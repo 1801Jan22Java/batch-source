@@ -1,0 +1,6 @@
+Presentation Topics - Leonard Blumberg
+Presentation title - "The Human Body and Barometric Pressure"
+Presentation Description - The human body must tolerate changes in ambient pressure, 
+and while changes on land are rarely significant, the significant increases in pressure experienced
+by SCUBA divers leads to unexpected challenges and issues. The presentation will be a brief description
+of the challenges and solutions thereto. 
