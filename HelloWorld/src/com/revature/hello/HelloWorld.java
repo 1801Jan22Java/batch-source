@@ -23,7 +23,14 @@ public class HelloWorld {
 	
 	public static void main(String [] args) {
 		// static: won't need instance of HelloWorld to execute this method
-		System.out.println("Hello World");
+		System.out.println("Hello World!");
 	}
+	
+	// STS (basically also Eclipse)  does incremental compiling
+	// every time a file is saved, it and any of its dependencies are compiled
+	// compiling: converting from Java code to bytecode
+	// 		.java (source code) to .class (bytecode, to be executed by JVM)
+	//
+	
 	
 }
