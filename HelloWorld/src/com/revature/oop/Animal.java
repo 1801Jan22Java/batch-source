@@ -1,6 +1,8 @@
 package com.revature.oop;
 
 public class Animal {
+	
+	public static String latinName = "animalus";
 	private String name;
 
 	

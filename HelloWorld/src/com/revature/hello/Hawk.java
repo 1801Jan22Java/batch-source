@@ -7,6 +7,7 @@ class Bird{
 		System.out.println("b2");
 	}
 	static { System.out.println("b3"); }
+	
 }
 
 class Raptor extends Bird {
@@ -19,6 +20,7 @@ class Raptor extends Bird {
 	{ System.out.println("r3"); }
 	
 	static { System.out.println("r4");  }
+	
 }
 
 public class Hawk extends Raptor{

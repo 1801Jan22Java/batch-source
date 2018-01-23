@@ -2,8 +2,9 @@ package com.revature.oop;
 
 public class Dog extends Animal {
 	
-	public static String dogLatinName = "Canus lupus familiaris";
+	public static String latinName = "Canus lupus familiaris";
 	
+	private String name;
 	
 	public Dog() {
 		

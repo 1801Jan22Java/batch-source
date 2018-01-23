@@ -49,13 +49,13 @@ public class FunWithOOP {
 		//best practices: refer to static members via class
 		System.out.println(Cat.catLatinName);
 		
-		Dog d2 = new Dog();
+		Animal d2 = new Dog();
 		
 		//This will change the static field for all instances of dog
-		d2.dogLatinName = "doggus doggus";
+		//d2.latinName = "doggus doggus";
 		
-		System.out.println(d1.dogLatinName);
-		System.out.println(d2.dogLatinName);
+		System.out.println(d1.latinName);
+		System.out.println(d2.latinName);
 		
 	}
 	
