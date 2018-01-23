@@ -5,6 +5,9 @@ package com.revature.hello;
  * The base package for java is java.lang
  */
 
+import com.revature.oop.*;
+import static com.revature.oop.Cat.*;
+
 public class HelloWorld {
 	
 	/*
@@ -16,7 +19,7 @@ public class HelloWorld {
 	 */
 
 	/*
-	 * mMin method
+	 * main method
 	 * JVM looks for method with this signature as an entrance point to the program
 	 */
 	public static void main(String[] args) {
@@ -30,6 +33,18 @@ public class HelloWorld {
 		// STS (eclipse really) does incremental compiling
 		// Every time a file is saved, any of its dependencies are compiled
 		// Compiling: Converting .java source files into .class bytecode for execution by JVM
+		
+		// Access things from our package
+		// Could use our fully qualified classname
+		// Ex: com.revature.oop.Animal a = new com.revature.oop.Animal("Fred");
+		// Better yet, use an import
+		
+		Dog d = new Dog();
+		System.out.println(d.toString());
+		
+		// Using static import
+		System.out.println(catinName);
+		
 	}
 
 }
