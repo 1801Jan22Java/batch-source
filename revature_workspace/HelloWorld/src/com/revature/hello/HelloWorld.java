@@ -7,6 +7,11 @@ package com.revature.hello;
  * Base package for Java is java.lang
  * */
 
+import com.revature.oop.*;
+
+//Need to specify class - not just package for static imports
+import static com.revature.oop.Cate.*;
+
 public class HelloWorld {
 	
 	/*
@@ -16,7 +21,7 @@ public class HelloWorld {
 	 *  Pascal case: FirstSecondThird
 	 *  Methods and variables: 
 	 *  Camel case: firstSecondThird.
-	 *  Package names: lowerscase, separated by periods
+	 *  Package names: lowercase, separated by periods
 	 *  e.g. com.revature.otherstuff
 	 *  
 	 *  Constants: All caps and underscores.
@@ -40,6 +45,15 @@ public class HelloWorld {
 		//Every time a file is saved, it and any dependencies are 
 		// compiled - source files will have .java converted into .class
 		// byte code for execution
+		
+		//Access things from OOP package.
+		// Could use fully qualified classname
+		com.revature.oop.Animal a = new com.revature.oop.Animal("Kirk");
+		//or use import
+		Doge d= new Doge();
+		
+		//using static import
+		System.out.println(Cate.catLatinName);
 		
 	}
 }
