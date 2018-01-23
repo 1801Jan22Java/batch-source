@@ -5,6 +5,9 @@ package com.revature.hello;
  * base package for Java is java.lang
  */
 
+import com.revature.oop.*;
+import static com.revature.oop.Cat.*; //must specify a class, not a package
+
 public class HelloWorld {
 	
 	/*
@@ -24,6 +27,17 @@ public class HelloWorld {
 	public static void main(String [] args) {
 		// static: won't need instance of HelloWorld to execute this method
 		System.out.println("Hello World!");
+		
+		// access things from the OOP package
+		// could use fully qualified classname
+		com.revature.oop.Animal animal = new com.revature.oop.Animal("Fred");
+		
+		//or use an import;
+		Dog d = new Dog();
+		
+		// using static import
+		// we don't have to specify Cat.catinName
+		System.out.println(catinName);
 	}
 	
 	// STS (basically also Eclipse)  does incremental compiling
@@ -31,6 +45,7 @@ public class HelloWorld {
 	// compiling: converting from Java code to bytecode
 	// 		.java (source code) to .class (bytecode, to be executed by JVM)
 	//
+	
 	
 	
 }
