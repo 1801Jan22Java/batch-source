@@ -35,5 +35,11 @@ public class HelloWorld {
 		
 		System.out.println("Zdravstvuite mir!");
 		
+		//STS (and, under the hood, Eclipse) 
+		//does incremental compiling
+		//Every time a file is saved, it and any dependencies are 
+		// compiled - source files will have .java converted into .class
+		// byte code for execution
+		
 	}
 }
