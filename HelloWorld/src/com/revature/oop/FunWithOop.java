@@ -54,6 +54,14 @@ public class FunWithOop {
 		
 		System.out.println(d1.latinName);
 		System.out.println(d2.latinName);
+		
+		//fun with shadowing
+		d2.setName("fido");
+		System.out.println(d2.getName());
+		
+		Animal a = new Dog();
+		System.out.println(((Dog) a).latinName);
+		
 	}
 
 }

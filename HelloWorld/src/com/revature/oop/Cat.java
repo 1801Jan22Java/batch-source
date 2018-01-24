@@ -20,8 +20,10 @@ public class Cat extends Animal {
 		this.numLives = numLives;
 	}
 	
-	public void makeNoise(){
+	@Override
+	public int makeNoise(){
 		System.out.println("meow");
+		return 3;
 	}
 
 	@Override

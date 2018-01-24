@@ -2,6 +2,8 @@ package com.revature.oop;
 
 public class Animal {
 	
+	public static String latinName = "animalis";
+	
 	private String name;
 
 	public String getName() {
@@ -31,8 +33,9 @@ public class Animal {
 		this.name = name;
 	}
 	
-	public void makeNoise(){
+	public int makeNoise(){
 		System.out.println("...");
+		return 5;
 	}
 	
 
