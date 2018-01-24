@@ -19,6 +19,7 @@ public class Employee implements Comparator<Employee> {
 		this.age = age;
 	}
 	
+	//Compares two employees.
 	@Override
 	public int compare(Employee arg0, Employee arg1) {
 		if (arg0 == null || arg1 == null) {
@@ -28,14 +29,17 @@ public class Employee implements Comparator<Employee> {
 			throw new ClassCastException();
 		}
 		
+		//Compares employee's names
 		if (!arg0.getName().equals(arg1.getName())) {
-			return arg0.getName().compareTo(arg1.getName());
+			return arg1.getName().compareTo(arg0.getName());
 		}
 		
+		//Compares employee's departments
 		if (!arg0.getDepartment().equals(arg1.getDepartment())) {
-			return arg0.getDepartment().compareTo(arg1.getDepartment());
+			return arg1.getDepartment().compareTo(arg0.getDepartment());
 		}
 		
+		//Compares employee's ages
 		if (arg0.getAge() != arg1.getAge()) {
 			if (arg0.getAge() < arg1.getAge()) {
 				return -1;
