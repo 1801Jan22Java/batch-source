@@ -20,7 +20,7 @@ public class Question3 {
 			
 		}
 		
-		//Pulls the reverse string out and printa it
+		//Pulls the reverse string out and prints it
 		System.out.println(str.substring(origLen, str.length()));
 		
 	}
