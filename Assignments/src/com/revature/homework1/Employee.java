@@ -27,6 +27,22 @@ public class Employee implements Comparator<Employee> {
 		if (!(arg0 instanceof Employee && arg1 instanceof Employee)) {
 			throw new ClassCastException();
 		}
+		
+		if (!arg0.getName().equals(arg1.getName())) {
+			return arg0.getName().compareTo(arg1.getName());
+		}
+		
+		if (!arg0.getDepartment().equals(arg1.getDepartment())) {
+			return arg0.getDepartment().compareTo(arg1.getDepartment());
+		}
+		
+		if (arg0.getAge() != arg1.getAge()) {
+			if (arg0.getAge() < arg1.getAge()) {
+				return -1;
+			}
+			return 1;
+		}
+		
 		return 0;
 	}
 
@@ -52,6 +68,11 @@ public class Employee implements Comparator<Employee> {
 
 	public void setAge(int age) {
 		this.age = age;
+	}
+
+	@Override
+	public String toString() {
+		return "Employee [name=" + name + ", department=" + department + ", age=" + age + "]";
 	}
 
 }
