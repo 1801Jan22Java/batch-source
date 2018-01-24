@@ -9,17 +9,19 @@ public class Question3 {
 		
 		//starting string
 		String str = "string";
+		int origLen = str.length();
 		
 		System.out.println("string");
 		
-		//Prints the reverse of the string
-		for (int i = str.length() - 1; i >= 0 ; i--) {
+		//concats the reverse string to the end of the original string
+		for (int i = origLen - 1; i >= 0 ; i--) {
 			
-			System.out.print(str.charAt(i)); 
+			str += str.charAt(i); 
 			
 		}
 		
-		System.out.println();
+		//Pulls the reverse string out and printa it
+		System.out.println(str.substring(origLen, str.length()));
 		
 	}
 }
