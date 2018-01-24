@@ -1,14 +1,13 @@
 package com.revature.homework1;
 
+import java.util.Arrays;
+
 // Sort the following using bubble sort: 1,0,5,6,3,2,3,7,9,8,4
 public class Question1 {
 	public static void main(String[] args) {
 		String strArray = "";
 		int[] arr = {1,0,5,6,3,2,3,7,9,8,4};
-		for(int n : bubbleSort(arr)) {
-			strArray += n + " ";
-		}
-		System.out.println("{ "+strArray+"}");
+		System.out.println(Arrays.toString(bubbleSort(arr)));
 	}
 	
 	public static int[] bubbleSort(int[] arr) {
