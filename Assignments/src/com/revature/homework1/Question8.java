@@ -27,15 +27,18 @@ public class Question8 {
 		
 	}
 
+	//Puts the array into an ArrayList then makes a new ArrayList with the palindromes
 	public static void makeArrayLists(String[] array) {
 		
 		ArrayList<String> list = new ArrayList<>();
 		ArrayList<String> palindromes = new ArrayList<>();
 		
+		//Put array into ArrayList
 		for (String str : array) {
 			list.add(str);
 		}
 		
+		//Find Plaindromes and put them into an ArrayList
 		for (String str : list) {
 			if (isPalindrome(str)) {
 				palindromes.add(str);
@@ -49,6 +52,7 @@ public class Question8 {
 		
 	}
 	
+	//Checks to see if the String is a palindrome
 	public static boolean isPalindrome(String str) {
 		StringBuilder builder = new StringBuilder(str);
 		String str2 = builder.reverse().toString();

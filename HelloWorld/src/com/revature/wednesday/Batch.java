@@ -1,4 +1,4 @@
-package com.revature.wdnesday;
+package com.revature.wednesday;
 
 import java.util.Arrays;
 
