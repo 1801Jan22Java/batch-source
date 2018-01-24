@@ -20,10 +20,10 @@ public class Question1 {
 	
 	//The method that bubble sorts a given array
 	public static int[] bubbleSort(int[] array) {
-		boolean sorting = true;
+		boolean sorting;
 		int temp;
 		//This while loop will keep going until a pass in which no indices switch. 
-		while (sorting) {
+		do {
 
 			sorting = false;
 
@@ -42,7 +42,7 @@ public class Question1 {
 
 			}
 
-		}
+		}while (sorting);
 		
 		return array;
 		
