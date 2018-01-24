@@ -13,8 +13,16 @@ public class Question5 {
 		System.out.println("mySubString(" + str + ", " + index +");" );
 		System.out.println(mySubString(str, index));
 		
+		str = "Oh my another string";
+		index = 11;
+		
+		System.out.println("mySubString(" + str + ", " + index +");" );
+		System.out.println(mySubString(str, index));
+		
 	}
 	
+	
+	//Gets the sub tring starting at 0 and going to the index
 	public static String mySubString(String orig, int index) {
 		
 		//Makes sure we dont get any bad input
