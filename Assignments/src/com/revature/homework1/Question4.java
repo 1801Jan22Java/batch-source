@@ -17,11 +17,13 @@ public class Question4 {
 	
 	public static int factorial(int num) {
 		
+		//Base Case of the recursion
 		if (num == 1 || num <= 0)
 		{
 			return 1;
 		}
 		
+		//Recursive call
 		return num * factorial(num -1);
 		
 	}
