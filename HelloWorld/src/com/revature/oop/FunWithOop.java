@@ -64,6 +64,24 @@ public class FunWithOop {
 		//IDE is warning that we shouldn't access via instance
 		System.out.println(d1.latinName);
 		System.out.println(d2.latinName);
+		
+		// We gave Animal a latinName to see what would happen. 
+		// It prints out Animalis
+		System.out.println(Animal.latinName);
+		
+		// We now created an animal object of type Dog
+		Animal dog = new Dog();
+		
+		// If we cast it to type Dog, it prints out the Dog's variable
+		// Therefore, the Dog shadows the Animal
+		System.out.println(((Dog)dog).latinName);
+		
+		// Without casting, it prints out the Animal's latinName
+		// Shadowing does not happen here
+		// Because this is still of type Animal(?) or still using scope of
+		// Animal
+		System.out.println(dog.latinName);
+		dog.makeNoise();
 	}
 	
 }

@@ -4,7 +4,8 @@ public class Animal {
 	
 	private String name;
 	
-
+	public static String latinName = "Animalis";
+	
 	public String getName() {
 		return name;
 	}
