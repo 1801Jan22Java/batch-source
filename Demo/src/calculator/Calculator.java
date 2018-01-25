@@ -3,6 +3,8 @@ package calculator;
 import java.util.Arrays;
 import java.util.Scanner;
 
+import org.omg.CosNaming.NamingContextExtPackage.AddressHelper;
+
 
 public class Calculator {
 
@@ -10,7 +12,7 @@ public class Calculator {
 	private static double calculate(Double a, Double b, String operand) {
 		switch(operand) {
 			case "+":
-				return a+b;
+				return (Double)addWithGenerics(a, b);
 			case "-":
 				return a-b;
 			case "/":
@@ -69,4 +71,20 @@ public class Calculator {
 		return calculate(f, s, operand);
 	}
 	
+	// without generics
+	// compiles but throws exception if a non-double num is passed in or returned
+	public static Number addWithoutGenerics(Number n1, Number n2) {
+		return (Double)n1+(Double)n2;
+	}
+	
+	//with generics
+	public static <T> Number addWithGenerics(T n1, T n2) {	
+		Number result = null;
+		
+		if(n1 instanceof Double) {
+			result = ((Double) n1).doubleValue()+((Double) n2).doubleValue();
+		}
+		
+		return result;
+	}
 }
