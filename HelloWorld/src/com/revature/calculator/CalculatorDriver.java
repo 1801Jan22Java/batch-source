@@ -72,7 +72,7 @@ public class CalculatorDriver {
 	public static void doOperation(double left, String symbol, double right) {
 		switch (symbol) {
 		case "+":
-			System.out.println(left + right);
+			System.out.println("= " + addWithGenerics(new Double(left), new Double(right)));
 			break;
 		case "-":
 			System.out.println(left - right);
@@ -91,6 +91,21 @@ public class CalculatorDriver {
 			System.out.println("Not Defined");
 			break;
 		}
+	}
+	//Without gennerics
+	//compiles but thorws exception if a non-double is passed in or returned
+	public static Number addWithoutGenerics(Number n1, Number n2) {
+		return (Double)n1 + (Double)n2;
+	}
+	
+	//with generics
+	public static <T> Number addWithGenerics(T n1, T n2) {
+		Number result = null;
+		if (n1 instanceof Double && n2 instanceof Double) {
+			result = ((Double) n1).doubleValue() + ((Double) n2).doubleValue();
+		}
+		
+		return result;
 	}
 
 }
