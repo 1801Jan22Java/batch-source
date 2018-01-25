@@ -1,7 +1,5 @@
 package com.revature.homework1;
 
-import java.util.Scanner;
-
 /**Created by: Jeffrey Rubi
  * Date: 24 January 2018
  * Write a substring method that accepts a string str and an integer idx and 
@@ -9,6 +7,8 @@ import java.util.Scanner;
  * any of the existing substring methods in the String, StringBuilder, or 
  * StringBuffer APIs.
  */
+
+import java.util.Scanner;
 
 public class Question5 {
 	
