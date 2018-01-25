@@ -6,7 +6,7 @@ public class Driver {
 
 		Classroom room203;
 		try {
-			room203 = new Classroom(20.0, 20.0,ClassType.JAVA);
+			room203 = new Classroom(20.0, 20.0, ClassType.JAVA);
 			System.out.println("Area of 203 is: " + room203.calculateArea());
 			System.out.println("Perimeter of 203 is: " + room203.calculatePerimeter());
 			room203.openDoor();
