@@ -19,7 +19,7 @@ public class Question2 {
 		if(number == 0) return 0; // base case 1
 		else if(number == 1) return 1; // base case 2
 		// Fibonacci numbers are the sum of the 2 previous Fibs.
-		else return fib(number - 1) + fib(number - 2); 
+		else return fib(number - 1) + fib(number - 2); // recursive calls here
 	}
 
 }
