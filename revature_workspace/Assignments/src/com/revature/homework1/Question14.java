@@ -11,20 +11,49 @@ Refer to Generics in Notes under 1/25/2018
  * 
  * */
 
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Scanner;
 
 
 public class Question14 {
 	
-	public static void switchRun(int num)
+	private static Double getSquareRoot(int num)
 	{
-		switch(num)
+		double square = (double)num;
+		double result = Math.sqrt(square);
+		return result;
+	}
+	public static void switchRun(int input)
+	{
+		
+		switch((Integer)input)
 		{
-		case 1: System.out.println( Math.sqrt(num)); break;
-		case 2: System.out.println(); break;
-		case 3: String learning = "I am learning Core Java"; String [] learningArr = learning.split(" "); break;
+		case 1: Scanner sc = new Scanner(System.in); 
+				System.out.println("Please enter an integer:   "); 
+				Integer a = sc.nextInt();
+				while(!(a instanceof Integer) )
+					{System.out.println("Please enter an integer:  "); 
+						a=sc.nextInt();
+						}
+				System.out.println( getSquareRoot(a));
+		case 2: Date date = new Date(); System.out.println(date); break;
+		case 3: String learning = "I am learning Core Java"; String [] learningArr = learning.split(" "); 
+		for(int i =0;i<learningArr.length;i++)
+		{
+			System.out.println(learningArr[i]);
+		}
+		break;
 		default: System.out.println("Invalid choice");
 		}
 		
+	}
+	public static void main(String[] args)
+	{
+		
+		switchRun(1);
+		switchRun(2);
+		switchRun(3);
 	}
 
 }

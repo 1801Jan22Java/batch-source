@@ -24,12 +24,15 @@ public class Driver {
 		System.out.println(Question10.findMinimum(9, 10));
 		//Question 11 - Created but need to show
 		Question12.showEvenNumbers();
+		
 		//Question 13
 		//Question 14
 		//Question 15
 		//Question 16
 		//Question 17
 		//Question 18
+		
+		
 		//Question 19
 		ArrayList<Integer> question19List = Question19.insertInt();
 		Question19.addOdds(question19List);

@@ -47,31 +47,34 @@ public class Question19 {
 		return result;
 	}
 
-	public static boolean checkPrime(int n)
+	public static boolean checkPrime(int num)
 	{
 		boolean isPrime=true;
-		if(n==2)
+		if(num==2)
 		{
+			System.out.println(num);
 			isPrime=true;
-			return isPrime;
+			return true;
 		}
-		if(n%2==0)
+		
+		if(num%2==0)
 		{
-			isPrime= false;
-			return isPrime;
+			System.out.println(num%2);
+			return false;
 		}
-		int  a = 3;
-		while((a*a)<=n )
-		{
-			if(n%a==0)
+	
+		for(int i=3;i*i<=num; i+=2)
 			{
-			//	System.out.println("not prime");//Debugging statement
-				isPrime= false;
-				return isPrime;
+				if(num % i==0)
+				{
+					return false;
+				}
+				else
+				{
+					isPrime= true;
+				}
 			}
-			a+=2;
-		}
-		return isPrime;
+	return isPrime;
 	}
 	
 	
