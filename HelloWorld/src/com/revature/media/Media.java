@@ -20,9 +20,7 @@ public abstract class Media {
 	public String getCreator() {
 		return creator;
 	}
-	public void setCreator(String creator) {
-		this.creator = creator;
-	}
+	
 	public String getTitle() {
 		return title;
 	}
