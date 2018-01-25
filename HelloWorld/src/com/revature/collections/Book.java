@@ -28,7 +28,7 @@ public class Book extends Media{
 
 
 	public void read() {
-		System.out.println("reading "+this.getTitle()+" by"+this.getCreator());
+		System.out.println("reading "+this.getTitle()+" by "+this.getCreator());
 	}
 	
 }

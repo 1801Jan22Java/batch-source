@@ -38,12 +38,22 @@ public abstract class Media {
 	public void setYearPublished(int yearPublished) {
 		this.yearPublished = yearPublished;
 	}
+	public int getYearPublished() {
+		return yearPublished;
+	}
 	public String getTitle() {
 		return title;
 	}
 	public void setTitle(String title) {
 		this.title = title;
 	}
+	@Override
+	public String toString() {
+		return "Media [creator=" + creator + ", title=" + title + ", yearPublished=" + yearPublished + ", genre="
+				+ genre + "]";
+	}
+	
+	
 
 	
 }
