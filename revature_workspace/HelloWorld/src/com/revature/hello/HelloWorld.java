@@ -53,7 +53,15 @@ public class HelloWorld {
 		Doge d= new Doge();
 		
 		//using static import
-		System.out.println(Cate.catLatinName);
+		//System.out.println(Cate.catLatinName);
+		
+		String c=  "blah";
+		String b=c;
+		System.out.println(c==b);
+		String e =new String("blah");
+		System.out.println(e==c);
+		
+		
 		
 	}
 }
