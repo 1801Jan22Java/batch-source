@@ -1,6 +1,6 @@
 package com.revature.homework1;
 
-/* Created by: Jeffrey Rubi
+/**Created by: Jeffrey Rubi
  * Date: 23 January 2018
  * Reverse a string without using a temporary variable.  Do NOT use reverse() 
  * in the StringBuffer or the StringBuilder APIs.
