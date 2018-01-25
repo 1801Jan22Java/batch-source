@@ -9,7 +9,6 @@ public class Question3 {
 		
 		//starting string
 		String str = "string";
-		int origLen = str.length();
 		
 		System.out.println(str);
 		

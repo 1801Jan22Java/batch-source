@@ -1,9 +1,9 @@
-package com.revature.collections;
+package com.revature.media;
 
 public class Book extends Media {
 
 	
-	
+	private String publisher;
 	
 	
 	
@@ -21,5 +21,15 @@ public class Book extends Media {
 	public void read() {
 		System.out.println("reading " + this.getTitle() + " by " + this.getCreator());
 	}
+
+	public String getPublisher() {
+		return publisher;
+	}
+
+	@Override
+	public String toString() {
+		return "Book [publisher=" + publisher + "]";
+	}
+
 	
 }

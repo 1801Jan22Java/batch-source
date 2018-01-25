@@ -27,7 +27,8 @@ public class Question7 {
 	}
 	
 	public static String compareEmpl(Employee empl1, Employee empl2) {
-		int result = empl1.compare(empl1, empl2);
+		EmployeeComparator eComp = new EmployeeComparator();
+		int result = eComp.compare(empl1, empl2);
 		if (result == 0) {
 			return empl1.toString() + " is equal to " + empl2.toString();
 		}

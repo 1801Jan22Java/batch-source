@@ -1,4 +1,4 @@
-package com.revature.collections;
+package com.revature.media;
 
 public class Movie extends Media {
 

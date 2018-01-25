@@ -3,6 +3,10 @@ package com.revature.collections;
 import java.util.*;
 import java.util.Map.Entry;
 
+import com.revature.media.Book;
+import com.revature.media.Media;
+import com.revature.media.Movie;
+
 public class Driver {
 
 	public static void main(String[] args) {
