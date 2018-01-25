@@ -26,7 +26,7 @@ public class Question9 {
 	}
 	
 	// Prime number checker
-	private static boolean checkPrime(Integer n) {
+	public static boolean checkPrime(Integer n) {
 		// Primes start at 2
 		Integer start = 2;
 		
