@@ -4,6 +4,10 @@ package com.revature.hello;
  * Corresponds to a folder structure
  * Base package for Java is java.lang
  */
+
+import com.revature.oop.*;
+import static com.revature.oop.Cat.*;
+
 public class HelloWorld {
 	
 	/*
@@ -31,5 +35,15 @@ public class HelloWorld {
 		//STS (eclipse) does incremental compiling
 		//Every time a file is saved, it and any of its dependencies are compiled.
 		//Compiling: converting .java source files into .class bytecode for execution by the JVM
+		
+		//Access things from our OOP package
+		//Could use our fully qualified class name
+		com.revature.oop.Animal a = new com.revature.oop.Animal("Fred");
+		
+		//Or use an import
+		Dog d = new Dog();
+		
+		//Using static import
+		System.out.println(catLatinName);
 	}
 }
