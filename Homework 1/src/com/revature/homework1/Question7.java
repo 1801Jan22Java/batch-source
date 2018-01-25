@@ -55,7 +55,7 @@ public class Question7 implements Comparator<Employee>{
 			return 2;
 		}
 		
-		else if (emp1.getName().compareToIgnoreCase(emp2.getName()) > 0){
+		else if (emp1.getName().compareToIgnoreCase(emp2.getName()) < 0){
 			//Print the first employee's information before the second
 			return 1;
 		}
@@ -67,7 +67,7 @@ public class Question7 implements Comparator<Employee>{
 			return 2;
 		}
 		
-		else if (emp1.getDepartment().compareToIgnoreCase(emp2.getDepartment()) > 0){
+		else if (emp1.getDepartment().compareToIgnoreCase(emp2.getDepartment()) < 0){
 			//Print the first employee's information before the second
 			return 1;
 		}

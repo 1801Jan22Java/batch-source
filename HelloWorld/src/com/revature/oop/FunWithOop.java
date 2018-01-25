@@ -68,7 +68,7 @@ public class FunWithOop {
 		System.out.println(d2.getName());
 		
 		Animal a = new Dog();
-		System.out.println((Dog)a).latinName);	//Casting will cause Dog's latinName to be returned.
+		System.out.println(Dog.latinName);	//Casting will cause Dog's latinName to be returned.
 												//Not casting (Dog) will cause Animal's latinName to be returned.
 	}
 	

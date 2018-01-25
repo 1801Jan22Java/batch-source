@@ -27,7 +27,7 @@ public class Question14 {
 					sc.nextLine(); 
 					System.out.println("The square root is: " + squareRoot);	//And print it
 					break;
-		case 2 :	Date d = new Date();	//Create a new Date object
+		case 2 :	Date d = new Date();									//Create a new Date object
 					System.out.println("The date is: " + d.toString());		//Call toString() on it and print it
 					break;
 		case 3 :	String str = "I am learning Core Java";
