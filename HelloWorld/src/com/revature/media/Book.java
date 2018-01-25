@@ -28,8 +28,11 @@ public class Book extends Media {
 
 	@Override
 	public String toString() {
-		return "Book [publisher=" + publisher + "]";
+		return "Book [publisher=" + publisher + ", creator=" + creator + ", title=" + title + ", yearPublished="
+				+ yearPublished + ", genre=" + genre + "]";
 	}
+
+	
 
 	
 }

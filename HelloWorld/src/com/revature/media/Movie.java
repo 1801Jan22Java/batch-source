@@ -1,6 +1,6 @@
 package com.revature.media;
 
-public class Movie extends Media {
+public class Movie extends Media implements Comparable<Movie> {
 
 	
 	
@@ -19,6 +19,16 @@ public class Movie extends Media {
 
 	public void watch() {
 		System.out.println("get your popcorn! we're watching " + this.getTitle());
+	}
+
+
+
+
+
+	@Override
+	public int compareTo(Movie arg0) {
+		
+		return this.title.compareTo(arg0.getTitle());
 	}
 	
 }
