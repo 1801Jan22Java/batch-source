@@ -1,4 +1,4 @@
-package com.revature.oop
+package com.revature.oop;
 
 class Bird {
 	{ System.out.println("b1"); }
@@ -8,7 +8,7 @@ class Bird {
 	}
 	
 	static {
-		System.out.prinln("b3");
+		System.out.println("b3");
 	}
 }
 

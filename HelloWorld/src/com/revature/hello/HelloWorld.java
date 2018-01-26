@@ -10,8 +10,10 @@ public class HelloWorld {
 		System.out.println("Hello World");
 	}
 	
+	//without import
 	com.revature.oop.Animal a = new com.revature.oop.Animal("Fred");
-	
+	//with import
 	Dog d = new Dog();
+	
 	
 }
