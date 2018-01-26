@@ -1,9 +1,11 @@
 package com.revature.hello;
-
 /*
  * package - a namespace that organizes a set of related classes and interfaces
  * corresponds to a folder structure, base package for Java is java.lang
  */
+
+import com.revature.oop.*;
+import static com.revature.oop.Cat.*;
 public class HelloWorld {
 	
 	/*
@@ -30,6 +32,14 @@ public class HelloWorld {
 		// everytime a file is saved it, and any dependencies, are compiled
 		// compiling: converting .java source files into .class bytecode for execution by the JVM
 		
+		// access things from our OOP package
+		// could use fully qualified class name
+		com.revature.oop.Animal a = new com.revature.oop.Animal("Fred");
 		
+		// or use an import
+		Dog d = new Dog();
+		
+		// using static import
+		System.out.println(catinName);
 	}
 }
