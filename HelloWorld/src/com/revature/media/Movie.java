@@ -1,6 +1,8 @@
 package com.revature.media;
 
 public class Movie extends Media implements Comparable<Movie>{
+	
+	private int movieId;
 
 	public Movie() {
 		super();
@@ -19,6 +21,22 @@ public class Movie extends Media implements Comparable<Movie>{
 	@Override
 	public int compareTo(Movie m) {
 		return this.getTitle().compareTo(m.getTitle());
+	}
+
+	
+	//Getters and Setters
+	public int getMovieId() {
+		return movieId;
+	}
+
+	public void setMovieId(int movieId) {
+		this.movieId = movieId;
+	}
+
+	@Override
+	public String toString() {
+		return "Movie [movieId=" + movieId + ", creator=" + creator + ", title=" + title + ", yearPublished="
+				+ yearPublished + ", genre=" + genre + "]";
 	}
 	
 	

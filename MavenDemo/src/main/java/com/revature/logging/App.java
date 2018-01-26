@@ -1,0 +1,21 @@
+package com.revature.logging;
+
+public class App {
+
+	public static void main(String[] args) {
+		System.out.println("Hello World!");
+		
+		LoggingClass lc = new LoggingClass();
+		lc.allTheLogs();
+		
+		try {
+			divide(1,0);
+		} catch (Exception e) {
+			lc.giveFatal(e);		//Works because of polymorphism
+		}
+	}
+
+	public static int divide(int a, int b) {
+		return a/b;
+	}
+}

@@ -1,6 +1,8 @@
 package com.revature.media;
 
-public abstract class Media {
+import java.io.Serializable;
+
+public abstract class Media implements Serializable {
 
 	public Media(String creator, String title, int yearPublished, String genre) {
 		super();
