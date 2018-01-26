@@ -2,6 +2,12 @@ package com.revature.homework1;
 
 public class Employee 
 {
+	public Employee(String name, String department, int age) {
+		super();
+		this.name = name;
+		this.department = department;
+		this.age = age;
+	}
 	private String name;
 	private String department;
 	private int age;
@@ -55,5 +61,9 @@ public class Employee
 		} else if (!name.equals(other.name))
 			return false;
 		return true;
+	}
+	public String toString()
+	{
+		return this.getName() + " " + this.getDepartment()+ " " + this.getAge();
 	}
 }
