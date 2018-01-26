@@ -1,8 +1,10 @@
 package com.revature.collections;
 
+import java.io.Serializable;
+
 import com.revature.media.Media;
 
-public class Book extends Media{
+public class Book extends Media implements Serializable{
 	
 	private String publisher;
 	
@@ -46,8 +48,13 @@ public class Book extends Media{
 
 	@Override
 	public String toString() {
-		return "Book [publisher=" + publisher;
+		return "Book [publisher=" + publisher + ", creator=" + creator + ", title=" + title + ", yearPublished="
+				+ yearPublished + ", genre=" + genre + "]";
 	}
+
+
+
+
 	
 	
 	

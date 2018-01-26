@@ -1,11 +1,15 @@
 package com.revature.media;
 
-public abstract class Media {
+import java.beans.Transient;
+import java.io.Serializable;
+
+public abstract class Media implements Serializable{
 	
 	protected String creator;
 	protected String title;
 	protected int yearPublished;
-	protected String genre;
+	
+	protected transient String genre;
 	
 	
 	public String getCreator() {
