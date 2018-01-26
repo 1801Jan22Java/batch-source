@@ -26,13 +26,15 @@ public class SubClass extends SuperClass{
 	public void printAsInt(String str) {
 		int result = 0;
 		
-		for (int i = 0; i < str.length(); i++)
-		{
-			result += str.charAt(i);
+		try {
+			result = Integer.parseInt(str);
+			result += 10;
+			
+			System.out.println("The integer value + 10 of \"" + str + "\" is " + result);
+		}catch (NumberFormatException e) {
+			System.out.println("\"" + str + "\" does not contain a parseable number");
 		}
-		result += 10;
 		
-		System.out.println("The integer value + 10 of \"" + str + "\" is " + result);
 		
 	}
 

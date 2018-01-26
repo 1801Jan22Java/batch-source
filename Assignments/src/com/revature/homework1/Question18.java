@@ -29,6 +29,20 @@ public class Question18 {
 		System.out.println("Does \"" + str + "\" contain an uppercase character? " + sub.hasUppercase(str));
 		System.out.println("When you capitalize all charcters in \"" + str + "\" it looks like \n\"" +
 							sub.toUpperCase(str) + "\"");
+		sub.printAsInt(str); 
+		
+		System.out.println();
+		
+		str = "2354";
+		System.out.println("Does \"" + str + "\" contain an uppercase character? " + sub.hasUppercase(str));
+		System.out.println("When you capitalize all charcters in \"" + str + "\" it looks like \n\"" +
+							sub.toUpperCase(str) + "\"");
+		sub.printAsInt(str);
+		
+		str = "2354k";
+		System.out.println("Does \"" + str + "\" contain an uppercase character? " + sub.hasUppercase(str));
+		System.out.println("When you capitalize all charcters in \"" + str + "\" it looks like \n\"" +
+							sub.toUpperCase(str) + "\"");
 		sub.printAsInt(str);
 
 	}
