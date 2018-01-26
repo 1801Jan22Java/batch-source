@@ -29,4 +29,5 @@ public class Calculator {
 		
 		System.out.println("Answer: " + result);
 	}
+	
 }
