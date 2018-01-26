@@ -6,7 +6,7 @@ package com.revature.homework1;
  * @author Ahmed Awwad
  *
  */
-public interface mathy {
+public interface Mathable {
 	
 	/**
 	 * Adds two numbers

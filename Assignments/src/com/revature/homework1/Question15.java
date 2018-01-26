@@ -65,7 +65,7 @@ public class Question15 {
  * @author Ahmed Awwad
  *
  */
-class MathWizard implements mathy {
+class MathWizard implements Mathable {
 
 	/**
 	 * Adds two numbers
