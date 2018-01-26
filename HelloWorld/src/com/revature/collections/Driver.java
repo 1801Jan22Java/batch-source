@@ -38,7 +38,7 @@ public class Driver {
 
 		// Print list elements iwth iterator
 		// remove any elements published before 1870
-		Iterator it = mediaList.iterator();
+		Iterator<Media> it = mediaList.iterator();
 		while (it.hasNext()) {
 			Media m = (Media) it.next();
 			if (m.getYearPublished() <= 1870) {

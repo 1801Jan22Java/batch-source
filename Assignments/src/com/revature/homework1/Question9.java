@@ -1,7 +1,6 @@
 package com.revature.homework1;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Question9 {
 	public static void main(String[] args) {

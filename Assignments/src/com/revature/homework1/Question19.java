@@ -7,7 +7,6 @@ and display the result. Remove the prime numbers from
 the ArrayList and print out the remaining ArrayList.
 */
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Question19 {

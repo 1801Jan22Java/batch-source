@@ -22,7 +22,7 @@ public class Question13 {
 		
 		// Create an ArrayList of alternating 1s and 0s
 		ArrayList<String> buildBlocks = new ArrayList<String>(Arrays.asList("0","1","0","1","0","1","0","1","0","1"));
-		Iterator it = buildBlocks.iterator();
+		Iterator<String> it = buildBlocks.iterator();
 		
 		// amount to printo out per line, incremented to create the "triangle" pattern
 		int i = 1;

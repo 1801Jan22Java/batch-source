@@ -7,7 +7,6 @@ public class Book extends Media{
 	private String publisher;
 	
 	
-	
 	public Book() {
 		super();
 	}
@@ -22,7 +21,7 @@ public class Book extends Media{
 
 	public Book(String publisher) {
 		super();
-		this.publisher = publisher;
+		this.setPublisher(publisher);
 	}
 
 
@@ -30,5 +29,26 @@ public class Book extends Media{
 	public void read() {
 		System.out.println("reading "+this.getTitle()+" by "+this.getCreator());
 	}
+
+
+
+	public String getPublisher() {
+		return publisher;
+	}
+
+
+
+	public void setPublisher(String publisher) {
+		this.publisher = publisher;
+	}
+
+
+
+	@Override
+	public String toString() {
+		return "Book [publisher=" + publisher;
+	}
+	
+	
 	
 }
