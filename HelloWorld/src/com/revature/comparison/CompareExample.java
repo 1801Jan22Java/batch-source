@@ -19,15 +19,15 @@ public class CompareExample {
 		for (Media m : movieList) {
 			System.out.println(m);
 		}
-		//sortWithComparable(movieList);
-		
+		// sortWithComparable(movieList);
+
 		System.out.println("Sort with comparator: ");
 		sortWithComparator(movieList);
 	}
-	
-	public static List<Movie> sortWithComparator(List<Movie> l){
+
+	public static List<Movie> sortWithComparator(List<Movie> l) {
 		YearCompare yc = new YearCompare();
-		Collections.sort(l,yc);
+		Collections.sort(l, yc);
 		for (Movie m : l) {
 			System.out.println(m);
 		}
