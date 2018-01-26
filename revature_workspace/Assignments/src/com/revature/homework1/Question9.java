@@ -24,7 +24,6 @@ public class Question9 {
 		boolean isPrime=true;
 		if(num==2)
 		{
-			isPrime=true;
 			return true;
 		}
 		

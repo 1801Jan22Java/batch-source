@@ -44,8 +44,8 @@ public abstract class Media {
 	}
 	@Override
 	public String toString() {
-		return "Media [creator=" + creator + ", title=" + title
-				+ ", yearPublished=" + yearPublished + ", genre=" + genre + "]";
+		return "Media [Creator=" + creator + ", Title=" + title
+				+ ", Year published=" + yearPublished + ", Genre=" + genre + "]";
 	}
 	
 	

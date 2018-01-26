@@ -18,13 +18,28 @@ import java.util.Scanner;
 
 public class Question14 {
 	
-	private static Double getSquareRoot(int num)
+	public int validateInput(String input)
+	{
+		char [] inputArr=input.toCharArray();
+		int inputInt=0;
+		for(char a:inputArr)
+		{
+			inputInt+= Character.getNumericValue(a);
+		}
+		if(inputInt<=0 || inputInt>= 4)
+		{
+			inputInt=0;
+		}
+		return inputInt;
+	}
+	
+	private Double getSquareRoot(int num)
 	{
 		double square = (double)num;
 		double result = Math.sqrt(square);
 		return result;
 	}
-	public static void switchRun(int input)
+	public void switchRun(int input)
 	{
 		
 		switch((Integer)input)
@@ -48,12 +63,4 @@ public class Question14 {
 		}
 		
 	}
-	public static void main(String[] args)
-	{
-		
-		switchRun(1);
-		switchRun(2);
-		switchRun(3);
-	}
-
 }

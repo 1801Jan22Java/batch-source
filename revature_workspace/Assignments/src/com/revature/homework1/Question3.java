@@ -31,7 +31,7 @@ public class Question3 {
 	public static void main(String [] args)
 	{
 		String reversed = reverseAString("wolf");
-		String reversed2 = reverseAString("evil");
+		String reversed2 = reverseAString("evil won");
 		System.out.println(reversed);
 		System.out.println(reversed2);
 	}

@@ -11,10 +11,18 @@ import java.util.ArrayList;
  * */
 public class Question19 {
 
+	
+	/*
+	 * insertInt() returns an ArrayList of type Integer
+	 * adds to ArrayList<Integer> with a for loop, that adds ints
+	 * 1 through 10;
+	 * @param none (void)
+	 * @return ArrayList<Integer> intList
+	 * */
 	public static ArrayList<Integer> insertInt()
 	{
 		ArrayList<Integer> intList = new ArrayList<Integer>();
-		for(int i = 1; i<=17 ; i++)
+		for(int i = 1; i<=10 ; i++)
 		{
 			intList.add(i);
 		}
@@ -47,31 +55,32 @@ public class Question19 {
 		return result;
 	}
 
-	public static boolean checkPrime(int num)
+	public static boolean checkPrime(Integer num)
 	{
-		boolean isPrime=true;
+		boolean isPrime=false;
 		if(num==2)
 		{
-			System.out.println(num);
-			isPrime=true;
-			return true;
-		}
-		
+			//System.out.println(num);
+			isPrime=true;	
+		}	
 		if(num%2==0)
 		{
-			System.out.println(num%2);
-			return false;
+		//	System.out.println(num%2);
+			isPrime=false;
 		}
-	
 		for(int i=3;i*i<=num; i+=2)
 			{
 				if(num % i==0)
 				{
-					return false;
+					isPrime= false;
+					
 				}
 				else
 				{
-					isPrime= true;
+					System.out.println(num);
+					 isPrime= true;
+					//System.out.println(isPrime);
+					
 				}
 			}
 	return isPrime;
@@ -81,9 +90,10 @@ public class Question19 {
 	public static ArrayList<Integer> removePrimes(ArrayList<Integer> list)
 	{
 		for(int i = 0;i<list.size();i++){
+			System.out.println("inside removePrimes");
 			if(checkPrime(list.get(i)))
 			{
-				System.out.println(list.get(i));
+			//	System.out.println(list.get(i));
 				list.remove(i);
 			}
 		}
@@ -97,10 +107,10 @@ public class Question19 {
 		ArrayList<Integer> list =insertInt();
 		for(int i = 0;i<list.size();i++)
 		{
-			System.out.println(list.get(i));
+		//	System.out.println(list.get(i));
 		}
-		System.out.println(addEvens(list));
-		System.out.println(addOdds(list));
+		//System.out.println(addEvens(list));
+	//	System.out.println(addOdds(list));
 		list = removePrimes(list);
 		for (int i=0;i<list.size();i++)
 		{

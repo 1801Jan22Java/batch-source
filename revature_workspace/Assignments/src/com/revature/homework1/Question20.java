@@ -1,4 +1,13 @@
 package com.revature.homework1;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Scanner;
+
 /*
  * 
  * 
@@ -17,5 +26,35 @@ State: Arizona State
 
  * */
 public class Question20 {
-
+	public static void main(String [] args){
+	
+	File file;
+	FileReader fr;
+	BufferedReader textReader;// = new BufferedReader(fr);
+	try{
+		file = new File("Data.txt");
+		fr = new FileReader("Data.txt");
+		textReader = new BufferedReader(fr);
+	int numLine=0;
+	while(textReader.readLine()!=null)
+	{
+		System.out.println(textReader.readLine());
+		numLine++;
+	
+	}
+	System.out.println(numLine);
+	textReader.close();
+	fr.close();
+	
+	}
+	catch(FileNotFoundException fnfe)
+	{
+		fnfe.printStackTrace();
+	}
+	catch(IOException e){
+		e.printStackTrace();
+	}
+	
+	
+	}
 }
