@@ -4,6 +4,20 @@ import java.util.Arrays;
 
 public class Batch {
 	
+<<<<<<< HEAD
+=======
+	public Batch() {
+		super();
+	}
+
+	public Batch(String id, String topic, String[] members) {
+		super();
+		this.id = id;
+		this.topic = topic;
+		this.members = members;
+	}
+
+>>>>>>> 39c64c4d101d1e56e70955d3bd4aa54d6f94e18e
 	private String id;
 	
 	private String topic;
@@ -34,6 +48,7 @@ public class Batch {
 		this.members = members;
 	}
 
+<<<<<<< HEAD
 	public Batch(String id, String topic, String[] members) {
 		super();
 		this.id = id;
@@ -46,6 +61,9 @@ public class Batch {
 	}
 
 	@Override
+=======
+	/*@Override
+>>>>>>> 39c64c4d101d1e56e70955d3bd4aa54d6f94e18e
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
@@ -55,7 +73,11 @@ public class Batch {
 		return result;
 	}
 
+<<<<<<< HEAD
 	/*@Override
+=======
+	@Override
+>>>>>>> 39c64c4d101d1e56e70955d3bd4aa54d6f94e18e
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
@@ -69,7 +91,10 @@ public class Batch {
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
+<<<<<<< HEAD
 		
+=======
+>>>>>>> 39c64c4d101d1e56e70955d3bd4aa54d6f94e18e
 		if (topic == null) {
 			if (other.topic != null)
 				return false;
@@ -77,7 +102,11 @@ public class Batch {
 			return false;
 		return true;
 	}*/
+<<<<<<< HEAD
 	
 	
 	
+=======
+
+>>>>>>> 39c64c4d101d1e56e70955d3bd4aa54d6f94e18e
 }

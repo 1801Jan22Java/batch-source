@@ -1,6 +1,7 @@
 package com.revature.threads;
 
 public class ProducerConsumer {
+<<<<<<< HEAD
 	public static void main(String[] args) {
 		Basket basket = new Basket();
 		Runnable producerJob = new Producer(basket);
@@ -71,10 +72,24 @@ class Producer implements Runnable {
 				e.printStackTrace();
 			}
 		}
+=======
+
+	public static void main(String[] args) {
+		
+		Basket b = new Basket();
+		Runnable producerJob = new Producer(b);
+		Runnable consumerJob = new Consumer(b);
+		Thread producerWorker = new Thread(producerJob,"PRODUCER");
+		Thread consumerWorker = new Thread(consumerJob,"CONSUMER");
+		producerWorker.start();
+		consumerWorker.start();
+
+>>>>>>> 39c64c4d101d1e56e70955d3bd4aa54d6f94e18e
 	}
 
 }
 
+<<<<<<< HEAD
 class Consumer implements Runnable {
 	private Basket basket;
 	int value;
@@ -93,3 +108,5 @@ class Consumer implements Runnable {
 	}
 
 }
+=======
+>>>>>>> 39c64c4d101d1e56e70955d3bd4aa54d6f94e18e
