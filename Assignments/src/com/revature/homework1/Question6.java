@@ -24,25 +24,12 @@ public class Question6 {
 	 * @return No return value
 	 */
 	public static void main(String[] args) {
-		int a = 0;
-		int b = 1;
-		int c = 2;
-		int d = 3;
-		// 2,147,483,647
-		int e = Integer.MAX_VALUE;
-		// -2,147,483,648
-		int f = Integer.MIN_VALUE;
 		
-		String template1 = "It is ";
-		String template2 = " that ";
-		String template3 = " is even.";
+		int[] numbers = {0, 1, 2, 3, Integer.MAX_VALUE, Integer.MIN_VALUE};
 		
-		System.out.println(template1 + isEven(a) + template2 + a + template3);
-		System.out.println(template1 + isEven(b) + template2 + b + template3);
-		System.out.println(template1 + isEven(c) + template2 + c + template3);
-		System.out.println(template1 + isEven(d) + template2 + d + template3);
-		System.out.println(template1 + isEven(e) + template2 + e + template3);
-		System.out.println(template1 + isEven(f) + template2 + f + template3);
+		for (int i : numbers) {
+			System.out.println("It is " + isEven(i) + " that " + i + " is even.");
+		}
 	}
 
 }

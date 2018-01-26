@@ -21,6 +21,7 @@ public class Question2 {
 		int first = 0;
 		int second = 1;
 		
+		// Memoized Fibonacci
 		for (int i = 0; i < limit; i++) {
 			// If limit is at least 1, first is always generated
 			System.out.print(first + " ");
@@ -42,9 +43,11 @@ public class Question2 {
 	 * @return No return value
 	 */
 	public static void main(String[] args) {
+		
 		int limit = 25;
 		
 		generateFibonacci(limit);
+		
 	}
 
 }

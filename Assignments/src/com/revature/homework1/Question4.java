@@ -21,7 +21,7 @@ public class Question4 {
 		}
 		
 		// 0! = 1
-		if (n == 0) { return 1;}
+		if (n == 0) return 1;
 		
 		// Keep multiplying in descending order until we reach 1
 		int result = n;

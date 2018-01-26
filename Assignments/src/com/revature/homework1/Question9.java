@@ -59,12 +59,14 @@ public class Question9 {
 	 * @return No return value
 	 */
 	public static void main(String[] args) {
+		
 		List<Integer> hundredList = new ArrayList<Integer>();
 		for (int i = 1; i <= 100; i++) {
 			hundredList.add(i);
 		}
 		System.out.print("The prime numbers between 1 and 100 are: ");
 		printPrime(hundredList);
+		
 	}
 
 }

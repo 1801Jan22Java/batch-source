@@ -28,7 +28,7 @@ public class Question3 {
 		
 		// As long as condition is valid, lowerLim and higherLim should be swapped
 		while (lowerLim < higherLim) {
-			// Perform the swap
+			// Perform the swap using xor operations
 			chars[lowerLim] ^= chars[higherLim];
 			chars[higherLim] ^= chars[lowerLim];
 			chars[lowerLim] ^= chars[higherLim];

@@ -41,11 +41,15 @@ public class Question5 {
 	 * @return No return value
 	 */
 	public static void main(String[] args) {
-		System.out.println(substring("HelloWorld", -1));
-		System.out.println(substring("HelloWorld", 0));
-		System.out.println(substring("HelloWorld", 1));
-		System.out.println(substring("HelloWorld", 9));
-		System.out.println(substring("HelloWorld", 67));
+		
+		String hello = "HelloWorld";
+		int[] numbers = {-1, 0, 1, 5, 9, 67};
+		
+		for (int i : numbers) {
+			System.out.print("The string produced for index " + i + " is ");
+			System.out.println(substring(hello, i));
+		}
+		
 	}
 	
 }
