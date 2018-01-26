@@ -1,7 +1,13 @@
 package com.revature.media;
 
-public class Book extends Media {
+import java.io.Serializable;
+
+public class Book extends Media implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1935367765088492580L;
 	private String publisher;
 	
 	public Book() {
