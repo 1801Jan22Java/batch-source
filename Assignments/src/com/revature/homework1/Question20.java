@@ -40,6 +40,7 @@ public class Question20 {
 			// Further, skip if any string is whitespace
 			// Do not need to check for last element since
 			// it would not be included by the split method
+			// if whitespace
 			if (members.length != 4
 					|| members[0].trim().length() == 0
 					|| members[1].trim().length() == 0

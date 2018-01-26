@@ -15,7 +15,7 @@ public class Question16 {
 	public static void main(String[] args) {
 		if (args.length != 0) {
 			// Print first argument only
-			System.out.println(args[0].length());
+			System.out.println("The string you provided has " + args[0].length() + " characters.");
 		} else {
 			System.out.println("Usage: Question16 string");
 			System.out.print("  If string is more than one word, use parentheses ");

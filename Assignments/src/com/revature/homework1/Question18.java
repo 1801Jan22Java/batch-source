@@ -31,9 +31,14 @@ public class Question18 {
 		assert e.convertUppercase("ihAzAcarrOt").equals("IHAZACARROT");
 		
 		// Testing toInteger
-		// No support for strings that are not actual numbers in string form
-		assert e.toInteger("0") == 0;
-		assert e.toInteger("23492342") == 23492342;
+		// No support for strings that are not actual integers in string form
+		assert e.toIntegerAdd10("0") == 10;
+		assert e.toIntegerAdd10("1") == 11;
+		assert e.toIntegerAdd10(("23492342")) == 23492352;
+		assert e.toIntegerAdd10(("Not a number!")) == 0;
+		// This is a number, but not an integer
+		assert e.toIntegerAdd10(("333.5")) == 0;
+		assert e.toIntegerAdd10("") == 0;
 		
 		System.out.println("All tests successful!");
 	}
@@ -76,12 +81,12 @@ abstract class ExampleSuperClass {
 	public abstract String convertUppercase(String s);
 	
 	/**
-	 * Converts the given string to an integer
+	 * Converts the given string to an integer and adds 10
 	 * 
 	 * @param s The string to convert to an integer
 	 * @return The integer form of the given string
 	 */
-	public abstract int toInteger(String s);
+	public abstract int toIntegerAdd10(String s);
 	
 }
 
@@ -127,17 +132,28 @@ class ExampleSubClass extends ExampleSuperClass {
 	}
 	
 	/**
-	 * Converts the given string to an integer. String given must only be decimal
-	 * digits.
+	 * Converts the given string to an integer and adds 10. String given must only
+	 * consist of decimal digits and must contain at least one decimal digit, 
+	 * i.e represent only integers. If not, returns 0.
 	 * 
 	 * @param s The string to convert to an integer
 	 * @throws IllegalArgumentException if s is null
-	 * @return The integer form of the given string
+	 * @return The integer form of the given string plus 10
 	 */
-	public int toInteger(String s) {
+	public int toIntegerAdd10(String s) {
 		checkException(s);
 		
-		return Integer.parseInt(s);
+		if (s.length() == 0) return 0;
+		
+		for (int i = 0; i < s.length(); i++) {
+			char c = s.charAt(i);
+			if (c < 48 || c > 57) {
+				// Found non-number
+				return 0;
+			}
+		}
+		
+		return Integer.parseInt(s) + 10;
 	}
 	
 	/**
