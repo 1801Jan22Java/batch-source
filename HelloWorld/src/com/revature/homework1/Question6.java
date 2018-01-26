@@ -7,7 +7,6 @@ public class Question6 {
 	
 	public static void main(String[] args) {
 		// Q6. Write a program to determine if an integer is even without using the modulus operator (%)
-		// 주어진 숫자가 나눠서 0인지 아닌지 확인하라는 거잖어
 		ifNumberEven();
 		 
 	}
