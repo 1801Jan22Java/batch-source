@@ -1,0 +1,20 @@
+2018-01-26 16:03:19 WARN  root:12 - warn message
+2018-01-26 16:03:19 ERROR root:13 - error message
+2018-01-26 16:03:19 FATAL root:14 - fatal message
+2018-01-26 16:03:31 WARN  root:12 - warn message
+2018-01-26 16:03:31 ERROR root:13 - error message
+2018-01-26 16:03:31 FATAL root:14 - fatal message
+2018-01-26 16:07:37 WARN  root:12 - warn message
+2018-01-26 16:07:37 ERROR root:13 - error message
+2018-01-26 16:07:37 FATAL root:14 - fatal message
+2018-01-26 16:07:37 FATAL root:20 - / by zero
+java.lang.ArithmeticException: / by zero
+	at com.revature.logging.App.divide(App.java:20)
+	at com.revature.logging.App.main(App.java:13)
+2018-01-26 16:07:45 WARN  root:12 - warn message
+2018-01-26 16:07:45 ERROR root:13 - error message
+2018-01-26 16:07:45 FATAL root:14 - fatal message
+2018-01-26 16:07:45 FATAL root:20 - / by zero
+java.lang.ArithmeticException: / by zero
+	at com.revature.logging.App.divide(App.java:20)
+	at com.revature.logging.App.main(App.java:13)
