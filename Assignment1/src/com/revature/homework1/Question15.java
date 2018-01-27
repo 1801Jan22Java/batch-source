@@ -2,40 +2,46 @@ package com.revature.homework1;
 
 public class Question15 
 {
-	public interface Math
+	public static void printOperands()
 	{
-		addition(int x, int y);
-		
-		subtraction(int x, int y);
-		
-		multiplication (int x, int y);
-		
-		division(int x, int y);
+		Implementer i = new Implementer();
+		System.out.println("Testing addition: 5 + 8: "+i.addition(5, 8));
+		System.out.println("Testing addition: 5 - 8: "+i.subtraction(5, 8));
 	}
+}
+interface Maths
+{
+	int addition(int x, int y);
+	
+	int subtraction(int x, int y);
+	
+	int multiplication (int x, int y);
+	
+	int division(int x, int y);
+}
 
-	public class Implementer implements Math
+class Implementer implements Maths
+{
+	public int addition(int x, int y)
 	{
-		public static int addition(int x, int y)
-		{
-			return x+y;
-		}
-		
-		public static int subtraction(int x, int y)
-		{
-			return x-y;
-		}
-		
-		public static int multiplication(int x, int y)
-		{
-			return x*y;
-		}
-		
-		public static int division(int x, int y)
-		{
-			if(y != 0)
-				return x/y;
-			else
-				throw new IllegalArgumentException("Argument 'divisor' is 0");
-		}
+		return x+y;
+	}
+	
+	public int subtraction(int x, int y)
+	{
+		return x-y;
+	}
+	
+	public int multiplication(int x, int y)
+	{
+		return x*y;
+	}
+	
+	public int division(int x, int y)
+	{
+		if(y != 0)
+			return x/y;
+		else
+			throw new IllegalArgumentException("Argument 'divisor' is 0");
 	}
 }

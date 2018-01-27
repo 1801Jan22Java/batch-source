@@ -1,25 +1,33 @@
 package com.revature.homework1;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class Question20 
 {
 	public static void readAndPrintFile()
 	{
-		BufferedReader br = Files.newBufferedReader(new BufferedInputStream(Paths.get("Data.txt"))));
-		
-		//You're either going to use a reader or a Scanner. I cannot remember.
-		FileReader r = new FileReader(new BufferedInputStream("file path");	
-		Scanner sc = new Scanner();
+		String curr = "";
+		String[] arr = null;
+		try {
+			//Wrapping FileReader object in a BufferedReader and passing the path of the Data.txt file.
+			BufferedReader br = new BufferedReader(new FileReader("src\\com\\revature\\homework1\\Data.txt"));
 
-		String[] curr = "";
-		while(file.nextLine() != null)
-		{	
-			curr = next().split(":");
-			System.out.print("Name: " + curr[0] + " " + curr[1] + "\nAge: " + curr[2] + " years \nState: " + curr[3] + " State"
+			//if the current line is not null
+			while((curr = br.readLine()) != null)
+			{	
+				//split the word by the delimiter ":"
+				//and add it to an array
+				arr = curr.split(":");
+				//format the string and print the contents of arr
+				System.out.println("Name: " + arr[0] + " " + arr[1] + "\nAge: " + arr[2] + " years \nState: " + arr[3] + " State\n");
+			}
+			//close br to prevent memory leakage
+			br.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 

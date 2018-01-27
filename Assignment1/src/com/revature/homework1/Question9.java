@@ -8,8 +8,10 @@ public class Question9
 	{
 		ArrayList<Integer> result = new ArrayList<Integer>();
 
+		//check each number form 1 to 100 and
 		for(int i = 1; i <= 100; i++)
 		{
+			// add them to the above list if a number is prime
 			if(isPrime(i))
 				result.add(i);
 		}
@@ -18,8 +20,10 @@ public class Question9
 
 	public static boolean isPrime(int x)
 	{
+		//flag
 		boolean isPrime = true;
 		int counter = 0;
+		
 		int temp = x;
 		while(temp != 0)
 		{
@@ -28,7 +32,7 @@ public class Question9
 			temp--;
 		}
 		//Prime numbers are divisible by 1 and themselves.
-		//so every prime number should produce a counter of 2
+		//so every prime number should produce a counter of 2.
 		if(counter > 2)
 			isPrime = false;
 		return isPrime;

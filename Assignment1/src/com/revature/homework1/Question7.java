@@ -9,45 +9,54 @@ public class Question7
 {
 	public static void sortEmployees()
 	{
+		//Create a list, two employees,
 		List<Employee> employees = new ArrayList<Employee>();
 		Employee e1 = new Employee("Eric", "IT", 37);
 		Employee e2 = new Employee("Clarissa", "Education", 21);
+		//and add the employees to the list.
 		Collections.addAll(employees, e1, e2);
 		
+		System.out.println("---------Sorting Based on First Name---------\n");
 		//Sorting by First Name
 		System.out.println("Employees before sorting");
+		//Randomize the employees
 		Collections.shuffle(employees);
+		//Print out the current order of employees
 		for(Employee employee : employees)
 			System.out.println(employee);
-		System.out.println("Sorting Based on First Name");
+		//Sort the employees by alphabetical order
 		sortByNameWithComparator(employees);
 		System.out.println();
 		
-		
+		System.out.println("---------Sorting Based on Last Name---------");
 		//Sorting by Department
 		System.out.println("Employees before sorting");
 		Collections.shuffle(employees);
 		for(Employee employee : employees)
 			System.out.println(employee);
-		System.out.println("Sorting Based on Last Name");
+		//Sort the employees by department's alphabetical order
 		sortByDepartmentWithComparator(employees);
 		System.out.println();
 		
 		
+		System.out.println("---------Sorting Based on Age---------");
 		//Sorting by Age
 		System.out.println("Employees before sorting");
 		Collections.shuffle(employees);
 		for(Employee employee : employees)
 			System.out.println(employee);
-		System.out.println("Sorting Based on Age");
+		//Sort the employees by age.
 		sortListByAgeWithComparator(employees);
 	}
 
 	public static List<Employee> sortByNameWithComparator(List<Employee> l)
 	{
 		NameCompare nc = new NameCompare();
+		//This particular version of the Collections's sort method
+		//will use the custom compareTo method to sort the list
 		Collections.sort(l, nc);
-		System.out.println("Employees after sortByNameWithComparator: ");
+		System.out.println("\nEmployees after sorting:");
+		//print the employees
 		for(Employee e : l)
 			System.out.println(e);
 		return l;
@@ -57,7 +66,7 @@ public class Question7
 	{
 		DepartmentCompare dc = new DepartmentCompare();
 		Collections.sort(l, dc);
-		System.out.println("Employees after sortByDepartmentWithComparator: ");
+		System.out.println("\nEmployees after sorting:");
 		for(Employee e : l)
 			System.out.println(e);
 		return l;
@@ -67,7 +76,7 @@ public class Question7
 	{
 		IntCompare ic = new IntCompare();
 		Collections.sort(l, ic);
-		System.out.println("Employees after sortListByAgeWithComparator: ");
+		System.out.println("\nEmployees after sorting:");
 		for(Employee e : l)
 			System.out.println(e);
 		return l;

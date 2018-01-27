@@ -13,6 +13,8 @@ public class Question19
 		int evens = 0;
 		int odds = 0;
 		int primes = 0;
+		//for each int in the array, use the methods created earlier in the assignment
+		//to add them to the ints.
 		for(Integer i : ints)
 		{
 			if(Question6.isEven(i))
@@ -22,8 +24,9 @@ public class Question19
 			if(Question9.isPrime(i))
 				primes += i;
 		}
-		System.out.println("Evens: "+evens);
-		System.out.println("Odds: "+odds);
-		System.out.println("Primes: "+primes);
+		//print out the sums of the evens, odds, and primes
+		System.out.println("Evens sum: "+evens);
+		System.out.println("Odds sum: "+odds);
+		System.out.println("Primes sum: "+primes);
 	}
 }

@@ -1,8 +1,6 @@
 package com.revature.homework1;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
 
 public class Question14 
 {
@@ -12,7 +10,7 @@ public class Question14
 		switch(java)
 		{
 		case "paul": 
-			System.out.println(Math.sqrt(8));
+			System.out.println(Math.sqrt(8.0));
 			break;
 		case "java": 
 			LocalDate date = LocalDate.now();
