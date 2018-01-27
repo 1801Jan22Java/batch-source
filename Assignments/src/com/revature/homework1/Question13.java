@@ -1,7 +1,7 @@
 package com.revature.homework1;
 
 /**
- * Created by: Jeffrey Rubi Date: 26 January 2018 Write a program to store
+ * Created by: Jeffrey Rubi Date: 26 January 2018 
  * Display the triangle on the console as follows using any type of loop. Do NOT
  * use a simple group of print statements to accomplish this. 
  * 0 

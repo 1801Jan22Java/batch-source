@@ -1,8 +1,8 @@
 package com.revature.homework1;
 
 /**
- * Created by: Jeffrey Rubi Date: 26 January 2018 Write a program to store
- * numbers from 1 to 100 in an array. Print out all the even numbers from the
+ * Created by: Jeffrey Rubi Date: 26 January 2018 
+ * Write a program to store numbers from 1 to 100 in an array. Print out all the even numbers from the
  * array. Use the enhanced FOR loop for printing out the numbers.
  */
 
