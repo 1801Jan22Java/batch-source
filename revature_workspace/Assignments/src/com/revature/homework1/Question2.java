@@ -28,22 +28,11 @@ public class Question2 {
 		
 	}
 	
-	public static int fibonacciIterative(int n)
-	{
-		int result = 0;
-		for( int i=0 ;i<=n;i++)
-		{
-			result=i+(i+1);
-		}
-		return result;
-	}
 	
 	public static void main(String [] args)
 	{
-		int a=fibonacciRecursive(9);
-		int b=fibonacciIterative(5);
+		int a=fibonacciRecursive(5);
 		System.out.println(a);
-		System.out.println(b);
 	}
 	
 }

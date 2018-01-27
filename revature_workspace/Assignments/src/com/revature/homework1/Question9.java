@@ -38,10 +38,6 @@ public class Question9 {
 				{
 					return false;
 				}
-				else
-				{
-					isPrime= true;
-				}
 			}
 	return isPrime;
 	}

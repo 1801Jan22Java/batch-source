@@ -54,7 +54,30 @@ public class Question19 {
 		}
 		return result;
 	}
-
+	
+	public static boolean checkPrime(int num)
+	{
+		boolean isPrime=true;
+		if(num==2)
+		{
+			return true;
+		}
+		
+		if(num%2==0)
+		{
+			return false;
+		}
+	
+		for(int i=3;i*i<=num; i+=2)
+			{
+				if(num % i==0)
+				{
+					return false;
+				}
+			}
+	return isPrime;
+	}
+/*
 	public static boolean checkPrime(Integer num)
 	{
 		boolean isPrime=false;
@@ -86,10 +109,11 @@ public class Question19 {
 	return isPrime;
 	}
 	
+	*/
 	
 	public static ArrayList<Integer> removePrimes(ArrayList<Integer> list)
 	{
-		for(int i = 0;i<list.size();i++){
+		for(int i = 2;i<list.size();i++){
 			System.out.println("inside removePrimes");
 			if(checkPrime(list.get(i)))
 			{

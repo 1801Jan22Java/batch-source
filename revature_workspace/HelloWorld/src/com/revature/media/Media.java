@@ -1,7 +1,14 @@
 package com.revature.media;
 
-public abstract class Media {
+import java.io.Serializable;
+
+public abstract class Media implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3493057914192363111L;
+
 	public Media() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -16,7 +23,7 @@ public abstract class Media {
 	protected String creator;
 	protected String title;
 	protected int yearPublished;
-	protected String genre;
+	protected transient String genre;
 	
 	public String getCreator() {
 		return creator;
