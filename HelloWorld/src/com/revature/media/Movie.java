@@ -2,6 +2,16 @@ package com.revature.media;
 
 public class Movie extends Media implements Comparable<Movie> {
 
+	private int movieId;
+	
+	public void setMovieId(int id) {
+		this.movieId = id;
+	}
+	
+	public int getMovieId() {
+		return this.movieId;
+	}
+	
 	public Movie() {
 		super();
 	}

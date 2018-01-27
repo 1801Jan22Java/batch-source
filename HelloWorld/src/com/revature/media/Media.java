@@ -1,28 +1,29 @@
 package com.revature.media;
 
-public abstract class Media {
+import java.io.Serializable;
+
+public abstract class Media implements Serializable {
 	
+	protected String creator;
+	protected String title;
+	protected int yearPublished;
+	protected transient String genre;
+
 	public Media() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	public Media(String creator, String title, int yearPublished, String genre) {
 		super();
-		this.publisher = creator;
+		this.creator = creator;
 		this.title = title;
 		this.yearPublished = yearPublished;
 		this.genre = genre;
 	}
-	protected String publisher;
-	protected String title;
-	protected int yearPublished;
-	protected String genre;
-	public String getPublisher() {
-		return publisher;
+	
+	public String getCreator() {
+		return creator;
 	}
-	public void setPublisher(String creator) {
-		this.publisher = creator;
-	}
+
 	public String getTitle() {
 		return title;
 	}
@@ -43,7 +44,7 @@ public abstract class Media {
 	}
 	@Override
 	public String toString() {
-		return "Media [creator=" + publisher + ", title=" + title + ", yearPublished=" + yearPublished + ", genre="
+		return "Media [creator=" + creator + ", title=" + title + ", yearPublished=" + yearPublished + ", genre="
 				+ genre + "]";
 	}
 	
