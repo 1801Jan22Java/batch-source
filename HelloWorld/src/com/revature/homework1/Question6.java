@@ -26,6 +26,7 @@ public class Question6 {
 			} else {
 				System.out.println("it's odd");
 			}
+			sc.nextLine();
 			System.out.println("please input another number below. ");		
 		} while (sc.hasNextInt());
 		
