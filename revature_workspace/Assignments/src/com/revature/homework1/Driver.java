@@ -32,10 +32,7 @@ public class Driver {
 		//Question 2
 		System.out.println("\nQuestion 2");
 		Question2 q2 = new Question2();
-		//Attempts Fibonacci on 5
-		System.out.println(q2.fibonacciRecursive(5));
-		System.out.println(q2.fibonacciRecursive(1));
-		System.out.println(q2.fibonacciRecursive(0));
+		//Displays first 25 fibonacci numbers
 		q2.displayNums();
 		
 		//Question 3
