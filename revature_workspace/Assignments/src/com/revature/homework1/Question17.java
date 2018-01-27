@@ -6,13 +6,20 @@ package com.revature.homework1;
 Accrued amount = Principal*(1+ Rate* Time)
 
  * 
+ * Question17 class takes in three parameters: float rate, int numYears, float principal
  * */
 public class Question17 {
-	
+
 	private float rate;
 	private int numYears;
 	private float principal;
 	
+	
+	/*
+	 * Constructor for Question17 class
+	 * We instantiate Question17 class by taking in the three parameters
+	 * int numYears, float principal, float rate
+	 * */
 	public Question17( int numYears, float principal,float rate) {
 		super();
 		
@@ -21,6 +28,7 @@ public class Question17 {
 		this.rate = rate;
 		
 	}
+
 	
 	public float getRate() {
 		return rate;
@@ -45,6 +53,13 @@ public class Question17 {
 		this.principal = principal;
 	}
 	
+	/*
+	 * public float calculateInterest() returns float interest.
+	 * the rate field is multiplied by .01f to be treated as a percentage of the principal
+	 * getPrincipal() is then multiplied by getNumYears() and decimalRate to get interest
+	 * @param none
+	 * @return float interest
+	 * */
 	public float calculateInterest()
 	{
 		float interest =0.0f;
@@ -52,12 +67,74 @@ public class Question17 {
 		interest = getNumYears()*getPrincipal()*decimalRate;
 		return interest;
 	}
+	/*
+	 * displays the principal, number of years, rate, and simple interest is displayed as a string
+	 * @param none
+	 * @return none
+	 * */
 	
 	public void displayInterest()
 	{
-		System.out.println("The simple interest for a principal of " +getPrincipal() +" over " + getNumYears() + " years"+
+		System.out.println("The simple interest for a principal of " +getPrincipal() +" over " + getNumYears() + " years "+
 	"at a rate of " + getRate() + " is " + calculateInterest());
 	}
+	
+	public boolean verifyRateFloat(String input)
+	{
+		boolean result =false;
+		try{
+		Float rate = Float.parseFloat(input);
+		setRate(rate);
+		result = true;
+		}
+		catch(NumberFormatException e)
+		{
+			System.out.println("Invalid number");
+		}
+		finally
+		{
+			return result;
+		}
+	}
+	/*Attempts to verify that the input from the user can 
+	 * indeed be parsed into a number of years.
+	 * 
+	 * */
+	public boolean verifyYearInt(String input)
+	{
+		boolean result=false;
+		try{
+		Integer years = Integer.parseInt(input);
+		setNumYears(years);
+		result=true;
+		}
+		catch(NumberFormatException e)
+		{
+			System.out.println("Invalid number");
+		}
+		finally
+		{
+			return result;
+		}
+	}
+	
+	public boolean verifyPrincipalFloat(String input)
+	{
+		boolean result = false;
+		try{
+		Float principal = Float.parseFloat(input);
+		setPrincipal(principal);
+		result=true;
+		}
+		catch(NumberFormatException e)
+		{
+			System.out.println("Invalid number");
+		}
+		finally{
+			return result;
+		}
+	}
+	
 	
 
 }

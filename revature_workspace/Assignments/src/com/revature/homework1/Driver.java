@@ -182,9 +182,39 @@ public class Driver {
 	
 		
 		//Question 17
-		
+		/* int years = 10
+		 * float principal = 2434.60f
+		 * float rate = 2.5f
+		 * 
+		 * */
 		System.out.println("\nQuestion 17");
-		Question17 q17 = new Question17(10,2434.60f,2.5f);
+		Question17 q17 = new Question17();
+		Scanner sc17 = new Scanner(System.in);
+		
+		System.out.println("Please enter the number of years: " );
+		String yearStr =sc17.nextLine();
+		while(!q17.verifyYearInt(yearStr)){
+			System.out.println("The number you entered was invalid, please try again:");
+			yearStr =sc17.nextLine();
+			q17.verifyYearInt(yearStr);
+		}
+		
+		System.out.println("Please enter the rate: ");
+		String rateStr =sc17.nextLine();
+		while(!q17.verifyRateFloat(rateStr)){
+			System.out.println("The number you entered was invalid, please try again:");
+			rateStr =sc17.nextLine();
+			q17.verifyRateFloat(rateStr);
+		}
+		
+		System.out.println("Please enter the principal");
+		String principal =sc17.nextLine();
+		while(!q17.verifyPrincipalFloat(principal))
+		{
+			System.out.println("The number you entered was invalid, please try again:");
+			principal=sc17.nextLine();
+			q17.verifyPrincipalFloat(principal);
+		}
 		q17.displayInterest();
 		
 		//Question 18  
