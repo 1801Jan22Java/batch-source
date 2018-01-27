@@ -8,6 +8,12 @@ Q18. Write a program having a concrete ;subclass that inherits three abstract me
 Create an appropriate class having a main method to test the above setup.
  */
 
+/*
+ * abstract class Q18AbstractParentClass has three methods
+ * abstract boolean hasUppercase(String str)
+ * abstract String convertToUpper(String str)
+ * abstract int convertToInt(String str)
+ * */
 abstract class Q18AbstractParentClass
 {
 	abstract boolean hasUppercase(String str);
@@ -17,10 +23,22 @@ abstract class Q18AbstractParentClass
 
 }
 
+/*
+ * class Q18ConcreteChildClass implements abstract methods in
+ * Q18AbstractParentClass
+ * */
 class Q18ConcreteChildClass extends Q18AbstractParentClass
 {
 
 	@Override
+	/*
+	 * hasUpperCase(String str) searches through String str
+	 * after converting it to a charArray and trying to 
+	 * detect uppercase characters
+	 * @param String str
+	 * @return boolean hasUpper
+	 * 
+	 * */
 	public boolean hasUppercase(String str) {
 		boolean hasUpper=false;
 		char[] charArr=str.toCharArray();
@@ -40,7 +58,14 @@ class Q18ConcreteChildClass extends Q18AbstractParentClass
 		return hasUpper;
 	}
 	
-	
+	/*
+	 * converToUpper(String str) 
+	 * converts any lowercase characters in a string to uppercase,
+	 * while retaining uppercase characters in the string. 
+	 * iterates through string str after converting it to a charArray
+	 * @param String str
+	 * @return String result
+	 * */
 	@Override
 	 public String convertToUpper(String str) {
 		String result="";

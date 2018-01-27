@@ -28,27 +28,58 @@ public class Question17 {
 		this.rate = rate;
 		
 	}
-
-	
-	public float getRate() {
-		return rate;
-	}
-	public void setRate(float rate) {
-		this.rate = rate;
-	}
-	public int getNumYears() {
-		return numYears;
-	}
-	public void setNumYears(int numYears) {
-		this.numYears = numYears;
-	}
+	//No-args constructor for Question17
 	public Question17() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+
+	//Getters and setters
+	/*float getRate()
+	 * @param none
+	 * @return float rate
+	 * */
+	public float getRate() {
+		return rate;
+	}
+	/*
+	 * setRate()
+	 * @param float rate
+	 * @return none
+	 * */
+	public void setRate(float rate) {
+		this.rate = rate;
+	}
+	/*
+	 * getNumYears()
+	 * @param none
+	 * @return int numYears
+	 * */
+	public int getNumYears() {
+		return numYears;
+	}
+	/*
+	 * setNumYears()
+	 * @param int numYears
+	 * @return none
+	 * */
+	public void setNumYears(int numYears) {
+		this.numYears = numYears;
+	}
+	
+	/*
+	 * getPrincipal()
+	 * @param none
+	 * @return float principal
+	 * */
 	public float getPrincipal() {
 		return principal;
 	}
+	/*
+	 * setPrincipal()
+	 * @param float principal
+	 * @return none
+	 * */
 	public void setPrincipal(float principal) {
 		this.principal = principal;
 	}

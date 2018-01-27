@@ -38,7 +38,7 @@ public class Driver {
 		//Question 3
 		 System.out.println("\nQuestion 3");
 		 Question3 q3=new Question3();
-		System.out.println(q3.reverseAString("dog"));
+		System.out.println(q3.reverseAString("Sport coat"));
 		System.out.println(q3.reverseAString("4342k3l0"));
 		
 		//Question 4
