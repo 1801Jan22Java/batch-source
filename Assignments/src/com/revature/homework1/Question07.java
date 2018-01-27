@@ -2,6 +2,8 @@ package com.revature.homework1;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.Scanner;
 
@@ -75,15 +77,15 @@ public class Question07 {
 		System.out.println("Original array =\t" + array);
 		// Sort by name
 		SortByName s1 = new SortByName();
-		array.sort(s1);
+		Collections.sort(array, s1);
 		System.out.println("Sorted by name =\t" + array);
 		// Sort by department
 		SortByDepartment s2 = new SortByDepartment();
-		array.sort(s2);
+		Collections.sort(array, s2);
 		System.out.println("Sorted by department =\t" + array);
 		// Sort by age
 		SortByAge s3 = new SortByAge();
-		array.sort(s3);
+		Collections.sort(array, s3);
 		System.out.println("Sorted by age =\t\t" + array);
 	}
 }
