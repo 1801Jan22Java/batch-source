@@ -3,18 +3,23 @@ package com.revature.homework1;
 public class Question13 {
 	
 	public static void printTriangle() {
-		String str = "0";
-		for(int j = 0; j < 4; j++) {
-			System.out.println(str);
-			String[] strArray = str.split(" ");
-			
-			if(strArray.length % 2 == 0) {
-				str = str + " 1";
-			} else if(strArray[0] == "0"){
-				str = "1 " + str;
-			} else {
-				str = "0 " + str;
+		// By following the pattern
+		// 1
+		// 2 3
+		// 4 5 6, etc
+		// The 0 are going to be printed in the odd positions
+		
+		int counter = 0;
+		for(int i = 0; i <= 4; i++) {
+			for(int j = 1; j <= i; j++) {
+				if(counter % 2 == 0) {
+					System.out.print("0");
+				} else {
+					System.out.print("1");
+				}
+				counter++;
 			}
+			System.out.println();
 		}
 	}
 }
