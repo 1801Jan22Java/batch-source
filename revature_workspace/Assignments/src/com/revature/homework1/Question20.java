@@ -48,6 +48,7 @@ Person(String fName,String lName,int age, String state){
 	public String toString()
 	{
 		String personStr= "Name: "+firstName + " "+lastName + "\nAge: " + this.age + " years"+ "\nState: " + this.state + " State";
+		
 		return personStr; 
 	}
 	
@@ -63,6 +64,7 @@ public static void displayData(ArrayList<String[]> personList)
 		//System.out.println(str[1]);
 		Person p =new Person(str[0],str[1],Integer.parseInt(str[2]),str[3]);
 		System.out.println(p.toString());
+		System.out.println();
 	}
 	
 }
@@ -77,7 +79,7 @@ public static ArrayList<String[]> intakeData(File file){
 	int numLine=0;
 	String newLine =textReader.readLine();
 
-	personList.add(newLine.split(":"));
+	//personList.add(newLine.split(":"));
 	while(newLine!=null)
 	{
 		//personList.add(newLine);

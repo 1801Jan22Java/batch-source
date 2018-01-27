@@ -95,16 +95,22 @@ public class Driver {
 		
 		//Question 8
 		System.out.println("\nQuestion 8");
-		System.out.println(Question8.isPalindrome("werewolf"));
-		System.out.println(Question8.isPalindrome("warewilf"));
-		System.out.println(Question8.isPalindrome("racecar"));
+		Question8 q8 = new Question8();
+		ArrayList<String>list = q8.storeStrings("karan","madam", "tom", "civic", "radar","jimmy",
+				"kayak","john","refer","billy","did");
 		
+		ArrayList<String>palindromes = q8.storePalindromes(list);
+		for(int i =0;i<palindromes.size();i++)
+		{
+			System.out.println(palindromes.get(i));
+		}
+	
 		//Question 9 
 		
 		System.out.println("\nQuestion 9");
-		ArrayList <Double> list = new ArrayList<Double>();
-		list=Question9.fillArrayList();
-		Question9.printPrime(list);
+		ArrayList <Double> listDoubles = new ArrayList<Double>();
+		listDoubles=Question9.fillArrayList();
+		Question9.printPrime(listDoubles);
 		
 		
 		//Question 10
@@ -121,8 +127,10 @@ public class Driver {
 		Question12.showEvenNumbers();
 		
 		
-		//Question 13  // Working on.  All kinds of messed up
-		
+		//Question 13  // Working on a better solution...
+		System.out.println("\nQuestion 13");
+		Question13 q13 = new Question13();
+		q13.displayTriangle();
 		
 		
 		//Question 14
@@ -143,27 +151,27 @@ public class Driver {
 		
 		
 		
-		//Question 15 // NEED TO WORK ON
+		//Question 15 
 		System.out.println("\nQuestion 15");
 		//Calling Question15 by its main method.
 		Question15 q15 = new Question15();
 		q15.main(args);
 		
+		//Question 16 Version A
+		Question16a.main(args);
 		
 		//Question 16
 		System.out.println("\nQuestion 16");
-		String [] strings = {"hot","cold","yes","no"};
 		Question16 q16 = new Question16();
-		//System.out.println(q16.countChars(strs));
 		Scanner sc2=new Scanner (System.in);
 		
 		ArrayList<String> stringList = new ArrayList<String>();
-		System.out.println("Add a string: ");
+		System.out.println("Please add a string: ");
 		String q16Input = sc.nextLine();
 		stringList.add(q16Input);
 		while(!q16Input.isEmpty())
 		{
-			System.out.println("Add another string: ");
+			System.out.println("Please add another string: ");
 			q16Input=sc2.nextLine();
 			stringList.add(q16Input);
 		}
