@@ -38,12 +38,14 @@ public class Question7 {
 		for (Employee e : employeeList) {
 			System.out.println("Age: " + e.getAge() + " Department: " + e.getDepartment() + " Name: " + e.getName());
 		}
+		System.out.println("");
 
 		Collections.sort(employeeList, departmentCompare);
 		System.out.println("Sort by department: ");
 		for (Employee e : employeeList) {
 			System.out.println("Age: " + e.getAge() + " Department: " + e.getDepartment() + " Name: " + e.getName());
 		}
+		System.out.println("");
 
 		Collections.sort(employeeList, nameCompare);
 		System.out.println("Sort by name: ");

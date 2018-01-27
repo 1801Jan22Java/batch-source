@@ -6,8 +6,14 @@ public class Question16 {
 	public static void main(String[] args) {
 		// Get the first command line argument.
 		// Find the length using String's built-in length() method.
-		int strLen = args[0].length();
-		
-		System.out.println(strLen);
+		if(args.length==0) {
+			System.out.println("0");
+		}
+		else {
+			int strLen = args[0].length();
+			
+			System.out.println(strLen);
+		}
+
 	}
 }

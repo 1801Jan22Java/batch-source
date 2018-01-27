@@ -7,7 +7,7 @@ package com.revature.homework1;
  */
 public class Question5 {
 	public static void main(String[] args) {
-		String test = subString("Testing this String", 5);
+		String test = subString("Testing this String", 9);
 		System.out.println(test);
 	}
 	
