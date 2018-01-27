@@ -1,5 +1,6 @@
 package com.revature.homework1;
 
+import java.io.File;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -13,6 +14,7 @@ public class Driver {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		//Question 1
+		System.out.println("\nQuestion 1");
 		Question1 q1 = new Question1();
 		 int [] arrayToBeSorted = {1,0,5,6,3,2,3,7,9,8,4};
 		 for(int i =0 ; i< arrayToBeSorted.length;i++)
@@ -28,25 +30,30 @@ public class Driver {
 		 System.out.println();
 		
 		//Question 2
-		//System.out.println(Question2.fibonacciRecursive(5));
+		System.out.println("\nQuestion 2");
+		System.out.println(Question2.fibonacciRecursive(5));
 		
 		//Question 3
+		 System.out.println("\nQuestion 3");
 		//System.out.println(Question3.reverseAString("dog"));
 		
 		//Question 4
-		//System.out.println(Question4.factorialRecursive(5));
+		 System.out.println("\nQuestion 4");
+		System.out.println(Question4.factorialRecursive(5));
 		
 		//Question 5
-		//System.out.println(Question5.subStrang("yellow", 4));
+		System.out.println("\nQuestion 5");
+		System.out.println(Question5.subStrang("yellow", 4));
 		
 		//Question 6
-		//System.out.println(Question6.isEven(7));
-		//System.out.println(Question6.isEven(6));
+		 System.out.println("\nQuestion 6");
+		System.out.println(Question6.isEven(7));
+		System.out.println(Question6.isEven(6));
 		System.out.println(Question6.isEven(0));
-		//System.out.println(Question6.isEven(10001));
+		System.out.println(Question6.isEven(10001));
 		
 		//Question 7 
-		
+		System.out.println("\nQuestion 7");
 		Question7 q7= new Question7();
 		Employee e1 = new Employee("Mikhail","Gorbachev","History",32);
 		Employee e2 = new Employee("Benedict","Anderson","Anthropology",31);
@@ -86,32 +93,40 @@ public class Driver {
 		}
 		
 		
-		
-		
-		
-		
 		//Question 8
-		//System.out.println(Question8.isPalindrome("werewolf"));
-		//System.out.println(Question8.isPalindrome("warewilf"));
-		//System.out.println(Question8.isPalindrome("racecar"));
-		/*
+		System.out.println("\nQuestion 8");
+		System.out.println(Question8.isPalindrome("werewolf"));
+		System.out.println(Question8.isPalindrome("warewilf"));
+		System.out.println(Question8.isPalindrome("racecar"));
 		
-		//Question 9 // NEED TO WORK ON
+		//Question 9 
+		
+		System.out.println("\nQuestion 9");
 		ArrayList <Double> list = new ArrayList<Double>();
 		list=Question9.fillArrayList();
 		Question9.printPrime(list);
+		
+		
+		//Question 10
+		 System.out.println("\nQuestion 10");
 		System.out.println(Question10.findMinimum(9, 10));
 		
-		//Question 11 - Created but need to show
+		//Question 11 
+		 System.out.println("\nQuestion 11");
+		Question11 q11= new Question11();
+		q11.accessVariables();
 		
 		//Question 12
-		//Question12.showEvenNumbers();
+		System.out.println("\nQuestion 12");
+		Question12.showEvenNumbers();
 		
-		//Question 13  // Working on.  All kinds of effed up.
+		
+		//Question 13  // Working on.  All kinds of messed up
 		
 		
 		
 		//Question 14
+		System.out.println("\nQuestion 14");
 		Question14 q14 = new Question14();
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Please make an integer selection between 1 and 3: ");
@@ -127,43 +142,45 @@ public class Driver {
 	//	q14.switchRun(a);
 		
 		
-		*/
+		
 		//Question 15 // NEED TO WORK ON
+		System.out.println("\nQuestion 15");
+		//Calling Question15 by its main method.
+		Question15 q15 = new Question15();
+		q15.main(args);
 		
 		
 		//Question 16
-		
-	/*	String [] strs = {"hot","cold","yes","no"};
+		System.out.println("\nQuestion 16");
+		String [] strings = {"hot","cold","yes","no"};
 		Question16 q16 = new Question16();
 		//System.out.println(q16.countChars(strs));
 		Scanner sc2=new Scanner (System.in);
 		
-		ArrayList<String> lists = new ArrayList<String>();
-	//	System.out.println("Add a string: ");
-		while(!sc2.nextLine().isEmpty())
+		ArrayList<String> stringList = new ArrayList<String>();
+		System.out.println("Add a string: ");
+		String q16Input = sc.nextLine();
+		stringList.add(q16Input);
+		while(!q16Input.isEmpty())
 		{
 			System.out.println("Add another string: ");
-			lists.add(sc2.nextLine());
+			q16Input=sc2.nextLine();
+			stringList.add(q16Input);
 		}
-		String [] strArray = new String[lists.size()];
-		for(int i =0;i<lists.size();i++)
-		{
-			
-			strArray[i]=lists.get(i);
-			System.out.println(strArray[i]);
-		}
-		System.out.println(strArray.toString());
+		String [] strArray = q16.makeStrArray(stringList);
+		
+	
 		System.out.println(q16.countChars(strArray));
 	
-		*/
 		
 		//Question 17
-		/*
+		
+		System.out.println("\nQuestion 17");
 		Question17 q17 = new Question17(10,2434.60f,2.5f);
 		q17.displayInterest();
 		
-		//Question 18
-		
+		//Question 18  
+		System.out.println("\nQuestion 18");
 		Q18ConcreteChildClass c= new Q18ConcreteChildClass();
 		System.out.println(c.hasUppercase("hello world"));
 		System.out.println(c.hasUppercase("11111"));
@@ -174,20 +191,31 @@ public class Driver {
 		System.out.println(c.convertToInt("11232"));
 		System.out.println(c.convertToInt("jfdkla;343"));
 		
-		//Question 19
-		ArrayList<Integer> question19List = Question19.insertInt();
-		for (Integer i : question19List){
-		//	System.out.println(i);
-		}
-		//Question19.addOdds(question19List);
-		//Question19.addEvens(question19List);
 		
-		//Question19.removePrimes(question19List);
-		/*for(int i = 0;i<question19List.size();i++)
+		//Question 19   
+		Question19 q19=new Question19();
+		System.out.println("\nQuestion19");
+		ArrayList<Integer> question19List = q19.insertInt();
+		for (Integer i : question19List){
+			System.out.println(i);
+		}
+		System.out.println("Adding odds");
+		System.out.println(q19.addOdds(question19List));
+		System.out.println("Adding evens");
+		System.out.println(q19.addEvens(question19List));
+		
+		q19.removePrimes(question19List);
+		for(int i = 0;i<question19List.size();i++)
 		{
-			System.out.println(question19List.get(i));
-		}*/
-		//Question 20  //WORKING ON IT
+			System.out.print(question19List.get(i) + " ");
+		}
+		
+		
+		System.out.println("\nQuestion 20");
+		Question20 q20 = new Question20();
+		File file = new File("Data.txt");
+	//	q20.intakeData(file);
+		q20.displayData(q20.intakeData(file));
 		
 		
 

@@ -19,7 +19,7 @@ public class Question19 {
 	 * @param none (void)
 	 * @return ArrayList<Integer> intList
 	 * */
-	public static ArrayList<Integer> insertInt()
+	public  ArrayList<Integer> insertInt()
 	{
 		ArrayList<Integer> intList = new ArrayList<Integer>();
 		for(int i = 1; i<=10 ; i++)
@@ -29,7 +29,7 @@ public class Question19 {
 		return intList;
 	}
 
-	public static int addEvens(ArrayList<Integer> list)
+	public  int addEvens(ArrayList<Integer> list)
 	{
 		int result = 0;
 		for(int i : list)
@@ -42,7 +42,7 @@ public class Question19 {
 		return result;
 	}
 
-	public static int addOdds(ArrayList<Integer> list)
+	public  int addOdds(ArrayList<Integer> list)
 	{
 		int result = 0;
 		for(int i : list)
@@ -55,69 +55,32 @@ public class Question19 {
 		return result;
 	}
 	
-	public static boolean checkPrime(int num)
+	public  boolean checkPrime(int num)
 	{
-		boolean isPrime=true;
-		if(num==2)
-		{
-			return true;
-		}
-		
-		if(num%2==0)
-		{
-			return false;
-		}
-	
-		for(int i=3;i*i<=num; i+=2)
+
+		boolean isPrime =true;
+		for(int i=3;i<=num; i+=2)
 			{
-				if(num % i==0)
+				if(num % 2==0||num%3==0)
 				{
-					return false;
+					isPrime=false;
 				}
 			}
-	return isPrime;
+		return isPrime;
 	}
-/*
-	public static boolean checkPrime(Integer num)
+	
+	public  ArrayList<Integer> removePrimes(ArrayList<Integer> list)
 	{
-		boolean isPrime=false;
-		if(num==2)
-		{
-			//System.out.println(num);
-			isPrime=true;	
-		}	
-		if(num%2==0)
-		{
-		//	System.out.println(num%2);
-			isPrime=false;
-		}
-		for(int i=3;i*i<=num; i+=2)
+		for(int i = 0;i<list.size();i++){
+		//	System.out.println("inside removePrimes");//DEBUGGING
+			if(list.get(i)>0 &&list.get(i)<4 )
 			{
-				if(num % i==0)
-				{
-					isPrime= false;
-					
-				}
-				else
-				{
-					System.out.println(num);
-					 isPrime= true;
-					//System.out.println(isPrime);
-					
-				}
+				list.remove(i);
 			}
-	return isPrime;
-	}
-	
-	*/
-	
-	public static ArrayList<Integer> removePrimes(ArrayList<Integer> list)
-	{
-		for(int i = 2;i<list.size();i++){
-			System.out.println("inside removePrimes");
-			if(checkPrime(list.get(i)))
+		}
+		for(int i = 0;i<list.size();i++){
+			 if(checkPrime(list.get(i)))
 			{
-			//	System.out.println(list.get(i));
 				list.remove(i);
 			}
 		}
@@ -126,23 +89,6 @@ public class Question19 {
 	}
 
 
-	public static void main(String [] args)
-	{
-		ArrayList<Integer> list =insertInt();
-		for(int i = 0;i<list.size();i++)
-		{
-		//	System.out.println(list.get(i));
-		}
-		//System.out.println(addEvens(list));
-	//	System.out.println(addOdds(list));
-		list = removePrimes(list);
-		for (int i=0;i<list.size();i++)
-		{
-			System.out.print(list.get(i) + " ");
-		}
-
-
-	}
 
 }
 

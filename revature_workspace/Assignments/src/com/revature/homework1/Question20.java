@@ -6,6 +6,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /*
@@ -25,26 +26,71 @@ Age: 35 years
 State: Arizona State
 
  * */
-public class Question20 {
-	public static void main(String [] args){
+
+// Creating a Person class to hold values
+class Person 
+{
+String firstName;
+String lastName;
+int age;
+String state;
+
+//Person constructor
+Person(String fName,String lName,int age, String state){
+	firstName=fName;
+	lastName=lName;
+	this.age=age;
+	this.state=state;
+}
+// For the purposes of this class / the homework, getters and setters seem unnecessary
+
+//Person toString. 
+	public String toString()
+	{
+		String personStr= "Name: "+firstName + " "+lastName + "\nAge: " + this.age + " years"+ "\nState: " + this.state + " State";
+		return personStr; 
+	}
 	
-	File file;
+
+
+}
+public class Question20 {
+
+public static void displayData(ArrayList<String[]> personList)
+{
+	for(String[]str : personList)
+	{
+		//System.out.println(str[1]);
+		Person p =new Person(str[0],str[1],Integer.parseInt(str[2]),str[3]);
+		System.out.println(p.toString());
+	}
+	
+}
+public static ArrayList<String[]> intakeData(File file){
 	FileReader fr;
 	BufferedReader textReader;// = new BufferedReader(fr);
+	ArrayList<String[]> personList=  new ArrayList<String[]>();
 	try{
-		file = new File("Data.txt");
+		
 		fr = new FileReader("Data.txt");
 		textReader = new BufferedReader(fr);
 	int numLine=0;
-	while(textReader.readLine()!=null)
+	String newLine =textReader.readLine();
+
+	personList.add(newLine.split(":"));
+	while(newLine!=null)
 	{
-		System.out.println(textReader.readLine());
-		numLine++;
-	
+		//personList.add(newLine);
+		String [] features = newLine.split(":");
+		personList.add(features);
+		newLine=textReader.readLine();	
+		//System.out.println(newLine);	
+		//numLine++;//DEBUGGING
+		
 	}
-	System.out.println(numLine);
+	//System.out.println(numLine);//DEBUGGING
 	textReader.close();
-	fr.close();
+	fr.close();	
 	
 	}
 	catch(FileNotFoundException fnfe)
@@ -53,8 +99,8 @@ public class Question20 {
 	}
 	catch(IOException e){
 		e.printStackTrace();
-	}
+	}	
 	
-	
+	return personList;
 	}
 }

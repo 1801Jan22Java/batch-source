@@ -11,6 +11,8 @@ Refer to Generics in Notes under 1/25/2018
  * 
  * */
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Scanner;
@@ -39,6 +41,22 @@ public class Question14 {
 		double result = Math.sqrt(square);
 		return result;
 	}
+	
+	private void showDate()
+	{
+
+		LocalDate ldt1 =  LocalDate.now();
+		System.out.println(ldt1);
+	}
+	
+	private void showLearningString()
+	{
+		 String learning = "I am learning Core Java"; String [] learningArr = learning.split(" "); 
+			for(int i =0;i<learningArr.length;i++)
+			{
+				System.out.println(learningArr[i]);
+			}
+	}
 	public void switchRun(int input)
 	{
 		
@@ -52,13 +70,8 @@ public class Question14 {
 						a=sc.nextInt();
 						}
 				System.out.println( getSquareRoot(a));
-		case 2: Date date = new Date(); System.out.println(date); break;
-		case 3: String learning = "I am learning Core Java"; String [] learningArr = learning.split(" "); 
-		for(int i =0;i<learningArr.length;i++)
-		{
-			System.out.println(learningArr[i]);
-		}
-		break;
+		case 2: showDate(); break;
+		case 3:showLearningString();break;
 		default: System.out.println("Invalid choice");
 		}
 		
