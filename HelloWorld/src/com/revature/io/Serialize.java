@@ -30,6 +30,7 @@ public class Serialize {
 		try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filename))) {
 			oos.writeObject(s);
 			System.out.println("wrote to file: " + s.toString());
+			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -44,6 +45,7 @@ public class Serialize {
 		try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filename))) {
 			s = (Serializable) ois.readObject();
 			System.out.println("read object: " + s.toString());
+			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
