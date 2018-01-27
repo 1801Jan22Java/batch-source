@@ -4,7 +4,6 @@ import java.util.Scanner;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-
 /**
  * Created by: Jeffrey Rubi Date: 26 January 2018 
  * Write a program that demonstrates the switch case. Implement the following functionalities in the 
