@@ -20,7 +20,7 @@ public class Question18  extends Question18Super{
 		// Create object from subtype
 		Question18 q18 = new Question18();
 		// Get user input
-		System.out.print("What would you like to say? ");
+		System.out.print("Enter what you would like to say or a number: ");
 		str = input.nextLine();
 		// Check to see if there are upper case characters
 		System.out.print("1. There are ");
