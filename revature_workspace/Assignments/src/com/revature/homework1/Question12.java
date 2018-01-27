@@ -6,7 +6,12 @@ package com.revature.homework1;
  * */
 public class Question12 {
 	
-	public static void showEvenNumbers()
+	/*
+	 * showEvenNumbers() displays even Numbers between 1 and 100 using an enhanced for loop
+	 * @param none
+	 * @return none
+	 * */
+	public void showEvenNumbers()
 	{
 		int [] arr = new int[101];
 		for(int i=1;i<arr.length;i++)
@@ -20,10 +25,6 @@ public class Question12 {
 				System.out.println(arr[i]);
 			}
 		}
-	}
-	public static void main(String [] args)
-	{
-		showEvenNumbers();
 	}
 
 }

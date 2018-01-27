@@ -15,11 +15,24 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 
 public class Question14 {
 	
+	int squareInt=0;
+	private void setInputInteger(int inputInt)
+	{
+		squareInt=inputInt;
+	}
+	/*
+	 * valiateInput validates String input
+	 * ensures that user chooses an option between 1 and 3
+	 * returns 0 if input is invalid
+	 * @param String input
+	 * @return int inputInt
+	 * */
 	public int validateInput(String input)
 	{
 		char [] inputArr=input.toCharArray();
@@ -34,14 +47,52 @@ public class Question14 {
 		}
 		return inputInt;
 	}
+	/*
+	 * Validates input given by user for the number for which they want the square root
+	 * Calls setInputInteger
+	 * returns true if input is valid
+	 * returns false and calls the stack trace if input is invalid
+	 * @param String input
+	 * @return boolean
+	 * */
 	
+	public boolean validateIntegerInput(String input)
+	{
+		int inputInteger=0;
+		boolean valid =false;
+		try{
+			 inputInteger= Integer.parseInt(input);
+			 setInputInteger(inputInteger);
+			 valid=true;
+		}
+		catch(InputMismatchException e)
+		{
+			e.printStackTrace();
+		}
+		catch(NumberFormatException e)
+		{
+			e.printStackTrace();
+		}
+		finally{
+		return valid;
+		}
+	}
+	/*
+	 * returns a square root of a user input number
+	 * @param int
+	 * @return Double result
+	 * */
 	private Double getSquareRoot(int num)
 	{
 		double square = (double)num;
 		double result = Math.sqrt(square);
 		return result;
 	}
-	
+	/*
+	 * Displays today's date;
+	 * @param none
+	 * @return void
+	 * */
 	private void showDate()
 	{
 
@@ -49,6 +100,11 @@ public class Question14 {
 		System.out.println(ldt1);
 	}
 	
+	/*
+	 * Displays string split into an array of smaller strings line by line
+	 * @param none
+	 * @return void
+	 * */
 	private void showLearningString()
 	{
 		 String learning = "I am learning Core Java"; String [] learningArr = learning.split(" "); 
@@ -57,6 +113,16 @@ public class Question14 {
 				System.out.println(learningArr[i]);
 			}
 	}
+	
+	/*
+	 * Chooses between three choices (1 through 3)
+	 * if user chooses 1, user is prompted to choose an integer for which they want to find the square root.
+	 * if user chooses 2, prints out the date
+	 * if user chooses 3, prints out a string that says "I am learning Core Java"
+	 * Displays "Invalid choice" if user selects none of the above.
+	 * @param int
+	 * @return none
+	 * */
 	public void switchRun(int input)
 	{
 		
@@ -64,12 +130,13 @@ public class Question14 {
 		{
 		case 1: Scanner sc = new Scanner(System.in); 
 				System.out.println("Please enter an integer:   "); 
-				Integer a = sc.nextInt();
-				while(!(a instanceof Integer) )
+				String a = sc.nextLine();
+				//Makes sure that the user inputs an integer
+				while(!validateIntegerInput(a))
 					{System.out.println("Please enter an integer:  "); 
-						a=sc.nextInt();
+						a=sc.nextLine();
 						}
-				System.out.println( getSquareRoot(a));
+				System.out.println( getSquareRoot(squareInt));
 		case 2: showDate(); break;
 		case 3:showLearningString();break;
 		default: System.out.println("Invalid choice");

@@ -5,14 +5,15 @@ package com.revature.homework1;
 
 public class Question10 {
 	
-	public static int findMinimum(int a, int b)
+	/*
+	 * Uses a ternary operator to find the minimum between int a and int b
+	 * @param int a and int b
+	 * @return int result
+	 * */
+	public int findMinimum(int a, int b)
 	{
 		int result = a>b?b:a;
 		return result;
-	}
-	public static void main(String [] args)
-	{
-		System.out.println(findMinimum(-5,-86));
 	}
 
 }

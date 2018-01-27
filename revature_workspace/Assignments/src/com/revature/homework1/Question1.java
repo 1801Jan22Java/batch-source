@@ -13,6 +13,8 @@ public class Question1 {
 	/*Bubble sort method
 	 * Uses bubble sort to sort numbers in 
 	 * array
+	 * Uses nested for loop to repeatedly iterate through array until 
+	 * items are swapped into order
 	 * @param  arrray (int[] )
 	 * @return void
 	 * 
@@ -23,6 +25,7 @@ public class Question1 {
 		{
 			for(int j =0;j<array.length-1;j++)
 			{
+				//Swap if int at lower index is greater than int at higher index.
 				if(array[j]>array[j+1])
 				{
 					int temp = array[j];

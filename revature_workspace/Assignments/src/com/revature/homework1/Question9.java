@@ -8,7 +8,12 @@ import java.util.ArrayList;
  * */
 public class Question9 {
 
-	public static ArrayList<Double> fillArrayList()
+	/*
+	 * Fills the ArrayList with doubles from 1 to 100
+	 * @param none
+	 * @return ArrayList<Double> list
+	 * */
+	private ArrayList<Double> fillArrayList()
 	{
 		ArrayList<Double>list= new ArrayList<Double>();
 		for(double i = 1; i<=100;i++)
@@ -18,8 +23,14 @@ public class Question9 {
 		return list;
 	}
 	
-	
-	public static boolean isPrimeNumber(Double num)
+	/*
+	 * Checks if Double num is a prime number.
+	 * if num % 2 returns 0, if num <= 3 or if num is divisible by any number other than itself,
+	 * isPrimeNumber returns false.  Otherwise returns true
+	 * @param Double num
+	 * @return boolean isPrime
+	 * */
+	private boolean isPrimeNumber(Double num)
 	{
 		boolean isPrime=true;
 		if(num==2)
@@ -42,24 +53,24 @@ public class Question9 {
 	return isPrime;
 	}
 	
-	public static void printPrime(ArrayList<Double>list)
+	/*Displays prime numbers from ArrayList<Double> list
+	 * Calls isPrimeNumber() on items in list
+	 * Calls fillArrayList()
+	 * if isPrimeNumber() returns true, item is printed out.
+	 * @param none
+	 * @return none
+	 * */
+	public void printPrime()
 	{
+		ArrayList<Double>list=fillArrayList();
 		for(int i =0;i<list.size();i++)
 		{
 			if(isPrimeNumber(list.get(i)))
 			{
-				System.out.println(list.get(i));
+				System.out.print(list.get(i) + " ");
 			}
 		}
 	}
-	public static void main(String [] args)
-	{
 
-		 printPrime(fillArrayList());
-		
-
-
-
-	}
 
 }

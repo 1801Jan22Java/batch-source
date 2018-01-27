@@ -78,7 +78,13 @@ public class Question17 {
 		System.out.println("The simple interest for a principal of " +getPrincipal() +" over " + getNumYears() + " years "+
 	"at a rate of " + getRate() + " is " + calculateInterest());
 	}
-	
+	/*
+	 * Verifies that the input can be parsed into a rate. 
+	 * Complains if input causes a NumberFormatException
+	 * if valid, calls setRate()
+	 * @param input String
+	 * @return boolean result
+	 * */
 	public boolean verifyRateFloat(String input)
 	{
 		boolean result =false;
@@ -96,9 +102,11 @@ public class Question17 {
 			return result;
 		}
 	}
-	/*Attempts to verify that the input from the user can 
-	 * indeed be parsed into a number of years.
-	 * 
+	/* Verifies that the input can be parsed into a number of years. 
+	 * Complains if input causes a NumberFormatException
+	 * If valid, calls setNumYears()
+	 * @param String input
+	 * @return boolean result
 	 * */
 	public boolean verifyYearInt(String input)
 	{
@@ -117,7 +125,13 @@ public class Question17 {
 			return result;
 		}
 	}
-	
+	/*
+	 * Verifies that the input can be parsed into a principal balance. 
+	 * Complains if input causes a NumberFormatException
+	 * If valid, calls setPrincipal()
+	 * @param input String
+	 * @return boolean result
+	 * */
 	public boolean verifyPrincipalFloat(String input)
 	{
 		boolean result = false;

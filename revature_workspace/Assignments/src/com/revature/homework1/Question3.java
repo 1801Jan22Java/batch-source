@@ -18,7 +18,7 @@ public class Question3 {
 	 * @param String a
 	 * @return String result
 	 * */
-	public static String reverseAString(String a)
+	public String reverseAString(String a)
 	{
 		String result = "";
 		for(int i=0;i<a.length();i++)
@@ -28,12 +28,5 @@ public class Question3 {
 		return result;
 	}
 	
-	public static void main(String [] args)
-	{
-		String reversed = reverseAString("wolf");
-		String reversed2 = reverseAString("evil won");
-		System.out.println(reversed);
-		System.out.println(reversed2);
-	}
 
 }

@@ -10,6 +10,11 @@ import static homework1a.Question11.*;
 
 public class Question11 {
 
+	/*
+	 * Tries to access variables from Class Question11a in another package (homework1a)
+	 * @param none
+	 * @return none
+	 * */
 	public void accessVariables()
 	{
 	

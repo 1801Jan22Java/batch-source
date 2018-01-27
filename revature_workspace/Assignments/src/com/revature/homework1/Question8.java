@@ -11,7 +11,12 @@ import java.util.ArrayList;
  * */
 public class Question8 {
 	
-	public static ArrayList<String> storeStrings(String... args)
+	/*Stores strings as a varargs in an ArrayList of Strings
+	 * returns ArrayList<String> list
+	 * @param String... args
+	 * @return ArrayList<String> list
+	 * */
+	public ArrayList<String> storeStrings(String... args)
 	{
 		ArrayList<String> list= new ArrayList<String>();
 		for(int i =0;i<args.length;i++)
@@ -20,9 +25,17 @@ public class Question8 {
 		}
 		return list;
 	}
-	
-	public static ArrayList<String> storePalindromes(ArrayList<String> list)
+	/*
+	 * Stores those strings which are palindromes.
+	 * accepts input of ArrayList<String> list and returns an ArrayList<String> palindromes
+	 * Iterates through list and calls isPalindrome() on list.get(i)
+	 * Adds strings that return true to palindromes.
+	 * @param ArrayList<String> list
+	 * @return ArrayList<String> palindromes
+	 * */
+	public ArrayList<String> storePalindromes(ArrayList<String> list)
 	{
+		
 		ArrayList<String>palindromes = new ArrayList<String>();
 		for(int i = 0;i<list.size();i++)
 		{
@@ -34,7 +47,16 @@ public class Question8 {
 		return palindromes;
 	}
 	
-	public static boolean isPalindrome(String str)
+	/*
+	 * checks if string str is a palindrome
+	 * Takes in a string and returns true is string is a palindrome and false if it is not
+	 * divides string in half, ignoring middle character if str.length is odd, 
+	 * and reverses latter half of string and compares reversed second half to first half.
+	 * if two halves are equal, returns true;
+	 * @param String str
+	 * @return boolean palindrome
+	 * */
+	private boolean isPalindrome(String str)
 	{
 		boolean palindrome=false;
 		String str1=str.substring(0,str.length()/2);
@@ -52,19 +74,6 @@ public class Question8 {
 			palindrome=true;
 		}
 		return palindrome;
-		
-	}
-	
-	public static void main(String [] args)
-	{
-		ArrayList<String>list = storeStrings("karan","madam", "tom", "civic", "radar","jimmy",
-				"kayak","john","refer","billy","did");
-		
-		ArrayList<String>palindromes = storePalindromes(list);
-		for(int i =0;i<palindromes.size();i++)
-		{
-			System.out.println(palindromes.get(i));
-		}
 		
 	}
 	
