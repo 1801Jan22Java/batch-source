@@ -1,4 +1,4 @@
-package homework1a;
+package com.revature.homework1a;
 
 public class Question11 {
 	//Declaring aStatic and bStatic as a public static float that can be accessed from another package
