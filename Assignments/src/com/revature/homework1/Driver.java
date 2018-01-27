@@ -2,6 +2,8 @@ package com.revature.homework1;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class Driver {
 	public static void main(String[] args) {
@@ -33,6 +35,14 @@ public class Driver {
 		
 		//Question7
 		System.out.println("Question 7");
+		Question7 comparison = new Question7();
+		List<Employee> employeeList = new ArrayList<Employee>();
+		employeeList.add(new Employee("Conan", "quality control", 25));
+		employeeList.add(new Employee("Conan", "quality control", 18));
+		Collections.sort(employeeList, comparison);
+		for(Employee e : employeeList) {
+			System.out.println(e.toString());
+		}
 		System.out.println("NEED TO FINISH THAT PROBLEM");
 		
 		//Question8
