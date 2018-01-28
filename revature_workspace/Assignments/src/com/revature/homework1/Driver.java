@@ -9,8 +9,6 @@ import java.util.Scanner;
 
 public class Driver {
 	
-	
-
 	public static void main(String[] args) {
 		
 		// TODO Auto-generated method stub
@@ -170,7 +168,7 @@ public class Driver {
 		q15.main(args);
 		
 		//Question 16 Version A
-		
+		System.out.println("\nQuestion 16");
 		Question16a.main(args);
 		
 		//Question 16 old version
@@ -275,7 +273,7 @@ public class Driver {
 		//Creating the data file using the relative path - File located in the package.
 		String path ="C:/Users/user/Desktop/Cornu Sinistra/gitrepos/batch-source/revature_workspace/Assignments/src/Data.txt";
 		File file = new File(path);
-		System.out.println(file.getAbsolutePath());
+		//System.out.println(file.getAbsolutePath());
 		q20.displayData(q20.intakeData(file));
 		
 		
