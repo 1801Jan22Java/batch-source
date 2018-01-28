@@ -12,7 +12,7 @@ public class Driver {
 	
 
 	public static void main(String[] args) {
-		/*
+		
 		// TODO Auto-generated method stub
 		//Question 1
 		System.out.println("\nQuestion 1");
@@ -170,8 +170,11 @@ public class Driver {
 		q15.main(args);
 		
 		//Question 16 Version A
+		
 		Question16a.main(args);
 		
+		//Question 16 old version
+		/*
 		//Question 16
 		System.out.println("\nQuestion 16");
 		Question16 q16 = new Question16();
@@ -192,7 +195,7 @@ public class Driver {
 	
 		System.out.println(q16.countChars(strArray));
 	
-		
+		*/
 		//Question 17
 		
 		
@@ -203,7 +206,7 @@ public class Driver {
 		 * Gathering user input data - number of years, rate and principal
 		 * 
 		 * */
-		/*
+		
 		System.out.println("Please enter the number of years: " );
 		String yearStr =sc17.nextLine();
 		while(!q17.verifyYearInt(yearStr)){
@@ -266,7 +269,7 @@ public class Driver {
 			System.out.print(question19List.get(i) + " ");
 		}
 		
-		*/
+		
 		System.out.println("\nQuestion 20");
 		Question20 q20 = new Question20();
 		//Creating the data file using the relative path - File located in the package.

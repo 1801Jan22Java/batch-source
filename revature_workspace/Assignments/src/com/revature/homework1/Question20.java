@@ -56,7 +56,14 @@ Person(String fName,String lName,int age, String state){
 
 }
 public class Question20 {
-
+/* 
+ * displayData() takes in ArrayList<String[]> personList as a parameter,
+ * then iterates through that list, and creates an instance of Person.
+ * For each String[] str in the list, it sets each index 0-3 as a field in the
+ * Person constructor.
+ * @param ArrayList<String[]> personList
+ * @return none
+ * */
 public void displayData(ArrayList<String[]> personList)
 {
 	for(String[]str : personList)
@@ -68,13 +75,21 @@ public void displayData(ArrayList<String[]> personList)
 	}
 	
 }
+/*
+ * intakeData takes in a File file and returns an ArrayList<String[]>
+ *  Opens file in a textReader
+ *  reads each line in file (Data.txt) and adds each line
+ *  to an ArrayList of String arrays in a try-catch
+ *  Catches FileNotFoundException and an IOException
+ *  returns ArrayList<String[]> personList
+ * */
 public ArrayList<String[]> intakeData(File file){
 	FileReader fr;
 	BufferedReader textReader;// = new BufferedReader(fr);
 	ArrayList<String[]> personList=  new ArrayList<String[]>();
 	try{
 		
-		fr = new FileReader("Data.txt");
+		fr = new FileReader(file);
 		textReader = new BufferedReader(fr);
 	int numLine=0;
 	String newLine =textReader.readLine();
