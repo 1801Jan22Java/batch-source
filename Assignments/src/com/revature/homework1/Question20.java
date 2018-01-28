@@ -25,7 +25,7 @@ import java.util.ArrayList;
 public class Question20 {
 
 	public static void main(String[] args) {
-		// delare variables
+		// Declare variables
 		String[] person;
 		String age;
 		String state;
@@ -48,7 +48,7 @@ public class Question20 {
 			System.out.println("I can't find this file.");
 			e.printStackTrace();
 		}
-		// embedded code because for retrieving a person
+		// embedded code because specification for retrieving a person
 		person = people.get(0).split("[:]"); 
 		
 		// display, parse the information from retrieved person
@@ -60,7 +60,7 @@ public class Question20 {
 				name.append(" " + person[i]);
 				System.out.println("Name:" + name);
 			}
-			else if (i == 2) {
+			else if(i == 2) {
 				age = person[i];
 				System.out.println("Age: " + age + " years");
 			} 
