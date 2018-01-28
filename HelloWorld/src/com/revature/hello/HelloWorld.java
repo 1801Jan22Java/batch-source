@@ -1,9 +1,15 @@
+// Date: 1/22/2018
+// Imports on 1/23/2018
+
 package com.revature.hello;
 /*
  * package - a namespace that organizes a set of related classes and interfaces
  * - corresponds to a folder structure
  * - base package for Java is java.lang
  */
+
+import com.revature.oop.*;
+import static com.revature.oop.Cat.*;	// have to import static members of a class, not a package
 
 public class HelloWorld {
 
@@ -32,5 +38,18 @@ public class HelloWorld {
 		// STS (and, under the hood, Eclipse) does incremental compiling
 		// every time a file is saved, it and any of its dependencies are compiled
 		// Compiling: converting .java source files into .class (bytecode, to be executed by JVM) 
+	
+	
+		// Date: 1/23/2018
+		// Access things from our OOP package
+		// Could use our fully qualified class name
+		com.revature.oop.Animal animal = new com.revature.oop.Animal("Fred");
+		
+		// Or use an import
+		Dog dog = new Dog();
+		
+		// Using static import
+		System.out.println(Cat.catinName);
+		
 	}
 }
