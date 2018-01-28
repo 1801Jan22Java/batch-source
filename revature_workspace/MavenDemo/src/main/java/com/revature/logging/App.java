@@ -8,11 +8,12 @@ public class App {
 		
 		LoggingClass lc = new LoggingClass();
 		lc.allTheLogs();
-		try {divide(5,0);
+		try {
+			divide(5,0);
 		}
-		/*catch(LoggingClass lc){
+		catch(LoggingClass lc){
 			lc.giveFatal();
-		}*/
+		}
 	}
 	
 	public static int divide(int a, int b)

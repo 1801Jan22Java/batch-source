@@ -12,6 +12,7 @@ public class Driver {
 	
 
 	public static void main(String[] args) {
+		/*
 		// TODO Auto-generated method stub
 		//Question 1
 		System.out.println("\nQuestion 1");
@@ -200,7 +201,9 @@ public class Driver {
 		Scanner sc17 = new Scanner(System.in);
 		/*
 		 * Gathering user input data - number of years, rate and principal
+		 * 
 		 * */
+		/*
 		System.out.println("Please enter the number of years: " );
 		String yearStr =sc17.nextLine();
 		while(!q17.verifyYearInt(yearStr)){
@@ -263,11 +266,13 @@ public class Driver {
 			System.out.print(question19List.get(i) + " ");
 		}
 		
-		
+		*/
 		System.out.println("\nQuestion 20");
 		Question20 q20 = new Question20();
 		//Creating the data file using the relative path - File located in the package.
-		File file = new File("Data.txt");
+		String path ="C:/Users/user/Desktop/Cornu Sinistra/gitrepos/batch-source/revature_workspace/Assignments/src/Data.txt";
+		File file = new File(path);
+		System.out.println(file.getAbsolutePath());
 		q20.displayData(q20.intakeData(file));
 		
 		

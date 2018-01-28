@@ -57,7 +57,7 @@ Person(String fName,String lName,int age, String state){
 }
 public class Question20 {
 
-public static void displayData(ArrayList<String[]> personList)
+public void displayData(ArrayList<String[]> personList)
 {
 	for(String[]str : personList)
 	{
@@ -68,7 +68,7 @@ public static void displayData(ArrayList<String[]> personList)
 	}
 	
 }
-public static ArrayList<String[]> intakeData(File file){
+public ArrayList<String[]> intakeData(File file){
 	FileReader fr;
 	BufferedReader textReader;// = new BufferedReader(fr);
 	ArrayList<String[]> personList=  new ArrayList<String[]>();
