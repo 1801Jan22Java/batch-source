@@ -13,7 +13,7 @@ public class Question6 {
 			return false;
 		}else 
 			System.out.println(n + " is even");
-			return false;
+			return true;
 		
 		
 	}
