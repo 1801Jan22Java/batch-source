@@ -13,14 +13,15 @@ public class Question19 {
 
 	
 	public Question19() {
-		for(int i = 1; i < 11; i++) {
-			numbers.add(i);
-		}
 		evenSum = 0;
 		oddSum = 0;
 	}
 	
 	public void doThing() {
+		numbers = new ArrayList<Integer>();
+		for(int i = 1; i < 11; i++) {
+			numbers.add(i);
+		}
 		for(Integer n: numbers) {
 			if(n % 2 == 0) 
 				evenSum += n;
@@ -31,16 +32,26 @@ public class Question19 {
 		System.out.println("Sum of even numers: " + evenSum);
 		System.out.println("Sum of odd numbers: " + oddSum);
 		
-		for(Integer m: numbers) {
-			for(int i = 2; i < 11; i++) {
-				if((m % i == 0) && (m != i))
-					numbers.remove(m);
-			}
+		for(int n = 0; n < numbers.size(); n++) {
+			if(isPrime(n))
+				numbers.remove(n);
 		}
 		
 		System.out.println("Composite numers: ");
-		for(Integer o: numbers) {
-			System.out.print(o);
+		for(int o = 0; o < numbers.size(); o++) {
+			System.out.print(o + '\t');
 		}
+		System.out.println();
+	}
+	
+	private boolean isPrime(Integer num) {
+		if((num == 1) || (num == 2)){
+			return true;
+		}
+		for(int i = 2; i < num; i++) {
+			if(num % i == 0)
+				return false;
+		}
+		return true;
 	}
 }

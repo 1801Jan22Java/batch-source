@@ -10,25 +10,19 @@ public class Question5 {
 	private String original;
 	private int idx;
 	
-	public Question5() {
-		myStr = "";
-		original = "";
-		idx = 0;
-	}
-	
 	public Question5(String str, int idx) {
 		this.original = str;
-		this.myStr = "";
+		myStr = "";
 		this.idx = idx;
 	}
 	
 	public String doThing() {
+		myStr = "";
+		char[] chars = new char[idx];
 		for(int i = 0; i < idx; i++) {
-			myStr.concat(((Character)(original.charAt(i))).toString());
-			// concatenate the String version of the boxed char at that position 
-			// in the original string. 
+			chars[i] = original.charAt(i);
 		}
-		return myStr;
+		return new String(chars);
 	}
 
 	public String getOriginal() {

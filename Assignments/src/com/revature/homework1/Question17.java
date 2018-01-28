@@ -45,7 +45,7 @@ public class Question17 {
 		System.out.println("Principal = $" + principal);
 		System.out.println("Rate = " + rate * 100 + " %");
 		System.out.println(time + " years");
-		System.out.println("Accrued amount = $" + (principal + (1 + (rate * time))));
+		System.out.println("Accrued amount = $" + (principal *(1 + (rate * time))));
 		
 	}
 }

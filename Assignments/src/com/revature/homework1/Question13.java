@@ -13,13 +13,15 @@ public class Question13 {
 	
 	
 	public void doThing() {
-		boolean foo = false;
+		boolean foo = true;
 		for(int i = 0; i < 4; i++) {
 			for (int j = 0; j <= i; j++) {
 				if(foo)
 					System.out.print("0 ");
 				else
-					System.out.println("1 ");
+					System.out.print("1 ");
+			
+				foo = !foo;
 			}
 			System.out.println();
 		}

@@ -10,6 +10,8 @@ public class Question9 {
 	private ArrayList<Integer> primes;
 	
 	public Question9() {
+		numbers = new ArrayList<Integer>();
+		primes = new ArrayList<Integer>();
 		for(int i = 1; i <= 100; i++) {
 			numbers.add(i);
 		}
@@ -29,13 +31,14 @@ public class Question9 {
 	}
 	
 	public void printPrimes() {
-		System.out.println("Prime numbers form 1 to 100");
+		System.out.println("Prime numbers from 1 to 100");
 		int counter = 1;
 		for(Integer i: primes) {
 			if(counter % 8 == 0) // cosmetic, to make the output easier to read
 				System.out.println();
-			System.out.println(i + ",  ");
+			System.out.print(i + ",  ");
 			counter++;
 		}
+		System.out.println();
 	}
 }

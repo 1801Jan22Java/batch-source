@@ -7,28 +7,18 @@ StringBuffer or the StringBuilder APIs.
 
 public class Question3 {
 	private String original;
-	private String reversed;
-	
-	public Question3() {
-		original = "";
-		reversed = "";
-	}
 	
 	public Question3(String original) {
 		this.original = original;
 	}
 	
-	private void reverseStr() {
-		reversed = "";
-		for(int i = original.length()-1; i >= 0; i--) {
-			reversed.concat(((Character)(original.charAt(i))).toString()); 
-		}
-		// Concatenate the string version of the boxed char at that location
-	}
-
 	public String getReversed() {
-		reverseStr();
-		return reversed;
+		char[] str = new char[original.length()];
+		int len = original.length()-1;
+		for(int i = 0; i < original.length(); i++) {
+			str[len-i] = original.charAt(i);
+		}
+		return new String(str);
 	}
 
 	public void setOriginal(String original) {

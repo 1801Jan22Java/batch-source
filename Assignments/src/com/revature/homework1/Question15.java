@@ -9,6 +9,12 @@ operands in a test class having a main method that calls the implementing class.
  */
 public class Question15 implements Question15a{
 	
+	public Question15(long num1, long num2) {
+		super();
+		this.num1 = num1;
+		this.num2 = num2;
+	}
+
 	private long num1;
 	private long num2;
 

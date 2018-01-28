@@ -1,5 +1,5 @@
 package com.revature.homework1;
-import java.util.Date;
+import java.util.Calendar;
 /*
  * Write a program that demonstrates the switch case. Implement the following
 functionalities in the cases:java
@@ -11,6 +11,12 @@ Case 3: Split the following string and store it in a string array.
  */
 public class Question14 {
 	
+	public Question14(int caseNum, double number) {
+		super();
+		this.caseNum = caseNum;
+		this.number = number;
+	}
+
 	public Question14(int caseNum) {
 		super();
 		this.caseNum = caseNum;
@@ -18,8 +24,6 @@ public class Question14 {
 
 	private int caseNum;
 	private double number;
-	private long date;
-	private String[] coreJava;
 	private String str = "I am learning Core Java";
 
 	public int getCaseNum() {
@@ -38,16 +42,8 @@ public class Question14 {
 		this.number = number;
 	}
 
-	public long getDate() {
-		return date;
-	}
-
-	public void setDate(long date) {
-		this.date = date;
-	}
 	
 	public void doThing() {
-		Date theDay = new Date(date);
 		switch (caseNum) {
 			case 1:
 				System.out.println("Case 1 - number is " + number);
@@ -55,21 +51,19 @@ public class Question14 {
 				break;
 				
 			case 2: 
-				System.out.println("Case 2 - given milliseconds: " + date);
-				System.out.println("Date from given milliseconds: " + theDay.toString());
+				System.out.print("Case 2 - Today's date: ");
+				System.out.println(Calendar.getInstance().getTime().toString());
 				break;
 				
 			case 3:
 				System.out.println("Case 3 - Starting string literal:");
 				System.out.println(str);
 				System.out.println("Splitting string, contents of array are: ");
-				coreJava = str.split(str);
-				int i = 0;
-				for(String s: coreJava) {
-					System.out.println(coreJava[i]);
-					i++;
-				} // why a for-each loop instead of a normal for? 
-				  // because I felt like doing so. Yay rebellion. 
+				String[] coreJava = str.split(" ");
+				for(int i = 0; i < coreJava.length; i++) {
+					System.out.print("["+i+"] = " + coreJava[i] + "   ");
+				}
+				System.out.println();
 				break;
 		}
 	}

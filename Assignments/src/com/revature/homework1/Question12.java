@@ -16,9 +16,11 @@ public class Question12 {
 		for(int i = 0; i < 100; i++) {
 			numbers[i] = i+1;
 		}
-		for(Integer j: numbers) {
-			if(numbers[j] % 2 == 0) 
+		for(int j = 0; j < 100; j++) {
+			if((numbers[j] % 2 == 0) && (j != 99)) 
 				System.out.print(numbers[j] + ", ");
+			else if(j == 99)
+				System.out.println(numbers[j]);
 			
 			if(numbers[j] % 8 == 0)
 				System.out.println(); // for cleaning up the output

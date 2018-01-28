@@ -41,7 +41,14 @@ public class Question18 extends Question18a{
 
 	@Override
 	public void stringToInt() {
-		// TODO Auto-generated method stub
+
+		try {
+			Integer num = null; 
+			num.parseInt(str);
+			System.out.println("String to integer is " + num);
+		} catch(NumberFormatException e) {
+			System.out.println("NumberFormatException - unable to parse integer from string");
+		}
 		
 	}
 

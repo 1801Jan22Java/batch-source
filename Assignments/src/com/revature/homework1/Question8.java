@@ -11,6 +11,11 @@ public class Question8 {
 	private ArrayList<String> palindromes;
 	
 	public Question8() {
+		words = new ArrayList<String>();
+		palindromes = new ArrayList<String>();
+	}
+	
+	public void doThing(){
 		words.add("karan");
 		words.add("madam");
 		words.add("tom");
@@ -22,32 +27,34 @@ public class Question8 {
 		words.add("refer");
 		words.add("billy");
 		words.add("did");
-	}
-	
-	public ArrayList<String> findPalindromes(){
-		
 		for(String temp: palindromes) {
 			if(isPalindrome(temp)) {
 				palindromes.add(temp);
 				System.out.println("Found Palindrome: " + temp);
 			}
 		}
-		
-		return palindromes;
 	}
 	
 	private boolean isPalindrome(String str) {
-		int j = str.length();
-		for(int i = 0; i < str.length(); i++) {
-			if(i == j)
-				break;
-			else {
-				if(str.charAt(i) != str.charAt(j))
-					return false;
-			}
-			j--;
-		}
-		return true;
+		str.trim();
+		String temp = new StringBuilder(str).reverse().toString();
+		return str.equals(temp);
+	}
+
+	public ArrayList<String> getWords() {
+		return words;
+	}
+
+	public void setWords(ArrayList<String> words) {
+		this.words = words;
+	}
+
+	public ArrayList<String> getPalindromes() {
+		return palindromes;
+	}
+
+	public void setPalindromes(ArrayList<String> palindromes) {
+		this.palindromes = palindromes;
 	}
 	
 	

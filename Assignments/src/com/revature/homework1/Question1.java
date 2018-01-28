@@ -9,6 +9,7 @@ public class Question1 {
 	public int[] bubbleSort() {
 		boolean swapped = true;
 		do {
+			swapped = true;
 			for(int i = 1; i < 11; i++) {
 				if(arr[i] < arr[i-1]) {
 					swapped = false;
