@@ -69,8 +69,8 @@ public class Question18  extends Question18Super{
 			try {
 				double doubleResult = Double.parseDouble(str);
 				result = (int)doubleResult;
-			} finally {
-				
+			} catch (NumberFormatException nfe) {
+				throw new NumberFormatException();
 			}
 		}
 		// If the string can be parsed to a number, add 10 and return result
