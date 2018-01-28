@@ -38,7 +38,7 @@ public class Problem18 extends ProblemEighteen_Super {
 	
 	public static void main(String[] args) {
 		
-		ProblemEighteen_Super la = new ProblemEighteen();
+		ProblemEighteen_Super la = new Problem18();
 		
 		System.out.println(la.lowerToUpper("hello"));
 				
