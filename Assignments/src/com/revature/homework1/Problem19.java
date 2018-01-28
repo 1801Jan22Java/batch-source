@@ -3,54 +3,52 @@ package com.revature.homework1;
 import java.util.ArrayList;
 
 public class Problem19 {
-	
+
 	public static void funWithArrayList() {
 		ArrayList<Integer> stuff = new ArrayList<>();
 		ArrayList<Integer> bank = new ArrayList<>();
-		int adding_evens = 0,adding_odds =0;
-		boolean is_prime = true;
-		for(int i = 1; i<11; i++) {
+		int adding_evens = 0, adding_odds = 0;
+		boolean has_a_factor = false;
+		for (int i = 1; i <= 10; i++) {
 			stuff.add(i);
 		}
-		int count = 0;
-		for(int element : stuff) {
-			if(element%2 ==0) {
-				adding_evens+= element;
-			}else {
-				adding_odds+= element;
+		
+		for (int m = 0;m<stuff.size();m++) {
+			if (stuff.get(m) % 2 == 0) {
+				adding_evens += stuff.get(m).intValue();
+			} else {
+				adding_odds += stuff.get(m).intValue();
 			}
 			
-			if(element<=2) {
-				bank.add(element);
-				stuff.remove(count);
-			}
-			else {
-				
-				for(int i = 0;i<bank.size();i++) {
-					if(element%bank.get(i)==0) {
-						is_prime= false;
-						break;
-					}
-					else {
-						is_prime = true;
-						
+			if (m >= 3) {
+				stuff.remove(m);
+				bank.add(m);
+			} else {
+				has_a_factor = false;
+				// System.out.println(bank.size);
+				for (int j = 2; j < bank.size()-1; j++) {
+					if (m % bank.get(j) == 0) {
+						has_a_factor = true;
 					}
 				}
-				if(is_prime = true) {
-					stuff.remove(count);
-					bank.add(element);					
+
+				if (has_a_factor == false) {
+					bank.add(m);
+					stuff.remove(m);
 				}
 			}
-			count+=1;
 		}
 		System.out.println(adding_evens);
 		System.out.println(adding_odds);
+		for(int s : stuff) {
+			System.out.print(s+", ");
+		}
 		
-		
+
 	}
 
 	public static void main(String[] args) {
 		funWithArrayList();
-		
+
 	}
 }
