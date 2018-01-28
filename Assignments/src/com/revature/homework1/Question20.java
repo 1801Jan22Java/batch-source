@@ -6,18 +6,24 @@ import java.util.*;
 public class Question20 {
 
 	private static ArrayList<String> arr = new ArrayList<String>();
-	public static void main(String[] args) {
-		File f = new File("C:\\GitRepos\\batch-source\\Assignments\\src\\com\\revature\\homework1\\Data.txt");
-		try {
-			Scanner sc = new Scanner(f);
-			while(sc.hasNextLine()) {
-				arr.add(sc.nextLine());
-			}
-			sc.close();
-		}
-		catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
+	public static void main(String[] args) throws IOException {
+		FileInputStream fin = new FileInputStream("src/data.txt");
+		 
+        BufferedInputStream bin = new BufferedInputStream(fin);
+
+        int ch;
+        String str = "";
+        while ((ch=bin.read()) != -1) {
+        	if ((char)ch == '\n') {
+        		arr.add(str);
+        		str = "";
+        		continue;
+        	}
+        	str += Character.toString((char)ch);
+        }
+ 
+        // close the file
+        fin.close();
 		
 		for (int i = 0; i < arr.size(); i++) {
 			String data = arr.get(i);
