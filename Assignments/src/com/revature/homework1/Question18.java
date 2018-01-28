@@ -44,7 +44,7 @@ public class Question18 extends Question18a{
 
 		try {
 			Integer num = null; 
-			num.parseInt(str);
+			num = num.parseInt(this.getStr());
 			System.out.println("String to integer is " + num);
 		} catch(NumberFormatException e) {
 			System.out.println("NumberFormatException - unable to parse integer from string");

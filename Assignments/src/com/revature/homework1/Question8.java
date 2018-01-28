@@ -27,17 +27,21 @@ public class Question8 {
 		words.add("refer");
 		words.add("billy");
 		words.add("did");
-		for(String temp: palindromes) {
-			if(isPalindrome(temp)) {
-				palindromes.add(temp);
-				System.out.println("Found Palindrome: " + temp);
+		for(int i = 0; i < words.size(); i++) {
+			if(isPalindrome(words.get(i))) {
+				palindromes.add(words.get(i));
+
 			}
+		}
+		for(String temp: palindromes) {
+			System.out.println(temp);
 		}
 	}
 	
 	private boolean isPalindrome(String str) {
 		str.trim();
-		String temp = new StringBuilder(str).reverse().toString();
+		Question3 q3 = new Question3(str);
+		String temp = q3.getReversed();
 		return str.equals(temp);
 	}
 

@@ -38,14 +38,13 @@ public class Question20 {
 			line = reader.readLine();
 			while (line != null) {
 				people = line.split(":");
-				people[0].concat(" ");
+				people[0] = people[0].concat(" ");
 				names.add(people[0].concat(people[1]));
 				ages.add(people[2]);
 				states.add(people[3]);
 				line = reader.readLine();
 			}
 			reader.close();
-			System.out.println("Reached end of file");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -54,6 +53,7 @@ public class Question20 {
 			System.out.println("Name : " + names.get(i));
 			System.out.println("Age: " + ages.get(i) + " years");
 			System.out.println("State: " + states.get(i));
+			System.out.println("####################################");
 			
 		}
 		
