@@ -12,10 +12,21 @@ public class Calculator {
 		String[] numbersArray = numbers.split(",");
 		if (numbersArray.length > 2) {
 			throw new RuntimeException("too many numbers!");
-			//could also throw a custom checked exception.
+			// could also throw a custom checked exception
 		}
-		
-		
+		if (numbers.equals("")) {
+			return sum;
+		} else {
+			for (String number : numbersArray) {
+				if (!number.equals("")) {
+					sum += Integer.parseInt(number);
+					// shorthand for sum = sum + ...things..
+				} else {
+					continue; // allow for consecutive commas
+				}
+			}
+		}
+
 		return sum;
 	}
 	
