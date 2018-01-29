@@ -57,6 +57,10 @@ public class Driver {
 			valid=false;
 			fnfe.printStackTrace();
 		}
+		catch(NullPointerException e)
+		{
+			e.printStackTrace();
+		}
 		catch(IOException e){
 			valid=false;
 			e.printStackTrace();
