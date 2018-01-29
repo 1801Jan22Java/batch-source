@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class Utility 
 {
 	static ArrayList<String> bank = new ArrayList<String>();
-	static final ArrayList<Characters> genes = new ArrayList<String>();
+	//static final ArrayList<Characters> genes = new ArrayList<String>();
 	
 
 	public static int isValidMutation(String start, String end)
