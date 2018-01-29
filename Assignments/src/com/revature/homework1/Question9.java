@@ -8,6 +8,8 @@ import java.util.Arrays;
  */
 public class Question9 
 {
+	//I started by creating a method to check if a number is prime by using the mod opperatopr and dividing by
+	//all numb ers less than that number
 	public static boolean isPrime(Integer i)
 	{
 		if(i == 1)
@@ -24,6 +26,7 @@ public class Question9
 	public static ArrayList<Integer> printPrimes(ArrayList<Integer> ints)
 	{
 		ArrayList<Integer> primes = new ArrayList<Integer>();
+		//with my new method, I just filtered out the prime numbers into a new list
 		for(Integer i: ints)
 		{
 			if(isPrime(i))

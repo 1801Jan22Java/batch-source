@@ -12,6 +12,7 @@ public class Question8
 	public static boolean isPalindrome(String s)
 	{
 		Question3 q3 = new Question3();
+		//I used the code I wrote in problem 3 and checked the reverse string against the origonal 
 		if(q3.reverse(s).equals(s))
 		{
 			return true;

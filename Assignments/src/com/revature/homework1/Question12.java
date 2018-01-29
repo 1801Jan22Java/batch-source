@@ -8,6 +8,7 @@ import java.util.Arrays;
  */
 public class Question12 
 {
+	//I started by making a method that will allow me to create an array with just the even numbers
 	public static int[] onlyEvens(int[] nums)
 	{
 		int[] evens = new int[nums.length];
@@ -40,6 +41,7 @@ public class Question12
 		}
 		System.out.println();
 		System.out.print("After: ");
+		//I used the augmented for loop to move through the array and print all of the number in it
 		for(int i: onlyEvens(nums))
 		{
 			System.out.print(i + " ");

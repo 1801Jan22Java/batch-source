@@ -27,6 +27,10 @@ public class Question20
 			String word = br.readLine();
 			while(word != null)
 			{
+				//Given that I know the format of the input file,
+				//I can format the out put based on the : that seperates the words
+				//Since I know how many words are required in the file per line, 
+				//I can use the resulting String array in a pretty straight forward output 
 				String[] eachWord = word.split(":");
 				System.out.println("Name: "+eachWord[0]+" "+eachWord[1]);
 				System.out.println("Age: "+eachWord[2]);

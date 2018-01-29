@@ -30,6 +30,7 @@ public class Question1
 					array[k] = array[k-1];
 					array[k-1] = bucket;
 				}
+				//at the end, the largest numeber should be the last number in the array
 			}
 		}
 		

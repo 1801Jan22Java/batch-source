@@ -1,4 +1,7 @@
 package com.revature.homework1;
+
+import java.util.Scanner;
+
 /*
  * Write a program to compute N factorial.
  */
@@ -18,9 +21,10 @@ public class Question4
 	}
 	public static void main(String args[])
 	{
-		for(int i = 0; i <= 10; i++) 
-		{
-			System.out.println("Factorial of "+i+": " + factorial(i));
-		}
+		Scanner sc = new Scanner(System.in);
+		System.out.print("Enter an int: ");
+		int i = sc.nextInt();
+		System.out.println("Factorial of "+i+": " + factorial(i));
+
 	}
 }

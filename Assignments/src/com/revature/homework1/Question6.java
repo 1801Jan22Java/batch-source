@@ -7,6 +7,8 @@ public class Question6
 {
 	public static String isEven(int n)
 	{
+		//I used the floor and ceiling functions in the math API to determin if the answer had a remainder
+		//when dividing by 2, without using the modulus opperation 
 		if(Math.ceil((double)n/2) > Math.floor((double)n/2)) 
 		{
 			return "Odd";
