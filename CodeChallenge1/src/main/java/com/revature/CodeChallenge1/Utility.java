@@ -17,6 +17,9 @@ public class Utility {
 	
 	public void inputGenes() {
 		
+		//TODO::Separate this method up more, and put the mutations in a different method
+		//End the simulation better
+		
 		//Load genes in from file Data.txt Data2.txt Data3.txt
 		genes = readGeneFile("src/res/Data.txt");
 		
