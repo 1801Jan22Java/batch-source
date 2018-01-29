@@ -2,8 +2,8 @@ package com.revature.homework1;
 
 import java.util.Scanner;
 
-/*
- * Author: Calvin Milliron
+/**
+ * @author Calvin Milliron
  * Assignment: Write a program to determine if an integer is even without using the modulus operator (%)
  * Status: Done
  */

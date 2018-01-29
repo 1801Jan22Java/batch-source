@@ -7,8 +7,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Scanner;
 
-/*
- * Author: Calvin Milliron
+/**
+ * @author Calvin Milliron
  * Assignment: Sort two employees based on their name, department, and age using the Comparator interface.
  * Status: Done
  */

@@ -2,8 +2,8 @@ package com.revature.homework1;
 
 import java.util.Scanner;
 
-/*
- * Author: Calvin Milliron
+/**
+ * @author Calvin Milliron
  * Assignment: Write a program having a concrete ;subclass that inherits three abstract methods from a superclass.  
  * 		Provide the following three implementations in the subclass corresponding to the abstract methods in the superclass:
  * 		1. 	Check for uppercase characters in a string, and return ‘true’ or ‘false’ depending if any are found.

@@ -3,8 +3,8 @@ package com.revature.homework1;
 import java.text.DecimalFormat;
 import java.util.Scanner;
 
-/*
- * Author: Calvin Milliron
+/**
+ * @author Calvin Milliron
  * Assignment: Write a program that calculates the simple interest on the principal, rate of interest and number of years provided by the user. 
  * 		Enter principal, rate and time through the console using the Scanner class.
  * 		Accrued amount = Principal*(1+ Rate* Time)

@@ -1,7 +1,7 @@
 package com.revature.homework1;
 
-/*
- * Author: Calvin Milliron
+/**
+ * @author Calvin Milliron
  * Assignment: Write a program to display the first 25 Fibonacci numbers beginning at 0.
  * Status: Done
  */

@@ -1,5 +1,11 @@
 package com.revature.homework1;
 
+/**
+ * @author Calvin Milliron
+ * Assignment: Sort two employees based on their name, department, and age using the Comparator interface.
+ * Status: Done
+ */
+
 public class Question07Bean {
 	public Question07Bean(String name, String department, int age) {
 		super();

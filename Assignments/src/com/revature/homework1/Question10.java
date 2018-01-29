@@ -2,8 +2,8 @@ package com.revature.homework1;
 
 import java.util.Scanner;
 
-/*
- * Author: Calvin Milliron
+/**
+ * @author Calvin Milliron
  * Assignment: Find the minimum of two numbers using ternary operators.
  * Status: Done
  */

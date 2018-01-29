@@ -6,8 +6,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
 
-/*
- * Author: Calvin Milliron
+/**
+ * @author Calvin Milliron
  * Assignment: Create a notepad file called Data.txt and enter the following:
  *
  *		Mickey:Mouse:35:Arizona

@@ -2,8 +2,8 @@ package com.revature.homework1;
 
 import java.util.Scanner;
 
-/*
- * Author: Calvin Milliron
+/**
+ * @author Calvin Milliron
  * Assignment: Write a program to compute N factorial.
  * Status: Done
  */

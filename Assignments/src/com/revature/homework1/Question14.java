@@ -4,9 +4,8 @@ import java.util.Scanner;
 import java.time.*;
 import java.time.format.*;
 
-
-/*
- * Author: Calvin Milliron
+/**
+ * @author Calvin Milliron
  * Assignment: Write a program that demonstrates the switch case. Implement the following functionalities in the cases:java 
  *		Case 1: Find the square root of a number using the Math class method.
  *		Case 2: Display today’s date.

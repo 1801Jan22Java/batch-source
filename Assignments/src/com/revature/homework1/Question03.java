@@ -1,7 +1,7 @@
 package com.revature.homework1;
 
-/*
- * Author: Calvin Milliron
+/**
+ * @author Calvin Milliron
  * Assignment: Reverse a string without using a temporary variable.  
  * 		Do NOT use reverse() in the StringBuffer or the StringBuilder APIs.
  * Status: Done
