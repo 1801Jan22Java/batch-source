@@ -13,6 +13,7 @@ public class Driver {
 		b.addSequence("AACCGGTT");
 		b.addSequence("AAACGGTA");
 		b.addSequence("AAGGCCTT");
+		
 		//	String[] bankArray =b.convertToArray();
 		/*	for(int i =0;i<bankArray.length;i++)
 		{
@@ -20,11 +21,10 @@ public class Driver {
 		}
 		 */	
 		File file = new File("Data.txt");
-		validateInput(file);
 		System.out.println(b.bankList.toString());
 		System.out.println(b.numMutations("AACCGGTG", "AAACGGTA"));
 		System.out.println(b.numMutations("FFFFFFFF", "AACCGGTT"));
-
+		validateInput(file);
 	}
 	
 	
@@ -45,6 +45,7 @@ public class Driver {
 				newLine=textReader.readLine();
 				String [] startEndArr = newLine.split(":");
 				System.out.println(b.numMutations(startEndArr[0],startEndArr[1]));
+				System.out.println(startEndArr[0] + " "+ startEndArr[1]);
 			}
 			 valid = true;
 			textReader.close();
