@@ -21,7 +21,7 @@ public class Utility {
 	}
 	
 	public void checkSequence() {
-		isSame(start, end);
+		System.out.println(isSame(start, end));
 		countMutate(start, end);
 		
 	}
