@@ -1,6 +1,10 @@
 package com.revature.GeneMutations;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class GeneMutations {
 	private ArrayList<String> bank;
@@ -10,7 +14,27 @@ public class GeneMutations {
 	}
 
 	public GeneMutations(String filename) {
-
+		this.bank = getBank(filename);
+	}
+	
+	
+	// placeholder for file IO
+	private ArrayList<String> getBank(String filename){
+		ArrayList<String> bank = new ArrayList<String>();
+		
+		// For getting one line at a time
+		String line = null;
+		
+		try {
+			FileReader fr = new FileReader(filename);
+			BufferedReader br = new BufferedReader(fr);
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return bank;
 	}
 
 	public boolean checkValidMutation(ArrayList<String> bank, String gene) {
