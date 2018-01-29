@@ -45,7 +45,7 @@ public abstract class Question18 {
 	}
 	
 	public static void tester() {
-		
+		// creates an instance of the SubClass and performs the operator methods on it
 		SubClass t1 = new SubClass();
 		System.out.println(t1.addTen("12"));
 		System.out.println(t1.upperToLower("UPPER"));

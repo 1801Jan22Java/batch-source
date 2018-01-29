@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Question19 {
 	
+	// goes through an ArrayList and adds the even integers
 	public static int addEvens(ArrayList<Integer> list){
 		int sum = 0;
 		for(int i = 0; i < list.size(); i++) {
@@ -16,7 +17,7 @@ public class Question19 {
 		
 		
 	}
-	
+	// goes through an ArrayList and adds the odd numbers
 	public static int addOdds(ArrayList<Integer> list){
 		int sum = 0;
 		for(int i = 0; i <  list.size(); i++) {
@@ -29,7 +30,7 @@ public class Question19 {
 		
 		
 	}
-	
+	// goes through an ArrayList and filters odd numbers
 	public static ArrayList<Integer> removeOdds(ArrayList<Integer> list){
 
 		for(int i = 0; i < list.size(); i++) {
@@ -62,6 +63,7 @@ public class Question19 {
 		ArrayList<Integer> oddOnlyList = new ArrayList<>();
 		System.out.println("List with only odd numbers:");
 		oddOnlyList = removeOdds(testList);
+		// prints the elements of the printed list
 		for(int i =0; i < oddOnlyList.size(); i++) {
 
 			System.out.println(oddOnlyList.get(i));

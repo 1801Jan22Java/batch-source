@@ -13,9 +13,10 @@ public class Question8 {
 		for (int i = 0; i < list.size();i++) {
 			StringBuilder temp = new StringBuilder();
 			temp.append(list.get(i).toString());
+			// uses built in StringBuilder function to reverse a word and .equals to check if equal to original
 			if( temp.reverse().toString().equals(list.get(i))) {
 				
-				filteredList.add(list.get(i));
+				filteredList.add(list.get(i)); // adds to filtered list if reversed is the same
 			}
 		}
 		return filteredList;
@@ -43,6 +44,7 @@ public class Question8 {
 		nameList.add("billy");
 		nameList.add("did");
 		
+		//creates new list to store palindromes
 		ArrayList<String> emptyList = new ArrayList<>() ;
 		
 		emptyList = palindromeFilter(nameList);

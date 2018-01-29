@@ -12,7 +12,7 @@ public class Question14 {
 		double x = 64;
 		String functionality = "display date";
 		String learnJava;
-	
+		// decides which case to excecute depending on string
 		switch (functionality) {
 		case "square root":
 				x = Math.sqrt(x);

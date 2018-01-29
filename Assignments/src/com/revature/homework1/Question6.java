@@ -7,7 +7,7 @@ public class Question6 {
 		 Integer integerPart = rationalNumber.intValue();
 		 double decimalPart = rationalNumber - integerPart;
 		 
-		 
+		 // if a number divided by 2 has anything other than 0 after decimal point it it prime
 		if(decimalPart != 0) {
 			System.out.println(n + " is not even");
 			return false;

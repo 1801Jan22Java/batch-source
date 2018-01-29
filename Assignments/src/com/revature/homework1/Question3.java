@@ -5,20 +5,16 @@ public class Question3 {
 
 	
 	public static String reverse(String str) {
-		
-			int originalLength = str.length();
-		  
-		  for (int i = originalLength  -1; i >= 0; --i) {
-		  
-		  str += str.charAt(i);
+		//
+		int originalLength = str.length();
+		// adds the reversed elements of str to str
+		for (int i = originalLength  -1; i >= 0; --i) {
+		 str += str.charAt(i);
 		  
 		  }
-		  
+		  //removes the original string from the reversed part of string
 		  str = str.substring(originalLength);
-		  
-		 
-		  
-		 
+
 		  return str;
 		
 	}

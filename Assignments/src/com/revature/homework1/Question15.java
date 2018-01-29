@@ -6,6 +6,8 @@ public class Question15 {
 
 	
 	private static void tester() {
+		
+		// creates new instance of MathSubClass and performes examples of functionality
 		MathSubClass fun = new MathSubClass();
 		System.out.println(fun.addition(13, 11));
 		System.out.println(fun.subtraction(13, 11));
@@ -24,7 +26,7 @@ public class Question15 {
 	 class MathSubClass implements Question15Interface {
 		
 
-
+		
 		@Override
 		public int addition(int num1, int num2) {
 			return (num1 + num2);

@@ -14,7 +14,8 @@ public class Question17 {
 	
 	
 	public static void main(String[] args) {
-		
+		// obtains user input and assigns it to three different variables
+		// uses parseDouble to turn the string into a double object that is abloe to pass through the simple calculator function
 		Scanner sc = new Scanner(System.in);
 
 		System.out.println("Please enter principle amount without commas: ");
