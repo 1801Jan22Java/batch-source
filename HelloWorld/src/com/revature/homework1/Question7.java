@@ -12,13 +12,16 @@ public class Question7 {
 		
 		Employee e1 = new Employee("Kitty", "Dell", 10);
 		Employee e2 = new Employee("Jerry", "Samsung", 4);
+		/*
+		 *  Extra instances for test
 		Employee e3 = new Employee("Aerry", "Apple", 7);
 		Employee e4 = new Employee("Cerry", "Dyson", 11);
 		Employee e5 = new Employee("Ferry", "HP", 3);
 		Employee e6 = new Employee("Gerry", "LG", 9);
+		*/
 		
 		List<Employee> e = new ArrayList<Employee>();
-		Collections.addAll(e, e1, e2, e3, e4, e5, e6);
+		Collections.addAll(e, e1, e2);
 		System.out.println(e.toString());
 		
 		EmployeeAgeComparator eAge = new EmployeeAgeComparator();
