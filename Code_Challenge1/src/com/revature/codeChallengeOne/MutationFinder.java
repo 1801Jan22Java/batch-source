@@ -20,6 +20,7 @@ public class MutationFinder {
 			BufferedReader reader = new BufferedReader(new FileReader(FILENAME));
 			Gene start = new Gene((reader.readLine()));
 			Gene end = new Gene((reader.readLine()));
+			Gene current;
 			temp = reader.readLine();
 			strArr = temp.split(",");
 			bank = new GeneBank(strArr.length);
@@ -28,7 +29,21 @@ public class MutationFinder {
 			}
 			
 			for(int i = 0; i < bank.getSize(); i++) {
-				// logic to determine validity
+				/*
+				 * Logic to determine validity: 
+				 * beginning with gene start (declared above)
+				 * 		determine if there exists a valid mutation in the bank, or if end is a valid mutation
+				 * 			if true, set current to that reference and go into loop
+				 * 			else, return -1 as value (preferably throw exception, but meh)
+				 * Loop:
+				 * 		determine if there exists a valid mutation within 
+				 * 		the gene bank, or if end (declared above) is a valid mutation
+				 * 			if true, continue loop, setting current to that reference
+				 * 			else, return -1 as value (preferably throw exception, but meh)
+				 * 		if end is a valid mutation from 'current', exit loop and return value 
+				 * 		 
+				 */
+				
 			}
 			
 			reader.close();
