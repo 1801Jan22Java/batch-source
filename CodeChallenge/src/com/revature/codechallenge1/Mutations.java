@@ -59,6 +59,7 @@ public class Mutations {
 		return -1;
 	}
 	
+	// algorithm to check if you have a valid mutation between the two
 	public int validMutation() {
 		
 		current = "";
@@ -66,11 +67,17 @@ public class Mutations {
 		if (bank.isValid(end)) {
 			
 			int valid = -1;
-			for(int i = 0; i < end.length; i++) {
+			// 
+			for(int i = 0; i < end.length(); i++) {
+				//where there is a difference you look to see if the mutation is available
+				// doesnt matter everything after, just check if it is available within the bank
+				// keep building the current string until it is the same as the begin string
 				if(end.charAt(i) != begin.charAt(i)) {
 					current += Character.toString(begin.charAt(i));
 					//check if valid
 				}
+				
+				//build the current string
 				else {
 					current += Character.toString(end.charAt(i));
 				}
