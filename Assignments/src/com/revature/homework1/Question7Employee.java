@@ -1,5 +1,6 @@
 package com.revature.homework1;
 import java.util.Comparator;
+
 public class Question7Employee{
 	private String name;
 	private String department;
