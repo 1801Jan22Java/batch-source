@@ -16,7 +16,7 @@ package com.revature.homework1;
 				
 				System.out.println(fo.checkIfUppercaseExist("watermelon is Always Good"));
 				System.out.println(fo.convertLowerCaseToUpperCase("does it include lowercase?"));
-				System.out.println(fo.switchToNumberAndAddTen("abc"));
+				System.out.println(fo.switchToNumberAndAddTen("15"));		// please input 'string' which can be parsed into Integer
 			}
 		
 	}
