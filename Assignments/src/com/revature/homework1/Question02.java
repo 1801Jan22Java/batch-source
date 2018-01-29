@@ -14,11 +14,12 @@ public class Question02 {
 		// Start with F0, and F1
 		int x = 0;
 	    int y = 1;
+	    System.out.println("Fibonacci numbers f0 -> f25:");
 	    // Print F0
-	    System.out.println("F0 = " + x);
+	    System.out.println("f0 = " + x);
 	    for (int i = 1; i <= total; i++) {
 	    	// Print F1 and on
-	        System.out.println("F" + i + " = " + y);
+	        System.out.println("f" + i + " = " + y);
 	        // Add last number and next number
 	        int temp = x + y;
 	        // Update last number and next number

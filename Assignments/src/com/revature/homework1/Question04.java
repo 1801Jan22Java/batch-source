@@ -1,5 +1,6 @@
 package com.revature.homework1;
 
+import java.text.DecimalFormat;
 import java.util.Scanner;
 
 /**
@@ -11,20 +12,20 @@ public class Question04 {
 	public static void main(String[] args) {
 		Scanner input = new Scanner(System.in);
 		int number = 0;
-		int total = 1;
+		double total = 1;
 		boolean isNegative = false;
 		// Assume the user entered an invalid value
 		boolean validInput = false;
 		// Loop until the user enters a valid value
 		while (!validInput) {
 			// Ask user for a value
-			System.out.print("What integer would you like to find the factorial of? ");
+			System.out.print("What number would you like to find the factorial of? ");
 			// If user entered a valid value, store it, otherwise print error message and clear Scanner
 			if (input.hasNextInt()) {
 				number = input.nextInt();
 				validInput = true;
 			} else {
-				System.out.println("Sorry, that wasn't an integer.");
+				System.out.println("Sorry, that wasn't an integer.\n");
 				input.next();
 			}
 		}
@@ -37,6 +38,7 @@ public class Question04 {
 		System.out.print("The answer is: ");
 		// If the number was negative add the negative symbol to the answer
 		if (isNegative) { System.out.print("-"); }
-		System.out.println(total);
+		DecimalFormat df = new DecimalFormat("#,###");
+		System.out.println(df.format(total));
 	}
 }

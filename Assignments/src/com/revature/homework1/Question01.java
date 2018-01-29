@@ -10,6 +10,7 @@ import java.util.Arrays;
 public class Question01 {
 	public static void main(String[] args) {
 		int[] list = {1,0,5,6,3,2,3,7,9,8,4};
+		System.out.println("Original array:\t" + Arrays.toString(list));
 		// Iterate through each place in the array
 		for (int i = 0; i < list.length; i++) {
 			// Iterate through each remaining place in the array
@@ -26,6 +27,6 @@ public class Question01 {
 			}
 		}
 		// Display formatted result
-		System.out.println(Arrays.toString(list));
+		System.out.println("Sorted array:\t" + Arrays.toString(list));
 	}
 }

@@ -13,6 +13,7 @@ public class Question10 {
 		Scanner input = new Scanner(System.in);
 		double firstValue = 0.0;
 		double secondValue = 0.0;
+		System.out.println("Tell me two numbers and I'll tell you which one is smaller.");
 		// Assume the user entered an invalid value
 		boolean validInput = false;
 		// Loop until the user enters a valid value

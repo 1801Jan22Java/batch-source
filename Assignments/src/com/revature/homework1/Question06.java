@@ -1,5 +1,6 @@
 package com.revature.homework1;
 
+import java.text.DecimalFormat;
 import java.util.Scanner;
 
 /**
@@ -17,23 +18,28 @@ public class Question06 {
 		// Loop until the user enters a valid value
 		while (!validInput) {
 			// Ask user for a value
-			System.out.print("Enter a whole number: ");
+			System.out.print("Tell me a number and I'll tell you if it is even: ");
 			// If user entered a valid value, store it, otherwise print error message and clear Scanner
 			if (input.hasNextInt()) {
 				value = input.nextInt();
 				validInput = true;
 			} else {
-				System.out.println("Sorry, that wasn't a whole number.");
+				if (input.hasNextDouble()) {
+					System.out.println("Sorry, that number was too big, try something smaller.\n");
+				} else {
+					System.out.println("Sorry, that wasn't a whole number.\n");
+				}
 				input.next();
 			}
 		}
 		// Divide the number by 2, if the original number was odd, then the result will be truncated when multiplied by 2
 		// If that quotient is less than the original number, then the then the number is odd
+		DecimalFormat df = new DecimalFormat("#,###");
 		if (value / 2 * 2 < value) {
-			System.out.println("The number is odd.");
+			System.out.println("The number " + df.format(value) + " is odd.");
 		// If the quotient was not truncated, then that quotient will equal the original value, proving that the number was even
 		} else {
-			System.out.println("The number is even.");
+			System.out.println("The number " + df.format(value) + " is even.");
 		}
 	}
 }

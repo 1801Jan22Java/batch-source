@@ -14,7 +14,7 @@ public class Question05 {
 		Scanner input = new Scanner(System.in);
 		String str = new String();
 		int idx = 0;
-		System.out.print("Please enter what will be cut down: ");
+		System.out.print("Please enter something to be shortened: ");
 		str = input.nextLine();
 		// Assume the user entered an invalid value
 		boolean validInput = false;
@@ -32,7 +32,7 @@ public class Question05 {
 			}
 		}
 		// Print result
-		System.out.println("The result is: " + subString(str, idx));
+		System.out.println("The result is: \"" + subString(str, idx) + "\"");
 	}
 	
 	public static String subString(String str, int idx) {

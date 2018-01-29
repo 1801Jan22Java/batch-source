@@ -13,7 +13,7 @@ public class Question11 {
 
 	public static void main(String[] args) {
 		System.out.println("The first value stored in the com.revature.question11 package is " + com.revature.question11.Question11Support.value1);
-		System.out.println("The second value stored imported from the com.ravature.question11 package is " + Question11Support.value2);
+		System.out.println("The second value imported from the com.ravature.question11 package is " + Question11Support.value2);
 	}
 
 }

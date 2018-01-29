@@ -15,7 +15,7 @@ public class Question08 {
 	public static void main(String[] args) {
 		// Build and display the initial array
 		ArrayList<String> initial = new ArrayList<>(Arrays.asList("karan", "madam", "tom", "civic", "radar", "jimmy", "kayak", "john",  "refer", "billy", "did"));
-		System.out.println("The original list contains: " + initial);
+		System.out.println("The original list is:\t" + initial);
 		// Create new array for palindromes
 		ArrayList<String> palindromes = new ArrayList<>();
 		// Check each element of array, add to new array if palindrome
@@ -25,7 +25,7 @@ public class Question08 {
 			}
 		}
 		// Display result
-		System.out.println("The palindromes are: " + palindromes);
+		System.out.println("The palindromes are:\t" + palindromes);
 		
 	}
 	

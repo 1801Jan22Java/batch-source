@@ -16,7 +16,7 @@ public class Question09 {
 		for(int i = 1; i <= 100; i++) { numbers.add(i); }
 		int count = 0;
 		boolean isPrime = true;
-		System.out.println("Prime numbers found are: ");
+		System.out.println("Prime numbers from 1 to 100 are: ");
 		// Step through each number in array
 		for(Integer x : numbers) {
 			isPrime = true;

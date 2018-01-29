@@ -23,7 +23,7 @@ public class Question03 {
 		// Remove the first half of the string containing the original content
 		str = str.substring(length);
 		// Print the result
-		System.out.println("The reverse is: " + str);
+		System.out.println("The reverse is: \"" + str + "\"");
 		
 	}
 
