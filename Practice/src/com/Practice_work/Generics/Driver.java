@@ -3,7 +3,7 @@ package com.Practice_work.Generics;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class Driver {
+public class Driver extends Thread {
 	public static void main(String[] args) {
 		ArrayList<Movie> list = new ArrayList<>();
 		Movie m1 = new Movie("Force Awakens",8.3,2015);
@@ -12,6 +12,12 @@ public class Driver {
 		Movie m4 = new Movie("Return of the Jedi",8.4,1983);
 		
 		Collections.addAll(list, m1,m2,m3,m4);
+		Animal a = new Dog();
+		//String name = (Dog) a.name;
+		//System.out.println(name);
+		
+		
+		//list.str
 		
 	}
 
