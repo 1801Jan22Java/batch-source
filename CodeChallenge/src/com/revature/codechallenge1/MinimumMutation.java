@@ -55,15 +55,20 @@ public class MinimumMutation {
 		
 		for(int i=0; i<start.length(); i++) {
 			if(start.charAt(i)!=end.charAt(i)) {
-				//int check = mutations;
+				int check = mutations;
+				boolean mutation = false;
 				for(int j=0; j<bank.size(); j++) {
-					if(bank.get(j).charAt(i)==start.charAt(i)) {
+					if(bank.get(j).charAt(i)==end.charAt(i)) {
 						mutations+=1;
+						mutation = true;
+					}
+					if(mutation) {
+						break;
 					}
 				}
-				//if(check==mutations){
-				//	return -1;
-				//}
+				if(check==mutations){
+					return -1;
+				}
 			}
 		}
 		return mutations;
