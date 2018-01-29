@@ -7,16 +7,16 @@ public class Question9 {
 	// Q9. Create an ArrayList which stores numbers from 1 to 100 and prints out all the prime numbers to the console.
 	public static void main(String[] args) {
 		
-		checkIfPrime();
+		checkIfPrime(100);
 	}
 	
-	public static void checkIfPrime() {
+	public static ArrayList<Integer> checkIfPrime(int size) {
 		
 		int i = 1;	// set the initial number for using 'while' 
 		
 		ArrayList<Integer> primeNo = new ArrayList<Integer>();
 		
-		while ( i < 100) {
+		while ( i < size) {
 			i++;			// iterate from 1 to 100
 			int givenNo = i;
 			boolean ifPrime = true;		// assume the number(i++) is prime
@@ -35,5 +35,8 @@ public class Question9 {
 		}
 		
 		System.out.println("prime numbers from 1 to 100 are : " + primeNo.toString());
+	
+		return primeNo;
 	}
+	
 }
