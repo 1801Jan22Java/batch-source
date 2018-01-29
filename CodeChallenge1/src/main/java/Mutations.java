@@ -1,4 +1,3 @@
-import java.io.InputStream;
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -20,6 +19,7 @@ public class Mutations {
 		if (start.equals(end)) {
 			return numMutations;
 		}
+		
 		
 		while (scan.hasNext()) {
 			bank.add(scan.next());
