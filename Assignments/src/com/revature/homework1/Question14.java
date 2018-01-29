@@ -1,7 +1,7 @@
 package com.revature.homework1;
 
+import java.time.LocalDate;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -24,9 +24,9 @@ public class Question14 {
 		String slogan = "I am learning Core Java";
 		
 		System.out.println("Type 1, 2, or 3 to perform an operation:");
-		System.out.println("1- Find the square root of 57.34");
-		System.out.println("2- Find out today's date");
-		System.out.println("3- Split and store \"" + slogan + "\" into an array");
+		System.out.println("1 -> Find the square root of 57.34");
+		System.out.println("2 -> Find out today's date in \"year-month-day\" format");
+		System.out.println("3 -> Split and store \"" + slogan + "\" into an array");
 		
 		int choice = -1;
 		String template = "Please type 1, 2, or 3!";
@@ -46,9 +46,7 @@ public class Question14 {
 				System.out.println("The square root of 57.34 is " + Math.sqrt(57.34));
 				break;
 			case 2:
-				// Default constructor for date object is current date and time
-				Date date = new Date();
-				System.out.println("Today's date is " + date.toString());
+				System.out.println("Today's date is " + LocalDate.now().toString());
 				break;
 			case 3:
 				// Splitting on whitespace
