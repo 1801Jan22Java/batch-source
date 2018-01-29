@@ -12,8 +12,10 @@ public class Gene {
 	
 	public boolean isValid() {
 		for(int i = 0; i < GENE_LENGTH; i++) {
-			if((gene.charAt(i) != "A") || (gene.charAt(i) != "G") || (gene.charAt(i) != "T") || (gene.charAt(i) != "C"))
+			if((gene.charAt(i) != 'A') && (gene.charAt(i) != 'T') && (gene.charAt(i) != 'G') && (gene.charAt(i) != 'C'))
+				return false;
 		}
+		return true;
 	}
 	
 	//Overloading equals

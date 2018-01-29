@@ -13,6 +13,7 @@ public class MutationFinder {
 	
 	public static void main(String[] args) {
 		try{
+			boolean valid;
 			String[] strArr;
 			String temp = new String();
 			GeneBank bank;
@@ -26,6 +27,9 @@ public class MutationFinder {
 				bank.add(new Gene(strArr[i]));
 			}
 			
+			for(int i = 0; i < bank.getSize(); i++) {
+				// logic to determine validity
+			}
 			
 			reader.close();
 		} catch (FileNotFoundException e) {
