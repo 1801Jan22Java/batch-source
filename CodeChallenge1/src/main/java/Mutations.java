@@ -31,12 +31,10 @@ public class Mutations {
 		if (bank.size() == 0 || !bank.contains(end)) {
 			return -1;
 		}
-		System.out.println(bank);
 		for (String str : bank) {
 			for (int i = 0; i < currentMutation.length(); i++) {
 				if (currentMutation.charAt(i) != str.charAt(i)) {
 					currentMutation.replace(i, i + 1, "" + str.charAt(i));
-					System.out.println(currentMutation);
 					numMutations++;
 					break;
 				}
