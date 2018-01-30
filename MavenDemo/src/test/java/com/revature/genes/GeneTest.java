@@ -14,7 +14,7 @@ public class GeneTest {
 	public final void testExample() {
 		String start = "AACCGGTT";
 		String end = "AAACGGTA";
-		String[] bankArr = {"AACCGGTA", "AACCGCTA", "AAACGGTA", "AAACGCTA"};
+		String[] bankArr = {"AACCGGTA", "AACCGCTA", "AAACGGTA"};
 		List<String> bank = new ArrayList<String>();
 		for (String s : bankArr) {
 			bank.add(s);
@@ -47,6 +47,19 @@ public class GeneTest {
 		}
 		
 		Assert.assertEquals(MutateQuery.query(start, end, bank), -1);
+	}
+	
+	@Test
+	public final void testStartInBank() {
+		String start = "AACCGGTA";
+		String end = "AAACGGTA";
+		String[] bankArr = {"AACCGGTA", "AACCGCTA", "AAACGGTA"};
+		List<String> bank = new ArrayList<String>();
+		for (String s : bankArr) {
+			bank.add(s);
+		}
+		
+		Assert.assertEquals(MutateQuery.query(start, end, bank), 1);
 	}
 
 }

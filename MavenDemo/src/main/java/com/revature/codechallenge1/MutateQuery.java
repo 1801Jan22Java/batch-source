@@ -12,7 +12,7 @@ public class MutateQuery {
 		
 		int result = queryHelper(start, end, bank, new ArrayList<String>());
 		
-		if (result == 0) return -1;
+		if (result == Integer.MAX_VALUE) return -1;
 		
 		return result;
 	}
@@ -20,13 +20,15 @@ public class MutateQuery {
 	private static String swap(String s, int idx, char c) {
 		char[] temp = s.toCharArray();
 		temp[idx] = c;
+		
+		
 		return new String(temp);
 	}
 	
 	private static int queryHelper(String current, String end, List<String> bank, List<String> used) {
-		int maxResult = 0;
+		int minResult = Integer.MAX_VALUE;
 		if (used.size() == bank.size()) {
-			return 0;
+			return Integer.MAX_VALUE;
 		}
 		for (int i = 0; i < current.length(); i++) {
 			for (char c : GENES) {
@@ -38,13 +40,13 @@ public class MutateQuery {
 					List<String> addUsed = new ArrayList<String>(used);
 					addUsed.add(temp);
 					int currResult = queryHelper(temp, end, bank, addUsed);
-					if (currResult != 0 && currResult > maxResult) {
-						maxResult = currResult;
+					if (currResult < minResult) {
+						minResult = currResult;
 					}
 				}
 			}
 		}
-		return maxResult;
+		return minResult;
 	}
 	
 }
