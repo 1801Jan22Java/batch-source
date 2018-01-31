@@ -1,4 +1,9 @@
-ALTER SESSION SET CURRENT_SCHEMA = CHINOOK;
+/*
+Sungkwon Kudo
+Assignment 2 
+Revature
+February 5, 2018
+*/
 
 -- 2.1 SELECT
 SELECT * FROM EMPLOYEE;
@@ -114,4 +119,43 @@ WHERE FIRSTNAME = 'Robert'
 SELECT TIME_RETURN() FROM DUAL;
 
 -- Length finder of MEDIATYPE table
-CREATE OR REPLACE FUNCTION 
+-- Assumes that chinook is NOT a separate user, 
+-- and the columns are in USER_TAB_COLUMNS
+--CREATE OR REPLACE FUNCTION LENGTH_RETURN RETURN NUMBER AS
+--    N NUMBER;
+--BEGIN
+--    SELECT DATA_LENGTH INTO
+--        N
+--    FROM USER_TAB_COLUMNS
+--    WHERE TABLE_NAME = 'MEDIATYPE'
+--          AND   COLUMN_NAME = 'NAME';
+--    RETURN N;
+--END;
+SELECT LENGTH_RETURN() FROM DUAL;
+
+--3.2 System Defined Aggregate Functions
+--Task – Create a function that returns the average total of all invoices 
+--Task – Create a function that returns the most expensive track
+
+-- -- A function to return the total average of invoice.
+--CREATE OR REPLACE FUNCTION INVOICE_TOTAL_AVERAGE RETURN NUMBER AS
+--    N NUMBER;
+--BEGIN
+--    SELECT AVG(TOTAL) INTO
+--        N
+--    FROM INVOICE;
+--    RETURN N;
+--END;
+SELECT INVOICE_TOTAL_AVERAGE() FROM DUAL;
+
+-- A function to return the most expensive track from TRACK
+--CREATE OR REPLACE FUNCTION GET_MOST_EXPENSIVE_TRACK RETURN NUMBER AS
+--    N NUMBER;
+--BEGIN
+--    SELECT MAX(UNITPRICE) INTO
+--        N
+--    FROM TRACK;
+--    RETURN N;
+--END;
+SELECT GET_MOST_EXPENSIVE_TRACK() FROM DUAL;
+
