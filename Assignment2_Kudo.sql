@@ -101,3 +101,17 @@ ALTER TABLE INVOICELINE
 DELETE FROM CUSTOMER
 WHERE FIRSTNAME = 'Robert'
       AND   LASTNAME = 'Walter';
+      
+--3.1 System Defined Functions
+--Task – Create a function that returns the current time.
+--Task – create a function that returns the length of name in MEDIATYPE table
+
+-- Time returner, select function and ctrl + / to uncomment
+--CREATE OR REPLACE FUNCTION TIME_RETURN RETURN TIMESTAMP AS
+--BEGIN
+--    RETURN CURRENT_TIMESTAMP;
+--END TIME_RETURN;
+SELECT TIME_RETURN() FROM DUAL;
+
+-- Length finder of MEDIATYPE table
+CREATE OR REPLACE FUNCTION 
