@@ -29,5 +29,8 @@ public class App
         
         // Case where it's a valid mutation
         gm.assessor("AAGGTTCC", "AAGGTTTT", testBank);
+        
+        // Case where intermediate is not valid
+        gm.assessor("AGGCTTCC", "AAGGTTTT", testBank);
     }
 }
