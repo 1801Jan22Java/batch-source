@@ -83,16 +83,21 @@ WHERE TITLE = 'Master of Cheese';
 2.3 TASK 3 - insert two new records into Customer table
 */
 
+--instead of hard coding the customerid, i pulled the last found customerid and incremented
+--it and used it to insert a new genre to the table
 INSERT INTO CUSTOMER (CUSTOMERID,LASTNAME,FIRSTNAME,COMPANY,ADDRESS,CITY,STATE,COUNTRY,POSTALCODE,PHONE,FAX,EMAIL,SUPPORTREPID)
 SELECT CUSTOMERID + 1, 'Chan','Jackie','Dragon Fist Co.','777 Lucky Dragon Ln.','San Francisco','CA','United States of America','90210','(987) 654-3210','+1 (123) 456-7890','KungFu@master.com',NULL
 FROM CUSTOMER WHERE ROWNUM <=1 ORDER BY CUSTOMERID DESC;
 
+--instead of hard coding the supportrepid i updated the entry with a select to the IT Manager
 UPDATE CUSTOMER
 SET SUPPORTREPID = (SELECT EMPLOYEEID
                  FROM EMPLOYEE
                  WHERE TITLE = 'IT Manager')
 WHERE FIRSTNAME = 'Jackie' AND LASTNAME = 'Chan';
 
+--instead of hard coding the customerid, i pulled the last found customerid and incremented
+--it and used it to insert a new genre to the table; the supportrepid is hard coded in this query
 INSERT INTO CUSTOMER (CUSTOMERID,LASTNAME,FIRSTNAME,COMPANY,ADDRESS,CITY,STATE,COUNTRY,POSTALCODE,PHONE,FAX,EMAIL,SUPPORTREPID)
 SELECT CUSTOMERID + 1, 'Duck','Donald',NULL,'Ducky Duck Dr.','Houston','TX','United States of America','77352','(936) 654-3210','+1 (484) 456-7890','DuckyMcDuck@DuckFace.com',4
 FROM CUSTOMER WHERE ROWNUM <=1 ORDER BY CUSTOMERID DESC;
@@ -140,10 +145,18 @@ WHERE HIREDATE BETWEEN TO_DATE('2003-6-1','yyyy-mm-dd')AND TO_DATE('2004-3-1','y
 /*
 2.7 TASK 1 - delete a record in Customer table where the name is Robert Walter
 */
-UPDATE INVOICE
-SET CUSTOMERID = -1
-WHERE CUSTOMERID = (SELECT CUSTOMERID
-                    FROM CUSTOMER
-                    WHERE FIRSTNAME = 'Robert' AND LASTNAME = 'Walter');
-            
+
+-- delete all references in invoiceline to the invoice that references the record that is for Robert Walker                    
+DELETE FROM INVOICELINE WHERE INVOICEID IN(SELECT INVOICEID 
+                                           FROM INVOICE
+                                           WHERE CUSTOMERID IN (SELECT CUSTOMERID
+                                                               FROM CUSTOMER
+                                                               WHERE FIRSTNAME = 'Robert' AND LASTNAME = 'Walter'));
+
+-- delete all references in invoice that references the record that is for Robert Walker
+DELETE FROM INVOICE WHERE CUSTOMERID IN (SELECT CUSTOMERID
+                                         FROM CUSTOMER
+                                         WHERE FIRSTNAME = 'Robert' AND LASTNAME = 'Walter');
+
+-- delete the record for Robert Walker                                                               
 DELETE FROM CUSTOMER WHERE FIRSTNAME = 'Robert' AND LASTNAME = 'Walter';
