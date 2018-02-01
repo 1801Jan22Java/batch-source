@@ -241,6 +241,5 @@ INNER JOIN ALBUM AL ON AR.ARTISTID = AL.ARTISTID;
 SELECT NAME,TITLE FROM ARTIST,ALBUM
 ORDER BY NAME ASC;
 
-
 --7.5 SELF
 --Task – Perform a self-join on the employee table, joining on the reportsto column.
