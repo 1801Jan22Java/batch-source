@@ -143,97 +143,109 @@ WHERE FIRSTNAME = 'Robert'
 --Task – create a function that returns the length of name in MEDIATYPE table
 
 -- Time returner, select function and ctrl + / to uncomment
---CREATE OR REPLACE FUNCTION TIME_RETURN RETURN TIMESTAMP AS
---BEGIN
---    RETURN CURRENT_TIMESTAMP;
---END TIME_RETURN;
+CREATE OR REPLACE FUNCTION TIME_RETURN RETURN TIMESTAMP AS
+BEGIN
+    RETURN CURRENT_TIMESTAMP;
+END TIME_RETURN;
+      
+/
 SELECT TIME_RETURN() FROM DUAL;
 
 -- Length finder of MEDIATYPE table
 -- Assumes that chinook is NOT a separate user, 
 -- and the columns are in USER_TAB_COLUMNS
---CREATE OR REPLACE FUNCTION LENGTH_RETURN RETURN NUMBER AS
---    N NUMBER;
---BEGIN
---    SELECT DATA_LENGTH INTO
---        N
---    FROM USER_TAB_COLUMNS
---    WHERE TABLE_NAME = 'MEDIATYPE'
---          AND   COLUMN_NAME = 'NAME';
---    RETURN N;
---END;
+CREATE OR REPLACE FUNCTION LENGTH_RETURN RETURN NUMBER AS
+    N NUMBER;
+BEGIN
+    SELECT DATA_LENGTH INTO
+        N
+    FROM USER_TAB_COLUMNS
+    WHERE TABLE_NAME = 'MEDIATYPE'
+          AND   COLUMN_NAME = 'NAME';
+    RETURN N;
+END;
+
+/
 SELECT LENGTH_RETURN() FROM DUAL;
 
 --3.2 System Defined Aggregate Functions
---Task – Create a function that returns the average total of all invoices 
---Task – Create a function that returns the most expensive track
 
 -- -- A function to return the total average of invoice.
---CREATE OR REPLACE FUNCTION INVOICE_TOTAL_AVERAGE RETURN NUMBER AS
---    N NUMBER;
---BEGIN
---    SELECT AVG(TOTAL) INTO
---        N
---    FROM INVOICE;
---    RETURN N;
---END;
+CREATE OR REPLACE FUNCTION INVOICE_TOTAL_AVERAGE RETURN NUMBER AS
+    N NUMBER;
+BEGIN
+    SELECT AVG(TOTAL) INTO
+        N
+    FROM INVOICE;
+    RETURN N;
+END;
+
+/
 SELECT INVOICE_TOTAL_AVERAGE() FROM DUAL;
 
 -- A function to return the most expensive track from TRACK
---CREATE OR REPLACE FUNCTION GET_MOST_EXPENSIVE_TRACK RETURN NUMBER AS
---    N NUMBER;
---BEGIN
---    SELECT MAX(UNITPRICE) INTO
---        N
---    FROM TRACK;
---    RETURN N;
---END;
+CREATE OR REPLACE FUNCTION GET_MOST_EXPENSIVE_TRACK RETURN NUMBER AS
+    N NUMBER;
+BEGIN
+    SELECT MAX(UNITPRICE) INTO
+        N
+    FROM TRACK;
+    RETURN N;
+END;
+
+/
 SELECT GET_MOST_EXPENSIVE_TRACK() FROM DUAL;
 
 --3.3 User Defined Scalar Functions
 --Task – Create a function that returns the average 
 --price of invoiceline items in the invoiceline table
---CREATE OR REPLACE FUNCTION AVG_INVOICE_PRICE RETURN NUMBER AS
---    N NUMBER;
---BEGIN
---    SELECT AVG(UNITPRICE) INTO
---        N
---    FROM INVOICELINE;
---    RETURN N;
---END;
+CREATE OR REPLACE FUNCTION AVG_INVOICE_PRICE RETURN NUMBER AS
+    N NUMBER;
+BEGIN
+    SELECT AVG(UNITPRICE) INTO
+        N
+    FROM INVOICELINE;
+    RETURN N;
+END;
+
+/
 SELECT AVG_INVOICE_PRICE() FROM DUAL;
 
 --3.4 User Defined Table Valued Functions
 --Task – Create a function that returns all employees who are born after 1968.
 
 ---- Create a custom user type to store the data type.
---CREATE OR REPLACE TYPE EMPLOYEE_TYPE AS OBJECT (
---    EMP_ID      NUMBER,
---    FIRSTNAME   VARCHAR2(20),
---    LASTNAME    VARCHAR2(20)
---);
--- create a nested table to store data
---CREATE OR REPLACE TYPE TABLE_EMP AS
---    TABLE OF EMPLOYEES;
----- Create function
---CREATE OR REPLACE FUNCTION EMPLOYEE_AFTER_YEAR (
---    VC_YEAR IN VARCHAR2
---) RETURN TABLE_EMP AS
---    RET_TABLE_EMP TABLE_EMP;
---    DATE_HOLDER VARCHAR2(20);
---BEGIN
---    DATE_HOLDER := '31-DEC-'
---    || VC_YEAR;
----- use cast-multiset to insert data into the nested table
---    SELECT CAST(MULTISET(
---        SELECT EMPLOYEEID,FIRSTNAME,LASTNAME
---        FROM EMPLOYEE
---        WHERE BIRTHDATE > DATE_HOLDER
---    ) AS TABLE_EMP) INTO
---        RET_TABLE_EMP
---    FROM DUAL;
---    RETURN RET_TABLE_EMP;
---END;
+CREATE OR REPLACE TYPE EMPLOYEE_TYPE AS OBJECT (
+    EMP_ID      NUMBER,
+    FIRSTNAME   VARCHAR2(20),
+    LASTNAME    VARCHAR2(20)
+);
+/
+ --create a nested table to store data
+CREATE OR REPLACE TYPE TABLE_EMP AS
+    TABLE OF EMPLOYEES;
+    /
+-- Create function
+CREATE OR REPLACE FUNCTION EMPLOYEE_AFTER_YEAR (
+    VC_YEAR IN VARCHAR2
+) RETURN TABLE_EMP AS
+    RET_TABLE_EMP TABLE_EMP;
+    DATE_HOLDER VARCHAR2(20);
+BEGIN
+    DATE_HOLDER := '31-DEC-'
+    || VC_YEAR;
+-- use cast-multiset to insert data into the nested table
+    SELECT CAST(MULTISET(
+        SELECT EMPLOYEEID,FIRSTNAME,LASTNAME
+        FROM EMPLOYEE
+        WHERE BIRTHDATE > DATE_HOLDER
+    ) AS TABLE_EMP) INTO
+        RET_TABLE_EMP
+    FROM DUAL;
+    RETURN RET_TABLE_EMP;
+END;
+
+/
 SELECT *
 FROM TABLE ( EMPLOYEE_AFTER_YEAR('1968') );
 -- referenced: 
@@ -246,16 +258,16 @@ FROM TABLE ( EMPLOYEE_AFTER_YEAR('1968') );
 
 --4.1 Basic Stored Procedure
 --Task – Create a stored procedure that selects the first and last names of all the employees. 
---CREATE OR REPLACE PROCEDURE FIRST_LAST_NAMES AS
---    CURSOR C_NAME IS SELECT FIRSTNAME,
---                            LASTNAME FROM EMPLOYEE;
---BEGIN
---    FOR VC_NAME IN C_NAME LOOP
---        DBMS_OUTPUT.PUT_LINE(VC_NAME.FIRSTNAME
---        || ' '
---        || VC_NAME.LASTNAME);
---    END LOOP;
---END;
+CREATE OR REPLACE PROCEDURE FIRST_LAST_NAMES AS
+    CURSOR C_NAME IS SELECT FIRSTNAME,
+                            LASTNAME FROM EMPLOYEE;
+BEGIN
+    FOR VC_NAME IN C_NAME LOOP
+        DBMS_OUTPUT.PUT_LINE(VC_NAME.FIRSTNAME
+        || ' '
+        || VC_NAME.LASTNAME);
+    END LOOP;
+END;
 
 /
 BEGIN
@@ -266,103 +278,103 @@ END;
 --4.2 Stored Procedure Input Parameters
 --Task – Create a stored procedure that updates the personal information
 --of an employee.
---CREATE OR REPLACE PROCEDURE UPDATE_EMP (
---    N_EMPID      IN NUMBER,
---    VC_LNAME     IN VARCHAR2,
---    VC_FNAME     IN VARCHAR2,
---    VC_TITLE     IN VARCHAR2,
---    N_REPORT     IN NUMBER,
---    D_BDATE      IN DATE,
---    D_HIRE       IN DATE,
---    VC_ADDRESS   IN VARCHAR2,
---    VC_CITY      IN VARCHAR2,
---    VC_STATE     IN VARCHAR2,
---    VC_COUNTRY   IN VARCHAR2,
---    VC_POSTAL    IN VARCHAR2,
---    VC_PHONE     IN VARCHAR2,
---    VC_FAX       IN VARCHAR2,
---    VC_EMAIL     IN VARCHAR2
---)
---    AS
---BEGIN
---    UPDATE EMPLOYEE
---        SET
---            LASTNAME = VC_LNAME,
---            FIRSTNAME = VC_FNAME,
---            TITLE = VC_TITLE,
---            REPORTSTO = N_REPORT,
---            BIRTHDATE = D_BDATE,
---            HIREDATE = D_HIRE,
---            ADDRESS = VC_ADDRESS,
---            CITY = VC_CITY,
---            STATE = VC_STATE,
---            COUNTRY = VC_COUNTRY,
---            POSTALCODE = VC_POSTAL,
---            PHONE = VC_PHONE,
---            FAX = VC_FAX,
---            EMAIL = VC_EMAIL
---    WHERE EMPLOYEEID = N_EMPID;
--- 
---END;
+CREATE OR REPLACE PROCEDURE UPDATE_EMP (
+    N_EMPID      IN NUMBER,
+    VC_LNAME     IN VARCHAR2,
+    VC_FNAME     IN VARCHAR2,
+    VC_TITLE     IN VARCHAR2,
+    N_REPORT     IN NUMBER,
+    D_BDATE      IN DATE,
+    D_HIRE       IN DATE,
+    VC_ADDRESS   IN VARCHAR2,
+    VC_CITY      IN VARCHAR2,
+    VC_STATE     IN VARCHAR2,
+    VC_COUNTRY   IN VARCHAR2,
+    VC_POSTAL    IN VARCHAR2,
+    VC_PHONE     IN VARCHAR2,
+    VC_FAX       IN VARCHAR2,
+    VC_EMAIL     IN VARCHAR2
+)
+    AS
+BEGIN
+    UPDATE EMPLOYEE
+        SET
+            LASTNAME = VC_LNAME,
+            FIRSTNAME = VC_FNAME,
+            TITLE = VC_TITLE,
+            REPORTSTO = N_REPORT,
+            BIRTHDATE = D_BDATE,
+            HIREDATE = D_HIRE,
+            ADDRESS = VC_ADDRESS,
+            CITY = VC_CITY,
+            STATE = VC_STATE,
+            COUNTRY = VC_COUNTRY,
+            POSTALCODE = VC_POSTAL,
+            PHONE = VC_PHONE,
+            FAX = VC_FAX,
+            EMAIL = VC_EMAIL
+    WHERE EMPLOYEEID = N_EMPID;
+ 
+END;
 /
 BEGIN
-    UPDATE_EMP(1,'William','Overture','Sharp Shooter',1,'12-DEC-1912','03-MAR-1950'
+    update_emp(1,'William','Overture','Sharp Shooter',1,'12-DEC-1912','03-MAR-1950'
 ,'1111 One Avenue','Dallas','Texas','USA','10101','1111111111','2222222222'
 ,'applesonhead@arrow.com');
 END;
-
+/
 --Task – Create a stored procedure that returns the managers of an employee.
-CREATE OR REPLACE PROCEDURE RET_EMPLOYEE_MANAGERS (
-    N_EMPID   IN NUMBER
+CREATE OR REPLACE PROCEDURE ret_employee_managers (
+    n_empid   IN NUMBER
 ) IS
-    N_MANAGER_ID       NUMBER;
-    VC_MANAGER_LAST    VARCHAR2(20);
-    VC_MANAGER_FIRST   VARCHAR2(20);
+    n_manager_id       NUMBER;
+    vc_manager_last    VARCHAR2(20);
+    vc_manager_first   VARCHAR2(20);
 BEGIN
-SELECT EMPLOYEEID,FIRSTNAME,
-                       LASTNAME INTO
-        N_MANAGER_ID,VC_MANAGER_LAST,VC_MANAGER_FIRST
-                FROM EMPLOYEE
-                WHERE EMPLOYEEID = (
-        SELECT REPORTSTO FROM EMPLOYEE WHERE EMPLOYEEID = N_EMPID
+SELECT employeeid,firstname,
+                       lastname INTO
+        n_manager_id,vc_manager_last,vc_manager_first
+                FROM employee
+                WHERE employeeid = (
+        SELECT reportsto FROM employee WHERE employeeid = n_empid
     );
-    DBMS_OUTPUT.PUT_LINE(N_MANAGER_ID
+    dbms_output.put_line(n_manager_id
     || ' '
-    || VC_MANAGER_FIRST
+    || vc_manager_first
     || ' '
-    || VC_MANAGER_LAST);
+    || vc_manager_last);
 END;
 /
 BEGIN
-    RET_EMPLOYEE_MANAGERS(3);
+    ret_employee_managers(3);
 END;
 /
 
 --4.3 Stored Procedure Output Parameters
 --Task – Create a stored procedure that returns the name and company of a customer.
-CREATE OR REPLACE PROCEDURE GET_CUST_NAME_COMPANY (
-    N_CUSTOMERID   IN NUMBER
+CREATE OR REPLACE PROCEDURE get_cust_name_company (
+    n_customerid   IN NUMBER
 ) AS
-    VC_FIRSTNAME   VARCHAR2(20);
-    VC_LASTNAME    VARCHAR2(20);
-    VC_COMPANY     VARCHAR2(20);
+    vc_firstname   VARCHAR2(20);
+    vc_lastname    VARCHAR2(20);
+    vc_company     VARCHAR2(20);
 BEGIN
-    SELECT FIRSTNAME,
-                       LASTNAME,
-                       COMPANY INTO
-        VC_FIRSTNAME,VC_LASTNAME,VC_COMPANY
-                FROM CUSTOMER
-                WHERE CUSTOMERID = N_CUSTOMERID;
-    DBMS_OUTPUT.PUT_LINE(VC_FIRSTNAME
+    SELECT firstname,
+                       lastname,
+                       company INTO
+        vc_firstname,vc_lastname,vc_company
+                FROM customer
+                WHERE customerid = n_customerid;
+    dbms_output.put_line(vc_firstname
     || ' '
-    || VC_LASTNAME
+    || vc_lastname
     || ' '
-    || VC_COMPANY);
+    || vc_company);
 END;
 /
-begin
-GET_CUST_NAME_COMPANY(2);
-end;
+BEGIN
+get_cust_name_company(2);
+END;
 /
 
 --5.0 Transactions
@@ -371,97 +383,142 @@ end;
 
 --Task – Create a transaction that given a invoiceId will delete that 
 --invoice (There may be constraints that rely on this, find out how to resolve them).
-CREATE OR REPLACE PROCEDURE DELETE_INVOICE (
-    N_INVOICEID IN NUMBER
+CREATE OR REPLACE PROCEDURE delete_invoice (
+    n_invoiceid IN NUMBER
 )
     AS
 BEGIN
-    DELETE FROM INVOICE WHERE INVOICEID = N_INVOICEID;
+    DELETE FROM invoice WHERE invoiceid = n_invoiceid;
+    commit;
 END;
 /
-begin
+BEGIN
 delete_invoice(215);
-end;
+END;
 /
 --Task – Create a transaction nested within a stored procedure that 
 --inserts a new record in the Customer table
-create or replace procedure add_new_customer(
-n_customerid in number,
-vc_FIRSTNAME in varchar2,
-vc_LASTNAME in varchar2,
-vc_COMPANY in varchar2,
-vc_ADDRESS in varchar2,
-vc_CITY in varchar2,
-vc_STATE in varchar2,
-vc_COUNTRY in varchar2,
-vc_POSTALCODE in varchar2,
-vc_PHONE in varchar2,
-vc_FAX in varchar2,
-n_EMAIL in varchar2,
-n_SUPPORTREPID in number
-) as
-row_exists number;
-begin
-select customerid
-into row_exists
-from customer
-where customerid=n_customerid;
+CREATE OR REPLACE PROCEDURE add_new_customer(
+n_customerid IN NUMBER,
+vc_firstname IN VARCHAR2,
+vc_lastname IN VARCHAR2,
+vc_company IN VARCHAR2,
+vc_address IN VARCHAR2,
+vc_city IN VARCHAR2,
+vc_state IN VARCHAR2,
+vc_country IN VARCHAR2,
+vc_postalcode IN VARCHAR2,
+vc_phone IN VARCHAR2,
+vc_fax IN VARCHAR2,
+n_email IN VARCHAR2,
+n_supportrepid IN NUMBER
+) AS
+row_exists NUMBER;
+BEGIN
+SELECT customerid
+INTO row_exists
+FROM customer
+WHERE customerid=n_customerid;
+-- Don't insert if row already exists with PK
 IF row_exists >=1 THEN
     dbms_output.put_line('row exists');
   ELSE
-    insert into CUSTOMER(
+    INSERT INTO customer(
     customerid,
-    FIRSTNAME,
-    LASTNAME,
-    COMPANY,
-    ADDRESS,
-    CITY,
+    firstname,
+    lastname,
+    company,
+    address,
+    city,
     STATE,
-    COUNTRY,
-    POSTALCODE,
-    PHONE,
-    FAX,
-    EMAIL,
-    SUPPORTREPID)
-    values(
+    country,
+    postalcode,
+    phone,
+    fax,
+    email,
+    supportrepid)
+    VALUES(
     n_customerid,
-    vc_FIRSTNAME,
-    vc_LASTNAME,
-    vc_COMPANY ,
-    vc_ADDRESS ,
-    vc_CITY ,
-    vc_STATE ,
-    vc_COUNTRY ,
-    vc_POSTALCODE ,
-    vc_PHONE ,
-    vc_FAX ,
-    n_EMAIL,
-    n_SUPPORTREPID);
+    vc_firstname,
+    vc_lastname,
+    vc_company ,
+    vc_address ,
+    vc_city ,
+    vc_state ,
+    vc_country ,
+    vc_postalcode ,
+    vc_phone ,
+    vc_fax ,
+    n_email,
+    n_supportrepid);
+    COMMIT;
   END IF;
-end;
+  
+END;
 /
-begin 
+BEGIN 
 add_new_customer(300, 'Yordle','Hunter','Rito Mages', '1337 Rift Lane',
 'San Fran', 'California', 'USA','12345','1234567890','0987654321', 'hunteem@run.com',4);
-end;
+END;
 /
 
 --6.0 Triggers
 --In this section you will create various kinds of triggers that work when certain DML statements are executed on a table.
 
 --6.1 AFTER/FOR
---Task - Create an after insert trigger on the employee table fired after a new record is inserted into the table.
---Task – Create an after update trigger on the album table that fires after a row is inserted in the table
---Task – Create an after delete trigger on the customer table that fires after a row is deleted from the table.
+--Task - Create an after insert trigger on the employee table fired
+--after a new record is inserted into the table.
+CREATE OR REPLACE TRIGGER TRG_AI_EMPLOYEE AFTER
+    INSERT ON EMPLOYEE
+DECLARE
+    N   NUMBER;
+BEGIN
+    SELECT COUNT(EMPLOYEEID) INTO
+        N
+    FROM EMPLOYEE;
+    DBMS_OUTPUT.PUT_LINE(N);
+END;
+/
+INSERT INTO EMPLOYEE(EMPLOYEEID, LASTNAME, FIRSTNAME)
+VALUES(93, 'John','Smith');
+/
+--Task – Create an after update trigger on the album table that fires 
+--after a row is updated in the table
+CREATE OR REPLACE TRIGGER TRG_AU_ALBUM AFTER
+    UPDATE ON ALBUM FOR EACH ROW
+BEGIN
 
+    DBMS_OUTPUT.PUT_LINE('Album updated from: '||:OLD.albumid || ' to '||:NEW.albumid);
+END;
 
-
+/
+UPDATE ALBUM
+SET ARTISTID = 15
+WHERE ALBUMID = 28;
+/
+--Task – Create an after delete trigger on the customer table that 
+--fires after a row is deleted from the table.
+CREATE OR REPLACE TRIGGER TRG_AD_CUSTOMER_LOG AFTER
+    DELETE ON CUSTOMER
+    FOR EACH ROW
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('Deleted '
+    ||:OLD.CUSTOMERID
+    || ', '
+    || :OLD.FIRSTNAME
+    || ', '
+    || :OLD.LASTNAME);
+END;
+/
+DELETE FROM CUSTOMER
+WHERE customerID = 300;
+/
 --7.1 INNER
 --Task – Create an inner join that joins customers and orders and
 --specifies the name of the customer and the invoiceId.
 SELECT FIRSTNAME,
-       LASTNAME,
-       INVOICEID
+      LASTNAME,
+      INVOICEID
 FROM CUSTOMER C
 INNER JOIN INVOICE I ON C.CUSTOMERID = I.CUSTOMERID;
 
@@ -469,10 +526,10 @@ INNER JOIN INVOICE I ON C.CUSTOMERID = I.CUSTOMERID;
 --Task – Create an outer join that joins the customer and invoice table, 
 --specifying the CustomerId, firstname, lastname, invoiceId, and total.
 SELECT C.CUSTOMERID,
-       FIRSTNAME,
-       LASTNAME,
-       INVOICEID,
-       TOTAL
+      FIRSTNAME,
+      LASTNAME,
+      INVOICEID,
+      TOTAL
 FROM CUSTOMER C FULL OUTER
 JOIN INVOICE I ON C.CUSTOMERID =
 I.CUSTOMERID;
@@ -495,6 +552,7 @@ ORDER BY NAME ASC;
 
 --7.5 SELF
 --Task – Perform a self-join on the employee table, joining on the reportsto column.
+-- Note: Practically a cross join without the join keyword used.
 SELECT A.EMPLOYEEID AS TRAINEE,
        A.FIRSTNAME,
        A.LASTNAME,
