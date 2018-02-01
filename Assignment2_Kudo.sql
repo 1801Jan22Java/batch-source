@@ -26,32 +26,54 @@ ORDER BY CITY ASC;
 -- 2.3 INSERT INTO
 -- 2 rows into Genre
 INSERT INTO GENRE VALUES (
-    26,'Witch House'
+    26,
+    'Witch House'
 );
 INSERT INTO GENRE VALUES (
-    27,'Hobo Punk'
+    27,
+    'Hobo Punk'
 );
 -- 2 rows into Employee
 INSERT INTO EMPLOYEE (
-    EMPLOYEEID,LASTNAME,FIRSTNAME
+    EMPLOYEEID,
+    LASTNAME,
+    FIRSTNAME
 ) VALUES (
-    9,'Laura','Croft'
+    9,
+    'Laura',
+    'Croft'
 );
 INSERT INTO EMPLOYEE (
-    EMPLOYEEID,LASTNAME,FIRSTNAME
+    EMPLOYEEID,
+    LASTNAME,
+    FIRSTNAME
 ) VALUES (
-    10,'Donald','Trump'
+    10,
+    'Donald',
+    'Trump'
 );
 -- 2 rows into Customer
 INSERT INTO CUSTOMER (
-    CUSTOMERID,FIRSTNAME,LASTNAME,EMAIL
+    CUSTOMERID,
+    FIRSTNAME,
+    LASTNAME,
+    EMAIL
 ) VALUES (
-    60,'Super','Man','krypton@spacemail.com'
+    60,
+    'Super',
+    'Man',
+    'krypton@spacemail.com'
 );
 INSERT INTO CUSTOMER (
-    CUSTOMERID,FIRSTNAME,LASTNAME,EMAIL
+    CUSTOMERID,
+    FIRSTNAME,
+    LASTNAME,
+    EMAIL
 ) VALUES (
-    61,'Wonder','Bread','flour@oven.bread'
+    61,
+    'Wonder',
+    'Bread',
+    'flour@oven.bread'
 );
 
 --2.4 UPDATE
@@ -59,7 +81,8 @@ INSERT INTO CUSTOMER (
 --Task – Update name of artist in the Artist table “Creedence Clearwater Revival” to “CCR”
 UPDATE CUSTOMER
     SET
-        FIRSTNAME = 'Robert',LASTNAME = 'Walter'
+        FIRSTNAME = 'Robert',
+        LASTNAME = 'Walter'
 WHERE FIRSTNAME = 'Aaron'
       AND   LASTNAME = 'Mitchell';
 -- update artist
@@ -76,12 +99,16 @@ SELECT INVOICEID FROM INVOICE WHERE BILLINGADDRESS LIKE 'T%';
 --Task – Select all invoices that have a total between 15 and 50
 --Task – Select all employees hired between 1st of June 2003 and 1st of March 2004
 --Total between 15 and 50
-SELECT CUSTOMERID,INVOICEID,INVOICEDATE
+SELECT CUSTOMERID,
+       INVOICEID,
+       INVOICEDATE
 FROM INVOICE
 WHERE TOTAL > 15
       AND   TOTAL < 50;
 -- Employees between dates     
-SELECT EMPLOYEEID,FIRSTNAME,LASTNAME
+SELECT EMPLOYEEID,
+       FIRSTNAME,
+       LASTNAME
 FROM EMPLOYEE
 WHERE HIREDATE < '01-MAR-2004'
       AND   HIREDATE > '01-JUN-2003';
@@ -180,9 +207,11 @@ SELECT AVG_INVOICE_PRICE() FROM DUAL;
 --Task – Create a function that returns all employees who are born after 1968.
 
 ---- Create a custom user type to store the data type.
-CREATE OR REPLACE TYPE EMPLOYEE_TYPE AS OBJECT (
-    EMP_ID NUMBER,FIRSTNAME VARCHAR2(20),LASTNAME VARCHAR2(20)
-);
+--CREATE OR REPLACE TYPE EMPLOYEE_TYPE AS OBJECT (
+--    EMP_ID      NUMBER,
+--    FIRSTNAME   VARCHAR2(20),
+--    LASTNAME    VARCHAR2(20)
+--);
 -- create a nested table to store data
 --CREATE OR REPLACE TYPE TABLE_EMP AS
 --    TABLE OF EMPLOYEES;
@@ -212,34 +241,266 @@ FROM TABLE ( EMPLOYEE_AFTER_YEAR('1968') );
 --https://stackoverflow.com/questions/23755660/table-cast-vs-cast-multiset-in-pl-sql
 --https://docs.oracle.com/cd/B19306_01/server.102/b14200/operators006.htm
 
+--4.0 Stored Procedures
+-- In this section you will be creating and executing stored procedures. You will be creating various types of stored procedures that take input and output parameters.
+
+--4.1 Basic Stored Procedure
+--Task – Create a stored procedure that selects the first and last names of all the employees. 
+--CREATE OR REPLACE PROCEDURE FIRST_LAST_NAMES AS
+--    CURSOR C_NAME IS SELECT FIRSTNAME,
+--                            LASTNAME FROM EMPLOYEE;
+--BEGIN
+--    FOR VC_NAME IN C_NAME LOOP
+--        DBMS_OUTPUT.PUT_LINE(VC_NAME.FIRSTNAME
+--        || ' '
+--        || VC_NAME.LASTNAME);
+--    END LOOP;
+--END;
+
+/
+BEGIN
+    FIRST_LAST_NAMES;
+END;
+/
+
+--4.2 Stored Procedure Input Parameters
+--Task – Create a stored procedure that updates the personal information
+--of an employee.
+--CREATE OR REPLACE PROCEDURE UPDATE_EMP (
+--    N_EMPID      IN NUMBER,
+--    VC_LNAME     IN VARCHAR2,
+--    VC_FNAME     IN VARCHAR2,
+--    VC_TITLE     IN VARCHAR2,
+--    N_REPORT     IN NUMBER,
+--    D_BDATE      IN DATE,
+--    D_HIRE       IN DATE,
+--    VC_ADDRESS   IN VARCHAR2,
+--    VC_CITY      IN VARCHAR2,
+--    VC_STATE     IN VARCHAR2,
+--    VC_COUNTRY   IN VARCHAR2,
+--    VC_POSTAL    IN VARCHAR2,
+--    VC_PHONE     IN VARCHAR2,
+--    VC_FAX       IN VARCHAR2,
+--    VC_EMAIL     IN VARCHAR2
+--)
+--    AS
+--BEGIN
+--    UPDATE EMPLOYEE
+--        SET
+--            LASTNAME = VC_LNAME,
+--            FIRSTNAME = VC_FNAME,
+--            TITLE = VC_TITLE,
+--            REPORTSTO = N_REPORT,
+--            BIRTHDATE = D_BDATE,
+--            HIREDATE = D_HIRE,
+--            ADDRESS = VC_ADDRESS,
+--            CITY = VC_CITY,
+--            STATE = VC_STATE,
+--            COUNTRY = VC_COUNTRY,
+--            POSTALCODE = VC_POSTAL,
+--            PHONE = VC_PHONE,
+--            FAX = VC_FAX,
+--            EMAIL = VC_EMAIL
+--    WHERE EMPLOYEEID = N_EMPID;
+-- 
+--END;
+/
+BEGIN
+    UPDATE_EMP(1,'William','Overture','Sharp Shooter',1,'12-DEC-1912','03-MAR-1950'
+,'1111 One Avenue','Dallas','Texas','USA','10101','1111111111','2222222222'
+,'applesonhead@arrow.com');
+END;
+
+--Task – Create a stored procedure that returns the managers of an employee.
+CREATE OR REPLACE PROCEDURE RET_EMPLOYEE_MANAGERS (
+    N_EMPID   IN NUMBER
+) IS
+    N_MANAGER_ID       NUMBER;
+    VC_MANAGER_LAST    VARCHAR2(20);
+    VC_MANAGER_FIRST   VARCHAR2(20);
+BEGIN
+SELECT EMPLOYEEID,FIRSTNAME,
+                       LASTNAME INTO
+        N_MANAGER_ID,VC_MANAGER_LAST,VC_MANAGER_FIRST
+                FROM EMPLOYEE
+                WHERE EMPLOYEEID = (
+        SELECT REPORTSTO FROM EMPLOYEE WHERE EMPLOYEEID = N_EMPID
+    );
+    DBMS_OUTPUT.PUT_LINE(N_MANAGER_ID
+    || ' '
+    || VC_MANAGER_FIRST
+    || ' '
+    || VC_MANAGER_LAST);
+END;
+/
+BEGIN
+    RET_EMPLOYEE_MANAGERS(3);
+END;
+/
+
+--4.3 Stored Procedure Output Parameters
+--Task – Create a stored procedure that returns the name and company of a customer.
+CREATE OR REPLACE PROCEDURE GET_CUST_NAME_COMPANY (
+    N_CUSTOMERID   IN NUMBER
+) AS
+    VC_FIRSTNAME   VARCHAR2(20);
+    VC_LASTNAME    VARCHAR2(20);
+    VC_COMPANY     VARCHAR2(20);
+BEGIN
+    SELECT FIRSTNAME,
+                       LASTNAME,
+                       COMPANY INTO
+        VC_FIRSTNAME,VC_LASTNAME,VC_COMPANY
+                FROM CUSTOMER
+                WHERE CUSTOMERID = N_CUSTOMERID;
+    DBMS_OUTPUT.PUT_LINE(VC_FIRSTNAME
+    || ' '
+    || VC_LASTNAME
+    || ' '
+    || VC_COMPANY);
+END;
+/
+begin
+GET_CUST_NAME_COMPANY(2);
+end;
+/
+
+--5.0 Transactions
+--In this section you will be working with transactions. Transactions 
+--are usually nested within a stored procedure.
+
+--Task – Create a transaction that given a invoiceId will delete that 
+--invoice (There may be constraints that rely on this, find out how to resolve them).
+CREATE OR REPLACE PROCEDURE DELETE_INVOICE (
+    N_INVOICEID IN NUMBER
+)
+    AS
+BEGIN
+    DELETE FROM INVOICE WHERE INVOICEID = N_INVOICEID;
+END;
+/
+begin
+delete_invoice(215);
+end;
+/
+--Task – Create a transaction nested within a stored procedure that 
+--inserts a new record in the Customer table
+create or replace procedure add_new_customer(
+n_customerid in number,
+vc_FIRSTNAME in varchar2,
+vc_LASTNAME in varchar2,
+vc_COMPANY in varchar2,
+vc_ADDRESS in varchar2,
+vc_CITY in varchar2,
+vc_STATE in varchar2,
+vc_COUNTRY in varchar2,
+vc_POSTALCODE in varchar2,
+vc_PHONE in varchar2,
+vc_FAX in varchar2,
+n_EMAIL in varchar2,
+n_SUPPORTREPID in number
+) as
+row_exists number;
+begin
+select customerid
+into row_exists
+from customer
+where customerid=n_customerid;
+IF row_exists >=1 THEN
+    dbms_output.put_line('row exists');
+  ELSE
+    insert into CUSTOMER(
+    customerid,
+    FIRSTNAME,
+    LASTNAME,
+    COMPANY,
+    ADDRESS,
+    CITY,
+    STATE,
+    COUNTRY,
+    POSTALCODE,
+    PHONE,
+    FAX,
+    EMAIL,
+    SUPPORTREPID)
+    values(
+    n_customerid,
+    vc_FIRSTNAME,
+    vc_LASTNAME,
+    vc_COMPANY ,
+    vc_ADDRESS ,
+    vc_CITY ,
+    vc_STATE ,
+    vc_COUNTRY ,
+    vc_POSTALCODE ,
+    vc_PHONE ,
+    vc_FAX ,
+    n_EMAIL,
+    n_SUPPORTREPID);
+  END IF;
+end;
+/
+begin 
+add_new_customer(300, 'Yordle','Hunter','Rito Mages', '1337 Rift Lane',
+'San Fran', 'California', 'USA','12345','1234567890','0987654321', 'hunteem@run.com',4);
+end;
+/
+
+--6.0 Triggers
+--In this section you will create various kinds of triggers that work when certain DML statements are executed on a table.
+
+--6.1 AFTER/FOR
+--Task - Create an after insert trigger on the employee table fired after a new record is inserted into the table.
+--Task – Create an after update trigger on the album table that fires after a row is inserted in the table
+--Task – Create an after delete trigger on the customer table that fires after a row is deleted from the table.
+
+
 
 --7.1 INNER
 --Task – Create an inner join that joins customers and orders and
 --specifies the name of the customer and the invoiceId.
-SELECT FIRSTNAME,LASTNAME,INVOICEID
+SELECT FIRSTNAME,
+       LASTNAME,
+       INVOICEID
 FROM CUSTOMER C
 INNER JOIN INVOICE I ON C.CUSTOMERID = I.CUSTOMERID;
-
 
 --7.2 OUTER
 --Task – Create an outer join that joins the customer and invoice table, 
 --specifying the CustomerId, firstname, lastname, invoiceId, and total.
-SELECT C.CUSTOMERID,FIRSTNAME,LASTNAME,INVOICEID,TOTAL
-FROM CUSTOMER C
-FULL OUTER JOIN INVOICE I ON C.CUSTOMERID = I.CUSTOMERID;
+SELECT C.CUSTOMERID,
+       FIRSTNAME,
+       LASTNAME,
+       INVOICEID,
+       TOTAL
+FROM CUSTOMER C FULL OUTER
+JOIN INVOICE I ON C.CUSTOMERID =
+I.CUSTOMERID;
 
 --7.3 RIGHT
 --Task – Create a right join that joins album and artist specifying 
 --artist name and title.
-SELECT AR.NAME,AL.TITLE
+SELECT AR.NAME,
+       AL.TITLE
 FROM ARTIST AR
 INNER JOIN ALBUM AL ON AR.ARTISTID = AL.ARTISTID;
 
 --7.4 CROSS
 --Task – Create a cross join that joins album and artist and sorts by 
 --artist name in ascending order.
-SELECT NAME,TITLE FROM ARTIST,ALBUM
+SELECT NAME,
+       TITLE FROM ARTIST,
+                 ALBUM
 ORDER BY NAME ASC;
 
 --7.5 SELF
 --Task – Perform a self-join on the employee table, joining on the reportsto column.
+SELECT A.EMPLOYEEID AS TRAINEE,
+       A.FIRSTNAME,
+       A.LASTNAME,
+       B.EMPLOYEEID AS EMPLOYER,
+       B.FIRSTNAME,
+       B.LASTNAME
+FROM EMPLOYEE A,
+     EMPLOYEE B
+WHERE A.REPORTSTO = B.EMPLOYEEID;
