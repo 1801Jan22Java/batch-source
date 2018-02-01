@@ -86,7 +86,7 @@ public class Bank {
 			wtr.println("Please enter password");
 			pswrd = scan.nextLine();
 
-			// Check to see if user exists
+			currentUser = new User(userName, pswrd);
 			signedIn = true;
 
 		} while (!signedIn);
