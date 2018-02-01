@@ -3,23 +3,26 @@ Sungkwon Kudo
 Assignment 2 
 Revature
 February 5, 2018
-
-Notes:
-Function and package definitions are commented out to prevent compilation errors.
-
 */
 
 -- 2.1 SELECT
+--Task – Select all records from the Employee table.
 SELECT * FROM EMPLOYEE;
+--Task – Select all records from the Employee table where last name is King.
 SELECT * FROM EMPLOYEE WHERE LASTNAME = 'King';
+--Task – Select all records from the Employee table where first name 
+--is Andrew and REPORTSTO is NULL.
 SELECT *
 FROM EMPLOYEE
 WHERE FIRSTNAME = 'Andrew'
       AND   REPORTSTO IS NULL;
       
 -- 2.2 ORDER BY
+
+--Task – Select all albums in Album table and sort result set in descending order by title.
 SELECT * FROM ALBUM
 ORDER BY TITLE DESC;
+--Task – Select first name from Customer and sort result set in ascending order by city
 SELECT * FROM CUSTOMER
 ORDER BY CITY ASC;
 
@@ -78,14 +81,15 @@ INSERT INTO CUSTOMER (
 
 --2.4 UPDATE
 --Task – Update Aaron Mitchell in Customer table to Robert Walter
---Task – Update name of artist in the Artist table “Creedence Clearwater Revival” to “CCR”
 UPDATE CUSTOMER
     SET
         FIRSTNAME = 'Robert',
         LASTNAME = 'Walter'
 WHERE FIRSTNAME = 'Aaron'
       AND   LASTNAME = 'Mitchell';
--- update artist
+      
+--Task – Update name of artist in the Artist table 
+--“Creedence Clearwater Revival” to “CCR”
 UPDATE ARTIST
     SET
         NAME = 'CCR'
@@ -97,7 +101,6 @@ SELECT INVOICEID FROM INVOICE WHERE BILLINGADDRESS LIKE 'T%';
 
 --2.6 BETWEEN
 --Task – Select all invoices that have a total between 15 and 50
---Task – Select all employees hired between 1st of June 2003 and 1st of March 2004
 --Total between 15 and 50
 SELECT CUSTOMERID,
        INVOICEID,
@@ -105,6 +108,8 @@ SELECT CUSTOMERID,
 FROM INVOICE
 WHERE TOTAL > 15
       AND   TOTAL < 50;
+      
+--Task – Select all employees hired between 1st of June 2003 and 1st of March 2004
 -- Employees between dates     
 SELECT EMPLOYEEID,
        FIRSTNAME,
@@ -140,22 +145,22 @@ WHERE FIRSTNAME = 'Robert'
       
 --3.1 System Defined Functions
 --Task – Create a function that returns the current time.
---Task – create a function that returns the length of name in MEDIATYPE table
 
 -- Time returner, select function and ctrl + / to uncomment
-CREATE OR REPLACE FUNCTION TIME_RETURN RETURN TIMESTAMP AS
+CREATE OR REPLACE FUNCTION TIME_RETURN RETURN TIMESTAMP
+    AS
 BEGIN
     RETURN CURRENT_TIMESTAMP;
 END TIME_RETURN;
-      
 /
 SELECT TIME_RETURN() FROM DUAL;
 
+--Task – create a function that returns the length of name in MEDIATYPE table
 -- Length finder of MEDIATYPE table
 -- Assumes that chinook is NOT a separate user, 
 -- and the columns are in USER_TAB_COLUMNS
 CREATE OR REPLACE FUNCTION LENGTH_RETURN RETURN NUMBER AS
-    N NUMBER;
+    N   NUMBER;
 BEGIN
     SELECT DATA_LENGTH INTO
         N
@@ -164,38 +169,34 @@ BEGIN
           AND   COLUMN_NAME = 'NAME';
     RETURN N;
 END;
-
 /
 SELECT LENGTH_RETURN() FROM DUAL;
 
 --3.2 System Defined Aggregate Functions
-
--- -- A function to return the total average of invoice.
+--Task – Create a function that returns the average total of all invoices 
 CREATE OR REPLACE FUNCTION INVOICE_TOTAL_AVERAGE RETURN NUMBER AS
-    N NUMBER;
+    N   NUMBER;
 BEGIN
     SELECT AVG(TOTAL) INTO
         N
     FROM INVOICE;
     RETURN N;
 END;
-
 /
 SELECT INVOICE_TOTAL_AVERAGE() FROM DUAL;
 
--- A function to return the most expensive track from TRACK
+--Task – Create a function that returns the most expensive track
 CREATE OR REPLACE FUNCTION GET_MOST_EXPENSIVE_TRACK RETURN NUMBER AS
-    N NUMBER;
+    N   NUMBER;
 BEGIN
     SELECT MAX(UNITPRICE) INTO
         N
     FROM TRACK;
     RETURN N;
 END;
-
 /
 SELECT GET_MOST_EXPENSIVE_TRACK() FROM DUAL;
-
+/
 --3.3 User Defined Scalar Functions
 --Task – Create a function that returns the average 
 --price of invoiceline items in the invoiceline table
@@ -314,66 +315,66 @@ BEGIN
             FAX = VC_FAX,
             EMAIL = VC_EMAIL
     WHERE EMPLOYEEID = N_EMPID;
- 
 END;
 /
 BEGIN
-    update_emp(1,'William','Overture','Sharp Shooter',1,'12-DEC-1912','03-MAR-1950'
+    UPDATE_EMP(1,'William','Overture','Sharp Shooter',1,'12-DEC-1912','03-MAR-1950'
 ,'1111 One Avenue','Dallas','Texas','USA','10101','1111111111','2222222222'
 ,'applesonhead@arrow.com');
 END;
 /
 --Task – Create a stored procedure that returns the managers of an employee.
-CREATE OR REPLACE PROCEDURE ret_employee_managers (
-    n_empid   IN NUMBER
+CREATE OR REPLACE PROCEDURE RET_EMPLOYEE_MANAGERS (
+    N_EMPID IN NUMBER
 ) IS
-    n_manager_id       NUMBER;
-    vc_manager_last    VARCHAR2(20);
-    vc_manager_first   VARCHAR2(20);
+    N_MANAGER_ID       NUMBER;
+    VC_MANAGER_LAST    VARCHAR2(20);
+    VC_MANAGER_FIRST   VARCHAR2(20);
 BEGIN
-SELECT employeeid,firstname,
-                       lastname INTO
-        n_manager_id,vc_manager_last,vc_manager_first
-                FROM employee
-                WHERE employeeid = (
-        SELECT reportsto FROM employee WHERE employeeid = n_empid
+    SELECT EMPLOYEEID,
+           FIRSTNAME,
+           LASTNAME INTO
+        N_MANAGER_ID,VC_MANAGER_LAST,VC_MANAGER_FIRST
+    FROM EMPLOYEE
+    WHERE EMPLOYEEID = (
+        SELECT REPORTSTO FROM EMPLOYEE WHERE EMPLOYEEID = N_EMPID
     );
-    dbms_output.put_line(n_manager_id
+    DBMS_OUTPUT.PUT_LINE(N_MANAGER_ID
     || ' '
-    || vc_manager_first
+    || VC_MANAGER_FIRST
     || ' '
-    || vc_manager_last);
+    || VC_MANAGER_LAST);
 END;
 /
 BEGIN
-    ret_employee_managers(3);
+    RET_EMPLOYEE_MANAGERS(3);
 END;
 /
 
 --4.3 Stored Procedure Output Parameters
 --Task – Create a stored procedure that returns the name and company of a customer.
-CREATE OR REPLACE PROCEDURE get_cust_name_company (
-    n_customerid   IN NUMBER
+CREATE OR REPLACE PROCEDURE GET_CUST_NAME_COMPANY (
+    N_CUSTOMERID IN NUMBER
 ) AS
-    vc_firstname   VARCHAR2(20);
-    vc_lastname    VARCHAR2(20);
-    vc_company     VARCHAR2(20);
+    VC_FIRSTNAME   VARCHAR2(20);
+    VC_LASTNAME    VARCHAR2(20);
+    VC_COMPANY     VARCHAR2(20);
 BEGIN
-    SELECT firstname,
-                       lastname,
-                       company INTO
-        vc_firstname,vc_lastname,vc_company
-                FROM customer
-                WHERE customerid = n_customerid;
-    dbms_output.put_line(vc_firstname
+    SELECT FIRSTNAME,
+           LASTNAME,
+           COMPANY INTO
+        VC_FIRSTNAME,VC_LASTNAME,VC_COMPANY
+    FROM CUSTOMER
+    WHERE CUSTOMERID = N_CUSTOMERID;
+    DBMS_OUTPUT.PUT_LINE(VC_FIRSTNAME
     || ' '
-    || vc_lastname
+    || VC_LASTNAME
     || ' '
-    || vc_company);
+    || VC_COMPANY);
 END;
 /
 BEGIN
-get_cust_name_company(2);
+    GET_CUST_NAME_COMPANY(2);
 END;
 /
 
@@ -383,82 +384,85 @@ END;
 
 --Task – Create a transaction that given a invoiceId will delete that 
 --invoice (There may be constraints that rely on this, find out how to resolve them).
-CREATE OR REPLACE PROCEDURE delete_invoice (
-    n_invoiceid IN NUMBER
+CREATE OR REPLACE PROCEDURE DELETE_INVOICE (
+    N_INVOICEID IN NUMBER
 )
     AS
 BEGIN
-    DELETE FROM invoice WHERE invoiceid = n_invoiceid;
-    commit;
+    DELETE FROM INVOICE WHERE INVOICEID = N_INVOICEID;
+    COMMIT;
 END;
 /
 BEGIN
-delete_invoice(215);
+    DELETE_INVOICE(215);
 END;
 /
 --Task – Create a transaction nested within a stored procedure that 
 --inserts a new record in the Customer table
-CREATE OR REPLACE PROCEDURE add_new_customer(
-n_customerid IN NUMBER,
-vc_firstname IN VARCHAR2,
-vc_lastname IN VARCHAR2,
-vc_company IN VARCHAR2,
-vc_address IN VARCHAR2,
-vc_city IN VARCHAR2,
-vc_state IN VARCHAR2,
-vc_country IN VARCHAR2,
-vc_postalcode IN VARCHAR2,
-vc_phone IN VARCHAR2,
-vc_fax IN VARCHAR2,
-n_email IN VARCHAR2,
-n_supportrepid IN NUMBER
+CREATE OR REPLACE PROCEDURE ADD_NEW_CUSTOMER (
+    N_CUSTOMERID     IN NUMBER,
+    VC_FIRSTNAME     IN VARCHAR2,
+    VC_LASTNAME      IN VARCHAR2,
+    VC_COMPANY       IN VARCHAR2,
+    VC_ADDRESS       IN VARCHAR2,
+    VC_CITY          IN VARCHAR2,
+    VC_STATE         IN VARCHAR2,
+    VC_COUNTRY       IN VARCHAR2,
+    VC_POSTALCODE    IN VARCHAR2,
+    VC_PHONE         IN VARCHAR2,
+    VC_FAX           IN VARCHAR2,
+    N_EMAIL          IN VARCHAR2,
+    N_SUPPORTREPID   IN NUMBER
 ) AS
-row_exists NUMBER;
+    ROW_EXISTS   NUMBER;
 BEGIN
-SELECT customerid
-INTO row_exists
-FROM customer
-WHERE customerid=n_customerid;
+    SELECT CUSTOMERID INTO
+        ROW_EXISTS
+    FROM CUSTOMER
+    WHERE CUSTOMERID = N_CUSTOMERID;
 -- Don't insert if row already exists with PK
-IF row_exists >=1 THEN
-    dbms_output.put_line('row exists');
-  ELSE
-    INSERT INTO customer(
-    customerid,
-    firstname,
-    lastname,
-    company,
-    address,
-    city,
-    STATE,
-    country,
-    postalcode,
-    phone,
-    fax,
-    email,
-    supportrepid)
-    VALUES(
-    n_customerid,
-    vc_firstname,
-    vc_lastname,
-    vc_company ,
-    vc_address ,
-    vc_city ,
-    vc_state ,
-    vc_country ,
-    vc_postalcode ,
-    vc_phone ,
-    vc_fax ,
-    n_email,
-    n_supportrepid);
-    COMMIT;
-  END IF;
-  
+    IF
+        ROW_EXISTS >= 1
+    THEN
+        DBMS_OUTPUT.PUT_LINE('row exists');
+    ELSE
+        INSERT INTO CUSTOMER (
+            CUSTOMERID,
+            FIRSTNAME,
+            LASTNAME,
+            COMPANY,
+            ADDRESS,
+            CITY,
+            STATE,
+            COUNTRY,
+            POSTALCODE,
+            PHONE,
+            FAX,
+            EMAIL,
+            SUPPORTREPID
+        ) VALUES (
+            N_CUSTOMERID,
+            VC_FIRSTNAME,
+            VC_LASTNAME,
+            VC_COMPANY,
+            VC_ADDRESS,
+            VC_CITY,
+            VC_STATE,
+            VC_COUNTRY,
+            VC_POSTALCODE,
+            VC_PHONE,
+            VC_FAX,
+            N_EMAIL,
+            N_SUPPORTREPID
+        );
+        COMMIT;
+    END IF;
 END;
 /
-BEGIN 
-add_new_customer(300, 'Yordle','Hunter','Rito Mages', '1337 Rift Lane',
-'San Fran', 'California', 'USA','12345','1234567890','0987654321', 'hunteem@run.com',4);
+BEGIN
+    ADD_NEW_CUSTOMER(300,'Yordle','Hunter','Rito Mages','1337 Rift Lane','San Fran'
+,'California','USA','12345','1234567890','0987654321','hunteem@run.com'
+,4);
 END;
 /
 
@@ -513,6 +517,7 @@ END;
 DELETE FROM CUSTOMER
 WHERE customerID = 300;
 /
+
 --7.1 INNER
 --Task – Create an inner join that joins customers and orders and
 --specifies the name of the customer and the invoiceId.
