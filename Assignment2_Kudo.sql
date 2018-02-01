@@ -3,6 +3,10 @@ Sungkwon Kudo
 Assignment 2 
 Revature
 February 5, 2018
+
+Notes:
+Function and package definitions are commented out to prevent compilation errors.
+
 */
 
 -- 2.1 SELECT
@@ -159,3 +163,84 @@ SELECT INVOICE_TOTAL_AVERAGE() FROM DUAL;
 --END;
 SELECT GET_MOST_EXPENSIVE_TRACK() FROM DUAL;
 
+--3.3 User Defined Scalar Functions
+--Task – Create a function that returns the average 
+--price of invoiceline items in the invoiceline table
+--CREATE OR REPLACE FUNCTION AVG_INVOICE_PRICE RETURN NUMBER AS
+--    N NUMBER;
+--BEGIN
+--    SELECT AVG(UNITPRICE) INTO
+--        N
+--    FROM INVOICELINE;
+--    RETURN N;
+--END;
+SELECT AVG_INVOICE_PRICE() FROM DUAL;
+
+--3.4 User Defined Table Valued Functions
+--Task – Create a function that returns all employees who are born after 1968.
+
+---- Create a custom user type to store the data type.
+CREATE OR REPLACE TYPE EMPLOYEE_TYPE AS OBJECT (
+    EMP_ID NUMBER,FIRSTNAME VARCHAR2(20),LASTNAME VARCHAR2(20)
+);
+-- create a nested table to store data
+--CREATE OR REPLACE TYPE TABLE_EMP AS
+--    TABLE OF EMPLOYEES;
+---- Create function
+--CREATE OR REPLACE FUNCTION EMPLOYEE_AFTER_YEAR (
+--    VC_YEAR IN VARCHAR2
+--) RETURN TABLE_EMP AS
+--    RET_TABLE_EMP TABLE_EMP;
+--    DATE_HOLDER VARCHAR2(20);
+--BEGIN
+--    DATE_HOLDER := '31-DEC-'
+--    || VC_YEAR;
+---- use cast-multiset to insert data into the nested table
+--    SELECT CAST(MULTISET(
+--        SELECT EMPLOYEEID,FIRSTNAME,LASTNAME
+--        FROM EMPLOYEE
+--        WHERE BIRTHDATE > DATE_HOLDER
+--    ) AS TABLE_EMP) INTO
+--        RET_TABLE_EMP
+--    FROM DUAL;
+--    RETURN RET_TABLE_EMP;
+--END;
+SELECT *
+FROM TABLE ( EMPLOYEE_AFTER_YEAR('1968') );
+-- referenced: 
+--http://www.baigzeeshan.com/2010/01/plsql-function-to-return-table-type.html
+--https://stackoverflow.com/questions/23755660/table-cast-vs-cast-multiset-in-pl-sql
+--https://docs.oracle.com/cd/B19306_01/server.102/b14200/operators006.htm
+
+
+--7.1 INNER
+--Task – Create an inner join that joins customers and orders and
+--specifies the name of the customer and the invoiceId.
+SELECT FIRSTNAME,LASTNAME,INVOICEID
+FROM CUSTOMER C
+INNER JOIN INVOICE I ON C.CUSTOMERID = I.CUSTOMERID;
+
+
+--7.2 OUTER
+--Task – Create an outer join that joins the customer and invoice table, 
+--specifying the CustomerId, firstname, lastname, invoiceId, and total.
+SELECT C.CUSTOMERID,FIRSTNAME,LASTNAME,INVOICEID,TOTAL
+FROM CUSTOMER C
+FULL OUTER JOIN INVOICE I ON C.CUSTOMERID = I.CUSTOMERID;
+
+--7.3 RIGHT
+--Task – Create a right join that joins album and artist specifying 
+--artist name and title.
+SELECT AR.NAME,AL.TITLE
+FROM ARTIST AR
+INNER JOIN ALBUM AL ON AR.ARTISTID = AL.ARTISTID;
+
+--7.4 CROSS
+--Task – Create a cross join that joins album and artist and sorts by 
+--artist name in ascending order.
+SELECT NAME,TITLE FROM ARTIST,ALBUM
+ORDER BY NAME ASC;
+
+
+--7.5 SELF
+--Task – Perform a self-join on the employee table, joining on the reportsto column.
