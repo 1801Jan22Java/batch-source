@@ -230,6 +230,7 @@ CREATE OR REPLACE TYPE TABLE_EMP AS
 CREATE OR REPLACE FUNCTION EMPLOYEE_AFTER_YEAR (
     VC_YEAR IN VARCHAR2
 ) RETURN TABLE_EMP AS
+-- custom data type table emp
     RET_TABLE_EMP TABLE_EMP;
     DATE_HOLDER VARCHAR2(20);
 BEGIN
@@ -253,26 +254,35 @@ FROM TABLE ( EMPLOYEE_AFTER_YEAR('1968') );
 --http://www.baigzeeshan.com/2010/01/plsql-function-to-return-table-type.html
 --https://stackoverflow.com/questions/23755660/table-cast-vs-cast-multiset-in-pl-sql
 --https://docs.oracle.com/cd/B19306_01/server.102/b14200/operators006.htm
+-- Went down a rabbit hole and still tripping out on what I did with cast-multiset.
 
 --4.0 Stored Procedures
 -- In this section you will be creating and executing stored procedures. You will be creating various types of stored procedures that take input and output parameters.
 
 --4.1 Basic Stored Procedure
 --Task – Create a stored procedure that selects the first and last names of all the employees. 
-CREATE OR REPLACE PROCEDURE FIRST_LAST_NAMES AS
-    CURSOR C_NAME IS SELECT FIRSTNAME,
-                            LASTNAME FROM EMPLOYEE;
-BEGIN
-    FOR VC_NAME IN C_NAME LOOP
-        DBMS_OUTPUT.PUT_LINE(VC_NAME.FIRSTNAME
-        || ' '
-        || VC_NAME.LASTNAME);
-    END LOOP;
-END;
+CREATE OR REPLACE PROCEDURE FIRST_LAST_NAMES (
+    C_CURSOR OUT SYS_REFCURSOR
+)
+    AS
 
-/
 BEGIN
-    FIRST_LAST_NAMES;
+    OPEN C_CURSOR FOR SELECT FIRSTNAME,LASTNAME FROM EMPLOYEE;
+END;
+/
+DECLARE
+    C SYS_REFCURSOR;
+    FNAME VARCHAR2(40);
+    LNAME VARCHAR2(40);
+BEGIN
+    FIRST_LAST_NAMES(C);
+    LOOP
+        FETCH C INTO FNAME,LNAME;
+        EXIT WHEN C%NOTFOUND;
+        DBMS_OUTPUT.PUT_LINE(FNAME
+        || '     '
+        || LNAME);
+    END LOOP;
 END;
 /
 
@@ -354,27 +364,33 @@ END;
 --4.3 Stored Procedure Output Parameters
 --Task – Create a stored procedure that returns the name and company of a customer.
 CREATE OR REPLACE PROCEDURE GET_CUST_NAME_COMPANY (
-    N_CUSTOMERID IN NUMBER
+    N_CUSTOMERID IN NUMBER,C_CURSOR OUT SYS_REFCURSOR
 ) AS
-    VC_FIRSTNAME   VARCHAR2(20);
-    VC_LASTNAME    VARCHAR2(20);
-    VC_COMPANY     VARCHAR2(20);
+    VC_FIRSTNAME VARCHAR2(20);
+    VC_LASTNAME VARCHAR2(20);
+    VC_COMPANY VARCHAR2(20);
 BEGIN
-    SELECT FIRSTNAME,
-           LASTNAME,
-           COMPANY INTO
-        VC_FIRSTNAME,VC_LASTNAME,VC_COMPANY
-    FROM CUSTOMER
-    WHERE CUSTOMERID = N_CUSTOMERID;
-    DBMS_OUTPUT.PUT_LINE(VC_FIRSTNAME
-    || ' '
-    || VC_LASTNAME
-    || ' '
-    || VC_COMPANY);
+    OPEN C_CURSOR FOR SELECT FIRSTNAME,LASTNAME,COMPANY
+                      FROM CUSTOMER
+                      WHERE CUSTOMERID = N_CUSTOMERID;
 END;
 /
+DECLARE
+    C SYS_REFCURSOR;
+    FNAME VARCHAR2(40);
+    LNAME VARCHAR2(40);
+    COMPANY VARCHAR2(40);
 BEGIN
-    GET_CUST_NAME_COMPANY(2);
+    GET_CUST_NAME_COMPANY(5,C);
+    LOOP
+        FETCH C INTO FNAME,LNAME,COMPANY;
+        EXIT WHEN C%NOTFOUND;
+        DBMS_OUTPUT.PUT_LINE(FNAME
+        || '     '
+        || LNAME
+        || '     '
+        || COMPANY);
+    END LOOP;
 END;
 /
 
