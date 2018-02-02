@@ -415,12 +415,15 @@ CREATE OR REPLACE PROCEDURE DELETE_INVOICE (
 )
     AS
 BEGIN
+-- This is for the constraint altered version.
+--    DELETE FROM INVOICE WHERE INVOICEID = N_INVOICEID;
+    DELETE FROM INVOICELINE WHERE INVOICEID = N_INVOICEID;
     DELETE FROM INVOICE WHERE INVOICEID = N_INVOICEID;
     COMMIT;
 END;
 /
 BEGIN
-    DELETE_INVOICE(215);
+    DELETE_INVOICE(5);
 END;
 /
 --Task – Create a transaction nested within a stored procedure that 
