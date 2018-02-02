@@ -34,6 +34,7 @@ public class Bank {
 
 		switch (input) {
 		case "1"://view
+			displayAccounts();
 			break;
 		case "2"://create
 			break;
@@ -55,6 +56,12 @@ public class Bank {
 			break;
 		}
 
+	}
+
+	private void displayAccounts() {
+		
+		
+		
 	}
 
 	private void welcome() {

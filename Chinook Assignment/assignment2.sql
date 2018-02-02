@@ -311,6 +311,8 @@ BEGIN
 END;
 /
 
+INSERT INTO EMPLOYEE (EMPLOYEEID, FIRSTNAME, LASTNAME) VALUES (30, 'FRED', 'DERF');
+
 -- Create an after update trigger on the album table that fires after a row is inserted in the table
 
 CREATE OR REPLACE TRIGGER ALBUM_TRIGGER AFTER UPDATE ON ALBUM

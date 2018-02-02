@@ -1,5 +1,7 @@
 package com.revature.bank;
 
+import java.util.*;
+
 public class User {
 
 	public User() {
@@ -12,5 +14,13 @@ public class User {
 	
 	public User(String userName, String password) {
 		
+	}
+	
+	public boolean signIn() {
+		return true;
+	}
+	
+	public List<Account> getAllAccounts(){
+		return new ArrayList<Account>();
 	}
 }
