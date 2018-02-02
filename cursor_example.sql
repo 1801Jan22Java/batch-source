@@ -1,5 +1,7 @@
 CREATE OR REPLACE PROCEDURE GET_ALL_ALBUMS (
-    C OUT SYS_REFCURSOR
+    C OUT SYS_REFCURSOR,
+    str IN varchar2,
+    str in out varchar2
 )
     AS
 BEGIN
