@@ -45,8 +45,10 @@ public class Driver {
 		//Bear joe = new Bear("Joe",new Cave(7,"Reston",10),new BearType(5,"Grizzly"),200, LocalDate.of(1992, 9, 5));
 		
 		//bd.buildABear(joe);
-		//bd.feedBear(7, 7, 30);
-		System.out.println(bd.getBearById(7));
+		//bd.feedBear(5, 7, 30);
+		System.out.println(bd.getBearById(5));
+		
+		//SQL injection: https://xkcd.com/327/
 		
 		
 	}
