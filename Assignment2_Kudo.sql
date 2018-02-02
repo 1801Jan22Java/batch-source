@@ -268,6 +268,7 @@ CREATE OR REPLACE PROCEDURE FIRST_LAST_NAMES (
 
 BEGIN
     OPEN C_CURSOR FOR SELECT FIRSTNAME,LASTNAME FROM EMPLOYEE;
+
 END;
 /
 DECLARE
@@ -283,6 +284,7 @@ BEGIN
         || '     '
         || LNAME);
     END LOOP;
+    CLOSE C;
 END;
 /
 
@@ -391,6 +393,7 @@ BEGIN
         || '     '
         || COMPANY);
     END LOOP;
+    CLOSE C;
 END;
 /
 
