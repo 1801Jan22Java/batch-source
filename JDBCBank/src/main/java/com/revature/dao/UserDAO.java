@@ -1,4 +1,4 @@
-package com.revature.bank;
+package com.revature.dao;
 
 public interface UserDAO {
 

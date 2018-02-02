@@ -1,4 +1,4 @@
-package com.revature.bank;
+package com.revature.main;
 
 public class JDBCBankApp {
 

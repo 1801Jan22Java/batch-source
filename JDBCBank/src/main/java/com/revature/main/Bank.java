@@ -1,7 +1,9 @@
-package com.revature.bank;
+package com.revature.main;
 
 import java.io.*;
 import java.util.*;
+
+import com.revature.beans.User;
 
 public class Bank {
 	

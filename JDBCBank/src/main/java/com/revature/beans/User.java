@@ -1,4 +1,4 @@
-package com.revature.bank;
+package com.revature.beans;
 
 import java.util.*;
 
