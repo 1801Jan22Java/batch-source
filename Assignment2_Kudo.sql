@@ -5,6 +5,7 @@ Revature
 February 5, 2018
 */
 
+
 -- 2.1 SELECT
 --Task – Select all records from the Employee table.
 SELECT * FROM EMPLOYEE;
@@ -16,8 +17,10 @@ SELECT *
 FROM EMPLOYEE
 WHERE FIRSTNAME = 'Andrew'
       AND   REPORTSTO IS NULL;
+
       
 -- 2.2 ORDER BY
+
 
 --Task – Select all albums in Album table and sort result set in descending order by title.
 SELECT * FROM ALBUM
@@ -26,67 +29,47 @@ ORDER BY TITLE DESC;
 SELECT * FROM CUSTOMER
 ORDER BY CITY ASC;
 
+
 -- 2.3 INSERT INTO
 -- 2 rows into Genre
 INSERT INTO GENRE VALUES (
-    26,
-    'Witch House'
+    26,'Witch House'
 );
 INSERT INTO GENRE VALUES (
-    27,
-    'Hobo Punk'
+    27,'Hobo Punk'
 );
 -- 2 rows into Employee
 INSERT INTO EMPLOYEE (
-    EMPLOYEEID,
-    LASTNAME,
-    FIRSTNAME
+    EMPLOYEEID,LASTNAME,FIRSTNAME
 ) VALUES (
-    9,
-    'Laura',
-    'Croft'
+    9,'Laura','Croft'
 );
 INSERT INTO EMPLOYEE (
-    EMPLOYEEID,
-    LASTNAME,
-    FIRSTNAME
+    EMPLOYEEID,LASTNAME,FIRSTNAME
 ) VALUES (
-    10,
-    'Donald',
-    'Trump'
+    10,'Donald','Trump'
 );
 -- 2 rows into Customer
 INSERT INTO CUSTOMER (
-    CUSTOMERID,
-    FIRSTNAME,
-    LASTNAME,
-    EMAIL
+    CUSTOMERID,FIRSTNAME,LASTNAME,EMAIL
 ) VALUES (
-    60,
-    'Super',
-    'Man',
-    'krypton@spacemail.com'
+    60,'Super','Man','krypton@spacemail.com'
 );
 INSERT INTO CUSTOMER (
-    CUSTOMERID,
-    FIRSTNAME,
-    LASTNAME,
-    EMAIL
+    CUSTOMERID,FIRSTNAME,LASTNAME,EMAIL
 ) VALUES (
-    61,
-    'Wonder',
-    'Bread',
-    'flour@oven.bread'
+    61,'Wonder','Bread','flour@oven.bread'
 );
+
 
 --2.4 UPDATE
 --Task – Update Aaron Mitchell in Customer table to Robert Walter
 UPDATE CUSTOMER
     SET
-        FIRSTNAME = 'Robert',
-        LASTNAME = 'Walter'
+        FIRSTNAME = 'Robert',LASTNAME = 'Walter'
 WHERE FIRSTNAME = 'Aaron'
       AND   LASTNAME = 'Mitchell';
+
       
 --Task – Update name of artist in the Artist table 
 --“Creedence Clearwater Revival” to “CCR”
@@ -95,54 +78,78 @@ UPDATE ARTIST
         NAME = 'CCR'
 WHERE NAME = 'Creedence Clearwater Revival';
 
+
 --2.5 LIKE
 --Task – Select all invoices with a billing address like “T%”
 SELECT INVOICEID FROM INVOICE WHERE BILLINGADDRESS LIKE 'T%';
 
+
 --2.6 BETWEEN
 --Task – Select all invoices that have a total between 15 and 50
 --Total between 15 and 50
-SELECT CUSTOMERID,
-       INVOICEID,
-       INVOICEDATE
+SELECT CUSTOMERID,INVOICEID,INVOICEDATE
 FROM INVOICE
 WHERE TOTAL > 15
       AND   TOTAL < 50;
+
       
 --Task – Select all employees hired between 1st of June 2003 and 1st of March 2004
 -- Employees between dates     
-SELECT EMPLOYEEID,
-       FIRSTNAME,
-       LASTNAME
+SELECT EMPLOYEEID,FIRSTNAME,LASTNAME
 FROM EMPLOYEE
 WHERE HIREDATE < '01-MAR-2004'
       AND   HIREDATE > '01-JUN-2003';
+
       
 --2.7 DELETE
 --Task – Delete a record in Customer table where the name is Robert Walter 
 --(There may be constraints that rely on this, find out how to resolve them).
 
+
 -- Change constraints by dropping and creating a new one with
 -- a cascade delete.
 
+
 -- Change the first constraint for invoice.customerid and customer.customerid
-ALTER TABLE INVOICE DROP CONSTRAINT FK_INVOICECUSTOMERID;
-ALTER TABLE INVOICE
-    ADD CONSTRAINT FK_INVOICECUSTOMERID FOREIGN KEY ( CUSTOMERID )
-        REFERENCES CUSTOMER ( CUSTOMERID )
-            ON DELETE CASCADE;
--- Change another constraint, this time between 
--- invoice.invoicelineinvoiceid and invoiceline.invoicelineinvoicelineid
-ALTER TABLE INVOICELINE DROP CONSTRAINT FK_INVOICELINEINVOICEID;
-ALTER TABLE INVOICELINE
-    ADD CONSTRAINT FK_INVOICELINEINVOICEID FOREIGN KEY ( INVOICEID )
-        REFERENCES INVOICE ( INVOICEID )
-            ON DELETE CASCADE;
--- FINALLY delete the customer.             
+
+--ALTER TABLE INVOICE DROP CONSTRAINT FK_INVOICECUSTOMERID;
+--ALTER TABLE INVOICE
+--    ADD CONSTRAINT FK_INVOICECUSTOMERID FOREIGN KEY ( CUSTOMERID )
+--        REFERENCES CUSTOMER ( CUSTOMERID )
+--            ON DELETE CASCADE;
+---- Change another constraint, this time between 
+---- invoice.invoicelineinvoiceid and invoiceline.invoicelineinvoicelineid
+--ALTER TABLE INVOICELINE DROP CONSTRAINT FK_INVOICELINEINVOICEID;
+--ALTER TABLE INVOICELINE
+--    ADD CONSTRAINT FK_INVOICELINEINVOICEID FOREIGN KEY ( INVOICEID )
+--        REFERENCES INVOICE ( INVOICEID )
+--            ON DELETE CASCADE;
+---- FINALLY delete the customer.             
+--DELETE FROM CUSTOMER
+--WHERE FIRSTNAME = 'Robert'
+--      AND   LASTNAME = 'Walter';
+
+-- Solution 2 for removing Robert Walter without altering table
+DELETE FROM INVOICELINE
+WHERE INVOICEID = (
+    SELECT INVOICEID
+    FROM INVOICELINE
+    INNER JOIN INVOICE ON INVOICELINE.INVOICEID = INVOICE.INVOICEID
+    INNER JOIN CUSTOMER ON CUSTOMER.CUSTOMERID = INVOICE.INVOICEID
+    WHERE CUSTOMER.FIRSTNAME = 'Robert'
+          AND   CUSTOMER.LASTNAME = 'Walter'
+);
+DELETE FROM INVOICE
+WHERE CUSTOMERID = (
+    SELECT CUSTOMERID
+    FROM CUSTOMER
+    INNER JOIN INVOICE ON INVOICE.CUSTOMERID = CUSTOMER.CUSTOMERID
+    WHERE CUSTOOMER.FIRSTNAME = 'Robert'
+          AND   CUSTOMER.LASTNAME = 'Walter'
+);
 DELETE FROM CUSTOMER
 WHERE FIRSTNAME = 'Robert'
       AND   LASTNAME = 'Walter';
-      
 --3.1 System Defined Functions
 --Task – Create a function that returns the current time.
 
@@ -558,31 +565,25 @@ FROM CUSTOMER C FULL OUTER
 JOIN INVOICE I ON C.CUSTOMERID =
 I.CUSTOMERID;
 
+
 --7.3 RIGHT
 --Task – Create a right join that joins album and artist specifying 
 --artist name and title.
-SELECT AR.NAME,
-       AL.TITLE
+SELECT AR.NAME,AL.TITLE
 FROM ARTIST AR
 INNER JOIN ALBUM AL ON AR.ARTISTID = AL.ARTISTID;
+
 
 --7.4 CROSS
 --Task – Create a cross join that joins album and artist and sorts by 
 --artist name in ascending order.
-SELECT NAME,
-       TITLE FROM ARTIST,
-                 ALBUM
+SELECT NAME,TITLE FROM ARTIST,ALBUM
 ORDER BY NAME ASC;
+
 
 --7.5 SELF
 --Task – Perform a self-join on the employee table, joining on the reportsto column.
 -- Note: Practically a cross join without the join keyword used.
-SELECT A.EMPLOYEEID AS TRAINEE,
-       A.FIRSTNAME,
-       A.LASTNAME,
-       B.EMPLOYEEID AS EMPLOYER,
-       B.FIRSTNAME,
-       B.LASTNAME
-FROM EMPLOYEE A,
-     EMPLOYEE B
+SELECT A.EMPLOYEEID AS TRAINEE,A.FIRSTNAME,A.LASTNAME,B.EMPLOYEEID AS EMPLOYER,B.FIRSTNAME,B.LASTNAME
+FROM EMPLOYEE A,EMPLOYEE B
 WHERE A.REPORTSTO = B.EMPLOYEEID;
