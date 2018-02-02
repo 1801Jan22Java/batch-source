@@ -1,7 +1,6 @@
 package com.revature.JDBCBank;
 
-// Abstract out account operations 
-public class Account {
+public class AccountOracle implements AccountDAO{
 
 	// Throw custom exception for username already exists
 	public void newAccount(String username, String password) throws UserNameExistsException {

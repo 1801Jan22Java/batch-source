@@ -11,6 +11,7 @@ public class UserNameExistsException extends Exception {
 
 	public UserNameExistsException(String name) {
 		this.name = name;
+		getName();
 	}
 
 	public String getName() {
