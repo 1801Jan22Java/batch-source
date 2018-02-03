@@ -4,6 +4,8 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.*;
 
+import com.revature.dao.UserOracle;
+
 public class UserOracleTest {
 	@Before
 	public void createUserOracleObject() {

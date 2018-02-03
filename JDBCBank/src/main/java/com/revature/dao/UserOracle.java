@@ -1,4 +1,4 @@
-package com.revature.JDBCBank;
+package com.revature.dao;
 
 // Abstract out user operations
 public class UserOracle implements UserDAO {

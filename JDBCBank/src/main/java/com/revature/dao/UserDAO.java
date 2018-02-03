@@ -1,4 +1,4 @@
-package com.revature.JDBCBank;
+package com.revature.dao;
 
 public interface UserDAO {
 	public Integer login(String username, String password);

@@ -1,4 +1,4 @@
-package com.revature.JDBCBank;
+package com.revature.util;
 
 public class UserNameExistsException extends Exception {
 

@@ -4,6 +4,9 @@ import static org.hamcrest.CoreMatchers.containsString;
 
 import java.util.Scanner;
 
+import com.revature.dao.AccountOracle;
+import com.revature.dao.UserOracle;
+
 public class JDBCApplication {
 
 	public static void main(String[] args) {

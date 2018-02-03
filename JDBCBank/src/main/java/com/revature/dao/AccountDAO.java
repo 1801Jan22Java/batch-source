@@ -1,5 +1,6 @@
-package com.revature.JDBCBank;
+package com.revature.dao;
 
+import com.revature.util.UserNameExistsException;
 
 //Abstract out account operations 
 public interface AccountDAO {

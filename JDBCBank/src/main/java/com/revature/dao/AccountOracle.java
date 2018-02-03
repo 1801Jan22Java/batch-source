@@ -1,4 +1,6 @@
-package com.revature.JDBCBank;
+package com.revature.dao;
+
+import com.revature.util.UserNameExistsException;
 
 public class AccountOracle implements AccountDAO{
 
