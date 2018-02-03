@@ -6,7 +6,7 @@ public class BankAccount {
 		super();
 	}
 
-	public BankAccount(int id, double balance, User user, AccountType accountType) {
+	public BankAccount(int id, double balance, User user, String accountType) {
 		super();
 		this.id = id;
 		this.balance = balance;
@@ -17,7 +17,7 @@ public class BankAccount {
 	private int id;
 	private double balance;
 	private User user;
-	private AccountType accountType;
+	private String accountType;
 	
 	public int getId() {
 		return id;
@@ -37,10 +37,10 @@ public class BankAccount {
 	public void setUser(User user) {
 		this.user = user;
 	}
-	public AccountType getAccountType() {
+	public String getAccountType() {
 		return accountType;
 	}
-	public void setAccountType(AccountType accountType) {
+	public void setAccountType(String accountType) {
 		this.accountType = accountType;
 	}
 

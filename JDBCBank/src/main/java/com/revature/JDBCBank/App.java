@@ -1,15 +1,19 @@
 package com.revature.JDBCBank;
 
+
 import java.util.Scanner;
+
+import com.revature.model.UserActions;
 
 public class App 
 {
+	private static Scanner sc = new Scanner(System.in);
+	
     public static void main( String[] args )
     {
-        boolean keepPrinting = true;
-        Scanner sc = new Scanner(System.in);
-        while(keepPrinting) {
-        	
-        }
+    	UserActions.mainMenu(sc);
+        sc.close();  
     }
+    
 }
+
