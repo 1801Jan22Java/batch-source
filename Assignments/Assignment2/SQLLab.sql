@@ -96,9 +96,13 @@ SELECT * FROM EMPLOYEE WHERE HIREDATE BETWEEN '01-JUN-03' AND '01-MAR-04';
 -- 2.7 DELETE
 -- Delete a record in Customer table where the name is Robert Walter (There may be constraints
 --that rely on this, find out how to resolve them).
--- remove constraints for deletion and add a cascade delete restraint
-ALTER TABLE INVOICE DROP CONSTRAINT FK_INVOICECUSTOMERID;
-ALTER TABLE CUSTOMER ADD CONSTRAINT FK_CUSTOMERSUPID_CASCADE FOREIGN KEY(CUSTOMERID) REFERENCES INVOICE(INVOICEID) ON DELETE CASCADE;
+DELETE FROM INVOICELINE WHERE INVOICEID IN
+(SELECT INVOICEID FROM INVOICE WHERE CUSTOMERID IN
+(SELECT CUSTOMERID FROM CUSTOMER WHERE FIRSTNAME='Robert' AND LASTNAME= 'Walter'));
+
+DELETE FROM INVOICE WHERE CUSTOMERID IN
+(SELECT CUSTOMERID FROM CUSTOMER WHERE FIRSTNAME='Robert' AND LASTNAME= 'Walter');
+
 DELETE FROM CUSTOMER WHERE FIRSTNAME='Robert' AND LASTNAME= 'Walter';
 
 -- 3. SQL Functions
@@ -307,11 +311,30 @@ END;
 
 -- Create a transaction that given a invoiceId will delete that invoice (There may be constraints that
 -- rely on this, find out how to resolve them).
+-- We also need to delete references to that ID in invoiceline
+CREATE OR REPLACE PROCEDURE DELETE_INVOICE (INVOICE_ID INT)
+IS
+BEGIN
+    DELETE FROM INVOICELINE WHERE INVOICEID=INVOICE_ID;
+    DELETE FROM INVOICE WHERE INVOICEID=INVOICE_ID;
+    COMMIT;
+END;
+/
+
+EXECUTE DELETE_INVOICE(110);
 
 -- Create a transaction nested within a stored procedure that inserts a new record in the Customer
 -- table
+CREATE OR REPLACE PROCEDURE NEW_CUSTOMER
+(CUSTOMER_ID INT, FIRSTN VARCHAR, LASTN VARCHAR, EMAIL VARCHAR )
+IS
+BEGIN
+    INSERT INTO CUSTOMER(CUSTOMERID, LASTNAME, FIRSTNAME, EMAIL) VALUES(CUSTOMER_ID, FIRSTN, LASTN, EMAIL);
+    COMMIT;
+END;
+/
 
-
+EXECUTE NEW_CUSTOMER(62, 'Rocky', 'Balboa', 'Rockie''srealemail@4real.com');
 
 -- 6.0 Triggers
 -- In this section you will create various kinds of triggers that work when certain DML statements are
