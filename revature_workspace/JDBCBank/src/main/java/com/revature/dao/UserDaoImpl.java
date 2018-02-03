@@ -103,6 +103,18 @@ public class UserDaoImpl implements UserDao {
 
 	}
 
+	@Override
+	public void validateCredentials(String username, String password) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void createUser(User user) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
 
 

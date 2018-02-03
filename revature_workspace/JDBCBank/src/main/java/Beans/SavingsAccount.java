@@ -3,10 +3,12 @@ package Beans;
 
 public class SavingsAccount extends Account {
 
+	AccountType accountType = new AccountType(1,"Savings");
 
-	SavingsAccount(float initialBalance)
+	SavingsAccount(float initialBalance,AccountType accountType,int userId)
 	{
-		super(initialBalance);
+		
+		super(initialBalance,accountType,userId);
 	}
 	@Override
 	public void deposit(float funds) {

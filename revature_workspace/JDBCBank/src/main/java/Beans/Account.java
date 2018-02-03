@@ -2,9 +2,15 @@ package Beans;
 
 public abstract class Account {
 	public float initialBalance;
-	public Account(float initialBalance)
+	public AccountType accountType;
+	public int userId;
+	public Account(){}
+	public Account(float initialBalance,AccountType accountType,int userID)
 	{
+		
 		this.initialBalance=initialBalance;
+		this.accountType=accountType;
+		this.userId=userID;
 	}
 	
 	 public abstract void deposit(float funds);
