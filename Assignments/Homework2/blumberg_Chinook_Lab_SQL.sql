@@ -166,6 +166,46 @@ END name_and_company;
 
 -- 5.0 TRANSACTIONS
 
+CREATE OR REPLACE PROCEDURE DEL_INV
+(IId NUMBER)
+AS
+
+BEGIN
+  DELETE FROM INVOICELINE
+  WHERE INVOICEID IN (SELECT INVOICEID
+                      FROM INVOICE 
+                      WHERE INVOICEID = IId);
+  DELETE FROM INVOICE 
+  WHERE INVOICEID = IId;
+END DELETE_TRANSACTION;
+/
+
+CREATE OR REPLACE PROCEDURE NEW_CUSTOMER
+(
+  -- Here, I am naming the fields as lower-case versions of the actual
+  -- field names, minus most of the vowels. cty -> City, phne -> Phone, etc;
+  cid   NUMBER,
+  fname VARCHAR2,
+  lname VARCHAR2,
+  cmpny VARCHAR2,
+  addrs VARCHAR2,
+  cty   VARCHAR2,
+  st    VARCHAR2,
+  cntry VARCHAR2,
+  pst_cd VARCHAR2,
+  phne  VARCHAR2,
+  fx    VARCHAR2,
+  eml   VARCHAR2,
+  sprep NUMBER
+)
+AS
+BEGIN
+  INSERT INTO CUSTOMER (CustomerId, FirstName, LastName, Company, Address, City, State, Country, PostalCode, Phone, Fax, Email, SupportRepId) VALUES (cid, fname, lname, cmpny, addrs, cty, st, cntry, pst_cd, phne, fx, eml, 4);
+END NEW_CUSTOMER;
+
+-- 6.1 TRIGGERS 
+
+
 
 
 
