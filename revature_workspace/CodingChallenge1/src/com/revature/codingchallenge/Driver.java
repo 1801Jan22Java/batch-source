@@ -59,7 +59,8 @@ public class Driver {
 		}
 		catch(NullPointerException e)
 		{
-			e.printStackTrace();
+			System.out.println("Caught exception");
+			//e.printStackTrace();
 		}
 		catch(IOException e){
 			valid=false;

@@ -8,33 +8,30 @@ import java.util.Scanner;
 
 public class Calculator {
 	public static String operator ="";
-	public static String[] parseLine(String line)
-	{
-		String[] arr = new String[3];
-		if(line.contains("+"))
+	public static double operate(int i, double a, double b){
+		double result =0.0;
+		switch(i)
 		{
-			arr=line.split("+");
-			operator = "+";
+		case 1: result = a+b;break;
+		case 2: result = a-b;break;
+		case 3: result = a*b; break;
+		case 4: result = a/b; break;
 		}
-		else if (line.contains("/"))
-		{
-			arr=line.split("/");
-			operator="/";
-			
-		}
-		else if(line.contains("*"))
-		{
-			arr=line.split("*");
-			operator = "*";
-		}
-		else if(line.contains("-"))
-		{
-			arr=line.split("-");
-			operator = "-";
-		}
-		return arr;
+		return result;
 	}
-	
+
+	public static String showOperation(int a)
+	{
+		String result ="";
+		switch(a){
+		case 1: result="Addition"; break;
+		case 2: result ="Subtraction"; break;
+		case 3: result ="Multiplication"; break;
+		case 4: result="Division"; break;
+		default: result ="Invalid operation";
+		}
+		return result;
+	}
 	
 	public static double convertStringToNumeric(String num)
 	{
@@ -43,62 +40,48 @@ public class Calculator {
 		result = number;
 		return result;
 	}
-	
-	public static double calculate(ArrayList<Double> nums)
+	public static int convertStringToInt(String operator)
 	{
-		
-		double result = 0.0;
-		switch(operator)
+		int result = 0;
+		try
 		{
-		case "/":  result = nums.get(0)/nums.get(1); break;
-		case "*":  result = nums.get(0)*nums.get(1); break;
-		case "+": result=nums.get(0)+nums.get(1); break;
-		case "-":result=nums.get(0)-nums.get(1); break;
+			result = Integer.parseInt(operator);
 		}
-		return result;
-	}
-	
-	
-	public static ArrayList<Double> getNum(String [] arr)
-	{
-		ArrayList<Double> result = new ArrayList<Double>();
-		for(int i = 0;i<arr.length;i++)
+		catch(NumberFormatException e)
 		{
-			try
-			
-			{
-			Double num = Double.parseDouble(arr[i]);
-			result.add(num);
-			}
-			catch(Exception e)
-			{
-				System.out.println("Cannot convert operator");
-			}
-	
+			System.out.println("Please enter a number value between 1 and 4");
 		}
-		return result;
+		finally
+		{
+			return result;
+		}
 	}
-	
-	/*public String selectOperator(String operation)
-	{
-			
-	}*/
-	
-	public double calculateDouble(){
-		double result = 0.0;
-		
-		return result;
-		
-	}
-	
 	
 	
 	public static void main(String [] args)
 	{
 		Scanner sc = new Scanner(System.in);
-		
+		System.out.println("Please choose your operation: 1 for addition, 2 for subtraction,"
+				+ "3 for multiplication, and 4 for division");
 		String operator = sc.nextLine();
-		String operand = sc.nextLine();
+		int i =convertStringToInt(operator);
+		while (i<0 || i>4)
+		{
+			System.out.println("You chose: " +showOperation(i));
+			System.out.println("You must choose a valid option between 1 and 4");
+			operator=sc.nextLine();
+			i = convertStringToInt(operator);
+		}
+		System.out.println("You chose: " +showOperation(i));
+		System.out.println("Please choose your first operand");
+		String operand1 = sc.nextLine();
+		double a = convertStringToNumeric(operand1);
+		System.out.println("");
+		System.out.println("Please choose your next operand");
+		String operand2 = sc.nextLine();
+		double b=  convertStringToNumeric(operand2);
+		double result = operate(i,a,b);
+		System.out.println(result);
 		
 
 
