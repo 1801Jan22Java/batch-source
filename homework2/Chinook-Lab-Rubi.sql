@@ -45,19 +45,11 @@ SELECT * FROM Invoice WHERE Total BETWEEN 15 AND 50;
 -- Task – Select all employees hired between 1st of June 2003 and 1st of March 2004
 SELECT * FROM Employee WHERE HireDate BETWEEN TO_DATE('2003-6 00:00:00','yyyy-mm hh24:mi:ss') AND TO_DATE('2004-3 00:00:00','yyyy-mm hh24:mi:ss');
 
-/***** COMMIT *****/
-
 /** 2.7 DELETE **/
-/***** INCOMPLETE *****/
 -- Task – Delete a record in Customer table where the name is Robert Walter (There may be constraints that rely on this, find out how to resolve them).
-ALTER TABLE Invoice DROP CONSTRAINT FK_INVOICELINEINVOICEID;
-DELETE FROM InvoiceLine WHERE InvoiceId = (
-    SELECT InvoiceID FROM Invoice WHERE CustomerId = (
-        SELECT CustomerId FROM Customer WHERE FirstName = 'Robert' AND LastName = 'Walter'
-        )
-    );
+DELETE FROM InvoiceLine WHERE InvoiceId IN (SELECT InvoiceId FROM Invoice WHERE CustomerId = 32);
 --SELECT * FROM InvoiceLine WHERE InvoiceId = 245;
-DELETE FROM Invoice WHERE CustomerId = (SELECT CustomerId FROM Customer WHERE FirstName = 'Robert' AND LastName = 'Walter');
+DELETE FROM Invoice WHERE CustomerId = 32;
 --SELECT * FROM Invoice WHERE CustomerId = 32;
 DELETE FROM Customer WHERE FirstName = 'Robert' AND LastName = 'Walter'; 
 
@@ -158,7 +150,6 @@ SELECT AvgPriceInvoiceLine FROM DUAL;
 /** 3.4 User Defined Table Valued Functions **/
 -- Task – Create a function that returns all employees who are born after 1968.
 --SELECT * FROM Employee WHERE BirthDate > TO_DATE('1968','yyyy');
-
 CREATE OR REPLACE FUNCTION GetEmployeeAfter
     RETURN SYS_REFCURSOR
 IS
@@ -176,16 +167,15 @@ SELECT GetEmployeeAfter FROM DUAL;
  In this section you will be creating and executing stored procedures. You will be creating various types of stored procedures that take input and output parameters.
 **/
 
-/***** INCOMPLETE *****/
 /** 4.1 Basic Stored Procedure **/
 -- Task – Create a stored procedure that selects the first and last names of all the employees.
-CREATE OR REPLACE PROCEDURE GetFirstLast (RUNNING OUT SYS_REFCURSOR)
+CREATE OR REPLACE PROCEDURE GetFirstLast(RUNNING OUT SYS_REFCURSOR)
 AS
 BEGIN
     OPEN RUNNING FOR 
     SELECT FirstName, LastName FROM Employee;
     DBMS_SQL.RETURN_RESULT(RUNNING);
-END;
+END GetFirstLast;
 /
 
 DECLARE
@@ -197,16 +187,116 @@ END;
 
 /** 4.2 Stored Procedure Input Parameters **/
 -- Task – Create a stored procedure that updates the personal information of an employee.
+--UPDATE Customer SET FirstName = 'Robert', LastName = 'Walter' WHERE FirstName = 'Aaron' AND LastName = 'Mitchell';
+CREATE OR REPLACE PROCEDURE UpdateEmpInfo (
+    toModify IN NUMBER,
+    newEmployeeLN IN VARCHAR2, 
+    newEmployeeFN IN VARCHAR2
+    )  
+AS  
+BEGIN  
+    UPDATE employee 
+    SET LastName = newEmployeeLN, FirstName = newEmployeeFN
+    WHERE EmployeeId = toModify; 
+END UpdateEmpInfo;
+/
+
+BEGIN
+    UpdateEmpInfo(8, 'Flow', 'Hustle');
+END;
+/
+
 -- Task – Create a stored procedure that returns the managers of an employee.
+--SELECT FIRSTNAME, LASTNAME FROM EMPLOYEE WHERE EMPLOYEEID = (SELECT REPORTSTO FROM EMPLOYEE WHERE LASTNAME = 'Edwards' AND FIRSTNAME = 'Nancy');
+CREATE OR REPLACE PROCEDURE WhosTheBoss (
+    minionLN IN VARCHAR2,
+    minionFN IN VARCHAR2,
+    rCursor OUT SYS_REFCURSOR
+    )
+AS
+BEGIN
+    OPEN rCursor FOR
+    SELECT FirstName, LastName
+    FROM Employee 
+    WHERE EmployeeId = (
+        SELECT ReportsTo 
+        FROM Employee 
+        WHERE LastName = minionLN AND FirstName = minionFN);
+    DBMS_SQL.RETURN_RESULT(rCursor);
+END;
+/
+
+DECLARE
+CURR SYS_REFCURSOR;
+BEGIN
+    WhosTheBoss('Johnson', 'Steve', rCursor=>CURR);
+END;
+/
 
 /** 4.3 Stored Procedure Output Parameters **/
 -- Task – Create a stored procedure that returns the name and company of a customer.
+--SELECT FirstName, LastName, Company FROM Customer WHERE CustomerId = 18;
+CREATE OR REPLACE PROCEDURE GetNameCompany(
+    custId IN NUMBER,
+    rCursor OUT SYS_REFCURSOR
+    )
+AS
+BEGIN
+    OPEN rCursor FOR
+    SELECT FirstName, LastName, Company
+    FROM Customer 
+    WHERE CustomerId = custId;
+    DBMS_SQL.RETURN_RESULT(rCursor);
+END;
+/
+
+DECLARE
+CURR SYS_REFCURSOR;
+BEGIN
+    GetNameCompany(16, rCursor=>CURR);
+END;
+/
 
 /** 5.0 Transactions
 In this section you will be working with transactions. Transactions are usually nested within a stored procedure.
 **/
 -- Task – Create a transaction that given a invoiceId will delete that invoice (There may be constraints that rely on this, find out how to resolve them).
+CREATE OR REPLACE PROCEDURE DeleteInvoice (
+    invoiceToDelete IN NUMBER
+    )  
+AS  
+BEGIN
+    DELETE FROM InvoiceLine WHERE InvoiceId = invoiceToDelete;
+    DELETE FROM Invoice WHERE InvoiceId = invoiceToDelete;
+END DeleteInvoice;
+/
+
+BEGIN
+    DeleteInvoice(382);
+    commit;
+END;
+/
+
+/***** COMMIT *****/
+
 -- Task – Create a transaction nested within a stored procedure that inserts a new record in the Customer table
+CREATE OR REPLACE PROCEDURE InsertNewCustomer (
+    custId IN NUMBER,
+    newFN IN VARCHAR,
+    newLN IN VARCHAR,
+    newEmail IN VARCHAR
+    )  
+AS  
+BEGIN
+    INSERT INTO Customer(CustomerId, FirstName, LastName, Email) VALUES(custId, newFN, newLN, newEmail);
+END InsertNewCustomer;
+/
+
+BEGIN
+    InsertNewCustomer(62, 'Johnny', 'Bravo', 'alwaysfly@gmail.com');
+    commit;
+END;
+/
 
 /** 6.0 Triggers
 In this section you will create various kinds of triggers that work when certain DML statements are executed on a table.
@@ -250,7 +340,6 @@ SET SERVEROUTPUT ON;
 UPDATE Album SET Title = 'Fly Me To The Moon' WHERE AlbumId = 100 AND Title = 'Iron Maiden';
 commit;
 
-/***** INCOMPLETE *****/
 -- Task – Create an after delete trigger on the customer table that fires after a row is deleted from the table.
 CREATE OR REPLACE TRIGGER AfterDeleteCustomer 
     AFTER UPDATE 
@@ -266,8 +355,15 @@ END;
 /** CAUTION: DO NOT FORGET TO TURN ON 'Dbms Output' and 'Enable DBMS_OUTPUT for connection' **/
 --DBMS_OUTPUT.ENABLE;
 SET SERVEROUTPUT ON;
+DELETE FROM InvoiceLine WHERE InvoiceId IN (
+    SELECT InvoiceId FROM Invoice WHERE CustomerId = (
+        SELECT CustomerId FROM Customer WHERE FirstName = 'Luís' AND LastName = 'Gonçalves'));
+--SELECT * FROM InvoiceLine WHERE InvoiceId = 245;
+DELETE FROM Invoice WHERE CustomerId IN (SELECT CustomerId FROM Customer WHERE FirstName = 'Luís' AND LastName = 'Gonçalves');
+--SELECT * FROM Invoice WHERE CustomerId = 32;
 DELETE FROM Customer WHERE FirstName = 'Luís' AND LastName = 'Gonçalves'; 
 commit;
+/***** COMMIT *****/
 
 /** 7.0 JOINS
 In this section you will be working with combining various tables through the use of joins. You will work with outer, inner, right, left, cross, and self joins.
