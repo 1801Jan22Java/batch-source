@@ -1,24 +1,27 @@
 package com.revature.dao;
 
-import com.revature.util.UserNameExistsException;
+import java.util.ArrayList;
+
+import com.revature.beans.Accounts;
+import com.revature.util.OverDraftException;
 
 //Abstract out account operations 
 public interface AccountDAO {
 
 	// Throw custom exception for username already exists
-	public void newAccount(String username, String password) throws UserNameExistsException;
+	public boolean newAccount(int userId, int accountType);
 	
 	// Delete an account
-	public void deleteAccount(String username, String password, Integer AccountID);
+	public boolean deleteAccount(int userId, int accountId);
 
 	// Display accounts
-	public String displayAccount(Integer userid) ;
+	public ArrayList<Accounts> getAccounts(Integer userid) ;
 
 
 	// Deposit money to account
-	public void deposit(Integer userid, Integer accountid, Double amount);
+	public boolean deposit(Integer userid, Integer accountid, Double amount);
 
-	public Double withdraw(Integer userid, Integer accountid, Double amount);
+	public boolean withdraw(Integer userid, Integer accountid, Double amount) throws OverDraftException;
 	
 
 }

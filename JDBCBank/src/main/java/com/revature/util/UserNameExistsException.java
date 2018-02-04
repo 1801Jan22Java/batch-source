@@ -7,20 +7,18 @@ public class UserNameExistsException extends Exception {
 	 */
 	private static final long serialVersionUID = -3129498241007695884L;
 
-	private String name;
+	private String message = "Username already exists. \n Please choose a different username.";
 
-	public UserNameExistsException(String name) {
-		this.name = name;
-		getName();
-	}
-
-	public String getName() {
-		return name;
+	public UserNameExistsException(String message) {
+		this.message = message;
 	}
 
 	public UserNameExistsException() {
 		super();
-		// TODO Auto-generated constructor stub
+	}
+
+	public String getMessage() {
+		return message;
 	}
 
 	public UserNameExistsException(String message, Throwable cause, boolean enableSuppression,
