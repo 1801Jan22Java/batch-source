@@ -11,27 +11,31 @@ import Beans.SavingsAccount;
 import Beans.SuperUser;
 import Beans.User;
 
+import com.revature.Exceptions.OverdraftException;
 import com.revature.dao.AccountDaoImpl;
 import com.revature.dao.UserDaoImpl;
 import com.revature.util.ConnectionUtil;
 
 public class BankDriver {
-	
-	public static void showMenu(int option)
+	/*
+	public static void showMenu(int option, User user)
 	{
 		AccountDaoImpl udi = new AccontDaoImpl();
 		switch(option)
 		{
-		case 1: 
+		case 2: 
 			System.out.println();
 			udi.deposit(accountID, amount);	
 			break;
-		case 2: System.out.println();
-		udi.withdrawal();
+		case 3: System.out.println();
+			udi.withdrawal(user, accountID, amount);
+			break;
+		case 4: System.out.println();
+			udi.
 		}
 		
 	}
-
+*/
 	public static void main(String [] args)
 	{
 
@@ -67,7 +71,10 @@ public class BankDriver {
 			int accountID = sc.nextInt();
 			System.out.println("Please enter an amount to withdraw");
 			float amount = sc.nextFloat();
+			try{
 			adi.withdrawal(user,accountID, amount);
+			}
+			catch(OverdraftException e){e.printStackTrace();}
 
 
 		} catch (IOException e) {

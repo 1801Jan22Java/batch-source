@@ -2,6 +2,8 @@ package com.revature.dao;
 
 import java.util.List;
 
+import com.revature.Exceptions.OverdraftException;
+
 import Beans.Account;
 import Beans.User;
 
@@ -10,7 +12,7 @@ public interface AccountDao {
 	public Account getAccountById();
 	public void addAccount(Account account);
 	public void deposit(int accountID,float amount);
-	public void withdrawal(User user,int accountID,float amount);
+	public void withdrawal(User user,int accountID,float amount) throws OverdraftException;
 	public void selectAction(int option);
 	public void showBalances(User user, int accountID);
 

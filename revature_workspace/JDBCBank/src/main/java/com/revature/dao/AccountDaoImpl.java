@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import com.revature.Exceptions.OverdraftException;
 import com.revature.util.ConnectionUtil;
 
 import Beans.Account;
@@ -103,7 +104,8 @@ public class AccountDaoImpl implements AccountDao{
 	}
 
 	@Override
-	public void withdrawal(User user,int accountID, float amount) throws OverdraftException {
+	public void withdrawal(User user,int accountID, float amount) throws OverdraftException  {
+		float currentBalance=0.0f;
 		try(Connection conn = ConnectionUtil.getConnectionFromFile(filename))
 		{
 
@@ -115,6 +117,18 @@ public class AccountDaoImpl implements AccountDao{
 				conn.setAutoCommit(false);
 				System.out.println("In try statement for withdrawal");
 				String sqlStmt="{CALL SP_MAKE_WITHDRAWAL(?,?)}";
+				PreparedStatement ps = conn.prepareStatement("SELECT BALANCE FROM ACCOUNTS WHERE ACCOUNT_ID=?");
+				ps.setInt(1, accountID);
+				ps.execute();
+				ResultSet rs = ps.getResultSet();
+				if(rs.next())
+				{
+					currentBalance = rs.getFloat("BALANCE");
+				}
+				if(currentBalance<amount)
+				{
+					throw new OverdraftException("You may not withdraw more than what is in the account");
+				}
 				CallableStatement cs = conn.prepareCall(sqlStmt);
 				cs.setInt(1,accountID);
 				cs.setFloat(2,amount);
