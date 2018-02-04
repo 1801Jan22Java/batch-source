@@ -14,7 +14,7 @@ public interface UserDao {
 	public boolean validateCredentials(String username, String password);
 	public void logout();
 	public boolean validateSuperUser(User user);
-	public void deleteUser(User user);
+	public void deleteUser(User user1,User User2);
 	public User createUser();
 
 }

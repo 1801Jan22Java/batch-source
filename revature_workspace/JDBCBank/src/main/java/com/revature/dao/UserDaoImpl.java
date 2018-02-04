@@ -247,13 +247,35 @@ public class UserDaoImpl implements UserDao {
 		catch(IOException | SQLException e)
 		{e.printStackTrace();
 		}
-		return false;
+		return isSuperUser;
 	}
 
 	@Override
-	public void deleteUser(User user2) {
+	public void deleteUser(User user1, User user2) {
 		
-
+		if(!validateSuperUser(user1))
+		{
+			System.out.println("You do not carry the membership");
+			System.out.println(user1.getSuperUser());
+		}
+		else
+		{
+			int userID = getUserID(user2);
+			try(Connection conn=  ConnectionUtil.getConnectionFromFile(filename))
+			{
+				String sqlStr = "{CALL SP_DELETE_USER(?)}";
+				CallableStatement cs = conn.prepareCall(sqlStr);
+				cs.setInt(1, userID);
+				cs.execute();
+				System.out.println("User "+ userID + " has been deleted");
+			} 
+			catch (SQLException | IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		
 	}
 
 }

@@ -162,7 +162,7 @@ public class AccountDaoImpl implements AccountDao{
 
 	@Override
 	public void selectAction(int option, User user) {
-
+		UserDaoImpl udi = new UserDaoImpl(); 
 		Scanner sc = new Scanner(System.in);
 		switch(option)
 		{
@@ -194,7 +194,7 @@ public class AccountDaoImpl implements AccountDao{
 		break;
 		case 5:System.out.println("Would you like a checking or a savings account?  "
 				+ "Enter 1 for a savings account.  Enter 2 for a checking account");
-		UserDaoImpl udi = new UserDaoImpl(); 
+		
 		int userID = udi.getUserID(user);
 		int choice =sc.nextInt();
 		System.out.println("Please enter your initial balance");
@@ -220,12 +220,19 @@ public class AccountDaoImpl implements AccountDao{
 				}
 			}
 		}
-			catch(ZeroBalanceException e){
-				e.printStackTrace();
-			}
+		catch(ZeroBalanceException e){
+			e.printStackTrace();
+		}
 		finally{break;}
-		
-	default: System.out.println("Invalid choice");
+		case 6: 
+			System.out.println("Please enter the user ID of the user you want to delete");
+			userID=sc.nextInt();
+			User user2 = udi.getUserById(userID);
+			System.out.println("User attempting the deletion");
+			System.out.println(udi.getUserID(user));
+			udi.deleteUser(user, user2);
+			break;
+		default: System.out.println("Invalid choice");
 		}
 
 	}
@@ -299,8 +306,8 @@ public class AccountDaoImpl implements AccountDao{
 			e.printStackTrace();
 		}
 
-		
-		
+
+
 	}
 
 
