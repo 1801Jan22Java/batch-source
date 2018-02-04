@@ -60,6 +60,14 @@ public class User {
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
+
+	public boolean isSuperUser() {
+		return superUser;
+	}
+
+	public void setSuperUser(boolean superUser) {
+		this.superUser = superUser;
+	}
 	
 	
 	

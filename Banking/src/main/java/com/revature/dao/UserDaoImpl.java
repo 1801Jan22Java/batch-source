@@ -1,14 +1,20 @@
 package com.revature.dao;
 
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Properties;
 import java.util.Scanner;
 
 import com.revature.beans.User;
+import com.revature.exceptions.InvalidAccountIDException;
+import com.revature.exceptions.InvalidInputException;
+import com.revature.exceptions.InvalidPasswordException;
 import com.revature.util.ConnectionUtil;
 
 public class UserDaoImpl implements UserDao{
@@ -25,6 +31,7 @@ public class UserDaoImpl implements UserDao{
 		try(Connection conn = ConnectionUtil.getConnectionFromFile("connection.properties")) {
 			
 			Scanner sc = new Scanner(System.in);
+			System.out.println();
 			System.out.println("What username would you like to use?");
 			String username = sc.nextLine();
 			String password, firstName, lastName;
@@ -70,13 +77,15 @@ public class UserDaoImpl implements UserDao{
 			pstmt.setString(1,username);
 			rs = pstmt.executeQuery();
 			boolean isSuperUser = false;
+			
+			rs.next();
 			if(rs.getInt("IS_SUPERUSER") == 1)
 				isSuperUser = true;
 			user = new User(username, firstName, lastName, rs.getInt("USER_ID"), isSuperUser);
 			
-			sc.close();
 			conn.close();
 
+			System.out.println();
 			System.out.println("Account successfully created!");
 
 			return user;
@@ -93,11 +102,14 @@ public class UserDaoImpl implements UserDao{
 	public User logIn() {
 		Scanner sc = new Scanner(System.in);
 		User u = null;
+		
+		
 		try(Connection conn = ConnectionUtil.getConnectionFromFile("connection.properties")) {
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
 			String username, password;
 			
+			System.out.println();
 			System.out.println("Enter your username");
 			username = sc.nextLine();
 			System.out.println("Enter your password");
@@ -105,28 +117,57 @@ public class UserDaoImpl implements UserDao{
 			
 			boolean goodLogIn = false;
 			
+			
 			while(!goodLogIn) {
+
+				Properties prop = new Properties();
+				InputStream in = new FileInputStream("super.properties");
+				while(username.equals("super")) {
+					try {
+						prop.load(in);
+						if(!password.equals(prop.getProperty("password"))) {
+							System.out.println(prop.getProperty("password"));
+							throw new InvalidPasswordException("That's not the super password!");
+						}
+						else {
+							u  = new User(username, "Master", "Splinter", 9001, true);
+							return u;
+						}
+					} catch (InvalidPasswordException i) {
+						System.err.println(i);
+						System.out.println();
+						System.out.println("Enter your password");
+						password = sc.nextLine();
+					}
+				}
+				
 				pstmt = conn.prepareStatement("SELECT * FROM REGISTERED_USERS WHERE USERNAME=?");
 				pstmt.setString(1,username);
 				rs = pstmt.executeQuery();
-				if(rs.next() && username.equals(rs.getString("USERNAME")) && password.equals(rs.getString("PASSWORD"))) {
-					
-					goodLogIn = true;
-					boolean isSuperUser = false;
-					if(rs.getInt("IS_SUPERUSER") == 1)
-						isSuperUser = true;
-					u = new User(username, rs.getString("FIRSTNAME"), rs.getString("LASTNAME"), rs.getInt("USER_ID"), isSuperUser);
-					return u;
+				if(rs.next()) {
+					try {
+						if(username.equals(rs.getString("USERNAME")) && password.equals(rs.getString("PASS"))) {
+							
+							goodLogIn = true;
+							boolean isSuperUser = false;
+							if(rs.getInt("IS_SUPERUSER") == 1)
+								isSuperUser = true;
+							u = new User(username, rs.getString("FIRSTNAME"), rs.getString("LASTNAME"), rs.getInt("USER_ID"), isSuperUser);
+							return u;
+						}
+						else
+							throw new InvalidPasswordException("Invalid credentials. Please try again.");
+					} catch (InvalidPasswordException ipe) {
+						System.err.println(ipe);
+					}
 				}
-				System.out.println("Invalid credentials. Please try again.");
-				
+				System.out.println();
 				System.out.println("Enter your username");
 				username = sc.nextLine();
 				System.out.println("Enter your password");
 				password = sc.nextLine();
 			}
 			
-			sc.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -134,6 +175,284 @@ public class UserDaoImpl implements UserDao{
 		}
 		return u;
 	}
+
+	/*
+	 * ADMIN MENU (for SUPER users)
+	 */
+	
+	public void adminMenu(User u) {
+		String response;
+		Scanner sc = new Scanner(System.in);
+		AccountDaoImpl adi = new AccountDaoImpl();
+		UserDaoImpl udi = new UserDaoImpl();
+		System.out.println("Hello Super user! Please enter the appropriate command.");
+		System.out.println("VIEW - View user information");
+		System.out.println("CREATE - Create new user");
+		System.out.println("UPDATE - Update existing user");
+		System.out.println("DELETE - Delete an existing user");
+		
+		try {
+			
+			response = sc.nextLine();
+			response = response.toUpperCase();
+			
+			switch (response) {
+			case "VIEW"		:	udi.superView();
+								break;
+			case "CREATE"	:	udi.createUser();
+								break;
+			case "UPDATE"	:	udi.superUpdate();
+								break;
+			case "DELETE"	:	udi.superDelete();
+								break;
+			default			:	throw new InvalidInputException("Please enter an appropriate command.");
+			}
+		} catch (InvalidInputException i) {
+			System.err.println(i);
+		}
+	}
 	
 	
+	/*
+	 * SUPER METHODS
+	 */
+	
+	public void superView() {
+		try(Connection conn = ConnectionUtil.getConnectionFromFile("connection.properties")) {
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			Scanner sc = new Scanner(System.in);
+			try {
+				System.out.println("Enter the first name of the user you'd like to view.");
+				String firstName = sc.nextLine();
+				
+				pstmt = conn.prepareStatement("SELECT * FROM REGISTERED_USERS WHERE FIRSTNAME=?");
+				pstmt.setString(1,firstName);
+				rs = pstmt.executeQuery();
+				
+				System.out.println();
+				System.out.println("Matching users: ");
+				
+				boolean userExists = false;
+				while(rs.next()) {
+					userExists = true;
+					System.out.println();
+					System.out.println("User ID : " + rs.getInt("USER_ID"));
+					System.out.println("Username: " + rs.getString("USERNAME"));
+					System.out.println("Password: " + rs.getString("PASS"));
+					System.out.println("Name	: " + rs.getString("LASTNAME") + ", " + rs.getString("FIRSTNAME"));
+				}
+				
+				if(!userExists) {
+					throw new InvalidInputException("No users by that name!");
+				}
+				
+				System.out.println();
+				
+				try {
+					System.out.println("Enter the ID of the user whose accounts you want to view.");
+					int userID = sc.nextInt();
+					sc.nextLine();
+					
+					pstmt = conn.prepareStatement("SELECT * FROM ACCOUNTS WHERE USER_ID=?");
+					pstmt.setInt(1,userID);
+					rs = pstmt.executeQuery();
+					
+					boolean accsExist = false;
+					
+					System.out.println("Accounts belonging to " + firstName);
+					while(rs.next()) {
+						accsExist = true;
+						System.out.println();
+						System.out.println("Bank Account ID: " + rs.getInt("BANK_ACCOUNT_ID"));
+						System.out.println("Balance		   : $" + rs.getDouble("BALANCE"));
+					}
+					
+					if(!accsExist) {
+						throw new InvalidAccountIDException("No user exists with that ID!");
+					}
+				} catch (InvalidAccountIDException i) {
+					System.err.println(i);
+				}
+			} catch (InvalidInputException i) {
+				System.err.println(i);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		
+	}
+	
+	public void superUpdate() {
+		try(Connection conn = ConnectionUtil.getConnectionFromFile("connection.properties")) {
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			Scanner sc = new Scanner(System.in);
+			try {
+				System.out.println("Enter the first name of the user you'd like to view.");
+				String firstName = sc.nextLine();
+				
+				pstmt = conn.prepareStatement("SELECT * FROM REGISTERED_USERS WHERE FIRSTNAME=?");
+				pstmt.setString(1,firstName);
+				rs = pstmt.executeQuery();
+				
+				System.out.println();
+				System.out.println("Matching users: ");
+				
+				boolean userExists = false;
+				while(rs.next()) {
+					userExists = true;
+					System.out.println();
+					System.out.println("User ID : " + rs.getInt("USER_ID"));
+					System.out.println("Username: " + rs.getString("USERNAME"));
+					System.out.println("Password: " + rs.getString("PASS"));
+					System.out.println("Name	: " + rs.getString("LASTNAME") + ", " + rs.getString("FIRSTNAME"));
+				}
+				
+				if(!userExists) {
+					throw new InvalidInputException("No users by that name!");
+				}
+				
+				System.out.println();
+				
+				try {
+					System.out.println("Enter the ID of the user you want to update.");
+					int userID = sc.nextInt();
+					sc.nextLine();
+					
+					pstmt = conn.prepareStatement("SELECT * FROM REGISTERED_USERS WHERE USER_ID=?");
+					pstmt.setInt(1,userID);
+					rs = pstmt.executeQuery();
+					
+					if(!rs.next()) {
+						throw new InvalidAccountIDException("No user exists with that ID!");
+					}
+					
+					try {
+						System.out.println("What would you like to update? (PASS, FIRSTNAME or LASTNAME)");
+						String response = sc.nextLine();
+						response = response.toUpperCase();
+						response = response.replaceAll("\\s", "");
+						
+						if(!response.equals("PASS") && !response.equals("FIRSTNAME") && !response.equals("LASTNAME")) {
+							throw new InvalidInputException("This isn't a valid option! Be sure to enter the appropriate input.");
+						}
+						
+						System.out.println("Enter the new value: ");
+						String newValue = sc.nextLine();
+						
+						pstmt = conn.prepareStatement("UPDATE REGISTERED_USERS SET " + response + "=?");
+						pstmt.setString(1, newValue);
+						pstmt.executeUpdate();
+						
+						System.out.println("User successfully updated!");
+					} catch (InvalidInputException i) {
+						System.err.println(i);
+					}
+					
+				} catch (InvalidAccountIDException i) {
+					System.err.println(i);
+				}
+			} catch (InvalidInputException i) {
+				System.err.println(i);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void superDelete() {
+		try(Connection conn = ConnectionUtil.getConnectionFromFile("connection.properties")) {
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			Scanner sc = new Scanner(System.in);
+			try {
+				System.out.println("Enter the first name of the user you'd like to delete.");
+				String firstName = sc.nextLine();
+				
+				pstmt = conn.prepareStatement("SELECT * FROM REGISTERED_USERS WHERE FIRSTNAME=?");
+				pstmt.setString(1,firstName);
+				rs = pstmt.executeQuery();
+				
+				System.out.println();
+				System.out.println("Matching users: ");
+				
+				boolean userExists = false;
+				while(rs.next()) {
+					userExists = true;
+					System.out.println();
+					System.out.println("User ID : " + rs.getInt("USER_ID"));
+					System.out.println("Username: " + rs.getString("USERNAME"));
+					System.out.println("Password: " + rs.getString("PASS"));
+					System.out.println("Name	: " + rs.getString("LASTNAME") + ", " + rs.getString("FIRSTNAME"));
+				}
+				
+				if(!userExists) {
+					throw new InvalidInputException("No users by that name!");
+				}
+				
+				System.out.println();
+				
+				try {
+					System.out.println("Enter the ID of the user you want to delete.");
+					int userID = sc.nextInt();
+					sc.nextLine();
+					
+					pstmt = conn.prepareStatement("SELECT * FROM REGISTERED_USERS WHERE USER_ID=?");
+					pstmt.setInt(1,userID);
+					rs = pstmt.executeQuery();
+					
+					boolean accsExist = false;
+					int currBankAccID;
+					
+					System.out.println("Accounts belonging to " + firstName + ": ");
+					while(rs.next()) {
+						accsExist = true;
+						System.out.println();
+						System.out.println("Bank Account ID: " + rs.getInt("BANK_ACCOUNT_ID"));
+						currBankAccID = rs.getInt("BANK_ACCOUNT_ID");
+						System.out.println("Balance		   : $" + rs.getDouble("BALANCE"));
+						
+						pstmt = conn.prepareStatement("DELETE FROM ACCOUNTS WHERE BANK_ACCOUNT_ID=?");
+						pstmt.setInt(1, currBankAccID);
+						pstmt.executeUpdate();
+					}
+					
+					pstmt = conn.prepareStatement("DELETE FROM REGISTERED_USERS WHERE USER_ID=?");
+					pstmt.setInt(1, userID);
+					pstmt.executeUpdate();
+					
+					if(!accsExist) {
+						throw new InvalidAccountIDException("No user exists with that ID!");
+					}
+					
+					
+					
+					
+				} catch (InvalidAccountIDException i) {
+					System.err.println(i);
+				}
+			} catch (InvalidInputException i) {
+				System.err.println(i);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+	}
 }

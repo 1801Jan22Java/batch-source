@@ -5,4 +5,6 @@ import com.revature.beans.User;
 public interface UserDao {
 	public User createUser();
 	public User logIn();
+
+	public void adminMenu(User u);
 }
