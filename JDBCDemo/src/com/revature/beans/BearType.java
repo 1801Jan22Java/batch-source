@@ -2,6 +2,10 @@ package com.revature.beans;
 
 public class BearType {
 
+	private int id;
+	private String name;
+	
+	
 	public BearType(String name) {
 		super();
 		this.name = name;
@@ -14,8 +18,7 @@ public class BearType {
 	public BearType() {
 		super();
 	}
-	private int id;
-	private String name;
+	
 	public int getId() {
 		return id;
 	}

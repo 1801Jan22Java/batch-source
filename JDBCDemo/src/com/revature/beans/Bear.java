@@ -3,6 +3,14 @@ package com.revature.beans;
 import java.util.Date;
 
 public class Bear {
+	
+	private int id;
+	private String name;
+	private Cave cave;
+	private BearType bearType;
+	private int weight;
+	private Date birthdate;
+
 
 	public Bear(String name, Cave cave, BearType bearType, int weight, Date birthdate) {
 		super();
@@ -27,12 +35,6 @@ public class Bear {
 		super();
 	}
 
-	private int id;
-	private String name;
-	private Cave cave;
-	private BearType bearType;
-	private int weight;
-	private Date birthdate;
 
 	public int getId() {
 		return id;
