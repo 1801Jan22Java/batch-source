@@ -1,15 +1,18 @@
 package Beans;
 
+import com.revature.Exceptions.ZeroBalanceException;
+
 
 public class CheckingAccount extends Account {
 
 	AccountType accountType = new AccountType(2,"Checking");
 	
-	public CheckingAccount(float initialBalance, int userId)
+	public CheckingAccount(float initialBalance, int userId) 
 	{
-		
 		super(initialBalance,userId);
 		super.accountType=accountType;
+		
+
 	}
 	@Override
 	public void deposit(float funds) {
