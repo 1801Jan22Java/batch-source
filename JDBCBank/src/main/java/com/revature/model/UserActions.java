@@ -117,7 +117,10 @@ public class UserActions {
     			newTransaction.addTransaction(user, bankAccount.viewBankAccountByID(accountID, user), transactionType, money);
     			break;
     		case 4:
-    			System.out.println("Viewing transactions");
+    			System.out.println("Which Account do you want to look at?");
+    			System.out.println(bankAccount.viewBankAccounts(user));
+    			accountID = sc.nextInt();
+    			System.out.println(newTransaction.viewAllTransactions(user, accountID));
     			break;
     		case 5:
     			System.out.println("Creating an account");

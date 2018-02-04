@@ -9,7 +9,7 @@ import com.revature.beans.User;
 
 public interface TransactionDAO {
 	
-	public List<Transaction> viewAllTransactions(User user, BankAccount b);
+	public List<Transaction> viewAllTransactions(User user, int accountID);
 	public void addTransaction(User user, BankAccount b, TransactionType transactionType, double amount);
 	
 }

@@ -5,27 +5,19 @@ public class Transaction {
 	public Transaction() {
 		super();
 	}
-	public Transaction(int id, User user, BankAccount bankAccount, TransactionType transactionType, int amountTransfered) {
+	public Transaction( User user, BankAccount bankAccount, TransactionType transactionType, double amountTransfered) {
 		super();
-		this.id = id;
 		this.user = user;
 		this.bankAccount = bankAccount;
 		this.transactionType = transactionType;
 		this.amountTransfered = amountTransfered;
 	}
 	
-	private int id;
 	private User user;
 	private BankAccount bankAccount;
 	private TransactionType transactionType;
-	private int amountTransfered;
+	private double amountTransfered;
 	
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
 	public User getUser() {
 		return user;
 	}
@@ -44,7 +36,7 @@ public class Transaction {
 	public void setTransactionType(TransactionType transactionType) {
 		this.transactionType = transactionType;
 	}
-	public int getAmountTransfered() {
+	public double getAmountTransfered() {
 		return amountTransfered;
 	}
 	public void setAmountTransfered(int amountTransfered) {
@@ -52,8 +44,8 @@ public class Transaction {
 	}
 	@Override
 	public String toString() {
-		return "Transaction [id=" + id + ", user=" + user + ", bankAccount=" + bankAccount + ", transactionType="
-				+ transactionType + ", amountTransfered=" + amountTransfered + "]";
+		return "Transaction [user=" + user.getUsername() + ", bankAccount=" + bankAccount.getId() + ", transactionType="
+				+ transactionType.getType() + ", amountTransfered=" + amountTransfered + "]";
 	}
 	
 	
