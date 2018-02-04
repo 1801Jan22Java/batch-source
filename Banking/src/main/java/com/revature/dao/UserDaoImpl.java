@@ -269,7 +269,7 @@ public class UserDaoImpl implements UserDao{
 					}
 					
 					if(!accsExist) {
-						throw new InvalidAccountIDException("No user exists with that ID!");
+						throw new InvalidAccountIDException("User with that ID has no accounts!");
 					}
 				} catch (InvalidAccountIDException i) {
 					System.err.println(i);
@@ -403,45 +403,35 @@ public class UserDaoImpl implements UserDao{
 				
 				System.out.println();
 				
-				try {
-					System.out.println("Enter the ID of the user you want to delete.");
-					int userID = sc.nextInt();
-					sc.nextLine();
+				System.out.println("Enter the ID of the user you want to delete.");
+				int userID = sc.nextInt();
+				sc.nextLine();
+				
+				pstmt = conn.prepareStatement("SELECT * FROM ACCOUNTS WHERE USER_ID=?");
+				pstmt.setInt(1,userID);
+				rs = pstmt.executeQuery();
+				
+				int currBankAccID;
+				
+				System.out.println("Accounts belonging to " + firstName + ": ");
+				while(rs.next()) {
+					System.out.println();
+					System.out.println("Bank Account ID: " + rs.getInt("BANK_ACCOUNT_ID"));
+					currBankAccID = rs.getInt("BANK_ACCOUNT_ID");
+					System.out.println("Balance		   : $" + rs.getDouble("BALANCE"));
 					
-					pstmt = conn.prepareStatement("SELECT * FROM REGISTERED_USERS WHERE USER_ID=?");
-					pstmt.setInt(1,userID);
-					rs = pstmt.executeQuery();
-					
-					boolean accsExist = false;
-					int currBankAccID;
-					
-					System.out.println("Accounts belonging to " + firstName + ": ");
-					while(rs.next()) {
-						accsExist = true;
-						System.out.println();
-						System.out.println("Bank Account ID: " + rs.getInt("BANK_ACCOUNT_ID"));
-						currBankAccID = rs.getInt("BANK_ACCOUNT_ID");
-						System.out.println("Balance		   : $" + rs.getDouble("BALANCE"));
-						
-						pstmt = conn.prepareStatement("DELETE FROM ACCOUNTS WHERE BANK_ACCOUNT_ID=?");
-						pstmt.setInt(1, currBankAccID);
-						pstmt.executeUpdate();
-					}
-					
-					pstmt = conn.prepareStatement("DELETE FROM REGISTERED_USERS WHERE USER_ID=?");
-					pstmt.setInt(1, userID);
+					pstmt = conn.prepareStatement("DELETE FROM ACCOUNTS WHERE BANK_ACCOUNT_ID=?");
+					pstmt.setInt(1, currBankAccID);
 					pstmt.executeUpdate();
-					
-					if(!accsExist) {
-						throw new InvalidAccountIDException("No user exists with that ID!");
-					}
-					
-					
-					
-					
-				} catch (InvalidAccountIDException i) {
-					System.err.println(i);
 				}
+				
+				pstmt = conn.prepareStatement("DELETE FROM REGISTERED_USERS WHERE USER_ID=?");
+				pstmt.setInt(1, userID);
+				pstmt.executeUpdate();
+				
+				System.out.println("User " + firstName + " with ID " + userID + " successfully deleted!");
+				System.out.println("All accounts belonging to " + firstName + " were also deleted.");
+					
 			} catch (InvalidInputException i) {
 				System.err.println(i);
 			}
