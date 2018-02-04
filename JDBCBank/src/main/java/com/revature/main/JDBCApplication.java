@@ -56,9 +56,9 @@ public class JDBCApplication {
 					// Proceed to account information if all is well.
 					// Proceed to superuser if Roleid is 1
 					if (bUser.getRoleId() == 1) {
-						AccountSuperAccess(bUser);
+						AccountSuperAccess(bUser, scanner);
 					} else {
-						AccountAccess(bUser);
+						AccountAccess(bUser,scanner);
 					}
 
 				} catch (LoginNotValidException e) {
@@ -97,9 +97,8 @@ public class JDBCApplication {
 	// Check roleid
 	// : if 1 : go to superuser account access mode
 	// : if 2 : go to normal account access mode
-	private static void AccountAccess(BankUsers bu) {
+	private static void AccountAccess(BankUsers bu, Scanner scanner1) {
 		boolean keepGoing = true;
-		Scanner scanner1 = new Scanner(System.in);
 		AccountOracle accountOps = new AccountOracle();
 
 		while (keepGoing) {
@@ -171,13 +170,11 @@ public class JDBCApplication {
 			}
 		}
 
-		scanner1.close();
 	}
 
 	// Special access option for super users
-	private static void AccountSuperAccess(BankUsers bu) {
+	private static void AccountSuperAccess(BankUsers bu, Scanner scanner) {
 		boolean keepGoing = true;
-		Scanner scanner = new Scanner(System.in);
 		UserOracle usr = null;
 
 		while (keepGoing) {
@@ -243,6 +240,5 @@ public class JDBCApplication {
 			}
 		}
 
-		scanner.close();
 	}
 }

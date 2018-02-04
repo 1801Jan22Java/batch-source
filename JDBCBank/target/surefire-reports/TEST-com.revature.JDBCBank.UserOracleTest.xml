@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="7" failures="4" name="com.revature.JDBCBank.UserOracleTest" time="0.315" errors="1" skipped="0">
+<testsuite tests="7" failures="4" name="com.revature.JDBCBank.UserOracleTest" time="0.031" errors="1" skipped="0">
   <properties>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Users\kudo5\scoop\apps\openjdk\current\jre\bin"/>
@@ -46,7 +46,7 @@
     <property name="java.vm.specification.version" value="1.8"/>
     <property name="sun.arch.data.model" value="64"/>
     <property name="java.home" value="C:\Users\kudo5\scoop\apps\openjdk\current\jre"/>
-    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher test"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher package"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
     <property name="user.language" value="en"/>
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
@@ -65,7 +65,7 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="com.revature.JDBCBank.UserOracleTest" name="newUserCreatedValid" time="0.046">
+  <testcase classname="com.revature.JDBCBank.UserOracleTest" name="newUserCreatedValid" time="0.005">
     <failure message="expected:&lt;[]&gt; but was:&lt;[test]&gt;" type="org.junit.ComparisonFailure">org.junit.ComparisonFailure: expected:&lt;[]&gt; but was:&lt;[test]&gt;
 	at org.junit.Assert.assertEquals(Assert.java:115)
 	at org.junit.Assert.assertEquals(Assert.java:144)
@@ -171,7 +171,7 @@ java.sql.SQLException: No suitable driver found for jdbc:oracle:thin:@kudodemo.c
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
 </system-err>
   </testcase>
-  <testcase classname="com.revature.JDBCBank.UserOracleTest" name="deleteInvalidUser" time="0.053">
+  <testcase classname="com.revature.JDBCBank.UserOracleTest" name="deleteInvalidUser" time="0.003">
     <failure type="java.lang.AssertionError">java.lang.AssertionError
 	at org.junit.Assert.fail(Assert.java:86)
 	at org.junit.Assert.assertTrue(Assert.java:41)
@@ -279,7 +279,7 @@ java.sql.SQLException: No suitable driver found for jdbc:oracle:thin:@kudodemo.c
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
 </system-err>
   </testcase>
-  <testcase classname="com.revature.JDBCBank.UserOracleTest" name="deleteValidUser" time="0.116">
+  <testcase classname="com.revature.JDBCBank.UserOracleTest" name="deleteValidUser" time="0.015">
     <failure type="java.lang.AssertionError">java.lang.AssertionError
 	at org.junit.Assert.fail(Assert.java:86)
 	at org.junit.Assert.assertTrue(Assert.java:41)
@@ -421,8 +421,8 @@ java.sql.SQLException: No suitable driver found for jdbc:oracle:thin:@kudodemo.c
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
 </system-err>
   </testcase>
-  <testcase classname="com.revature.JDBCBank.UserOracleTest" name="invalidLoginEmptyStringsReturnsNull" time="0.016"/>
-  <testcase classname="com.revature.JDBCBank.UserOracleTest" name="validLogin" time="0.031">
+  <testcase classname="com.revature.JDBCBank.UserOracleTest" name="invalidLoginEmptyStringsReturnsNull" time="0.001"/>
+  <testcase classname="com.revature.JDBCBank.UserOracleTest" name="validLogin" time="0.002">
     <error type="java.lang.NullPointerException">java.lang.NullPointerException
 	at com.revature.JDBCBank.UserOracleTest.validLogin(UserOracleTest.java:33)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
@@ -492,8 +492,8 @@ java.sql.SQLException: No suitable driver found for jdbc:oracle:thin:@kudodemo.c
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
 </system-err>
   </testcase>
-  <testcase classname="com.revature.JDBCBank.UserOracleTest" name="displayAllUsers" time="0.022"/>
-  <testcase classname="com.revature.JDBCBank.UserOracleTest" name="checkIfUserUpdated" time="0.031">
+  <testcase classname="com.revature.JDBCBank.UserOracleTest" name="displayAllUsers" time="0.003"/>
+  <testcase classname="com.revature.JDBCBank.UserOracleTest" name="checkIfUserUpdated" time="0.002">
     <failure message="arrays first differed at element [0]; expected:&lt;0&gt; but was:&lt;null&gt;" type="arrays first differed at element [0]; expected">arrays first differed at element [0]; expected:&lt;0&gt; but was:&lt;null&gt;
 	at org.junit.internal.ComparisonCriteria.arrayEquals(ComparisonCriteria.java:55)
 	at org.junit.Assert.internalArrayEquals(Assert.java:532)

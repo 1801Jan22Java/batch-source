@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: com.revature.JDBCBank.AccountOracleTest
 -------------------------------------------------------------------------------
-Tests run: 14, Failures: 7, Errors: 0, Skipped: 0, Time elapsed: 0.652 sec <<< FAILURE!
-depositZeroSuccessful(com.revature.JDBCBank.AccountOracleTest)  Time elapsed: 0.045 sec  <<< FAILURE!
+Tests run: 14, Failures: 7, Errors: 0, Skipped: 0, Time elapsed: 0.348 sec <<< FAILURE!
+depositZeroSuccessful(com.revature.JDBCBank.AccountOracleTest)  Time elapsed: 0.037 sec  <<< FAILURE!
 java.lang.AssertionError
 	at org.junit.Assert.fail(Assert.java:86)
 	at org.junit.Assert.assertTrue(Assert.java:41)
@@ -74,7 +74,7 @@ java.lang.AssertionError
 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
 
-withdrawSuccessful(com.revature.JDBCBank.AccountOracleTest)  Time elapsed: 0.036 sec  <<< FAILURE!
+withdrawSuccessful(com.revature.JDBCBank.AccountOracleTest)  Time elapsed: 0.009 sec  <<< FAILURE!
 java.lang.AssertionError
 	at org.junit.Assert.fail(Assert.java:86)
 	at org.junit.Assert.assertTrue(Assert.java:41)
@@ -110,7 +110,7 @@ java.lang.AssertionError
 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
 
-depositGreaterThanZeroSuccessful(com.revature.JDBCBank.AccountOracleTest)  Time elapsed: 0.015 sec  <<< FAILURE!
+depositGreaterThanZeroSuccessful(com.revature.JDBCBank.AccountOracleTest)  Time elapsed: 0.007 sec  <<< FAILURE!
 java.lang.AssertionError
 	at org.junit.Assert.fail(Assert.java:86)
 	at org.junit.Assert.assertTrue(Assert.java:41)
@@ -146,7 +146,7 @@ java.lang.AssertionError
 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
 
-depositNegativeAmount(com.revature.JDBCBank.AccountOracleTest)  Time elapsed: 0.022 sec  <<< FAILURE!
+depositNegativeAmount(com.revature.JDBCBank.AccountOracleTest)  Time elapsed: 0.001 sec  <<< FAILURE!
 java.lang.AssertionError
 	at org.junit.Assert.fail(Assert.java:86)
 	at org.junit.Assert.assertTrue(Assert.java:41)
@@ -182,7 +182,7 @@ java.lang.AssertionError
 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
 
-withdrawNegativeAmount(com.revature.JDBCBank.AccountOracleTest)  Time elapsed: 0.016 sec  <<< FAILURE!
+withdrawNegativeAmount(com.revature.JDBCBank.AccountOracleTest)  Time elapsed: 0.003 sec  <<< FAILURE!
 java.lang.AssertionError
 	at org.junit.Assert.fail(Assert.java:86)
 	at org.junit.Assert.assertTrue(Assert.java:41)
@@ -218,7 +218,7 @@ java.lang.AssertionError
 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
 
-deleteEmptyAccount(com.revature.JDBCBank.AccountOracleTest)  Time elapsed: 0.016 sec  <<< FAILURE!
+deleteEmptyAccount(com.revature.JDBCBank.AccountOracleTest)  Time elapsed: 0.002 sec  <<< FAILURE!
 java.lang.AssertionError
 	at org.junit.Assert.fail(Assert.java:86)
 	at org.junit.Assert.assertTrue(Assert.java:41)
