@@ -6,9 +6,9 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.Scanner;
 
-public class Challenge {
+public class Challenge2 {
 	
-	public static int mutator(String bank, String gene_start,String gene_end) {
+	public static int mutator(String bank, String gene_start,String gene_e) {
 		String [][] mismatches = new String[gene_start.length()][1];
 		String[]bank2 = bank.split(",");
 		String gene_start2 = bank2[bank2.length-2];
@@ -25,23 +25,14 @@ public class Challenge {
 			
 		}*/
 		
-		for(String h : bank2) {
-			System.out.println(h);
-		}
-		
-		for(int l = 0; l< gene_start.length();l++) {
-			
+		/*for(int l = 0; l<= gene_start.length();l++) {
 			if(gene_start.charAt(l) != gene_end.charAt(l)) {
 				
 				for(int n = 0;n<bank2.length;n++) {
-					//System.out.println("got here");
-					for(int m = last_mutation; m<gene_start.length();m++) {
+					
+					for(int m = 0; m<last_mutation;m++) {
 						if(gene_start.charAt(l) != bank2[n].charAt(m)) {
-							//System.out.println("got here");
-							
-							System.out.println("m is : "+bank2[n].charAt(m)+" l is : "+l );
 							if(m == l) {
-								System.out.println("got here");
 								mutations+=1;
 							}
 							else{
@@ -50,14 +41,14 @@ public class Challenge {
 						}
 					}
 				}
-				//mismatches[l][0] = mismatches[l][gene_end.charAt(l)];
+				mismatches[l][0] = mismatches[l][gene_end.charAt(l)];
 			}
-		}
+		}*/
 		
-		if(same == true) {
+		if(same = true) {
 			return 0;
 		}else {
-			return mutations+1;
+			return mutations;
 		}
 		
 		
@@ -86,18 +77,7 @@ public class Challenge {
 		getBank();
 		
 		
-		//System.out.print(mutator(getBank(),"AACCGGTT","AAACGGTA"));
-		String s = null;
-		Object p = new Object();
-		
-		boolean b1 = false;
-		boolean b2 = false;
-		
-		if(b1 = b2= b1) {
-			System.out.println("worked");
-		}
-		//System.out.println(p);
-		//System.out.println(s+ "fjdlsj");
+		System.out.print(mutator(getBank(),"AACCGGTT","AAACGGTA"));
 		
 			//System.out.println(mutator(getBank()));
 	}
