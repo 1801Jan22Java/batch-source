@@ -52,25 +52,47 @@ public class UserDaoImpl implements UserDao {
 			return user;
 		}
 	}
-
+	
+	private User createUserObject(){
+		User user = null;
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Please enter user firstname");
+		String name = sc.nextLine();
+		System.out.println("Please enter user lastname");
+		String lname = sc.nextLine();
+		System.out.println("Please enter user SSN");
+		String ssn = sc.nextLine();
+		System.out.println("Please enter user username");
+		String username=sc.nextLine();
+		System.out.println("Please enter user password");
+		String pw = sc.nextLine();
+		user =new User(username,pw,name,lname,ssn);
+		return user;
+	}
 	@Override
 	public void addUser(User user) {
 
+		if(!validateSuperUser(user))
+		{
+			System.out.println("You do not carry the membership");
+			System.out.println(user.getSuperUser());
+		}
 		try(Connection conn = ConnectionUtil.getConnectionFromFile(filename))
 		{
-
+			User user2= createUserObject();
 			conn.setAutoCommit(false);
 			System.out.println("In try statement");
 			String sqlStmt="{CALL NEW_USER_PROC(?,?,?,?,?,?)}";
 			CallableStatement cs = conn.prepareCall(sqlStmt);
-			cs.setString(1,user.getUserName());
-			cs.setString(2,user.getPassword());
-			cs.setString(3, user.getFirstName());
-			cs.setString(4,user.getLastName());
-			cs.setInt(5, user.getSuperUser());
-			cs.setString(6, user.getSSN());
+			cs.setString(1,user2.getUserName());
+			cs.setString(2,user2.getPassword());
+			cs.setString(3, user2.getFirstName());
+			cs.setString(4,user2.getLastName());
+			cs.setInt(5, user2.getSuperUser());
+			cs.setString(6, user2.getSSN());
 			cs.execute();
 			conn.commit();
+			System.out.println("User added");
 
 		} catch (SQLException | IOException e) {
 			//con.rollback();
@@ -136,19 +158,7 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public User createUser() {
-		User user = null;
-		Scanner sc = new Scanner(System.in);
-		System.out.println("Please enter your firstname");
-		String name = sc.nextLine();
-		System.out.println("Please enter your lastname");
-		String lname = sc.nextLine();
-		System.out.println("Please enter your SSN");
-		String ssn = sc.nextLine();
-		System.out.println("Please enter your username");
-		String username=sc.nextLine();
-		System.out.println("Please enter your password");
-		String pw = sc.nextLine();
-		user =new User(username,pw,name,lname,ssn);
+		User user = createUserObject();
 		addUser(user);
 		System.out.println("User creation successful!");
 		return user;
@@ -207,7 +217,8 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public void logout() {
+	public User logout() {
+		User user =null;
 		try(Connection conn = new ConnectionUtil().getConnectionFromFile(filename))
 		{
 			try{
@@ -219,8 +230,11 @@ public class UserDaoImpl implements UserDao {
 				e.printStackTrace();
 			}
 			
+			
 		}
-		catch(SQLException | IOException e){e.printStackTrace();}
+		catch(SQLException | IOException e){e.printStackTrace();
+		}
+		finally{return user;}
 	}
 
 	@Override

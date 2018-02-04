@@ -50,9 +50,7 @@ public class BankDriver {
 			}
 			AccountDaoImpl adi =new AccountDaoImpl();
 			User user = udi.getUserByCredentials(username, password);
-			System.out.println("Please make a selection:\n 1: View balance \n2: Make deposit\n3: Make withdrawal\n4:Close account.\n5: Create account.\n6: Delete user");
-			int option = sc.nextInt();
-			adi.selectAction(option, user);
+			adi.showMenu(user);
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

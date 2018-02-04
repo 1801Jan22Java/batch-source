@@ -160,6 +160,32 @@ public class AccountDaoImpl implements AccountDao{
 		return null;
 	}
 
+	public void showMenu(User user)
+	{
+		UserDaoImpl udi = new UserDaoImpl();
+		Scanner sc = new Scanner(System.in);
+		if(udi.validateSuperUser(user)){
+			System.out.println("Please make a selection:\n 1: View balance "
+					+ "\n2: Make deposit\n3: Make withdrawal\n4:Close account."
+					+ "\n5: Create account.\n6: Delete user\n 7: Create user\n10: Log out");
+		}
+		else
+		{
+			System.out.println("Please make a selection:\n 1: View balance "
+					+ "\n2: Make deposit\n3: Make withdrawal\n4:Close account."
+					+ "\n5: Create account.\n10: Log out");
+		}
+		try{
+		int newOption = sc.nextInt();
+		selectAction(newOption, user);	
+		}
+		catch(NumberFormatException e)
+		{
+			System.out.println("You must input a number value");
+			e.printStackTrace();
+		}
+		
+	}
 	@Override
 	public void selectAction(int option, User user) {
 		UserDaoImpl udi = new UserDaoImpl(); 
@@ -170,12 +196,14 @@ public class AccountDaoImpl implements AccountDao{
 			System.out.println("Please enter the account ID."); 
 			int accountID = sc.nextInt(); 
 			showBalance(user,accountID); 
+			showMenu(user);
 			break;
 		case 2: System.out.println("Please enter the account ID."); 
 		accountID = sc.nextInt(); 
 		System.out.println("Please choose an amount to deposit.");
 		float amount = sc.nextFloat();
 		deposit(accountID,amount,user); 
+		showMenu(user);
 		break;
 		case 3 :System.out.println("Please enter the account ID."); 
 		accountID = sc.nextInt(); 
@@ -187,14 +215,18 @@ public class AccountDaoImpl implements AccountDao{
 		{
 			e.printStackTrace();
 		}
+		finally{
+			showMenu(user);
+		}
 		break;	
 		case 4: System.out.println("Please enter the account ID to close");
 		accountID=sc.nextInt();
 		closeAccount(user,accountID);
+		showMenu(user);
 		break;
 		case 5:System.out.println("Would you like a checking or a savings account?  "
 				+ "Enter 1 for a savings account.  Enter 2 for a checking account");
-		
+
 		int userID = udi.getUserID(user);
 		int choice =sc.nextInt();
 		System.out.println("Please enter your initial balance");
@@ -223,7 +255,10 @@ public class AccountDaoImpl implements AccountDao{
 		catch(ZeroBalanceException e){
 			e.printStackTrace();
 		}
-		finally{break;}
+		finally{
+			showMenu(user);
+			break;
+		}
 		case 6: 
 			System.out.println("Please enter the user ID of the user you want to delete");
 			userID=sc.nextInt();
@@ -231,8 +266,16 @@ public class AccountDaoImpl implements AccountDao{
 			System.out.println("User attempting the deletion");
 			System.out.println(udi.getUserID(user));
 			udi.deleteUser(user, user2);
+			showMenu(user);
 			break;
-		default: System.out.println("Invalid choice");
+		case 7:
+			udi.addUser(user);
+			showMenu(user); 
+			break;
+		case 10: user=udi.logout();break;
+		default: 
+			System.out.println("Invalid choice");
+			showMenu(user);
 		}
 
 	}

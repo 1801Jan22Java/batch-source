@@ -12,7 +12,7 @@ public interface UserDao {
 	public int getUserID(User user);
 	public void addUser(User user); 
 	public boolean validateCredentials(String username, String password);
-	public void logout();
+	public User logout();
 	public boolean validateSuperUser(User user);
 	public void deleteUser(User user1,User User2);
 	public User createUser();
