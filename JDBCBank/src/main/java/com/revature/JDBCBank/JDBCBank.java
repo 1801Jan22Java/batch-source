@@ -4,7 +4,7 @@ package com.revature.JDBCBank;
  * Hello world!
  *
  */
-public class App 
+public class JDBCBank 
 {
     public static void main( String[] args )
     {
