@@ -71,4 +71,11 @@ public class User {
 		return credentials.getPassword();
 	}
 
+	@Override
+	public String toString() {
+		return "User [userID=" + userID + ", credentials=" + credentials + ", firstName=" + firstName + ", lastName="
+				+ lastName + ", birthday=" + birthday + ", email=" + email + ", dayRegistered=" + dayRegistered
+				+ ", active=" + active + "]";
+	}
+
 }

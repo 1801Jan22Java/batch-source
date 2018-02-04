@@ -1,21 +1,21 @@
 package com.revature.beans;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 public class Transaction {
 
-	public Transaction(Date transactionTime, int transactionID, Double amount) {
+	public Transaction(LocalDate transactionTime, int transactionID, Double amount) {
 		super();
 		this.transactionTime = transactionTime;
 		this.transactionID = transactionID;
 		this.amount = amount;
 	}
 
-	private Date transactionTime;
+	private LocalDate transactionTime;
 	private int transactionID;
 	private Double amount;
 
-	public Date getTransactionTime() {
+	public LocalDate getTransactionTime() {
 		return transactionTime;
 	}
 
@@ -25,5 +25,10 @@ public class Transaction {
 
 	public Double getAmount() {
 		return amount;
+	}
+
+	@Override
+	public String toString() {
+		return "Transaction amount =" + amount + " , transaction Time = " + transactionTime.getChronology().toString();
 	}
 }

@@ -19,7 +19,7 @@ public class AccountDaoImpl implements AccountDao {
 
 	public static final String filename = "connection.properties";
 
-	public ArrayList<Account> getAccounts(User u) {
+	public ArrayList<Account> getAccounts(User u) { 
 		ArrayList<Account> accs = null;
 		try {
 			Connection con = ConnectionUtil.getConnectionFromFile(filename);
@@ -42,7 +42,7 @@ public class AccountDaoImpl implements AccountDao {
 					amount = rs.getDouble("BALANCE");
 					interest = rs.getDouble("INTEREST");
 					LocalDate when = rs.getDate("STARTDAY").toLocalDate();
-					accs.add(new Account(aid, accountType, amount, interest, when));
+					accs.add(new Account(aid, accountType, amount, interest, accountType, when));
 				}
 			}
 			con.close();
@@ -75,7 +75,7 @@ public class AccountDaoImpl implements AccountDao {
 					interest = rs.getDouble("INTEREST");
 					LocalDate when = rs.getDate("STARTDAY").toLocalDate();
 					con.close();
-					return new Account(aid, accountType, amount, interest, when);
+					return new Account(aid, accountType, amount, interest, accountType, when);
 				}
 			} else {
 				con.close();
@@ -123,6 +123,8 @@ public class AccountDaoImpl implements AccountDao {
 
 	}
 
+	
+	
 	public int getNextAccountID() {
 		int aid = 0;
 		try {
@@ -182,5 +184,7 @@ public class AccountDaoImpl implements AccountDao {
 		}
 
 	}
+
+	
 
 }

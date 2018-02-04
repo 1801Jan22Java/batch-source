@@ -41,7 +41,7 @@ public class UserDaoImpl implements UserDao {
 			Date birthday = null;
 			String email = new String();
 			Date dayRegistered = null;
-			String sql = "SELECT * FROM CUSTOMER;";
+			String sql = "SELECT * FROM CUSTOMER"; // ERROR
 			PreparedStatement ps = con.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
@@ -49,7 +49,7 @@ public class UserDaoImpl implements UserDao {
 				if (valid > 0) {
 					uid = rs.getInt("USERID");
 					uName = rs.getString("USERNAME");
-					password = rs.getString("BALANCE");
+					password = rs.getString("PWORD");
 					firstName = rs.getString("FIRSTNAME");
 					lastName = rs.getString("LASTNAME");
 					birthday = rs.getDate("BIRTHDATE");

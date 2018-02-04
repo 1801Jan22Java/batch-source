@@ -8,6 +8,7 @@ import com.revature.beans.Transaction;
 public interface TransactionDao {
 	public List<Transaction> getTransactions(Account a);
 	public Transaction getTransactionByID(int id);
-	public Transaction addTransaction();
+	public void addTransaction(Transaction t, Account a);
+	public int getNextTransactionID();
 	public void deleteTransaction(Transaction t);
 }

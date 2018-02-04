@@ -1,14 +1,10 @@
 package com.revature.beans;
 
-import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
-
 import com.revature.dao.TransactionDaoImpl;
+import com.revature.util.OverdraftException;
 
-enum AccountTypes {
-		Checking, Savings, IRA, Brokerage, Money_Market
-	}
 
 public class Account {
 	public Account(int id, Double balance, double interestRate, Boolean isEmpty, String accountName, LocalDate dayCreated) {
@@ -29,12 +25,13 @@ public class Account {
 		this.balance = 0.0;
 	}
 	
-	public Account(int aid, String accountType, Double amount, Double interest, LocalDate start) {
+	public Account(int aid, String accountType, Double amount, Double interest, String accountName, LocalDate start) {
 		super();
 		this.accountID = aid;
 		this.accountType = accountType;
 		this.balance = amount;
 		this.interestRate = interest;
+		this.accountName = accountName;
 		this.creationDate = start;
 		this.transactions = this.getTransactions();
 	}
@@ -59,12 +56,14 @@ public class Account {
 	private String accountName; // User-friendly name for UI interactions, not the database. 
 	// E.g, "John's Checking Account", "Mary's Savings account", etc. 
 	
-	public void deposit(Double amount) throws RuntimeException{
+	public void transact(Double amount) throws OverdraftException{
 		
-		if(amount < 0.0) {
-			throw new RuntimeException("Invalid Deposit Amount!");
+		if((balance - amount) < 0.0) {
+			throw new OverdraftException();
 		}
 		
+		TransactionDaoImpl TDI = new TransactionDaoImpl();
+		TDI.addTransaction(new Transaction(LocalDate.now(), TDI.getNextTransactionID(),  amount), this);
 		
 	}
 	
@@ -106,6 +105,15 @@ public class Account {
 
 	public String getAccountType() {
 		return accountType;
+	}
+
+	@Override
+	public String toString() {
+		return (accountName + " contains " + balance + " DOGE");
+	}
+
+	public void setBalance(Double balance) {
+		this.balance = balance;
 	}
 	
 	
