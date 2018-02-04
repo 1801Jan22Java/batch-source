@@ -1,8 +1,10 @@
 package com.revature.model;
 
 import java.io.FileNotFoundException;
+import java.util.List;
 import java.util.Scanner;
 
+import com.revature.beans.BankAccount;
 import com.revature.beans.User;
 import com.revature.dao.BankAccountDAO;
 import com.revature.dao.BankAccountDAOImpl;
@@ -71,7 +73,7 @@ public class UserActions {
     	BankAccountDAO bankAccount = new BankAccountDAOImpl();
     	while(keepGoing) {
     		System.out.println("What would you like to do?");
-    		System.out.println("1. View Bank Account");
+    		System.out.println("1. View Bank Accounts");
     		System.out.println("2. Withdraw Money");
     		System.out.println("3. Deposit Money");
     		System.out.println("4. View Transactions");
@@ -98,8 +100,9 @@ public class UserActions {
     			bankAccount.createAccount("savings", user);
     			break;    			
     		case 6:
-    			System.out.println("Deleting Account");
-    			
+    			System.out.println("Enter the ID of the Account Being Deleted");
+    			int accountID = sc.nextInt();
+    			bankAccount.deleteAccountById(accountID, user);
     			break;
     		case 7:
     			System.out.println("Logging out");

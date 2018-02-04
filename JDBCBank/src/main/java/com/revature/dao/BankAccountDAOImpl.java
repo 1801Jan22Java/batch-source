@@ -1,6 +1,7 @@
 package com.revature.dao;
 
 import java.io.IOException;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -33,9 +34,21 @@ public class BankAccountDAOImpl implements BankAccountDAO{
 		}
 	}
 
-	public void deleteAccount(BankAccount b) {
-		// TODO Auto-generated method stub
-		
+	public void deleteAccountById(int id, User user) {
+		Connection conn;
+		try{
+			conn = ConnectionUtil.getConnectionFromFile(filename);
+			CallableStatement cstmt = conn.prepareCall("{call DELETEBANKACCOUNT(?, ?)}");
+			cstmt.setInt(1, id);
+			cstmt.setInt(2, user.getId());
+			System.out.println("Trying stored procedure call");
+			cstmt.execute();
+			conn.close();
+		} catch (SQLException e){
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public List<BankAccount> viewBankAccounts(User user) {

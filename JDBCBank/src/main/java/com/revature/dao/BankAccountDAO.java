@@ -8,6 +8,6 @@ import com.revature.beans.User;
 public interface BankAccountDAO {
 	
 	public void createAccount(String accountType, User user);
-	public void deleteAccount(BankAccount b);
+	public void deleteAccountById(int id, User user);
 	public List<BankAccount> viewBankAccounts(User user);
 }
