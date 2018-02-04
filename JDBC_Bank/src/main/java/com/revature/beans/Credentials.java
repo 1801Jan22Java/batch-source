@@ -42,6 +42,14 @@ public class Credentials {
 			return false;
 		return true;
 	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
 	
 	
 }

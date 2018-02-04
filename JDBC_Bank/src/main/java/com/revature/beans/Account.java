@@ -1,22 +1,41 @@
 package com.revature.beans;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import com.revature.dao.TransactionDaoImpl;
-import com.revature.util.*;
 
 enum AccountTypes {
 		Checking, Savings, IRA, Brokerage, Money_Market
 	}
 
 public class Account {
-	public Account(int id, Double balance, double interestRate, Boolean isEmpty) {
+	public Account(int id, Double balance, double interestRate, Boolean isEmpty, String accountName, LocalDate dayCreated) {
 		super();
 		this.accountID = id;
 		this.balance = balance;
 		this.interestRate = interestRate;
 		this.isEmpty = isEmpty;
+		this.transactions = this.getTransactions();
+		this.accountName = accountName;
+		creationDate = dayCreated;
+	}
+	
+	public Account(int id) {
+		super();
+		this.accountID = id;
+		this.isEmpty = true;
+		this.balance = 0.0;
+	}
+	
+	public Account(int aid, String accountType, Double amount, Double interest, LocalDate start) {
+		super();
+		this.accountID = aid;
+		this.accountType = accountType;
+		this.balance = amount;
+		this.interestRate = interest;
+		this.creationDate = start;
 		this.transactions = this.getTransactions();
 	}
 	
@@ -28,12 +47,17 @@ public class Account {
 		isEmpty = true;
 	}
 	
+	
+
 	private int accountID;
+	private String accountType;
 	private Double balance;
 	private double interestRate;
 	private Boolean isEmpty;
-	private Date creationDate;
+	private LocalDate creationDate;
 	private ArrayList<Transaction> transactions;
+	private String accountName; // User-friendly name for UI interactions, not the database. 
+	// E.g, "John's Checking Account", "Mary's Savings account", etc. 
 	
 	public void deposit(Double amount) throws RuntimeException{
 		
@@ -47,6 +71,7 @@ public class Account {
 	public ArrayList<Transaction> getTransactions() {
 		TransactionDaoImpl t = new TransactionDaoImpl();
 		ArrayList<Transaction> money = t.getTransactions(this);
+		// i.e, get the transactions that are associated with this instance
 		return money;
 	}
 	
@@ -71,8 +96,16 @@ public class Account {
 		return accountID;
 	}
 
-	public Date getCreationDate() {
+	public LocalDate getCreationDate() {
 		return creationDate;
+	}
+
+	public String getAccountName() {
+		return accountName;
+	}
+
+	public String getAccountType() {
+		return accountType;
 	}
 	
 	
