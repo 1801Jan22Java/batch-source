@@ -2,9 +2,18 @@ package com.revature.beans;
 
 public class User {
 	
-	int id;
-	String username;
-	String password;
+	private int id;
+	private String username;
+	private String password;
+	private boolean isSuperUser;
+	
+	public User(int id, String username, String password, boolean isSuperUser) {
+		super();
+		this.id = id;
+		this.username = username;
+		this.password = password;
+		this.setSuperUser(isSuperUser);
+	}
 	
 	public int getId() {
 		return id;
@@ -30,11 +39,12 @@ public class User {
 		this.password = password;
 	}
 
-	public User(int id, String username, String password) {
-		super();
-		this.id = id;
-		this.username = username;
-		this.password = password;
+	public boolean isSuperUser() {
+		return isSuperUser;
+	}
+
+	public void setSuperUser(boolean isSuperUser) {
+		this.isSuperUser = isSuperUser;
 	}
 	
 }
