@@ -11,9 +11,9 @@ public interface AccountDao {
 	public List<Account> getAccounts();
 	public Account getAccountById();
 	public void addAccount(Account account);
-	public void deposit(int accountID,float amount);
+	public void deposit(int accountID,float amount,User user);
 	public void withdrawal(User user,int accountID,float amount) throws OverdraftException;
-	public void selectAction(int option);
-	public void showBalances(User user, int accountID);
+	public void selectAction(int option, User user);
+	public void showBalance(User user, int accountID);
 
 }

@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Scanner;
 
 import com.revature.Exceptions.OverdraftException;
 import com.revature.util.ConnectionUtil;
@@ -26,7 +27,6 @@ public class AccountDaoImpl implements AccountDao{
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 
 	public void addAccount(Account account,User user)
 	{
@@ -51,26 +51,30 @@ public class AccountDaoImpl implements AccountDao{
 
 	}
 
-
-
 	@Override
-	public void deposit(int accountID, float amount) {
+	public void deposit(int accountID, float amount, User user) {
+
 		try(Connection conn = ConnectionUtil.getConnectionFromFile(filename))
 		{
-			conn.setAutoCommit(false);
-			System.out.println("In try statement for deposit");
-			String sqlStmt="{CALL SP_MAKE_DEPOSIT(?,?)}";
-			CallableStatement cs = conn.prepareCall(sqlStmt);
-			cs.setInt(1,accountID);
-			cs.setFloat(2,amount);
-			cs.execute();
-			conn.commit();
-
+			if(!validateAccount(user,accountID))
+			{
+				System.out.println("You must be logged in to make a withdrawal");
+			}
+			else{
+				conn.setAutoCommit(false);
+				System.out.println("In try statement for deposit");
+				String sqlStmt="{CALL SP_MAKE_DEPOSIT(?,?)}";
+				CallableStatement cs = conn.prepareCall(sqlStmt);
+				cs.setInt(1,accountID);
+				cs.setFloat(2,amount);
+				cs.execute();
+				conn.commit();
+				showBalance(user,accountID);
+			}
 		} catch (SQLException | IOException e) {
 			//con.rollback();
 			e.printStackTrace();
 		}
-
 
 	}
 	public boolean validateAccount(User user, int accountID)
@@ -135,6 +139,7 @@ public class AccountDaoImpl implements AccountDao{
 
 				cs.execute();
 				conn.commit();
+				showBalance(user,accountID);
 			}
 
 		} catch (SQLException | IOException e) {
@@ -157,13 +162,41 @@ public class AccountDaoImpl implements AccountDao{
 	}
 
 	@Override
-	public void selectAction(int option) {
-		// TODO Auto-generated method stub
+	public void selectAction(int option, User user) {
+		
+		Scanner sc = new Scanner(System.in);
+		switch(option)
+		{
+		case 1: 
+			System.out.println("Please enter the account ID."); 
+			int accountID = sc.nextInt(); 
+			showBalance(user,accountID); 
+			break;
+		case 2: System.out.println("Please enter the account ID."); 
+			 accountID = sc.nextInt(); 
+			 System.out.println("Please choose an amount to deposit.");
+			 float amount = sc.nextFloat();
+			 deposit(accountID,amount,user); 
+			 break;
+		case 3 :System.out.println("Please enter the account ID."); 
+		 	accountID = sc.nextInt(); 
+		 	System.out.println("Please choose an amount to withdraw.");
+		 	amount = sc.nextFloat();
+		 	try{
+		 	withdrawal(user,accountID,amount); }
+		 	catch(OverdraftException e)
+		 	{
+		 		e.printStackTrace();
+		 	}
+		 	break;	
+		 case 4: break;
+		default: System.out.println("Invalid choice");
+		}
 
 	}
 
 	@Override
-	public void showBalances(User user, int accountID) {
+	public void showBalance(User user, int accountID) {
 		try(Connection conn = ConnectionUtil.getConnectionFromFile(filename))
 		{
 
@@ -173,8 +206,8 @@ public class AccountDaoImpl implements AccountDao{
 			}
 			else{
 				conn.setAutoCommit(false);
-				System.out.println("In try statement for withdrawal");
-				String sqlStmt="SELECT BALANCE FROM ACCOUNT_ID WHERE ACCOUNT_ID=?";
+				System.out.println("In try statement for showing balance");
+				String sqlStmt="SELECT BALANCE FROM ACCOUNTS WHERE ACCOUNT_ID=?";
 				PreparedStatement ps = conn.prepareStatement(sqlStmt);
 				ps.setInt(1,accountID);
 				ps.execute();
@@ -182,6 +215,7 @@ public class AccountDaoImpl implements AccountDao{
 				while(rs.next())
 				{
 					float balance =rs.getFloat("BALANCE");
+					System.out.println("Your balance is: "+balance);
 				}
 			}
 

@@ -17,25 +17,7 @@ import com.revature.dao.UserDaoImpl;
 import com.revature.util.ConnectionUtil;
 
 public class BankDriver {
-	/*
-	public static void showMenu(int option, User user)
-	{
-		AccountDaoImpl udi = new AccontDaoImpl();
-		switch(option)
-		{
-		case 2: 
-			System.out.println();
-			udi.deposit(accountID, amount);	
-			break;
-		case 3: System.out.println();
-			udi.withdrawal(user, accountID, amount);
-			break;
-		case 4: System.out.println();
-			udi.
-		}
-		
-	}
-*/
+
 	public static void main(String [] args)
 	{
 
@@ -67,15 +49,9 @@ public class BankDriver {
 			}
 			AccountDaoImpl adi =new AccountDaoImpl();
 			User user = udi.getUserByCredentials(username, password);
-			System.out.println("Please enter your account number");
-			int accountID = sc.nextInt();
-			System.out.println("Please enter an amount to withdraw");
-			float amount = sc.nextFloat();
-			try{
-			adi.withdrawal(user,accountID, amount);
-			}
-			catch(OverdraftException e){e.printStackTrace();}
-
+			System.out.println("Please make a selection:\n 1: View balance \n2: Make deposit\n3: Make withdrawal\n4:Close account");
+			int option = sc.nextInt();
+			adi.selectAction(option, user);
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -85,6 +61,7 @@ public class BankDriver {
 			e.printStackTrace();
 		}
 
-	}
 
+
+	}
 }
