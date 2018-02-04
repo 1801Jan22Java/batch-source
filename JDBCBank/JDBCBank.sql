@@ -41,10 +41,10 @@ CREATE TABLE Userinfo
     USERINFOID INT NOT NULL,
     BANKUSERID INT NOT NULL,
     SSN VARCHAR2(40) NOT NULL,
-    FIRSTNAME VARCHAR2(40),
-    LASTNAME VARCHAR2(40),
+    FIRSTNAME VARCHAR2(40) NOT NULL,
+    LASTNAME VARCHAR2(40) NOT NULL,
     ADDRESS VARCHAR2(160),
-    EMAIL VARCHAR2(60)
+    EMAIL VARCHAR2(60) NOT NULL
 );
 
 /*
@@ -130,6 +130,8 @@ FOREIGN KEY (BANKUSERID) REFERENCES Bankuser (BANKUSERID);
    Create Other Constraints
 ********************************************************************************/
 
+--make sure the type colums are either 0 or 1
+
 ALTER TABLE Account ADD CONSTRAINT ACC_TYPE
 CHECK (TYPE >= 0 AND TYPE < 2);
 
@@ -173,6 +175,9 @@ NOCYCLE;
 /*******************************************************************************
    Create Triggers
 ********************************************************************************/
+
+--all triggers make use of a sequence that starts at 1000 and increments by 1 
+--to create a new primary key for each table
 
 CREATE OR REPLACE TRIGGER ACC_ADD_ID
 BEFORE INSERT ON Account
@@ -237,6 +242,14 @@ END;
 /*******************************************************************************
    Create Stored Procedures
 ********************************************************************************/
+
+--Note: all stored procedures pass a 0 for the id portion of the record, but it is ignored
+--when the trigger fires
+
+
+--make a stored procedure that inserts a new transaction given a balanceid
+--accountid,type, and transactionamount; round the type to ensure an integer
+--value, and along with the contrainst forces the type to either be 0 or 1
 CREATE OR REPLACE PROCEDURE NEW_TRANSACTION
 (
     BALANCEID IN BALANCE.BALANCEID%TYPE,
@@ -246,10 +259,13 @@ CREATE OR REPLACE PROCEDURE NEW_TRANSACTION
 )
 AS
 BEGIN
-    INSERT INTO TRANSACTION VALUES(0,BALANCEID,ACCOUNTID,TYPE,TRANSACTIONAMOUNT);
+    INSERT INTO TRANSACTION VALUES(0,BALANCEID,ACCOUNTID,ROUND(TYPE),TRANSACTIONAMOUNT);
 END;
 /
 
+--make a stored procedure that inserts a new userinfo that is connected to a bankuser
+--by making a new bankuser along with the new userinfo; this procedure is given a username
+--password, ssn, firstname, lastname, address, and email - address can be null
 CREATE OR REPLACE PROCEDURE NEW_USERINFO
 (
     USERNAME IN BANKUSER.BANKUSER%TYPE,
@@ -268,6 +284,8 @@ BEGIN
 END;
 /
 
+--make a stored procedure that inserts a new bankuser given a username, password and gives 
+--back the bankuserid that is associated with the new bankuser
 CREATE OR REPLACE PROCEDURE NEW_BANKUSER
 (
     BANKUSER_USER IN BANKUSER.BANKUSER%TYPE,
@@ -281,6 +299,10 @@ BEGIN
 END;
 /
 
+--make a stored procedure that inserts a new account that is connected to a balance
+--by making a new account along with the new balance; this procedure is given a 
+--bankuserid, type, and initialbalance; round the type, which, along with the constraints
+--forces the type to be either 0 or 1
 CREATE OR REPLACE PROCEDURE NEW_ACCOUNT
 (
     BANKUSER_ID IN BANKUSER.BANKUSERID%TYPE,
@@ -291,10 +313,12 @@ IS
 B_ID BALANCE.BALANCEID%TYPE;
 BEGIN
     NEW_BALANCE(INITIAL_BALANCE,B_ID);
-    INSERT INTO ACCOUNT VALUES(0,BANKUSER_ID, TYPE, B_ID);
+    INSERT INTO ACCOUNT VALUES(0,BANKUSER_ID, ROUND(TYPE), B_ID);
 END;
 /
 
+--make a stoerd procedure that makes a new balance given an initial balance
+--and gives back the balance id given with the new balance record
 CREATE OR REPLACE PROCEDURE NEW_BALANCE 
 (
     INITIAL_BALANCE IN BALANCE.INITIALBALANCE%TYPE,
