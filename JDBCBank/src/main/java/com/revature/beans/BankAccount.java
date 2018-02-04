@@ -45,8 +45,9 @@ public class BankAccount {
 	}
 
 	@Override
+	// Don't want to show all of the user information
 	public String toString() {
-		return "BankAccount [id=" + id + ", balance=" + balance + ", user=" + user + ", accountType="
+		return "BankAccount [id=" + id + ", balance=" + balance + ", user=" + user.getUsername() + ", accountType="
 				+ accountType + "]";
 	}
 	

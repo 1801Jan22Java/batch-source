@@ -51,6 +51,45 @@ public class BankAccountDAOImpl implements BankAccountDAO{
 		}
 	}
 
+	public void depositMoneyToAccount(int accountID, double money, User user) {
+		BankAccount getInfo = this.viewBankAccountByID(accountID, user);
+		Connection conn;
+		try{
+			conn = ConnectionUtil.getConnectionFromFile(filename);
+			PreparedStatement pstmt = conn.prepareStatement("UPDATE BANKACCOUNTS SET BALANCE = ? WHERE USER_ID = ? AND BANK_ACCOUNT_ID = ?");
+			pstmt.setDouble(1, getInfo.getbalance() + money);
+			pstmt.setInt(2, user.getId());
+			pstmt.setInt(3,  accountID);
+			System.out.println("Updating bank account");
+			pstmt.executeUpdate();
+			conn.close();
+		} catch (SQLException e){
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void withdrawMoneyFromAccount(int accountID, double money, User user) {
+		BankAccount getInfo = this.viewBankAccountByID(accountID, user);
+		Connection conn;
+		try{
+			conn = ConnectionUtil.getConnectionFromFile(filename);
+			PreparedStatement pstmt = conn.prepareStatement("UPDATE BANKACCOUNTS SET BALANCE = ? WHERE USER_ID = ? AND BANK_ACCOUNT_ID = ?");
+			pstmt.setDouble(1, getInfo.getbalance() - money);
+			pstmt.setInt(2, user.getId());
+			pstmt.setInt(3,  accountID);
+			System.out.println("Updating bank account");
+			pstmt.executeUpdate();
+			conn.close();
+		} catch (SQLException e){
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
 	public List<BankAccount> viewBankAccounts(User user) {
 		List<BankAccount> userAccounts = new ArrayList<BankAccount>();
 		Connection conn;
@@ -73,5 +112,31 @@ public class BankAccountDAOImpl implements BankAccountDAO{
 		}
 		return userAccounts;
 	}
+
+	public BankAccount viewBankAccountByID(int accountID, User currentUser) {
+		BankAccount currentUserAccount = new BankAccount();
+		Connection conn;
+		try{
+			conn = ConnectionUtil.getConnectionFromFile(filename);
+			PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM BANKACCOUNTS WHERE BANK_ACCOUNT_ID = ?");
+			pstmt.setInt(1, accountID);
+			ResultSet results = pstmt.executeQuery();
+			while(results.next()) {
+				String accountType = results.getString("ACCOUNT_TYPE");
+				double balance = results.getDouble("BALANCE");
+				currentUserAccount.setAccountType(accountType);
+				currentUserAccount.setbalance(balance);
+				currentUserAccount.setUser(currentUser);
+				currentUserAccount.setId(accountID);
+			}
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return currentUserAccount;
+	}
+
 
 }

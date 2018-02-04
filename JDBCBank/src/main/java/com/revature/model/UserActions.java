@@ -1,10 +1,8 @@
 package com.revature.model;
 
 import java.io.FileNotFoundException;
-import java.util.List;
 import java.util.Scanner;
 
-import com.revature.beans.BankAccount;
 import com.revature.beans.User;
 import com.revature.dao.BankAccountDAO;
 import com.revature.dao.BankAccountDAOImpl;
@@ -14,6 +12,11 @@ import com.revature.dao.UserDAO;
 import com.revature.dao.UserDAOImpl;
 
 public class UserActions {
+	
+	// The first menu that pops up when application is launched.
+	// It will continuously bring back the menu as long as the app has not exited.
+	// If user is trying to log in, it will first check whether or not the user is the admin(credentials in properties)
+	// If so, bring up the ADMIN menu. Otherwise, normal user menu shows up.
 	
 	public static void mainMenu(Scanner sc) {
 		boolean keepPrinting = true;
@@ -30,10 +33,9 @@ public class UserActions {
 	    		
 	    		try {
 					if(CheckCredentials.checkSuperCredentials(username, password)) {
-						SuperUserDAO superUser = new SuperUserDAOImpl();
-						User currentUser = superUser.getUserByUsername(username);
+						User superUser = new User();
 						System.out.println("logged in super user");
-						superLoggedIn(sc, currentUser);
+						superLoggedIn(sc, superUser);
 						
 					} else {
 						UserDAO user = new UserDAOImpl();
@@ -46,7 +48,6 @@ public class UserActions {
 						}
 					}
 				} catch (FileNotFoundException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 	    		
@@ -64,13 +65,14 @@ public class UserActions {
 	    	}
 		}
 		
-		
 	}
 
 	public static void loggedIn(Scanner sc, User user) {
     	// Should implement Transaction and BankAccountDAO here.
     	boolean keepGoing = true;
     	BankAccountDAO bankAccount = new BankAccountDAOImpl();
+    	int accountID;
+    	double money;
     	while(keepGoing) {
     		System.out.println("What would you like to do?");
     		System.out.println("1. View Bank Accounts");
@@ -87,21 +89,34 @@ public class UserActions {
     			System.out.println(bankAccount.viewBankAccounts(user));
     			break;
     		case 2:
-    			System.out.println("Withdraw Money");
+    			// MAKE AN EXCEPTION IF NOT ENOUGH MONEY IN THE BANK ACCOUNT
+    			System.out.println("Which account do you want to withdraw from?");
+    			System.out.println(bankAccount.viewBankAccounts(user));
+    			accountID = sc.nextInt();
+    			System.out.println("How much money do you want to withdraw?");
+    			money = sc.nextDouble();
+    			bankAccount.withdrawMoneyFromAccount(accountID, money, user);
     			break;
     		case 3: 
-    			System.out.println("Deposit Money");
+    			// Try making a custom exception for not being the right user if putting into wrong account
+    			System.out.println("Which account do you want to put money into?");
+    			System.out.println(bankAccount.viewBankAccounts(user));
+    			accountID = sc.nextInt();
+    			System.out.println("How much money do you want to deposit?");
+    			money = sc.nextDouble();
+    			bankAccount.depositMoneyToAccount(accountID, money, user);
     			break;
     		case 4:
     			System.out.println("Viewing transactions");
     			break;
     		case 5:
     			System.out.println("Creating an account");
+    			// NEED TO MAKE IT SO THAT THEY CAN CREATE SAVINGS OR CHECKING ACCOUNT!!!!!!!!!!!!!!!!!!!!!!!!!!
     			bankAccount.createAccount("savings", user);
     			break;    			
     		case 6:
     			System.out.println("Enter the ID of the Account Being Deleted");
-    			int accountID = sc.nextInt();
+    			accountID = sc.nextInt();
     			bankAccount.deleteAccountById(accountID, user);
     			break;
     		case 7:
@@ -115,6 +130,7 @@ public class UserActions {
     	}
 	}
 	
+	// Implement superUserDAO here to perform various Admin actions.
 	public static void superLoggedIn(Scanner sc, User user) {
     	boolean keepGoing = true;
     	SuperUserDAO superUser = new SuperUserDAOImpl();
