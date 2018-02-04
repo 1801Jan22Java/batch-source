@@ -16,7 +16,7 @@ public class CheckCredentials {
 			prop.load(in);
 			String username = prop.getProperty("username");
 			String password = prop.getProperty("password");
-			if(username.equals(userUsername) && password.equals(password)) {
+			if(username.equals(userUsername) && password.equals(userPassword)) {
 				isSuper = true;
 			}
 		} catch (IOException e) {

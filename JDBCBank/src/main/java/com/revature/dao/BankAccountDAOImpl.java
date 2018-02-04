@@ -1,7 +1,10 @@
 package com.revature.dao;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,18 +17,20 @@ public class BankAccountDAOImpl implements BankAccountDAO{
 	private static String filename = "connection.properties";
 
 	public void createAccount(String accountType, User user) {
-//		try(Connection conn = ConnectionUtil.getConnectionFromFile(filename)){
-//			PreparedStatement pstmt = conn.prepareStatement("INSERT INTO BANK ACCOUNT "
-//					+ "(BANKACCOUNT_ID, BALANCE, ACCOUNT_TYPE, USERID)"
-//					+ "VALUES (ID SEQ, ?, ?, ?)");
-//			pstmt.setInt(1, 0);
-//			pstmt.setString(2, accountType);
-//			pstmt.setInt(3, user.getId());
-//			pstmt.executeUpdate();
-//			conn.close();
-//		}
-
-		
+		Connection conn;
+		try{
+			conn = ConnectionUtil.getConnectionFromFile(filename);
+			PreparedStatement pstmt = conn.prepareStatement("INSERT INTO BANKACCOUNTS (BANK_ACCOUNT_ID, ACCOUNT_TYPE, BALANCE, USER_ID) VALUES (BANK_ACCOUNT_ID_SEQ.NEXTVAL, ?, ?, ?)");
+			pstmt.setString(1, accountType);
+			pstmt.setInt(2, 0);
+			pstmt.setInt(3, user.getId());
+			pstmt.executeUpdate();
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void deleteAccount(BankAccount b) {
@@ -35,21 +40,25 @@ public class BankAccountDAOImpl implements BankAccountDAO{
 
 	public List<BankAccount> viewBankAccounts(User user) {
 		List<BankAccount> userAccounts = new ArrayList<BankAccount>();
-
-//		try(Connection conn = ConnectionUtil.getConnectionFromFile(filename)){
-//			 //I NEED TO CONNECT JDBC TO MAVEN PROJECT
-//			PreparedStatement pstmt = conn.prepareStatement("SELECT BANKACCOUNT_ID, BALANCE, ACCOUNT_TYPE FROM BANKACCOUNT WHERE BANKACCOUNT.USERID = ?");
-//			pstmt.setInt(1, user.getId());
-//			ResultsSet results = pstmt.executeQuery();
-//			while(results.next()) {
-//				int id = results.getInt("BANKACCOUNT_ID");
-//				double balance = results.getDouble("BALANCE");
-//				String accountType = results.getString("ACCOUNT_TYPE");
-//				userAccounts.add(new BankAccount(id, balance, user, accountType));
-//			}
-//			conn.close();
-//		}
-		return null;
+		Connection conn;
+		try{
+			conn = ConnectionUtil.getConnectionFromFile(filename);
+			PreparedStatement pstmt = conn.prepareStatement("SELECT BANK_ACCOUNT_ID, BALANCE, ACCOUNT_TYPE FROM BANKACCOUNTS WHERE BANKACCOUNTS.USER_ID = ?");
+			pstmt.setInt(1, user.getId());
+			ResultSet results = pstmt.executeQuery();
+			while(results.next()) {
+				int id = results.getInt("BANK_ACCOUNT_ID");
+				double balance = results.getDouble("BALANCE");
+				String accountType = results.getString("ACCOUNT_TYPE");
+				userAccounts.add(new BankAccount(id, balance, user, accountType));
+			}
+			conn.close();
+		} catch (SQLException e){
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return userAccounts;
 	}
 
 }

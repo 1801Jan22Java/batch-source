@@ -30,8 +30,9 @@ public class UserActions {
 					if(CheckCredentials.checkSuperCredentials(username, password)) {
 						SuperUserDAO superUser = new SuperUserDAOImpl();
 						User currentUser = superUser.getUserByUsername(username);
-						superLoggedIn(sc, currentUser);
 						System.out.println("logged in super user");
+						superLoggedIn(sc, currentUser);
+						
 					} else {
 						UserDAO user = new UserDAOImpl();
 						if(user.checkCredentials(username, password)) {
@@ -67,20 +68,21 @@ public class UserActions {
 	public static void loggedIn(Scanner sc, User user) {
     	// Should implement Transaction and BankAccountDAO here.
     	boolean keepGoing = true;
+    	BankAccountDAO bankAccount = new BankAccountDAOImpl();
     	while(keepGoing) {
     		System.out.println("What would you like to do?");
     		System.out.println("1. View Bank Account");
     		System.out.println("2. Withdraw Money");
     		System.out.println("3. Deposit Money");
     		System.out.println("4. View Transactions");
-    		System.out.println("5. Delete Account");
-    		System.out.println("6. Logout");
+    		System.out.println("5. Create An Account");
+    		System.out.println("6. Delete Account");
+    		System.out.println("7. Logout");
     		int optionSelected = sc.nextInt();
     		switch(optionSelected) {
     		case 1:
     			System.out.println("Viewing Bank Account");
-    			BankAccountDAO bankAccount = new BankAccountDAOImpl();
-    			bankAccount.viewBankAccounts(user);
+    			System.out.println(bankAccount.viewBankAccounts(user));
     			break;
     		case 2:
     			System.out.println("Withdraw Money");
@@ -92,9 +94,14 @@ public class UserActions {
     			System.out.println("Viewing transactions");
     			break;
     		case 5:
-    			System.out.println("Deleting Account");
-    			break;
+    			System.out.println("Creating an account");
+    			bankAccount.createAccount("savings", user);
+    			break;    			
     		case 6:
+    			System.out.println("Deleting Account");
+    			
+    			break;
+    		case 7:
     			System.out.println("Logging out");
     			keepGoing = false;
     			break;
@@ -107,6 +114,7 @@ public class UserActions {
 	
 	public static void superLoggedIn(Scanner sc, User user) {
     	boolean keepGoing = true;
+    	SuperUserDAO superUser = new SuperUserDAOImpl();
     	while(keepGoing) {
     		System.out.println("Welcome Admin, what would you like to do?");
     		System.out.println("1. View Bank Account");
@@ -140,9 +148,11 @@ public class UserActions {
     			break;
     		case 6:
     			System.out.println("Viewing all Users");
+    			System.out.println(superUser.viewAllUsers());
     			break;
     		case 7: 
     			System.out.println("Creating new User");
+    			superUser.createNewUser(user);
     			break;
     		case 8:
     			System.out.println("Updating user");
