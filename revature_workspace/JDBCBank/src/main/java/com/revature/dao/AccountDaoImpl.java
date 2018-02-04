@@ -10,9 +10,12 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.revature.Exceptions.OverdraftException;
+import com.revature.Exceptions.ZeroBalanceException;
 import com.revature.util.ConnectionUtil;
 
 import Beans.Account;
+import Beans.CheckingAccount;
+import Beans.SavingsAccount;
 import Beans.User;
 
 public class AccountDaoImpl implements AccountDao{
@@ -28,6 +31,7 @@ public class AccountDaoImpl implements AccountDao{
 		return null;
 	}
 
+	@Override
 	public void addAccount(Account account,User user)
 	{
 
@@ -149,11 +153,6 @@ public class AccountDaoImpl implements AccountDao{
 
 	}
 
-	@Override
-	public void addAccount(Account account) {
-		// TODO Auto-generated method stub
-
-	}
 
 	@Override
 	public Account getAccountById() {
@@ -163,7 +162,7 @@ public class AccountDaoImpl implements AccountDao{
 
 	@Override
 	public void selectAction(int option, User user) {
-		
+
 		Scanner sc = new Scanner(System.in);
 		switch(option)
 		{
@@ -173,24 +172,60 @@ public class AccountDaoImpl implements AccountDao{
 			showBalance(user,accountID); 
 			break;
 		case 2: System.out.println("Please enter the account ID."); 
-			 accountID = sc.nextInt(); 
-			 System.out.println("Please choose an amount to deposit.");
-			 float amount = sc.nextFloat();
-			 deposit(accountID,amount,user); 
-			 break;
+		accountID = sc.nextInt(); 
+		System.out.println("Please choose an amount to deposit.");
+		float amount = sc.nextFloat();
+		deposit(accountID,amount,user); 
+		break;
 		case 3 :System.out.println("Please enter the account ID."); 
-		 	accountID = sc.nextInt(); 
-		 	System.out.println("Please choose an amount to withdraw.");
-		 	amount = sc.nextFloat();
-		 	try{
-		 	withdrawal(user,accountID,amount); }
-		 	catch(OverdraftException e)
-		 	{
-		 		e.printStackTrace();
-		 	}
-		 	break;	
-		 case 4: break;
-		default: System.out.println("Invalid choice");
+		accountID = sc.nextInt(); 
+		System.out.println("Please choose an amount to withdraw.");
+		amount = sc.nextFloat();
+		try{
+			withdrawal(user,accountID,amount); }
+		catch(OverdraftException e)
+		{
+			e.printStackTrace();
+		}
+		break;	
+		case 4: System.out.println("Please enter the account ID to close");
+		accountID=sc.nextInt();
+		closeAccount(user,accountID);
+		break;
+		case 5:System.out.println("Would you like a checking or a savings account?  "
+				+ "Enter 1 for a savings account.  Enter 2 for a checking account");
+		UserDaoImpl udi = new UserDaoImpl(); 
+		int userID = udi.getUserID(user);
+		int choice =sc.nextInt();
+		System.out.println("Please enter your initial balance");
+		float initbal=sc.nextFloat();
+		Account account =null;
+		try{
+			if(initbal==0){ 
+				throw new ZeroBalanceException("Your initial balance must be greater than zero");
+			}
+			else{
+				switch(choice){
+				case 1: 
+
+
+					account = new SavingsAccount(initbal,userID) ;
+					addAccount(account,user); break;
+
+
+
+				case 2:
+					account = new CheckingAccount(initbal,userID) ;
+					addAccount(account,user); break;
+				}
+			}
+		}
+			catch(ZeroBalanceException e){
+				e.printStackTrace();
+			}
+		finally{break;}
+		
+	default: System.out.println("Invalid choice");
 		}
 
 	}
@@ -224,6 +259,48 @@ public class AccountDaoImpl implements AccountDao{
 			e.printStackTrace();
 		}
 
+	}
+
+	@Override
+	public void closeAccount(User user, int accountID) {
+		try(Connection conn = ConnectionUtil.getConnectionFromFile(filename))
+		{
+
+			if(!validateAccount(user,accountID))
+			{
+				System.out.println("You must be logged in to see account information");
+			}
+			else{
+				conn.setAutoCommit(false);
+				System.out.println("In try statement for showing balance");
+				String sqlStmt="SELECT BALANCE FROM ACCOUNTS WHERE ACCOUNT_ID=?";
+				PreparedStatement ps = conn.prepareStatement(sqlStmt);
+				ps.setInt(1,accountID);
+				ps.execute();
+				ResultSet rs =ps.getResultSet();
+				while(rs.next())
+				{
+					float balance =rs.getFloat("BALANCE");
+					if(balance>0)
+					{
+						System.out.println("You may not delete an account that has a balance");
+					}
+					else
+					{
+						CallableStatement cs = conn.prepareCall("{CALL SP_DELETE_ACCOUNT(?)}");
+						cs.setInt(1, accountID);
+						cs.execute();
+					}
+				}
+			}
+
+		} catch (SQLException | IOException e) {
+			//con.rollback();
+			e.printStackTrace();
+		}
+
+		
+		
 	}
 
 

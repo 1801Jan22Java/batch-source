@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Scanner;
 
 import com.revature.util.ConnectionUtil;
 
@@ -134,8 +135,23 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public void createUser(User user) {
-		// TODO Auto-generated method stub
+	public User createUser() {
+		User user = null;
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Please enter your firstname");
+		String name = sc.nextLine();
+		System.out.println("Please enter your lastname");
+		String lname = sc.nextLine();
+		System.out.println("Please enter your SSN");
+		String ssn = sc.nextLine();
+		System.out.println("Please enter your username");
+		String username=sc.nextLine();
+		System.out.println("Please enter your password");
+		String pw = sc.nextLine();
+		user =new User(username,pw,name,lname,ssn);
+		addUser(user);
+		System.out.println("User creation successful!");
+		return user;
 
 	}
 

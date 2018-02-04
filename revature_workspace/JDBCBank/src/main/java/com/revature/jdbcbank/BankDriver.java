@@ -23,17 +23,18 @@ public class BankDriver {
 
 		String filename = "connection.properties";
 		ConnectionUtil cu = new ConnectionUtil();
-		User newUser = new User("testname2","testpass","Julian","Bashir","100-00-0000");
-		SuperUser newSupUser = new SuperUser("testname","testpass","Benjamin","Sisko","000-00-0000");
-		System.out.println(newSupUser.getLastName());
-		System.out.println(newSupUser.getPassword());
-		System.out.println(newSupUser.getSSN());
-		System.out.println();
-		System.out.println(newSupUser.getSuperUser());
+		
 		try {
 			Connection conn = cu.getConnectionFromFile(filename);
 			UserDaoImpl udi = new UserDaoImpl();
+			System.out.println("Would you like to create an account?  Enter 1 to create a user account, otherwise press 2");
 			Scanner sc = new Scanner(System.in);
+			String response = sc.nextLine();
+			if(response.equals("1"))
+			{
+				udi.createUser();
+			}
+			else if(response.equals("2")){
 			System.out.println("Enter your username");
 			String username =sc.nextLine();
 			System.out.println("Enter your password");
@@ -49,10 +50,10 @@ public class BankDriver {
 			}
 			AccountDaoImpl adi =new AccountDaoImpl();
 			User user = udi.getUserByCredentials(username, password);
-			System.out.println("Please make a selection:\n 1: View balance \n2: Make deposit\n3: Make withdrawal\n4:Close account");
+			System.out.println("Please make a selection:\n 1: View balance \n2: Make deposit\n3: Make withdrawal\n4:Close account.\n5 Create account.");
 			int option = sc.nextInt();
 			adi.selectAction(option, user);
-
+			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
