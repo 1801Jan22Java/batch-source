@@ -32,6 +32,7 @@ public class CaveDaoImpl implements CaveDao {
 				int maxBears = rs.getInt("MAX_BEARS");
 				cl.add(new Cave(id, name, maxBears));
 			}
+			con.close();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -58,6 +59,7 @@ public class CaveDaoImpl implements CaveDao {
 				int maxBears = rs.getInt("MAX_BEARS");
 			    c = new Cave(id, name, maxBears);
 			}
+			con.close();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();

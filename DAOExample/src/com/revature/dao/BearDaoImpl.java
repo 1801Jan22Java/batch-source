@@ -89,6 +89,7 @@ public class BearDaoImpl implements BearDao {
 			pstmt.setInt(5, bear.getCave().getId());
 			
 			bearsCreated = pstmt.executeUpdate();
+			con.close();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -112,6 +113,7 @@ public class BearDaoImpl implements BearDao {
 			//if out stored procedure had out parameters
 			
 			cblmt.executeUpdate();
+			con.close();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
