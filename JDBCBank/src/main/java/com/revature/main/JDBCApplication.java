@@ -97,7 +97,7 @@ public class JDBCApplication {
 	// Check roleid
 	// : if 1 : go to superuser account access mode
 	// : if 2 : go to normal account access mode
-	private static void AccountAccess(BankUsers bu, Scanner scanner1) {
+	private static void AccountAccess(BankUsers bu, Scanner scanner) {
 		boolean keepGoing = true;
 		AccountOracle accountOps = new AccountOracle();
 
@@ -113,13 +113,13 @@ public class JDBCApplication {
 			System.out.println("3 - Create Account");
 			System.out.println("4 - Delete Account");
 			System.out.println("5 - Logout");
-			String input = scanner1.nextLine();
+			String input = scanner.nextLine();
 			switch (input) {
 			case "1":
 				System.out.println("Choose account number to withdraw from: ");
-				Integer wAccount = Integer.parseInt(scanner1.nextLine());
+				Integer wAccount = Integer.parseInt(scanner.nextLine());
 				System.out.println("Enter amount to withdraw");
-				Double wAmount = Double.parseDouble(scanner1.nextLine());
+				Double wAmount = Double.parseDouble(scanner.nextLine());
 
 				// Withdraw
 				accountOps.withdraw(bu.getUserId(), wAccount, wAmount);
@@ -127,9 +127,9 @@ public class JDBCApplication {
 
 			case "2":
 				System.out.println("Choose accountid to deposit into: ");
-				Integer dAccount = Integer.parseInt(scanner1.nextLine());
+				Integer dAccount = Integer.parseInt(scanner.nextLine());
 				System.out.println("Enter amount to deposit: ");
-				Double dAmount = Double.parseDouble(scanner1.nextLine());
+				Double dAmount = Double.parseDouble(scanner.nextLine());
 
 				// Deposit
 				accountOps.deposit(bu.getUserId(), dAccount, dAmount);
@@ -143,7 +143,7 @@ public class JDBCApplication {
 				// Create new account
 				// Username must be unique
 				try {
-					int choice = Integer.parseInt(scanner1.nextLine());
+					int choice = Integer.parseInt(scanner.nextLine());
 					accountOps.newAccount(bu.getUserId(), choice);
 				} catch (NumberFormatException e) {
 					System.out.println("Invalid account type id.");
@@ -153,7 +153,7 @@ public class JDBCApplication {
 
 			case "4":
 				System.out.println("Enter account ID to delete");
-				int accountId = Integer.parseInt(scanner1.nextLine());
+				int accountId = Integer.parseInt(scanner.nextLine());
 
 				// Delete account
 				// Account empty checking done within deleteAccount function
