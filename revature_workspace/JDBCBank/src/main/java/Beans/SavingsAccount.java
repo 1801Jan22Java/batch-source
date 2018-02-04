@@ -5,10 +5,11 @@ public class SavingsAccount extends Account {
 
 	AccountType accountType = new AccountType(1,"Savings");
 
-	SavingsAccount(float initialBalance,AccountType accountType,int userId)
+	public SavingsAccount(float initialBalance,int userId)
 	{
 		
-		super(initialBalance,accountType,userId);
+		super(initialBalance,userId);
+		super.accountType=accountType;
 	}
 	@Override
 	public void deposit(float funds) {
@@ -31,6 +32,15 @@ public class SavingsAccount extends Account {
 	public void closeAccount() {
 		// TODO Auto-generated method stub
 		
+	}
+	@Override
+	public AccountType getAccountType() {
+		return accountType;
+	}
+	@Override
+	public float getBalance() {
+		// TODO Auto-generated method stub
+		return initialBalance;
 	}
 
 

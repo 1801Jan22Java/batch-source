@@ -27,14 +27,11 @@ public class User {
 
 	public void logIn(String username,String password)
 	{
-		if(username.equals(this.username)&&password.equals(this.password))
+		if(username.equals(this.getUserName())&password.equals(this.getPassword()))
 		{
-			loggedIn=true;
+			this.loggedIn=true;
 		}
-		else
-		{
-			loggedIn=false;
-		}
+
 	}
 	
 	public boolean getLoginStatus()
@@ -78,19 +75,5 @@ public class User {
 	public int getSuperUser(){
 		return superUser;
 	}
-	
-	public CheckingAccount createCheckingAccount(float initialBalance)
-	{
-		CheckingAccount ca = new CheckingAccount(initialBalance);
-		return ca;
-	}
-	
-	public SavingsAccount createSavingsAccount(float initialBalance)
-	{
-		SavingsAccount sa = new SavingsAccount(initialBalance);
-		return sa;
-	}
-	
-	
 
 }

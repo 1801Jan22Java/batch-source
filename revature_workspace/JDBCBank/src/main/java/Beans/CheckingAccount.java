@@ -5,10 +5,11 @@ public class CheckingAccount extends Account {
 
 	AccountType accountType = new AccountType(2,"Checking");
 	
-	CheckingAccount(float initialBalance,AccountType accountType, int userId)
+	public CheckingAccount(float initialBalance, int userId)
 	{
 		
-		super(initialBalance,accountType,userId);
+		super(initialBalance,userId);
+		super.accountType=accountType;
 	}
 	@Override
 	public void deposit(float funds) {
@@ -32,6 +33,15 @@ public class CheckingAccount extends Account {
 	public void closeAccount() {
 		// TODO Auto-generated method stub
 		
+	}
+	@Override
+	public AccountType getAccountType() {
+		return accountType;
+	}
+	@Override
+	public float getBalance() {
+		// TODO Auto-generated method stub
+		return initialBalance;
 	}
 
 }

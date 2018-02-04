@@ -104,15 +104,140 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public void validateCredentials(String username, String password) {
-		// TODO Auto-generated method stub
-		
+	public boolean validateCredentials(String username, String password) {
+		boolean validated=false;
+		String userPass=null;
+		String userName= null;
+		//	String sql = "SELECT USER_ID,USER_NAME,USER_PASS FROM USERS WHERE USER_NAME=?";
+		try(Connection conn = ConnectionUtil.getConnectionFromFile(filename))
+		{
+			PreparedStatement ps = conn.prepareStatement("SELECT USER_ID,USER_NAME,USER_PASS FROM USERS WHERE USER_NAME=?");
+			ps.setString(1, username);
+			ps.execute();
+			ResultSet rs =ps.getResultSet();
+			if(rs.next())
+			{
+				userName=rs.getString("USER_NAME");
+				userPass=rs.getString("USER_PASS");	
+				if(username.equals(userName)&&password.equals(userPass))
+				{
+					validated=true;
+					System.out.println("validated");
+				}
+			}
+		}
+		catch(SQLException | IOException e){ e.printStackTrace();
+		}
+		finally{
+			return validated;
+		}
 	}
 
 	@Override
 	public void createUser(User user) {
 		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public int getUserID(User user) {
+		int userId=0;
+		String username=user.getUserName();
+		String sql = "SELECT USER_ID FROM USERS WHERE USER_NAME=?";
+		try(Connection conn = ConnectionUtil.getConnectionFromFile(filename))
+		{
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, username);
+			ps.execute();
+			ResultSet rs =ps.getResultSet();
+			if(rs.next())
+			{
+				userId=rs.getInt("USER_ID");
+			}
+		}
+		catch(SQLException | IOException e){ e.printStackTrace();}
+		return userId;
+	}
+
+	@Override
+	public User getUserByCredentials(String username, String password) {
+		User user = null;
+		try(Connection con = ConnectionUtil.getConnectionFromFile(filename))
+		{
+
+			PreparedStatement prepStmt = con.prepareStatement("SELECT * FROM USERS WHERE USER_NAME=? AND USER_PASS=?");
+			prepStmt.setString(1, username);
+			prepStmt.setString(2,password);
+			prepStmt.execute();
+			ResultSet rs= prepStmt.getResultSet();
+			if(rs.next())
+			{
+				String usenam=rs.getString("USER_NAME");
+				String pass = rs.getString("USER_PASS");
+				String fname = rs.getString("FIRST_NAME");
+				String lname= rs.getString("LAST_NAME");
+				String ssn = rs.getString("SSN");
+
+				user=new User(username,pass,fname,lname,ssn);
+			}
+		} catch (SQLException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally
+		{
+			return user;
+		}
+	}
+
+	@Override
+	public void logout() {
+		try(Connection conn = new ConnectionUtil().getConnectionFromFile(filename))
+		{
+			try{
+			conn.close();
+			System.out.println("You have been logged out.  Thank you for using JDBC Banking");
+			}
+			catch(SQLException e)
+			{
+				e.printStackTrace();
+			}
+			
+		}
+		catch(SQLException | IOException e){e.printStackTrace();}
+	}
+
+	@Override
+	public boolean validateSuperUser(User user) {
+		boolean isSuperUser=  false;
+		try(Connection conn = new ConnectionUtil().getConnectionFromFile(filename))
+		{
+			String username = user.getUserName();
+			String password = user.getPassword();
+			PreparedStatement prepStmt = conn.prepareStatement("SELECT * FROM USERS WHERE USER_NAME=? AND USER_PASS=?");
+			prepStmt.setString(1, username);
+			prepStmt.setString(2,password);
+			prepStmt.execute();
+			ResultSet rs= prepStmt.getResultSet();
+			while(rs.next())
+			{
+				int superUser = rs.getInt("SUPER_USER");
+				if(superUser==1)
+				{
+					isSuperUser=true;
+				}
+			}
+		}
+		catch(IOException | SQLException e)
+		{e.printStackTrace();
+		}
+		return false;
+	}
+
+	@Override
+	public void deleteUser(User user2) {
 		
+
 	}
 
 }
