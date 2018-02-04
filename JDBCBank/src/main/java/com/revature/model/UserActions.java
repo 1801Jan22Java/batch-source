@@ -3,11 +3,14 @@ package com.revature.model;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+import com.revature.beans.TransactionType;
 import com.revature.beans.User;
 import com.revature.dao.BankAccountDAO;
 import com.revature.dao.BankAccountDAOImpl;
 import com.revature.dao.SuperUserDAO;
 import com.revature.dao.SuperUserDAOImpl;
+import com.revature.dao.TransactionDAO;
+import com.revature.dao.TransactionDAOImpl;
 import com.revature.dao.UserDAO;
 import com.revature.dao.UserDAOImpl;
 
@@ -71,6 +74,8 @@ public class UserActions {
     	// Should implement Transaction and BankAccountDAO here.
     	boolean keepGoing = true;
     	BankAccountDAO bankAccount = new BankAccountDAOImpl();
+    	TransactionDAO newTransaction = new TransactionDAOImpl();
+    	TransactionType transactionType = new TransactionType();
     	int accountID;
     	double money;
     	while(keepGoing) {
@@ -96,6 +101,9 @@ public class UserActions {
     			System.out.println("How much money do you want to withdraw?");
     			money = sc.nextDouble();
     			bankAccount.withdrawMoneyFromAccount(accountID, money, user);
+    			// When a transaction is made, store it in the table
+    			transactionType.setType("withdraw");
+    			newTransaction.addTransaction(user, bankAccount.viewBankAccountByID(accountID, user), transactionType, money);
     			break;
     		case 3: 
     			// Try making a custom exception for not being the right user if putting into wrong account
@@ -105,6 +113,8 @@ public class UserActions {
     			System.out.println("How much money do you want to deposit?");
     			money = sc.nextDouble();
     			bankAccount.depositMoneyToAccount(accountID, money, user);
+    			transactionType.setType("deposit");
+    			newTransaction.addTransaction(user, bankAccount.viewBankAccountByID(accountID, user), transactionType, money);
     			break;
     		case 4:
     			System.out.println("Viewing transactions");
