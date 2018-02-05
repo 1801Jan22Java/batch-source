@@ -427,7 +427,7 @@ public class Bank {
 	}
 
 	/*
-	 * Prints out the optins for a normal user
+	 * Prints out the options for a normal user
 	 */
 	private void printMainOptionSeclect() {
 		wtr.println("Please select an option\n" + "1. View accounts and balances.\n" + "2. Create an account.\n"
