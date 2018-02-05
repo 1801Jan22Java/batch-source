@@ -1,6 +1,7 @@
 package com.revature.dao;
 
 import java.io.IOException;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,7 +9,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.revature.beans.BankAccount;
 import com.revature.beans.User;
 import com.revature.util.ConnectionUtil;
 
@@ -56,30 +56,63 @@ public class SuperUserDAOImpl implements SuperUserDAO {
 		}
 	}
 
-	public void updateUserById(int id) {
-		// TODO Auto-generated method stub
-		
+	public void updateUserById(int id, String column, String value) {
+		Connection conn;
+		try {
+			conn = ConnectionUtil.getConnectionFromFile(filename);
+			PreparedStatement pstmt;
+			if(column == "USERNAME") {
+				pstmt = conn.prepareStatement("UPDATE USERS SET USERNAME = ? WHERE USER_ID = ?");
+			} else {
+				pstmt = conn.prepareStatement("UPDATE USERS SET PASSWORD = ? WHERE USER_ID = ?");
+			}
+			pstmt.setString(1,  value);
+			pstmt.setInt(2,  id);
+			pstmt.executeUpdate();
+			conn.close();
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public void deleteAllUsers() {
-		// TODO Auto-generated method stub
-		
+		Connection conn;
+		try{
+			conn = ConnectionUtil.getConnectionFromFile(filename);
+			CallableStatement cstmt = conn.prepareCall("{call TRUNCATEALLTABLES}");
+			cstmt.execute();
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 
 	public User getUserById(int id) {
 		User newUser = new User();
-//		try(Connection conn = ConnectionUtil.getConnectionFromFile(filename)){
-//			PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM USER WHERE USERID = ?");
-//			pstmt.setInt(1, id);
-//			ResultSet results = pstmt.executeQuery();
-//			if(results.next()) {
-//				String username = results.getString("USERNAME");
-//				newUser.setId = id;
-//				newUser.setUsername = username;
-//			}
-//			conn.close();
-//		}
+		Connection conn;
+		try{
+			conn = ConnectionUtil.getConnectionFromFile(filename);
+			PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM USERS WHERE USER_ID = ?");
+			pstmt.setInt(1, id);
+			ResultSet results = pstmt.executeQuery();
+			if(results.next()) {
+				String username = results.getString("USERNAME");
+				newUser.setId(id);
+				newUser.setUsername(username);
+			}
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		return newUser;
 	}
 
@@ -105,9 +138,9 @@ public class SuperUserDAOImpl implements SuperUserDAO {
 		}
 		return newUser;
 	}
-
+	
+	// Doesn't get used because Super User credential checking is more unique.
 	public boolean checkCredentials(String username, String password) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 

@@ -1,102 +1,41 @@
 package com.revature.model;
 
-import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 import com.revature.beans.TransactionType;
 import com.revature.beans.User;
 import com.revature.dao.BankAccountDAO;
 import com.revature.dao.BankAccountDAOImpl;
+import com.revature.dao.SuperUserDAO;
+import com.revature.dao.SuperUserDAOImpl;
 import com.revature.dao.TransactionDAO;
 import com.revature.dao.TransactionDAOImpl;
-import com.revature.dao.UserDAO;
-import com.revature.dao.UserDAOImpl;
 
-// NEED TO ADD SUPER USER ACTIONS
-// IMPLEMENT NEW USER FUNCTIONALITY
-// ADD CUSTOM EXCEPTIONS
-
-public class UserActions {
+public class AdminActions {
 	
-	// The first menu that pops up when application is launched.
-	// It will continuously bring back the menu as long as the app has not exited.
-	// If user is trying to log in, it will first check whether or not the user is the admin(credentials in properties)
-	// If so, bring up the ADMIN menu. Otherwise, normal user menu shows up.
-	
-	public static void mainMenu(Scanner sc) {
-		boolean keepPrinting = true;
-		while(keepPrinting) {
-			System.out.println("Welcome to the JDBC Bank. What would you like to do today?\n 1.Login \n 2.New User \n 3.Exit.");
-	    	int selectedAction = sc.nextInt();
-	    	sc.nextLine();
-	    	switch(selectedAction) {
-	    	case 1: 
-	    		System.out.println("Please Enter Your Credentials");
-	    		System.out.println("Username:");
-	    		String username = sc.next();
-	    		System.out.println("Password:");
-	    		String password = sc.next();
-	    		
-	    		try {
-					if(CheckCredentials.checkSuperCredentials(username, password)) {
-						User superUser = new User();
-						System.out.println("logged in super user");
-						AdminActions.superLoggedIn(sc, superUser);
-					} else {
-						UserDAO user = new UserDAOImpl();
-						if(user.checkCredentials(username, password)) {
-							User currentUser = user.getUserByUsername(username);
-							System.out.println("logged into normal user");
-							loggedIn(sc, currentUser);
-						} else {
-							// Use a custom exception probably?
-							System.out.println("Incorrect Credentials");
-						}
-					}
-				} catch (FileNotFoundException e) {
-					e.printStackTrace();
-				}
-	    		
-	    		break;
-	    	case 2:
-	    		System.out.println("Registering new User");
-    			User newUser = new User();
-    			System.out.println("Enter the username: ");
-    			newUser.setUsername(sc.nextLine());
-    			System.out.println("Enter the password: ");
-    			newUser.setPassword(sc.nextLine());
-    			UserDAO user = new UserDAOImpl();
-    			user.createNewUser(newUser);
-    			break;
-	    	case 3:
-	    		System.out.println("Exiting");
-	    		keepPrinting = false;
-	    		break;
-	    	default:
-	    		System.out.println("Please enter a correct value");
-	    		break;
-	    	}
-		}
-		
-	}
-
-	public static void loggedIn(Scanner sc, User user) {
-    	// Should implement Transaction and BankAccountDAO here.
-    	boolean keepGoing = true;
-    	BankAccountDAO bankAccount = new BankAccountDAOImpl();
+	// Implement superUserDAO here to perform various Admin actions.
+	// Menu is pretty long.
+	public static void superLoggedIn(Scanner sc, User user) {
+		boolean keepGoing = true;
+		BankAccountDAO bankAccount = new BankAccountDAOImpl();
     	TransactionDAO newTransaction = new TransactionDAOImpl();
+    	SuperUserDAO superUser = new SuperUserDAOImpl();
     	TransactionType transactionType = new TransactionType();
     	int accountID;
     	double money;
     	while(keepGoing) {
-    		System.out.println("What would you like to do?");
-    		System.out.println("1. View Bank Accounts");
+    		System.out.println("Welcome Admin, what would you like to do?");
+    		System.out.println("1. View Bank Account");
     		System.out.println("2. Withdraw Money");
     		System.out.println("3. Deposit Money");
     		System.out.println("4. View Transactions");
     		System.out.println("5. Create An Account");
     		System.out.println("6. Delete Account");
-    		System.out.println("7. Logout");
+    		System.out.println("7. View All Users");
+    		System.out.println("8. Create New User");
+    		System.out.println("9. Update User");
+    		System.out.println("10. Delete all Users");
+    		System.out.println("11. Logout");
     		int optionSelected = sc.nextInt();
     		switch(optionSelected) {
     		case 1:
@@ -136,13 +75,39 @@ public class UserActions {
     			System.out.println("Would you like to create a Savings or Checking account?");
     			String accountType = sc.nextLine();   			
     			bankAccount.createAccount(accountType, user);
-    			break;    			
+    			break;   			
     		case 6:
+    			// Delete an Account that has a 0 balance
     			System.out.println("Enter the ID of the Account Being Deleted");
     			accountID = sc.nextInt();
     			bankAccount.deleteAccountById(accountID, user);
     			break;
     		case 7:
+    			// View the Users table
+    			System.out.println("Viewing all Users");
+    			System.out.println(superUser.viewAllUsers());
+    			break;
+    		case 8: 
+    			// Creating a new user
+    			System.out.println("Creating new User");
+    			User newUser = new User();
+    			System.out.println("Enter the username: ");
+    			newUser.setUsername(sc.next());
+    			System.out.println("Enter the password: ");
+    			newUser.setPassword(sc.next());
+    			superUser.createNewUser(newUser);
+    			break;
+    		case 9:
+    			// Update a user information
+    			// Call another function that determines what column to update
+    			System.out.println("Updating user");
+    			updateExistingUser(sc);
+    			break;
+    		case 10:
+    			System.out.println("Deleting all Users");
+    			superUser.deleteAllUsers();
+    			break;
+    		case 11:
     			System.out.println("Logging out");
     			keepGoing = false;
     			break;
@@ -152,4 +117,44 @@ public class UserActions {
     		}
     	}
 	}
+	
+	public static void updateExistingUser(Scanner sc) {
+		boolean keepGoing = true;
+		SuperUserDAO superUser = new SuperUserDAOImpl();
+		String value;
+		while(keepGoing) {
+			System.out.println("Which user would you like to update?");
+			System.out.println(superUser.viewAllUsers());
+			int updateUserId = sc.nextInt();
+			System.out.println("What would you like to update?");
+			System.out.println("1. Username");
+			System.out.println("2. Password");
+			System.out.println("3. Go back to Super User menu.");
+			int optionSelected = sc.nextInt();
+			// Consume the new line character
+			sc.nextLine();
+			switch(optionSelected) {
+			case 1:
+				System.out.println("Updating username for " + superUser.getUserById(updateUserId).getUsername());
+				System.out.println("What would you like to change the username to?");
+				value = sc.nextLine();
+				superUser.updateUserById(updateUserId, "USERNAME", value);
+				break;
+			case 2:
+				System.out.println("Updating username for " + superUser.getUserById(updateUserId).getUsername());
+				System.out.println("What would you like to change the password to?");
+				value = sc.nextLine();
+				superUser.updateUserById(updateUserId, "PASSWORD", value);
+				break;
+			case 3:
+				System.out.println("Going back to Admin menu");
+				keepGoing = false;
+				break;
+			default:
+				System.out.println("Please enter a correct option");
+				break;
+			}
+		}
+	}
+
 }
