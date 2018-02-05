@@ -64,7 +64,7 @@ public class TransactionDaoImpl implements TransactionDao {
 			LocalDate when = null;
 			String sql = "SELECT * FROM TRANSACTIONS WHERE TRANSACTIONID = ?;";
 			PreparedStatement ps = con.prepareStatement(sql);
-			ps.setInt(1, transID);
+			ps.setInt(1, id);
 			ResultSet rs = ps.executeQuery();
 			if(rs.next()) {
 			// if not while, because the transactionID is the primary key 
@@ -108,7 +108,7 @@ public class TransactionDaoImpl implements TransactionDao {
 
 			String sql = "INSERT INTO TRANSACTIONLINE (ACCOUNTID, AMOUNT, DAYTIME, ACTIVE) "
 					+ "VALUES (?,?,?,?)";
-			PreparedStatement cs = con.prepareCall(sql);
+			PreparedStatement cs = con.prepareStatement(sql);
 			cs.setInt(1, aid);
 			cs.setDouble(2, amount);
 			cs.setDate(3, java.sql.Date.valueOf(LocalDate.now()));

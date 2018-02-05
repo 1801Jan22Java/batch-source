@@ -12,7 +12,6 @@ public interface UserDao {
 	public ArrayList<User> getUsers();
 	public User getUserByID(int id);
 	public void addUser(User u);
-	public int getNextUserID();
 	public void deleteUser(User u);
 	
 }

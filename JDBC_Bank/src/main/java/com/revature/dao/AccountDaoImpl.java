@@ -23,6 +23,7 @@ public class AccountDaoImpl implements AccountDao {
 
 	public ArrayList<Account> getAccounts() {
 		try {
+			ADI_Accounts = new ArrayList<Account>();
 			Connection con = ConnectionUtil.getConnectionFromFile(filename);
 			String usr = currentUser.getUserName();
 			int valid = 0;
@@ -42,7 +43,8 @@ public class AccountDaoImpl implements AccountDao {
 					amount = rs.getDouble("BALANCE");
 					interest = rs.getDouble("INTEREST");
 					LocalDate when = rs.getDate("STARTDAY").toLocalDate();
-					ADI_Accounts.add(new Account(aid, accountType, amount, interest, accountType, when));
+					Account n = new Account(aid, accountType, amount, interest, accountType, when);
+					ADI_Accounts.add(n); // NullPointerException Here
 				}
 			}
 			con.close();
@@ -60,6 +62,9 @@ public class AccountDaoImpl implements AccountDao {
 			Connection con = ConnectionUtil.getConnectionFromFile(filename);
 			int valid = 0;
 			int aid = id;
+			if(id % 2 == 1) {
+				throw new InvalidAccountIdException();
+			}
 			Double amount = 0.0;
 			Double interest = 0.0;
 			String accountType = new String();
@@ -111,7 +116,6 @@ public class AccountDaoImpl implements AccountDao {
 			cs.setDate(5, java.sql.Date.valueOf(dayMade));
 			cs.setInt(6, active);
 			cs.executeUpdate();
-			ADI_Accounts = getAccounts();
 
 		} catch (SQLException e) {
 			e.printStackTrace();

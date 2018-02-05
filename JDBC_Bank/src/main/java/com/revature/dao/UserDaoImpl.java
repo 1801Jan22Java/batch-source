@@ -122,55 +122,11 @@ public class UserDaoImpl implements UserDao {
 		return usrs;
 	}
 	
-	public User getUserByID(int id) {
-		try {
-			Connection con = ConnectionUtil.getConnectionFromFile(filename);
-			int valid = 0;
-			int uid = id;
-			String username = null;
-			String password = null;
-			String firstName = null;
-			String lastName = null;
-			String email = null;
-
-			String sql = "SELECT * FROM CUSTOMER WHERE USERID = ?;";
-			PreparedStatement ps = con.prepareStatement(sql);
-			ps.setInt(1, uid);
-			ResultSet rs = ps.executeQuery();
-			if (rs.next()) {
-				valid = rs.getInt("ACTIVE");
-				if (valid > 0) {
-					uid = rs.getInt("USERID");
-					username = rs.getString("USERNAME");
-					password = rs.getString("PASSWORD");
-					firstName = rs.getString("FIRSTNAME");
-					lastName = rs.getString("LASTNAME");
-					LocalDate birthday = rs.getDate("BIRTHDATE").toLocalDate();
-					email = rs.getString("EMAIL");
-					LocalDate dayRegistered = rs.getDate("DAYREGISTERED").toLocalDate();
-					con.close();
-					return new User(username, password, firstName, lastName, birthday, email, dayRegistered, valid);
-
-				}
-			} else {
-				con.close();
-				throw new InvalidAccountIdException();
-			}
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
 	public void addUser(User u) {
 		
 		try {
 			Connection con = ConnectionUtil.getConnectionFromFile(filename);
 			String userName = u.getUserName();
-			System.out.println("USERNAME = " + userName);
 			String password = u.getPassword();
 			String firstName = u.getFirstName();
 			String lastName = u.getLastName();
@@ -197,27 +153,6 @@ public class UserDaoImpl implements UserDao {
 		}
 	}
 
-	public int getNextUserID() {
-		int uid = 0;
-		try {
-			Connection con = ConnectionUtil.getConnectionFromFile(filename);
-			String sql = "SELECT PK_CUSTOMERS.NEXTVAL FROM DUAL";
-			PreparedStatement ps = con.prepareStatement(sql);
-			ResultSet rs = ps.executeQuery();
-			if (rs.next())
-				uid = rs.getInt(1);
-
-			else
-				throw new RuntimeException("No next value in sequence");
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return uid;
-	}
-
 	public void deleteUser(User u) {
 		
 		try {
@@ -234,6 +169,11 @@ public class UserDaoImpl implements UserDao {
 			e.printStackTrace();
 		}
 		
+	}
+
+	public User getUserByID(int id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	

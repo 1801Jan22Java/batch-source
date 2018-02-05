@@ -139,7 +139,6 @@ public class BankDriver {
 				valid = true;
 			}
 			else {
-				System.out.println("NULL ISSUE 141");
 				System.out.println("Incorrect Username or Password");
 				valid = false;
 			}
@@ -174,6 +173,7 @@ public class BankDriver {
 				switch (choice) {
 				case 1: {
 					System.out.println("==========================");
+					ADI.ADI_Accounts = ADI.getAccounts();
 					for (Account a : ADI.ADI_Accounts) {
 						if(a != null)
 							a.toString();
@@ -227,12 +227,18 @@ public class BankDriver {
 				}
 
 				case 5: {
-					Account toTransact = null;
+					Account toTransact = new Account();
 					System.out.print("Add a new transaction - Specify account name: \t");
 					String name = scanner.next();
+					int aid = 0;
+					for(Account b: ADI.getAccounts()) {
+						if(b.getAccountName().equals(name)) {
+							aid = b.getAccountID();
+						}
+					}
 					for (Account a : ADI.getAccounts()) {
-						if (a.getAccountName().equals(name)) {
-							toTransact = a;
+						if (aid == a.getAccountID()) {
+							toTransact = ADI.ADI_Accounts.get(ADI.ADI_Accounts.indexOf(a));
 						}
 					}
 					System.out.println(toTransact.toString());
@@ -242,6 +248,7 @@ public class BankDriver {
 					Transaction t = new Transaction(LocalDate.now(), amount);
 					TDI.addTransaction(t, toTransact);
 					System.out.println("Transaction Complete");
+					break;
 				}
 				case 6: {
 					System.out.println("Logging out. Thank you for using the First Bank of Doge");
