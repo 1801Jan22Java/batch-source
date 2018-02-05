@@ -2,9 +2,16 @@ package beans;
 
 public class Account 
 {
+	public Account(int accountid, int userId, String accountType, float balance) {
+		super();
+		this.accountid = accountid;
+		this.userId = userId;
+		this.accountType = accountType;
+		this.balance = balance;
+	}
 	private int accountid;
-	private String userId;
-	private int accountType;
+	private int userId;
+	private String accountType;
 	private float balance;
 	public int getAccountid() {
 		return accountid;
@@ -12,16 +19,16 @@ public class Account
 	public void setAccountid(int accountid) {
 		this.accountid = accountid;
 	}
-	public String getUserId() {
+	public int getUserId() {
 		return userId;
 	}
-	public void setUserId(String userId) {
+	public void setUserId(int userId) {
 		this.userId = userId;
 	}
-	public int getAccountType() {
+	public String getAccountType() {
 		return accountType;
 	}
-	public void setAccountType(int accountType) {
+	public void setAccountType(String accountType) {
 		this.accountType = accountType;
 	}
 	public float getBalance() {
@@ -29,6 +36,10 @@ public class Account
 	}
 	public void setBalance(float balance) {
 		this.balance = balance;
+	}
+	public String toString()
+	{
+		return this.accountid+" "+this.accountType+" "+this.userId;
 	}
 	
 }

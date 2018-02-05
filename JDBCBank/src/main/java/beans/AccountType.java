@@ -2,6 +2,11 @@ package beans;
 
 public class AccountType 
 {
+	public AccountType(String accountName, int typeId) {
+		super();
+		this.accountName = accountName;
+		this.typeId = typeId;
+	}
 	private String accountName;
 	private int typeId;
 	public String getAccountName() {
