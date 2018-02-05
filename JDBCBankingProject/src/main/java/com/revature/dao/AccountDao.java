@@ -9,7 +9,7 @@ import com.revature.util.IllegalWithdrawException;
 
 public interface AccountDao {
 	
-	public void createAccount(int userId, Account acc);
+	public void createAccount(Account acc);
 	public List<Account> getUserAccounts(int userId);
 	public Account getAccountById(int id);
 	public void delete(int id) throws IllegalDeleteException;

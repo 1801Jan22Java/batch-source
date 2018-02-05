@@ -20,14 +20,14 @@ public class AccountDaoImpl implements AccountDao {
 	private final String filename = "connection.properties";
 
 	@Override
-	public void createAccount(int userId, Account acc) {
+	public void createAccount(Account acc) {
 		CallableStatement cstmt = null;
 		
 		try (Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
 			String sql = "{CALL CREATE_ACCOUNT(?, ?, ?)}";
 			
 			cstmt = con.prepareCall(sql);
-			cstmt.setInt(1, userId);
+			cstmt.setInt(1, acc.getUserId());
 			cstmt.setDouble(2, acc.getBalance());
 			cstmt.setString(3, acc.getAccName());
 			cstmt.executeUpdate();

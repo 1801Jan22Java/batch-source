@@ -419,7 +419,7 @@ public class BankManager {
 		System.out.println("Name your account");
 		String accName = sc.next();
 		System.out.println();
-		adi.createAccount(user.getuserId(), new Account(user.getuserId(), 0.0, accName));
+		adi.createAccount(new Account(user.getuserId(), 0.0, accName));
 		System.out.println("Account created!");
 		System.out.println();
 	}
