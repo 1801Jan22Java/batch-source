@@ -51,7 +51,7 @@ public class UserDaoImpl implements UserDao {
 			return user;
 		}
 	}
-	
+
 	private User createUserObject(){
 		User user = null;
 		Scanner sc = new Scanner(System.in);
@@ -70,12 +70,12 @@ public class UserDaoImpl implements UserDao {
 	}
 	@Override
 	public void addUser(User user) {
-/*
+
 		if(!validateSuperUser(user))
 		{
 			System.out.println("You do not carry the membership");
 			System.out.println(user.getSuperUser());
-		}*/
+		}
 		try(Connection conn = ConnectionUtil.getConnectionFromFile(filename))
 		{
 			User user2= createUserObject();
@@ -155,10 +155,38 @@ public class UserDaoImpl implements UserDao {
 		}
 	}
 
+	/*
+	 * createUser for average users.  
+	 * Does not attempt any kind of user validation for a super user. 
+	 * This is for first time users.
+	 * calls createUser object and returns a user.
+	 * Then adds that user to the database.
+	 * @param none
+	 * @return User user
+	 * */
 	@Override
 	public User createUser() {
 		User user = createUserObject();
-		addUser(user);
+		try(Connection conn = ConnectionUtil.getConnectionFromFile(filename))
+		{
+			conn.setAutoCommit(false);
+			System.out.println("In try statement");
+			String sqlStmt="{CALL NEW_USER_PROC(?,?,?,?,?,?)}";
+			CallableStatement cs = conn.prepareCall(sqlStmt);
+			cs.setString(1,user.getUserName());
+			cs.setString(2,user.getPassword());
+			cs.setString(3, user.getFirstName());
+			cs.setString(4,user.getLastName());
+			cs.setInt(5, user.getSuperUser());
+			cs.setString(6, user.getSSN());
+			cs.execute();
+			conn.commit();
+			System.out.println("User added");
+
+		} catch (SQLException | IOException e) {
+			//con.rollback();
+			e.printStackTrace();
+		}
 		System.out.println("User creation successful!");
 		return user;
 
@@ -183,7 +211,14 @@ public class UserDaoImpl implements UserDao {
 		catch(SQLException | IOException e){ e.printStackTrace();}
 		return userId;
 	}
-
+	/*
+	 *getUserByCredentials takes in two strings, username and password and 
+	 *returns a User.
+	 *
+	 *
+	 * @param String username, String password
+	 * @return User user
+	 * */
 	@Override
 	public User getUserByCredentials(String username, String password) {
 		User user = null;
@@ -221,15 +256,15 @@ public class UserDaoImpl implements UserDao {
 		try(Connection conn = new ConnectionUtil().getConnectionFromFile(filename))
 		{
 			try{
-			conn.close();
-			System.out.println("You have been logged out.  Thank you for using JDBC Banking");
+				conn.close();
+				System.out.println("You have been logged out.  Thank you for using JDBC Banking");
 			}
 			catch(SQLException e)
 			{
 				e.printStackTrace();
 			}
-			
-			
+
+
 		}
 		catch(SQLException | IOException e){e.printStackTrace();
 		}
@@ -265,7 +300,7 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public void deleteUser(User user1, User user2) {
-		
+
 		if(!validateSuperUser(user1))
 		{
 			System.out.println("You do not carry the membership");
@@ -286,9 +321,9 @@ public class UserDaoImpl implements UserDao {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
+
 		}
-		
+
 	}
 
 }

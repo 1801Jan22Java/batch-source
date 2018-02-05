@@ -23,6 +23,7 @@ public class BankDriver {
 	 * The JDBC Bank program starts from the main method.
 	 * Includes a scanner to accept user input and calls the User class, the UserDaoImpl class and the 
 	 * AccountDaoImpl class.  There must be an SQL connection before the class can begin.
+	 * 
 	 * */
 	public static void main(String [] args)
 	{
@@ -77,14 +78,19 @@ public class BankDriver {
 				}
 			}
 		}
+		
+		//Catches, in case something goes wrong while connected to database
+		//SQLConnection not available
 		catch (SQLRecoverableException e)
 		{
 			System.out.println("Could not connect to database!");
 			e.printStackTrace();
 		}
+		//SQLException
 		catch (SQLException e) {
 			e.printStackTrace();
 		}
+		//General IOException
 		catch (IOException e) {
 			e.printStackTrace();
 		}
