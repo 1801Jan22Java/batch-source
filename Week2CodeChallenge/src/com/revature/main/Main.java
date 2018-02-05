@@ -24,7 +24,6 @@ public class Main {
 			e.printStackTrace();
 			return;
 		}
-
 		
 		DepartmentDao depDao = new DepartmentDaoImpl();
 		List<Department> departments = depDao.getDepartments();
@@ -46,7 +45,7 @@ public class Main {
 
 	private static void listEmployees(List<Employee> emps) {
 		for(Employee emp : emps) {
-			System.out.println(emp.getFirstName() + " " + emp.getLastName() + " " + emp.getSalary());
+			System.out.println(emp.getFirstName() + " " + emp.getLastName() + " " + emp.getDep_id() +  " " + emp.getSalary());
 		}
 	}
 	
