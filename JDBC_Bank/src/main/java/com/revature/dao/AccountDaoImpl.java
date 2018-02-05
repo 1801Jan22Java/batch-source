@@ -19,7 +19,7 @@ public class AccountDaoImpl implements AccountDao {
 
 	public static final String filename = "connection.properties";
 
-	public ArrayList<Account> getAccounts(User u) { 
+	public ArrayList<Account> getAccounts(User u) {
 		ArrayList<Account> accs = null;
 		try {
 			Connection con = ConnectionUtil.getConnectionFromFile(filename);
@@ -100,9 +100,10 @@ public class AccountDaoImpl implements AccountDao {
 			LocalDate dayMade = a.getCreationDate();
 			int active = 1;
 
-			String sql = "INSERT INTO ACCOUNT (USERID, ACCOUNTTYPE, BALANCE, INTEREST, STARTDAY, ACTIVE)" + 
-									" VALUES (?,?,?,?,?,?)";
-			PreparedStatement cs = con.prepareCall(sql);
+			String sql = "INSERT INTO ACCOUNT (USERID, ACCOUNTTYPE, BALANCE, INTEREST, STARTDAY, ACTIVE)"
+					+ " VALUES (?,?,?,?,?,?)";
+			PreparedStatement cs = con.prepareStatement(sql);
+			System.out.println("USER ID IS : " + uid);
 			cs.setInt(1, uid);
 			cs.setString(2, type);
 			cs.setDouble(3, amt);
@@ -157,7 +158,5 @@ public class AccountDaoImpl implements AccountDao {
 		}
 
 	}
-
-	
 
 }

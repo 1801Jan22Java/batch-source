@@ -25,12 +25,49 @@ public class UserDaoImpl implements UserDao {
 		return false;
 	}
 
-	public User getUserByUsername(ArrayList<User> usrs, String username) {
-		for(User u: usrs) {
-			if(u.getUserName().equals(username))
-				return u;
+	public User getUserByUsername(String username) {
+		ArrayList<User> usrs = null;
+		User u = null;
+		try {
+			Connection con = ConnectionUtil.getConnectionFromFile(filename);
+			usrs = new ArrayList<User>();
+			int uid = 0;
+			int valid = 0;
+			String uName = new String();
+			String password = new String();
+			String firstName = new String();
+			String lastName = new String();
+			Date birthday = null;
+			String email = new String();
+			Date dayRegistered = null;
+			String sql = "SELECT * FROM CUSTOMER WHERE USERNAME = ?";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, uName);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				valid = rs.getInt("Active");
+				if (valid > 0) {
+					uid = rs.getInt("USERID");
+					uName = rs.getString("USERNAME");
+					password = rs.getString("PWORD");
+					firstName = rs.getString("FIRSTNAME");
+					lastName = rs.getString("LASTNAME");
+					birthday = rs.getDate("BIRTHDATE");
+					email = rs.getString("EMAIL");
+					dayRegistered = rs.getDate("DAYREGISTERED");
+
+					u = new User(uid, uName, password, firstName, lastName, 
+								birthday.toLocalDate(), email, dayRegistered.toLocalDate(), 1);
+					
+				}
+			}
+			con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
-		return null;
+		return u;
 	}
 	
 	public ArrayList<String> getUserNames(ArrayList<User> usrs) {
@@ -71,7 +108,7 @@ public class UserDaoImpl implements UserDao {
 					email = rs.getString("EMAIL");
 					dayRegistered = rs.getDate("DAYREGISTERED");
 
-					usrs.add(new User(uName, password, firstName, lastName, 
+					usrs.add(new User(uid, uName, password, firstName, lastName, 
 								birthday.toLocalDate(), email, dayRegistered.toLocalDate(), 1));
 					
 				}
@@ -132,7 +169,6 @@ public class UserDaoImpl implements UserDao {
 		
 		try {
 			Connection con = ConnectionUtil.getConnectionFromFile(filename);
-			int uid = u.getUserID();
 			String userName = u.getUserName();
 			System.out.println("USERNAME = " + userName);
 			String password = u.getPassword();

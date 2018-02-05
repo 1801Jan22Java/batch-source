@@ -21,6 +21,7 @@ public class BankDriver {
 		UserDaoImpl UDI = new UserDaoImpl();
 		ArrayList<User> usrs = UDI.getUsers();
 		ArrayList<String> userNames = UDI.getUserNames(usrs);
+		User tempU = new User();
 		// UDI.getUsers() talks to the DB, UDI.getUserNames() takes that list
 		// and extracts the username Strings into another ArrayList.
 
@@ -114,7 +115,7 @@ public class BankDriver {
 		// User logging in
 		String uname = null;
 		String pass = null;
-		User tempU = null;
+
 		boolean valid = false;
 		do {
 			valid = false;
@@ -129,7 +130,7 @@ public class BankDriver {
 
 			if (UDI.contains(usrs, uname)) {
 				valid = true;
-				tempU = UDI.getUserByUsername(usrs, uname);
+				tempU = UDI.getUserByUsername(uname);
 				break;
 			}
 			System.out.println("Incorrect Username or Password");
@@ -181,7 +182,13 @@ public class BankDriver {
 					System.out.print("Account type: \t");
 					tempType = scanner.next();
 					boolean uniqueName = true;
-					for (Account a : ADI2.getAccounts(tempU)) {
+					if(tempU == null)
+						System.out.println("U is null");
+					ArrayList<Account> acs= ADI2.getAccounts(tempU);
+					for (Account a : acs) {
+						if(temp == null) {
+							System.out.println("Temp is null");
+						}
 						if (a.getAccountName().equals(temp)) {
 							System.out.println("Account name already in use");
 							uniqueName = false;
@@ -189,6 +196,7 @@ public class BankDriver {
 					}
 					if (uniqueName) {
 						Account tempA = new Account(tempType, 0.0, 0.0, LocalDate.now(), temp);
+						System.out.println("Bank Driver ID: " + tempU.getUserID());
 						ADI2.addAccount(tempA, tempU);
 						System.out.println("Account Created.");
 					}
@@ -332,7 +340,7 @@ public class BankDriver {
 					if (!UDI.contains(usrs, name)) {
 						System.out.println("Username not found");
 					} else {
-						tempUser = UDI.getUserByUsername(usrs, name);
+						tempUser = UDI.getUserByUsername(name);
 						tempUser.toString();
 					}
 					break;
@@ -350,7 +358,7 @@ public class BankDriver {
 					String tempStr = scanner.next();
 					User tempUser = null;
 					if (usrs.contains(tempStr)) {
-						tempUser = UDI.getUserByUsername(usrs, tempStr);
+						tempUser = UDI.getUserByUsername(tempStr);
 						String firstName = null;
 						String lastName = null;
 						int year;
@@ -381,8 +389,7 @@ public class BankDriver {
 							System.out.print("Continue (Y/N)? \t");
 							complete = (scanner.nextLine().toCharArray())[0];
 						} while ((complete == 'Y') || (complete == 'y'));
-					}
-					else {
+					} else {
 						throw new RuntimeException();
 					}
 					break;
@@ -391,7 +398,7 @@ public class BankDriver {
 					System.out.println("Pressing the big red button.");
 					System.out.println("Deleting all users");
 					usrs = UDI.getUsers();
-					for(User u: usrs) {
+					for (User u : usrs) {
 						UDI.deleteUser(u);
 					}
 					break;

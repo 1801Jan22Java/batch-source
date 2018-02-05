@@ -10,8 +10,11 @@ import com.revature.util.InvalidAccountIdException;
 public interface AccountDao {
 
 	public ArrayList<Account> getAccounts(User u) throws InvalidAccountIdException;
+
 	public Account getAccountByID(int id);
+
 	public void addAccount(Account a, User u);
+
 	public void deleteAccount(Account a) throws AccountNotEmptyException;
-	
+
 }
