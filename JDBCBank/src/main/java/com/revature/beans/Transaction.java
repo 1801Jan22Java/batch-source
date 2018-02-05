@@ -6,7 +6,7 @@ public class Transaction {
 	private int balanceID;
 	private int accountID;
 	private int type;
-	private int transactionAmount;
+	private double transactionAmount;
 	
 	public Transaction() {
 		super();
@@ -60,7 +60,7 @@ public class Transaction {
 		this.type = type;
 	}
 
-	public int getTransactionAmount() {
+	public double getTransactionAmount() {
 		return transactionAmount;
 	}
 

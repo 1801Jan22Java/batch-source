@@ -65,8 +65,6 @@ public class Account {
 		return "Account [accID=" + accID + ", bankuserID=" + bankuserID + ", type=" + type + ", balance=" + balanceID
 				+ "]";
 	}
-	
-	
-	
+
 	
 }

@@ -1,7 +1,8 @@
 package com.revature.beans;
 
-public class Bankuser {
+public class Userinfo {
 	
+	private int userinfoID;
 	private int bankuserID;
 	private String ssn;
 	private String firstName;
@@ -9,19 +10,12 @@ public class Bankuser {
 	private String address;
 	private String email;
 	
-	public Bankuser() {
+	public Userinfo() {
 		super();
 	}
 	
-	public Bankuser(String ssn, String firstName, String lastName, String address, String email) {
-		super();
-		this.ssn = ssn;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.address = address;
-		this.email = email;
-	}
-	public Bankuser(int bankuserID, String ssn, String firstName, String lastName, String address, String email) {
+	public Userinfo(int bankuserID, String ssn, String firstName, String lastName, String address,
+			String email) {
 		super();
 		this.bankuserID = bankuserID;
 		this.ssn = ssn;
@@ -30,13 +24,33 @@ public class Bankuser {
 		this.address = address;
 		this.email = email;
 	}
-
+	
 	public int getBankuserID() {
 		return bankuserID;
 	}
 
 	public void setBankuserID(int bankuserID) {
 		this.bankuserID = bankuserID;
+	}
+
+	public Userinfo(int userinfoID, int bankuserID, String ssn, String firstName, String lastName, String address,
+			String email) {
+		super();
+		this.userinfoID = userinfoID;
+		this.bankuserID = bankuserID;
+		this.ssn = ssn;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.address = address;
+		this.email = email;
+	}
+
+	public int getUserinfoID() {
+		return userinfoID;
+	}
+
+	public void setUserinfoID(int UserinfoID) {
+		this.userinfoID = UserinfoID;
 	}
 
 	public String getSsn() {
@@ -81,8 +95,8 @@ public class Bankuser {
 
 	@Override
 	public String toString() {
-		return "Bankuser [bankuserID=" + bankuserID + ", ssn=" + ssn + ", firstName=" + firstName + ", lastName="
-				+ lastName + ", address=" + address + ", email=" + email + "]";
+		return "Userinfo [userinfoID=" + userinfoID + ", bankuserID=" + bankuserID + ", ssn=" + ssn + ", firstName="
+				+ firstName + ", lastName=" + lastName + ", address=" + address + ", email=" + email + "]";
 	}
-	
+
 }
