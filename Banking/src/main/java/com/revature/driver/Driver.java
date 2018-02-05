@@ -57,9 +57,9 @@ public class Driver {
 			response = response.toUpperCase();
 			try {
 				switch (response) {
-				case "CREATE"	:	adi.createAccount(currentUser);
+				case "CREATE"	:	adi.createAccount(currentUser, sc);
 									break;
-				case  "VIEW" 	:	adi.viewAccount(currentUser);
+				case  "VIEW" 	:	adi.viewAccount(currentUser, sc);
 									break;
 				case "ADMIN"	:	if(currentUser.isSuperUser())
 										udi.adminMenu(currentUser);

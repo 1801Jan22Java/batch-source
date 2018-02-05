@@ -14,20 +14,24 @@ import com.revature.beans.User;
 import com.revature.exceptions.BalanceNotZeroException;
 import com.revature.exceptions.InvalidAccountIDException;
 import com.revature.exceptions.InvalidPasswordException;
+import com.revature.exceptions.NegativeAmountException;
+import com.revature.exceptions.NegativeBalanceException;
 import com.revature.exceptions.OverdraftException;
 import com.revature.util.ConnectionUtil;
 
 public class AccountDaoImpl implements AccountDao{
 	
-	public void createAccount(User u) {
+	public boolean createAccount(User u, Scanner sc) {
 		Account account = null;
 		try(Connection conn = ConnectionUtil.getConnectionFromFile("connection.properties")) {
-			Scanner sc = new Scanner(System.in);
 			double balanceToDeposit = 0;
 			
 			System.out.println("How much would you like to put into your new account?");
 			balanceToDeposit = sc.nextDouble();
 			sc.nextLine();
+			
+			if(balanceToDeposit < 0)
+				throw new NegativeBalanceException("You can't deposit a negative amount!");
 			
 			CallableStatement cs = null;
 			String sql = "{call CREATE_ACCOUNT(?,?)}";
@@ -40,21 +44,24 @@ public class AccountDaoImpl implements AccountDao{
 			System.out.println("$" + balanceToDeposit + " deposited into your new account, " + u.getFirstName() + ".");
 			System.out.println("Take a look at your new account by entering VIEW in the main menu!");
 			
-			
+			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
+		} catch (NegativeBalanceException e) {
+			return false;
 		}
+		return false;
 	}
 	
+	
 	//Allows user to view their accounts. Can make withdrawls and deposits by selecting an account.
-	public void viewAccount(User u) {
+	public boolean viewAccount(User u, Scanner sc) {
 		try(Connection conn = ConnectionUtil.getConnectionFromFile("connection.properties")) {
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
 			AccountDaoImpl adi = new AccountDaoImpl();
-			Scanner sc = new Scanner(System.in);
 			pstmt = conn.prepareStatement("SELECT * FROM ACCOUNTS WHERE USER_ID=?");
 			pstmt.setInt(1,u.getUserId());
 			rs = pstmt.executeQuery();
@@ -90,11 +97,11 @@ public class AccountDaoImpl implements AccountDao{
 						
 						responseStr = responseStr.toUpperCase();
 						switch(responseStr) {
-						case "WITHDRAW"	:	adi.withdraw(response);
+						case "WITHDRAW"	:	adi.withdraw(response, sc);
 											break;
-						case "DEPOSIT"	:	adi.deposit(response);
+						case "DEPOSIT"	:	adi.deposit(response, sc);
 											break;
-						case "DELETE"	:	adi.deleteAccount(response);
+						case "DELETE"	:	adi.deleteAccount(response, sc);
 											break;
 						default			:	break;
 						}
@@ -104,21 +111,23 @@ public class AccountDaoImpl implements AccountDao{
 					}
 				} catch (InvalidAccountIDException i) {
 					System.err.println(i);
+					return false;
 				}
 			}
+			return true; 
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		return false;
 	}
 	
-	public void deleteAccount(int accID) {
+	public boolean deleteAccount(int accID, Scanner sc) {
 		try(Connection conn = ConnectionUtil.getConnectionFromFile("connection.properties")) {
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
-			Scanner sc = new Scanner(System.in);
 
 			pstmt = conn.prepareStatement("SELECT * FROM ACCOUNTS WHERE BANK_ACCOUNT_ID=?");
 			pstmt.setInt(1,accID);
@@ -139,9 +148,11 @@ public class AccountDaoImpl implements AccountDao{
 					cs.execute();
 					
 					System.out.println("Account successfully deleted!");
+					return true;
 				}
 			} catch (BalanceNotZeroException bnze) {
 				System.err.println(bnze);
+				return false;
 			}
 			
 		} catch (SQLException e) {
@@ -149,10 +160,10 @@ public class AccountDaoImpl implements AccountDao{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		return false;
 	}
 	
-	public double withdraw(int accID) {
-		Scanner sc = new Scanner(System.in);
+	public double withdraw(int accID, Scanner sc) {
 		double newBalance = 0;
 		try(Connection conn = ConnectionUtil.getConnectionFromFile("connection.properties")) {
 			PreparedStatement pstmt = null;
@@ -160,7 +171,9 @@ public class AccountDaoImpl implements AccountDao{
 			
 			System.out.println("How much would you like to withdraw?");
 			double withdrawAmt = sc.nextDouble();
-
+			if(withdrawAmt < 0)
+				throw new NegativeAmountException("That's a negative amount!");
+			
 			pstmt = conn.prepareStatement("SELECT BALANCE FROM ACCOUNTS WHERE BANK_ACCOUNT_ID=?");
 			pstmt.setInt(1,accID);
 			rs = pstmt.executeQuery();
@@ -198,17 +211,21 @@ public class AccountDaoImpl implements AccountDao{
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
+		} catch (NegativeAmountException e) {
+			System.err.println(e);
 		}
 		return newBalance;
 	}
 	
-	public double deposit(int accID) {
-		Scanner sc = new Scanner(System.in);
+	public double deposit(int accID, Scanner sc) {
 		double newBalance = 0;
 		try(Connection conn = ConnectionUtil.getConnectionFromFile("connection.properties")) {
 			
 			System.out.println("How much would you like to deposit?");
 			double depositAmt = sc.nextDouble();
+			if(depositAmt < 0) {
+				throw new NegativeAmountException("That's a negative amount!");
+			}
 			
 			//Withdraw the amount from accID
 			CallableStatement cs = null;
@@ -235,6 +252,8 @@ public class AccountDaoImpl implements AccountDao{
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
+		} catch (NegativeAmountException e) {
+			System.err.println(e);
 		}
 		return newBalance;
 	}

@@ -347,8 +347,9 @@ public class UserDaoImpl implements UserDao{
 						System.out.println("Enter the new value: ");
 						String newValue = sc.nextLine();
 						
-						pstmt = conn.prepareStatement("UPDATE REGISTERED_USERS SET " + response + "=?");
+						pstmt = conn.prepareStatement("UPDATE REGISTERED_USERS SET " + response + "=? WHERE USER_ID=?");
 						pstmt.setString(1, newValue);
+						pstmt.setInt(2, userID);
 						pstmt.executeUpdate();
 						
 						pstmt = conn.prepareStatement("SELECT * FROM REGISTERED_USERS WHERE USER_ID=?");
