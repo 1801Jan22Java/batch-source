@@ -11,6 +11,8 @@ import java.util.List;
 
 import com.revature.beans.BankAccount;
 import com.revature.beans.User;
+import com.revature.exceptions.BalanceNotEmptyException;
+import com.revature.exceptions.OverdraftException;
 import com.revature.util.ConnectionUtil;
 
 public class BankAccountDAOImpl implements BankAccountDAO{
@@ -38,11 +40,23 @@ public class BankAccountDAOImpl implements BankAccountDAO{
 		Connection conn;
 		try{
 			conn = ConnectionUtil.getConnectionFromFile(filename);
-			CallableStatement cstmt = conn.prepareCall("{call DELETEBANKACCOUNT(?, ?)}");
-			cstmt.setInt(1, id);
-			cstmt.setInt(2, user.getId());
-			System.out.println("Trying stored procedure call");
-			cstmt.execute();
+			PreparedStatement pstmt = conn.prepareStatement("SELECT BALANCE FROM BANKACCOUNTS WHERE BANK_ACCOUNT_ID = ?");
+			pstmt.setInt(1,id);
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next()) {
+				try {
+					if(rs.getDouble("BALANCE") == 0) {
+						CallableStatement cstmt = conn.prepareCall("{call DELETEBANKACCOUNT(?, ?)}");
+						cstmt.setInt(1, id);
+						cstmt.setInt(2, user.getId());
+						cstmt.execute();
+					} else {
+						throw new BalanceNotEmptyException("The account is not empty");
+					}
+				} catch (BalanceNotEmptyException e) {
+					e.printStackTrace();
+				}
+			}
 			conn.close();
 		} catch (SQLException e){
 			e.printStackTrace();
@@ -70,11 +84,19 @@ public class BankAccountDAOImpl implements BankAccountDAO{
 		}
 	}
 
-	public void withdrawMoneyFromAccount(int accountID, double money, User user) {
+	public void withdrawMoneyFromAccount(int accountID, double money, User user) throws OverdraftException{
 		BankAccount getInfo = this.viewBankAccountByID(accountID, user);
 		Connection conn;
 		try{
 			conn = ConnectionUtil.getConnectionFromFile(filename);
+			PreparedStatement checkAccount = conn.prepareStatement("SELECT BALANCE FROM BANKACCOUNTS WHERE BANK_ACCOUNT_ID = ?");
+			checkAccount.setInt(1, accountID);
+			ResultSet rs = checkAccount.executeQuery();
+			while(rs.next()) {
+				if(rs.getDouble("BALANCE") < money) {
+					throw new OverdraftException("You do not have that much money");
+				}
+			}
 			PreparedStatement pstmt = conn.prepareStatement("UPDATE BANKACCOUNTS SET BALANCE = ? WHERE USER_ID = ? AND BANK_ACCOUNT_ID = ?");
 			pstmt.setDouble(1, getInfo.getbalance() - money);
 			pstmt.setInt(2, user.getId());
@@ -82,7 +104,8 @@ public class BankAccountDAOImpl implements BankAccountDAO{
 			System.out.println("Updating bank account");
 			pstmt.executeUpdate();
 			conn.close();
-		} catch (SQLException e){
+		}
+		catch (SQLException e){
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();

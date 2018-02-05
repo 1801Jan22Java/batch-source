@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.revature.beans.User;
+import com.revature.exceptions.UserTakenException;
 import com.revature.util.ConnectionUtil;
 
 public class SuperUserDAOImpl implements SuperUserDAO {
@@ -38,16 +39,22 @@ public class SuperUserDAOImpl implements SuperUserDAO {
 		return users;
 	}
 
-	public void createNewUser(User u) {
+	public void createNewUser(User u) throws UserTakenException {
 		Connection conn;
 		try {
 			conn = ConnectionUtil.getConnectionFromFile(filename);
-			PreparedStatement pstmt = conn.prepareStatement("INSERT INTO USERS(USER_ID, USERNAME, PASSWORD) VALUES (USER_ID_SEQ.NEXTVAL, ?, ?)");
+			PreparedStatement pstmt = conn.prepareStatement("SELECT USERNAME FROM USERS WHERE USERNAME = ?");
 			pstmt.setString(1, u.getUsername());
-			pstmt.setString(2, u.getPassword());
-			pstmt.executeUpdate();
-			conn.close();
-			
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next()) {
+				throw new UserTakenException("Username has been taken");
+			} else {
+				pstmt = conn.prepareStatement("INSERT INTO USERS(USER_ID, USERNAME, PASSWORD) VALUES (USER_ID_SEQ.NEXTVAL, ?, ?)");
+				pstmt.setString(1, u.getUsername());
+				pstmt.setString(2, u.getPassword());
+				pstmt.executeUpdate();
+				conn.close();
+			}
 		} catch(SQLException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

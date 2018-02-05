@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.revature.beans.User;
+import com.revature.exceptions.IncorrectCredentialsException;
+import com.revature.exceptions.UserTakenException;
 import com.revature.util.ConnectionUtil;
 
 
@@ -14,7 +16,7 @@ public class UserDAOImpl implements UserDAO {
 	
 	private static String filename = "connection.properties";
 	
-	public boolean checkCredentials(String username, String password) {
+	public boolean checkCredentials(String username, String password) throws IncorrectCredentialsException {
 		boolean userExists = false;
 		Connection conn;
 		try{
@@ -25,6 +27,9 @@ public class UserDAOImpl implements UserDAO {
 			ResultSet results = pstmt.executeQuery();
 			if(results.next()) {
 				userExists = true;
+			}
+			else {
+				throw new IncorrectCredentialsException("You Entered in the WRONG credentials");
 			}
 			conn.close();
 		} catch(SQLException e) {
@@ -80,16 +85,22 @@ public class UserDAOImpl implements UserDAO {
 		return newUser;
 	}
 
-	public void createNewUser(User u) {
+	public void createNewUser(User u) throws UserTakenException {
 		Connection conn;
 		try {
 			conn = ConnectionUtil.getConnectionFromFile(filename);
-			PreparedStatement pstmt = conn.prepareStatement("INSERT INTO USERS(USER_ID, USERNAME, PASSWORD) VALUES (USER_ID_SEQ.NEXTVAL, ?, ?)");
+			PreparedStatement pstmt = conn.prepareStatement("SELECT USERNAME FROM USERS WHERE USERNAME = ?");
 			pstmt.setString(1, u.getUsername());
-			pstmt.setString(2, u.getPassword());
-			pstmt.executeUpdate();
-			conn.close();
-			
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next()) {
+				throw new UserTakenException("Username has been taken");
+			} else {
+				pstmt = conn.prepareStatement("INSERT INTO USERS(USER_ID, USERNAME, PASSWORD) VALUES (USER_ID_SEQ.NEXTVAL, ?, ?)");
+				pstmt.setString(1, u.getUsername());
+				pstmt.setString(2, u.getPassword());
+				pstmt.executeUpdate();
+				conn.close();
+			}
 		} catch(SQLException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

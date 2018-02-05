@@ -11,10 +11,10 @@ import com.revature.dao.TransactionDAO;
 import com.revature.dao.TransactionDAOImpl;
 import com.revature.dao.UserDAO;
 import com.revature.dao.UserDAOImpl;
+import com.revature.exceptions.IncorrectCredentialsException;
+import com.revature.exceptions.OverdraftException;
+import com.revature.exceptions.UserTakenException;
 
-// NEED TO ADD SUPER USER ACTIONS
-// IMPLEMENT NEW USER FUNCTIONALITY
-// ADD CUSTOM EXCEPTIONS
 
 public class UserActions {
 	
@@ -27,15 +27,14 @@ public class UserActions {
 		boolean keepPrinting = true;
 		while(keepPrinting) {
 			System.out.println("Welcome to the JDBC Bank. What would you like to do today?\n 1.Login \n 2.New User \n 3.Exit.");
-	    	int selectedAction = sc.nextInt();
-	    	sc.nextLine();
+	    	String selectedAction = sc.nextLine();
 	    	switch(selectedAction) {
-	    	case 1: 
+	    	case "1": 
 	    		System.out.println("Please Enter Your Credentials");
 	    		System.out.println("Username:");
-	    		String username = sc.next();
+	    		String username = sc.nextLine();
 	    		System.out.println("Password:");
-	    		String password = sc.next();
+	    		String password = sc.nextLine();
 	    		
 	    		try {
 					if(CheckCredentials.checkSuperCredentials(username, password)) {
@@ -44,13 +43,14 @@ public class UserActions {
 						AdminActions.superLoggedIn(sc, superUser);
 					} else {
 						UserDAO user = new UserDAOImpl();
-						if(user.checkCredentials(username, password)) {
-							User currentUser = user.getUserByUsername(username);
-							System.out.println("logged into normal user");
-							loggedIn(sc, currentUser);
-						} else {
-							// Use a custom exception probably?
-							System.out.println("Incorrect Credentials");
+						try {
+							if(user.checkCredentials(username, password)) {
+								User currentUser = user.getUserByUsername(username);
+								System.out.println("logged into normal user");
+								loggedIn(sc, currentUser);
+							} 
+						} catch (IncorrectCredentialsException e) {
+							System.out.println(e.getMessage());
 						}
 					}
 				} catch (FileNotFoundException e) {
@@ -58,7 +58,7 @@ public class UserActions {
 				}
 	    		
 	    		break;
-	    	case 2:
+	    	case "2":
 	    		System.out.println("Registering new User");
     			User newUser = new User();
     			System.out.println("Enter the username: ");
@@ -66,9 +66,13 @@ public class UserActions {
     			System.out.println("Enter the password: ");
     			newUser.setPassword(sc.nextLine());
     			UserDAO user = new UserDAOImpl();
-    			user.createNewUser(newUser);
+    			try {
+					user.createNewUser(newUser);
+				} catch (UserTakenException e) {
+					System.out.println(e.getMessage());
+				}
     			break;
-	    	case 3:
+	    	case "3":
 	    		System.out.println("Exiting");
 	    		keepPrinting = false;
 	    		break;
@@ -97,52 +101,64 @@ public class UserActions {
     		System.out.println("5. Create An Account");
     		System.out.println("6. Delete Account");
     		System.out.println("7. Logout");
-    		int optionSelected = sc.nextInt();
+    		String optionSelected = sc.nextLine();
     		switch(optionSelected) {
-    		case 1:
+    		case "1":
     			System.out.println("Viewing Bank Account");
     			System.out.println(bankAccount.viewBankAccounts(user));
     			break;
-    		case 2:
+    		case "2":
     			// MAKE AN EXCEPTION IF NOT ENOUGH MONEY IN THE BANK ACCOUNT
     			System.out.println("Which account do you want to withdraw from?");
     			System.out.println(bankAccount.viewBankAccounts(user));
     			accountID = sc.nextInt();
+    			sc.nextLine();
     			System.out.println("How much money do you want to withdraw?");
     			money = sc.nextDouble();
-    			bankAccount.withdrawMoneyFromAccount(accountID, money, user);
-    			// When a transaction is made, store it in the table
-    			transactionType.setType("withdraw");
-    			newTransaction.addTransaction(user, bankAccount.viewBankAccountByID(accountID, user), transactionType, money);
+    			sc.nextLine();
+    			try {
+    				bankAccount.withdrawMoneyFromAccount(accountID, money, user);
+    				// When a transaction is made, store it in the table
+    				System.out.println("Why am I getting executed");
+        			transactionType.setType("withdraw");
+        			newTransaction.addTransaction(user, bankAccount.viewBankAccountByID(accountID, user), transactionType, money);
+    			} catch (OverdraftException e) {
+    				System.out.println(e.getMessage());
+    			}
+				
     			break;
-    		case 3: 
+    		case "3": 
     			// Try making a custom exception for not being the right user if putting into wrong account
     			System.out.println("Which account do you want to put money into?");
     			System.out.println(bankAccount.viewBankAccounts(user));
     			accountID = sc.nextInt();
+    			sc.nextLine();
     			System.out.println("How much money do you want to deposit?");
     			money = sc.nextDouble();
+    			sc.nextLine();
     			bankAccount.depositMoneyToAccount(accountID, money, user);
     			transactionType.setType("deposit");
     			newTransaction.addTransaction(user, bankAccount.viewBankAccountByID(accountID, user), transactionType, money);
     			break;
-    		case 4:
+    		case "4":
     			System.out.println("Which Account do you want to look at?");
     			System.out.println(bankAccount.viewBankAccounts(user));
     			accountID = sc.nextInt();
+    			sc.nextLine();
     			System.out.println(newTransaction.viewAllTransactions(user, accountID));
     			break;
-    		case 5:
+    		case "5":
     			System.out.println("Would you like to create a Savings or Checking account?");
     			String accountType = sc.nextLine();   			
     			bankAccount.createAccount(accountType, user);
     			break;    			
-    		case 6:
+    		case "6":
     			System.out.println("Enter the ID of the Account Being Deleted");
     			accountID = sc.nextInt();
+    			sc.nextLine();
     			bankAccount.deleteAccountById(accountID, user);
     			break;
-    		case 7:
+    		case "7":
     			System.out.println("Logging out");
     			keepGoing = false;
     			break;
