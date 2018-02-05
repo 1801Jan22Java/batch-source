@@ -21,7 +21,7 @@ public class Display {
 	private String super_file = "SuperUser.properties";
 
 	public void mainMenu() {
-		System.out.println("Hello welcome to McBank what would you like to do" + "\n Press 1 to open an accout"
+		System.out.println("Hello welcome to McBank what would you like to do" + "\n Press 1 to open an account"
 				+ "\n Press 2 to check on existing account" + "\n Press 0 to exit\n");
 	}
 
@@ -170,6 +170,8 @@ public class Display {
 
 						break;
 
+					}else {
+						verify = security.check_Credentials(username, password);
 					}
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
@@ -180,9 +182,6 @@ public class Display {
 				}
 			}
 			System.out.println(super_user);
-			if (super_user == false) {
-				verify = security.check_Credentials(username, password);
-			}
 			if (verify == true) {
 
 				break;

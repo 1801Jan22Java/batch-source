@@ -76,15 +76,12 @@ public class SecurityDaoImpl implements SecurityDao {
 			PreparedStatement statement = con.prepareStatement("select * from security where username = ?");
 			//"select * from security where username = ?"
 			statement.setString(1, username);
-			System.out.println("got here 3");
 			ResultSet rs = statement.executeQuery();
 			if(rs.next()) {
 
 			this.UserID = rs.getInt(1);
-			System.out.println(this.UserID+"_______"+rs.getString(2));
 			
 			stored_username =rs.getString(2);
-			System.out.println("Got the username = "+ stored_username );
 			stored_password = rs.getString(3);
 				
 				

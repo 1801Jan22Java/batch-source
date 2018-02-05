@@ -50,6 +50,8 @@ public class Driver {
 				dis.newAccount();
 			}else if(result == 2) {
 				dis.verify_User();
+			}else {
+				System.out.println("Goodbye");
 			}
 		}while(result != 0);
 	}
