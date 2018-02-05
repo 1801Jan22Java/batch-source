@@ -44,15 +44,17 @@ public class BankDriver {
 			System.out.println("Would you like to create an account?\n"
 					+ "Enter 1 to create a user account, otherwise press 2");
 			String response = sc.nextLine();
-			System.out.println(response.equals("1") ||response.equals("2"));
-
+			boolean validRes =response.equals("1") ||response.equals("2");
+			//System.out.println(validRes);
 			//Attempting to validate user response
-			while(!response.equals("1") ||!response.equals("2"))
+			while(!validRes)
 			{
 				System.out.println("That input was not recognized.");
 				System.out.println("Would you like to create an account?\n"
 						+ "Enter 1 to create a user account, otherwise press 2");
 				response = sc.nextLine();
+				validRes =response.equals("1") ||response.equals("2");
+			}
 				if(response.equals("1"))
 				{
 					udi.createUser();
@@ -76,7 +78,7 @@ public class BankDriver {
 					User user = udi.getUserByCredentials(username, password);
 					adi.showMenu(user);
 				}
-			}
+			
 		}
 		
 		//Catches, in case something goes wrong while connected to database

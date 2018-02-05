@@ -102,10 +102,12 @@ public class AccountDaoImpl implements AccountDao{
 			CallableStatement cs = conn.prepareCall(sqlStmt);
 			cs.setInt(1,account.getAccountType().getAccountTypeID());
 			cs.setFloat(2,account.getBalance());
+			NumberFormat nf = NumberFormat.getCurrencyInstance();
 			cs.setInt(3,udi.getUserID(user));
 			cs.execute();
 			conn.commit();
-			System.out.println("Account for user " + udi.getUserID(user)+ " created with a balance of " + account.getBalance());
+			System.out.println("Account for user " + udi.getUserID(user)
+					+ " created with a balance of " + nf.format(account.getBalance()));
 		} catch (SQLException | IOException e) {
 			//con.rollback();
 			e.printStackTrace();
@@ -130,7 +132,7 @@ public class AccountDaoImpl implements AccountDao{
 			}
 			else{
 				conn.setAutoCommit(false);
-				System.out.println("In try statement for deposit");
+			//	System.out.println("In try statement for deposit"); //DEBUGGING
 				String sqlStmt="{CALL SP_MAKE_DEPOSIT(?,?)}";
 				CallableStatement cs = conn.prepareCall(sqlStmt);
 				cs.setInt(1,accountID);
@@ -140,7 +142,7 @@ public class AccountDaoImpl implements AccountDao{
 				showBalance(user,accountID);
 			}
 		} catch (SQLException | IOException e) {
-			//con.rollback();
+			//conn.rollback();
 			e.printStackTrace();
 		}
 
@@ -169,8 +171,8 @@ public class AccountDaoImpl implements AccountDao{
 				ResultSet rs = ps.getResultSet();
 				if (rs.next())
 				{
-					//System.out.println("ACCOUNT!!");
-					//System.out.println(rs.getInt("ACCOUNT_ID"));
+					//System.out.println("ACCOUNT!!"); //DEBUGGING
+					//System.out.println(rs.getInt("ACCOUNT_ID"));//DEBUGGING
 					accountValid=true;
 				}
 				else
@@ -207,7 +209,7 @@ public class AccountDaoImpl implements AccountDao{
 			}
 			else{
 				conn.setAutoCommit(false);
-				System.out.println("In try statement for withdrawal");
+				//System.out.println("In try statement for withdrawal"); //DEBUGGING
 				String sqlStmt="{CALL SP_MAKE_WITHDRAWAL(?,?)}";
 				PreparedStatement ps = conn.prepareStatement("SELECT BALANCE FROM ACCOUNTS WHERE ACCOUNT_ID=?");
 				ps.setInt(1, accountID);
@@ -435,7 +437,7 @@ public class AccountDaoImpl implements AccountDao{
 			}
 			else{
 				conn.setAutoCommit(false);
-				System.out.println("In try statement for showing balance");
+			//	System.out.println("In try statement for showing balance");  //DEBUGGING
 				String sqlStmt="SELECT * FROM ACCOUNT_TRANSACTION WHERE ACCOUNT_ID=? ORDER BY DATE_OF_TRANSACTION DESC";
 				PreparedStatement ps = conn.prepareStatement(sqlStmt);
 				ps.setInt(1,accountID);
@@ -480,16 +482,17 @@ public class AccountDaoImpl implements AccountDao{
 			}
 			else{
 				conn.setAutoCommit(false);
-				System.out.println("In try statement for showing balance");
+			//	System.out.println("In try statement for showing balance"); //DEBUGGING
 				String sqlStmt="SELECT BALANCE FROM ACCOUNTS WHERE ACCOUNT_ID=?";
 				PreparedStatement ps = conn.prepareStatement(sqlStmt);
 				ps.setInt(1,accountID);
 				ps.execute();
+				NumberFormat nf = NumberFormat.getCurrencyInstance();
 				ResultSet rs =ps.getResultSet();
 				while(rs.next())
 				{
 					float balance =rs.getFloat("BALANCE");
-					System.out.println("Your balance is: "+balance);
+					System.out.println("Your balance is: "+nf.format(balance));
 				}
 			}
 
@@ -519,7 +522,7 @@ public class AccountDaoImpl implements AccountDao{
 			}
 			else{
 				conn.setAutoCommit(false);
-				System.out.println("In try statement for showing balance");
+				//System.out.println("In try statement for showing balance"); //DEBUGGING
 				String sqlStmt="SELECT BALANCE FROM ACCOUNTS WHERE ACCOUNT_ID=?";
 				PreparedStatement ps = conn.prepareStatement(sqlStmt);
 				ps.setInt(1,accountID);
