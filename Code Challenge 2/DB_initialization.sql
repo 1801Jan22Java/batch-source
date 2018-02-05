@@ -68,19 +68,12 @@ END before_insert_department;
 
 -- Stored Procedures
 CREATE OR REPLACE PROCEDURE SP_GIVE_RAISE
-(did INTEGER, 
-validDept BOOLEAN)
+(did INTEGER)
 AS
-numRes INTEGER;
+
 BEGIN
-  SELECT count(*) into numRes 
-  FROM DEPARTMENT
-  WHERE DEPARTMENT_ID = did;
   
-  IF(numRes > 0)
-    UPDATE validDept = true;
-  END IF
-  UPDATE EMPLOYEE SET SALARY = (SALARY * 1.1) 
+  UPDATE EMPLOYEE SET SALARY = SALARY * 1.1
   WHERE DEPARTMENT_ID = did;
 END SP_GIVE_RAISE;
 /

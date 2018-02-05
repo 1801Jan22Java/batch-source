@@ -15,17 +15,19 @@ public class Driver {
 		Integer avg = 0;
 		Integer count = 0;
 		for(Integer i: money) {
-			System.out.println("Salaries: " + i.toString()); // to see that salaries have actually changed
 			count++;
 			avg += i;
 		}
+		
 		avg /= count;
 		System.out.println("Average Salary for " + d.getDepartmentName() + " is " + avg);
 		
 		DDI.giveRaise(d);
 		money = DDI.getSalaries(d);
+		count = 0;
+		avg = 0;
 		for(Integer i: money) {
-			System.out.println("Salary: " + i.toString());
+
 			count++;
 			avg += i;
 		}

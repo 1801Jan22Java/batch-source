@@ -18,9 +18,10 @@ public class DepartmentDaoImpl implements DepartmentDao {
 	public void giveRaise(Department d) {
 		try {
 			Connection con = ConnectionUtil.getConnectionFromFile(filename);
-			String sql = "{CALL SP_GIVE_RAISE(?,?)}";
+			String sql = "{CALL SP_GIVE_RAISE(?)}";
 			CallableStatement cs = con.prepareCall(sql);
-			
+			cs.setInt(1, d.getDepartmentID());
+			cs.executeUpdate();
 			
 		} catch (IOException | SQLException e) {
 			// TODO Auto-generated catch block
@@ -35,14 +36,14 @@ public class DepartmentDaoImpl implements DepartmentDao {
 		try {
 			Connection con = ConnectionUtil.getConnectionFromFile(filename);
 			int did = d.getDepartmentID();
-			Integer sal = null;
-			String sql = "SELECT * FROM EMPLOYEE WHERE DEPARTMENT_ID = ?";
+			Integer sal = 0;
+			String sql = "SELECT SALARY, DEPARTMENT_ID FROM EMPLOYEE WHERE DEPARTMENT_ID = ?";
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setInt(1, d.getDepartmentID());
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				did = rs.getInt("DEPARTMENT_ID");
-				sal = rs.getInt("SALARY");
+				did = rs.getInt(1);
+				sal = rs.getInt(2);
 				salaries.add(sal);
 				
 			}
