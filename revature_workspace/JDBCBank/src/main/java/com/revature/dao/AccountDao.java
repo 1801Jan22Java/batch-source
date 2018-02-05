@@ -7,7 +7,6 @@ import com.revature.beans.Account;
 import com.revature.beans.User;
 
 public interface AccountDao {
-	public List<Account> getAccounts();
 	public Account getAccountById();
 	public void addAccount(Account account, User user);
 	public void deposit(int accountID,float amount,User user);

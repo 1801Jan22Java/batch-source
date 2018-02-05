@@ -24,17 +24,21 @@ import com.revature.util.ConnectionUtil;
 
 public class AccountDaoImpl implements AccountDao{
 	private static String filename = "connection.properties";
-
-	public List<Account> getAccounts() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	
 	public Account getAccountById(int Id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/*
+	 * validateAmount() takes in string input returns a boolean valid 
+	 * more precisely, it ensures that the user entered a non-zero positive number,
+	 * and not a negative number or a string of characters.  if the user enters a negative number or zero, the
+	 * method complains.  If the user enters a string, it enters a NumberFormatException and returns false
+	 * otherwise, validateAmount() returns true
+	 * @param String input
+	 * @return boolean valid
+	 * */
 	private boolean validateAmount(String input)
 	{
 		boolean valid =false;
@@ -57,6 +61,13 @@ public class AccountDaoImpl implements AccountDao{
 		}
 	}
 
+	/*
+	 * Takes in a string input and returns a float, after calling validateAmount() on the string input.
+	 * if validateAmount returns true, convertToFloat returns a non-zero amount.  
+	 * Otherwise, convertToFloat returns zero.
+	 * @param String input
+	 * @return float result
+	 * */
 	private float convertToFloat(String input)
 	{
 		float result = 0.0f;
@@ -71,6 +82,8 @@ public class AccountDaoImpl implements AccountDao{
 	}
 	/*
 	 * addAccount adds a new account for a user.
+	 * takes in an Account object and a User object.
+	 * First creates an account
 	 * */
 	@Override
 	public void addAccount(Account account,User user)
@@ -80,7 +93,7 @@ public class AccountDaoImpl implements AccountDao{
 		{
 			UserDaoImpl udi = new UserDaoImpl();
 			conn.setAutoCommit(false);
-			System.out.println("In try statement");
+	//		System.out.println("In try statement"); //DEBUGGING
 			String sqlStmt="{CALL SP_NEW_ACCOUNT(?,?,?)}";
 			CallableStatement cs = conn.prepareCall(sqlStmt);
 			cs.setInt(1,account.getAccountType().getAccountTypeID());
@@ -88,7 +101,7 @@ public class AccountDaoImpl implements AccountDao{
 			cs.setInt(3,udi.getUserID(user));
 			cs.execute();
 			conn.commit();
-
+			System.out.println("Account for user " + udi.getUserID(user)+ " created with a balance of " + account.getBalance());
 		} catch (SQLException | IOException e) {
 			//con.rollback();
 			e.printStackTrace();
@@ -213,15 +226,15 @@ public class AccountDaoImpl implements AccountDao{
 		UserDaoImpl udi = new UserDaoImpl();
 		Scanner sc = new Scanner(System.in);
 		if(udi.validateSuperUser(user)){
-			System.out.println("Please make a selection:\n 1: View balance "
+			System.out.println("Please make a selection:\n1: View balance "
 					+ "\n2: Make deposit\n3: Make withdrawal\n4:Close account."
-					+ "\n5: Create account.\n6: Delete user\n 7: Create user\n8: Show Transactions. \n10: Log out");
+					+ "\n5: Create account.\n6: Delete user\n7: Create user\n8: Show Transactions. \n9: Show Accounts. \n10: Log out");
 		}
 		else
 		{
-			System.out.println("Please make a selection:\n 1: View balance "
+			System.out.println("Please make a selection:\n1: View balance "
 					+ "\n2: Make deposit\n3: Make withdrawal\n4:Close account."
-					+ "\n5: Create account.\n8: Show Transactions.\n10: Log out");
+					+ "\n5: Create account.\n8: Show Transactions. \n9: Show Accounts \n10: Log out");
 		}
 		try{
 			int newOption = sc.nextInt();
@@ -353,6 +366,8 @@ public class AccountDaoImpl implements AccountDao{
 				showTransactions(user,accountID);
 				showMenu(user);
 				break;
+			case 9: showUserAccounts(user); showMenu(user);
+			break;
 			case 10: user=udi.logout();
 			break;
 			default: 
@@ -477,6 +492,30 @@ public class AccountDaoImpl implements AccountDao{
 
 	}
 
-
+	public void showUserAccounts(User user)
+	{
+		try(Connection conn= ConnectionUtil.getConnectionFromFile(filename))
+		{
+			String sqlStatement = "SELECT * FROM ACCOUNTS WHERE USER_ID =?";
+			UserDaoImpl udi = new UserDaoImpl();
+			int userID =udi.getUserID(user);
+			PreparedStatement ps = conn.prepareStatement(sqlStatement);
+			ps.setInt(1, userID);
+			ps.execute();
+			ResultSet rs = ps.getResultSet();
+			while(rs.next())
+			{
+				int accountID = rs.getInt("ACCOUNT_ID");
+				float balance = rs.getFloat("BALANCE");
+				NumberFormat nf = NumberFormat.getCurrencyInstance();
+				String acctInfo = "USER " + userID + " has account " + accountID 
+						+" which has a balance of " + nf.format(balance);
+				System.out.println(acctInfo);
+			}
+		} catch (SQLException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 }
