@@ -1,11 +1,5 @@
 package com.revature.JDBCBankAssignment;
 
-import com.revature.util.ConnectionUtil;
-
-/**
- * Hello world!
- *
- */
 public class App 
 {
     public static void main( String[] args )

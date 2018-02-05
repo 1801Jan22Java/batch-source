@@ -7,6 +7,8 @@ import com.revature.beans.Account;
 import com.revature.beans.User;
 import com.revature.dao.AccountDao;
 import com.revature.dao.AccountDaoImpl;
+import com.revature.dao.TransactionDao;
+import com.revature.dao.TransactionDaoImpl;
 import com.revature.dao.UserDao;
 import com.revature.dao.UserDaoImpl;
 import com.revature.util.BankOfDoge;
@@ -52,8 +54,6 @@ public class Banker {
 	
 	//Here user can login, register, or exit
 	private void homeScreen() {
-		System.out.println("----------------------------------");
-		System.out.println("Welcome to the bank of DOGE");
 		System.out.println("----------------------------------");
 		BankOfDoge.getDoge();
 		boolean exit = false;
@@ -238,8 +238,8 @@ public class Banker {
 		boolean exit = false;
 		
 		while(!exit) {
-			switch(getUserChoice("In account " + account.getAccountName() + "(" + account.getBalance() + " DOGE) as "
-					+ user.getUsername() + "\nDeposit[1] Withdraw[2] Delete[3] Back[4]", 1, 4)) {
+			switch(getUserChoice("In account: " + account.getAccountName() + "(" + account.getBalance() + " DOGE) as "
+					+ user.getUsername() + "\nDeposit[1] Withdraw[2] Transactions[3] Delete[4] Back[5]", 1, 4)) {
 			case 1:
 				deposit(user, account);
 				break;
@@ -249,6 +249,11 @@ public class Banker {
 				break;
 				
 			case 3:
+				TransactionDao tdao = new TransactionDaoImpl();
+				tdao.getAccountTransactions(account);
+				break;
+				
+			case 4:
 				if(account.getBalance() == 0) {
 					AccountDao dao = new AccountDaoImpl();
 					dao.deleteAccount(account);
@@ -259,7 +264,7 @@ public class Banker {
 				break;
 				
 			default:
-			case 4:
+			case 5:
 				exit = true;
 				
 			}
