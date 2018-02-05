@@ -4,6 +4,17 @@ import java.sql.Date;
 
 public class UserInfo 
 {
+	public UserInfo(String firstName, String lastName, String state, String zip,Date birthDay, String address, String ssn, int userId) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		State = state;
+		this.birthDay = birthDay;
+		this.address = address;
+		this.ssn = ssn;
+		this.userId = userId;
+		this.zip=zip;
+	}
 	private String firstName;
 	private String lastName;
 	private String State;
@@ -11,6 +22,7 @@ public class UserInfo
 	private String address;
 	private String ssn;
 	private int userId;
+	private String zip;
 	public String getFirstName() {
 		return firstName;
 	}
@@ -55,7 +67,7 @@ public class UserInfo
 	}
 	public String toString()
 	{
-		return this.firstName+" "+this.lastName+" "+this.userId;
+		return this.firstName+" "+this.lastName;
 				
 	}
 }

@@ -13,6 +13,7 @@ import java.util.List;
 
 import beans.Account;
 import util.ConnectionUtil;
+import util.NotEnoughMoneyException;
 
 public class AccountDAOImpl implements AccountDAO
 {
@@ -29,7 +30,7 @@ public class AccountDAOImpl implements AccountDAO
 			{
 				int accountId = rs.getInt("ACCOUNT_ID");
 				int userId = rs.getInt("USER_ID");
-				String accountType = rs.getString("ACCOUNT_TYPE");
+				int accountType = rs.getInt("ACCOUNT_TYPE");
 				float balance = rs.getFloat("BALANCE");
 				Account a = new Account(accountId, userId, accountType, balance);
 				act.add(a);
@@ -44,22 +45,22 @@ public class AccountDAOImpl implements AccountDAO
 	}
 
 	@Override
-	public Account getAccountByUser(int u) 
+	public ArrayList<Account> getAccountsByUser(int u) 
 	{
 		ArrayList<Account> acts = this.getAccounts();
-		Account act = null;
+		ArrayList<Account> uacts = new ArrayList<Account>();
 		for(Account a: acts)
 		{
 			if(a.getUserId()==u)
 			{
-				act = a;
+				uacts.add(a);
 			}
 		}
-		return act;
+		return uacts;
 	}
 
 	@Override
-	public Account createAccount(int accountId, int userId, String accountType, float balance) 
+	public Account createAccount(int accountId, int userId, int accountType, float balance) 
 	{
 		PreparedStatement pstmt = null;
 		try (Connection con = ConnectionUtil.getConnectionFromFile(filename)){
@@ -67,7 +68,7 @@ public class AccountDAOImpl implements AccountDAO
 			pstmt=con.prepareStatement(sql);
 			pstmt.setInt(1, accountId);
 			pstmt.setInt(2, userId);
-			pstmt.setInt(3, 0);
+			pstmt.setInt(3, accountType);
 			pstmt.setFloat(4, balance);
 			//pstmt.execute();
 			pstmt.executeUpdate();
@@ -97,6 +98,30 @@ public class AccountDAOImpl implements AccountDAO
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
+	}
+
+	@Override
+	public float updateAccount(float f, Account a) throws NotEnoughMoneyException {
+		float newBalance = a.getBalance()+f;
+		if(newBalance < 0)
+		{
+			throw new NotEnoughMoneyException();
+		}
+		PreparedStatement pstmt = null;
+		try (Connection con = ConnectionUtil.getConnectionFromFile(filename)){
+			String sql = "UPDATE ACCOUNT SET BALANCE = ? WHERE ACCOUNT_ID = ?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setFloat(1, newBalance);
+			pstmt.setInt(2, a.getAccountid());
+			//pstmt.execute();
+			pstmt.executeUpdate();
+			con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		return 0;
 	}
 
 }

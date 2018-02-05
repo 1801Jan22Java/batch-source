@@ -2,7 +2,7 @@ package beans;
 
 public class Account 
 {
-	public Account(int accountid, int userId, String accountType, float balance) {
+	public Account(int accountid, int userId, int accountType, float balance) {
 		super();
 		this.accountid = accountid;
 		this.userId = userId;
@@ -11,7 +11,7 @@ public class Account
 	}
 	private int accountid;
 	private int userId;
-	private String accountType;
+	private int accountType;
 	private float balance;
 	public int getAccountid() {
 		return accountid;
@@ -25,10 +25,10 @@ public class Account
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
-	public String getAccountType() {
+	public int getAccountType() {
 		return accountType;
 	}
-	public void setAccountType(String accountType) {
+	public void setAccountType(int accountType) {
 		this.accountType = accountType;
 	}
 	public float getBalance() {
@@ -39,7 +39,14 @@ public class Account
 	}
 	public String toString()
 	{
-		return this.accountid+" "+this.accountType+" "+this.userId;
+		if(this.accountType == 0)
+		{
+			return this.accountType+" Checking: "+this.userId;
+		}
+		else
+		{
+			return this.accountid+" Saving: "+this.balance;
+		}
 	}
 	
 }

@@ -7,18 +7,21 @@ import java.text.SimpleDateFormat;
 import java.util.Scanner;
 import doa.*;
 import util.ConnectionUtil;
+import util.NoSuchUserNameAndPasswordException;
+import util.NotEnoughMoneyException;
 
 
 
 public class Driver {
 
-	public static void main(String[] args) throws ParseException
+	public static void main(String[] args) throws ParseException, NoSuchUserNameAndPasswordException, NotEnoughMoneyException
 	{
 		long time = System.currentTimeMillis();
 		java.sql.Date date = new java.sql.Date(time);
 		Scanner input = new Scanner(System.in);
 		UserDAOImpl userdao = new UserDAOImpl();
 		AccountDAOImpl actdao = new AccountDAOImpl();
+		//actdao.createAccount(0, 1024, 0, 90f);
 		//System.out.println(userdao.getUsers().toString());
 		//userdao.registerNewUser("kitty222", "wordPass1", "Hello", "Kitty", "Of Mind", "the moment", date, "867 Japan ave.", "000001");
 		//actdao.createAccount(0, 1024, "Savings", 0f, date, 0);
@@ -27,6 +30,8 @@ public class Driver {
 		System.out.println("1: Login in");
 		System.out.println("2: Register a New Account");
 		System.out.println("3: Login as a Super User");
+		//UserInfoDAOImpl uidao = new UserInfoDAOImpl();
+		//System.out.println(uidao.getUserInfo().toString());
 		int choice = input.nextInt();
 		boolean cnt = true;
 		while(cnt)
@@ -34,7 +39,11 @@ public class Driver {
 			switch(choice)
 			{
 				case 1:
-					
+					System.out.print("Enter your User Name: ");
+					String BMuserName = input.next();
+					System.out.print("Enter your Password: ");
+					String BMpassword = input.next();
+					BankManager bm = new BankManager(BMuserName, BMpassword);
 					break;
 				case 2:
 					System.out.print("Enter your User Name: ");

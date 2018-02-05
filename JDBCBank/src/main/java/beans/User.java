@@ -29,7 +29,7 @@ public class User
 	}
 	public String toString()
 	{
-		return this.userName;
+		return this.userName +" "+this.password;
 	}
 	public int getSuperUser() {
 		return superUser;
