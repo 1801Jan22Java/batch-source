@@ -80,7 +80,7 @@ public class UserDaoImpl implements UserDao {
 		{
 			User user2= createUserObject();
 			conn.setAutoCommit(false);
-			System.out.println("In try statement");
+		//	System.out.println("In try statement"); //DEBUGGING
 			String sqlStmt="{CALL NEW_USER_PROC(?,?,?,?,?,?)}";
 			CallableStatement cs = conn.prepareCall(sqlStmt);
 			cs.setString(1,user2.getUserName());
@@ -106,7 +106,7 @@ public class UserDaoImpl implements UserDao {
 		{
 
 			conn.setAutoCommit(false);
-			System.out.println("In try statement");
+			//System.out.println("In try statement");//DEBUGGING
 			String sqlStmt="{CALL NEW_USER_PROC(?,?,?,?,?,?)}";
 			CallableStatement cs = conn.prepareCall(sqlStmt);
 			cs.setString(1,user.getUserName());
@@ -144,7 +144,7 @@ public class UserDaoImpl implements UserDao {
 				if(username.equals(userName)&&password.equals(userPass))
 				{
 					validated=true;
-					System.out.println("validated");
+				//	System.out.println("validated");//DEBUGGING
 				}
 			}
 		}
@@ -170,7 +170,7 @@ public class UserDaoImpl implements UserDao {
 		try(Connection conn = ConnectionUtil.getConnectionFromFile(filename))
 		{
 			conn.setAutoCommit(false);
-			System.out.println("In try statement");
+		//	System.out.println("In try statement");//DEBUGGING
 			String sqlStmt="{CALL NEW_USER_PROC(?,?,?,?,?,?)}";
 			CallableStatement cs = conn.prepareCall(sqlStmt);
 			cs.setString(1,user.getUserName());
@@ -257,7 +257,7 @@ public class UserDaoImpl implements UserDao {
 		{
 			try{
 				conn.close();
-				System.out.println("You have been logged out.  Thank you for using JDBC Banking");
+				System.out.println("You have been logged out. Thank you for using the JDBC Banking console!");
 			}
 			catch(SQLException e)
 			{
