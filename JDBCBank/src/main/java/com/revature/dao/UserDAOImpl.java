@@ -5,8 +5,6 @@ import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import com.revature.beans.Account;
-import com.revature.exceptions.NegativeAmountException;
-import com.revature.exceptions.WrongUsernameOrPasswordException;
 import com.revature.util.ConnectionUtil;
 import com.revature.beans.User;
 
@@ -29,16 +27,16 @@ public class UserDAOImpl implements UserDAO {
 			stmnt.setString(3, user.getPassword());
 			stmnt.setString(4, user.getUserName());
 			stmnt.executeUpdate();
-			
+
 			sql = "SELECT USER_ID FROM BANK_USER WHERE USERNAME = ?";
 			stmnt = con.prepareStatement(sql);
 			stmnt.setString(1, user.getUserName());
 			ResultSet rs = stmnt.executeQuery();
-			
+
 			while (rs.next()) {
 				user.setId(rs.getInt("USER_ID"));
 			}
-			
+
 			con.close();
 
 		} catch (SQLException e) {
@@ -83,7 +81,7 @@ public class UserDAOImpl implements UserDAO {
 					superuser = true;
 				}
 				users.add(new User(id, firstName, lastName, userName, password, superuser, accts));
-				
+
 			}
 			con.close();
 		} catch (SQLException e) {
@@ -114,7 +112,7 @@ public class UserDAOImpl implements UserDAO {
 			stmnt = con.prepareStatement(sql);
 			stmnt.setInt(1, userId);
 			ResultSet rs = stmnt.executeQuery();
-			
+
 			if (rs.next()) {
 				id = rs.getInt("USER_ID");
 				firstName = rs.getString("FIRST_NAME");
@@ -129,7 +127,7 @@ public class UserDAOImpl implements UserDAO {
 					superuser = true;
 				}
 				user = new User(id, firstName, lastName, userName, password, superuser, accts);
-				
+
 			}
 			con.close();
 		} catch (SQLException e) {
@@ -167,7 +165,7 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public User signIn(String userName, String password) throws WrongUsernameOrPasswordException {
+	public User signIn(String userName, String password) {
 
 		User user = null;
 		PreparedStatement stmnt = null;
@@ -197,9 +195,7 @@ public class UserDAOImpl implements UserDAO {
 					superuser = true;
 				}
 				user = new User(id, firstName, lastName, userName, password, superuser, accts);
-				
-			} else {
-				throw new WrongUsernameOrPasswordException();
+
 			}
 			con.close();
 		} catch (SQLException e) {
@@ -215,7 +211,8 @@ public class UserDAOImpl implements UserDAO {
 	public void updateUser(User user) {
 		PreparedStatement stmnt = null;
 		try (Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
-			String sql = "UPDATE USER SET FIRST_NAME = ? AND LAST_NAME = ? AND USER_PASSWORD = ? " + "WHERE USER_ID = ?";
+			String sql = "UPDATE USER SET FIRST_NAME = ? AND LAST_NAME = ? AND USER_PASSWORD = ? "
+					+ "WHERE USER_ID = ?";
 
 			stmnt = con.prepareStatement(sql);
 			stmnt.setString(1, user.getFirstName());
@@ -235,7 +232,6 @@ public class UserDAOImpl implements UserDAO {
 	public User getUserByUsername(String username) {
 		User user = null;
 		PreparedStatement stmnt = null;
-		AccountDAO acctDao = new AccountDAOImpl();
 		int id;
 		int su;
 		boolean superuser;
@@ -263,7 +259,7 @@ public class UserDAOImpl implements UserDAO {
 					superuser = true;
 				}
 				user = new User(id, firstName, lastName, userName, password, superuser, accts);
-				
+
 			}
 			con.close();
 		} catch (SQLException e) {

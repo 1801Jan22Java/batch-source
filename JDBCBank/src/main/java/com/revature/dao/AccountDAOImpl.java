@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import com.revature.beans.Account;
-import com.revature.exceptions.NegativeAmountException;
+import com.revature.exceptions.OverdraftException;
 import com.revature.util.ConnectionUtil;
 
 public class AccountDAOImpl implements AccountDAO {
@@ -126,13 +126,9 @@ public class AccountDAOImpl implements AccountDAO {
 	}
 
 	@Override
-	public void depositAmount(int acctId, int amount) throws NegativeAmountException {
+	public void depositAmount(int acctId, int amount) {
 
 		PreparedStatement stmnt = null;
-
-		if (amount < 1) {
-			throw new NegativeAmountException();
-		}
 
 		try (Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
 			String sql = "UPDATE ACCOUNT SET AMOUNT = (AMOUNT + ?) " + "WHERE ACCOUNT_ID = ?";
@@ -150,13 +146,9 @@ public class AccountDAOImpl implements AccountDAO {
 	}
 
 	@Override
-	public void withdrawAmount(int acctId, int amount) throws NegativeAmountException {
+	public void withdrawAmount(int acctId, int amount) throws OverdraftException {
 
 		CallableStatement stmnt = null;
-
-		if (amount < 1) {
-			throw new NegativeAmountException();
-		}
 
 		try (Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
 			String sql = "{CALL WITHDRAW_AMOUNT(?, ?)}";
@@ -166,7 +158,11 @@ public class AccountDAOImpl implements AccountDAO {
 			stmnt.executeUpdate();
 			con.close();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			if (e.getErrorCode() == 6510) {
+				throw new OverdraftException();
+			}else {
+				e.printStackTrace();
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
