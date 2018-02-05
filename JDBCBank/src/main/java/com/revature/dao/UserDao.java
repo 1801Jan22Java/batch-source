@@ -3,7 +3,7 @@ package com.revature.dao;
 import com.revature.beans.User;
 
 public interface UserDao {
-	public void	registerUser (User user) throws Exception;
+	public void registerUser(User user) throws Exception;
 	public void login(User user) throws Exception;
 	public void viewAccounts (User user) throws Exception;
 	public void newAccount (User user, double balance) throws Exception;

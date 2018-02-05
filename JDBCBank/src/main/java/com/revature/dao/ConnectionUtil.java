@@ -16,11 +16,11 @@ public class ConnectionUtil {
 		String url = prop.getProperty("url");
 		String username = prop.getProperty("username");
 		String password = prop.getProperty("password");
-		// if user is superUser, sets flag for such in User class
+		// if user is superUser, assigns them the superUser UserID
 		if ((user.getUsername() == username) || (user.getPassword() == password)) {
 			user.setUserID(1);
 		}
 		// creates connection and sets to instance connection variable
-		user.setConn(DriverManager.getConnection(url,username,password));
+		user.setConn(DriverManager.getConnection(url, username, password));
 	}
 }

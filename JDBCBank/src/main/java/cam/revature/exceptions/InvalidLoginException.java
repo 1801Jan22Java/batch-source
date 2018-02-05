@@ -6,6 +6,7 @@ public class InvalidLoginException extends Exception {
 	public String getMessage() {
 		return "Invalid username/password combination! Please try logging in with registered credentials.";
 	}
+
 	private static final long serialVersionUID = 1L;
 
 }
