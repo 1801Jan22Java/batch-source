@@ -43,8 +43,8 @@ public class SuperUserDAOImpl implements SuperUserDAO {
 		try {
 			conn = ConnectionUtil.getConnectionFromFile(filename);
 			PreparedStatement pstmt = conn.prepareStatement("INSERT INTO USERS(USER_ID, USERNAME, PASSWORD) VALUES (USER_ID_SEQ.NEXTVAL, ?, ?)");
-			pstmt.setString(1, "cchan67");
-			pstmt.setString(2, "password");
+			pstmt.setString(1, u.getUsername());
+			pstmt.setString(2, u.getPassword());
 			pstmt.executeUpdate();
 			conn.close();
 			

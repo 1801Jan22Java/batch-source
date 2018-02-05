@@ -14,6 +14,9 @@ import com.revature.dao.TransactionDAOImpl;
 import com.revature.dao.UserDAO;
 import com.revature.dao.UserDAOImpl;
 
+// NEED TO ADD SUPER USER ACTIONS
+// IMPLEMENT NEW USER FUNCTIONALITY
+
 public class UserActions {
 	
 	// The first menu that pops up when application is launched.
@@ -56,8 +59,15 @@ public class UserActions {
 	    		
 	    		break;
 	    	case 2:
-	    		System.out.println("New User");
-	    		break;
+	    		System.out.println("Registering new User");
+    			User newUser = new User();
+    			System.out.println("Enter the username: ");
+    			newUser.setUsername(sc.nextLine());
+    			System.out.println("Enter the password: ");
+    			newUser.setPassword(sc.nextLine());
+    			UserDAO user = new UserDAOImpl();
+    			user.createNewUser(newUser);
+    			break;
 	    	case 3:
 	    		System.out.println("Exiting");
 	    		keepPrinting = false;
@@ -144,55 +154,96 @@ public class UserActions {
 	}
 	
 	// Implement superUserDAO here to perform various Admin actions.
+	// Menu is pretty long.
 	public static void superLoggedIn(Scanner sc, User user) {
-    	boolean keepGoing = true;
+		boolean keepGoing = true;
+		BankAccountDAO bankAccount = new BankAccountDAOImpl();
+    	TransactionDAO newTransaction = new TransactionDAOImpl();
     	SuperUserDAO superUser = new SuperUserDAOImpl();
+    	TransactionType transactionType = new TransactionType();
+    	int accountID;
+    	double money;
     	while(keepGoing) {
     		System.out.println("Welcome Admin, what would you like to do?");
     		System.out.println("1. View Bank Account");
     		System.out.println("2. Withdraw Money");
     		System.out.println("3. Deposit Money");
     		System.out.println("4. View Transactions");
-    		System.out.println("5. Delete Account");
-    		System.out.println("6. View All Users");
-    		System.out.println("7. Create New User");
-    		System.out.println("8. Update User");
-    		System.out.println("9. Delete all Users");
-    		System.out.println("10. Logout");
+    		System.out.println("5. Create An Account");
+    		System.out.println("6. Delete Account");
+    		System.out.println("7. View All Users");
+    		System.out.println("8. Create New User");
+    		System.out.println("9. Update User");
+    		System.out.println("10. Delete all Users");
+    		System.out.println("11. Logout");
     		int optionSelected = sc.nextInt();
     		switch(optionSelected) {
     		case 1:
     			System.out.println("Viewing Bank Account");
-    			BankAccountDAO bankAccount = new BankAccountDAOImpl();
-    			bankAccount.viewBankAccounts(user);
+    			System.out.println(bankAccount.viewBankAccounts(user));
     			break;
     		case 2:
-    			System.out.println("Withdraw Money");
+    			// MAKE AN EXCEPTION IF NOT ENOUGH MONEY IN THE BANK ACCOUNT
+    			System.out.println("Which account do you want to withdraw from?");
+    			System.out.println(bankAccount.viewBankAccounts(user));
+    			accountID = sc.nextInt();
+    			System.out.println("How much money do you want to withdraw?");
+    			money = sc.nextDouble();
+    			bankAccount.withdrawMoneyFromAccount(accountID, money, user);
+    			// When a transaction is made, store it in the table
+    			transactionType.setType("withdraw");
+    			newTransaction.addTransaction(user, bankAccount.viewBankAccountByID(accountID, user), transactionType, money);
     			break;
     		case 3: 
-    			System.out.println("Deposit Money");
+    			// Try making a custom exception for not being the right user if putting into wrong account
+    			System.out.println("Which account do you want to put money into?");
+    			System.out.println(bankAccount.viewBankAccounts(user));
+    			accountID = sc.nextInt();
+    			System.out.println("How much money do you want to deposit?");
+    			money = sc.nextDouble();
+    			bankAccount.depositMoneyToAccount(accountID, money, user);
+    			transactionType.setType("deposit");
+    			newTransaction.addTransaction(user, bankAccount.viewBankAccountByID(accountID, user), transactionType, money);
     			break;
     		case 4:
-    			System.out.println("Viewing transactions");
+    			System.out.println("Which Account do you want to look at?");
+    			System.out.println(bankAccount.viewBankAccounts(user));
+    			accountID = sc.nextInt();
+    			System.out.println(newTransaction.viewAllTransactions(user, accountID));
     			break;
     		case 5:
-    			System.out.println("Deleting Account");
-    			break;
+    			System.out.println("Creating an account");
+    			// NEED TO MAKE IT SO THAT THEY CAN CREATE SAVINGS OR CHECKING ACCOUNT!!!!!!!!!!!!!!!!!!!!!!!!!!
+    			bankAccount.createAccount("savings", user);
+    			break;    			
     		case 6:
+    			// Delete an Account that has a 0 balance
+    			System.out.println("Enter the ID of the Account Being Deleted");
+    			accountID = sc.nextInt();
+    			bankAccount.deleteAccountById(accountID, user);
+    			break;
+    		case 7:
+    			// View the Users table
     			System.out.println("Viewing all Users");
     			System.out.println(superUser.viewAllUsers());
     			break;
-    		case 7: 
+    		case 8: 
+    			// Creating a new user
     			System.out.println("Creating new User");
-    			superUser.createNewUser(user);
-    			break;
-    		case 8:
-    			System.out.println("Updating user");
+    			User newUser = new User();
+    			System.out.println("Enter the username: ");
+    			newUser.setUsername(sc.nextLine());
+    			System.out.println("Enter the password: ");
+    			newUser.setPassword(sc.nextLine());
+    			superUser.createNewUser(newUser);
     			break;
     		case 9:
-    			System.out.println("Deleting all Users");
+    			System.out.println("Updating user");
     			break;
     		case 10:
+    			System.out.println("Deleting all Users");
+    			break;
+    		case 11:
     			System.out.println("Logging out");
     			keepGoing = false;
     			break;
