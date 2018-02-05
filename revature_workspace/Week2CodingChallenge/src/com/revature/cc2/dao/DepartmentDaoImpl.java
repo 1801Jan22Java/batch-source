@@ -44,6 +44,8 @@ public class DepartmentDaoImpl implements DepartmentDao {
 	@Override
 	public float getAverageSalary(int id) {
 		float avgSalary = 0.0f;
+		Department dep =getDepartmentByID(id);
+		String name = dep.getDeptName();
 		try(Connection conn = ConnectionUtil.getConnectionFromFile(filename))
 		{
 			
@@ -62,12 +64,15 @@ public class DepartmentDaoImpl implements DepartmentDao {
 			e.printStackTrace();
 		}
 		finally{
-		System.out.println(avgSalary);
+	
+		//System.out.println("Average salary for " +name + " is now "+avgSalary);
 		return avgSalary;
 		}
 	}
 	public float getPreviousAverageSalary(int id) {
 		float avgSalary = 0.0f;
+		Department dep = getDepartmentByID(id);
+		String name = dep.getDeptName();
 		try(Connection conn = ConnectionUtil.getConnectionFromFile(filename))
 		{
 			
@@ -87,6 +92,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
 		}
 		finally{
 		System.out.println(avgSalary);
+		//System.out.println("Average salary for " +name + " was now "+avgSalary);
 		return avgSalary;
 		}
 	}
