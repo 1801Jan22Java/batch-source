@@ -14,6 +14,7 @@ import com.revature.util.OverdraftException;
 
 public class AccountDaoImpl implements AccountDao{
 
+	//Get all the bank accounts associated with a user
 	public List<Account> getAccounts(User owner) {
 
 		List<Account> accounts = new ArrayList<Account>();
@@ -28,6 +29,7 @@ public class AccountDaoImpl implements AccountDao{
 			statement.setInt(1, owner.getId());
 			ResultSet rs = statement.executeQuery();
 			
+			//Add each resulting account to the accounts list before return the list
 			while(rs.next()) {
 				int accountID = rs.getInt(1);
 				String accountName = rs.getString(2);
@@ -43,6 +45,7 @@ public class AccountDaoImpl implements AccountDao{
 		return accounts;
 	}
 
+	//Creates a new account
 	public void createAccount(User owner, String accountName) {
 
 		try {
@@ -51,7 +54,7 @@ public class AccountDaoImpl implements AccountDao{
 			statement.setString(1, accountName);
 			statement.executeQuery();
 			
-			//Also add account to lookup table
+			//Also add account to lookup table (should be done in SQL with a trigger :: TODO?)
 			String sql2 ="INSERT INTO BANK_USERACCOUNTS VALUES(USERACCOUNT_SEQUENCE.NEXTVAL, ACCOUNTLINK_SEQUENCE.NEXTVAL,?)"; 
 			PreparedStatement statement2 = ConnectionUtil.connection.prepareStatement(sql2);
 			statement2.setInt(1, owner.getId());
@@ -64,6 +67,7 @@ public class AccountDaoImpl implements AccountDao{
 		
 	}
 
+	//Deletes an account using a callable procedure, actually nullifies the password
 	public void deleteAccount(Account account) {
 		try {
 
@@ -80,6 +84,7 @@ public class AccountDaoImpl implements AccountDao{
 		
 	}
 
+	//Deposit an amount to the specified account
 	public void deposit(User owner, Account account, float amount) {
 		
 		try {
@@ -98,6 +103,7 @@ public class AccountDaoImpl implements AccountDao{
 		account.updateBalance();
 	}
 
+	//Withdraws an amount from a specified account
 	public void withdraw(User owner, Account account, float amount) throws OverdraftException{
 		
 		//Overdraft protection
@@ -119,6 +125,7 @@ public class AccountDaoImpl implements AccountDao{
 		account.updateBalance();
 	}
 
+	//Gets the updated balance for the current account
 	public float updateBalance(Account account) {
 
 		try {

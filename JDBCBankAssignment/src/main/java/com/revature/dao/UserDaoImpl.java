@@ -12,6 +12,7 @@ import com.revature.util.UsernameTakenException;
 
 public class UserDaoImpl implements UserDao {
 
+	//Logs in a user from a given username and password
 	public User login(String username, String password) {
 
 		try {
@@ -31,6 +32,7 @@ public class UserDaoImpl implements UserDao {
 				statement2.setInt(1, id);
 				ResultSet rs2 = statement2.executeQuery();
 				
+				//If userID is found in the super user table they are a super user
 				boolean isSuperUser = false;
 				if(rs2.next()) isSuperUser = true;
 				
@@ -45,6 +47,7 @@ public class UserDaoImpl implements UserDao {
 		return null;
 	}
 
+	//Check to see if someone has this username, this includes nullified passwords
 	public boolean isUsernameTaken(String name) throws UsernameTakenException{
 		
 		try {
@@ -63,6 +66,7 @@ public class UserDaoImpl implements UserDao {
 		return false;
 	}
 	
+	//Registers a new user
 	public User register(String username, String password) {
 
 		try {
@@ -80,11 +84,13 @@ public class UserDaoImpl implements UserDao {
 		return null;
 	}
 
+	//Gets every user except the "deleted" ones
 	public List<User> getAllUsers() {
 
 		List<User> users = new ArrayList<User>();
 		
 		try {
+			//If password is null, the user has been "deleted"
 		String sql = "SELECT * FROM BANK_USERS WHERE USERPASS IS NOT NULL";
 		PreparedStatement statement = ConnectionUtil.connection.prepareStatement(sql);
 
@@ -107,6 +113,7 @@ public class UserDaoImpl implements UserDao {
 		return users;
 	}
 
+	//changes a user's username and/or password
 	public void updateUser(User user, String username, String password) {
 
 		try {
@@ -124,6 +131,7 @@ public class UserDaoImpl implements UserDao {
 		
 	}
 
+	//Deletes (nullifies) a user
 	public void deleteUser(User user) {
 		try {
 			String sql = "UPDATE BANK_USERS SET USERPASS=NULL WHERE USERID=?";

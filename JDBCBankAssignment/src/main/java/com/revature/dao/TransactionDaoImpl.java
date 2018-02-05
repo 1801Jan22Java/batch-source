@@ -14,6 +14,7 @@ import com.revature.util.ConnectionUtil;
 
 public class TransactionDaoImpl implements TransactionDao {
 
+	//Gets all the transactions for a specified account
 	@Override
 	public List<Transaction> getAccountTransactions(Account account) {
 		
@@ -26,6 +27,8 @@ public class TransactionDaoImpl implements TransactionDao {
 			PreparedStatement statement = ConnectionUtil.connection.prepareStatement(sql);
 			statement.setInt(1, account.getAccountID());
 			ResultSet rs = statement.executeQuery();
+			
+			//Loops through each returned transaction, prints it out, and adds it to the list
 			while(rs.next()) {
 				int tid = rs.getInt(1);
 				int uid = rs.getInt(2);

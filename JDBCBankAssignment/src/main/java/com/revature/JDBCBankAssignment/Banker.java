@@ -93,6 +93,7 @@ public class Banker {
 			System.out.println("Invalid login credentials!");
 	}
 	
+	//User has just logged in
 	private void loggedIn(User user) {
 		
 		boolean exit = false;
@@ -157,6 +158,7 @@ public class Banker {
 		
 	}
 	
+	//Super user menu
 	private void superMenu(User user) {
 		//A superuser can view, create, update, and delete all users.
 
@@ -167,9 +169,9 @@ public class Banker {
 			UserDao dao = new UserDaoImpl();
 			List<User> users = dao.getAllUsers();
 			
-			String userPrompt = "Select a user: ";
+			String userPrompt = "Select a user:\n";
 			for(int i = 0; i < users.size(); i++) {
-				userPrompt += users.get(i).getUsername() + "[" + (i+1) + "] ";
+				userPrompt += users.get(i).getUsername() + "[" + (i+1) + "]\n";
 			}
 			
 			userPrompt += "Create User[" +  (users.size()+1) + "] ";
@@ -190,6 +192,7 @@ public class Banker {
 		}
 	}
 	
+	//Super user has selected another user menu
 	private void superMenuSelectedUser(User selected) {
 		//A superuser can view, create, update, and delete all users.
 		boolean exit = false;
@@ -211,6 +214,7 @@ public class Banker {
 		
 	}
 	
+	//Update user menu for super user
 	private void updateUser(User user) {
 		UserDao dao = new UserDaoImpl();
 		String username;
@@ -222,8 +226,8 @@ public class Banker {
 			try {
 				usernameTaken = dao.isUsernameTaken(username);
 			} catch (UsernameTakenException e) {
-				e.printStackTrace();
 				System.out.println("Username is taken!");
+				usernameTaken=true;
 			}
 			if(usernameTaken)
 				System.out.println("Username is taken!");
@@ -234,12 +238,13 @@ public class Banker {
 		dao.updateUser(user, username, password);
 	}
 	
+	//User has selected an account menu
 	private void enterAccount(User user, Account account) {
 		boolean exit = false;
 		
 		while(!exit) {
 			switch(getUserChoice("In account: " + account.getAccountName() + "(" + account.getBalance() + " DOGE) as "
-					+ user.getUsername() + "\nDeposit[1] Withdraw[2] Transactions[3] Delete[4] Back[5]", 1, 4)) {
+					+ user.getUsername() + "\nDeposit[1] Withdraw[2] Transactions[3] Delete[4] Back[5]", 1, 5)) {
 			case 1:
 				deposit(user, account);
 				break;
@@ -271,6 +276,7 @@ public class Banker {
 		}
 	}
 	
+	//User has selected to deposit to an account menu
 	private void deposit(User user, Account account) {
 		float amount = getUserFloat("Account " + account.getAccountName() + " has a balance of " + account.getBalance() + "\nHow much would you like to deposit?",
 				1, Float.MAX_VALUE);
@@ -279,6 +285,7 @@ public class Banker {
 		dao.deposit(user,  account,  amount);
 	}
 	
+	//User has selected to withdraw from an account menu
 	private void withdraw(User user, Account account) {
 		
 		float amount = getUserFloat("Account " + account.getAccountName() + " has a balance of " + account.getBalance() + "\nHow much would you like to withdraw?",
@@ -294,6 +301,7 @@ public class Banker {
 		}
 	}
 	
+	//User has selected to create an account
 	private void createAccount(User user) {
 		String accountName = getUserString("Enter account name: ", 5, 20);
 		
@@ -326,7 +334,11 @@ public class Banker {
 		dao.register(username, password);
 	}
 	
-	//Propts users to select from a list of options
+	/*
+	 * The most useful functions ever are as follows.  They could be moved to a utility or input class in further iterations
+	 */
+	
+	//Prompts users to select from a list of options
 	private int getUserChoice(String prompt, int lowChoice, int highChoice) {
 		
 		int choice = -1;
@@ -351,6 +363,7 @@ public class Banker {
 		return choice;
 	}
 	
+	//Handy function for getting and validating a string input from the user
 	private String getUserString(String prompt, int minLength, int maxLength) {
 		
 		String input = "";
@@ -371,6 +384,7 @@ public class Banker {
 		return input;
 	}
 	
+	//Function for getting a float input from the user and validating it
 	private float getUserFloat(String prompt, float min, float max) {
 		
 		boolean valid = false;
