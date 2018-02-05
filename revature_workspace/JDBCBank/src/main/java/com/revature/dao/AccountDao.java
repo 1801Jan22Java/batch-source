@@ -3,9 +3,8 @@ package com.revature.dao;
 import java.util.List;
 
 import com.revature.Exceptions.OverdraftException;
-
-import Beans.Account;
-import Beans.User;
+import com.revature.beans.Account;
+import com.revature.beans.User;
 
 public interface AccountDao {
 	public List<Account> getAccounts();

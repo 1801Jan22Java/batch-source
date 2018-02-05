@@ -4,10 +4,9 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import Beans.Account;
-import Beans.User;
-
 import com.revature.Exceptions.OverdraftException;
+import com.revature.beans.Account;
+import com.revature.beans.User;
 
 public class BankTest {
 	/*

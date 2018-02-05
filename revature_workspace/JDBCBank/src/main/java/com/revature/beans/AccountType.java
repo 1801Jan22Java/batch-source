@@ -1,4 +1,4 @@
-package Beans;
+package com.revature.beans;
 
 public class AccountType {
 	private int accountTypeID;

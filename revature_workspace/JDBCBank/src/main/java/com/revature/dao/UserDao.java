@@ -2,7 +2,7 @@ package com.revature.dao;
 
 import java.util.List;
 
-import Beans.User;
+import com.revature.beans.User;
 
 public interface UserDao {
 	

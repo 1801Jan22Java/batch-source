@@ -9,11 +9,10 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
 
+import com.revature.beans.Account;
+import com.revature.beans.SuperUser;
+import com.revature.beans.User;
 import com.revature.util.ConnectionUtil;
-
-import Beans.Account;
-import Beans.SuperUser;
-import Beans.User;
 
 public class UserDaoImpl implements UserDao {
 	private static String filename = "connection.properties";

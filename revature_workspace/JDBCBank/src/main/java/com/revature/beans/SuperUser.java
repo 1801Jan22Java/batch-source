@@ -1,4 +1,4 @@
-package Beans;
+package com.revature.beans;
 
 import java.io.IOException;
 import java.sql.CallableStatement;

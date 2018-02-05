@@ -1,5 +1,8 @@
-package Beans;
+package com.revature.beans;
 
+/*
+ * USer class allows creation of JDBC regular and super users
+ * */
 
 public class User {
 	private String username;
@@ -12,7 +15,9 @@ public class User {
 	
 	
 	public User()
-	{}
+	{
+		
+	}
 	
 	public User(String username, String password,String fname, String lname, String ssn)
 	{

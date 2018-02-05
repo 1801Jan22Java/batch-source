@@ -2,7 +2,7 @@ package com.revature.dao;
 
 import java.util.List;
 
-import Beans.AccountType;
+import com.revature.beans.AccountType;
 
 public interface AccountTypeDao {
 	public List <AccountType> getAccountType();

@@ -6,17 +6,18 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
+import com.revature.Exceptions.InvalidCredentialsException;
 import com.revature.Exceptions.OverdraftException;
 import com.revature.Exceptions.ZeroBalanceException;
+import com.revature.beans.Account;
+import com.revature.beans.CheckingAccount;
+import com.revature.beans.SavingsAccount;
+import com.revature.beans.User;
 import com.revature.util.ConnectionUtil;
-
-import Beans.Account;
-import Beans.CheckingAccount;
-import Beans.SavingsAccount;
-import Beans.User;
 
 public class AccountDaoImpl implements AccountDao{
 	private static String filename = "connection.properties";
@@ -31,6 +32,9 @@ public class AccountDaoImpl implements AccountDao{
 		return null;
 	}
 
+	/*
+	 * addAccount adds a new account for a user.
+	 * */
 	@Override
 	public void addAccount(Account account,User user)
 	{
@@ -96,16 +100,23 @@ public class AccountDaoImpl implements AccountDao{
 				ps.setString(3, user.getPassword());
 				ps.execute();
 				ResultSet rs = ps.getResultSet();
-				while (rs.next())
+				if (rs.next())
 				{
-					System.out.println("ACCOUNT!!");
-					System.out.println(rs.getInt("ACCOUNT_ID"));
+					//System.out.println("ACCOUNT!!");
+					//System.out.println(rs.getInt("ACCOUNT_ID"));
 					accountValid=true;
+				}
+				else
+				{
+					try {
+						throw new InvalidCredentialsException("Those credentials are invalid.  Please try again.");
+					} catch (InvalidCredentialsException e) {
+						e.printStackTrace();
+					}
 				}
 			}
 
 		} catch (SQLException | IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return accountValid;
@@ -186,10 +197,16 @@ public class AccountDaoImpl implements AccountDao{
 		}
 		
 	}
+	/*
+	 * selectAction method takes in an integer and a user, and calls different methods based
+	 * on user input.  Always calls the showMenu method unless the user opts to log out of the application.
+	 * Throws OverdraftException, ZeroBalanceException, and InputMismatchException.
+	 * */
 	@Override
 	public void selectAction(int option, User user) {
 		UserDaoImpl udi = new UserDaoImpl(); 
 		Scanner sc = new Scanner(System.in);
+		try{
 		switch(option)
 		{
 		case 1: 
@@ -277,7 +294,12 @@ public class AccountDaoImpl implements AccountDao{
 			System.out.println("Invalid choice");
 			showMenu(user);
 		}
-
+		}
+		catch( InputMismatchException e)
+		{
+			System.out.println("That choice is invalid.  Please select a number from the options listed.");
+			showMenu(user);
+		}
 	}
 
 	@Override

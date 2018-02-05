@@ -3,13 +3,15 @@ package com.revature.Beans;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
-import Beans.Account;
-import Beans.CheckingAccount;
-import Beans.SavingsAccount;
-import Beans.User;
+
+
 
 
 import com.revature.Exceptions.OverdraftException;
+import com.revature.beans.Account;
+import com.revature.beans.CheckingAccount;
+import com.revature.beans.SavingsAccount;
+import com.revature.beans.User;
 
 public class BankBeansTest {
 

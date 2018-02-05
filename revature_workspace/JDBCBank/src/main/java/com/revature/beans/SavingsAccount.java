@@ -1,18 +1,15 @@
-package Beans;
-
-import com.revature.Exceptions.ZeroBalanceException;
+package com.revature.beans;
 
 
-public class CheckingAccount extends Account {
+public class SavingsAccount extends Account {
 
-	AccountType accountType = new AccountType(2,"Checking");
-	
-	public CheckingAccount(float initialBalance, int userId) 
+	AccountType accountType = new AccountType(1,"Savings");
+
+	public SavingsAccount(float initialBalance,int userId)
 	{
+		
 		super(initialBalance,userId);
 		super.accountType=accountType;
-		
-
 	}
 	@Override
 	public void deposit(float funds) {
@@ -23,7 +20,6 @@ public class CheckingAccount extends Account {
 	@Override
 	public void withdraw(float withdrawal) {
 		initialBalance-=withdrawal;
-	
 	}
 
 	@Override
@@ -46,5 +42,6 @@ public class CheckingAccount extends Account {
 		// TODO Auto-generated method stub
 		return initialBalance;
 	}
+
 
 }
