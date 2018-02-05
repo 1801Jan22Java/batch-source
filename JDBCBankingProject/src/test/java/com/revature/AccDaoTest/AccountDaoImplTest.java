@@ -22,7 +22,7 @@ public class AccountDaoImplTest {
 	AccountDao adi = new AccountDaoImpl();
 	UserDao udi = new UserDaoImpl();
 	
-	
+	@Test
 	public final void testCreateAccount() {
 		User user = new User("usr", "aaaaaaaa", "Test", "Case");
 		try {
@@ -54,7 +54,7 @@ public class AccountDaoImplTest {
 		Assert.assertTrue(success);
 	}
 	
-	
+	@Test
 	public final void testGetUserAccounts() {
 		User user = new User("usr", "aaaaaaaa", "Test", "Case");
 		try {
@@ -86,7 +86,7 @@ public class AccountDaoImplTest {
 		Assert.assertEquals(3, size);
 	}
 	
-	
+	@Test
 	public final void testGetAccountById() {
 		User user = new User("usr", "aaaaaaaa", "Test", "Case");
 		try {
@@ -119,7 +119,7 @@ public class AccountDaoImplTest {
 		udi.superDeleteUser(user);
 	}
 	
-	
+	@Test
 	public final void testDelete() {
 		User user = new User("usr", "aaaaaaaa", "Test", "Case");
 		try {

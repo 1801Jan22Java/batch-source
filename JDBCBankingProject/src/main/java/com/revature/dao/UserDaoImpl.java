@@ -22,6 +22,11 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public User createUser(User user) throws IllegalUsernameException, IllegalPasswordException {
+		for (User u : this.superGetUsers()) {
+			if (u.getUsername().equals(user.getUsername())) {
+				throw new IllegalUsernameException();
+			}
+		}
 		if (user.getPassword().length() < 8) {
 			throw new IllegalPasswordException();
 		}
@@ -209,7 +214,7 @@ public class UserDaoImpl implements UserDao {
 	public void superChangeUser(User user) throws IllegalUsernameException, IllegalPasswordException {
 		User user2 = this.getUserByUsername(user.getUsername());
 		for (User u : this.superGetUsers()) {
-			if (u.getUsername().equals(user.getUsername()) && !u.equals(user2)) {
+			if (u.getUsername().equals(user.getUsername()) && user.getuserId() != user2.getuserId()) {
 				throw new IllegalUsernameException();
 			}
 		}
