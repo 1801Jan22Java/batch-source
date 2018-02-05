@@ -5,7 +5,9 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import com.revature.Exceptions.OverdraftException;
+import com.revature.Exceptions.ZeroBalanceException;
 import com.revature.beans.Account;
+import com.revature.beans.CheckingAccount;
 import com.revature.beans.User;
 
 public class BankTest {
@@ -30,6 +32,23 @@ public class BankTest {
 		User newUser = new User(username,pw,fname,lname,ssn);
 		//User user = udi.getUserById(1005);
 		assert(newUser instanceof User);
+	}
+	
+	@Test
+	public final void returnsAccount()
+	{
+	
+		UserDaoImpl udi = new UserDaoImpl();
+		User user = udi.getUserById(1005);
+		udi.getUserID(user);
+		Account ca=null;
+		try {
+			 ca = new CheckingAccount(500,1005);
+		} catch (ZeroBalanceException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		assert(ca instanceof CheckingAccount);
 	}
 
 

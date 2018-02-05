@@ -7,7 +7,7 @@ public abstract class Account {
 	public AccountType accountType;
 	public int userId;
 	public Account(){}
-	Account (float initialBalance, int userID)
+	public Account (float initialBalance, int userID) throws ZeroBalanceException
 	{
 		try{
 			if(initialBalance<1)

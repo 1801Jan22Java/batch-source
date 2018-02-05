@@ -1,11 +1,13 @@
 package com.revature.beans;
 
+import com.revature.Exceptions.ZeroBalanceException;
+
 
 public class SavingsAccount extends Account {
 
 	AccountType accountType = new AccountType(1,"Savings");
 
-	public SavingsAccount(float initialBalance,int userId)
+	public SavingsAccount(float initialBalance,int userId) throws ZeroBalanceException
 	{
 		
 		super(initialBalance,userId);

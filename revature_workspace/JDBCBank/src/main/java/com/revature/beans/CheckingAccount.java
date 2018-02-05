@@ -7,7 +7,7 @@ public class CheckingAccount extends Account {
 
 	AccountType accountType = new AccountType(2,"Checking");
 	
-	public CheckingAccount(float initialBalance, int userId) 
+	public CheckingAccount(float initialBalance, int userId)  throws ZeroBalanceException
 	{
 		super(initialBalance,userId);
 		super.accountType=accountType;
