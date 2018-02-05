@@ -31,6 +31,12 @@ public class UserAccounts {
 	public void setBankAccountID(int bankAccountID) {
 		this.bankAccountID = bankAccountID;
 	}
+
+	//toString
+	@Override
+	public String toString() {
+		return "UserAccounts [userID=" + userID + ", bankAccountID=" + bankAccountID + "]";
+	}
 	
 	
 	

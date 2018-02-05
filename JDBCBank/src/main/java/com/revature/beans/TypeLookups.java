@@ -28,5 +28,11 @@ public class TypeLookups {
 	public void setLookupType(String lookupType) {
 		this.lookupType = lookupType;
 	}
+
+	//toString
+	@Override
+	public String toString() {
+		return "TypeLookups [typeID=" + typeID + ", lookupType=" + lookupType + "]";
+	}
 	
 }

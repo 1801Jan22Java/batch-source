@@ -1,13 +1,16 @@
 package com.revature.beans;
 
-import java.sql.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 
 public class Transactions {
 
 	//Constructors
 	public Transactions() {}
 	
-	public Transactions(int transID, int userID, int bankAccountID, Date transTime, float transAmount, int transType) {
+	public Transactions(int transID, int userID, int bankAccountID, LocalDateTime transTime, float transAmount, int transType) {
 		super();
 		this.transID = transID;
 		this.userID = userID;
@@ -21,7 +24,7 @@ public class Transactions {
 	private int transID;
 	private int userID;
 	private int bankAccountID;
-	private Date transTime;
+	private LocalDateTime transTime;
 	private float transAmount;
 	private int transType;
 	
@@ -50,11 +53,11 @@ public class Transactions {
 		this.bankAccountID = bankAccountID;
 	}
 
-	public Date getTransTime() {
+	public LocalDateTime getTransTime() {
 		return transTime;
 	}
 
-	public void setTransTime(Date transTime) {
+	public void setTransTime(LocalDateTime transTime) {
 		this.transTime = transTime;
 	}
 
@@ -72,6 +75,26 @@ public class Transactions {
 
 	public void setTransType(int transType) {
 		this.transType = transType;
+	}
+
+	//toString
+	@Override
+	public String toString() {
+		/*return "Transactions [transID=" + transID + ", userID=" + userID + ", bankAccountID=" + bankAccountID
+				+ ", transTime=" + transTime + ", transAmount=" + transAmount + ", transType=" + transType + "]";*/
+		
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy K:mm:ss a");
+		transTime.format(formatter);
+		String userT;
+		if (transType == 5)
+			userT = "Deposit";
+		else
+			userT = "Withdraw";
+		
+		return String.format("Transaction ID: %d         Account ID: %d          User ID: %d          \nTime of Transaction: %s\n Transaction Type: %s          Amount: $ %.2f%n"
+				,transID, bankAccountID, userID, transTime.format(formatter), userT, transAmount);
+		
+		
 	}
 	
 	

@@ -71,6 +71,25 @@ public class Users {
 	public void setUserType(int userType) {
 		this.userType = userType;
 	}
+
+	//toString
+	@Override
+	public String toString() {
+		
+		/*return "Users [userID=" + userID + ", userAccount=" + userAccount + ", userFName=" + userFName + ", userLName="
+				+ userLName + ", userPassword=" + userPassword + ", userType=" + userType + "]";*/
+		
+		String userT;
+		if (userType == 1)
+			userT = "Super User Bob Dole, the best, better than the rest, yes your almighty lord";
+		else
+			userT = "Customer";
+		
+		return String.format("%s Account: %s         Password: %s        User ID: %d       Name on Account: %s %s", userT, userAccount, userPassword, userID, userFName, userLName);
+		
+	
+	}
+	
 	
 	
 }
