@@ -54,6 +54,7 @@ public class BankManager {
 			System.out.println("2: Deposit/Withdraw");
 			System.out.println("3: Create a new Savings or Checking account");
 			System.out.println("4: Log out");
+			System.out.println("5: Delete an Account");
 			int choice = input.nextInt();
 			switch(choice)
 			{
@@ -106,6 +107,12 @@ public class BankManager {
 					break;
 				case 4:
 					cnt = false;
+					break;
+				case 5:
+					System.out.println("Which Account would you like to delete?(By account Id");
+					int actId = input.nextInt();
+					userAccountDao.removeAccount(actId);
+					this.currentAccounts = userAccountDao.getAccountsByUser(this.currentUser.getUserId());
 					break;
 			}
 			
