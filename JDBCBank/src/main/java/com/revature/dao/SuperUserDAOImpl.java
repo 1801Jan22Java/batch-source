@@ -111,8 +111,10 @@ public class SuperUserDAOImpl implements SuperUserDAO {
 			ResultSet results = pstmt.executeQuery();
 			if(results.next()) {
 				String username = results.getString("USERNAME");
+				String password = results.getString("PASSWORD");
 				newUser.setId(id);
 				newUser.setUsername(username);
+				newUser.setPassword(password);
 			}
 			conn.close();
 		} catch (SQLException e) {

@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.revature.beans.BankAccount;
 import com.revature.beans.User;
-import com.revature.exceptions.BalanceNotEmptyException;
 import com.revature.exceptions.OverdraftException;
 
 public interface BankAccountDAO {
