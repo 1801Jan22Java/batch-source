@@ -15,7 +15,9 @@ public class WalmartEmployeeDaoImpl implements WalmartEmployeeDao{
 	
 	public void printDeptNameSalary () {
 		PreparedStatement pstmt = null;
+		PreparedStatement pstmt2 = null;
 		ResultSet rs = null;
+		ResultSet rs2 = null;
 		int departmentID;
 		double salary;
 		
@@ -68,12 +70,12 @@ public class WalmartEmployeeDaoImpl implements WalmartEmployeeDao{
 				}
 				
 				if(currSum > 0) {
-					pstmt = conn.prepareStatement("SELECT * FROM DEPARTMENT WHERE DEPARTMENT_ID=?");
-					pstmt.setInt(1, temp.getDepartmentID());
-					rs = pstmt.executeQuery();
+					pstmt2 = conn.prepareStatement("SELECT * FROM DEPARTMENT WHERE DEPARTMENT_ID=?");
+					pstmt2.setInt(1, temp.getDepartmentID());
+					rs2 = pstmt2.executeQuery();
 					
-					rs.next();
-					System.out.println("Average salary for the " + rs.getString("DEPARTMENT_NAME") + " department is " + (currSum/numInDept));
+					rs2.next();
+					System.out.println("Average salary for the " + rs2.getString("DEPARTMENT_NAME") + " department is " + (currSum/numInDept));
 					
 				}
 				
