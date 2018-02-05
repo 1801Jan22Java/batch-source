@@ -49,7 +49,7 @@ public class UserOracle implements UserDAO {
 
 	// Create new user
 	@Override
-	public void newUser(String username, String password) {
+	public boolean newUser(String username, String password) {
 		String sql = "SELECT USER_ID FROM BANK_USERS WHERE USERNAME = ?";
 		String dml = "INSERT INTO BANK_USERS(USERNAME, PASSWORD, LOGGED) VALUES(?,?,0)";
 		PreparedStatement pstate = null;
@@ -72,13 +72,16 @@ public class UserOracle implements UserDAO {
 			System.out.println("New User Created!");
 
 			rs.close();
+			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (UserNameExistsException e) {
 			System.out.println(e.getMessage());
+
 		}
+		return false;
 	}
 
 	@Override

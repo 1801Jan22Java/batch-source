@@ -175,7 +175,7 @@ public class JDBCApplication {
 	// Special access option for super users
 	private static void AccountSuperAccess(BankUsers bu, Scanner scanner) {
 		boolean keepGoing = true;
-		UserOracle usr = null;
+		UserOracle usr = new UserOracle();
 
 		while (keepGoing) {
 			System.out.println("1 - View All Users");
@@ -195,7 +195,6 @@ public class JDBCApplication {
 				String username = scanner.nextLine();
 				System.out.println("Password: ");
 				String password = scanner.nextLine();
-				usr = new UserOracle();
 
 				// Create new user
 				usr.newUser(username, password);

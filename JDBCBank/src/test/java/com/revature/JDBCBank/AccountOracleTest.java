@@ -123,10 +123,8 @@ public class AccountOracleTest {
 				accountid = rs.getInt("ID");
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		assertTrue(ao.deleteAccount(1, accountid));
@@ -150,10 +148,8 @@ public class AccountOracleTest {
 			}
 			ao.deposit(1, accountid, 10.0);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		assertFalse(ao.deleteAccount(1, accountid));

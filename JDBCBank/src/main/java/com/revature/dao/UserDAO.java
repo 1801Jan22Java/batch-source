@@ -7,7 +7,7 @@ public interface UserDAO {
 	public BankUsers login(String username, String password);
 
 	// Create new user
-	public void newUser(String username, String password);
+	public boolean newUser(String username, String password);
 
 	// Delete user
 	public boolean deleteUser(int userid);

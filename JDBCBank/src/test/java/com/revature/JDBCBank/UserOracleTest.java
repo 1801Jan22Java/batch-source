@@ -2,6 +2,7 @@ package com.revature.JDBCBank;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -50,7 +51,7 @@ public class UserOracleTest {
 		int uid = 0;
 		try (Connection con = ConnectionUtil.getConnectionFromFile("connection.properties")) {
 			// SQL to select username of the newest account for testing
-			String sql = "SELECT USERNAME FROM BANK_USERS WHERE USERNAME = 'test'";
+			String sql = "SELECT USERNAME FROM BANK_USERS WHERE USERNAME = 'test3'";
 			Statement stmt = con.createStatement();
 
 			ResultSet rs = stmt.executeQuery(sql);
@@ -74,7 +75,46 @@ public class UserOracleTest {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		assertEquals(uname, "test");
+		assertEquals(uname, "test3");
+		uo.deleteUser(uid);
+
+	}
+	
+	// Create new user with invalid information
+	@Test
+	public void createNewUserWithDuplicateName() {
+		UserOracle uo = new UserOracle();
+		uo.newUser("test10", "case1");
+		
+		String uname = "";
+		int uid = 0;
+		try (Connection con = ConnectionUtil.getConnectionFromFile("connection.properties")) {
+			// SQL to select username of the newest account for testing
+			String sql = "SELECT USERNAME FROM BANK_USERS WHERE USERNAME = 'test10'";
+			Statement stmt = con.createStatement();
+
+			ResultSet rs = stmt.executeQuery(sql);
+
+			while (rs.next()) {
+				uname = rs.getString("USERNAME");
+			}
+			String del = "SELECT MAX(USER_ID) AS \"UID\" FROM BANK_USERS";
+			Statement delstmt = con.createStatement();
+
+			ResultSet rs2 = delstmt.executeQuery(del);
+
+			while (rs2.next()) {
+				uid = rs2.getInt("UID");
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		assertFalse(uo.newUser("test10", "case1"));
 		uo.deleteUser(uid);
 
 	}

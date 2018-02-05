@@ -1,6 +1,5 @@
 package com.revature.dao;
 
-import java.awt.List;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,7 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import javax.naming.spi.DirStateFactory.Result;
 import javax.security.auth.login.AccountNotFoundException;
 
 import com.revature.beans.Accounts;
@@ -92,7 +90,6 @@ public class AccountOracle implements AccountDAO {
 		} catch (AccountNotFoundException e) {
 			System.out.println(e.getMessage());
 		} catch (AccountNotEmptyException e) {
-			// TODO Auto-generated catch block
 			System.out.println(e.getMessage());
 		}
 		return false;
