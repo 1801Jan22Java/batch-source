@@ -3,6 +3,7 @@ package com.revature.challenge1;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class GeneBank {
@@ -22,17 +23,20 @@ public class GeneBank {
 			System.out.println("Sorry, that file was not found.");
 		}
 		ArrayList<Boolean> successes = new ArrayList<>();
+		int checks = -1;
 		// Step through each character of the starting gene
 		for (int i = 0; i < start.length(); i++) {
 			// If the character in start doesn't character in end, find mutation
 			if (start.charAt(i) != end.charAt(i)) {
-				successes.add(i, (Boolean)false);
+				successes.add((Boolean)false);
+				checks++;
 				// Step through each string in bank to compare character
 				for (String x : bank) {
 					// If character found, add success to list and increment count
 					if (x.charAt(i) == end.charAt(i)) {
-						successes.set(i, (Boolean)true);
+						successes.set(checks, (Boolean)true);
 						count++;
+						break;
 					}
 				}
 			}

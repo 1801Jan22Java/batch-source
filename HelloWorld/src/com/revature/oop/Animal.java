@@ -2,7 +2,7 @@ package com.revature.oop;
 
 public class Animal {
 	private String name;
-	
+	public static String hello = "Hello";
 	public Animal() {
 		super();
 	}

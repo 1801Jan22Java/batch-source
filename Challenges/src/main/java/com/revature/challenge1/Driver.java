@@ -29,7 +29,14 @@ public class Driver {
 			System.out.println("Sorry, the end file was not found.");
 		}
 		
-		System.out.println(GeneBank.countModifications(start, end));
+		int result = GeneBank.countModifications(start, end);
+		if (result == 0) {
+			System.out.println("The genes are identical.");
+		} else if (result < 0) {
+			System.out.println("No valid mutation was found.");
+		} else {
+			System.out.println("The number of mutations required is " + result);
+		}
 		
 		
 		
