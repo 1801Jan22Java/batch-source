@@ -1,0 +1,1 @@
+SELECT LEN(Name) FROM MediaType;

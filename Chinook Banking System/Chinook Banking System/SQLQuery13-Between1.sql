@@ -1,0 +1,2 @@
+SELECT * FROM Invoice
+WHERE Total BETWEEN 15 AND 20;

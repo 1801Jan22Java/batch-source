@@ -1,0 +1,1 @@
+SELECT MAX(Track.UnitPrice) FROM Track;

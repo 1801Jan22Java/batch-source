@@ -1,0 +1,3 @@
+BEGIN TRANSACTION
+DELETE FROM Invoice WHERE Invoice.InvoiceId = 1
+COMMIT;

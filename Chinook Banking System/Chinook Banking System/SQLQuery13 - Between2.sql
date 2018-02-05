@@ -1,0 +1,2 @@
+SELECT * FROM Employee
+WHERE HireDate BETWEEN '6/1/03' AND '3/1/04';

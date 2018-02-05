@@ -1,0 +1,6 @@
+CREATE OR ALTER FUNCTION NoParameters()
+RETURNS INT
+AS
+BEGIN
+RETURN (SELECT AVG(InvoiceLine.UnitPrice) FROM InvoiceLine)
+END
