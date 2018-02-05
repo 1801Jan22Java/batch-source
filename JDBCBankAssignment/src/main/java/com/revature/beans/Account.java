@@ -21,14 +21,6 @@ public class Account {
 		AccountDao dao = new AccountDaoImpl();
 		balance = dao.updateBalance(this);
 	}
-	
-	public float deposit() {
-		return 0;
-	}
-	
-	public float withdraw() {
-		return 0;
-	}
 
 	public void setBalance(float balance) {
 		this.balance = balance;
