@@ -1,19 +1,26 @@
 package com.revature.beans;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Bear {
 
-	public Bear(String name, Cave cave, BearType bearType, int weight, Date birthdate) {
+	private int id;
+	private String name;
+	private Cave cave;
+	private BearType bearType;
+	private int weight;
+	private LocalDate birthdate;
+
+	public Bear(String name, Cave cave, BearType bearType, int weight, LocalDate localDate) {
 		super();
 		this.name = name;
 		this.cave = cave;
 		this.bearType = bearType;
 		this.weight = weight;
-		this.birthdate = birthdate;
+		this.birthdate = localDate;
 	}
 
-	public Bear(int id, String name, Cave cave, BearType bearType, int weight, Date birthdate) {
+	public Bear(int id, String name, Cave cave, BearType bearType, int weight, LocalDate birthdate) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -26,13 +33,6 @@ public class Bear {
 	public Bear() {
 		super();
 	}
-
-	private int id;
-	private String name;
-	private Cave cave;
-	private BearType bearType;
-	private int weight;
-	private Date birthdate;
 
 	public int getId() {
 		return id;
@@ -74,11 +74,11 @@ public class Bear {
 		this.weight = weight;
 	}
 
-	public Date getBirthdate() {
+	public LocalDate getBirthdate() {
 		return birthdate;
 	}
 
-	public void setBirthdate(Date birthdate) {
+	public void setBirthdate(LocalDate birthdate) {
 		this.birthdate = birthdate;
 	}
 

@@ -13,47 +13,63 @@ import com.revature.beans.Cave;
 import com.revature.util.ConnectionUtil;
 
 public class CaveDaoImpl implements CaveDao {
-	
+
 	private static String filename = "connection.properties";
-	
-	public List<Cave> getCaves(){
+
+	public List<Cave> getCaves() {
 		List<Cave> cl = new ArrayList<>();
-		
-		try(Connection con = ConnectionUtil.getConnectionFromFile(filename)){
-			//using a Statement - beware SQL injection
+
+		try (Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
+			// using a Statement - beware SQL injection
 			String sql = "SELECT * FROM CAVE";
 			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery(sql);
-			while(rs.next()){
+			while (rs.next()) {
 				int id = rs.getInt("CAVE_ID");
 				String name = rs.getString("CAVE_NAME");
 				int maxBears = rs.getInt("MAX_BEARS");
-				cl.add(new Cave(id,name,maxBears));
+				cl.add(new Cave(id, name, maxBears));
 			}
+			con.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 		return cl;
 	}
 
-	public void doProcedure() {
-		try(Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
-			String sql = "SP_FEED_BEAR(BEAR_ID, BEEHIVE_ID, HONEY_AMT)";
-			PreparedStatement stmt = con.prepareStatement(sql);
-			ResultSet rs = stmt.executeQuery();
+	@Override
+	public Cave getCaveById(int id) {
+		PreparedStatement pstmt = null;
+		Cave cave = null;
+		try (Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
+			String sql = "SELECT * FROM CAVE WHERE CAVE_ID = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, id);
+			ResultSet rs = pstmt.executeQuery();
+			/*
+			while (rs.next()) {
+				System.out.println("in the while loop");
+				String name = rs.getString("CAVE_NAME");
+				int maxB = rs.getInt("MAX_BEARS");
+				cave = new Cave(id, name, maxB);
+			}
+			*/
+			//alternate approach
+			if(rs.next()){
+				String name = rs.getString("CAVE_NAME");
+				int maxB = rs.getInt("MAX_BEARS");
+				cave = new Cave(id, name, maxB);
+			}
+			con.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
-	@Override
-	public Cave getCaveById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return cave;
 	}
 
 }
