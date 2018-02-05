@@ -9,7 +9,6 @@ import java.sql.SQLException;
 import java.sql.Types;
 
 import com.revature.beans.Department2;
-import com.revature.beans.Employee2;
 import com.revature.util.ConnectionUtil;
 
 public class DepartmentDaoImpl implements DepartmentDao {
@@ -54,7 +53,6 @@ public class DepartmentDaoImpl implements DepartmentDao {
 				dep = new Department2(id, name);
 			}
 		} catch (SQLException | IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

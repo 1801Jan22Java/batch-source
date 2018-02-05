@@ -8,7 +8,7 @@ public class Driver {
 	public static void main(String[] args) {
 		
 		DepartmentDao ddi = new DepartmentDaoImpl();
-		int[] ids = {5, 8, 11};
+		int[] ids = {65, 68, 71};
 		
 		for (int i : ids) {
 			ddi.nameAvgSalary(i);
