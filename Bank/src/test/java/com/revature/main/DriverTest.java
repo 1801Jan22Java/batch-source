@@ -8,12 +8,14 @@ import com.revature.main.SQLProfileUpdateException;
 
 import static org.junit.Assert.*;
 
+import java.time.LocalDate;
+
 public class DriverTest {
 	@Test
 	public final void testAssertions() {
-		User thisUser = new User(100, "admin", "SUPERUSER", "John", "Doe");
-		thisUser.getUsers().add(new User(200, "customer", "USER", "John", "Doe"));
-		thisUser.getUsers().get(0).getAccounts().add(new Account(1, "CHECKING", "My Money", 100f));
+		User thisUser = new User(100, "admin", "SUPERUSER", "John", "Doe", LocalDate.now());
+		thisUser.getUsers().add(new User(200, "customer", "USER", "John", "Doe", LocalDate.now()));
+		thisUser.getUsers().get(0).getAccounts().add(new Account(1, "CHECKING", "My Money", 100f, LocalDate.now()));
 		
 		// Choose option 1 to return 1
 		assertEquals(Driver.getMainMenuOption(), 1);

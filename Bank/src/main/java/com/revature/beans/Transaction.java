@@ -1,27 +1,32 @@
 package com.revature.beans;
 
+import java.text.DecimalFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Transaction {
 	public Transaction() {
 		super();
 	}
-	public Transaction(int transactionid, int transactionType, double amount, LocalDate eventDate, int userid,
-			int accountid) {
+	public Transaction(int transactionid, String transactionType, double amount, LocalDate eventDate, String username,
+			int accountid, double balance) {
 		super();
 		this.transactionid = transactionid;
 		this.transactionType = transactionType;
 		this.amount = amount;
 		this.eventDate = eventDate;
-		this.userid = userid;
+		this.username = username;
 		this.accountid = accountid;
+		this.balance = balance;
 	}
 	private int transactionid;
-	private int transactionType;
+	private String transactionType;
 	private double amount;
 	private LocalDate eventDate;
-	private int userid;
+	private String username;
 	private int accountid;
+	private double balance;
+	public static final String heading = String.format("TRANSACTIONS\n%-12s %-8s %-10s %-12s %10s", "User Name", "Type", "Amount", "Date", "Balance");
 	
 	public int getTransactionid() {
 		return transactionid;
@@ -29,10 +34,10 @@ public class Transaction {
 	public void setTransactionid(int transactionid) {
 		this.transactionid = transactionid;
 	}
-	public int getTransactionType() {
+	public String getTransactionType() {
 		return transactionType;
 	}
-	public void setTransactionType(int transactionType) {
+	public void setTransactionType(String transactionType) {
 		this.transactionType = transactionType;
 	}
 	public double getAmount() {
@@ -47,11 +52,11 @@ public class Transaction {
 	public void setEventDate(LocalDate eventDate) {
 		this.eventDate = eventDate;
 	}
-	public int getUserid() {
-		return userid;
+	public String getUserid() {
+		return username;
 	}
-	public void setUserid(int userid) {
-		this.userid = userid;
+	public void setUserid(String username) {
+		this.username = username;
 	}
 	public int getAccountid() {
 		return accountid;
@@ -61,7 +66,20 @@ public class Transaction {
 	}
 	@Override
 	public String toString() {
-		return "Transaction [transactionid=" + transactionid + ", transactionType=" + transactionType + ", amount="
-				+ amount + ", eventDate=" + eventDate + ", userid=" + userid + ", accountid=" + accountid + "]";
+		DecimalFormat df = new DecimalFormat("#,##0.00");
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM, d yyyy");
+		return String.format("%-12s %-8s %10s %-12s %10s", "\""+username+"\"", transactionType, "$"+df.format(amount), eventDate.format(formatter), "$"+df.format(balance) );
+	}
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	public double getBalance() {
+		return balance;
+	}
+	public void setBalance(double balance) {
+		this.balance = balance;
 	}
 }

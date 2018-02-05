@@ -43,7 +43,9 @@ public class UserDaoImpl implements UserDao{
 		} else {
 			try{
 				Connection con = ConnectionUtil.getConnectionFromFile(filename);
-				String sql = "SELECT u.userid, c.keyword FROM users u INNER JOIN common_lookup c ON u.user_type = c.common_lookup_id WHERE u.username = ? AND c.ref_table = 'users' AND c.ref_column = 'user_type'";
+				String sql = "SELECT u.creation_date, u.userid, c.keyword " +
+							 "FROM users u INNER JOIN common_lookup c ON u.user_type = c.common_lookup_id " +
+							 "WHERE u.username = ? AND c.ref_table = 'users' AND c.ref_column = 'user_type' ";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, username);
 				// Save number returned from insert statement
@@ -51,7 +53,8 @@ public class UserDaoImpl implements UserDao{
 				if(rs.next()){
 					int userid = rs.getInt("userid");
 					String userType = rs.getString("keyword");
-					newUser = new User(userid, username, userType, firstname, lastname);
+					LocalDate creationDate = rs.getDate("creation_date").toLocalDate();
+					newUser = new User(userid, username, userType, firstname, lastname, creationDate);
 				}
 				con.close();
 			} catch (SQLException e) {
@@ -87,25 +90,23 @@ public class UserDaoImpl implements UserDao{
 	@Override
 	public User login(String username, String password) {
 		PreparedStatement pstmt = null;
-		boolean success = false;
-		int userid = 0;
-		String type = null;
-		String firstname = null;
-		String lastname = null;
+		User thisUser = null;
 		try (Connection con = ConnectionUtil.getConnectionFromFile(filename)){
-			String sql = "SELECT u.userid, c.keyword, u.firstname, u.lastname FROM users u INNER JOIN common_lookup c ON u.user_type = c.common_lookup_id WHERE u.username = ? AND u.password = ?";
+			String sql = "SELECT u.creation_date, u.userid, c.keyword, u.firstname, u.lastname " +
+						 "FROM users u INNER JOIN common_lookup c ON u.user_type = c.common_lookup_id " +
+						 "WHERE u.username = ? AND u.password = ? ";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, username);
 			pstmt.setString(2, password);
 			ResultSet rs = pstmt.executeQuery();
 			// If rs.next() returns true, then the password matches the username, so save all info to object
 			if(rs.next()){
-				userid = rs.getInt("userid");
-				type = rs.getString("keyword");
-				firstname = rs.getString("firstname");
-				lastname = rs.getString("lastname");
-				
-				success = true;
+				int userid = rs.getInt("userid");
+				String type = rs.getString("keyword");
+				String firstname = rs.getString("firstname");
+				String lastname = rs.getString("lastname");
+				LocalDate creationDate = rs.getDate("creation_date").toLocalDate();
+				thisUser = new User(userid, username, type, firstname, lastname, creationDate);
 			}
 			con.close();
 		} catch (SQLException e) {
@@ -113,11 +114,7 @@ public class UserDaoImpl implements UserDao{
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
-		if (success) {
-			return new User(userid, username, type, firstname, lastname);
-		} else {
-			return null;
-		}
+		return thisUser;
 	}
 
 	@Override
@@ -131,7 +128,10 @@ public class UserDaoImpl implements UserDao{
 		String lastname = null;
 		String username = null;
 		try (Connection con = ConnectionUtil.getConnectionFromFile(filename)){
-			String sql = "SELECT u.userid, u.username, c.keyword, u.firstname, u.lastname FROM users u INNER JOIN common_lookup c ON u.user_type = c.common_lookup_id WHERE u.password IS NOT NULL AND u.username != 'admin'";
+			String sql = "SELECT u.creation_date, u.userid, u.username, c.keyword, u.firstname, u.lastname " +
+						 "FROM users u INNER JOIN common_lookup c ON u.user_type = c.common_lookup_id " +
+						 "WHERE u.password IS NOT NULL AND c.keyword != 'SUPERUSER' " +
+						 "ORDER BY u.creation_date DESC";
 			pstmt = con.prepareStatement(sql);
 			ResultSet rs = pstmt.executeQuery();
 			// If rs.next() returns true, then the password matches the username, so save all info to object
@@ -141,7 +141,8 @@ public class UserDaoImpl implements UserDao{
 				type = rs.getString("keyword");
 				firstname = rs.getString("firstname");
 				lastname = rs.getString("lastname");
-				thisUser.getUsers().add(new User(userid, username, type, firstname, lastname));
+				LocalDate creationDate = rs.getDate("creation_date").toLocalDate();
+				thisUser.getUsers().add(new User(userid, username, type, firstname, lastname, creationDate));
 				success = true;
 			}
 			con.close();

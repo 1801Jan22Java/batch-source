@@ -25,16 +25,18 @@ public class AccountDaoImpl implements AccountDao{
 		int accountsCreated = 0;
 		try{
 			Connection con = ConnectionUtil.getConnectionFromFile(filename);
-			String sql = "{ call add_account(?, ?, ?, ?) }";
+			String sql = "{ call add_account(?, ?, ?, ?, ?) }";
 			cs = con.prepareCall(sql);
 			cs.setString(1, accountType);
 			cs.setString(2, accountName);
 			cs.setInt(3, myUser.getUserid());
 			cs.registerOutParameter(4, Types.NUMERIC);
+			cs.registerOutParameter(5, Types.DATE);
 			// Save number returned from insert statement
 			accountsCreated = cs.executeUpdate();
 			int accountid = cs.getInt(4);
-			myUser.getAccounts().add(new Account(accountid, accountType, accountName, 0f));
+			LocalDate creationDate = cs.getDate(5).toLocalDate();
+			myUser.getAccounts().add(new Account(accountid, accountType, accountName, 0f, creationDate));
 			con.close();
 		} catch (SQLException e) {
 			System.out.println("could not create new account.");
@@ -55,11 +57,12 @@ public class AccountDaoImpl implements AccountDao{
 		myUser.getAccounts().clear();
 		PreparedStatement pstmt = null;
 		try(Connection con = ConnectionUtil.getConnectionFromFile(filename)){
-			String sql = "SELECT a.accountid, a.balance, a.name, c.keyword " + 
+			String sql = "SELECT a.creation_date, a.accountid, a.balance, a.name, c.keyword " + 
 					"FROM user_account u " + 
 					"INNER JOIN accounts a ON u.accountid = a.accountid " + 
 					"INNER JOIN common_lookup c ON a.account_type = c.common_lookup_id " + 
-					"WHERE u.userid = ?";
+					"WHERE u.userid = ? " +
+					"ORDER BY a.creation_date DESC";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, myUser.getUserid());
 			ResultSet rs = pstmt.executeQuery();
@@ -68,7 +71,8 @@ public class AccountDaoImpl implements AccountDao{
 				float balance = rs.getFloat("balance");
 				String name = rs.getString("name");
 				String type = rs.getString("keyword");
-				myUser.getAccounts().add(new Account(accountid, type, name, balance));
+				LocalDate creationDate = rs.getDate("creation_date").toLocalDate();
+				myUser.getAccounts().add(new Account(accountid, type, name, balance, creationDate));
 			}
 			con.close();
 		} catch (SQLException e) {

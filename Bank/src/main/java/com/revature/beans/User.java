@@ -1,6 +1,8 @@
 package com.revature.beans;
 
+import java.text.DecimalFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,13 +10,14 @@ public class User {
 	public User() {
 		super();
 	}
-	public User(int userid, String username, String userType, String firstname, String lastname) {
+	public User(int userid, String username, String userType, String firstname, String lastname, LocalDate creationDate) {
 		super();
 		this.userid = userid;
 		this.username = username;
 		this.userType = userType;
 		this.firstname = firstname;
 		this.lastname = lastname;
+		this.creationDate = creationDate;
 	}
 	public User(int userid, String username, String userType) {
 		super();
@@ -27,7 +30,7 @@ public class User {
 	private String userType;
 	private String firstname = "<noname>";
 	private String lastname = "<noname>";
-	private LocalDate creationDate;
+	private LocalDate creationDate = null;
 	private ArrayList<Account> accounts = new ArrayList<>();
 	private ArrayList<User> users = new ArrayList<>();
 	
@@ -76,6 +79,7 @@ public class User {
 	}
 	@Override
 	public String toString() {
-		return "\"" + username + "\":" + firstname + " " + lastname;
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM, d yyyy");
+		return String.format("%-12s %-20s since %10s ", "\""+username+"\"", "-"+firstname + " " + lastname, creationDate.format(formatter) );
 	}
 }
