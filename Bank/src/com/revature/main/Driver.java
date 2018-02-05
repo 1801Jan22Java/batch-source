@@ -5,6 +5,8 @@ import com.revature.dao.AccountTypeDaoImpl;
 import com.revature.dao.BankAccountDaoImpl;
 import com.revature.dao.UserBankAccountDaoImpl;
 import com.revature.dao.UserDaoImpl;
+import com.revature.dao.UserLoginDaoImpl;
+import com.revature.util.Menu;
 
 public class Driver {
 
@@ -32,10 +34,16 @@ public class Driver {
 //		accounts.addAccount(acc);
 //		System.out.println(accounts.getBankAccountById(30));
 //		System.out.println(accounts.viewBalance(30));
-		UserBankAccountDaoImpl uba = new UserBankAccountDaoImpl();
-		System.out.println(uba.getUserBankAccounts());
-		uba.addUserBankAccount(new UserBankAccount(4,30));
-		System.out.println(uba.getUserBankAccounts());
+//		UserBankAccountDaoImpl uba = new UserBankAccountDaoImpl();
+//		System.out.println(uba.getUserBankAccounts());
+//		uba.addUserBankAccount(new UserBankAccount(4,30));
+//		System.out.println(uba.getUserBankAccounts());
+//		
+//		UserLoginDaoImpl login = new UserLoginDaoImpl();
+//		System.out.println(login.getUserLogins());
+		
+		Menu menu = new Menu();
+		
 		
 	}
 

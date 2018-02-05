@@ -11,6 +11,8 @@ import java.util.List;
 import com.revature.beans.BankAccount;
 import com.revature.beans.UserLogin;
 import com.revature.util.ConnectionUtil;
+import com.revature.util.IncorrectPasswordException;
+import com.revature.util.InvalidUsernameException;
 
 public class UserLoginDaoImpl implements UserLoginDao{
 
@@ -29,7 +31,7 @@ public class UserLoginDaoImpl implements UserLoginDao{
 			ResultSet rs = pstmt.executeQuery();
 			while(rs.next())
 			{
-				int id = rs.getInt("ACCOUNT_ID");
+				int id = rs.getInt("USER_ID");
 				String username = rs.getString("USERNAME");
 				String password = rs.getString("PASSWORD");
 				logins.add(new UserLogin(id,username, password));
@@ -70,8 +72,34 @@ public class UserLoginDaoImpl implements UserLoginDao{
 	 * @see com.revature.dao.UserLoginDao#contains(java.lang.String)
 	 */
 	@Override
-	public boolean contains(String username) {
-		// TODO Auto-generated method stub
+	public boolean contains(String username) throws InvalidUsernameException {
+		PreparedStatement pstmt = null;
+		try(Connection con = ConnectionUtil.getConnectionFromFile(filename))
+		{
+			String sql = "SELECT * FROM USER_LOGIN WHERE USERNAME = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1,username);
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next())	//check if there is a match
+			{
+			//if true return user id
+				return true;
+			}
+			else//the password was incorrect
+			{
+				throw new InvalidUsernameException();
+				
+			}
+			
+		}
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		} 
+		catch (IOException e1) 
+		{
+			e1.printStackTrace();
+		}
 		return false;
 	}
 
@@ -79,9 +107,38 @@ public class UserLoginDaoImpl implements UserLoginDao{
 	 * @see com.revature.dao.UserLoginDao#login(java.lang.String, java.lang.String)
 	 */
 	@Override
-	public boolean login(String username, String password) {
-		// TODO Auto-generated method stub
-		return false;
+	public int login(UserLogin login) throws IncorrectPasswordException{
+		PreparedStatement pstmt = null;
+		String username = login.getUsername();
+		String password = login.getPassword();
+		try(Connection con = ConnectionUtil.getConnectionFromFile(filename))
+		{
+			String sql = "SELECT USER_ID FROM USER_LOGIN WHERE USERNAME = ? AND PASSWORD = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1,username);
+			pstmt.setString(2, password);
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next())	//check if there is a match
+			{
+				int userid = rs.getInt("USER_ID");		//if true return user id
+				return userid;
+			}
+			else//the password was incorrect
+			{
+				throw new IncorrectPasswordException();
+				
+			}
+			
+		}
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		} 
+		catch (IOException e1) 
+		{
+			e1.printStackTrace();
+		}
+		return -1;
 	}
 	
 	

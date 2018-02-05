@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.revature.beans.User;
 import com.revature.beans.UserBankAccount;
 import com.revature.util.ConnectionUtil;
 
@@ -125,6 +126,39 @@ public class UserBankAccountDaoImpl implements UserBankAccountDao {
 			}
 		}
 		return ubaCreated;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.revature.dao.UserBankAccountDao#numOfAccounts(com.revature.beans.User)
+	 */
+	@Override
+	public int numOfAccounts(User user) {
+
+		int userid = user.getUserID();
+		List<UserBankAccount> uba = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		try(Connection con = ConnectionUtil.getConnectionFromFile(filename))
+		{
+			String sql = "SELECT * FROM USER_BANK_ACCOUNTS WHERE USER_ID = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, userid);
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next())
+			{
+				int accountid = rs.getInt("ACCOUNT_ID");
+				uba.add(new UserBankAccount(userid, accountid));
+			}//end while
+			con.close();
+		}
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		} 
+		catch (IOException e1) 
+		{
+			e1.printStackTrace();
+		}
+		return uba.size();
 	}
 	
 

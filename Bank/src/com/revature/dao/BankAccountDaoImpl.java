@@ -155,11 +155,11 @@ public class BankAccountDaoImpl implements BankAccountDao{
 		{
 			con = ConnectionUtil.getConnectionFromFile(filename);
 			con.setAutoCommit(false);
-			String sql = "INSERT INTO BANK_ACCOUNT VALUES (?, ?, ?)";
+			String sql = "INSERT INTO (CURRENT_BALANCE, ACCOUNT_TYPE) BANK_ACCOUNT VALUES (?, ?)";
 			PreparedStatement pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, account.getAccountID());
-			pstmt.setDouble(2, account.getCurrentBalance());
-			pstmt.setInt(3, account.getAccountType());
+			//pstmt.setInt(1, account.getAccountID());
+			pstmt.setDouble(1, account.getCurrentBalance());
+			pstmt.setInt(2, account.getAccountType());
 			accountsCreated = pstmt.executeUpdate();
 			con.commit();
 		}//end of try block
