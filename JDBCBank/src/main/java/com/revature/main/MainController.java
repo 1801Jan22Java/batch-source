@@ -92,9 +92,11 @@ public class MainController {
 					switch(option) {
 					case "1":
 						// view all users
+						lc.logDebug("view all user");
 						break;
 					case "2":
 						// create users
+						
 						break;
 					case "3":
 						// delete users
@@ -305,6 +307,14 @@ public class MainController {
 		} else {
 			lc.logInfo("You press wrong button. please try again.");
 		}
+	}
+	
+	public static List<BankUserVo> getBankUsers() {
+		List<BankUserVo> userVos = userDao.getBankUser();
+		for (BankUserVo vo : userVos ) {
+			lc.logInfo("user Id:" + vo.getId() + " / user Name: " + vo.getName() );
+		}
+		return userVos;
 	}
 	
 	public static void logOut () {
