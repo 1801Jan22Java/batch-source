@@ -227,9 +227,7 @@ public class UserDaoImpl implements UserDao {
 			pstmt.setString(2, user.getPassword());
 			pstmt.setString(3, user.getFirstName());
 			pstmt.setString(4, user.getLastName());
-			System.out.println(user2);
-			int id = user2.getuserId();
-			pstmt.setInt(5, id);
+			pstmt.setInt(5, user.getuserId());
 			
 			pstmt.executeUpdate();
 		} catch (SQLException e) {

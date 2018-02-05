@@ -288,7 +288,7 @@ public class BankManager {
 		
 		try {
 			System.out.println();
-			User newUser = new User(username, password, fname, lname);
+			User newUser = new User(this.chosenUser.getuserId(), username, password, fname, lname);
 			udi.superChangeUser(newUser);
 			this.chosenUser = newUser;
 			System.out.println("User updated.");
@@ -502,6 +502,7 @@ public class BankManager {
 				adi.delete(acc.getAccId());
 				System.out.println();
 				System.out.println("Account deleted.");
+				acc = null;
 				System.out.println();
 			} catch (IllegalDeleteException e) {
 				System.out.println();

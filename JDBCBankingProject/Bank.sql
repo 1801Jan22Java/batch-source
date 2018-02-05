@@ -116,3 +116,9 @@ END;
 
 INSERT INTO BANK_USER (USERNAME, PASS_WORD, FIRST_NAME, LAST_NAME)
 VALUES ('admin', '123password!', 'Ahmed', 'Awwad');
+INSERT INTO BANK_USER (USERNAME, PASS_WORD, FIRST_NAME, LAST_NAME)
+VALUES ('username', 'password', 'Chuck', 'Norris');
+INSERT INTO BANK_USER (USERNAME, PASS_WORD, FIRST_NAME, LAST_NAME)
+VALUES ('username!', 'password', 'Chuck', 'Boris');
+INSERT INTO BANK_USER (USERNAME, PASS_WORD, FIRST_NAME, LAST_NAME)
+VALUES ('username?', 'password', 'Chuck', 'Horace');
