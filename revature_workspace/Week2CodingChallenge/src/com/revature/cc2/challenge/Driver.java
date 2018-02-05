@@ -9,7 +9,7 @@ public class Driver {
 		DepartmentDaoImpl ddi = new DepartmentDaoImpl();
 		Department dept =ddi.getDepartmentByID(1000);
 		System.out.println(dept.getDeptName());
-		float prevAvgSalary = ddi.getAverageSalary(1000);
+		float prevAvgSalary = ddi.getPreviousAverageSalary(1000);
 		float avgSalary = ddi.getAverageSalary(1000);
 		
 		Float avg =( Float)avgSalary;
