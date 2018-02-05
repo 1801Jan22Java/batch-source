@@ -137,18 +137,32 @@ END MOST_EXPENSIVE_TRACK;
 
 --3.3 User Defined Scalar Functions
 --Task – Create a function that returns the average price of invoiceline items in the invoiceline table
-
+CREATE OR REPLACE FUNCTION AVG_INVOICELINE_PRICE 
+RETURN NUMBER AS
+    N NUMBER;
+BEGIN
+    SELECT AVG(UNITPRICE) INTO
+        N
+    FROM INVOICELINE;
+    RETURN N;
+END;
+/
 
 --3.4 User Defined Table Valued Functions
 --Task – Create a function that returns all employees who are born after 1968.
 
+CREATE OR REPLACE FUNCTION GET_YOUNG_EMPLOYEE 
+RETURN SYS_REFCURSOR IS C1 SYS_REFCURSOR;
+BEGIN
+    OPEN C1 FOR SELECT * FROM EMPLOYEE WHERE BIRTHDATE > '31-DEC-68';
+    RETURN C1;
+END;
+/
 
 --4.0 Stored Procedures
 --In this section you will be creating and executing stored procedures. You will be creating various types of stored procedures that take input and output parameters.
 --4.1 Basic Stored Procedure
 --Task – Create a stored procedure that selects the first and last names of all the employees.
---SET SERVEROUTPUT OFF;
-
 CREATE OR REPLACE PROCEDURE GET_ALL_NAMES (S OUT SYS_REFCURSOR)
 
 IS
@@ -206,11 +220,56 @@ BEGIN
 END;
 
 --Task – Create a stored procedure that returns the managers of an employee.***************************************************
+CREATE OR REPLACE PROCEDURE GET_EMPLOYEE_MANAGERS (
+    EMPL_ID IN EMPLOYEE.EMPLOYEEID%TYPE,
+    C1 OUT SYS_REFCURSOR)
+AS
+BEGIN
+    OPEN C1 FOR
+        SELECT * FROM EMPLOYEE WHERE EMPLOYEEID IN (SELECT REPORTSTO FROM EMPLOYEE WHERE EMPLOYEEID = EMPL_ID);
+    DBMS_SQL.RETURN_RESULT(C1);
+END GET_EMPLOYEE_MANAGERS;
+/
+
+DECLARE 
+MY_CURSOR SYS_REFCURSOR;
+BEGIN
+GET_EMPLOYEE_MANAGERS(2, c1=>MY_CURSOR/*REF CURSOR*/);
+END;
+/
+
 
 
 --4.3 Stored Procedure Output Parameters
 --Task – Create a stored procedure that returns the name and company of a customer.********************************************
-
+CREATE OR REPLACE PROCEDURE GET_CUST_NAME_COMPANY (
+    N_CUSTOMERID IN NUMBER,C_CURSOR OUT SYS_REFCURSOR
+) AS
+    VC_FIRSTNAME VARCHAR2(20);
+    VC_LASTNAME VARCHAR2(20);
+    VC_COMPANY VARCHAR2(20);
+BEGIN
+    OPEN C_CURSOR FOR SELECT FIRSTNAME,LASTNAME,COMPANY
+                      FROM CUSTOMER
+                      WHERE CUSTOMERID = N_CUSTOMERID;
+END;
+/
+DECLARE
+    C SYS_REFCURSOR;
+    FNAME VARCHAR2(40);
+    LNAME VARCHAR2(40);
+    COMPANY VARCHAR2(40);
+BEGIN
+    GET_CUST_NAME_COMPANY(5,C);
+    LOOP
+        FETCH C INTO FNAME,LNAME,COMPANY;
+        EXIT WHEN C%NOTFOUND;
+        DBMS_OUTPUT.PUT_LINE('CUSTOMER: '|| FNAME|| ' ' || LNAME || ' IS WITH ' || COMPANY);
+    END LOOP;
+    CLOSE C;
+END;
+/
+COMMIT;
 
 --5.0 Transactions
 --In this section you will be working with transactions. Transactions are usually nested within a stored procedure.
@@ -260,12 +319,13 @@ BEGIN
 DBMS_OUTPUT.PUT_LINE('new employee has been added to table');
 END;
 /
+commit;
 SET SERVEROUTPUT ON;
 INSERT INTO EMPLOYEE (EMPLOYEEID, FIRSTNAME, LASTNAME) 
-VALUES (983, 'Bob', 'Smith');
+VALUES (993, 'Bob', 'Smith');
 
 --Task – Create an after update trigger on the album table that fires after a row is inserted in the table
-SET SERVEROUTPUT ON;
+
 CREATE OR REPLACE TRIGGER TR_INSERT_ALBUM
 AFTER INSERT ON ALBUM
 FOR EACH ROW
@@ -275,7 +335,9 @@ BEGIN
 DBMS_OUTPUT.PUT_LINE(MSG);
 END;
 /
-INSERT INTO ALBUM  VALUES (2008,'EXAMPLE', 1);
+commit;
+SET SERVEROUTPUT ON;
+INSERT INTO ALBUM  VALUES (2019,'EXAMPLE', 1);
 
 --Task – Create an after delete trigger on the customer table that fires after a row is deleted from the table.
 CREATE OR REPLACE TRIGGER TR_DELETE_ALBUM
@@ -286,7 +348,8 @@ BEGIN
 DBMS_OUTPUT.PUT_LINE('CUSTOMER HAS BEEN REMOVED');
 END;
 /
-
+commit;
+SET SERVEROUTPUT ON;
 DELETE FROM CUSTOMER WHERE CUSTOMERID =2;
 
 --7.1 INNER

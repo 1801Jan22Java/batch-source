@@ -3,6 +3,7 @@ package com.revature.main;
 import com.revature.beans.*;
 import com.revature.dao.AccountTypeDaoImpl;
 import com.revature.dao.BankAccountDaoImpl;
+import com.revature.dao.UserBankAccountDaoImpl;
 import com.revature.dao.UserDaoImpl;
 
 public class Driver {
@@ -23,14 +24,19 @@ public class Driver {
 //		//udi.addUser(user);
 //		System.out.println(udi.getUserById(4));
 		
-		BankAccountDaoImpl accounts = new BankAccountDaoImpl();
-		//System.out.println(accounts.getBankAccounts());
-		System.out.println(accounts.getBankAccountById(155));
-		System.out.println(accounts.viewBalance(155));
+//		BankAccountDaoImpl accounts = new BankAccountDaoImpl();
+//		//System.out.println(accounts.getBankAccounts());
+//		System.out.println(accounts.getBankAccountById(155));
+//		System.out.println(accounts.viewBalance(155));
 //		BankAccount acc = new BankAccount(30, 16908763.56, 1);
 //		accounts.addAccount(acc);
-		System.out.println(accounts.getBankAccountById(30));
-		System.out.println(accounts.viewBalance(30));
+//		System.out.println(accounts.getBankAccountById(30));
+//		System.out.println(accounts.viewBalance(30));
+		UserBankAccountDaoImpl uba = new UserBankAccountDaoImpl();
+		System.out.println(uba.getUserBankAccounts());
+		uba.addUserBankAccount(new UserBankAccount(4,30));
+		System.out.println(uba.getUserBankAccounts());
+		
 	}
 
 }

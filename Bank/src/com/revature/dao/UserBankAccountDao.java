@@ -1,5 +1,13 @@
 package com.revature.dao;
 
-public interface UserBankAccountDao {
+import java.util.List;
 
+import com.revature.beans.UserBankAccount;
+
+public interface UserBankAccountDao {
+	
+	public List<UserBankAccount> getUserBankAccounts();
+	public UserBankAccount getUserBankAccountbyId(int userid, int account);
+	public int addUserBankAccount(UserBankAccount uba);
+	
 }
