@@ -1,18 +1,14 @@
 package com.revature.dao;
 
-import java.util.List;
-
-import com.revature.beans.Customer;
-
 public interface CustomerDAO {
 	
-	public Customer checkIfCustomerExist(String username);
+	public boolean getCustByUsername(String username, String password);
 
-	public List<Customer> getCustomers();
+//	public List<Customer> getCustomers();
 	
-	public Customer getCustomerById(int userId);
+//	public Customer getCustomerById(int userId);
 	
 	
-	public int addNewCustomer(Customer customer); 
+//	public int addNewCustomer(Customer customer); 
 	
 }
