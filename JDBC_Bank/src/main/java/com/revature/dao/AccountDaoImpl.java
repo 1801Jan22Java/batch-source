@@ -30,7 +30,7 @@ public class AccountDaoImpl implements AccountDao {
 			Double amount = 0.0;
 			Double interest = 0.0;
 			String accountType = new String();
-			String sql = "SELECT * FROM ACCOUNTS WHERE USERID = ?;";
+			String sql = "SELECT * FROM ACCOUNT WHERE USERID = ?";
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setInt(1, usr);
 			ResultSet rs = ps.executeQuery();
@@ -62,7 +62,7 @@ public class AccountDaoImpl implements AccountDao {
 			Double amount = 0.0;
 			Double interest = 0.0;
 			String accountType = new String();
-			String sql = "SELECT * FROM ACCOUNTS WHERE ACCOUNTID = ?;";
+			String sql = "SELECT * FROM ACCOUNT WHERE USERID = ?";
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setInt(1, aid);
 			ResultSet rs = ps.executeQuery();
@@ -93,7 +93,6 @@ public class AccountDaoImpl implements AccountDao {
 	public void addAccount(Account a, User u) {
 		try {
 			Connection con = ConnectionUtil.getConnectionFromFile(filename);
-			int aid = a.getAccountID();
 			int uid = u.getUserID();
 			String type = a.getAccountType();
 			Double amt = a.getBalance();
@@ -101,19 +100,16 @@ public class AccountDaoImpl implements AccountDao {
 			LocalDate dayMade = a.getCreationDate();
 			int active = 1;
 
-			String sql = "{call initialize_account(?,?,?,?,?,?,?)}";
-			CallableStatement cs = con.prepareCall(sql);
-			cs.setInt(1, aid);
-			cs.setInt(2, uid);
-			cs.setString(3, type);
-			cs.setDouble(4, amt);
-			cs.setDouble(5, interest);
-			cs.setDate(6, java.sql.Date.valueOf(dayMade));
-			cs.setInt(7, active);
-
-			if (cs.executeUpdate() > 1) {
-				System.out.println("More than 1 row updated");
-			}
+			String sql = "INSERT INTO ACCOUNT (USERID, ACCOUNTTYPE, BALANCE, INTEREST, STARTDAY, ACTIVE)" + 
+									" VALUES (?,?,?,?,?,?)";
+			PreparedStatement cs = con.prepareCall(sql);
+			cs.setInt(1, uid);
+			cs.setString(2, type);
+			cs.setDouble(3, amt);
+			cs.setDouble(4, interest);
+			cs.setDate(5, java.sql.Date.valueOf(dayMade));
+			cs.setInt(6, active);
+			cs.executeUpdate();
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -121,29 +117,6 @@ public class AccountDaoImpl implements AccountDao {
 			e.printStackTrace();
 		}
 
-	}
-
-	
-	
-	public int getNextAccountID() {
-		int aid = 0;
-		try {
-			Connection con = ConnectionUtil.getConnectionFromFile(filename);
-			String sql = "SELECT PK_ACCOUNTS.NEXTVAL FROM DUAL";
-			PreparedStatement ps = con.prepareStatement(sql);
-			ResultSet rs = ps.executeQuery();
-			if (rs.next())
-				aid = rs.getInt(1);
-
-			else
-				throw new RuntimeException("No next value in sequence");
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return aid;
 	}
 
 	public void deleteAccount(Account a) throws AccountNotEmptyException, InvalidAccountIdException {
@@ -152,7 +125,7 @@ public class AccountDaoImpl implements AccountDao {
 			Connection con = ConnectionUtil.getConnectionFromFile(filename);
 			int aid = a.getAccountID();
 			Double amount = 0.0;
-			String sql0 = "SELECT Balance FROM ACCOUNTS WHERE ACCOUNTID = ?;";
+			String sql0 = "SELECT Balance FROM ACCOUNT WHERE ACCOUNTID = ?";
 			String sql1 = "{call deactivate_account (?)}";
 
 			PreparedStatement ps = con.prepareStatement(sql0);

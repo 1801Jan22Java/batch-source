@@ -7,6 +7,18 @@ import com.revature.util.OverdraftException;
 
 
 public class Account {
+	
+
+	public Account(String accountType, Double balance, Double interestRate, LocalDate creationDate,
+			String accountName) {
+		super();
+		this.accountType = accountType;
+		this.balance = balance;
+		this.interestRate = interestRate;
+		this.creationDate = creationDate;
+		this.accountName = accountName;
+	}
+
 	public Account(int id, Double balance, double interestRate, Boolean isEmpty, String accountName, LocalDate dayCreated) {
 		super();
 		this.accountID = id;
@@ -49,7 +61,7 @@ public class Account {
 	private int accountID;
 	private String accountType;
 	private Double balance;
-	private double interestRate;
+	private Double interestRate;
 	private Boolean isEmpty;
 	private LocalDate creationDate;
 	private ArrayList<Transaction> transactions;
@@ -63,7 +75,7 @@ public class Account {
 		}
 		
 		TransactionDaoImpl TDI = new TransactionDaoImpl();
-		TDI.addTransaction(new Transaction(LocalDate.now(), TDI.getNextTransactionID(),  amount), this);
+		TDI.addTransaction(new Transaction(LocalDate.now(),  amount), this);
 		
 	}
 	

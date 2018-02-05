@@ -5,11 +5,25 @@ import java.time.LocalDate;
 
 public class User {
 
-	public User(int userID, Credentials credentials, String firstName, String lastName, LocalDate birthday, String email,
+	public User(String userName, String password, String firstName, String lastName, LocalDate birthday, String email,
+			LocalDate dayRegistered, int active) {
+		super();
+		this.userName = userName;
+		this.password = password;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.birthday = birthday;
+		this.email = email;
+		this.dayRegistered = dayRegistered;
+		this.active = active;
+	}
+
+	public User(int userID, String userName, String password, String firstName, String lastName, LocalDate birthday, String email,
 			LocalDate dayRegistered, int active) {
 		super();
 		this.userID = userID;
-		this.credentials = credentials;
+		this.userName = userName;
+		this.password = password;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.birthday = birthday;
@@ -18,7 +32,8 @@ public class User {
 		this.active = active;
 	}
 	private int userID;
-	private Credentials credentials;
+	private String userName;
+	private String password;
 	private String firstName;
 	private String lastName;
 	private LocalDate birthday;
@@ -27,7 +42,7 @@ public class User {
 	private int active;
 	
 	public String getUserName() {
-		return credentials.getUsername();
+		return userName;
 	}
 	
 	public String getFirstName() {
@@ -57,9 +72,6 @@ public class User {
 	public int getUserID() {
 		return userID;
 	}
-	public Credentials getCredentials() {
-		return credentials;
-	}
 	public LocalDate getBirthday() {
 		return birthday;
 	}
@@ -68,14 +80,13 @@ public class User {
 	}
 
 	public String getPassword() {
-		return credentials.getPassword();
+		return password;
 	}
 
 	@Override
 	public String toString() {
-		return "User [userID=" + userID + ", credentials=" + credentials + ", firstName=" + firstName + ", lastName="
-				+ lastName + ", birthday=" + birthday + ", email=" + email + ", dayRegistered=" + dayRegistered
-				+ ", active=" + active + "]";
+		return "Username: " + userName + " firstName=" + firstName + ", lastName="
+				+ lastName;
 	}
 
 }

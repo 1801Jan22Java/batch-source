@@ -9,7 +9,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import com.revature.beans.Credentials;
 import com.revature.beans.User;
 import com.revature.util.ConnectionUtil;
 import com.revature.util.InvalidAccountIdException;
@@ -17,7 +16,23 @@ import com.revature.util.InvalidAccountIdException;
 public class UserDaoImpl implements UserDao {
 
 	public static final String filename = "connection.properties";
+	
+	public boolean contains(ArrayList<User> usrs, String username) {
+		for(User u: usrs) {
+			if(u.getUserName() != null && u.getUserName().equals(username))
+				return true;
+		}
+		return false;
+	}
 
+	public User getUserByUsername(ArrayList<User> usrs, String username) {
+		for(User u: usrs) {
+			if(u.getUserName().equals(username))
+				return u;
+		}
+		return null;
+	}
+	
 	public ArrayList<String> getUserNames(ArrayList<User> usrs) {
 
 		ArrayList<String> userNames = new ArrayList<String>();
@@ -41,7 +56,7 @@ public class UserDaoImpl implements UserDao {
 			Date birthday = null;
 			String email = new String();
 			Date dayRegistered = null;
-			String sql = "SELECT * FROM CUSTOMER"; // ERROR
+			String sql = "SELECT * FROM CUSTOMER";
 			PreparedStatement ps = con.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
@@ -56,8 +71,7 @@ public class UserDaoImpl implements UserDao {
 					email = rs.getString("EMAIL");
 					dayRegistered = rs.getDate("DAYREGISTERED");
 
-					Credentials c = new Credentials(uName, password);
-					usrs.add(new User(uid, c, firstName, lastName, 
+					usrs.add(new User(uName, password, firstName, lastName, 
 								birthday.toLocalDate(), email, dayRegistered.toLocalDate(), 1));
 					
 				}
@@ -69,14 +83,6 @@ public class UserDaoImpl implements UserDao {
 			e.printStackTrace();
 		}
 		return usrs;
-	}
-
-	public ArrayList<Credentials> getCredentials(ArrayList<User> usrs) {
-		ArrayList<Credentials> credentials = new ArrayList<Credentials>();
-		for (User u : usrs) {
-			credentials.add(new Credentials(u.getUserName(), u.getPassword()));
-		}
-		return credentials;
 	}
 	
 	public User getUserByID(int id) {
@@ -105,9 +111,8 @@ public class UserDaoImpl implements UserDao {
 					LocalDate birthday = rs.getDate("BIRTHDATE").toLocalDate();
 					email = rs.getString("EMAIL");
 					LocalDate dayRegistered = rs.getDate("DAYREGISTERED").toLocalDate();
-					Credentials c = new Credentials(username, password);
 					con.close();
-					return new User(uid, c, firstName, lastName, birthday, email, dayRegistered, valid);
+					return new User(username, password, firstName, lastName, birthday, email, dayRegistered, valid);
 
 				}
 			} else {
@@ -129,26 +134,25 @@ public class UserDaoImpl implements UserDao {
 			Connection con = ConnectionUtil.getConnectionFromFile(filename);
 			int uid = u.getUserID();
 			String userName = u.getUserName();
+			System.out.println("USERNAME = " + userName);
 			String password = u.getPassword();
 			String firstName = u.getFirstName();
 			String lastName = u.getLastName();
 			LocalDate birthday = u.getBirthday();
 			String email = u.getEmail();
 			LocalDate dayCreated = u.getDayRegistered();
-			String sql = "{call initialize_user(?,?,?,?,?,?,?,?,?)}";
-			CallableStatement cs = con.prepareCall(sql);
-			cs.setInt(1, uid);
-			cs.setString(2, userName);
-			cs.setString(3, password);
-			cs.setString(4, firstName);
-			cs.setString(5, lastName);
-			cs.setDate(6, java.sql.Date.valueOf(birthday));
-			cs.setString(7, email);
-			cs.setDate(8, java.sql.Date.valueOf(dayCreated));
-			cs.setInt(9, 1);
-			if(cs.executeUpdate() > 1) {
-				System.out.println("More than 1 row updated");
-			}
+			String sql = "INSERT INTO CUSTOMER ( USERNAME, PWORD, FIRSTNAME, LASTNAME, "
+					+ "BIRTHDATE, EMAIL, DAYREGISTERED, ACTIVE) VALUES(?,?,?,?,?,?,?,?)";
+			PreparedStatement cs = con.prepareCall(sql);
+			cs.setString(1, userName);
+			cs.setString(2, password);
+			cs.setString(3, firstName);
+			cs.setString(4, lastName);
+			cs.setDate(5, java.sql.Date.valueOf(birthday));
+			cs.setString(6, email);
+			cs.setDate(7, java.sql.Date.valueOf(dayCreated));
+			cs.setInt(8, 1);
+			cs.executeUpdate();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -176,6 +180,24 @@ public class UserDaoImpl implements UserDao {
 			e.printStackTrace();
 		}
 		return uid;
+	}
+
+	public void deleteUser(User u) {
+		
+		try {
+			Connection con = ConnectionUtil.getConnectionFromFile(filename);
+			String sql = "{call deactivate_user(?)}";
+			CallableStatement cs = con.prepareCall(sql);
+			cs.setInt(1, u.getUserID());
+			if(cs.executeUpdate() > 1){
+				System.out.println("More than one row updated");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 	

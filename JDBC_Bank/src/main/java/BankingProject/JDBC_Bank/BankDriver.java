@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.revature.beans.Account;
-import com.revature.beans.Credentials;
 import com.revature.beans.SuperUser;
 import com.revature.beans.Transaction;
 import com.revature.beans.User;
@@ -64,14 +63,11 @@ public class BankDriver {
 
 			do {
 				System.out.print("Enter in the password for the account: \t");
-				tempPassword0 = scanner.nextLine();
+				tempPassword0 = scanner.nextLine().trim();
 				System.out.print("Confirm password: \t");
-				tempPassword1 = scanner.nextLine();
+				tempPassword1 = scanner.nextLine().trim();
 			} while (!tempPassword0.equals(tempPassword1));
 
-			Credentials c = new Credentials(tempName, tempPassword0);
-
-			int nextID = UDI.getNextUserID();
 			String firstName = null;
 			String lastName = null;
 			Integer year = 0;
@@ -95,7 +91,6 @@ public class BankDriver {
 				birthday = LocalDate.of(year, month, day);
 				System.out.print("Email: \t");
 				email = scanner.next();
-				
 
 				System.out.println("User info: ");
 				System.out.println("First name: \t" + firstName);
@@ -109,21 +104,14 @@ public class BankDriver {
 				// "Yes", "Yep" "Yah", etc work for this
 			} while ((complete != 'Y') && (complete != 'y'));
 
-			User newUser = new User(nextID, c, firstName, lastName, birthday, email, today, active);
+			User newUser = new User(tempName, tempPassword0, firstName, lastName, birthday, email, today, active);
 			UDI.addUser(newUser);
-			complete = 'x';
-			do {
-				System.out.println("Account Created. Exit Bank of Doge (Y/N)?");
-				String str = (scanner.next().trim());
-				complete = str.charAt(0);
-				if ((complete == 'Y') || (complete == 'y'))
-					System.exit(0);
-
-			} while ((complete != 'N') || (complete != 'n'));
+			usrs = UDI.getUsers();
 		} // end registering new user account
 			////////////////////////////////////////////////////////////////////////////////
-			////////////////////////////////////////////////////////////////////////////////
-			// User logging in
+
+		////////////////////////////////////////////////////////////////////////////////
+		// User logging in
 		String uname = null;
 		String pass = null;
 		User tempU = null;
@@ -132,20 +120,20 @@ public class BankDriver {
 			valid = false;
 			System.out.println("Please login with username and password");
 			System.out.print("Username: \t");
-			uname = scanner.nextLine();
+			uname = scanner.next();
 			System.out.print("Password: \t");
-			pass = scanner.nextLine();
+			pass = scanner.next();
 
 			if (SuperUser.rootLogin(uname, pass))
 				isSuper = true;
-			for (User u : usrs) {
-				if (u.getUserName().equals(uname) && u.getPassword().equals(pass)) {
-					valid = true;
-					tempU = u;
-					break;
-				}
-				System.out.println("Incorrect Username or Password");
+
+			if (UDI.contains(usrs, uname)) {
+				valid = true;
+				tempU = UDI.getUserByUsername(usrs, uname);
+				break;
 			}
+			System.out.println("Incorrect Username or Password");
+
 		} while (!valid);
 
 		// end user login
@@ -189,9 +177,9 @@ public class BankDriver {
 					String tempType;
 					System.out.println("To add account, please specify the following");
 					System.out.print("Account name: \t");
-					temp = scanner.nextLine();
+					temp = scanner.next();
 					System.out.print("Account type: \t");
-					tempType = scanner.nextLine();
+					tempType = scanner.next();
 					boolean uniqueName = true;
 					for (Account a : ADI2.getAccounts(tempU)) {
 						if (a.getAccountName().equals(temp)) {
@@ -200,7 +188,7 @@ public class BankDriver {
 						}
 					}
 					if (uniqueName) {
-						Account tempA = new Account(ADI2.getNextAccountID(), tempType, 0.0, 0.0, temp, LocalDate.now());
+						Account tempA = new Account(tempType, 0.0, 0.0, LocalDate.now(), temp);
 						ADI2.addAccount(tempA, tempU);
 						System.out.println("Account Created.");
 					}
@@ -240,8 +228,8 @@ public class BankDriver {
 					Account toTransact = null;
 					System.out.print("Add a new transaction - Specify account name: \t");
 					String name = scanner.nextLine();
-					for(Account a: ADI5.getAccounts(tempU)) {
-						if(a.getAccountName().equals(name)) {
+					for (Account a : ADI5.getAccounts(tempU)) {
+						if (a.getAccountName().equals(name)) {
 							toTransact = a;
 						}
 					}
@@ -249,7 +237,7 @@ public class BankDriver {
 					System.out.print("Enter deposit (positive) or withdraw (negative): \t");
 					Double amount = scanner.nextDouble();
 					TransactionDaoImpl TDI = new TransactionDaoImpl();
-					Transaction t = new Transaction(LocalDate.now(), TDI.getNextTransactionID(), amount);
+					Transaction t = new Transaction(LocalDate.now(), amount);
 					TDI.addTransaction(t, toTransact);
 					System.out.println("Transaction Complete");
 				}
@@ -258,14 +246,14 @@ public class BankDriver {
 					complete = 'Y';
 					break;
 				}
-				
+
 				default: {
 					System.out.print("Would you like to exit (Y/N)?\t\t");
 					complete = (scanner.nextLine().toCharArray())[0];
 				}
 				}
 				System.out.print("Would you like to exit (Y/N)?\t\t");
-				complete = (scanner.nextLine().toCharArray())[0];
+				complete = scanner.next().trim().charAt(0);
 			} while ((complete != 'Y') && (complete != 'y'));
 		}
 
@@ -278,15 +266,15 @@ public class BankDriver {
 				System.out.println("4 - Update a User");
 				System.out.println("5 - Nuke System - Delete All Users (excluding Superuser)");
 
-				switch(choice) {
+				switch (choice) {
 				case 1: {
 					do {
 						valid = true;
 						System.out.println("Please Enter username and password");
 						System.out.print("Username: \t");
-						uname = scanner.nextLine();
+						uname = scanner.nextLine().trim();
 						System.out.print("Password: \t");
-						pass = scanner.nextLine();
+						pass = scanner.nextLine().trim();
 
 						for (User u : usrs) {
 							if (u.getUserName().equals(uname)) {
@@ -297,8 +285,6 @@ public class BankDriver {
 							System.out.println("Username already taken");
 						}
 					} while (!valid);
-					Credentials c = new Credentials(uname, pass);
-					int nextID = UDI.getNextUserID();
 					String firstName = null;
 					String lastName = null;
 					Integer year = 0;
@@ -324,6 +310,7 @@ public class BankDriver {
 						email = scanner.nextLine();
 
 						System.out.println("User info: ");
+						System.out.println("Username: \t" + uname);
 						System.out.println("First name: \t" + firstName);
 						System.out.println("Last name: \t" + lastName);
 						System.out.println("Birthday: " + birthday.toString());
@@ -332,10 +319,86 @@ public class BankDriver {
 						complete = (scanner.nextLine().toCharArray())[0];
 					} while ((complete == 'Y') || (complete == 'y'));
 
-					User newUser = new User(nextID, c, firstName, lastName, birthday, email, today, active);
+					User newUser = new User(uname, pass, firstName, lastName, birthday, email, today, active);
 					UDI.addUser(newUser);
+					usrs = UDI.getUsers();
+					break;
+				} // end case 1
+				case 2: {
+					System.out.print("Enter in the username to view: \t");
+					String name = scanner.next();
+					usrs = UDI.getUsers();
+					User tempUser = null;
+					if (!UDI.contains(usrs, name)) {
+						System.out.println("Username not found");
+					} else {
+						tempUser = UDI.getUserByUsername(usrs, name);
+						tempUser.toString();
+					}
+					break;
+				} // end case 2
+				case 3: {
+					usrs = UDI.getUsers();
+					for (User u : usrs) {
+						System.out.println(u.toString());
+						System.out.println("----------------------------");
+					}
+					break;
+				} // end case 3
+				case 4: {
+					System.out.println("Enter username to update: ");
+					String tempStr = scanner.next();
+					User tempUser = null;
+					if (usrs.contains(tempStr)) {
+						tempUser = UDI.getUserByUsername(usrs, tempStr);
+						String firstName = null;
+						String lastName = null;
+						int year;
+						int month;
+						int day;
+						LocalDate birthday = null;
+						String email = null;
+						do {
+							System.out.print("First name: \t");
+							firstName = scanner.nextLine();
+							System.out.print("Last Name: \t");
+							lastName = scanner.nextLine();
+							System.out.print("Birth Year: \t");
+							year = scanner.nextInt();
+							System.out.print("Birth Month (number): \t");
+							month = scanner.nextInt();
+							System.out.print("Birth Day: \t");
+							day = scanner.nextInt();
+							birthday = LocalDate.of(year, month, day);
+							System.out.print("Email: \t");
+							email = scanner.nextLine();
+
+							System.out.println("User info: ");
+							System.out.println("First name: \t" + firstName);
+							System.out.println("Last name: \t" + lastName);
+							System.out.println("Birthday: " + birthday.toString());
+							System.out.println("Email: \t" + email);
+							System.out.print("Continue (Y/N)? \t");
+							complete = (scanner.nextLine().toCharArray())[0];
+						} while ((complete == 'Y') || (complete == 'y'));
+					}
+					else {
+						throw new RuntimeException();
+					}
+					break;
+				} // end case 4
+				case 5: {
+					System.out.println("Pressing the big red button.");
+					System.out.println("Deleting all users");
+					usrs = UDI.getUsers();
+					for(User u: usrs) {
+						UDI.deleteUser(u);
+					}
+					break;
+				} // end case 5
 				}
-				}
+				System.out.println("Continue (Y/N)?\t");
+				complete = scanner.next().trim().charAt(0);
 			} while ((complete != 'Y') && (complete != 'y'));
 			SuperUser.rootLogout();
 			isSuper = false;

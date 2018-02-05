@@ -1,7 +1,6 @@
 package com.revature.dao;
 
 import java.io.IOException; 
-import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -104,22 +103,17 @@ public class TransactionDaoImpl implements TransactionDao {
 		try {
 			Connection con = ConnectionUtil.getConnectionFromFile(filename);
 			int aid = a.getAccountID();
-			int tid = t.getTransactionID();
 			Double amount = t.getAmount();
 			int active = 1;
 
-			String sql = "{call initialize_transaction(?,?,?,?,?)}";
-			CallableStatement cs = con.prepareCall(sql);
-			cs.setInt(1, tid);
-			cs.setInt(2, aid);
-			cs.setDouble(3, amount);
-			cs.setDate(4, java.sql.Date.valueOf(LocalDate.now()));
-			cs.setDouble(5, active);
-
-			if (cs.executeUpdate() > 1) {
-				System.out.println("More than 1 row updated");
-			}
-			
+			String sql = "INSERT INTO TRANSACTIONLINE (ACCOUNTID, AMOUNT, DAYTIME, ACTIVE) "
+					+ "VALUES (?,?,?,?)";
+			PreparedStatement cs = con.prepareCall(sql);
+			cs.setInt(1, aid);
+			cs.setDouble(2, amount);
+			cs.setDate(3, java.sql.Date.valueOf(LocalDate.now()));
+			cs.setDouble(4, active);
+			cs.execute(); 
 			a.setBalance(a.getBalance() - amount);
 			
 		} catch (SQLException e) {
@@ -128,27 +122,7 @@ public class TransactionDaoImpl implements TransactionDao {
 			e.printStackTrace();
 		}
 	}
-	
-	public int getNextTransactionID() {
-		int tid = 0;
-		try {
-			Connection con = ConnectionUtil.getConnectionFromFile(filename);
-			String sql = "SELECT PK_TRANSACTION.NEXTVAL FROM DUAL";
-			PreparedStatement ps = con.prepareStatement(sql);
-			ResultSet rs = ps.executeQuery();
-			if (rs.next())
-				tid = rs.getInt(1);
 
-			else
-				throw new RuntimeException("No next value in sequence");
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return tid;
-	}
 
 	public void deleteTransaction(Transaction t) {
 		// TODO Auto-generated method stub

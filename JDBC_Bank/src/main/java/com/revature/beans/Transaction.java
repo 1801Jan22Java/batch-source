@@ -4,6 +4,12 @@ import java.time.LocalDate;
 
 public class Transaction {
 
+	public Transaction(LocalDate transactionTime, Double amount) {
+		super();
+		this.transactionTime = transactionTime;
+		this.amount = amount;
+	}
+
 	public Transaction(LocalDate transactionTime, int transactionID, Double amount) {
 		super();
 		this.transactionTime = transactionTime;
