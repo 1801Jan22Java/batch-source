@@ -52,7 +52,7 @@ public class Display {
 		l_name = in.next();
 
 		customer.addCustomer(f_name, l_name, username, password);
-
+		System.out.println("A new account was created please log in with your new credentials \n");
 	}
 
 	public void checkExisting() {
@@ -70,7 +70,7 @@ public class Display {
 
 			switch (result) {
 			case 1: {
-				System.out.println("Your account "+security.getAccount_Number()+ " has a balance of $" + accounts.getBalance() + " dollars");
+				System.out.println("Your account "+security.getAccount_Number()+ " has a balance of $" + accounts.getBalance() + " dollars\n");
 				break;
 			}
 			case 2: {
@@ -79,9 +79,7 @@ public class Display {
 				boolean finished = false;
 				int choice = 0;
 
-				while (finished != true) {
 
-					do {
 						System.out.println("How much would you like to add today: ");
 
 						try {
@@ -91,16 +89,7 @@ public class Display {
 						} catch (Exception e) {
 							System.out.println("Please enter a valid amount");
 						}
-					} while (proper_amount = false);
 
-					System.out.println("Would you like to add more?" + "\n 1.) Yes " + "\n 2.) No");
-					choice = in.nextInt();
-					if (choice == 1) {
-					} else {
-						finished = true;
-						break;
-					}
-				}
 				break;
 			}
 
@@ -112,7 +101,6 @@ public class Display {
 
 				while (finished != true) {
 
-					do {
 						System.out.println("How much would you like to withdraw today: ");
 
 						try {
@@ -121,23 +109,10 @@ public class Display {
 							proper_amount = true;
 						} catch (Exception e) {
 							System.out.println("Please enter a valid amount");
-						}
-					} while (proper_amount = false);
-
-					System.out.println("Would you like to add more?" + "\n 1.) Yes " + "\n 2.) No");
-					choice = in.nextInt();
-					if (choice == 1) {
-						try {
-							amount = Double.parseDouble(in.next());
-							accounts.addFunds(amount);
 							proper_amount = true;
-						} catch (Exception e) {
-							System.out.println("Please enter a valid amount");
+							break;
 						}
-					} else if (choice == 2) {
-						finished = true;
-						break;
-					}
+
 				}
 				break;
 			}
