@@ -8,7 +8,7 @@ public interface UserinfoDao {
 	
 	public List<Userinfo> getUserinfo();
 	public Userinfo getUserinfoByID(int id);
-	public void addUserinfo(int bankId,String ssn, String fname, String lname, String address, String email);
+	public int addUserinfo(String user, String pass,String ssn, String fname, String lname, String address, String email);
 	
 
 }

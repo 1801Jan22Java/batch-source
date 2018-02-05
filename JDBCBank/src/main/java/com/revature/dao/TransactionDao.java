@@ -8,6 +8,6 @@ public interface TransactionDao {
 	public String filename = "connection.properties";
 	public List<Transaction> getTransactions();
 	public Transaction getTransactionByID(int id);
-	public void addTransaction(int balancdId, int accountId, int type, double transactionAmount);
+	public int addTransaction(int balancdId, int accountId, int type, double transactionAmount);
 
 }

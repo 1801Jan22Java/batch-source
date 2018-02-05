@@ -10,6 +10,6 @@ public interface AccountDao {
 	
 	public List<Account> getAccount();
 	public Account getAccountByID(int id);
-	public void addAccount(int userid, int type, double initialAmount);
+	public int addAccount(int userid, int type, double initialAmount);
 
 }

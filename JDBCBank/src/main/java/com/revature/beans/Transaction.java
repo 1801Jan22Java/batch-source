@@ -12,14 +12,14 @@ public class Transaction {
 		super();
 	}
 	
-	public Transaction(int balanceID, int accountID, int type, int transactionAmount) {
+	public Transaction(int balanceID, int accountID, int type, double transactionAmount) {
 		super();
 		this.balanceID = balanceID;
 		this.type = type;
 		this.transactionAmount = transactionAmount;
 	}
 
-	public Transaction(int transactionID, int balanceID, int accountID, int type, int transactionAmount) {
+	public Transaction(int transactionID, int balanceID, int accountID, int type, double transactionAmount) {
 		super();
 		this.transactionID = transactionID;
 		this.balanceID = balanceID;
@@ -64,7 +64,7 @@ public class Transaction {
 		return transactionAmount;
 	}
 
-	public void setTransactionAmount(int transactionAmount) {
+	public void setTransactionAmount(double transactionAmount) {
 		this.transactionAmount = transactionAmount;
 	}
 

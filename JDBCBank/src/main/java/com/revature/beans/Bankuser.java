@@ -47,7 +47,7 @@ public class Bankuser {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
+	
 	@Override
 	public String toString() {
 		return "Bankuser [bankuserID=" + bankuserID + ", bankuser=" + bankuser + ", password=" + password + "]";

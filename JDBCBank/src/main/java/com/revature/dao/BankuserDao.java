@@ -10,6 +10,6 @@ public interface BankuserDao {
 	
 	public List<Bankuser> getBankusers();
 	public Bankuser getBankuserByID(int id);
-	public void addBankuser(String username, String password, int retId);
+	public int addBankuser(String username, String password);
 
 }

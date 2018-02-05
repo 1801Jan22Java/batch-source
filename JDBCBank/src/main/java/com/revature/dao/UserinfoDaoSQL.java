@@ -65,25 +65,33 @@ public class UserinfoDaoSQL implements UserinfoDao {
 	}
 
 	@Override
-	public void addUserinfo(int bankId, String ssn, String fname, String lname, String address, String email) {
+	public int addUserinfo(String usr, String pass, String ssn, String fname, String lname, String address, String email) {
+		
+		int id = -1;
 		
 		try(Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
 			con.setAutoCommit(false);
-			String sql = "{call NEW_USERIFO(?,?,?,?,?,?)}";
+			String sql = "{call NEW_USERINFO(?,?,?,?,?,?,?,?)}";
 			CallableStatement cs = con.prepareCall(sql);
-			cs.setInt(1, bankId);
-			cs.setString(2, ssn);
-			cs.setString(3, fname);
-			cs.setString(4, lname);
-			cs.setString(5, address);
-			cs.setString(6,email);
+			cs.setString(1, usr);
+			cs.setString(2, pass);
+			cs.setString(3, ssn);
+			cs.setString(4, fname);
+			cs.setString(5, lname);
+			cs.setString(6, address);
+			cs.setString(7,email);
+			cs.registerOutParameter(8,java.sql.Types.INTEGER);
+			
 			cs.execute();
+			
+			id = cs.getInt(8);
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
-		} 		
+		} 	
+		return id;
 	}
 
 }

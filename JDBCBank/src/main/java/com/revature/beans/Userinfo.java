@@ -9,14 +9,25 @@ public class Userinfo {
 	private String lastName;
 	private String address;
 	private String email;
+	private boolean superuser = false;
 	
 	public Userinfo() {
 		super();
 	}
 	
-	public Userinfo(int bankuserID, String ssn, String firstName, String lastName, String address,
-			String email) {
+	public Userinfo(int bankuserID, String ssn, String firstName, String lastName, String address, String email) {
 		super();
+		this.bankuserID = bankuserID;
+		this.ssn = ssn;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.address = address;
+		this.email = email;
+	}
+	
+	public Userinfo(int userinfoID, int bankuserID, String ssn, String firstName, String lastName, String address,String email) {
+		super();
+		this.userinfoID = userinfoID;
 		this.bankuserID = bankuserID;
 		this.ssn = ssn;
 		this.firstName = firstName;
@@ -31,18 +42,6 @@ public class Userinfo {
 
 	public void setBankuserID(int bankuserID) {
 		this.bankuserID = bankuserID;
-	}
-
-	public Userinfo(int userinfoID, int bankuserID, String ssn, String firstName, String lastName, String address,
-			String email) {
-		super();
-		this.userinfoID = userinfoID;
-		this.bankuserID = bankuserID;
-		this.ssn = ssn;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.address = address;
-		this.email = email;
 	}
 
 	public int getUserinfoID() {
@@ -92,11 +91,19 @@ public class Userinfo {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
+	public boolean getSuperuser() {
+		return superuser;
+	}
+	
+	public void setSuperuser(boolean bool) {
+		superuser = bool;
+	}
 
 	@Override
 	public String toString() {
 		return "Userinfo [userinfoID=" + userinfoID + ", bankuserID=" + bankuserID + ", ssn=" + ssn + ", firstName="
-				+ firstName + ", lastName=" + lastName + ", address=" + address + ", email=" + email + "]";
+				+ firstName + ", lastName=" + lastName + ", address=" + address + ", email=" + email + ", superuser=" + superuser +"]";
 	}
 
 }

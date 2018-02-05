@@ -60,25 +60,27 @@ public class BankuserDaoSQL implements BankuserDao {
 	}
 
 	@Override
-	public void addBankuser(String username, String password, int retId) {
+	public int addBankuser(String username, String password) {
 		
-		int id = 0;
+		int id = -1;
 
 		try(Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
 			String sql = "call NEW_BANKUSER(?,?,?)";
 			CallableStatement cs = con.prepareCall(sql);
 			cs.setString(1, username);
 			cs.setString(2, password);
-			cs.setInt(3, retId);
+			cs.registerOutParameter(3,java.sql.Types.INTEGER);
 			cs.execute();
-			id = retId;
-			System.out.println("added user yay! " + id);
+			
+			id = cs.getInt(3);
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		return id;
 		
 	}
-
+	
 }

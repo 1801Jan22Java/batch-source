@@ -65,24 +65,27 @@ public class AccountDaoSQL implements AccountDao {
 	}
 
 	@Override
-	public void addAccount(int userid, int type, double initialAmount) {
-
+	public int addAccount(int userid, int type, double initialAmount) {
+		
+		int id = -1;
 		try(Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
 			con.setAutoCommit(false);
-			String sql = "{call NEW_ACCOUNT(0,?,?,?)}";
+			String sql = "{call NEW_ACCOUNT(?,?,?,?)}";
 			CallableStatement cs = con.prepareCall(sql);
 			cs.setInt(1, userid);
 			cs.setInt(2,type);
 			cs.setDouble(3,initialAmount);
+			cs.registerOutParameter(4,java.sql.Types.INTEGER);
 			
 			cs.execute();
 			
+			id = cs.getInt(4);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		} 
-		
+		return id;
 	}
 
 }
