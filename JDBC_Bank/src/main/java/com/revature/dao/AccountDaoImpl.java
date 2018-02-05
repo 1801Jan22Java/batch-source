@@ -18,21 +18,21 @@ import com.revature.util.InvalidAccountIdException;
 public class AccountDaoImpl implements AccountDao {
 
 	public static final String filename = "connection.properties";
+	public User currentUser;
+	public ArrayList<Account> ADI_Accounts;
 
-	public ArrayList<Account> getAccounts(User u) {
-		ArrayList<Account> accs = null;
+	public ArrayList<Account> getAccounts() {
 		try {
 			Connection con = ConnectionUtil.getConnectionFromFile(filename);
-			accs = new ArrayList<Account>();
-			int usr = u.getUserID();
+			String usr = currentUser.getUserName();
 			int valid = 0;
 			int aid = 0;
 			Double amount = 0.0;
 			Double interest = 0.0;
 			String accountType = new String();
-			String sql = "SELECT * FROM ACCOUNT WHERE USERID = ?";
+			String sql = "SELECT * FROM ACCOUNT WHERE USERID IN " + "(SELECT USERID FROM CUSTOMER WHERE USERNAME = ?)";
 			PreparedStatement ps = con.prepareStatement(sql);
-			ps.setInt(1, usr);
+			ps.setString(1, usr);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				valid = rs.getInt("ACTIVE");
@@ -42,16 +42,17 @@ public class AccountDaoImpl implements AccountDao {
 					amount = rs.getDouble("BALANCE");
 					interest = rs.getDouble("INTEREST");
 					LocalDate when = rs.getDate("STARTDAY").toLocalDate();
-					accs.add(new Account(aid, accountType, amount, interest, accountType, when));
+					ADI_Accounts.add(new Account(aid, accountType, amount, interest, accountType, when));
 				}
 			}
 			con.close();
 		} catch (SQLException e) {
+			System.out.println("SQL EXCEPTION IN THE PLACE AND THING");
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return accs;
+		return ADI_Accounts;
 	}
 
 	public Account getAccountByID(int id) throws InvalidAccountIdException {
@@ -90,10 +91,10 @@ public class AccountDaoImpl implements AccountDao {
 		return null;
 	}
 
-	public void addAccount(Account a, User u) {
+	public void addAccount(Account a) {
 		try {
 			Connection con = ConnectionUtil.getConnectionFromFile(filename);
-			int uid = u.getUserID();
+			int uid = currentUser.getUserID();
 			String type = a.getAccountType();
 			Double amt = a.getBalance();
 			Double interest = a.getInterestRate();
@@ -103,7 +104,6 @@ public class AccountDaoImpl implements AccountDao {
 			String sql = "INSERT INTO ACCOUNT (USERID, ACCOUNTTYPE, BALANCE, INTEREST, STARTDAY, ACTIVE)"
 					+ " VALUES (?,?,?,?,?,?)";
 			PreparedStatement cs = con.prepareStatement(sql);
-			System.out.println("USER ID IS : " + uid);
 			cs.setInt(1, uid);
 			cs.setString(2, type);
 			cs.setDouble(3, amt);
@@ -111,6 +111,7 @@ public class AccountDaoImpl implements AccountDao {
 			cs.setDate(5, java.sql.Date.valueOf(dayMade));
 			cs.setInt(6, active);
 			cs.executeUpdate();
+			ADI_Accounts = getAccounts();
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -148,6 +149,7 @@ public class AccountDaoImpl implements AccountDao {
 			int numberUpdated = 0;
 			cs = con.prepareCall(sql1);
 			numberUpdated = cs.executeUpdate();
+			ADI_Accounts = this.getAccounts();
 			System.out.println("Number of rows updated: " + numberUpdated);
 
 			con.close();
@@ -157,6 +159,18 @@ public class AccountDaoImpl implements AccountDao {
 			e.printStackTrace();
 		}
 
+	}
+
+	public ArrayList<Account> getADI_Accounts() {
+		return ADI_Accounts;
+	}
+
+	public User getCurrentUser() {
+		return currentUser;
+	}
+
+	public void setCurrentUser(User currentUser) {
+		this.currentUser = currentUser;
 	}
 
 }

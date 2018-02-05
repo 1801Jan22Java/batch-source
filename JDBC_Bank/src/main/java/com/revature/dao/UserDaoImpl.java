@@ -42,7 +42,7 @@ public class UserDaoImpl implements UserDao {
 			Date dayRegistered = null;
 			String sql = "SELECT * FROM CUSTOMER WHERE USERNAME = ?";
 			PreparedStatement ps = con.prepareStatement(sql);
-			ps.setString(1, uName);
+			ps.setString(1, username);
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
 				valid = rs.getInt("Active");

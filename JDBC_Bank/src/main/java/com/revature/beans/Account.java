@@ -121,7 +121,7 @@ public class Account {
 
 	@Override
 	public String toString() {
-		return (accountName + " contains " + balance + " DOGE");
+		return (" Account " + accountName + " contains " + balance + " DOGE");
 	}
 
 	public void setBalance(Double balance) {

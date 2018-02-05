@@ -19,13 +19,14 @@ public class BankDriver {
 	public static void main(String[] args) {
 
 		UserDaoImpl UDI = new UserDaoImpl();
+		AccountDaoImpl ADI = new AccountDaoImpl();
 		ArrayList<User> usrs = UDI.getUsers();
 		ArrayList<String> userNames = UDI.getUserNames(usrs);
-		User tempU = new User();
+		User tempU = null;
 		// UDI.getUsers() talks to the DB, UDI.getUserNames() takes that list
 		// and extracts the username Strings into another ArrayList.
 
-		Integer choice = null;
+		Integer choice = 3;
 		Boolean isSuper = false;
 		Scanner scanner = new Scanner(System.in);
 
@@ -92,7 +93,8 @@ public class BankDriver {
 				birthday = LocalDate.of(year, month, day);
 				System.out.print("Email: \t");
 				email = scanner.next();
-
+				
+				System.out.println("\n================================");
 				System.out.println("User info: ");
 				System.out.println("First name: \t" + firstName);
 				System.out.println("Last name: \t" + lastName);
@@ -107,6 +109,8 @@ public class BankDriver {
 
 			User newUser = new User(tempName, tempPassword0, firstName, lastName, birthday, email, today, active);
 			UDI.addUser(newUser);
+			tempU = newUser;
+			ADI.setCurrentUser(tempU);
 			usrs = UDI.getUsers();
 		} // end registering new user account
 			////////////////////////////////////////////////////////////////////////////////
@@ -115,9 +119,9 @@ public class BankDriver {
 		// User logging in
 		String uname = null;
 		String pass = null;
-
 		boolean valid = false;
-		do {
+		
+		 do {
 			valid = false;
 			System.out.println("Please login with username and password");
 			System.out.print("Username: \t");
@@ -128,13 +132,18 @@ public class BankDriver {
 			if (SuperUser.rootLogin(uname, pass))
 				isSuper = true;
 
-			if (UDI.contains(usrs, uname)) {
+			
+			tempU = UDI.getUserByUsername(uname);
+			if(tempU != null) {
+				ADI.setCurrentUser(tempU);
 				valid = true;
-				tempU = UDI.getUserByUsername(uname);
-				break;
 			}
-			System.out.println("Incorrect Username or Password");
-
+			else {
+				System.out.println("NULL ISSUE 141");
+				System.out.println("Incorrect Username or Password");
+				valid = false;
+			}
+			
 		} while (!valid);
 
 		// end user login
@@ -144,7 +153,12 @@ public class BankDriver {
 		// User menu
 		complete = 'a';
 		choice = 0;
+		if(tempU == null)
+			System.out.println("NULL ISSUE 152");
 		if (!isSuper) {
+			ADI.setCurrentUser(tempU);
+			if(ADI.getCurrentUser() == null)
+				System.out.println("NULL ISSUE 156");
 			do {
 
 				System.out.println("Please choose an option:");
@@ -159,58 +173,39 @@ public class BankDriver {
 
 				switch (choice) {
 				case 1: {
-					AccountDaoImpl ADI1 = new AccountDaoImpl();
-					for (User u : usrs) {
-						if (u.getUserID() == tempU.getUserID()) {
-							System.out.println("Showing user accounts");
-							ArrayList<Account> accs = ADI1.getAccounts(u);
-							for (Account a : accs) {
-								a.toString();
-							}
-						}
+					System.out.println("==========================");
+					for (Account a : ADI.ADI_Accounts) {
+						if(a != null)
+							a.toString();
 					}
+					System.out.println("==========================");
 					break;
 				}
 
 				case 2: {
-					AccountDaoImpl ADI2 = new AccountDaoImpl();
 					String temp;
 					String tempType;
 					System.out.println("To add account, please specify the following");
 					System.out.print("Account name: \t");
 					temp = scanner.next();
+					System.out.println();
 					System.out.print("Account type: \t");
 					tempType = scanner.next();
-					boolean uniqueName = true;
-					if(tempU == null)
-						System.out.println("U is null");
-					ArrayList<Account> acs= ADI2.getAccounts(tempU);
-					for (Account a : acs) {
-						if(temp == null) {
-							System.out.println("Temp is null");
-						}
-						if (a.getAccountName().equals(temp)) {
-							System.out.println("Account name already in use");
-							uniqueName = false;
-						}
-					}
-					if (uniqueName) {
-						Account tempA = new Account(tempType, 0.0, 0.0, LocalDate.now(), temp);
-						System.out.println("Bank Driver ID: " + tempU.getUserID());
-						ADI2.addAccount(tempA, tempU);
-						System.out.println("Account Created.");
-					}
+					Account tempA = new Account(tempType, 0.0, 0.0, LocalDate.now(), temp);
+					ADI.addAccount(tempA);
+					System.out.println("Account Created.");
+					
 					break;
 				}
 				case 3: {
 					String name;
 					System.out.print("Enter Name of Account to Delete: \t");
 					name = scanner.nextLine();
-					AccountDaoImpl ADI3 = new AccountDaoImpl();
-					for (Account a : ADI3.getAccounts(tempU)) {
+					ArrayList<Account> acc = ADI.getAccounts();
+					for (Account a : acc) {
 						if (a.getAccountName().equals(name)) {
 							try {
-								ADI3.deleteAccount(a);
+								ADI.deleteAccount(a);
 							} catch (InvalidAccountIdException e) {
 								System.out.println("Account named doesn't exist");
 							} catch (AccountNotEmptyException e) {
@@ -221,22 +216,21 @@ public class BankDriver {
 				}
 				case 4: {
 					System.out.println("Showing All transactions");
-					AccountDaoImpl ADI4 = new AccountDaoImpl();
-					for (Account a : ADI4.getAccounts(tempU)) {
+					ArrayList<Account> a = ADI.getAccounts();
+					for (Account acc : a) {
 						System.out.println("================================================");
-						System.out.println(a.getAccountName() + ": ");
-						for (Transaction t : a.getTransactions()) {
+						System.out.println(acc.getAccountName() + ": ");
+						for (Transaction t : acc.getTransactions()) {
 							t.toString();
 						}
 					}
 				}
 
 				case 5: {
-					AccountDaoImpl ADI5 = new AccountDaoImpl();
 					Account toTransact = null;
 					System.out.print("Add a new transaction - Specify account name: \t");
-					String name = scanner.nextLine();
-					for (Account a : ADI5.getAccounts(tempU)) {
+					String name = scanner.next();
+					for (Account a : ADI.getAccounts()) {
 						if (a.getAccountName().equals(name)) {
 							toTransact = a;
 						}
@@ -256,11 +250,11 @@ public class BankDriver {
 				}
 
 				default: {
-					System.out.print("Would you like to exit (Y/N)?\t\t");
-					complete = (scanner.nextLine().toCharArray())[0];
+					System.out.print("Would you like to exit (Y/N)?\t");
+					complete = scanner.next().trim().charAt(0);
 				}
 				}
-				System.out.print("Would you like to exit (Y/N)?\t\t");
+				System.out.print("Would you like to exit (Y/N)?\t");
 				complete = scanner.next().trim().charAt(0);
 			} while ((complete != 'Y') && (complete != 'y'));
 		}
@@ -280,9 +274,9 @@ public class BankDriver {
 						valid = true;
 						System.out.println("Please Enter username and password");
 						System.out.print("Username: \t");
-						uname = scanner.nextLine().trim();
+						uname = scanner.next().trim();
 						System.out.print("Password: \t");
-						pass = scanner.nextLine().trim();
+						pass = scanner.next().trim();
 
 						for (User u : usrs) {
 							if (u.getUserName().equals(uname)) {
@@ -304,9 +298,9 @@ public class BankDriver {
 					LocalDate today = LocalDate.now();
 					do {
 						System.out.print("First name: \t");
-						firstName = scanner.nextLine();
+						firstName = scanner.next();
 						System.out.print("Last Name: \t");
-						lastName = scanner.nextLine();
+						lastName = scanner.next();
 						System.out.print("Birth Year: \t");
 						year = scanner.nextInt();
 						System.out.print("Birth Month (number): \t");
@@ -324,7 +318,7 @@ public class BankDriver {
 						System.out.println("Birthday: " + birthday.toString());
 						System.out.println("Email: \t" + email);
 						System.out.print("Continue (Y/N)? \t");
-						complete = (scanner.nextLine().toCharArray())[0];
+						complete = scanner.next().trim().charAt(0);
 					} while ((complete == 'Y') || (complete == 'y'));
 
 					User newUser = new User(uname, pass, firstName, lastName, birthday, email, today, active);
@@ -368,9 +362,9 @@ public class BankDriver {
 						String email = null;
 						do {
 							System.out.print("First name: \t");
-							firstName = scanner.nextLine();
+							firstName = scanner.next();
 							System.out.print("Last Name: \t");
-							lastName = scanner.nextLine();
+							lastName = scanner.next();
 							System.out.print("Birth Year: \t");
 							year = scanner.nextInt();
 							System.out.print("Birth Month (number): \t");
@@ -387,7 +381,7 @@ public class BankDriver {
 							System.out.println("Birthday: " + birthday.toString());
 							System.out.println("Email: \t" + email);
 							System.out.print("Continue (Y/N)? \t");
-							complete = (scanner.nextLine().toCharArray())[0];
+							complete = scanner.next().trim().charAt(0);
 						} while ((complete == 'Y') || (complete == 'y'));
 					} else {
 						throw new RuntimeException();
