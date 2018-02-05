@@ -34,10 +34,10 @@ public class Driver {
 		}
 		//If user wants to create a new user account
 		if(response.equals("CREATE")) {
-			currentUser = udi.createUser();
+			currentUser = udi.createUser(sc);
 		}
 		else {
-			currentUser = udi.logIn();
+			currentUser = udi.logIn(sc);
 		}
 		
 		do {

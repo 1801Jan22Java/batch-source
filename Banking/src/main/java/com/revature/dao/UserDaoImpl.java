@@ -26,11 +26,10 @@ public class UserDaoImpl implements UserDao{
 	/*
 	 * Create a standard user account
 	 */
-	public User createUser() {
+	public User createUser(Scanner sc) {
 		User user = null;
 		try(Connection conn = ConnectionUtil.getConnectionFromFile("connection.properties")) {
 			
-			Scanner sc = new Scanner(System.in);
 			System.out.println();
 			System.out.println("What username would you like to use?");
 			String username = sc.nextLine();
@@ -99,8 +98,7 @@ public class UserDaoImpl implements UserDao{
 	/*
 	 * Authenticate user login
 	 */
-	public User logIn() {
-		Scanner sc = new Scanner(System.in);
+	public User logIn(Scanner sc) {
 		User u = null;
 		
 		
@@ -197,13 +195,13 @@ public class UserDaoImpl implements UserDao{
 			response = response.toUpperCase();
 			
 			switch (response) {
-			case "VIEW"		:	udi.superView();
+			case "VIEW"		:	udi.superView(sc);
 								break;
-			case "CREATE"	:	udi.createUser();
+			case "CREATE"	:	udi.createUser(sc);
 								break;
-			case "UPDATE"	:	udi.superUpdate();
+			case "UPDATE"	:	udi.superUpdate(sc);
 								break;
-			case "DELETE"	:	udi.superDelete();
+			case "DELETE"	:	udi.superDelete(sc);
 								break;
 			default			:	throw new InvalidInputException("Please enter an appropriate command.");
 			}
@@ -217,11 +215,10 @@ public class UserDaoImpl implements UserDao{
 	 * SUPER METHODS
 	 */
 	
-	public void superView() {
+	public boolean superView(Scanner sc){
 		try(Connection conn = ConnectionUtil.getConnectionFromFile("connection.properties")) {
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
-			Scanner sc = new Scanner(System.in);
 			try {
 				System.out.println("Enter the first name of the user you'd like to view.");
 				String firstName = sc.nextLine();
@@ -271,11 +268,14 @@ public class UserDaoImpl implements UserDao{
 					if(!accsExist) {
 						throw new InvalidAccountIDException("User with that ID has no accounts!");
 					}
+					return accsExist;
 				} catch (InvalidAccountIDException i) {
 					System.err.println(i);
+					return false;
 				}
 			} catch (InvalidInputException i) {
 				System.err.println(i);
+				return false;
 			}
 			
 		} catch (SQLException e) {
@@ -286,14 +286,14 @@ public class UserDaoImpl implements UserDao{
 			e1.printStackTrace();
 		}
 		
-		
+		return false;
 	}
 	
-	public void superUpdate() {
+	public User superUpdate(Scanner sc) {
+		User u = new User("","","",-1,false);
 		try(Connection conn = ConnectionUtil.getConnectionFromFile("connection.properties")) {
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
-			Scanner sc = new Scanner(System.in);
 			try {
 				System.out.println("Enter the first name of the user you'd like to view.");
 				String firstName = sc.nextLine();
@@ -351,6 +351,18 @@ public class UserDaoImpl implements UserDao{
 						pstmt.setString(1, newValue);
 						pstmt.executeUpdate();
 						
+						pstmt = conn.prepareStatement("SELECT * FROM REGISTERED_USERS WHERE USER_ID=?");
+						pstmt.setInt(1, userID);
+						rs = pstmt.executeQuery();
+						rs.next();
+						
+						boolean isSuper;
+						if( rs.getInt("IS_SUPERUSER") == 1)
+							isSuper = true;
+						else
+							isSuper = false;
+						u = new User(rs.getString("USERNAME"), rs.getString("FIRSTNAME"), rs.getString("LASTNAME"), rs.getInt("USER_ID"), isSuper);
+						
 						System.out.println("User successfully updated!");
 					} catch (InvalidInputException i) {
 						System.err.println(i);
@@ -358,9 +370,11 @@ public class UserDaoImpl implements UserDao{
 					
 				} catch (InvalidAccountIDException i) {
 					System.err.println(i);
+					u.setUserId(-2);
 				}
 			} catch (InvalidInputException i) {
 				System.err.println(i);
+				u.setUserId(-3);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -369,13 +383,13 @@ public class UserDaoImpl implements UserDao{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return u;
 	}
 	
-	public void superDelete() {
+	public int superDelete(Scanner sc) {
 		try(Connection conn = ConnectionUtil.getConnectionFromFile("connection.properties")) {
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
-			Scanner sc = new Scanner(System.in);
 			try {
 				System.out.println("Enter the first name of the user you'd like to delete.");
 				String firstName = sc.nextLine();
@@ -413,8 +427,11 @@ public class UserDaoImpl implements UserDao{
 				
 				int currBankAccID;
 				
+				boolean accsExist = false;;
+				
 				System.out.println("Accounts belonging to " + firstName + ": ");
 				while(rs.next()) {
+					accsExist = true;
 					System.out.println();
 					System.out.println("Bank Account ID: " + rs.getInt("BANK_ACCOUNT_ID"));
 					currBankAccID = rs.getInt("BANK_ACCOUNT_ID");
@@ -425,15 +442,26 @@ public class UserDaoImpl implements UserDao{
 					pstmt.executeUpdate();
 				}
 				
+				if(!accsExist) {
+					throw new InvalidAccountIDException("No user exists with that ID!");
+				}
+				
 				pstmt = conn.prepareStatement("DELETE FROM REGISTERED_USERS WHERE USER_ID=?");
 				pstmt.setInt(1, userID);
 				pstmt.executeUpdate();
 				
 				System.out.println("User " + firstName + " with ID " + userID + " successfully deleted!");
 				System.out.println("All accounts belonging to " + firstName + " were also deleted.");
+				
+				return userID;
 					
 			} catch (InvalidInputException i) {
 				System.err.println(i);
+				return -1;
+			} catch (InvalidAccountIDException e) {
+				// TODO Auto-generated catch block
+				System.err.println(e);
+				return -2;
 			}
 			
 		} catch (SQLException e) {
@@ -443,6 +471,6 @@ public class UserDaoImpl implements UserDao{
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		
+		return -2;
 	}
 }
