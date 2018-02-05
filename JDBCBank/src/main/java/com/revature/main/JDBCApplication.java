@@ -57,8 +57,9 @@ public class JDBCApplication {
 					// Proceed to superuser if Roleid is 1
 					if (bUser.getRoleId() == 1) {
 						AccountSuperAccess(bUser, scanner);
+						AccountAccess(bUser, scanner);
 					} else {
-						AccountAccess(bUser,scanner);
+						AccountAccess(bUser, scanner);
 					}
 
 				} catch (LoginNotValidException e) {
@@ -113,60 +114,65 @@ public class JDBCApplication {
 			System.out.println("3 - Create Account");
 			System.out.println("4 - Delete Account");
 			System.out.println("5 - Logout");
-			String input = scanner.nextLine();
-			switch (input) {
-			case "1":
-				System.out.println("Choose account number to withdraw from: ");
-				Integer wAccount = Integer.parseInt(scanner.nextLine());
-				System.out.println("Enter amount to withdraw");
-				Double wAmount = Double.parseDouble(scanner.nextLine());
+			try {
+				String input = scanner.nextLine();
+				switch (input) {
 
-				// Withdraw
-				accountOps.withdraw(bu.getUserId(), wAccount, wAmount);
-				break;
+				case "1":
+					System.out.println("Choose account number to withdraw from: ");
+					Integer wAccount = Integer.parseInt(scanner.nextLine());
+					System.out.println("Enter amount to withdraw");
+					Double wAmount = Double.parseDouble(scanner.nextLine());
 
-			case "2":
-				System.out.println("Choose accountid to deposit into: ");
-				Integer dAccount = Integer.parseInt(scanner.nextLine());
-				System.out.println("Enter amount to deposit: ");
-				Double dAmount = Double.parseDouble(scanner.nextLine());
+					// Withdraw
+					accountOps.withdraw(bu.getUserId(), wAccount, wAmount);
+					break;
 
-				// Deposit
-				accountOps.deposit(bu.getUserId(), dAccount, dAmount);
-				break;
+				case "2":
+					System.out.println("Choose accountid to deposit into: ");
+					Integer dAccount = Integer.parseInt(scanner.nextLine());
+					System.out.println("Enter amount to deposit: ");
+					Double dAmount = Double.parseDouble(scanner.nextLine());
 
-			case "3":
-				System.out.println("Choose your account type:");
-				System.out.println("1 - Checking");
-				System.out.println("2 - Saving");
+					// Deposit
+					accountOps.deposit(bu.getUserId(), dAccount, dAmount);
+					break;
 
-				// Create new account
-				// Username must be unique
-				try {
-					int choice = Integer.parseInt(scanner.nextLine());
-					accountOps.newAccount(bu.getUserId(), choice);
-				} catch (NumberFormatException e) {
-					System.out.println("Invalid account type id.");
+				case "3":
+					System.out.println("Choose your account type:");
+					System.out.println("1 - Checking");
+					System.out.println("2 - Saving");
+
+					// Create new account
+					// Username must be unique
+					try {
+						int choice = Integer.parseInt(scanner.nextLine());
+						accountOps.newAccount(bu.getUserId(), choice);
+					} catch (NumberFormatException e) {
+						System.out.println("Invalid account type id.");
+					}
+
+					break;
+
+				case "4":
+					System.out.println("Enter account ID to delete");
+					int accountId = Integer.parseInt(scanner.nextLine());
+
+					// Delete account
+					// Account empty checking done within deleteAccount function
+					accountOps.deleteAccount(bu.getUserId(), accountId);
+					break;
+
+				case "5":
+					System.out.println("Logging out.");
+					keepGoing = false;
+					break;
+				default:
+					System.out.println("Invalid input.");
+					break;
 				}
-
-				break;
-
-			case "4":
-				System.out.println("Enter account ID to delete");
-				int accountId = Integer.parseInt(scanner.nextLine());
-
-				// Delete account
-				// Account empty checking done within deleteAccount function
-				accountOps.deleteAccount(bu.getUserId(), accountId);
-				break;
-
-			case "5":
-				System.out.println("Logging out.");
-				keepGoing = false;
-				break;
-			default:
-				System.out.println("Invalid input.");
-				break;
+			} catch (NumberFormatException e) {
+				System.out.println("Invalid input");
 			}
 		}
 
@@ -178,66 +184,71 @@ public class JDBCApplication {
 		UserOracle usr = new UserOracle();
 
 		while (keepGoing) {
-			System.out.println("1 - View All Users");
-			System.out.println("2 - Create User");
-			System.out.println("3 - Update User");
-			System.out.println("4 - Delete User");
-			System.out.println("5 - Logout");
-			String input = scanner.nextLine();
-			switch (input) {
-			case "1":
-				usr.showAllUsers();
-				break;
+			try {
+				System.out.println("1 - View All Users");
+				System.out.println("2 - Create User");
+				System.out.println("3 - Update User");
+				System.out.println("4 - Delete User");
+				System.out.println("5 - Logout");
+				String input = scanner.nextLine();
+				switch (input) {
+				case "1":
+					usr.showAllUsers();
+					break;
 
-			case "2":
-				System.out.println("Please enter the following: ");
-				System.out.println("Username: ");
-				String username = scanner.nextLine();
-				System.out.println("Password: ");
-				String password = scanner.nextLine();
+				case "2":
+					System.out.println("Please enter the following: ");
+					System.out.println("Username: ");
+					String username = scanner.nextLine();
+					System.out.println("Password: ");
+					String password = scanner.nextLine();
 
-				// Create new user
-				usr.newUser(username, password);
+					// Create new user
+					usr.newUser(username, password);
 
-				break;
-			case "3":
-				System.out.println("Please enter the following: ");
-				System.out.println("User ID:");
-				int userid = Integer.parseInt(scanner.nextLine());
-				System.out.println("Username:");
-				String udUsername = scanner.nextLine();
-				System.out.println("Password:");
-				String udPassword = scanner.nextLine();
-				System.out.println("Role ID (1 for super, 2 for normal):");
-				int udRoleId = Integer.parseInt(scanner.nextLine());
+					break;
+				case "3":
+					System.out.println("Please enter the following: ");
+					System.out.println("User ID:");
+					int userid = Integer.parseInt(scanner.nextLine());
+					System.out.println("Username:");
+					String udUsername = scanner.nextLine();
+					System.out.println("Password:");
+					String udPassword = scanner.nextLine();
+					System.out.println("Role ID (1 for super, 2 for normal):");
+					int udRoleId = Integer.parseInt(scanner.nextLine());
 
-				// Make sure self-edit doesn't happen
-				if (userid == bu.getUserId()) {
-					System.out.println("Cannot edit self");
-				} else {
-					// Update user information
-					usr.editUser(userid, udRoleId, udUsername, udPassword);
+					// Make sure self-edit doesn't happen
+					if (userid == bu.getUserId()) {
+						System.out.println("Cannot edit self");
+					} else {
+						// Update user information
+						usr.editUser(userid, udRoleId, udUsername, udPassword);
+					}
+					break;
+
+				case "4":
+					System.out.println("Input the user id to be deleted.");
+					int dUserId = Integer.parseInt(scanner.nextLine());
+					// Make sure self deletion doesn't happen
+					if (dUserId != bu.getUserId()) {
+						System.out.println("Self deletion is prohibited.");
+					} else {
+						usr.deleteUser(dUserId);
+					}
+
+					break;
+				case "5":
+					System.out.println("Logging out.");
+					keepGoing = false;
+					break;
+
 				}
-				break;
-
-			case "4":
-				System.out.println("Input the user id to be deleted.");
-				int dUserId = Integer.parseInt(scanner.nextLine());
-				// Make sure self deletion doesn't happen
-				if (dUserId != bu.getUserId()) {
-					System.out.println("Self deletion is prohibited.");
-				} else {
-					usr.deleteUser(dUserId);
-				}
-
-				break;
-			case "5":
-				System.out.println("Logging out.");
-				keepGoing = false;
-				break;
-
+			} catch (NumberFormatException e) {
+				System.out.println("Invalid input");
 			}
 		}
 
 	}
+
 }

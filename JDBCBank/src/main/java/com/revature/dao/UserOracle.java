@@ -144,7 +144,7 @@ public class UserOracle implements UserDAO {
 				int userid = rs.getInt("USER_ID");
 				int roleid = rs.getInt("ROLE_ID");
 				String username = rs.getString("USERNAME");
-				String password = rs.getString("USERNAME");
+				String password = rs.getString("PASSWORD");
 				userList.add(new BankUsers(userid, roleid, username, password));
 			}
 
