@@ -103,13 +103,13 @@ public class AccountsDaoImpl implements AccountsDao {
 	}
 
 	@Override
-	public void deleteAccount() {
+	public void deleteAccount(int account) {
 		int customersAdded = 0;
 		CallableStatement cs = null;
 		
 		try(Connection con = ConnectionUtil.getConnectionFromFile(filename)){
 			con.setAutoCommit(false);
-			String sql = "{call DELETE_ACCOUNT()}";
+			String sql = "{call DELETE_ACCOUNT("+ account+")}";
 			cs = con.prepareCall(sql);
 			cs.execute();
 			con.commit();
@@ -124,4 +124,104 @@ public class AccountsDaoImpl implements AccountsDao {
 		}
 
 }
+
+	@Override
+	public double getBalance_Super(int account) {
+		try(Connection con = ConnectionUtil.getConnectionFromFile(filename)){
+			PreparedStatement stmt = con.prepareStatement("Select savings from accounts where userid = ? ");
+			stmt.setInt(1, account);
+			ResultSet rs = stmt.executeQuery();
+			
+			rs.next();
+			return rs.getDouble(1);
+			
+	
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
+	@Override
+	public void addFunds_Super(int account, double money) {
+		double funds;
+		try (Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
+			PreparedStatement statement = con.prepareStatement("select savings from accounts where userid = ? ");
+			statement.setInt(1, account);
+			ResultSet rs = statement.executeQuery();
+			rs.next();
+			funds = rs.getDouble(1) + money;
+			PreparedStatement statement2 = con.prepareStatement("update accounts set savings = ? where userid = ? ");
+			statement2.setDouble(1, funds);
+			statement2.setInt(2, account);
+			statement2.executeUpdate();
+
+			System.out.println("The new balance is: $" + funds);
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
+	@Override
+	public void removeFunds_Super(int account, double money) {
+		double funds;
+		try (Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
+			PreparedStatement statement = con.prepareStatement("select savings from accounts where userid = ? ");
+			statement.setInt(1, account);
+			ResultSet rs = statement.executeQuery();
+			rs.next();
+			if (rs.getDouble(1) - money <= 0) {
+				System.out.println("You do not have enough money to withdraw that amount");
+			} else {
+				funds = rs.getDouble(1) - money;
+				PreparedStatement statement2 = con
+						.prepareStatement("update accounts set savings = ? where userid = ? ");
+				statement2.setDouble(1, funds);
+				statement2.setInt(2, account);
+				statement2.executeUpdate();
+
+				System.out.println("Your new balance is: $" + funds);
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
+	@Override
+	public void deleteAccount_Super(int account) {
+		int customersAdded = 0;
+		CallableStatement cs = null;
+		
+		try(Connection con = ConnectionUtil.getConnectionFromFile(filename)){
+			con.setAutoCommit(false);
+			String sql = "{call DELETE_ACCOUNT("+account+")}";
+			cs = con.prepareCall(sql);
+			cs.execute();
+			System.out.println("The account has been deleted");
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
 }

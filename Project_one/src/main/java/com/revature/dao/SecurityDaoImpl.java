@@ -48,6 +48,26 @@ public class SecurityDaoImpl implements SecurityDao {
 		return false;
 	}
 	
+	public boolean check_AccountNumber(int accounts) {
+		try(Connection con = ConnectionUtil.getConnectionFromFile(filename)){
+			PreparedStatement stmt = con.prepareStatement("select * from accounts where accountid = ? " );
+			stmt.setInt(1, accounts);
+			ResultSet rs = stmt.executeQuery();
+			if(rs.next()) {
+				return true;
+			}else {
+				return false;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
 	public boolean check_Credentials(String username, String password) {
 		String stored_username = null, stored_password = null;
 		boolean verify = false;
@@ -90,6 +110,10 @@ public class SecurityDaoImpl implements SecurityDao {
 		return false;
 		}
 	}
+
+
+
+
 	
 
 

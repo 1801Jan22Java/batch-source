@@ -26,5 +26,21 @@ public class ConnectionUtil {
 		String password = prop.getProperty("password");
 		return DriverManager.getConnection(url,username,password);
 	}
+	
+	public static String getSuperUser_Username (String filename) throws IOException, SQLException{
+		Properties prop = new Properties();
+		InputStream in = new FileInputStream(filename);
+		prop.load(in);
+		String username = prop.getProperty("username");
+		return username;
+	}
+	
+	public static String getSuperUser_Password (String filename) throws IOException, SQLException{
+		Properties prop = new Properties();
+		InputStream in  = new FileInputStream(filename);
+		prop.load(in);
+		String password = prop.getProperty("password");
+		return password;
+	}
 
 }

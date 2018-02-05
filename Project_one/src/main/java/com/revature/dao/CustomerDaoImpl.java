@@ -54,5 +54,29 @@ public class CustomerDaoImpl implements CustomerDao {
 		
 	}
 	
+	public void addCustomer_Super(String f_name,String l_name,String username,String password) {
+		int customersAdded = 0;
+		CallableStatement cs = null;
+		
+		try(Connection con = ConnectionUtil.getConnectionFromFile(filename)){
+			con.setAutoCommit(false);
+			String sql = "{call CREATE_NEW_CUSTOMER(?,?,?,?)}";
+			cs = con.prepareCall(sql);
+			cs.setString(1, f_name);
+			cs.setString(2, l_name);
+			cs.setString(3, username);
+			cs.setString(4, password);
+			cs.execute();
+			con.commit();
+			
+			
+		}
+		catch(SQLException e) {
+			e.printStackTrace();			
+		}
+		catch(IOException e) {
+			e.printStackTrace();
+		}
+	}
 
 }
