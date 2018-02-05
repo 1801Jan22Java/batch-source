@@ -12,9 +12,9 @@ import com.revature.beans.CheckingAccount;
 import com.revature.beans.SavingsAccount;
 import com.revature.beans.SuperUser;
 import com.revature.beans.User;
+import com.revature.cc2.util.ConnectionUtil;
 import com.revature.dao.AccountDaoImpl;
 import com.revature.dao.UserDaoImpl;
-import com.revature.util.ConnectionUtil;
 
 
 public class BankDriver {

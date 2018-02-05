@@ -12,7 +12,7 @@ import java.util.Scanner;
 import com.revature.beans.Account;
 import com.revature.beans.SuperUser;
 import com.revature.beans.User;
-import com.revature.util.ConnectionUtil;
+import com.revature.cc2.util.ConnectionUtil;
 
 public class UserDaoImpl implements UserDao {
 	private static String filename = "connection.properties";

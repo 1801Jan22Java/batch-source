@@ -17,7 +17,7 @@ import com.revature.beans.Account;
 import com.revature.beans.CheckingAccount;
 import com.revature.beans.SavingsAccount;
 import com.revature.beans.User;
-import com.revature.util.ConnectionUtil;
+import com.revature.cc2.util.ConnectionUtil;
 
 public class AccountDaoImpl implements AccountDao{
 	private static String filename = "connection.properties";
