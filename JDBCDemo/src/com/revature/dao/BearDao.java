@@ -8,7 +8,7 @@ public interface BearDao {
 	
 	public List<Bear> getBears();
 	public Bear getBearById(int id);
-	public void addBear(int id);
-	public void feedBear(int bearID, int beehiveID, int honeyAmount);
+	public int addBear(int id);
+	public int feedBear(int bearID, int beehiveID, int honeyAmount);
 
 }

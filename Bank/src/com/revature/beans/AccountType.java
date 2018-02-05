@@ -7,15 +7,29 @@ package com.revature.beans;
 public class AccountType{
 	
 	private int id;
+	private String type;
+	
 	/**
-	 * constructor that initializes id
+	 * constructor that initializes id and type
 	 * @param id
+	 * @param type
 	 */
-	public AccountType(int id) {
+	public AccountType(int id, String type) 
+	{
 		super();
 		this.id = id;
+		this.type = type;
 	}
 	
+	/**
+	 * constructor that initializes type
+	 * @param type
+	 */
+	public AccountType(String type) {
+		super();
+		this.type = type;
+	}
+
 	/**
 	 * no args constructor
 	 */
@@ -36,6 +50,28 @@ public class AccountType{
 	 */
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	/**
+	 * @return the type
+	 */
+	public String getType() {
+		return type;
+	}
+
+	/**
+	 * @param type the type to set
+	 */
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	/* 
+	 *
+	 */
+	@Override
+	public String toString() {
+		return "AccountType [id=" + id + ", type=" + type + "]";
 	}
 	
 	

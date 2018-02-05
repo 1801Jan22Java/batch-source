@@ -1,10 +1,36 @@
 package com.revature.main;
 
+import com.revature.beans.*;
+import com.revature.dao.AccountTypeDaoImpl;
+import com.revature.dao.BankAccountDaoImpl;
+import com.revature.dao.UserDaoImpl;
+
 public class Driver {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
+//		AccountTypeDaoImpl at = new AccountTypeDaoImpl();
+//		System.out.println(at.getAccountTypes().toString());
+//		System.out.println(at.getAccountTypeById(1));
+//		System.out.println(at.getAccountTypeById(2));
+		
+//		UserDaoImpl udi = new UserDaoImpl();
+//		System.out.println(udi.getUsers());
+//		System.out.println(udi.getUserById(1));
+//		System.out.println(udi.getUserById(2));
+//		System.out.println(udi.getUserById(3));
+//		//User user = new User(4, "Rihanna", "", "Fenti", "96 Superstar Blvd", "New York City", "New York", "rfentibeauty@gmail.com", "479-555-7777", "153-82-4627");
+//		//udi.addUser(user);
+//		System.out.println(udi.getUserById(4));
+		
+		BankAccountDaoImpl accounts = new BankAccountDaoImpl();
+		//System.out.println(accounts.getBankAccounts());
+		System.out.println(accounts.getBankAccountById(155));
+		System.out.println(accounts.viewBalance(155));
+//		BankAccount acc = new BankAccount(30, 16908763.56, 1);
+//		accounts.addAccount(acc);
+		System.out.println(accounts.getBankAccountById(30));
+		System.out.println(accounts.viewBalance(30));
 	}
 
 }

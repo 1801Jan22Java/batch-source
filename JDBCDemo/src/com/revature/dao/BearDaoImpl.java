@@ -2,6 +2,7 @@ package com.revature.dao;
 
 import java.io.IOException;
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +30,7 @@ public class BearDaoImpl implements BearDao {
 				Cave cave = cdi.getCaveById(caveId);
 				int typeId = rs.getInt("BEAR_TYPE_ID");
 				BearType bt = btdi.getBearTypeById(typeId);
-				Date birthdate = rs.getDate("BEAR_BIRTHDATE");
+				LocalDate birthdate = rs.getDate("BEAR_BIRTHDATE").toLocalDate();
 				bl.add(new Bear(id,name,cave,bt,weight,birthdate));
 			}
 			con.close();
@@ -59,7 +60,7 @@ public class BearDaoImpl implements BearDao {
 				Cave cave = cdi.getCaveById(caveId);
 				int typeId = rs.getInt("BEAR_TYPE_ID");
 				BearType bt = btdi.getBearTypeById(typeId);
-				Date birthdate = rs.getDate("BEAR_BIRTHDATE");
+				LocalDate birthdate = rs.getDate("BEAR_BIRTHDATE").toLocalDate();
 				bear = new Bear(id,name,cave,bt,weight,birthdate);
 			}
 			con.close();
@@ -71,33 +72,65 @@ public class BearDaoImpl implements BearDao {
 		return bear;
 	}
 	
-	public void addBear(int id)
-	{
-		String str = "{call ADDBEAR()}";
-	}
-	
-	public void feedBear(int bearID, int beehiveID, int honeyAmount)
-	{
-		CallableStatement cstmt = null;
-		CaveDaoImpl cdi = new CaveDaoImpl();
-		BearTypeDaoImpl btdi = new BearTypeDaoImpl();
-		Bear bear = null;
-		try (Connection con = ConnectionUtil.getConnectionFromFile(filename)){
-			String sql = "{CALL SP_FEED_BEAR(?, ?, ?)}";
-			cstmt = con.prepareCall(sql);
-			cstmt.setInt(1,bearID);
-			cstmt.setInt(2,beehiveID);
-			cstmt.setInt(3,honeyAmount);
-			ResultSet rs = cstmt.executeQuery();
-			
-			con.close();
-		} catch (SQLException e) {
+	public int addBear(Bear bear) {
+		int bearsCreated = 0;
+		Connection con = null;
+		try{
+			con = ConnectionUtil.getConnectionFromFile(filename);
+			con.setAutoCommit(false);
+			String sql = "INSERT INTO BEAR (BEAR_TYPE_ID,BEAR_NAME,BEAR_BIRTHDATE,BEAR_WEIGHT,CAVE_ID)"
+					+" VALUES(?,?,?,DEFAULT,?)";
+			PreparedStatement pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, bear.getBearType().getId());
+			pstmt.setString(2, bear.getName());
+			pstmt.setDate(3, Date.valueOf(bear.getBirthdate()));
+			pstmt.setInt(4, bear.getCave().getId());
+			bearsCreated = pstmt.executeUpdate();
+			con.commit();
+		} catch (SQLException e){
 			e.printStackTrace();
-		} catch (IOException e1) {
-			e1.printStackTrace();
+			try{
+				con.rollback();
+			} catch (Exception e1){
+				e.printStackTrace();
+			}
+		} 
+		catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		return;
+		if (con != null){
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return bearsCreated;
 	}
 
+	public int feedBear(int bearId, int hiveId, int amt) {
+		int amtFed = 0;
+		CallableStatement cs = null;
+		try(Connection con = ConnectionUtil.getConnectionFromFile(filename)){
+			String sql = "{call SP_FEED_BEAR(?,?,?)}";
+			cs = con.prepareCall(sql);
+			cs.setInt(1,bearId);
+			cs.setInt(2, hiveId);
+			cs.setInt(3, amt);
+			//if our stored procedure had out parameters,
+			//we would us cs.registerOutParameter(4,java.sql.Types.INTEGER) or similar
+			cs.execute();
+			amtFed = amt;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return amtFed;
+	}
 
 }

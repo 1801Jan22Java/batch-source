@@ -56,6 +56,14 @@ public class UserBankAccount {
 	public void setAccountID(int accountID) {
 		this.accountID = accountID;
 	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "UserBankAccount [userID=" + userID + ", accountID=" + accountID + "]";
+	}
 	
 	
 	
