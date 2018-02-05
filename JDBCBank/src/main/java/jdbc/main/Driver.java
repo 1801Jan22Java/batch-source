@@ -223,7 +223,7 @@ public class Driver {
 			System.out.println("enter the userId whose password you wish to change");
 			int id = sup.nextInt();
 			sup.nextLine();
-			System.out.println("enter the new username");
+			System.out.println("enter the new password");
 			String newPass = sup.nextLine();
 			if(id==bud.getIdByUserAndPass("admin", "admin")) {
 				System.out.println("nice try");

@@ -82,7 +82,7 @@ public class AccountDaoImpl implements AccountDao {
 
 	public void withdraw(int amount, int acctId) {
 		Account a = getAccountById(acctId);
-		if (a.getBalance() > amount) {
+		if (a.getBalance() >= amount) {
 			try (Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
 				String sql = "{call WITHDRAW(?,?)}";
 				CallableStatement cs = con.prepareCall(sql);
