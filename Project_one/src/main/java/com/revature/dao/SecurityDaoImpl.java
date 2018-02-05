@@ -14,9 +14,20 @@ import com.revature.util.ConnectionUtil;
 public class SecurityDaoImpl implements SecurityDao {
 	private static String filename = "Connection.properties";
 	private static int UserID;
+	private static String First_Name;
+	private static int Account_Number;
 
 	public static int getUserID() {
 		return UserID;
+	}
+	public static String getFirst_Name() {
+		return First_Name;
+	}
+
+
+
+	public static int getAccount_Number() {
+		return Account_Number;
 	}
 
 
@@ -83,11 +94,27 @@ public class SecurityDaoImpl implements SecurityDao {
 			
 			stored_username =rs.getString(2);
 			stored_password = rs.getString(3);
-				
+			
+			
 				
 			
 			if(username.equals(stored_username) && password.equals(stored_password)) {
 				verify = true;
+				PreparedStatement statement_2 = con.prepareStatement("select * from customer where userid = ?");
+				statement_2.setInt(1, this.UserID);
+				
+				 ResultSet rn = statement_2.executeQuery();
+				 rn.next();
+				 this.First_Name = rn.getString(2);
+				 
+				 PreparedStatement statement_3 = con.prepareStatement("select * from accounts where userid = ?");
+					statement_3.setInt(1, this.UserID);
+					
+					ResultSet rk = statement_3.executeQuery();
+					rk.next();
+					 this.Account_Number = rk.getInt(2);
+				 
+				 
 				return true;
 			}else {
 				return false;

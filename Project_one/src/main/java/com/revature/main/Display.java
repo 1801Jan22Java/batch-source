@@ -59,7 +59,7 @@ public class Display {
 		int result = 0;
 
 		do {
-			System.out.println("What would you like to do" + "\n 1.) Check on existing account "
+			System.out.println("What would you like to do "+ security.getFirst_Name()+ "?\n 1.) Check on existing account "
 					+ "\n 2.) Add funds to an account" + "\n 3.) Withdraw funds from an account"
 					+ "\n 4.) Delete your account " + "\n 0.) Log out ");
 			try {
@@ -70,7 +70,7 @@ public class Display {
 
 			switch (result) {
 			case 1: {
-				System.out.println("Your account has a balance of $" + accounts.getBalance() + " dollars");
+				System.out.println("Your account "+security.getAccount_Number()+ " has a balance of $" + accounts.getBalance() + " dollars");
 				break;
 			}
 			case 2: {
@@ -127,6 +127,13 @@ public class Display {
 					System.out.println("Would you like to add more?" + "\n 1.) Yes " + "\n 2.) No");
 					choice = in.nextInt();
 					if (choice == 1) {
+						try {
+							amount = Double.parseDouble(in.next());
+							accounts.addFunds(amount);
+							proper_amount = true;
+						} catch (Exception e) {
+							System.out.println("Please enter a valid amount");
+						}
 					} else if (choice == 2) {
 						finished = true;
 						break;
@@ -154,6 +161,8 @@ public class Display {
 
 		boolean verify = false;
 		boolean super_user = false;
+		int count = 0;
+		int choice=5;
 
 		do {
 			while (verify == false) {
@@ -180,18 +189,31 @@ public class Display {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+				if(verify == false) {
+				System.out.println("You have entered an invalid password you have "+ (3 - count-1) +" attempts remaining");
+				count+=1;
+				}
+				if (count == 3) {
+					System.out.println("You have no more attempts please try again later\n");
+					verify = false;
+					break;
+				}
+				
 			}
-			System.out.println(super_user);
 			if (verify == true) {
 
 				break;
+			}else if(count >=3) {
+				break;
+				
 			}
+			
 
 		} while (verify == false);
 
 		if (super_user == true) {
 			this.Super_User();
-		} else {
+		} else if(verify == true) {
 			this.checkExisting();
 		}
 
