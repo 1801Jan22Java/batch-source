@@ -76,7 +76,7 @@ public class BankManager {
 					break;
 				case 2:
 					this.createUser();
-					System.out.println("Login with newly created account? Y/N");
+					System.out.println("Login with an account? Y/N");
 					String choice2 = sc.next().toLowerCase();
 					if (!choice2.equals("y")) {
 						goodByeMessage();
