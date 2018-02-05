@@ -24,7 +24,8 @@ import com.revature.util.ConnectionUtil;
 
 public class AccountDaoImpl implements AccountDao{
 	private static String filename = "connection.properties";
-	
+
+	/*Does nothing yet*/
 	public Account getAccountById(int Id) {
 		// TODO Auto-generated method stub
 		return null;
@@ -83,7 +84,10 @@ public class AccountDaoImpl implements AccountDao{
 	/*
 	 * addAccount adds a new account for a user.
 	 * takes in an Account object and a User object.
-	 * First creates an account
+	 * First creates an accountType, then gets an initial balance, and adds account with initial balance and 
+	 * account type to the database, and ties it to the creating user.
+	 * @param Account account, User user
+	 * @return none
 	 * */
 	@Override
 	public void addAccount(Account account,User user)
@@ -93,7 +97,7 @@ public class AccountDaoImpl implements AccountDao{
 		{
 			UserDaoImpl udi = new UserDaoImpl();
 			conn.setAutoCommit(false);
-	//		System.out.println("In try statement"); //DEBUGGING
+			//		System.out.println("In try statement"); //DEBUGGING
 			String sqlStmt="{CALL SP_NEW_ACCOUNT(?,?,?)}";
 			CallableStatement cs = conn.prepareCall(sqlStmt);
 			cs.setInt(1,account.getAccountType().getAccountTypeID());
@@ -109,6 +113,12 @@ public class AccountDaoImpl implements AccountDao{
 
 	}
 
+	/*
+	 * deposit() takes in int accountID, float amount, and User user
+	 * returns nothing
+	 * @param int accountID, float amount, User user
+	 * @return none
+	 * */
 	@Override
 	public void deposit(int accountID, float amount, User user) {
 
@@ -135,6 +145,13 @@ public class AccountDaoImpl implements AccountDao{
 		}
 
 	}
+
+	/*
+	 * validateAccount() takes in a User user and int accountID and returns a boolean accountValid
+	 * @param User user, int accountID
+	 * @return boolean accountValid
+	 * 
+	 * */
 	public boolean validateAccount(User user, int accountID)
 	{
 		boolean accountValid=false;
@@ -172,6 +189,12 @@ public class AccountDaoImpl implements AccountDao{
 		return accountValid;
 	}
 
+	/*
+	 * withdraw() method takes in a User user, int accountID, float amount and returns nothing
+	 * throws OverdraftException if user attempts to withdraw more fund than they have in the account
+	 * @param User user, int accountID, float amount
+	 * @return none
+	 * */
 	@Override
 	public void withdrawal(User user,int accountID, float amount) throws OverdraftException  {
 		float currentBalance=0.0f;
@@ -214,13 +237,20 @@ public class AccountDaoImpl implements AccountDao{
 
 	}
 
-
+	/*Doesn't do anything.  Need to do this*/
 	@Override
 	public Account getAccountById() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/*
+	 * showMenu takes in a User user and returns nothing, but displays a list of menu options.
+	 * Displays user options based on whether user is user or super user
+	 * Calls validateSuperUser to determine whether user is regular user or super user.
+	 * @param User user
+	 * @return none
+	 * */
 	public void showMenu(User user)
 	{
 		UserDaoImpl udi = new UserDaoImpl();
@@ -247,10 +277,16 @@ public class AccountDaoImpl implements AccountDao{
 		}
 
 	}
-	/*
-	 * selectAction method takes in an integer and a user, and calls different methods based
+
+
+
+	/* selectAction method takes in an integer and a user, and calls different methods based
 	 * on user input.  Always calls the showMenu method unless the user opts to log out of the application.
+	 * Calls showBalance, showUserAccounts, withdraw(), deposit(), createAccount(), closeAccount(),
+	 *  createUser(), deleteUser() based on user input
 	 * Throws OverdraftException, ZeroBalanceException, and InputMismatchException.
+	 * @param int option, User user
+	 * @ return none
 	 * */
 	@Override
 	public void selectAction(int option, User user) {
@@ -292,17 +328,17 @@ public class AccountDaoImpl implements AccountDao{
 				amountStr =sc.next();
 				valid = validateAmount(amountStr);
 			}
-				amount = convertToFloat(amountStr);
-				try{
-					withdrawal(user,accountID,amount); }
-				catch(OverdraftException e)
-				{
-					e.printStackTrace();
-				}
-				finally{
-					showMenu(user);
-					break;
-				}	
+			amount = convertToFloat(amountStr);
+			try{
+				withdrawal(user,accountID,amount); }
+			catch(OverdraftException e)
+			{
+				e.printStackTrace();
+			}
+			finally{
+				showMenu(user);
+				break;
+			}	
 			case 4: System.out.println("Please enter the account ID to close");
 			accountID=sc.nextInt();
 			closeAccount(user,accountID);
@@ -349,7 +385,7 @@ public class AccountDaoImpl implements AccountDao{
 				User user2 = udi.getUserById(userID);
 				System.out.println("User attempting the deletion");
 				System.out.println(udi.getUserID(user));
-			 
+
 				udi.deleteUser(user, user2);
 				showMenu(user);
 				break;
@@ -382,7 +418,13 @@ public class AccountDaoImpl implements AccountDao{
 		}
 	}
 
-	
+	/*
+	 * showTransactions() takes in a User object and int accountID.
+	 * returns nothing, but displays transaction history for a user.
+	 * Uses prepared statement to get data from the database
+	 * @param User user, int accoundID
+	 * @return none
+	 * */
 	public void showTransactions(User user, int accountID)
 	{
 		try(Connection conn = ConnectionUtil.getConnectionFromFile(filename))
@@ -408,17 +450,25 @@ public class AccountDaoImpl implements AccountDao{
 					Float amountChanged = rs.getFloat("AMOUNT_CHANGED");
 					String description = rs.getString("TRANSACTION_DESC");
 					String wholeLine = description + " of " +fmt.format(amountChanged)+  " on " + dateStr;
-				
+
 					System.out.println(wholeLine);
 				}
 			}
 
 		} catch (SQLException | IOException e) {
-			//con.rollback();
 			e.printStackTrace();
 		}
 	}
-	
+	/*
+	 * showBalance() takes in a User object and and int accountID
+	 * returns nothing but displays a balance for that account.
+	 * calls validateAccount to make sure that the user is indeed the owner of that account.
+	 * Runs a PreparedStatement to query the database
+	 * Prints out balances for account specified by accountID
+	 * @param User user, int accountID
+	 * @return none
+	 * 
+	 * */
 	@Override
 	public void showBalance(User user, int accountID) {
 		try(Connection conn = ConnectionUtil.getConnectionFromFile(filename))
@@ -450,6 +500,14 @@ public class AccountDaoImpl implements AccountDao{
 
 	}
 
+	/*
+	 * closeAccount() takes in a User user and int accountID and returns nothing
+	 * calls validateAccount() to ensure that user in fact owns the account
+	 * ensures that account has a zero balance before closing
+	 * calls a CallableStatement for stored procedure SP_DELETE_ACCOUNT to delete account from DB.
+	 * @param User user, int accountID
+	 * @return none
+	 * */
 	@Override
 	public void closeAccount(User user, int accountID) {
 		try(Connection conn = ConnectionUtil.getConnectionFromFile(filename))
@@ -473,18 +531,20 @@ public class AccountDaoImpl implements AccountDao{
 					if(balance>0)
 					{
 						System.out.println("You may not delete an account that has a balance");
+						conn.rollback();
 					}
 					else
 					{
 						CallableStatement cs = conn.prepareCall("{CALL SP_DELETE_ACCOUNT(?)}");
 						cs.setInt(1, accountID);
 						cs.execute();
+						System.out.println("Account " + accountID + " for user " 
+								+ user.getFirstName() + " " + user.getLastName() + " has been closed");
 					}
 				}
 			}
 
 		} catch (SQLException | IOException e) {
-			//con.rollback();
 			e.printStackTrace();
 		}
 
@@ -492,6 +552,13 @@ public class AccountDaoImpl implements AccountDao{
 
 	}
 
+	/*
+	 * showUserAccounts() takes in a User user and displays all the accounts belonging to that user
+	 * Calls a prepared statement to show user accounts.
+	 * could throw SQLException or IOException
+	 * @param User user
+	 * @return none
+	 * */
 	public void showUserAccounts(User user)
 	{
 		try(Connection conn= ConnectionUtil.getConnectionFromFile(filename))
@@ -513,7 +580,6 @@ public class AccountDaoImpl implements AccountDao{
 				System.out.println(acctInfo);
 			}
 		} catch (SQLException | IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
