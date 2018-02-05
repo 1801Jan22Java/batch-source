@@ -5,7 +5,7 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-import com.revature.cc2.util.ConnectionUtil;
+import com.revature.util.ConnectionUtil;
 
 
 public class SuperUser extends User {

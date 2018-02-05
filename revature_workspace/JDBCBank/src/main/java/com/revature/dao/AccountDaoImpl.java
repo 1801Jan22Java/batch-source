@@ -6,6 +6,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.NumberFormat;
+import java.util.Date;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
@@ -17,7 +20,7 @@ import com.revature.beans.Account;
 import com.revature.beans.CheckingAccount;
 import com.revature.beans.SavingsAccount;
 import com.revature.beans.User;
-import com.revature.cc2.util.ConnectionUtil;
+import com.revature.util.ConnectionUtil;
 
 public class AccountDaoImpl implements AccountDao{
 	private static String filename = "connection.properties";
@@ -32,6 +35,40 @@ public class AccountDaoImpl implements AccountDao{
 		return null;
 	}
 
+	private boolean validateAmount(String input)
+	{
+		boolean valid =false;
+		try{
+
+			float result =Float.parseFloat(input);
+			if(result<0)
+			{
+				System.out.println("The number you entered was invalid");
+			}
+			else{ 
+				valid=true;}
+		}
+		catch(NumberFormatException e)
+		{
+			System.out.println("The number you entered was invalid");
+		}
+		finally{
+			return valid;
+		}
+	}
+
+	private float convertToFloat(String input)
+	{
+		float result = 0.0f;
+		if(validateAmount(input)){
+			result =Float.parseFloat(input);
+		}
+		else
+		{
+			result= 0.0f;
+		}
+		return result;
+	}
 	/*
 	 * addAccount adds a new account for a user.
 	 * */
@@ -178,24 +215,24 @@ public class AccountDaoImpl implements AccountDao{
 		if(udi.validateSuperUser(user)){
 			System.out.println("Please make a selection:\n 1: View balance "
 					+ "\n2: Make deposit\n3: Make withdrawal\n4:Close account."
-					+ "\n5: Create account.\n6: Delete user\n 7: Create user\n10: Log out");
+					+ "\n5: Create account.\n6: Delete user\n 7: Create user\n8: Show Transactions. \n10: Log out");
 		}
 		else
 		{
 			System.out.println("Please make a selection:\n 1: View balance "
 					+ "\n2: Make deposit\n3: Make withdrawal\n4:Close account."
-					+ "\n5: Create account.\n10: Log out");
+					+ "\n5: Create account.\n8: Show Transactions.\n10: Log out");
 		}
 		try{
-		int newOption = sc.nextInt();
-		selectAction(newOption, user);	
+			int newOption = sc.nextInt();
+			selectAction(newOption, user);	
 		}
 		catch(NumberFormatException e)
 		{
 			System.out.println("You must input a number value");
 			e.printStackTrace();
 		}
-		
+
 	}
 	/*
 	 * selectAction method takes in an integer and a user, and calls different methods based
@@ -207,93 +244,121 @@ public class AccountDaoImpl implements AccountDao{
 		UserDaoImpl udi = new UserDaoImpl(); 
 		Scanner sc = new Scanner(System.in);
 		try{
-		switch(option)
-		{
-		case 1: 
-			System.out.println("Please enter the account ID."); 
-			int accountID = sc.nextInt(); 
-			showBalance(user,accountID); 
+			switch(option)
+			{
+			case 1: 
+				System.out.println("Please enter the account ID."); 
+				int accountID = sc.nextInt(); 
+				showBalance(user,accountID); 
+				showMenu(user);
+				break;
+			case 2: 
+				System.out.println("Please enter the account ID."); 
+				accountID = sc.nextInt(); 
+				System.out.println("Please choose an amount to deposit.");
+				String amountStr =sc.next();
+				boolean valid = validateAmount(amountStr);
+				while(!valid)
+				{
+					System.out.println("You entered an invalid value.  Please try again");
+					amountStr =sc.next();
+					valid = validateAmount(amountStr);
+				}
+				float amount = convertToFloat(amountStr);
+				deposit(accountID,amount,user); 
+				showMenu(user);
+
+				break;
+			case 3 :System.out.println("Please enter the account ID."); 
+			accountID = sc.nextInt(); 
+			System.out.println("Please choose an amount to withdraw.");
+			amountStr =sc.next();
+			valid= validateAmount(amountStr);
+			while(!valid){
+				System.out.println("You entered an invalid value.  Please try again");
+				amountStr =sc.next();
+				valid = validateAmount(amountStr);
+			}
+				amount = convertToFloat(amountStr);
+				try{
+					withdrawal(user,accountID,amount); }
+				catch(OverdraftException e)
+				{
+					e.printStackTrace();
+				}
+				finally{
+					showMenu(user);
+					break;
+				}	
+			case 4: System.out.println("Please enter the account ID to close");
+			accountID=sc.nextInt();
+			closeAccount(user,accountID);
 			showMenu(user);
 			break;
-		case 2: System.out.println("Please enter the account ID."); 
-		accountID = sc.nextInt(); 
-		System.out.println("Please choose an amount to deposit.");
-		float amount = sc.nextFloat();
-		deposit(accountID,amount,user); 
-		showMenu(user);
-		break;
-		case 3 :System.out.println("Please enter the account ID."); 
-		accountID = sc.nextInt(); 
-		System.out.println("Please choose an amount to withdraw.");
-		amount = sc.nextFloat();
-		try{
-			withdrawal(user,accountID,amount); }
-		catch(OverdraftException e)
-		{
-			e.printStackTrace();
-		}
-		finally{
-			showMenu(user);
-		}
-		break;	
-		case 4: System.out.println("Please enter the account ID to close");
-		accountID=sc.nextInt();
-		closeAccount(user,accountID);
-		showMenu(user);
-		break;
-		case 5:System.out.println("Would you like a checking or a savings account?  "
-				+ "Enter 1 for a savings account.  Enter 2 for a checking account");
+			case 5:System.out.println("Would you like a checking or a savings account?  "
+					+ "Enter 1 for a savings account.  Enter 2 for a checking account");
 
-		int userID = udi.getUserID(user);
-		int choice =sc.nextInt();
-		System.out.println("Please enter your initial balance");
-		float initbal=sc.nextFloat();
-		Account account =null;
-		try{
-			if(initbal==0){ 
-				throw new ZeroBalanceException("Your initial balance must be greater than zero");
-			}
-			else{
-				switch(choice){
-				case 1: 
+			int userID = udi.getUserID(user);
+			int choice =sc.nextInt();
+			System.out.println("Please enter your initial balance");
+			float initbal=sc.nextFloat();
+			Account account =null;
+			try{
+				if(initbal==0){ 
+					throw new ZeroBalanceException("Your initial balance must be greater than zero");
+				}
+				else{
+					switch(choice){
+					case 1: 
 
 
-					account = new SavingsAccount(initbal,userID) ;
-					addAccount(account,user); break;
+						account = new SavingsAccount(initbal,userID) ;
+						addAccount(account,user); break;
 
 
 
-				case 2:
-					account = new CheckingAccount(initbal,userID) ;
-					addAccount(account,user); break;
+					case 2:
+						account = new CheckingAccount(initbal,userID) ;
+						addAccount(account,user); break;
+					}
 				}
 			}
-		}
-		catch(ZeroBalanceException e){
-			e.printStackTrace();
-		}
-		finally{
-			showMenu(user);
+			catch(ZeroBalanceException e){
+				e.printStackTrace();
+			}
+			finally{
+				showMenu(user);
+				break;
+			}
+			case 6: 
+				System.out.println("Please enter the user ID of the user you want to delete");
+				userID=sc.nextInt();
+				User user2 = udi.getUserById(userID);
+				System.out.println("User attempting the deletion");
+				System.out.println(udi.getUserID(user));
+			 
+				udi.deleteUser(user, user2);
+				showMenu(user);
+				break;
+			case 7:
+				udi.addUser(user);
+				showMenu(user); 
+				break;
+			case 8: 
+				System.out.println("Please enter your user ID");
+				userID=sc.nextInt();
+				user =udi.getUserById(userID);
+				System.out.println("Please enter your account ID");
+				accountID = sc.nextInt();
+				showTransactions(user,accountID);
+				showMenu(user);
+				break;
+			case 10: user=udi.logout();
 			break;
-		}
-		case 6: 
-			System.out.println("Please enter the user ID of the user you want to delete");
-			userID=sc.nextInt();
-			User user2 = udi.getUserById(userID);
-			System.out.println("User attempting the deletion");
-			System.out.println(udi.getUserID(user));
-			udi.deleteUser(user, user2);
-			showMenu(user);
-			break;
-		case 7:
-			udi.addUser(user);
-			showMenu(user); 
-			break;
-		case 10: user=udi.logout();break;
-		default: 
-			System.out.println("Invalid choice");
-			showMenu(user);
-		}
+			default: 
+				System.out.println("Invalid choice");
+				showMenu(user);
+			}
 		}
 		catch( InputMismatchException e)
 		{
@@ -302,6 +367,43 @@ public class AccountDaoImpl implements AccountDao{
 		}
 	}
 
+	
+	public void showTransactions(User user, int accountID)
+	{
+		try(Connection conn = ConnectionUtil.getConnectionFromFile(filename))
+		{
+			if(!validateAccount(user,accountID))
+			{
+				System.out.println("You must be logged in to see account information");
+			}
+			else{
+				conn.setAutoCommit(false);
+				System.out.println("In try statement for showing balance");
+				String sqlStmt="SELECT * FROM ACCOUNT_TRANSACTION WHERE ACCOUNT_ID=? ORDER BY DATE_OF_TRANSACTION DESC";
+				PreparedStatement ps = conn.prepareStatement(sqlStmt);
+				ps.setInt(1,accountID);
+				ps.execute();
+				ResultSet rs =ps.getResultSet();
+				while(rs.next())
+				{
+					DateFormat df = DateFormat.getDateInstance(DateFormat.LONG);
+					Date date =rs.getDate("DATE_OF_TRANSACTION");
+					String dateStr=df.format(date);
+					NumberFormat fmt = NumberFormat.getCurrencyInstance();
+					Float amountChanged = rs.getFloat("AMOUNT_CHANGED");
+					String description = rs.getString("TRANSACTION_DESC");
+					String wholeLine = description + " of " +fmt.format(amountChanged)+  " on " + dateStr;
+				
+					System.out.println(wholeLine);
+				}
+			}
+
+		} catch (SQLException | IOException e) {
+			//con.rollback();
+			e.printStackTrace();
+		}
+	}
+	
 	@Override
 	public void showBalance(User user, int accountID) {
 		try(Connection conn = ConnectionUtil.getConnectionFromFile(filename))

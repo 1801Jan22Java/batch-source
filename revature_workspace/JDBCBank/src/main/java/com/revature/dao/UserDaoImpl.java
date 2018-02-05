@@ -12,7 +12,7 @@ import java.util.Scanner;
 import com.revature.beans.Account;
 import com.revature.beans.SuperUser;
 import com.revature.beans.User;
-import com.revature.cc2.util.ConnectionUtil;
+import com.revature.util.ConnectionUtil;
 
 public class UserDaoImpl implements UserDao {
 	private static String filename = "connection.properties";
@@ -70,12 +70,12 @@ public class UserDaoImpl implements UserDao {
 	}
 	@Override
 	public void addUser(User user) {
-
+/*
 		if(!validateSuperUser(user))
 		{
 			System.out.println("You do not carry the membership");
 			System.out.println(user.getSuperUser());
-		}
+		}*/
 		try(Connection conn = ConnectionUtil.getConnectionFromFile(filename))
 		{
 			User user2= createUserObject();

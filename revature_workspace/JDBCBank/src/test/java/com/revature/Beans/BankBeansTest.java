@@ -7,7 +7,9 @@ import org.junit.Test;
 
 
 
+
 import com.revature.Exceptions.OverdraftException;
+import com.revature.Exceptions.ZeroBalanceException;
 import com.revature.beans.Account;
 import com.revature.beans.CheckingAccount;
 import com.revature.beans.SavingsAccount;
@@ -22,7 +24,7 @@ public class BankBeansTest {
 		String lname="Test";
 		String ssn = "000-00-0000";
 		String username ="omohama";
-		String pw = "password";
+		String pw = "p4ssw0rd";
 		User newUser = new User(username,pw,fname,lname,ssn);
 		//User user = udi.getUserById(1005);
 		assert(newUser instanceof User);
@@ -37,7 +39,7 @@ public class BankBeansTest {
 		assert(savingsAccount instanceof Account);	
 	}
 	
-	@Test(expected=com.revature.Exceptions.ZeroBalanceException.class) 
+	@Test(expected=ZeroBalanceException.class) 
 	public final void lessThanZeroThrowsException()
 	{
 		float initBal= -40.0f;
