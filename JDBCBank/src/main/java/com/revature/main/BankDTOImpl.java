@@ -46,7 +46,8 @@ public class BankDTOImpl implements BankDTO {
 		try {
 			user = userDao.signIn(userName, password);
 		}catch (WrongUsernameOrPasswordException e) {
-			wtr.println(e.getMessage());;
+			wtr.println(e.getMessage());
+			wtr.flush();
 		}
 		
 		
