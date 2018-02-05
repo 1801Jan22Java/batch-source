@@ -1,0 +1,377 @@
+
+-- Task – Select all records from the Employee table.
+
+SELECT * FROM EMPLOYEE;
+
+-- Task – Select all records from the Employee table where last name is King.
+
+SELECT * FROM EMPLOYEE 
+WHERE LASTNAME = 'King';
+
+-- Select all records from the Employee table where first name is Andrew and REPORTSTO is NULL.
+
+SELECT * FROM EMPLOYEE 
+WHERE FIRSTNAME = 'Andrew' OR REPORTSTO = null;
+
+--Task – Select all albums in Album table and sort result set in descending order by title.
+SELECT * FROM ALBUM 
+ORDER BY TITLE DESC;
+
+-- Task – Select first name from Customer and sort result set in ascending order by city
+SELECT FIRSTNAME FROM CUSTOMER
+ORDER BY CITY DESC;
+
+-- Task – Insert two new records into Genre table
+
+INSERT INTO GENRE (GENREID, NAME) 
+VALUES (26, 'Neo Soul');
+
+INSERT INTO GENRE (GENREID, NAME) 
+VALUES (27, 'Deep House');
+
+
+-- Task – Insert two new records into Employee table
+--SELECT * FROM EMPLOYEE;
+
+INSERT INTO EMPLOYEE (EMPLOYEEID , LASTNAME, FIRSTNAME, TITLE, REPORTSTO, BIRTHDATE,ADDRESS,CITY, STATE, COUNTRY, POSTALCODE, PHONE, FAX, EMAIL)
+VALUES (9, 'James', 'Eddy', 'General Manager',1 ,'12-DEC-63', '533 State Road', 'Calgary', 'AB', 'Canada', 'T5K 2N1', '+1 (780) 511-1234', '+1 (780) 532-4212', 'edjames123@chinookcorp.com ');
+
+INSERT INTO EMPLOYEE (EMPLOYEEID , LASTNAME, FIRSTNAME, TITLE, REPORTSTO, BIRTHDATE,ADDRESS, CITY, STATE, COUNTRY, POSTALCODE, PHONE, FAX, EMAIL)
+VALUES (10, 'Frank', 'Eddy', 'IT Staff', 6 ,'12-JAN-63', '22 Main Ave', 'Calgary', 'AB', 'Canada', 'T5K 2N1', '+1 (780) 511-1334', '+1 (780) 532-4332', 'frank123@chinookcorp.com ');
+
+-- Task – Insert two new records into Customer table
+--SELECT * FROM CUSTOMER;
+
+INSERT INTO CUSTOMER (CUSTOMERID , LASTNAME, FIRSTNAME, COMPANY, SUPPORTREPID, ADDRESS, CITY, STATE, COUNTRY, POSTALCODE, PHONE, FAX, EMAIL)
+VALUES (60, 'Jefferson', 'Fred', 'Pizza Hut', 4  ,'12 Red Road', 'Calgary', 'AB', 'Canada', 'T5K 2N1', '+1 (780) 555-1234', '+1 (780) 555-5555', 'fredjefferson@chinookcorp.com');
+
+INSERT INTO CUSTOMER (CUSTOMERID , LASTNAME, FIRSTNAME, COMPANY, SUPPORTREPID, ADDRESS, CITY, STATE, COUNTRY, POSTALCODE, PHONE, FAX, EMAIL)
+VALUES (61, 'Jonesy', 'Rick', 'Verizon', 4  ,'1 University Road', 'Calgary', 'AB', 'Canada', 'T5K 2N1', '+1 (780) 555-1234', '+1 (780) 532-4212', 'jonesey123@chinookcorp.com');
+
+-- 2.4: Task – Update Aaron Mitchell in Customer table to Robert Walter
+
+UPDATE CUSTOMER
+SET  FIRSTNAME = 'Robert'
+WHERE CUSTOMERID = 32; 
+
+UPDATE CUSTOMER
+SET  LASTNAME = 'Walter'
+WHERE CUSTOMERID = 32; 
+
+-- 2.4:Task – Update name of artist in the Artist table “Creedence Clearwater Revival” to “CCR” 
+--SELECT * FROM ARTIST;
+
+UPDATE ARTIST
+SET NAME = 'CCR'
+WHERE ARTISTID = 76; 
+
+-- 2.5: Task Select all invoices with a billing address like “T%” 
+--SELECT* FROM INVOICE;
+
+SELECT *
+FROM INVOICE
+WHERE BILLINGADDRESS LIKE 'T%'; 
+
+-- 2.6:Task – Select all invoices that have a total between 15 and 50
+-- Task – Select all employees hired between 1st of June 2003 and 1st of March 2004
+
+
+SELECT *
+FROM INVOICE
+WHERE TOTAL BETWEEN 15 AND 50; 
+
+SELECT *
+FROM EMPLOYEE
+WHERE HIREDATE BETWEEN '01-JUN-03' AND '03-MAR-04';
+
+-- 2.7: Task – Delete a record in Customer table where the name is Robert Walter (There may be constraints that
+-- rely on this, find out how to resolve them).
+ 
+ALTER TABLE INVOICE  
+DROP CONSTRAINT FK_INVOICECUSTOMERID; 
+
+ALTER TABLE INVOICELINE 
+DROP CONSTRAINT FK_INVOICELINEINVOICEID;
+
+DELETE FROM CUSTOMER WHERE FIRSTNAME= 'Robert' AND LASTNAME= 'Walter';
+
+ALTER TABLE INVOICE
+ADD CONSTRAINT FK_INVOICECUSTOMERID
+FOREIGN KEY (INVOICEID) REFERENCES INVOICE(INVOICEID) ON DELETE CASCADE; 
+
+ALTER TABLE INVOICELINE
+ADD CONSTRAINT FK_INVOICELINEINVOICEID
+FOREIGN KEY (INVOICEID) REFERENCES INVOICE(INVOICEID) ON DELETE CASCADE; 
+
+-- SELECT * FROM CUSTOMER;
+
+-- 3.1: Task – Create a function that returns the current time.
+
+CREATE OR REPLACE FUNCTION GET_TIME
+RETURN TIME IS
+BEGIN
+RETURN(CURRENT_TIMESTAMP);
+END;
+/
+
+SELECT GET_TIME FROM DUAL;
+
+-- 3.1: Task – create a function that returns the length of name in MEDIATYPE table
+
+CREATE OR REPLACE FUNCTION GET_NAME_LENGTH
+(NAME IN VARCHAR) 
+RETURN NUMBER IS LEN NUMBER;
+BEGIN
+RETURN LENGTH(NAME);
+END;
+/
+
+SELECT GET_NAME_LENGTH(NAME) FROM MEDIATYPE;
+
+-- 3:2 Task – Create a function that returns the average total of all invoices 
+
+CREATE OR REPLACE FUNCTION GET_TOTAL_AVERAGE
+RETURN FLOAT IS AVERAGE_TOTAL FLOAT;
+BEGIN
+SELECT AVG(TOTAL) INTO AVERAGE_TOTAL FROM INVOICE;
+RETURN(AVERAGE_TOTAL);
+END;
+/
+
+SELECT GET_TOTAL_AVERAGE FROM DUAL;
+
+-- 3.2: Task – Create a function that returns the most expensive track
+CREATE OR REPLACE FUNCTION GET_MAX_TRACK
+RETURN VARCHAR IS MAX_TRACK VARCHAR(100);
+BEGIN
+SELECT Track.NAME INTO MAX_TRACK FROM TRACK WHERE ROWNUM = 1 AND (UNITPRICE = (SELECT MAX(UNITPRICE) FROM TRACK)); 
+RETURN(MAX_TRACK);
+END;
+/
+
+SELECT GET_MAX_TRACK FROM DUAL;
+--SELECT * FROM TRACK;
+
+-- 3.3: Task – Create a function that returns the average price of invoiceline items in the invoiceline table
+
+CREATE OR REPLACE FUNCTION GET_INVOICELINE_AVERAGE
+RETURN FLOAT IS AVERAGE_TOTAL FLOAT;
+BEGIN
+SELECT AVG(UNITPRICE) INTO AVERAGE_TOTAL FROM INVOICELINE;
+RETURN(AVERAGE_TOTAL);
+END;
+/
+
+SELECT GET_INVOICELINE_AVERAGE FROM DUAL;
+
+-- 3.4 Task – Create a function that returns all employees who are born after 1968.
+CREATE OR REPLACE FUNCTION AFTER_1968
+RETURN SYS_REFCURSOR IS J SYS_REFCURSOR;
+BEGIN
+OPEN J FOR SELECT FIRSTNAME, LASTNAME FROM EMPLOYEE WHERE (BIRTHDATE > '01-JAN-68' );
+RETURN J;
+END;
+/
+
+SELECT AFTER_1968 FROM DUAL;
+
+ 
+-- 4.1: Task – Create a stored procedure that selects the first and last names of all the employees.
+
+SET SERVEROUTPUT ON;
+CREATE OR REPLACE PROCEDURE GET_EMPLOYEE_NAMES
+
+AS
+BEGIN 
+FOR  FULLNAME IN(
+SELECT FIRSTNAME, LASTNAME
+FROM EMPLOYEE)
+LOOP
+    DBMS_OUTPUT.PUT_LINE( FULLNAME.FIRSTNAME || ' ' || FULLNAME.LASTNAME );
+    END LOOP;
+    END GET_EMPLOYEE_NAMES;
+    /
+BEGIN
+GET_EMPLOYEE_NAMES;
+END;
+
+-- 4.2: Task – Create a stored procedure that updates the personal information of an employee.
+
+CREATE OR REPLACE PROCEDURE UPDATE_INFO ( EMPLOYEE_ID VARCHAR, EMPLOYEE_EMAIL VARCHAR, EMPLOYEE_PHONE_NUMBER VARCHAR)AS 
+   BEGIN 
+   UPDATE EMPLOYEE SET EMAIL = EMPLOYEE_EMAIL, PHONE = EMPLOYEE_PHONE_NUMBER
+   WHERE ( EMPLOYEEID = EMPLOYEE_ID);
+   END;
+   /
+   
+   BEGIN 
+   UPDATE_INFO(4, 'testemail@chinookcorp.com', '914-555-3333');
+   END;
+   
+
+-- Task – Create a stored procedure that returns the managers of an employee.
+CREATE OR REPLACE PROCEDURE EMPLOYEE_MANAGER
+( EMPLOYEE_ID IN EMPLOYEE.EMPLOYEEID%TYPE, J OUT SYS_REFCURSOR) AS
+BEGIN 
+OPEN J FOR SELECT FIRSTNAME, LASTNAME FROM EMPLOYEE WHERE EMPLOYEEID IN (SELECT REPORTSTO FROM EMPLOYEE WHERE EMPLOYEEID = EMPLOYEE_ID);
+END;
+/
+
+
+
+DECLARE J SYS_REFCURSOR; FIRSTNAME EMPLOYEE.FIRSTNAME%TYPE;
+LASTNAME EMPLOYEE.LASTNAME%TYPE;
+BEGIN
+EMPLOYEE_MANAGER(7, J);
+LOOP
+    FETCH J INTO FIRSTNAME, LASTNAME;
+EXIT WHEN J%NOTFOUND;
+DBMS_OUTPUT.PUT_LINE('Employee manager: ' || LASTNAME|| ', '|| FIRSTNAME);
+END LOOP;
+CLOSE J;
+END;
+
+
+-- 4.3: Task – Create a stored procedure that returns the name and company of a customer. 
+CREATE OR REPLACE PROCEDURE GET_COMPANY_NAME
+( CUSTOMER_ID IN CUSTOMER.CUSTOMERID%TYPE, COMPANY_NAME OUT CUSTOMER.COMPANY%TYPE,FIRST_NAME OUT CUSTOMER.FIRSTNAME%TYPE, LAST_NAME OUT CUSTOMER.LASTNAME%TYPE)
+AS
+BEGIN
+SELECT FIRSTNAME, LASTNAME, COMPANY INTO FIRST_NAME, LAST_NAME, COMPANY_NAME 
+FROM CUSTOMER WHERE CUSTOMERID = CUSTOMER_ID;
+END;
+/
+
+SELECT * FROM CUSTOMER;
+
+DECLARE
+COMPANY_NAME CUSTOMER.COMPANY&TYPE;
+FIRST_NAME CUSTOMER.FIRSTNAME%TYPE;
+LAST_NAME CUSTOMER.LASTNAME%TYPE;
+
+BEGIN
+COMPANY_NAME(1, COMPANY_NAME, FIRST_NAME, LAST_NAME);
+DBMS_OUTPUT.PUT_LINE('Customer: ' || FIRST_NAME|| ' ' || LAST_NAME);
+DBMS_OUTPUT.PUT_LINE('Customer company name: ' || COMPANY_NAME);
+END;
+
+-- 5.1: Task – Create a transaction that given a invoiceId will delete that invoice (There may be constraints that rely on this, find out how to resolve them).
+
+CREATE OR REPLACE PROCEDURE DELETE_INVOICE
+(INVOICE_ID NUMBER)
+IS
+BEGIN
+DELETE FROM INVOICELINE WHERE INVOICEID=INVOICE_ID;
+DELETE FROM INVOICE WHERE INVOICEID= INVOICE_ID;
+COMMIT;
+END;
+
+BEGIN
+DELETE_INVOICE(9);
+END;
+/
+--SELECT * FROM INVOICE;
+
+-- 5.`1:Task – Create a transaction nested within a stored procedure that inserts a new record in the Customer table
+
+CREATE OR REPLACE PROCEDURE CUSTOMER_TRANSACTION(
+CUSTOMER_ID CUSTOMER.CUSTOMERID%TYPE, 
+FIRST_NAME CUSTOMER.FIRSTNAME%TYPE,
+LAST_NAME CUSTOMER.LASTNAME%TYPE,
+PHONE_NUMBER CUSTOMER.PHONE%TYPE)
+AS
+BEGIN 
+SET TRANSACTION READ WRITE;
+INSERT INTO CUSTOMER (CUSTOMERID, FIRSTNAME, LASTNAME, PHONE)
+VALUES (CUSTOMER_ID, FIRST_NAME, LAST_NAME,PHONE_NUMBER);
+COMMIT;
+END;
+/
+
+BEGIN
+CUSTOMER_TRANSACTION(70,'Riley', 'McMike', '777-555-1234');
+END;
+/
+
+
+
+SELECT * FROM CUSTOMER;
+
+
+
+
+-- 6.1: Task - Create an after insert trigger on the employee table fired after a new record is inserted into the table.
+   CREATE OR REPLACE TRIGGER EMPLOYEE_TRIGGER 
+    AFTER INSERT ON EMPLOYEE
+    BEGIN
+      UPDATE EMPLOYEE
+      SET FIRSTNAME = 'Goofy'
+      WHERE REPORTSTO  = '1';
+    END;
+    
+    
+    
+INSERT INTO EMPLOYEE (EMPLOYEEID , LASTNAME, FIRSTNAME, TITLE, REPORTSTO, BIRTHDATE,ADDRESS,CITY, STATE, COUNTRY, POSTALCODE, PHONE, FAX, EMAIL)
+VALUES ('12', 'TEST', 'TEST', 'General Manager',1 ,'12-DEC-63', '533 State Road', 'Calgary', 'AB', 'Canada', 'T5K 2N1', '+1 (780) 511-1234', '+1 (780) 532-4212', 'edjames123@chinookcorp.com ');
+
+--SELECT * FROM EMPLOYEE;
+
+-- 6.1:Task – Create an after update trigger on the album table that fires after a row is inserted in the table
+   CREATE OR REPLACE TRIGGER ALBUM_TRIGGER 
+    AFTER INSERT ON ALBUM
+    BEGIN
+      UPDATE ALBUM
+      SET TITLE = 'BAD MUSIC'
+      WHERE ARTISTID  = '1';
+    END;
+    
+    INSERT INTO ALBUM (ALBUMID, TITLE, ARTISTID)
+    VALUES ('348', 'Good Song', '2'); 
+    
+    
+    --SELECT * FROM ALBUM;
+    -- 6.1: Task – Create an after delete trigger on the customer table that fires after a row is deleted from the table.
+    
+    CREATE OR REPLACE TRIGGER CUSTOMER_TRIGGER 
+    AFTER DELETE ON CUSTOMER
+    BEGIN
+      UPDATE CUSTOMER
+      SET COUNTRY = 'Madagascar'
+      WHERE CUSTOMERID  = '1';
+    END;
+    
+     DELETE FROM CUSTOMER WHERE FIRSTNAME = 'Daan' AND LASTNAME = 'Peeters';
+     --SELECT * FROM CUSTOMER;
+    
+    
+    
+
+
+-- 7.1: Task – Create an inner join that joins customers and orders and specifies the name of the customer and the invoiceId.
+
+SELECT CUSTOMER.FIRSTNAME , CUSTOMER.LASTNAME,  INVOICE.INVOICEID
+FROM INVOICE
+INNER JOIN CUSTOMER ON INVOICE.CUSTOMERID = CUSTOMER.CUSTOMERID; 
+
+-- 7.2 Task – Create an outer join that joins the customer and invoice table, 
+-- specifying the CustomerId, firstname, lastname, invoiceId, and total.
+
+SELECT CUSTOMER.CUSTOMERID, CUSTOMER.FIRSTNAME ,CUSTOMER.LASTNAME, INVOICE.INVOICEID, INVOICE.TOTAL
+FROM INVOICE
+FULL OUTER JOIN CUSTOMER ON INVOICE.CUSTOMERID = INVOICE.CUSTOMERID; 
+
+-- 7.3 - Task – Create a right join that joins album and artist specifying artist name and title.
+
+SELECT ARTIST.Name, ALBUM.TITLE
+FROM ARTIST
+RIGHT JOIN ALBUM ON ARTIST.ARTISTID = ALBUM.ARTISTID;
+
+-- 7.4: Task – Create a cross join that joins album and artist and sorts by artist name in ascending order.
+SELECT ARTIST.NAME, ALBUM.TITLE
+FROM ARTIST 
+CROSS JOIN ALBUM
+ORDER BY ARTIST.Name ASC;
+
+-- 7.5: Task – Perform a self-join on the employee table, joining on the reportsto column.
+SELECT * FROM EMPLOYEE A, EMPLOYEE A 
+WHERE A.REPORTSTO = B.EMPLOYEEID;
