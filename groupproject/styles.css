@@ -1,0 +1,34 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 120%;
+}
+
+#homepage{
+background-image: url("https://i2.wp.com/einfon.com/wp-content/uploads/2016/12/North-America.jpg?fit=1200%2C847");
+}
+
+.imgsize{
+    width: 500;
+    height: 400;
+}
+
+.menu:hover{
+    color: rgba(47, 120, 168, 0.459);
+}
+
+.menu{
+    background-color: #ece7f2;
+    text-align: center;
+}
+
+.borders{
+    visibility: visible;
+    border: 5px;
+    border-style: groove;
+    border-color: #fc67e3;
+}
+
+a {
+    color: #fc67e3;
+
+}
