@@ -27,7 +27,10 @@ public class UserDaoImpl implements UserDao {
 
 		try(Connection con = ConnectionUtil.getConnectionFromFile(filename)){
 
-			String sql = "SELECT * FROM USERS";
+			String sql = "SELECT USERS.*, CHECKINGS_BALANCE, SAVINGS_BALANCE "
+					+ "FROM USERS INNER JOIN SAVINGS ON USERS.USER_ID = SAVINGS.USER_ID "
+				    + "INNER JOIN CHECKINGS ON CHECKINGS.USER_ID = SAVINGS.USER_ID AND "
+				    + "CHECKINGS.USER_ID = SAVINGS.USER_ID";
 
 			pstmt = con.prepareStatement(sql);
 
@@ -77,6 +80,8 @@ public class UserDaoImpl implements UserDao {
 
 			pstmt.setString(1,username);
 			pstmt.setString(2,password);
+			
+			pstmt.executeUpdate();
 
 		} catch (SQLException e) {
 			e.printStackTrace();

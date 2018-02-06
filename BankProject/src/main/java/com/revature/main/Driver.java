@@ -141,7 +141,7 @@ public class Driver {
 
 			do {
 				try {
-					System.out.println("\n============================================================Admin Screen"
+					System.out.println("\n============================================================Transaction Screen"
 							+ "============================================================");
 					System.out.println("Current checkings balance: $" + loggedInUser.getCheckingsBalance());
 					System.out.println("Current savings balance: $" + loggedInUser.getSavingsBalance());

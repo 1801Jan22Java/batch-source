@@ -54,12 +54,14 @@ public class SavingsDaoImpl implements SavingsDao {
 		
 		try(Connection con = ConnectionUtil.getConnectionFromFile(filename)){
 
-			String sql = "UPDATE CHECKINGS SET SAVINGS_BALANCE = ? WHERE USER_ID = ?;";
+			String sql = "UPDATE SAVINGS SET SAVINGS_BALANCE = ? WHERE USER_ID = ?";
 
 			pstmt = con.prepareStatement(sql);
 			pstmt.setDouble(1, savingsBalance);
 			pstmt.setInt(2, userId);
 
+			pstmt.executeUpdate();
+			
 			con.close();
 
 		} catch (SQLException e) {

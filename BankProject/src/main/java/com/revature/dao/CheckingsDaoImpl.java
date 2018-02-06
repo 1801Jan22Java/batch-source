@@ -55,12 +55,14 @@ public class CheckingsDaoImpl implements CheckingsDao {
 
 		try(Connection con = ConnectionUtil.getConnectionFromFile(filename)){
 
-			String sql = "UPDATE CHECKINGS SET CHECKINGS_BALANCE = ? WHERE USER_ID = ?;";
+			String sql = "UPDATE CHECKINGS SET CHECKINGS_BALANCE = ? WHERE USER_ID = ?";
 
 			pstmt = con.prepareStatement(sql);
 			pstmt.setDouble(1, checkingsBalance);
 			pstmt.setInt(2, userId);
 
+			pstmt.executeUpdate();
+			
 			con.close();
 
 		} catch (SQLException e) {
