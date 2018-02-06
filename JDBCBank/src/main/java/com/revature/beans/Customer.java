@@ -6,8 +6,8 @@ public class Customer {
 	private String password;
 	private int userId;
 	private Account accountId;
-	private boolean isSuper; // default false
-	private boolean loginState; // default false
+	private int isSuper; // default false
+	private int loginState; // default false
 
 	public Customer() {
 		super();
@@ -19,8 +19,8 @@ public class Customer {
 		this.password = password;
 	}
 
-	public Customer(String username, String password, int userId, Account account, boolean isSuper,
-			boolean loginState) {
+	public Customer(String username, String password, int userId, Account account, int isSuper,
+			int loginState) {
 		super();
 		this.username = username;
 		this.password = password;
@@ -62,19 +62,19 @@ public class Customer {
 		this.accountId = account;
 	}
 
-	public boolean isSuper() {
+	public int isSuper() {
 		return isSuper;
 	}
 
-	public void setSuper(boolean isSuper) {
+	public void setSuper(int isSuper) {
 		this.isSuper = isSuper;
 	}
 
-	public boolean isLoginState() {
+	public int isLoginState() {
 		return loginState;
 	}
 
-	public void setLoginState(boolean loginState) {
+	public void setLoginState(int loginState) {
 		this.loginState = loginState;
 	}
 

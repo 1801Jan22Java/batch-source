@@ -1,8 +1,16 @@
 package com.revature.dao;
 
+import com.revature.beans.Customer;
+
 public interface CustomerDAO {
 	
-	public boolean getCustByUsername(String username, String password);
+	public Customer getCustByUsername(String username);
+	
+	public void createNewCustomer(String username, String password);
+
+	public int getSuperStatus(String username);
+
+	public String validatePassword(String password);
 
 //	public List<Customer> getCustomers();
 	

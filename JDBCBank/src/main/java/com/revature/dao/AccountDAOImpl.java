@@ -12,23 +12,17 @@ public class AccountDAOImpl implements AccountDAO {
 
 	@Override
 	public Account getByAccountId(int accountId) {
-
+		
+		PreparedStatement pstmt = null;
 		Account account = null;
-		double acctId=12;
 		try (Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
 			String sql = "SELECT * FROM BANKACCOUNT WHERE BANK_ACCOUNT_ID = ?";
-	
-			PreparedStatement pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1,accountId);
-			//pstmt.execute();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, accountId);
 			ResultSet rs = pstmt.executeQuery();
-			System.out.println(rs);
-			while (rs.next()) {
-				System.out.println("reached");
+			if(rs.next()){
 				double balance = rs.getDouble("BALANCE");
-				System.out.println(balance);
 				account = new Account(accountId, balance);
-				System.out.println(balance);
 			}
 			con.close();
 		} catch (SQLException e) {
@@ -38,4 +32,24 @@ public class AccountDAOImpl implements AccountDAO {
 		}
 		return account;
 	}
+
+	@Override
+	public void addAccount(double amount) {
+		System.out.println("Creating account");
+		
+		try (Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
+			String sql = "INSERT INTO BANKACCOUNT (BALANCE) VALUES (?)";
+			PreparedStatement pstmt = con.prepareStatement(sql);
+			pstmt.setDouble(1, amount);
+			pstmt.execute();
+			con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		System.out.println("Account created");		
+	}
+
+	
 }

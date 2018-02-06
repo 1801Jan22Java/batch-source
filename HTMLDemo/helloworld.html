@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title>Hello World</title>
+		<meta charset="utf-8">
+		<style type="text/css">
+			body {background-color: red}
+		</style>
+		<link rel="stylesheet" type="text/css" href="myCoolStyles.css">
+
+	</head>
+
+	<body style="background-color: #8eaa18">
+
+		<h1 class="classOne">this is a large heading</h1>
+		<h6>this is a small heading</h6>
+
+		<div>
+			<a href="https://en.wikipedia.org/wiki/Galapagos_penguin" class="classOne">Galapagos Penguins</a>
+			<img id="coolPenguin" src="https://a-z-animals.com/media/animals/images/original/penguin2.jpg" alt="penguin on the beach" width="" height="">
+
+			<p class="bobRoss" ="bobRoss">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+			<p class="bobRoss" ="bobRoss">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+		</div>
+		<br>
+		<br>
+		<div>
+			<form method="post" action="congrats.html"> <!-- specifies url to which form will be submitted -->
+				some text: <input type="text" name=""/>
+				<br>
+				<br>
+				a number: <input type="number" name=""/>
+				<br>
+				<br>
+				a date: <input type="date" name="">
+				<br>
+				<br>
+				a dropdown:<br>
+				 <select name="penguins">
+					<option value="emperor" selected>Emperor</option>
+					<option value="galapagos">Galapagos</option>
+					<option value="macaroni">Macaroni</option>
+				</select>
+				<br>
+				<br>
+				a text area: <textarea name="message" rows="4" cols="25">Your text here</textarea>
+				<br>
+				<br>
+				radio buttons: <br>
+				<input type="radio" name="penguinType" value="emperor" checked>Emperor</input><br>
+				<input type="radio" name="penguinType" value="galapagos" >Galapagos</input><br>
+				<input type="radio" name="penguinType" value="penguinType" >Macaroni</input>
+				<br>
+				<br>
+				<!-- from HTML 5: datalists and some other things -->
+				<input list="browsers"/>
+					<datalist id="browsers">
+						<option value="Firefox"></option>
+						<option value="Chrome"></option>
+						<option value="Tor"></option>
+					</datalist>
+				<input type="submit" value="submit"/>
+				<!-- submits the form data to the form handler. -->
+				<!-- if a for element does not have a name, it will not be submitted -->
+				
+
+			</form>
+		</div>
+		
+	</body>
+
+</html>

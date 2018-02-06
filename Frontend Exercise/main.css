@@ -1,0 +1,42 @@
+body {
+	background-image: url("https://images-na.ssl-images-amazon.com/images/I/41ztfkwnMFL.jpg");
+	background-size: cover;
+	background-repeat: no-repeat; 
+}
+
+h1 {
+	color: blue;
+	text-align: center;
+}
+
+ul {
+	text-align: center;
+	list-style: none;
+}
+
+.navigation {
+	font-family: sans-serif;
+	font-size: 24px;
+}
+
+.subject {
+	color: #4286f4;
+	font-size: 16px;
+}
+
+.authors {
+	color: #42f4eb;
+	font-family: "Comic Sans MS", cursive, sans-serif;
+	font-size: 30px;
+}
+a:hover {
+	text-shadow: 2px 2px 5px;
+}
+
+p {
+	text-align: center;
+}
+
+img {
+	height: 300px;
+}
