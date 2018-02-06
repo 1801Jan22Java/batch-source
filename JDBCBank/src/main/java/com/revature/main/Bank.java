@@ -79,6 +79,7 @@ public class Bank {
 			welcome();
 			break;
 		case "6":// quit
+			currentUser = null;
 			break;
 		default:
 			wtr.println("Unsupported Command\n");
@@ -101,6 +102,7 @@ public class Bank {
 		wtr.println("Enter id of user to update.");
 		wtr.flush();
 		userId = scan.nextInt();
+		scan.nextLine();
 		wtr.println("Enter new first name");
 		wtr.flush();
 		fName = scan.nextLine();

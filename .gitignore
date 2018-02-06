@@ -86,3 +86,6 @@ Servers/
 # my Exclusions
 Chinook_Oracle.sql
 connection.properties
+*.jpg
+*.gif
+*.mp4

@@ -211,7 +211,7 @@ public class UserDAOImpl implements UserDAO {
 	public void updateUser(User user) {
 		PreparedStatement stmnt = null;
 		try (Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
-			String sql = "UPDATE USER SET FIRST_NAME = ? AND LAST_NAME = ? AND USER_PASSWORD = ? "
+			String sql = "UPDATE BANK_USER SET FIRST_NAME = ?, LAST_NAME = ?, USER_PASSWORD = ? "
 					+ "WHERE USER_ID = ?";
 
 			stmnt = con.prepareStatement(sql);

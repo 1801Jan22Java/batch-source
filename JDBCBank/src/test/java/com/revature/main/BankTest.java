@@ -5,6 +5,7 @@ import static org.hamcrest.CoreMatchers.any;
 import static org.hamcrest.CoreMatchers.isA;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -93,7 +94,7 @@ public class BankTest {
 
 		User user = new User(1, "test", "user", "username", "password", false, null);
 		
-		//when(dtoMock.createUser(any(User.class)).thenReturn(user);
+		//doReturn(user).when(dtoMock).createUser(User.class);
 		when(dtoMock.checkUsername("username")).thenReturn(true);
 
 		Bank bank = new Bank(rdr, wtr, dtoMock);
