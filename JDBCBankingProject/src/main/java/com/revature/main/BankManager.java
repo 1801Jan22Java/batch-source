@@ -385,6 +385,7 @@ public class BankManager {
 				}
 			}
 			
+			accounts = adi.getUserAccounts(user.getuserId());
 
 			System.out.println();
 			System.out.println("Here are your accounts: ");
