@@ -10,6 +10,6 @@ public interface BalanceDao {
 	public List<Balance> getBalances();
 	public Balance getBalanceByID(int id);
 	public int addBalance(double initBalance);
-
+	public void updateBalance(int balId, double afterBalance);
 
 }

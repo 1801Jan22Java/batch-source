@@ -25,7 +25,6 @@ public class AccountDaoSQL implements AccountDao {
 				int type  = rs.getInt("TYPE");
 				int balId = rs.getInt("BALANCEID");
 				result = new Account(accId,bnkId,type,balId);
-				System.out.println("Found: " + result.toString());
 				resultAccounts.add(result);
 			}
 			
@@ -53,7 +52,6 @@ public class AccountDaoSQL implements AccountDao {
 				int type  = rs.getInt("TYPE");
 				int balId = rs.getInt("BALANCEID");
 				result = new Account(accId,bnkId,type,balId);
-				System.out.println("Found: " + result.toString());
 			}
 			
 		} catch (SQLException e) {
@@ -86,6 +84,10 @@ public class AccountDaoSQL implements AccountDao {
 			e.printStackTrace();
 		} 
 		return id;
+	}
+	
+	public boolean deleteAccount() {
+		return false;
 	}
 
 }

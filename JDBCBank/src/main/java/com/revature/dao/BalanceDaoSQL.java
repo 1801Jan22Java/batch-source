@@ -77,4 +77,23 @@ public class BalanceDaoSQL implements BalanceDao {
 		return id;
 	}
 
+	@Override
+	public void updateBalance(int balId, double afterBalance) {
+		
+		try(Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
+			String sql = "UPDATE BALANCE SET INITIALBALANCE = ? WHERE BALANCEID = ? ";
+			PreparedStatement ps = con.prepareCall(sql);
+			ps.setDouble(1, afterBalance);
+			ps.setInt(2, balId);
+			ps.executeQuery();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} 
+		
+	}
+
+	
 }

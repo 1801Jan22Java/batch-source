@@ -119,7 +119,9 @@ public class CheckLogin {
 					System.out.println("Username not found :(");
 					System.out.print("Would you like to continue? [Y/N]: ");
 					String in_ans = sc.next();
+					System.out.println(in_ans);
 					if (!(in_ans.toUpperCase()).equals("Y")) {
+						System.out.println("enter");
 						login_flag = false;
 					}
 				}
