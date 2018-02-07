@@ -255,15 +255,12 @@ public class BankDriver {
 					complete = 'Y';
 					break;
 				}
-
-				default: {
-					System.out.print("Would you like to exit (Y/N)?\t");
-					complete = scanner.next().trim().charAt(0);
-				}
+	
 				}
 				System.out.print("Would you like to exit (Y/N)?\t");
 				complete = scanner.next().trim().charAt(0);
 			} while ((complete != 'Y') && (complete != 'y'));
+			System.exit(0);
 		}
 
 		else {
