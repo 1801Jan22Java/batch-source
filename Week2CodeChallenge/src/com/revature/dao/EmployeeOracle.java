@@ -23,7 +23,6 @@ public class EmployeeOracle implements EmployeeDao {
 			cs.registerOutParameter(2, java.sql.Types.NUMERIC);
 			cs.registerOutParameter(3, java.sql.Types.INTEGER);
 			cs.execute();
-			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

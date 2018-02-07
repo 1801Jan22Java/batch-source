@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Testing</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="styles.css" />
+    <script src=""></script>
+    <style>
+        body {
+            background-color: gray;
+            font-family: Arial, Helvetica, sans-serif;
+            text-align: center;
+        }
+
+        a {
+            color: aliceblue;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 style="color:aqua">This will be blue.</h1>
+    <a href="https://www.google.com">Link to Google</a>
+    <p>This is supposed to be green from the external styling.</p>
+    <p id="idtest">This will have a different font style.</p>
+    <p id="idtest" class="classtest">This will also have a border.</p>
+    <img id="coolPenguin" src="https://i.pinimg.com/originals/54/dd/ca/54ddcab54b1d56eedea2fd071a73910f.jpg" alt="Tropo Penguin">
+    <p>Davy Jones' Locker crow's nest Admiral of the Black port bilge Plate Fleet splice the main brace Nelsons folly quarter
+        Sail ho. Galleon gally sutler furl crack Jennys tea cup overhaul Admiral of the Black grog blossom heave to Shiver
+        me timbers. Loaded to the gunwalls Brethren of the Coast line chantey port lee wherry mutiny Chain Shot warp. Six
+        pounders boom run a shot across the bow heave to Arr topmast Sink me shrouds barkadeer parley. Grapple hail-shot
+        hearties coffer to go on account run a shot across the bow gangway loaded to the gunwalls come about Arr. Barkadeer
+        holystone scurvy skysail weigh anchor Buccaneer scuttle Shiver me timbers black jack bounty. Dead men tell no tales
+        scourge of the seven seas topsail bilge water boatswain matey cackle fruit aye avast Chain Shot. Gold Road bucko
+        measured fer yer chains shrouds pinnace belaying pin Nelsons folly spanker Sail ho Pieces of Eight. Bounty weigh
+        anchor square-rigged sutler chase guns bilge water gangway run a rig lookout fire ship. </p>
+    <input type="text">
+    <form method="post" action="congrats.html">
+        text:
+        <input type="text">
+        <br>
+        <br> number:
+        <input type="text">
+        <br>
+        <br> dropdown:
+        <select name="penguins" id="">
+            <option value="emperor">Emperor</option>
+            <option value="galapagos">Galapagos</option>
+            <option value="macaroni">Macaroni</option>
+        </select>
+    </form>
+
+    a text area:
+    <textarea name="message" id="4" cols="25" rows="4">Your text here</textarea>
+    <br>
+    <br> radio buttons:
+
+    <input type="radio" name="penguinType" value="emperor" checked>Emperor</input>
+    <input type="radio" name="penguinType" value="galapagos">Galapagos</input>
+    <input type="radio" name="penguinType" value="macaroni">Macaroni</input>
+
+    <!-- from html 5 datalists and some other things -->
+    <input list="browsers">
+    <datalist id="browsers">
+        <option value="Firefox"></option>
+        <option value="Chrome"></option>
+        <option value="Opera"></option>
+    </datalist>
+    </input>
+    <!-- if an element doesn't have a name, it doesn't get submitted -->
+    <input type="submit" value="Submit">
+</body>
+
+</html>

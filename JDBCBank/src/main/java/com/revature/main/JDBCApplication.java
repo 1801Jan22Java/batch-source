@@ -231,7 +231,7 @@ public class JDBCApplication {
 					System.out.println("Input the user id to be deleted.");
 					int dUserId = Integer.parseInt(scanner.nextLine());
 					// Make sure self deletion doesn't happen
-					if (dUserId != bu.getUserId()) {
+					if (dUserId == bu.getUserId()) {
 						System.out.println("Self deletion is prohibited.");
 					} else {
 						usr.deleteUser(dUserId);

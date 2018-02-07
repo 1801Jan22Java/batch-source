@@ -1,0 +1,13 @@
+p {
+    color:green;
+}
+
+#idtest {
+    font-family:Courier New, Courier, monospace;
+}
+
+.classtest {
+    border:orange;
+    border-style:double;
+    
+}
