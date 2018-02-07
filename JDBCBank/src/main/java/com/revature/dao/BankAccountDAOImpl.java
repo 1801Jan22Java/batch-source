@@ -54,7 +54,7 @@ public class BankAccountDAOImpl implements BankAccountDAO{
 						throw new BalanceNotEmptyException("The account is not empty");
 					}
 				} catch (BalanceNotEmptyException e) {
-					e.printStackTrace();
+					System.out.println(e.getMessage());
 				}
 			}
 			conn.close();

@@ -118,8 +118,6 @@ public class UserActions {
     			sc.nextLine();
     			try {
     				bankAccount.withdrawMoneyFromAccount(accountID, money, user);
-    				// When a transaction is made, store it in the table
-    				System.out.println("Why am I getting executed");
         			transactionType.setType("withdraw");
         			newTransaction.addTransaction(user, bankAccount.viewBankAccountByID(accountID, user), transactionType, money);
     			} catch (OverdraftException e) {
