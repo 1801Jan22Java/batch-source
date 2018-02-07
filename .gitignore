@@ -1,3 +1,7 @@
+# Ignore connection/super properties
+connection.properties
+super.properties
+
 # Compiled class file
 *.class
 
