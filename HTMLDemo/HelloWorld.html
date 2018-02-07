@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Hello World</title>
+        <style>
+            body{background-color: red;}
+        </style>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="myCoolStyles.css">
+    </head>
+    <body style="background-color: #8eaa17">
+
+        <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand" href="#">Navbar</a>
+
+            <div class="navbar" id="navbarSupportedContent">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="HelloWorld.html">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="Congrats.html">Congrats <span class="sr-only">(current)</span></a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <br><br><br>
+
+        <h1 class="classOne">FUS RO DAH</h1>
+        <h6>This is a small heading</h6>
+
+        <div>
+            <p>The fusion dance<img src="http://yattatachi.com/wp-content/uploads/2016/05/Fusion-Dance.gif" alt="Fusion Ha!"></p>
+            <p class="bobRoss">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt.</p>
+            <p class="bobRoss"> Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui</p>
+        </div>
+
+        <div class="">
+            <form action="Congrats.html" method="post">
+                <label for="username">Username:</label><input type="text" name="username">
+                <label for="somenumber">Some number: </label><input type="number" name="somenumber">
+                <label for="leaguelocation">League of Legends</label>
+                <select name="locations">
+                    <option value="shurima">Shurima</option>
+                    <option value="demacia">Demacia</option>
+                    <option value="Noxus">Noxus</option>
+                </select>
+
+                <label for="message">Message</label><textarea name="message" rows="8" cols="80" placeholder="Enter Message Here"></textarea>
+                <input type="submit" value="submit a username">
+                <label for="radiobuttons">Some Radio Buttons</label>
+                <input type="radio" name="fusion" value="gogeta">Gogeta</input>
+                <input type="radio" name="fusion" value="gotenks">Gotenks</input>
+                <input type="radio" name="fusion" value="vegito">Vegito</input>
+
+
+                <input list="browsers"/>
+                <datalist id="browsers">
+                 <option value="Internet Explorer" selected>
+                 <option value="Firefox">
+                 <option value="Chrome">
+                 <option value="Opera">
+                 <option value="Safari">
+                </datalist>
+            </form>
+        </div>
+    </body>
+</html>

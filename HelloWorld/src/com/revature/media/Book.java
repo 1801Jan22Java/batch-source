@@ -1,0 +1,32 @@
+package com.revature.media;
+
+import java.io.Serializable;
+
+public class Book extends Media implements Serializable{
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7018386117255756323L;
+
+	public Book() {
+		super();
+	}
+
+	public Book(String creator, String title, int yearPublished, String genre) {
+		super(creator, title, yearPublished, genre);
+	}
+
+	private String publisher;
+	
+	public void read() {
+		System.out.println("reading " + this.title + " by " + this.getCreator());
+	}
+
+	@Override
+	public String toString() {
+		return "Book [publisher=" + publisher + ", creator=" + creator + ", title=" + title + ", yearPublished="
+				+ yearPublished + ", genre=" + genre + "]";
+	}
+	
+}

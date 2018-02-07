@@ -1,3 +1,7 @@
+# sensitive data
+*.properties
+
+
 # Compiled class file
 *.class
 

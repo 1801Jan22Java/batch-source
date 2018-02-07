@@ -1,0 +1,47 @@
+div{
+    background-color: #41b6c4;
+}
+
+.classOne{
+    color: #005824;
+    font-family: "courier new", cursive, sans-serif;
+    text-align: center;
+}
+
+h1{
+    font-size: 100px;
+}
+
+img{
+    height: 200px;
+    weight: 400px;
+    display: block;
+    border: 10px dotted red;
+    padding: 10px;
+}
+
+label, textarea{
+    display:block;
+}
+
+textarea{
+    resize:none;
+}
+
+.navbar{
+    position: absolute;
+    display: inline-block;
+    width:70%;
+    white-space: nowrap;
+}
+
+.nav-item, .nav-link{
+    display: inline-block;
+    white-space: nowrap;
+    width: 20%;
+}
+
+.navbar-nav {
+    display:inline;
+    width: 100%;
+}
