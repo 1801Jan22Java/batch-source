@@ -1,0 +1,6 @@
+2018-01-26 15:55:53 TRACE root:10 - trace message
+2018-01-26 15:55:53 DEBUG root:11 - debug message
+2018-01-26 15:55:53 INFO  root:12 - info message
+2018-01-26 15:55:53 WARN  root:13 - warn message
+2018-01-26 15:55:53 ERROR root:14 - error message
+2018-01-26 15:55:53 FATAL root:15 - fatal message

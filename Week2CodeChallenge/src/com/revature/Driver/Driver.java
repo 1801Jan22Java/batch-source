@@ -19,14 +19,17 @@ public class Driver {
 			con.setAutoCommit(false);
 			String sql = "{call SP_GIVE_RAISE(?,?,?)}";
 			CallableStatement cs = con.prepareCall(sql);
-			double new_avg = 0.0;
-			int valid = 0;
+			int valid = -1;
 			cs.setInt(1, 1003);
-			cs.setDouble(2,new_avg);
-			cs.setInt(3, valid);
-			
+			cs.registerOutParameter(2, java.sql.Types.DOUBLE);
+			cs.registerOutParameter(3, java.sql.Types.INTEGER);
 			cs.execute();
-			System.out.println("did the thing");
+			valid = cs.getInt(3);
+			if (valid == 0) {
+				System.out.println("Callable statement was successful");
+			}
+			
+			
 			
 		} catch (SQLException e) {
 			e.printStackTrace();

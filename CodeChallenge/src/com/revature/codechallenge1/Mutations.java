@@ -10,7 +10,7 @@ public class Mutations {
 	private static String begin;
 	private static String current = "";
 	private static String end;
-	private static MutationBank bank = new MutationBank();;
+	private static MutationBank bank = new MutationBank();
 
 	public Mutations() {
 	}

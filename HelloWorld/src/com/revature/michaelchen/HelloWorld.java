@@ -5,6 +5,9 @@ package com.revature.michaelchen;
  * base package for Java is java.lang
  */
 
+import com.revature.oop.*;
+
+import static com.revature.oop.Cat.*;
 
 public class HelloWorld {
 	
@@ -26,8 +29,20 @@ public class HelloWorld {
 		// void: return type, doesn't return anything
 		// String[] args: array of string parameter to pass to main()
 		
-		// sysout+crtl+space
+		// sysout+ctrl+space
 		System.out.println("Hello World!");
+		
+		// STS (and Eclipse) does incremental compiling every time a file is saved, it and any
+		// of its dependencies are compiled
+		
+		// compiling: converting .java source files into .class bytecode for execution by the JVM
+		
+		//access things from out OOP package
+		// could use fully qualified classname
+		com.revature.oop.Animal a = new com.revature.oop.Animal("Fred");
+		
+		// or can import the package and make it less wordy
+		Dog d = new Dog();
 		
 	}
 	

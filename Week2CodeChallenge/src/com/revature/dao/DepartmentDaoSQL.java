@@ -51,12 +51,12 @@ public class DepartmentDaoSQL implements DepartmentDao {
 				String depName = rs.getString("DEPARTMENT_NAME");
 				System.out.println(depName);
 			}
-			String sql2 = "SELECT AVG(SALARY) AS AV FROM EMPLOYEE WHERE DEPARTMENT_ID = ?";
+			String sql2 = "SELECT AVG(SALARY) FROM EMPLOYEE WHERE DEPARTMENT_ID = ?";
 			PreparedStatement ps2 = con.prepareStatement(sql2);
 			ps2.setInt(1, dep_id);
 			ResultSet rs2 = ps2.executeQuery();
 			while(rs2.next()) {
-				 double avg = rs.getDouble("AV");
+				 double avg = rs2.getDouble("AVG(SALARY)");
 				 System.out.println(avg);
 			}
 			
