@@ -97,6 +97,17 @@ homework.rotateLeft = function(array, n) {
 	var jdx;
 	var lastArr = array;
 	var currArr = [];
+
+	for (idx = 0; idx < n; idx++){
+		for (jdx = 1; jdx < lastArr.length; jdx++){
+			currArr[jdx - 1] = lastArr[jdx];
+		}
+		currArr[lastArr.length - 1] = lastArr[0];
+		lastArr = currArr;
+		currArr = [];
+	}
+
+	return lastArr;
 };
 
 /*
@@ -120,5 +131,41 @@ homework.rotateLeft = function(array, n) {
  Return false if not balanced
 */
 homework.balancedBrackets = function(bracketsString){
+
+	var stackPtr = 0;
+	var stack = [];
+	var idx = 0;
+	var currChar;
+
+	if (bracketsString.length % 2 != 0){
+		return false;
+	}
+
+	for (;idx < bracketsString.length; idx++) {
+		currChar = bracketsString.charAt(idx);
+		if (currChar == "(" || currChar == "[" || currChar == "{") {
+			stack[stackPtr] = currChar;
+			stackPtr++;
+		}
+		else if (currChar == ")"){
+			if (stack[stackPtr - 1] != "("){
+				return false;
+			}
+			stackPtr--;
+		}
+		else if (currChar == "]"){
+			if (stack[stackPtr - 1] != "["){
+				return false;
+			}
+			stackPtr--;
+		}
+		else if (currChar == "}"){
+			if (stack[stackPtr - 1] != "{"){
+				return false;
+			}
+			stackPtr--;
+		}
+	}
+	return true;
 
 };
