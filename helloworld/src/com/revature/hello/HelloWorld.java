@@ -5,6 +5,11 @@ package com.revature.hello;
  * base package for Java is java.lang
  */
 
+
+import com.revature.oop.*;
+//Has to go to specific class level
+import static com.revature.oop.Cat.*;
+
 public class HelloWorld {
 	/*
 	 * Naming convention:
@@ -27,6 +32,19 @@ public class HelloWorld {
 
 		//sysout+ctrl+space
 		System.out.println("Hello World!");
+
+
+		
+		//access things from our OOP package
+		//could use our fully qualified classname
+		com.revature.oop.Animal a = new com.revature.oop.Animal();
+		
+		//or we can use an import; refer to import line at top of code
+		Dog d = new Dog();
+		
+		//using static import
+		System.out.println(catinName);
+		
 		
 	}
 	
@@ -37,6 +55,10 @@ public class HelloWorld {
 	 *     .java (source code) to .class bytecode to be executed by the JVM
 	 */
 	
+	
+	
+
 }
+
 
 

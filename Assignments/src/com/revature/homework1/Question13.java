@@ -6,7 +6,8 @@ public class Question13 {
 		// By following the pattern
 		// 1
 		// 2 3
-		// 4 5 6, etc
+		// 4 5 6
+		// 7 8 9 10
 		// The 0 are going to be printed in the odd positions
 		
 		int counter = 0;
