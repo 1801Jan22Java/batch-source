@@ -60,7 +60,8 @@ public class BankUserDaoImpl implements BankUserDao {
 			pstmt = con.prepareStatement(sql);
 			ResultSet rs = pstmt.executeQuery();
 
-			lc.logInfo("******************************************");
+			lc.logInfo("\r\n");
+			lc.logInfo("*** Bank User List *** ");
 			while (rs.next()) {
 				int userId = rs.getInt("USERID");
 				String name = rs.getString("NAME");

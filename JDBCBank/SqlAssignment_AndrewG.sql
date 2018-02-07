@@ -285,6 +285,7 @@ END;
 
 --Task – Create a stored procedure that returns the managers of an employee.
 --(step1) create the function   employee id >> (return) manager id   
+SET SERVEROUTPUT ON; 
 CREATE OR REPLACE FUNCTION get_managerId_byEmpId (
     empId IN employee.employeeID%TYPE)
     RETURN NUMBER as managerId NUMBER;
@@ -296,8 +297,6 @@ BEGIN
     RETURN managerId;
 END;
 /
-
-
 --(step2) loop the function until all manager are stored
 CREATE OR REPLACE PROCEDURE get_allManagers_byEmpId(
     empId IN employee.employeeID%TYPE)    

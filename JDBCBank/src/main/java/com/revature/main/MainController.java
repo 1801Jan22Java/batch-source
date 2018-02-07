@@ -53,7 +53,7 @@ public class MainController {
 
 		// get current log-in user's info
 		userVo = userDao.getBankUserByName(userName);
-		lc.logDebug(userVo.toString());
+		//lc.logDebug(userVo.toString());
 
 		// while login, always comes back to the account information display.
 		boolean ifStayInlogin = true;
@@ -79,6 +79,7 @@ public class MainController {
 				}
 
 				lc.logInfo("******************************************");
+				lc.logInfo("---- Menu ");
 				if (userVo.lv == 0) {
 					lc.logInfo("---- press 201801 : manage users");
 				}
@@ -109,9 +110,6 @@ public class MainController {
 				case "5":
 					logOut(); // initialize the user info
 					ifStayInlogin = false;
-					break;
-				default:
-					lc.logInfo("wrong input. please try again.\r\n");
 					break;
 				}
 
@@ -144,6 +142,10 @@ public class MainController {
 		lc.logInfo("Bank Application is now turned off.");
 	}
 
+	
+	
+	
+	
 	// Bank App starts : get userName and password
 	public static String[] getInfo() {
 		System.out.println("Please enter user name");
@@ -174,9 +176,10 @@ public class MainController {
 	 */
 	public static void superUserMainMenu() {
 		// display all user account
-		List<BankUserVo> users = userDao.getBankUserWithTotalBalance();
+		userDao.getBankUserWithTotalBalance();
 		lc.logInfo("---- press 1 : create users");
 		lc.logInfo("---- press 2 : delete users");
+		lc.logInfo("---- press 3 : exit SUPERUSER menu");
 
 		boolean ifRightOption = false;
 		while (!ifRightOption) {
@@ -189,7 +192,27 @@ public class MainController {
 			lc.logInfo("please enter user password");
 			String newPassword = sc.nextLine();
 			userDao.createBankUser(newUsername, newPassword);
-			lc.logInfo("new user creation successfullly completed!!");
+			lc.logInfo("new user creation successfullly completed!! \r\n");
+			boolean stopCreate = false;
+			while(!stopCreate) {
+				lc.logInfo("would you like to create more user? -------- Y / N");
+				option = sc.nextLine().trim().toUpperCase();
+				
+				if(option.equals("Y")) {
+					lc.logInfo("please enter user name");
+					newUsername = sc.nextLine();
+					lc.logInfo("please enter user password");
+					newPassword = sc.nextLine();
+					userDao.createBankUser(newUsername, newPassword);
+					lc.logInfo("new user creation successfullly completed!! \r\n");
+					stopCreate = false;
+				} else if (option.equals("N")) {
+					stopCreate = true;
+				} else {
+					lc.logInfo("please enter Y or N only."); // restart!
+					stopCreate = false;
+				}
+			}
 			break;
 		case 2: // 2: delete user
 
@@ -216,63 +239,24 @@ public class MainController {
 						accountDao.deleteBankAccountByUser(userId);
 						userDao.deleteUser(userId);
 					}
+					stopDelete = false;
 				} else if (option.equals("N")) {
 					// don't delete.
 					stopDelete = true; // break while-loop and go back to the mainmenu.
 				} else {
 					lc.logInfo("please enter Y or N only."); // restart!
+					stopDelete = false;
 				}
 			}
+			break;
+		case 3: 
+			return;
 		}
+		
 
 	}
 
-	public static void deleteBankAccount(ArrayList<Integer> accountNos) {
-
-		// 1. check if the account exist.
-
-		boolean ifRight = false;
-		while (!ifRight) {
-			lc.logInfo("please enter the account ID you want to delete.");
-			ifRight = checkIfRightNumberFormat(sc.nextLine().trim()); // if it's number, returns true.
-
-			int accountId = parsedNumber; // get account
-			// check if the account exists.
-			if (!accountNos.contains(accountId)) {
-				lc.logInfo("The account no " + accountId + " doesn't exist. please choose from existing accounts.\r\n");
-				continue;
-			}
-			// check if the account has balance over 0.
-			BankAccountVo vo = accountDao.getBankAccountByAccountId(accountId);
-
-			if (vo.getBalance() > 0) {
-				// if it has more then 0 balance, can't be deleted.
-				lc.logInfo("The Account " + accountId + " has more than 0$. please withdraw all balance first.");
-				lc.logInfo("Deleting an account is canceled.");
-
-				lc.logInfo("would you like to delete more account? --- Y / N");
-				option = sc.nextLine().trim().toUpperCase();
-				if (option.equals("Y")) {
-					continue;
-				} else if (option.equals("N")) {
-					ifRight = true;
-				} else {
-					lc.logDebug("invalid option. Delete transaction is over.");
-					ifRight = true;
-				}
-			} else {
-				// if it's balance is 0, delete.
-				accountDao.deleteBankAccountByAccount(accountId);
-				lc.logInfo("Cancelation the account is completed./r/n");
-			}
-		}
-
-		ifRight = false;
-		while (ifRight) {
-			lc.logInfo("would you like to delete more account?");
-		}
-	}
-
+	 
 	/*
 	 * BasicUser' Menu
 	 */
@@ -282,108 +266,234 @@ public class MainController {
 		boolean ifRightOption = false;
 		int initDeposit = 0;
 		while (!ifRightOption) {
-			lc.logInfo("please enter the initial deposit amount(starts from 0)");
+			lc.logInfo("please enter the initial deposit amount(starts from 0)\r\n");
 			ifRightOption = checkIfRightNumberFormat(sc.nextLine().trim());
 			initDeposit = parsedNumber;
 		}
 		accountDao.createBankAccount(initDeposit, userVo.getId());
-		lc.logInfo("The new account is created./r/n");
+		lc.logInfo("The new account is created.\r\n");
 
 	}
 
 	// add deposit
 	public static void addDepositMoney(ArrayList<Integer> accountNos) {
 		int accountId = 0;
-		boolean ifRightOption = false;
-
-		while (!ifRightOption) {
-			lc.logInfo("please choose the account you want to add money.");
-			ifRightOption = checkIfRightNumberFormat(sc.nextLine().trim());
+		boolean ifExist = false;
+		int deposit = 0;
+		// first deposit 
+		while (!ifExist) {
+			lc.logInfo("please choose the account you want to add money.\r\n");
+			ifExist = checkIfRightNumberFormat(sc.nextLine().trim()); // if not number, returns false
 			accountId = parsedNumber;
+			if (ifExist && !accountNos.contains(accountId)) {
+				lc.logInfo("The account no " + accountId + " doesn't exist. please choose from existing accounts.\r\n");
+				ifExist = false;
+			}  
 		}
-
-		if (!accountNos.contains(accountId)) {
-			lc.logInfo("The account no " + accountId + " doesn't exist. please choose from existing accounts.\r\n");
-			return;
+		ifExist = false;
+		while (!ifExist) {
+			lc.logInfo("please enter the deposit amount (starts from 0)\r\n");
+			ifExist = checkIfRightNumberFormat(sc.nextLine().trim()); // if not number, returns false
+			deposit = parsedNumber;
+			if (ifExist) {
+				deposit = parsedNumber;
+				accountDao.transactMoney("+", deposit, accountId);
+				lc.logInfo("Making Deposit completed!!\r\n");
+				ifExist = true;
+			}  
 		}
-
-		lc.logInfo("please enter the deposit amount (starts from 0)");
-		ifRightOption = checkIfRightNumberFormat(sc.nextLine().trim());
-		int deposit = parsedNumber;
-		accountDao.transactMoney("+", deposit, accountId);
-
-		boolean stopAdd = true;
+		// sequencial deposit by option
+		boolean stopAdd = false;
 		while (!stopAdd) {
-
-			lc.logInfo("Would you like to add more money? ------- Y / N ");
+			lc.logInfo("Would you like to add more money? ------- Y / N  \r\n");
 			option = sc.nextLine();
 
 			if (option.toUpperCase().equals("Y")) {
-				lc.logInfo("please choose the account you want to add money.");
-				stopAdd = checkIfRightNumberFormat(sc.nextLine().trim());
-				accountId = parsedNumber;
-				if (!accountNos.contains(accountId)) {
-					lc.logInfo("wrong account information. please choose existing account.\r\n");
-					return;
+				ifExist = false;
+				while (!ifExist) {
+					lc.logInfo("please choose the account you want to add money.");
+					ifExist = checkIfRightNumberFormat(sc.nextLine().trim()); // if not number, returns false
+					accountId = parsedNumber;
+					if (ifExist && !accountNos.contains(accountId)) {
+						lc.logInfo("The account no " + accountId + " doesn't exist. please choose from existing accounts.\r\n");
+						ifExist = false;
+					}  
 				}
-
-				lc.logInfo("please enter the deposit amount (starts from 0)");
-				stopAdd = checkIfRightNumberFormat(sc.nextLine().trim());
-				deposit = parsedNumber;
-				accountDao.transactMoney("+", deposit, accountId);
+				ifExist = false;
+				while (!ifExist) {
+					lc.logInfo("please enter the deposit amount (starts from 0)\r\n");
+					ifExist = checkIfRightNumberFormat(sc.nextLine().trim()); // if not number, returns false
+					deposit = parsedNumber;
+					if (ifExist) {
+						deposit = parsedNumber;
+						accountDao.transactMoney("+", deposit, accountId);
+						lc.logInfo("Making Deposit completed!!\r\n");
+						ifExist = true;
+					}  
+				}
 
 			} else if (option.toUpperCase().equals("N")) {
 				stopAdd = true;
 			} else {
 				lc.logInfo("You press wrong button. please try again. \r\n");
+				stopAdd = false;
 			}
 		}
 		// transaction(); // Connection's auto commit control doesn't work.
 	}
-
+	
+	
 	// minus deposit
 	public static void minusDepositMoney(ArrayList<Integer> accountNos) {
-		lc.logInfo("please choose the account you want to withdraw money.");
-		int accountId = Integer.parseInt(sc.nextLine());
-
-		if (!accountNos.contains(accountId)) {
-			lc.logInfo("wrong account information. please choose existing account.\r\n");
-			return;
+		
+		
+		int accountId = 0;
+		int withdrawal = 0;
+		boolean ifExist = false;
+		while (!ifExist) {
+			lc.logInfo("please choose the account you want to withdraw money.\r\n");
+			ifExist = checkIfRightNumberFormat(sc.nextLine().trim()); // if not number, returns false
+			accountId = parsedNumber;
+			if (ifExist && !accountNos.contains(accountId)) {
+				lc.logInfo("The account no " + accountId + " doesn't exist. please choose from existing accounts.\r\n");
+				ifExist = false;
+			}  
 		}
-
-		lc.logInfo("please enter the withdrawal amount (starts from 0)");
-
-		int deposit = Integer.parseInt(sc.nextLine());
-		accountDao.transactMoney("-", deposit, accountId);
+		ifExist = false;
+		while (!ifExist) {
+			lc.logInfo("please enter the withdrawal amount (starts from 0)");
+			ifExist = checkIfRightNumberFormat(sc.nextLine().trim()); // if not number, returns false
+			withdrawal = parsedNumber;
+			if (ifExist && accountDao.getBankAccountByAccountId(accountId).getBalance() >= withdrawal) {
+				withdrawal = parsedNumber;
+				accountDao.transactMoney("-", withdrawal, accountId);
+				lc.logInfo("Withdrawal completed!!\r\n");
+				ifExist = true;
+			} else if (ifExist && accountDao.getBankAccountByAccountId(accountId).getBalance() < withdrawal) {
+				lc.logInfo("Not enough balance. please try again. \r\n");
+				ifExist = false;
+			}
+		}
 
 		boolean stopWithdraw = false;
 		while (!stopWithdraw) {
 			lc.logInfo("Would you like to withdraw more money? ------- Y / N ");
-			option = sc.nextLine();
+			option = sc.nextLine().toUpperCase().trim();
 
-			if (option.toUpperCase().equals("Y")) {
-				// withdraw more.
-				lc.logInfo("please choose the account you want to withdraw money.");
-				stopWithdraw = checkIfRightNumberFormat(sc.nextLine().trim());
-				accountId = parsedNumber;
-
-				lc.logInfo("please enter the withdrawal amount (starts from 0)");
-				stopWithdraw = checkIfRightNumberFormat(sc.nextLine().trim());
-				deposit = parsedNumber;
-
-				accountDao.transactMoney("-", deposit, accountId);
-
-			} else if (option.toUpperCase().equals("N")) {
-				// stop withdraw.
+			if (option.equals("Y")) {
+				ifExist = false;
+				while (!ifExist) {
+					lc.logInfo("please choose the account you want to withdraw money.\r\n");
+					ifExist = checkIfRightNumberFormat(sc.nextLine().trim()); // if not number, returns false
+					accountId = parsedNumber;
+					if (ifExist && !accountNos.contains(accountId)) {
+						lc.logInfo("The account no " + accountId + " doesn't exist. please choose from existing accounts.\r\n");
+						ifExist = false;
+					}  
+				}
+				ifExist = false;
+				while (!ifExist) {
+					lc.logInfo("please enter the withdrawal amount (starts from 0)\r\n");
+					ifExist = checkIfRightNumberFormat(sc.nextLine().trim()); // if not number, returns false
+					withdrawal = parsedNumber;
+					if (ifExist && accountDao.getBankAccountByAccountId(accountId).getBalance() >= withdrawal) {
+						withdrawal = parsedNumber;
+						accountDao.transactMoney("-", withdrawal, accountId);
+						lc.logInfo("Withdrawal completed!!\r\n");
+						ifExist = true;
+					} else if (ifExist && accountDao.getBankAccountByAccountId(accountId).getBalance() < withdrawal) {
+						lc.logInfo("Not enough balance. please try again. \r\n");
+						ifExist = false;
+					}
+				}
+				stopWithdraw = false;
+			} else if (option.equals("N")) {
 				stopWithdraw = true;
 			} else {
-				lc.logInfo("You press wrong button. please try again.\r\n");
+				lc.logInfo("You press wrong button. please try again. \r\n");
+				stopWithdraw = false;
 			}
 		}
 
 		// transaction();
 	}
 
+	
+	public static void deleteBankAccount(ArrayList<Integer> accountNos) {
+
+		// 1. check if the account exist.
+		int accountId = 0;
+		boolean ifExist = false;
+		
+		// first delete.
+		while (!ifExist) {
+			lc.logInfo("please choose the account you want to delete.  ");
+			ifExist = checkIfRightNumberFormat(sc.nextLine().trim()); // if not number, returns false
+			accountId = parsedNumber;
+			
+			if (ifExist && !accountNos.contains(accountId)) {
+				lc.logInfo("The account no " + accountId + " doesn't exist. please choose from existing accounts.\r\n");
+				ifExist = false;
+			}   
+		}
+				 
+		BankAccountVo vo1 = accountDao.getBankAccountByAccountId(accountId);
+		if (vo1.getBalance() > 0) {
+			// if it has more then 0 balance, can't be deleted.
+			lc.logInfo("The Account " + accountId + " has more than 0$. please withdraw all balance first.\r\n");
+			lc.logInfo("Deleting an account is canceled.\r\n");
+			return;
+		} else {
+			// if it's balance is 0, delete.
+			accountDao.deleteBankAccountByAccount(accountId);
+			lc.logInfo("Deleting the account "+ accountId + " is completed.\r\n");
+			ifExist = true;
+		}
+		
+		
+		boolean stopDelete = false;
+		while (!stopDelete) {
+			lc.logInfo("would you like to delete more account? --- Y / N");
+			option = sc.nextLine().trim().toUpperCase();
+			
+			if (option.equals("Y")) {
+				
+				// first delete.
+				while (!ifExist) {
+					lc.logInfo("please choose the account you want to delete. if you want exit, please press N.");
+					ifExist = checkIfRightNumberFormat(sc.nextLine().trim()); // if not number, returns false
+					accountId = parsedNumber;
+					
+					if (ifExist && !accountNos.contains(accountId)) {
+						lc.logInfo("The account no " + accountId + " doesn't exist. please choose from existing accounts.\r\n");
+						ifExist = false;
+					}   
+				}
+				
+				BankAccountVo vo2 = accountDao.getBankAccountByAccountId(accountId);
+				if (vo2.getBalance() > 0) {
+					// if it has more then 0 balance, can't be deleted.
+					lc.logInfo("The Account " + accountId + " has more than 0$. please withdraw all balance first.\r\n");
+					lc.logInfo("Deleting an account is canceled.\r\n");
+					return;
+				} else {
+					// if it's balance is 0, delete.
+					accountDao.deleteBankAccountByAccount(accountId);
+					lc.logInfo("Deleting the account "+ accountId + " is completed./r/n");
+					ifExist = true;
+				}
+				stopDelete = false;
+			} else if (option.equals("N")){
+				stopDelete = true;
+			} else {
+				lc.logInfo("You press wrong button. please try again.\r\n");
+				stopDelete = false;
+			}
+		}
+		 
+	}
+
+	
 	public static List<BankUserVo> getBankUsers() {
 		List<BankUserVo> userVos = userDao.getBankUser();
 		for (BankUserVo vo : userVos) {
@@ -405,7 +515,7 @@ public class MainController {
 			parsedNumber = Integer.parseInt(actuallyNumber);
 			ifRight = true;
 		} catch (NumberFormatException e) {
-			lc.logInfo("please enter only account number. Anything but number is not allowed.\r");
+			lc.logInfo("please enter only number. Anything but number is not allowed.\r");
 		}
 		return ifRight;
 	}
