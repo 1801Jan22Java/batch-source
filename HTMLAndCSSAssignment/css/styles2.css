@@ -1,0 +1,98 @@
+body{
+    margin: 0px;
+    padding: 0px;
+    background-color: #f3f3f3;
+}
+
+nav{
+    margin: 20px 20px;
+    text-align: center;
+}
+
+ul li{
+    display: inline-block;
+    padding: 5%;
+    margin:20px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+ul li{
+    display: inline-block;
+}
+
+a:link{
+    text-decoration: none;
+    color: black;
+}
+.title
+{
+    font-size: 10vw;
+    text-align: center;
+    margin: 0 1em;
+    padding-top: 20px;
+    padding-bottom: 40px;
+}
+h2{
+    font-size: 3em;
+    text-align: center;
+}
+
+h3{
+    font-size: 2em;
+    text-align: center;
+}
+
+p{
+    text-align: center;
+}
+
+section{
+    text-align: center;
+}
+img{
+    width: 100%;
+    height: auto;
+}
+
+backgroundsnow{
+    opacity: .15;
+    position: relative;
+    width: 100%;
+    height: auto;
+}
+
+.what-we-do{
+    position: absolute;
+    background-color: black;
+    padding: 20px 20px 0px 20px;
+    color: white;
+    text-transform: uppercase;
+}
+
+.whouseris{
+    position: absolute;
+    font-size: 2vw;
+    padding: 20px 20px 0px 20px;
+    color: white;
+    text-transform: uppercase;
+    text-align: center;
+    margin-left: 27%;
+    margin-right: 50%;
+    width: 40%;
+    z-index: 1;
+}
+
+.img2{
+    height: 100vh;
+    position:relative;
+    opacity:0.80;
+    background-position:center;
+    background-size:cover;
+    background-repeat:no-repeat;
+    background-attachment:fixed;
+}
+
+.img2{
+    background-image: url(../images/pexels-photo-257360.jpeg);
+}

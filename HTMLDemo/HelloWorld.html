@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+        <title>Hello World</title>
+        <meta charset="UTF-8">
+        <style>
+            body {background-color:red}
+        </style>
+        <link rel="stylesheet" href="myCoolStyles.css"/>
+    </head>
+
+    <body style="background-color:orange">
+        <h1 class="classOne">This is a large heading.</h1>
+        <h6>This is a small heading.</h6>
+
+        <div>
+            <a href="https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=15&cad=rja&uact=8&ved=0ahUKEwiNgY7f_pHZAhXHtVkKHXUsAXoQFgh2MA4&url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FGalapagos_penguin&usg=AOvVaw0d-O-ZGI-Vj6Ku39b80W7Q">Galapagos Penguins</a>
+            <img id="coolPenguin" src="https://s-media-cache-ak0.pinimg.com/originals/54/dd/ca/54ddcab54b1d56eedea2fd071a73910f.jpg" alt="Penguin on the beach" width=200px height=150px></https:>
+        
+            <p class="bobRoss">Paint anything you want on the canvas. Create your own world. Making all those little fluffies that live in the clouds. You better get your coat out, this is going to be a cold painting.</p>
+            
+            <p class="bobRoss">I get carried away with this brush cleaning. So often we avoid running water, and running water is a lot of fun. We don't want to set these clouds on fire. That's a crooked tree. We'll send him to Washington. Didn't you know you had that much power? You can move mountains. You can do anything. Let's give him a friend too. Everybody needs a friend.</p>
+                    
+            <p class="bobRoss">If it's not what you want - stop and change it. Don't just keep going and expect it will get better. We'll have a super time. We artists are a different breed of people. We're a happy bunch.</p>
+        </div>
+        <br>
+        <br>
+        <div>
+            <form method="post" action="Congrats.html"> <!--Specifies URL to which form will be submitted-->
+                Some text: <input type="text"/>
+                <br>
+                <br>
+                More text: <input type="number"/>
+                <br>
+                <br>
+                Date: <input type="date"/>
+                <br>
+                <br>
+                A dropdown: <br>
+                    <select name = "Penguins">
+                    <option value="emperor" selected>Emperor</option>
+                    <option value="galapagos">Galapagos</option>
+                    <option value="Macaroni">Macaroni</option>
+                </select>
+                <br>
+                <br>
+                A text area: <br>
+                    <textarea name="message" rows="4" cols="25">Your text here</textarea>
+                <br>
+                <br>
+                A radio button: <br>
+                <input type="radio" name="penguinType" value="emperor" checked>Emperor</input><br>
+                <input type="radio" name="penguinType" value="galapagos">Galapagos</input><br>
+                <input type="radio" name="penguinType" value="macaroni">Macaroni</input>
+                <br>
+                <br>
+                <!-- From HTML 5: datalists, unique key generation from foreign submissions and some other things -->
+                <input list="browsers">
+                    <datalist id="browsers">
+                        <option value="firefox">Firefox</option>
+                        <option value="chrome">Chrome</option>
+                        <option value="tor">Tor</option>
+
+                </datalist>
+
+                <input type="submit" value="Submit"/>
+                <!--Submits the form data to the form handler. -->
+                <!--If a form element doesn't have a name, it will not be submitted-->
+                <br>
+                <br>
+            </form>
+        </div>
+    </body>
+
+
+</html>
