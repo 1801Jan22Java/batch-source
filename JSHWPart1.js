@@ -73,25 +73,25 @@ homework.factorial = function (n) {
 
 */
 homework.rotateLeft = function (array, n) {
-    var shift = n%array.length;
-    var newArr=[];
+    var shift = n % array.length;
+    var newArr = [];
 
     // Dive into the negatives
-    for(var i = 0; i<array.length; i++){
-        array[i-shift]=array[i];
+    for (var i = 0; i < array.length; i++) {
+        array[i - shift] = array[i];
     }
-    var index = array.length-shift;
+    var index = array.length - shift;
     var negIndex = -shift;
 
     // Reassign from the negatives
-    for(;index<array.length; index++){
-        array[index]=array[negIndex];
+    for (; index < array.length; index++) {
+        array[index] = array[negIndex];
         negIndex++;
     }
 
     // Create new array from rotated mutated array
-    for(var c=0; c<array.length; c++){
-        newArr[c]=array[c];
+    for (var c = 0; c < array.length; c++) {
+        newArr[c] = array[c];
     }
 
     return newArr;
@@ -118,5 +118,29 @@ homework.rotateLeft = function (array, n) {
  Return false if not balanced
 */
 homework.balancedBrackets = function (bracketsString) {
+    var stack = [];
+    var temp;
 
+    for (var i = 0; i < bracketsString.length; i++) {
+        var bracket = bracketsString[i];
+        if (bracket == "(" || bracket == "{" || bracket == "[") {
+            stack.push(bracket);
+        } else if (bracket === ")") {
+            temp = stack.pop();
+            if (temp !== "(") {
+                return false;
+            }
+        } else if (bracket === "}") {
+            temp = stack.pop();
+            if (temp !== "{") {
+                return false;
+            }
+        } else if (bracket === "]") {
+            temp = stack.pop();
+            if (temp !== "[") {
+                return false;
+            }
+        }
+    }
+    return true;
 };
