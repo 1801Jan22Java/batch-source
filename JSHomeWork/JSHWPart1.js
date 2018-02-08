@@ -47,8 +47,8 @@ homework.sort = function(array) {
 				array[j+1] = temp;
 				nextPass = true;
 			}
-		}
-    }
+		} // end for
+    } // end for
     return array;
 };
 
@@ -145,7 +145,7 @@ homework.balancedBrackets = function(bracketsString){
 		}
 		else {
 			console.log('One of your char is not a bracket');
-			count = 1; //I'm trying to for to return FALSE when char is entered, JS won't!!!
+			count = 1; //I'm trying to force to return FALSE when char is entered, JS won't!!!
 			return false;
     	}
     
