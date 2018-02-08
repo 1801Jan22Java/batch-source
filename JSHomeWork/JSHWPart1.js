@@ -59,8 +59,13 @@ homework.sort = function(array) {
  f(1) = 1
  f(3) = 6
 */
-homework.factorial = function(n){
-
+homework.factorial = function(n) {
+	if(n === 0) {
+		return 1; 
+	} 
+	else {
+		return n * this.factorial(n - 1); 
+	}
 };
 
 /*
