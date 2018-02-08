@@ -5,8 +5,22 @@
  f(1) = 1
  f(10) = 55
 */
-homework.fibonacci = function(n){
+homework.fibonacci = function (n) {
+    var count = parseInt(n);
+    var temp = 0;
+    var prev = 0;
+    var next = 0;
+    while (count >= 0) {
+        temp = next;
+        next += prev;
+        prev = temp;
 
+        if (prev === 0 && next === 0) {
+            next++;
+        }
+        count--;
+    }
+    return prev;
 };
 
 /*
@@ -16,8 +30,18 @@ homework.fibonacci = function(n){
 
  Don't use the Array sort() method... that would be lame.
 */
-homework.sort = function(array) {
+homework.sort = function (array) {
 
+    for (var i = 0; i < array.length; i++) {
+        for (var j = 0; j < i; j++) {
+            if (array[i] < array[j]) {
+                var temp = array[j];
+                array[j] = array[i];
+                array[i] = temp;
+            }
+        }
+    }
+    return array;
 };
 
 /*
@@ -27,8 +51,15 @@ homework.sort = function(array) {
  f(1) = 1
  f(3) = 6
 */
-homework.factorial = function(n){
-
+homework.factorial = function (n) {
+    if (n === 0) {
+        return 1;
+    }
+    var output = 1;
+    for (var i = 1; i <= n; i++) {
+        output *= i;
+    }
+    return output;
 };
 
 /*
@@ -41,8 +72,29 @@ homework.factorial = function(n){
  f([1,2,3,4,5], 3) = [4,5,1,2,3]
 
 */
-homework.rotateLeft = function(array, n) {
+homework.rotateLeft = function (array, n) {
+    var shift = n%array.length;
+    var newArr=[];
 
+    // Dive into the negatives
+    for(var i = 0; i<array.length; i++){
+        array[i-shift]=array[i];
+    }
+    var index = array.length-shift;
+    var negIndex = -shift;
+
+    // Reassign from the negatives
+    for(;index<array.length; index++){
+        array[index]=array[negIndex];
+        negIndex++;
+    }
+
+    // Create new array from rotated mutated array
+    for(var c=0; c<array.length; c++){
+        newArr[c]=array[c];
+    }
+
+    return newArr;
 };
 
 /*
@@ -65,6 +117,6 @@ homework.rotateLeft = function(array, n) {
  Return true if balanced
  Return false if not balanced
 */
-homework.balancedBrackets = function(bracketsString){
+homework.balancedBrackets = function (bracketsString) {
 
 };
