@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -93,7 +94,12 @@ public class UserDaoImpl implements UserDao {
 			conn.commit();
 			System.out.println("User added");
 
-		} catch (SQLException | IOException e) {
+		}
+		catch(SQLIntegrityConstraintViolationException e)
+		{
+			System.out.println("A user with that username already exists!");
+		}
+		catch (SQLException | IOException e) {
 			//con.rollback();
 			e.printStackTrace();
 		}
@@ -118,10 +124,14 @@ public class UserDaoImpl implements UserDao {
 			cs.execute();
 			conn.commit();
 
+		}catch(SQLIntegrityConstraintViolationException e)
+		{
+			System.out.println("A user with that username already exists!");
 		} catch (SQLException | IOException e) {
 			//con.rollback();
 			e.printStackTrace();
 		}
+		
 
 	}
 
@@ -183,7 +193,12 @@ public class UserDaoImpl implements UserDao {
 			conn.commit();
 			System.out.println("User added");
 
-		} catch (SQLException | IOException e) {
+		} 
+		catch(SQLIntegrityConstraintViolationException e)
+		{
+			System.out.println("A user with that username already exists!");
+		}
+		catch (SQLException | IOException e) {
 			//con.rollback();
 			e.printStackTrace();
 		}
@@ -261,12 +276,12 @@ public class UserDaoImpl implements UserDao {
 			}
 			catch(SQLException e)
 			{
-				e.printStackTrace();
+				//e.printStackTrace();
 			}
 
 
 		}
-		catch(SQLException | IOException e){e.printStackTrace();
+		catch(SQLException | IOException e){//e.printStackTrace();
 		}
 		finally{return user;}
 	}

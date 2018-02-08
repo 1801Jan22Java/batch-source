@@ -37,6 +37,7 @@ public class BankDriver {
 		//try here for connection
 		try {
 			Connection conn = cu.getConnectionFromFile(filename);
+			AccountDaoImpl adi =new AccountDaoImpl();
 			UserDaoImpl udi = new UserDaoImpl();
 			Scanner sc = new Scanner(System.in);
 			
@@ -57,7 +58,8 @@ public class BankDriver {
 			}
 				if(response.equals("1"))
 				{
-					udi.createUser();
+					User user =udi.createUser();
+					adi.showMenu(user);
 				}
 				else if(response.equals("2")){
 					System.out.println("Enter your username");
@@ -74,7 +76,7 @@ public class BankDriver {
 						password =sc.nextLine();
 						validated=udi. validateCredentials(username, password);
 					}
-					AccountDaoImpl adi =new AccountDaoImpl();
+					 
 					User user = udi.getUserByCredentials(username, password);
 					adi.showMenu(user);
 				}

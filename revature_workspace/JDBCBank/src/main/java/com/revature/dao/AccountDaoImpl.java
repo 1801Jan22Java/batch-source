@@ -226,10 +226,9 @@ public class AccountDaoImpl implements AccountDao{
 				CallableStatement cs = conn.prepareCall(sqlStmt);
 				cs.setInt(1,accountID);
 				cs.setFloat(2,amount);
-
 				cs.execute();
-				conn.commit();
 				showBalance(user,accountID);
+				conn.commit();
 			}
 
 		} catch (SQLException | IOException e) {
@@ -259,13 +258,13 @@ public class AccountDaoImpl implements AccountDao{
 		Scanner sc = new Scanner(System.in);
 		if(udi.validateSuperUser(user)){
 			System.out.println("Please make a selection:\n1: View balance "
-					+ "\n2: Make deposit\n3: Make withdrawal\n4:Close account."
+					+ "\n2: Make deposit\n3: Make withdrawal\n4: Close account."
 					+ "\n5: Create account.\n6: Delete user\n7: Create user\n8: Show Transactions. \n9: Show Accounts. \n10: Log out");
 		}
 		else
 		{
 			System.out.println("Please make a selection:\n1: View balance "
-					+ "\n2: Make deposit\n3: Make withdrawal\n4:Close account."
+					+ "\n2: Make deposit\n3: Make withdrawal\n4: Close account."
 					+ "\n5: Create account.\n8: Show Transactions. \n9: Show Accounts \n10: Log out");
 		}
 		try{
@@ -396,9 +395,10 @@ public class AccountDaoImpl implements AccountDao{
 				showMenu(user); 
 				break;
 			case 8: 
-				System.out.println("Please enter your user ID");
-				userID=sc.nextInt();
-				user =udi.getUserById(userID);
+			//	System.out.println("Please enter your user ID");
+				//userID=sc.nextInt();
+				//userID=udi.getUserID(user);
+				//user =udi.getUserById(userID);
 				System.out.println("Please enter your account ID");
 				accountID = sc.nextInt();
 				showTransactions(user,accountID);
@@ -582,7 +582,12 @@ public class AccountDaoImpl implements AccountDao{
 						+" which has a balance of " + nf.format(balance);
 				System.out.println(acctInfo);
 			}
-		} catch (SQLException | IOException e) {
+		}
+		catch(NullPointerException e)
+		{
+			System.out.println("Could not find that account ID or user ID");
+		}
+		catch (SQLException | IOException e) {
 			e.printStackTrace();
 		}
 	}

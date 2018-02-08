@@ -1,6 +1,9 @@
 package com.revature.homework1;
 
 import java.io.File;
+import java.time.Instant;
+import java.time.Period;
+import java.time.ZoneId;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -8,9 +11,9 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Driver {
-	
+
 	public static void main(String[] args) {
-		
+		/*	
 		// TODO Auto-generated method stub
 		//Question 1
 		System.out.println("\nQuestion 1");
@@ -27,36 +30,36 @@ public class Driver {
 			 System.out.print(arrayToBeSorted[i]+ " ");
 		 }
 		 System.out.println();
-		
+
 		//Question 2
 		System.out.println("\nQuestion 2");
 		Question2 q2 = new Question2();
 		//Displays first 25 fibonacci numbers
 		q2.displayNums();
-		
+
 		//Question 3
 		 System.out.println("\nQuestion 3");
 		 Question3 q3=new Question3();
 		System.out.println(q3.reverseAString("Sport coat"));
 		System.out.println(q3.reverseAString("4342k3l0"));
-		
+
 		//Question 4
 		 System.out.println("\nQuestion 4");
 		System.out.println(Question4.factorialRecursive(5));
-		
+
 		//Question 5
 		System.out.println("\nQuestion 5");
 		Question5 q5 = new Question5();
 		System.out.println(q5.subString("yellow", 4));
 		System.out.println(q5.subString("Virginia", 20));
-		
+
 		//Question 6
 		 System.out.println("\nQuestion 6");
 		System.out.println(Question6.isEven(7));
 		System.out.println(Question6.isEven(6));
 		System.out.println(Question6.isEven(0));
 		System.out.println(Question6.isEven(10001));
-		
+
 		//Question 7 
 		//Creating a list of objects of type Employee
 		System.out.println("\nQuestion 7");
@@ -67,7 +70,7 @@ public class Driver {
 		Employee e4 = new Employee("Ian","Duncan","Psychology",46);
 		List<Employee> empList= new ArrayList<Employee>();
 		Collections.addAll(empList,e1,e2,e3,e4);
-		
+
 		//Sorts Employee by firstName
 		System.out.println("\n\nSorted by firstName");
 		List <Employee> empList2 = q7.sortEmployeeFirstName(empList);
@@ -89,7 +92,7 @@ public class Driver {
 		{
 			System.out.println(e);
 		}
-		
+
 		//Sorts Employee by department
 		System.out.println("\n\nSorted by department");
 		List <Employee> empList4 = q7.sortDepartment(empList);
@@ -97,52 +100,52 @@ public class Driver {
 		{
 			System.out.println(e);
 		}
-		
-		
+
+
 		//Question 8
-		
+
 		System.out.println("\nQuestion 8");
 		Question8 q8 = new Question8();
 		ArrayList<String>list = q8.storeStrings("karan","madam", "tom", "civic", "radar","jimmy",
 				"kayak","john","refer","billy","did");
-		
+
 		ArrayList<String>palindromes = q8.storePalindromes(list);
 		for(int i =0;i<palindromes.size();i++)
 		{
 			System.out.println(palindromes.get(i));
 		}
-	
+
 		//Question 9 
-		
+
 		System.out.println("\nQuestion 9");
 		Question9 q9 = new Question9();
 		q9.printPrime();
-		
-		
+
+
 		//Question 10
 		 System.out.println("\nQuestion 10");
 		 Question10 q10 = new Question10();
 		System.out.println(q10.findMinimum(9, 10));
 		System.out.println(q10.findMinimum(9, -10));
 		System.out.println(q10.findMinimum(0, 0));
-		
+
 		//Question 11 
 		 System.out.println("\nQuestion 11");
 		Question11 q11= new Question11();
 		q11.accessVariables();
-		
+
 		//Question 12
 		System.out.println("\nQuestion 12");
 		Question12 q12=new Question12();
 		q12.showEvenNumbers();
-		
-		
+
+
 		//Question 13  // Working on a better solution...
 		System.out.println("\nQuestion 13");
 		Question13 q13 = new Question13();
 		q13.displayTriangle();
-		
-		
+
+
 		//Question 14
 		System.out.println("\nQuestion 14");
 		Question14 q14 = new Question14();
@@ -158,26 +161,26 @@ public class Driver {
 		}
 		q14.switchRun(inputInt);
 	//	q14.switchRun(a);
-		
-		
-		
+
+
+
 		//Question 15 
 		System.out.println("\nQuestion 15");
 		//Calling Question15 by its main method.
 		Question15 q15 = new Question15();
 		q15.main(args);
-		
+
 		//Question 16 Version A
 		System.out.println("\nQuestion 16");
 		Question16a.main(args);
-		
+
 		//Question 16 old version
 		/*
 		//Question 16
 		System.out.println("\nQuestion 16");
 		Question16 q16 = new Question16();
 		Scanner sc2=new Scanner (System.in);
-		
+
 		ArrayList<String> stringList = new ArrayList<String>();
 		System.out.println("Please add a string: ");
 		String q16Input = sc.nextLine();
@@ -189,14 +192,14 @@ public class Driver {
 			stringList.add(q16Input);
 		}
 		String [] strArray = q16.makeStrArray(stringList);
-		
-	
+
+
 		System.out.println(q16.countChars(strArray));
-	
-		*/
+
+		 */
 		//Question 17
-		
-		
+
+
 		System.out.println("\nQuestion 17");
 		Question17 q17 = new Question17();
 		Scanner sc17 = new Scanner(System.in);
@@ -204,7 +207,7 @@ public class Driver {
 		 * Gathering user input data - number of years, rate and principal
 		 * 
 		 * */
-		
+		/*
 		System.out.println("Please enter the number of years: " );
 		String yearStr =sc17.nextLine();
 		while(!q17.verifyYearInt(yearStr)){
@@ -212,7 +215,7 @@ public class Driver {
 			yearStr =sc17.nextLine();
 			q17.verifyYearInt(yearStr);
 		}
-		
+
 		System.out.println("Please enter the rate: ");
 		String rateStr =sc17.nextLine();
 		while(!q17.verifyRateFloat(rateStr)){
@@ -220,7 +223,7 @@ public class Driver {
 			rateStr =sc17.nextLine();
 			q17.verifyRateFloat(rateStr);
 		}
-		
+
 		System.out.println("Please enter the principal");
 		String principal =sc17.nextLine();
 		while(!q17.verifyPrincipalFloat(principal))
@@ -231,11 +234,11 @@ public class Driver {
 		}
 		//Displays interest based on user input.
 		q17.displayInterest();
-		
+
 		//Question 18  
 		System.out.println("\nQuestion 18");
 		Q18ConcreteChildClass c= new Q18ConcreteChildClass();
-		
+
 		//Converts all lowercase string to uppercase
 		System.out.println(c.hasUppercase("hello world"));
 		//Attempts to see if numbers have uppercase 
@@ -247,8 +250,8 @@ public class Driver {
 		System.out.println(c.convertToInt("11232"));
 		//Attempts to convert a string of alphanumeric and special characters to integers
 		System.out.println(c.convertToInt("jfdkla;343"));
-		
-		
+
+
 		//Question 19   
 		Question19 q19=new Question19();
 		System.out.println("\nQuestion19");
@@ -260,14 +263,14 @@ public class Driver {
 		System.out.println(q19.addOdds(question19List));
 		System.out.println("Adding evens");
 		System.out.println(q19.addEvens(question19List));
-		
+
 		q19.removePrimes(question19List);
 		for(int i = 0;i<question19List.size();i++)
 		{
 			System.out.print(question19List.get(i) + " ");
 		}
-		
-		
+
+
 		System.out.println("\nQuestion 20");
 		Question20 q20 = new Question20();
 		//Creating the data file using the relative path - File located in the package.
@@ -275,9 +278,58 @@ public class Driver {
 		File file = new File(path);
 		//System.out.println(file.getAbsolutePath());
 		q20.displayData(q20.intakeData(file));
-		
-		
+		 */	
 
+		//	ZoneId.getAvailableZoneIds().stream().sorted().forEach(System.out::println);
+
+		//	Instant now = Instant.now();
+		//	Period p = Period.of(1, 0, 5);
+		//	System.out.println(p);
+		int length=5;
+		int[] arr = {1,2,3,4,5};
+		int offset =3;
+		int [] tempArr =arr.clone();
+		for(int i = 0;i<arr.length;i++)
+		{
+			if(i<=offset){
+				arr[i]=arr[(i+offset)%length];
+			}
+			else
+			{
+				for(int j=0;j<=offset;j++){
+					arr[i]=tempArr[j];
+				}
+			}
+
+
+		}
+		for(int i =0 ;i< arr.length;i++)
+		{
+			System.out.print(tempArr[i] + " ");
+		}
+		System.out.println();
+		for(int i =0 ;i< arr.length;i++)
+		{
+			//System.out.print(tempArr[i] + " ");
+			System.out.print(arr[i]+ " ");
+		}
 	}
+	/*	public static void leftRotate(int arr[],int length,int offset)
+	{
+		for (int i=0;i<offset;i++)
+		{
+			shiftLeft(arr,length);
+		}
+	}
+	public static void shiftLeft(int arr[],int length)	
+	{
+		int temp=arr[0];
+		int i=0;
+		for( i = 0;i<length-1;i++)
+		{
+			arr[i]=arr[i+1];
+		}
+		arr[i]=temp;
+	}*/
 
 }
