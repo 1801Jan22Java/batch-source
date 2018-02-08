@@ -31,7 +31,25 @@ homework.fibonacci = function(n){
  Don't use the Array sort() method... that would be lame.
 */
 homework.sort = function(array) {
+	// BUBBLESORT!!! :P
+	var nextPass = true;
+	
+	var i;
+	for(i = 0; i < array.length && nextPass; i++) {
+		
+		nextPass = false;
 
+		var j;
+		for(j = 0; j < array.length - i; j++) {
+			if(array[j] > array[j+1]) {
+				var temp = array[j];
+				array[j] = array[j+1];
+				array[j+1] = temp;
+				nextPass = true;
+			}
+		}
+    }
+    console.log(array.toString());
 };
 
 /*
