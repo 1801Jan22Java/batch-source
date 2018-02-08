@@ -49,7 +49,7 @@ homework.sort = function(array) {
 			}
 		}
     }
-    console.log(array.toString());
+    return array;
 };
 
 /*
@@ -79,7 +79,32 @@ homework.factorial = function(n) {
 
 */
 homework.rotateLeft = function(array, n) {
+	var temp;
+	var k = array.length;
+	
+	if(array.length % n === 0) {
+		return array;
+	}
+	else {
+    
+    	var i;
+		for(i = 0; i < n; i++) {
+			//console.log(i);
+			temp = array[0];
+			//console.log(temp);
+      
+			var j;
+			for(j = 1; j < k; j++) {
+				//console.log(j);
+				array[j-1] = array[j];
+			} // end for
+			array[k-1] = temp;
+			//console.log(temp);
+		} // end for
 
+	} // end else
+  
+	return array;
 };
 
 /*
