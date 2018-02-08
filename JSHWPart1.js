@@ -72,6 +72,8 @@ homework.factorial = function (n) {
  f([1,2,3,4,5], 3) = [4,5,1,2,3]
 
 */
+// Proof of concept implemetation 
+// showcasing Javascript behavior.
 homework.rotateLeft = function (array, n) {
     var shift = n % array.length;
     var newArr = [];
