@@ -128,7 +128,35 @@ homework.rotateLeft = function(array, n) {
  Return false if not balanced
 */
 homework.balancedBrackets = function(bracketsString){
-
+	var count = 0;
+	var str = bracketsString;
+	var len = bracketsString.length;
+  
+	var i;
+	for(i = 0; i < len; i++) {
+		if(str.charAt(i) == '(' || str.charAt(i) == '{' || str.charAt(i) == '[') {
+			count++;
+		}
+		else if(str.charAt(i) == ')' || str.charAt(i) == '}' || str.charAt(i) == ']') {
+			count--;
+		}
+		else if(str.charAt(i) == ' ') {
+			continue;
+		}
+		else {
+			console.log('One of your char is not a bracket');
+			count = 1; //I'm trying to for to return FALSE when char is entered, JS won't!!!
+			return false;
+    	}
+    
+    } // end for
+  
+	if(count === 0) {
+		return true;
+	}
+	else {
+		return false;
+	}
 };
 
 
