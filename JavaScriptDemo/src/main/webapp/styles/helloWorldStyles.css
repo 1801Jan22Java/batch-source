@@ -13,3 +13,8 @@
     padding: 20px;
     background-color: #289fe7;
 }
+
+#divWithText {
+	height : 450px;
+	width : 600px;
+}
