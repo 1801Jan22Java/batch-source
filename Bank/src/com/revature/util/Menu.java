@@ -179,7 +179,7 @@ public class Menu {
 		System.out.println("Please enter the type of account you would like to create");
 		System.out.println("1 for checking, 2 for savings");
 		String type = getInt();
-		//acc.addAccount(new BankAccount(startBal,type));
+		//2acc.addAccount(new BankAccount(startBal,type));
 	}
 	
 	private void makeDeposit()
