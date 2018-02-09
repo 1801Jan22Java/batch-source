@@ -130,7 +130,4 @@ homework.balancedBrackets = function(bracketsString){
     return isBalanced;
 };
 
-homework.balancedBrackets("([)]");
-
-
 // YOUR SOLUTIONS, NOT STACKOVERFLOW’S  ;)
