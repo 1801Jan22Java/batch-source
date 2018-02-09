@@ -159,7 +159,7 @@
                 }
             }
         }
-        // getPeopleInSales();
+        getPeopleInSales();
 
         // 3. Click Here
         // Define function getAnchorChildren()
@@ -173,7 +173,7 @@
                 }
             }
         }
-        // getAnchorChildren();
+        getAnchorChildren();
 
         // 4. Hobbies
         // Define function     getSkills
@@ -195,7 +195,7 @@
                 }
             }
         }
-        // getHobbies();
+        getSkills();
         // 5. Custom Attribute
         // Define function getCustomAttribute()
         // Find all elements with "data-customAttr" attribute
@@ -210,7 +210,7 @@
                 }
             }
         }
-        // getCustomAttribute();
+        getCustomAttribute();
 
         // 6. Sum Event
         // NOTE: Write unobtrusive Javascript
@@ -228,10 +228,11 @@
 
             var val1 = num1.value;
             var val2 = num2.value;
+            var answer = (parseInt(val1) + parseInt(val2))
             var sum = document.getElementById("sum");
-            if (!isNaN(val1) && !isNaN(val2)) {
+            if (!isNaN(answer)) {
 
-                sum.textContent = (parseInt(val1) + parseInt(val2));
+                sum.textContent = answer;
 
             } else {
                 sum.textContent = "Cannot add";
@@ -279,11 +280,14 @@
                 } else {
                     alert("So you like " + strColor + " more than " + prevColor.pop() + " now?");
                 }
+                prevColor.push(strColor);
                 var colorAreas = document.getElementsByName("favoriteColor")
 
+                // The question did not specify ONLY the 
+                // elements with name=favoriteColor
                 this.parentNode.style.backgroundColor = strColor;
                 // Code that was 
-                // prevColor.push(strColor);
+            
                 // for (var x = 0; x < colorAreas.length; x++) {
                 //     colorAreas[x].style.backgroundColor = strColor;
                 //     // Works, but only the outline of the radiobutton when clicked
@@ -392,12 +396,12 @@
             }
 
         }
-        // var html = document.getElementsByTagName("html");
-        // var list = [];
-        // walkTheDOM(html[0],function(elem){
-        //     list.push(elem)
-        // });
-        // console.log(list)
+        var html = document.getElementsByTagName("html");
+        var list = [];
+        walkTheDOM(html[0],function(elem){
+            list.push(elem)
+        });
+        console.log(list)
 
     </script>
 </body>
