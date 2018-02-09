@@ -102,7 +102,7 @@ public class Question7 {
 		}
 		
 		
-		ArrayList.sort( staff , Question7Comparator());;
+		//ArrayList.sort( staff , Question7Comparator());;
 		for (int i = 0; i < staff.size();i++) {
 			System.out.println("Without Comparator");
 			System.out.println(staff.get(i).getName());
