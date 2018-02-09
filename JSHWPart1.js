@@ -1,6 +1,6 @@
 var homework = {};
 
-homework.fibonacci = function(n){
+homework.fibonacci = function(n) {
 	// First and second terms in Fib. sequence is 0 and 1
 	var first = 0;
 	var second = 1;
@@ -48,7 +48,7 @@ homework.sort = function(array) {
 	return arr;
 };
 
-homework.factorial = function(n){
+homework.factorial = function(n) {
 	if (n < 0) return -1;
 
 	// 0! = 1
@@ -80,7 +80,7 @@ homework.rotateLeft = function(array, n) {
 	return array;
 };
 
-homework.balancedBrackets = function(bracketsString){
+homework.balancedBrackets = function(bracketsString) {
 	var charStack = [];
 	var openList = ["(", "[", "{"];
 

@@ -123,3 +123,4 @@ VALUES ('username!', 'password', 'Chuck', 'Boris');
 INSERT INTO BANK_USER (USERNAME, PASS_WORD, FIRST_NAME, LAST_NAME)
 VALUES ('username?', 'password', 'Chuck', 'Horace');
 
+SELECT * FROM BANK_ACCOUNT;
