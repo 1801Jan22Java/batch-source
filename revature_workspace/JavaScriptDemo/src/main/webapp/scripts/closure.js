@@ -3,7 +3,10 @@
 */
 //specifies behavior that will execute as soon as the page loads.
 window.onload= function(){
-	var count = getCount();
+	 count = getCount();
+	 appleCounter = getCount("apple");
+	 orangeCounter = getCount("orange");
+	
 }
 function count(noun){
 	var count = 0;
