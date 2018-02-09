@@ -91,9 +91,9 @@
             <br />
             <input id="num1" class="nums" type="text" />
             <br />
-            <input type="radio" name="favoriteAnimal" value="cat" />Cat
+            <input  type="radio" name="favoriteAnimal" value="cat" />Cat
             <br />
-            <input type="radio" name="favoriteColor" value="red" />Red
+            <input type="radio" id="test" name="favoriteColor" value="red" />Red
             <br />
             <input type="radio" name="favoriteAnimal" value="horse" />Horse
             <br />
@@ -176,10 +176,10 @@
         // getAnchorChildren();
 
         // 4. Hobbies
-        // Define function     
+        // Define function     getSkills
         // Find all checked options in the 'skills' select element.
         // Print the value and the contents.
-        function getHobbies() {
+        function getSkills() {
             var selects = document.getElementsByTagName("select");
             var sel;
             for (var i = 0; i < selects.length; i++) {
@@ -279,12 +279,19 @@
                 } else {
                     alert("So you like " + strColor + " more than " + prevColor.pop() + " now?");
                 }
-                prevColor.push(strColor);
-                for (var x = 0; x < colorRadios.length; x++) {
-                    colorRadios[x].style.backgroundColor = strColor;
-                }
+                var colorAreas = document.getElementsByName("favoriteColor")
+
+                this.parentNode.style.backgroundColor = strColor;
+                // Code that was 
+                // prevColor.push(strColor);
+                // for (var x = 0; x < colorAreas.length; x++) {
+                //     colorAreas[x].style.backgroundColor = strColor;
+                //     // Works, but only the outline of the radiobutton when clicked
+                //     // colorAreas[x].style.color = strColor;
+                // } 
             }
         }
+        
 
         // 9. Show/Hide Event
         // NOTE: Write unobtrusive Javascript
