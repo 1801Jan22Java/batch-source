@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bears>
+	<bear id="7">
+		<name>Henry</name>
+		<cave id="2">
+			<cName>AwesomeCave1</cName>
+			<maxBears>4</maxBears>
+		</cave>
+		<weight>350</weight>
+		<birthdate>1997-10-10</birthdate>
+		<bearType id="1">
+			<btName>Grizzly</btName>
+		</bearType>
+	</bear>
+	<bear id="8">
+		<name>Sophie</name>
+		<cave id="2">
+			<cName>AwesomeCave1</cName>
+			<maxBears>4</maxBears>
+		</cave>
+		<weight>300</weight>
+		<birthdate>1917-6-3</birthdate>
+		<bearType id="2">
+			<btName>Polar</btName>
+		</bearType>
+	</bear>
+	<bear id="9">
+		<name>Gwen</name>
+		<cave id="1">
+			<cName>Manhanttan</cName>
+			<maxBears>10</maxBears>
+		</cave>
+		<weight>800</weight>
+		<birthdate>1980-8-18</birthdate>
+		<bearType id="1">
+			<btName>Grizzly</btName>
+		</bearType>
+	</bear>
+</bears>

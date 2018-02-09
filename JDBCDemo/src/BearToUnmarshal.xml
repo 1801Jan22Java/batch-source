@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bear id="9">
+	<name>Gwen</name>
+	<cave id="1">
+		<name>Manhanttan</name>
+		<maxBears>10</maxBears>
+	</cave>
+	<weight>800</weight>
+	<birthdate>1980-8-18</birthdate>
+	<bearType id="1">
+		<name>Grizzly</name>
+	</bearType>
+</bear>

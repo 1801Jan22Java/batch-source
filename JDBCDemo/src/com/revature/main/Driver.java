@@ -11,6 +11,7 @@ import java.util.List;
 import com.revature.beans.*;
 import com.revature.dao.BearDao;
 import com.revature.dao.BearDaoImpl;
+import com.revature.dao.BearDaoXmlImpl;
 import com.revature.dao.CaveDao;
 import com.revature.dao.CaveDaoImpl;
 import com.revature.util.ConnectionUtil;
@@ -31,7 +32,7 @@ public class Driver {
 			e.printStackTrace();
 		}
 		*/
-		
+		/*
 		CaveDao cd = new CaveDaoImpl();
 		//System.out.println(cd.getCaves().toString());
 		//System.out.println(cd.getCaveById(10));
@@ -46,11 +47,18 @@ public class Driver {
 		
 		//bd.buildABear(joe);
 		//bd.feedBear(5, 7, 30);
-		System.out.println(bd.getBearById(5));
+		//System.out.println(bd.getBearById(5));
 		
 		//SQL injection: https://xkcd.com/327/
 		
+		BearDao bd = new BearDaoXmlImpl();
+		for (Bear b : bd.getBears()) {
+			System.out.println(b.toString());
+		}
 		
+		//we're breaking the DAO pattern a bit with this
+		Bear b2 = ((BearDaoXmlImpl)bd).unmarshalBear("src/BearToUnmarshal.xml");
+		System.out.println(b2.toString());
 	}
 
 }
