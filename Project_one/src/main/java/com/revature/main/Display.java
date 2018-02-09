@@ -57,7 +57,7 @@ public class Display {
 
 	public void checkExisting() {
 		int result = 0;
-
+		main:
 		do {
 			System.out.println("What would you like to do "+ security.getFirst_Name()+ "?\n 1.) Check on existing account "
 					+ "\n 2.) Add funds to an account" + "\n 3.) Withdraw funds from an account"
@@ -99,8 +99,6 @@ public class Display {
 				boolean finished = false;
 				int choice = 0;
 
-				while (finished != true) {
-
 						System.out.println("How much would you like to withdraw today: ");
 
 						try {
@@ -113,12 +111,27 @@ public class Display {
 							break;
 						}
 
-				}
 				break;
 			}
 			case 4: {
-				accounts.deleteAccount(security.getUserID());
-				System.out.println("Your account has been deleted");
+				int choice4 = 5;
+				System.out.println("Are you sure?"
+						+ "\n 1.) Yes"
+						+ "\n 2.) No");
+				try {
+					choice4 = in.nextInt();
+					if(choice4 == 1) {
+						accounts.deleteAccount(security.getUserID());
+						System.out.println("Your account has been deleted");
+						
+					}
+					else if(choice4 ==2) {
+						System.out.println("Your account has not been deleted");
+					}
+				}catch(Exception e) {
+					System.out.println("You have not entered a valid option");
+				}
+				break main;
 
 			}
 			case 0: {
