@@ -1,0 +1,114 @@
+DROP TABLE REQUEST;
+DROP TABLE EMPLOYEE;
+
+
+CREATE TABLE EMPLOYEE (
+  EmpID INTEGER PRIMARY KEY NOT NULL,
+  Email VARCHAR2(60) NOT NULL, -- used as the username in login
+  Pword VARCHAR(50) NOT NULL, --Password (duh)
+  FirstName VARCHAR2(20) NOT NULL,
+  LastName VARCHAR2(30) NOT NULL,
+  Phone VARCHAR2(15),
+  JobTitle VARCHAR2(40) NOT NULL,
+  ReportsTo INTEGER NOT NULL,
+  Active INTEGER NOT NULL 
+  -- Set to 0 for those no longer employed with company
+  );
+  
+CREATE TABLE REQUEST (
+  RID INTEGER PRIMARY KEY NOT NULL,
+  RequestID INTEGER NOT NULL,
+  ResolveID INTEGER NOT NULL,
+  Amount FLOAT NOT NULL,
+  whenMade DATE NOT NULL, 
+  Status VARCHAR2(10) NOT NULL
+  ); -- stand in for a boolean
+  
+-- Adding Foreign Keys
+  
+ALTER TABLE REQUEST
+ADD CONSTRAINT FK_REQUEST_ID
+FOREIGN KEY (RequestID) REFERENCES EMPLOYEE(EmpID);
+
+ALTER TABLE REQUEST
+ADD CONSTRAINT FK_RESOLVE_ID
+FOREIGN KEY (ResolveID) REFERENCES EMPLOYEE(EmpID);
+
+-- Sequence Creation
+
+CREATE SEQUENCE ID_EMP
+  START WITH 2
+  MINVALUE 2
+  MAXVALUE 10000000
+  INCREMENT BY 2
+  CACHE 100;
+  
+CREATE SEQUENCE ID_REQ
+  START WITH 1
+  MINVALUE 1
+  MAXVALUE  10000001
+  INCREMENT BY 2
+  CACHE 100;
+
+ -- Procedure Creation
+
+CREATE OR REPLACE PROCEDURE deactivate_EMP
+(eid INTEGER)
+AS
+BEGIN 
+
+  UPDATE EMPLOYEE
+  SET Active = 0
+  WHERE EmpID = eid;
+  
+END deactivate_EMP;
+/
+
+CREATE OR REPLACE PROCEDURE update_EMP
+(
+  eID INTEGER,
+  eml VARCHAR2, 
+  Pssword VARCHAR2, 
+  FName VARCHAR2,
+  LName VARCHAR2,
+  Eml VARCHAR2, 
+  Actv INTEGER
+)
+AS
+BEGIN
+  UPDATE EMPLOYEE
+  SET email = eml, Pword = Pssword, FIRSTNAME = FName, LASTNAME = LName, 
+              EMAIL = Eml, ACTIVE = Actv
+  WHERE EmpID = eID;
+END update_EMP;
+/
+
+-- Adding Triggers
+SET DEFINE OFF
+CREATE TRIGGER before_insert_EMP
+BEFORE INSERT
+ON EMPLOYEE
+FOR EACH ROW
+BEGIN
+  IF  :new.EmpID IS NULL THEN
+      SELECT ID_EMPS.NEXTVAL INTO :new.EmpID
+      FROM DUAL;
+  END IF;
+END before_insert_EMP;
+/
+
+SET DEFINE OFF
+CREATE OR REPLACE TRIGGER before_insert_Request
+BEFORE INSERT
+ON REQUEST
+FOR EACH ROW
+BEGIN
+  IF  :new.RID IS NULL THEN
+      SELECT ID_REQ.NEXTVAL INTO :new.RID
+      FROM DUAL;
+  END IF;
+END before_insert_Request;
+/
+
+
+-- Filling the Database

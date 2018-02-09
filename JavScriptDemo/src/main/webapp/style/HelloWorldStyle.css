@@ -1,0 +1,19 @@
+@charset "ISO-8859-1";
+
+.function{
+    border: solid 5px black;
+    margin: 20px;
+    padding: 20px;
+}
+
+.displayDiv{
+    border: solid 5px black;
+    margin: 20px;
+    padding: 20px;
+    background-color: #289f7;
+}
+
+#divWithText {
+	height : 450px;
+	width : 600px;
+}
