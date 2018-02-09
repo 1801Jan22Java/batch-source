@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="ISO-8859-1">
+		<title>Ajax API</title>
+		<link rel="stylesheet" href="../styles/HelloWorldStyles.css" />
+		<style>
+			#toggleDiv {
+				height:100px;
+				width:100px;
+			}
+		</style>
+	</head>
+<body id="partyTime">
+	<div class = "displayDiv">
+		<h4> enter a pokemon id: </h4>
+		<input type="number" id="pokeId"/> <br><br>
+		<button type="button" id="pokeButton">What's its name?</button>
+		<div class="displayDiv" id="pokeResult"></div>
+	
+	</div>
+	
+	<div id="toggleDiv"></div>
+	<br>
+	<br>
+	<button onClick="stopColor()">Do you like to party?</button>
+
+</body>
+<script src="../scripts/ajaxEtc.js"></script>
+</html>

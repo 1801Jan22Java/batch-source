@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="ISO-8859-1">
+		<title>Errors</title>
+		<link rel="stylesheet" href="../styles/HelloWorldStyles.css"/>
+	</head>
+	<body>
+		<div class="displauDiv">
+			<p>Please input a number between 5 and 10 </p>
+			<input id="number">
+			<button type="button" id="b1"> Test button</button>
+		</div>
+
+	</body>
+	
+<script>
+	var num = 1;
+	try {
+		num.toPrecision(500);
+	} catch(err {
+		console.log(err);
+	}
+	function test(input) {
+		var message = document.getElementById("message");
+		message.innerHTML ="all bueno";
+		try {
+			if(!input) throw "empty";
+		} catch (err) {
+			message.innerHTML = "input is: " +err;
+		}
+	}
+	document.getElementById("b1").addEventListener("click",function(){})
+	
+</script>
+</html>
