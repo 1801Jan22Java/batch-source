@@ -12,8 +12,7 @@ var homework = {};
  f(1) = 1
  f(10) = 55
 */
-homework.fibonacci = function(n)
-{
+homework.fibonacci = function(n){
 	//starting with base cases
 	if(n<=1)
 		return 1;
@@ -31,18 +30,17 @@ homework.fibonacci = function(n)
 
  Don't use the Array sort() method... that would be lame.
 */
-homework.sort = function(array) 
-{
-	for(i=0; i<array.length-1; i++)
+homework.sort = function(array) {
+	for(var i=0; i<array.length-1; i++)
 		{
 		var swapped;
 	    do {
 	        swapped = false;
-	        for (var i=0; i < array.length-1; i++) {
-	            if (array[i] > array[i+1]) {
-	                var temp = array[i];
-	                array[i] = array[i+1];
-	                array[i+1] = temp;
+	        for (var j=0; j < array.length-1; j++) {
+	            if (array[j] > array[j+1]) {
+	                var temp = array[j];
+	                array[j] = array[j+1];
+	                array[j+1] = temp;
 	                swapped = true;
 	            }
 	        }
@@ -57,10 +55,8 @@ homework.sort = function(array)
  f(1) = 1
  f(3) = 6
 */
-homework.factorial = function(n)
-{
-	if(n<=1)
-		{
+homework.factorial = function(n){
+	if(n<=1){
 			return 1;
 		}
 	else
@@ -77,16 +73,13 @@ homework.factorial = function(n)
  f([1,2,3,4,5], 3) = [4,5,1,2,3]
 
 */
-homework.rotateLeft = function(array, n) 
-{
+homework.rotateLeft = function(array, n) {
 	var rot = array;
 	var a;
 	var b;
-	for(i =0; i<n; i++)
-	{
+	for(i =0; i<n; i++){
 		//swap first and second
-		for( j=0; j<rot.length-1; j++)
-		{
+		for( j=0; j<rot.length-1; j++){
 			b= rot[j];
 			rot[j]=rot[j+1];
 			rot[j+1]=b;
@@ -115,24 +108,20 @@ homework.rotateLeft = function(array, n)
  Return true if balanced
  Return false if not balanced
 */
-homework.balancedBrackets = function(bracketsString)
-{
+homework.balancedBrackets = function(bracketsString){
 	//get the first half
 	var a="";
 	var b="";
-	for(i=0;i<(bracketsString.length/2);i++)
-		{
+	for(i=0;i<(bracketsString.length/2);i++){
 			a+=bracketsString[i];
 		}
 	//get back half
-	for(j=bracketsString.length-1;j>((bracketsString.length/2)-1);j--)
-		{
+	for(j=bracketsString.length-1;j>((bracketsString.length/2)-1);j--){
 			b+=bracketsString[j];
 		}
 	 //get desired back
 	c="";
-	for(k=0;k<(bracketsString.length/2);k++)
-	{
+	for(k=0;k<(bracketsString.length/2);k++){
 		switch(bracketsString[k])
 			{
 				case "{":
