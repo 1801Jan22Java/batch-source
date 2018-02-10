@@ -7,19 +7,20 @@ public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private int user_id;
+	private String username;
 	private String firstname;
 	private String lastname;
 	private String password;
-
 	private int position_id;
 
-	public User(int user_id, String firstname, String lastname, String password, int position_id) {
+	public User(int user_id, String username,String firstname, String lastname, String password, int position_id) {
 		super();
 		this.user_id = user_id;
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.position_id = position_id;
 		this.password = password;
+		this.username = username;
 	}
 
 	public User() {
@@ -64,6 +65,14 @@ public class User implements Serializable {
 
 	public void setUser_id(int user_id) {
 		this.user_id = user_id;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 }

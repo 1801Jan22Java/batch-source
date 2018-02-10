@@ -10,8 +10,9 @@ public class ReimburseLog implements Serializable {
 	private int reimburse_id;
 	private int reimburse_status_id;
 	private String log_date;
+	private int resolved_by;
 
-	public ReimburseLog(int log_id, int reimburse_id, int reimburse_status_id, String log_date) {
+	public ReimburseLog(int log_id, int reimburse_id, int reimburse_status_id, String log_date, int resolved_by) {
 		super();
 		this.log_id = log_id;
 		this.reimburse_id = reimburse_id;
@@ -53,6 +54,14 @@ public class ReimburseLog implements Serializable {
 
 	public void setLog_date(String log_date) {
 		this.log_date = log_date;
+	}
+
+	public int getResolved_by() {
+		return resolved_by;
+	}
+
+	public void setResolved_by(int resolved_by) {
+		this.resolved_by = resolved_by;
 	}
 
 }

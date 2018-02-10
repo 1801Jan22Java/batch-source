@@ -11,6 +11,7 @@ public class Reimbursement implements Serializable {
 	private double amount;
 	private String notes;
 	private String photo_url;
+	private int resolved_by;
 
 	public Reimbursement(int reimburse_id, int user_id, double amount, String notes, String photo_url) {
 		super();
@@ -63,6 +64,14 @@ public class Reimbursement implements Serializable {
 
 	public void setPhoto_url(String photo_url) {
 		this.photo_url = photo_url;
+	}
+
+	public int getResolved_by() {
+		return resolved_by;
+	}
+
+	public void setResolved_by(int resolved_by) {
+		this.resolved_by = resolved_by;
 	}
 
 }
