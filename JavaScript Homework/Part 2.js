@@ -1,16 +1,8 @@
-/*
- *
- */
+// Problem 1 - USA
+// Define function getUSA()
+// Find the html element that contains "USA".
+// Print that element's contents.
 
-window.onload = function () {
-    //For Problem 7
-    //document.getElementsByName("skills")[0].setAttribute("onchange", "skillsConfirmation()");
-
-    //For Problem 8
-
-}
-
-//Problem 1
 function getUSA() {
     var elements = document.getElementsByTagName("*");
     for (var i = 0; i < elements.length; i++) {
@@ -22,7 +14,11 @@ function getUSA() {
     }
 }
 
-//Problem 2
+
+// Problem 2 - Sales
+// Define function getPeopleInSales()
+// Print the names of all the people in the sales department.
+
 function getPeopleInSales() {
     var elements = document.getElementsByTagName("td");
     for (var i = 0; i < elements.length; i++) {
@@ -32,7 +28,12 @@ function getPeopleInSales() {
     }
 }
 
-//Problem 3
+
+// Problem 3 - Click Here
+// Define function getAnchorChildren()
+// Find all anchor elements with a <span> child.
+// Print the contents of <span>
+
 function getAnchorChildren() {
     var elements = document.getElementsByTagName("a");
     for (var i = 0; i < elements.length; i++) {
@@ -45,7 +46,12 @@ function getAnchorChildren() {
     }
 }
 
-//Problem 4
+
+// Problem 4 - Hobbies
+// Define function 	
+// Find all checked options in the 'skills' select element.
+// Print the value and the contents.
+
 function getSkills() {
     var element = document.getElementsByName("skills");
     for (var j = 0; j < element.length; j++) {
@@ -58,7 +64,12 @@ function getSkills() {
     }
 }
 
-//Problem 5
+
+// Problem 5 - Custom Attribute
+// Define function getCustomAttribute()
+// Find all elements with "data-customAttr" attribute
+// Print the value of the attribute.
+// Print the element that has the attribute.
 
 function getCustomAttribute() {
     var elements = document.getElementsByTagName("*");
@@ -66,30 +77,52 @@ function getCustomAttribute() {
         for (var j = 0; j < elements[i].attributes.length; j++) {
 
             if (elements[i].attributes[j].name == "data-customattr") {
-                console.log(elements[i].attributes[j].value + " " + elements[i].tagName);
+                console.log("Value: " + elements[i].attributes[j].value);
+                console.log("     Element: " + elements[i].tagName);
             }
         }
-    }
-}
-
-//Problem 6
-
-function getSum() {
-    var num1 = document.getElementById("num1").value;
-    var num2 = document.getElementById("num2").value;
-    if (!isNaN(num1) && !isNaN(num2)) {
-        var sum = parseInt(num1) + parseInt(num2);
-        document.getElementById("sum").innerHTML = sum;
-    }
-    else {
-        console.log("Cannot add");
     }
 }
 
 
 window.onload = function () {
 
-    //Problem 7
+
+// Problem 6 - Sum Event
+// NOTE: Write unobtrusive Javascript
+// Regarding these elements:
+// <input id="num1" class="nums" type="text"/>
+// <input id="num2" class="nums" type="text"/>
+// <h3>Sum: span id="sum"></span></h3>
+
+// Define onchange event handler.
+// Add <input> element values.
+// Put the sum in the <span> element.
+// If values cannot be added, put "Cannot add" in the <span> element
+
+    document.getElementById("num1").addEventListener('change', getSum, false);
+    document.getElementById("num2").addEventListener('change', getSum, false);
+
+    function getSum() {
+        var num1 = document.getElementById("num1").value;
+        var num2 = document.getElementById("num2").value;
+        if (!isNaN(num1) && !isNaN(num2)) {
+            var sum = parseFloat(num1) + parseFloat(num2);
+            document.getElementById("sum").innerHTML = sum;
+        }
+        else {
+            document.getElementById("sum").innerHTML = "Cannot add";
+        }
+    }
+
+
+
+// Problem 7 - Skills Event
+// NOTE: Write unobtrusive Javascript
+// When user selects a skill, create an alert with a message similar to:
+// "Are you sure CSS is one of your skills?"
+// NOTE: no alert should appear when user deselects a skill.
+
     document.getElementsByName("skills")[0].addEventListener('change', skillsConfirmation, false);
 
     function skillsConfirmation() {
@@ -105,7 +138,15 @@ window.onload = function () {
     }
 
 
-    //Problem 8
+    // Problem 8 - Favorite Color Event
+    // NOTE: Write unobtrusive Javascript
+    // NOTE: This is regarding the favoriteColor radio buttons.
+    // When a user selects a color, create an alert with a message similar to:
+    // "So you like green more than blue now?"
+    // In this example, green is the new value and blue is the old value.
+    // Make the background color (of all favoriteColor radio buttons) 
+    // the newly selected favoriteColor
+
 
     var colorOptions = document.getElementsByName("favoriteColor");
     var currentColor;
@@ -134,7 +175,11 @@ window.onload = function () {
     }
 
 
-    //Problem 9
+    // Problem 9 - Show/Hide Event
+    // NOTE: Write unobtrusive Javascript
+    // When user hovers over an employees name:
+    // Hide the name if shown.
+	// Show the name if hidden.
 
     var employeeNames = document.getElementsByClassName("empName");
     var placeholder9;
@@ -150,7 +195,11 @@ window.onload = function () {
     }
 
 
-    //Problem 10
+    // Problem 10 - Current Time
+    // Regarding this element:
+	// <h5 id="currentTime"></h5>
+    // Show the current time in this element in this format: 9:05:23 AM
+    // The time should be accurate to the second without having to reload the page.
 
     var updateTime = setInterval(function() {
         displayTime();
@@ -158,12 +207,28 @@ window.onload = function () {
 
     function displayTime() {
         var currTime = new Date();
-        document.getElementById("currentTime").innerHTML = (currTime.getHours() + ":" + currTime.getMinutes() + ":" + currTime.getSeconds());
+        var amOrPm = "AM";
+        var hours = currTime.getHours();
+        var minutes = currTime.getMinutes();
+        var seconds = currTime.getSeconds();
+
+        if(hours > 12){
+            hours -= 12;
+            amOrPm = "PM";
+        }
+        if(minutes < 10)
+            minutes = "0"+minutes;
+        if(seconds < 10)
+            seconds = "0"+seconds;
+        document.getElementById("currentTime").innerHTML = (hours + ":" + minutes + ":" + seconds + " " + amOrPm);
     }
 
 
-    //Problem 11
-
+    // Problem 11 - Delay
+    // Regarding this element:
+    // <p id="helloWorld">Hello, World!</p>
+    // Three seconds after a user clicks on this element, change the text to a random color.
+    
     document.getElementById("helloWorld").addEventListener('click', function() {
         setTimeout(textColorChange, 3);
     });
@@ -179,7 +244,13 @@ window.onload = function () {
     }
 
 
-    //Problem 12
+    // Problem 12 - 
+    // Walk the DOM
+    // Define function walkTheDOM(node, func)
+    // This function should traverse every node in the DOM. 
+    // Use recursion.
+    // On each node, call func(node).
+
 
     function walkTheDOM(node, func){
         func(node);
