@@ -11,6 +11,7 @@ import java.util.List;
 import com.revature.beans.*;
 import com.revature.dao.BearDao;
 import com.revature.dao.BearDaoImpl;
+import com.revature.dao.BearDaoXmlImpl;
 import com.revature.dao.CaveDao;
 import com.revature.dao.CaveDaoImpl;
 import com.revature.util.ConnectionUtil;
@@ -35,7 +36,7 @@ public class Driver {
 		// System.out.println(cd.getCaves().toString());
 		// System.out.println(cd.getCaveById(10));
 
-		BearDao bd = new BearDaoImpl();
+		//BearDao bd = new BearDaoImpl();
 		/*
 		 * List<Bear> bearList = bd.getBears(); for (Bear b : bearList){
 		 * System.out.println(b.toString()); }
@@ -46,9 +47,12 @@ public class Driver {
 
 		// bd.buildABear(joe);
 		// bd.feedBear(5, 7, 30);
-		System.out.println(bd.getBearById(5));
+		//System.out.println(bd.getBearById(5));
 
 		// SQL injection: https://xkcd.com/327/
+		
+		BearDao bd = new BearDaoXmlImpl();
+		bd.getBears();
 
 	}
 

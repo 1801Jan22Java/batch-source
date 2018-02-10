@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Errors</title>
+<link rel="stylesheet" type="text/css" href="../styles/HelloWorldStyles.css"/>
+</head>
+<body>
+	<div class="displayDiv">
+		<p>please input a number between 5 and 10:</p>
+		<input id="number">
+		<button type="button" id="b1">Test Input</button>
+	</div>
+	<div class="displayDiv" id="message"></div>
+
+</body>
+<script>
+	var num = 1;
+
+	// num.toPrecision(500);
+
+	function test(input) {
+		var message = document.getElementById("message");
+		message.innerHTML = "all good";
+		try {
+			if(!input) throw "empty";
+			if(isNaN(input)) throw "not a number";
+			x = Number(input);
+			if(x < 5) throw "too low";
+			if(x > 10) throw "too high";
+		} catch(err) {
+			message.innerHTML = "input is: " + err;
+		}
+	}
+	document.getElementById("b1").addEventListener("click", function() {
+		test(document.getElementById("number").value);
+	});
+</script>
+</html>

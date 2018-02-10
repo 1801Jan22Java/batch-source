@@ -12,12 +12,12 @@ window.onload = function() {
 	}
 	
 	var myEventHandler = function(event) {
-		console.log("target: "+event.target.id+" and this: "+this.id);
+		console.log("target: " + event.target.id + " and this: " +this.id);
 		console.log(event.timeStamp);
 	}
 	
 	var displayDivs = document.getElementsByClassName("displayDiv");
-	for (var i = 0; i<displayDivs.length; i++){
+	for (var i = 0; i < displayDivs.length; i++){
 		displayDivs[i].addEventListener("click",myEventHandler);
 	}
 	
