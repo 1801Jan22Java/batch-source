@@ -5,11 +5,21 @@
 var toggle = setInterval(function(){
 	console.log("called interval");
 	setColor();
-},1000);
+},500);
 
 function setColor(){
 	var x = document.getElementById("toggleDiv");
-	x.style.backgroundColor = x.style.backgroundColor == "cyan" ? "#78ab42" : "cyan";
+	
+	//what emily gave us
+	//x.style.backgroundColor = x.style.backgroundColor == "cyan" ? "#78ab42" : "cyan";
+	
+	//real random
+	var letters = "0123456789ABCDEF";
+	var color = "#";
+	for (var i = 0; i < 6; i++) {
+	  color += letters[Math.floor(Math.random() * 16)];
+	}
+	x.style.backgroundColor = color;
 };
 function getPokemon(xhr) {
 	var res = JSON.parse(xhr.responseText);

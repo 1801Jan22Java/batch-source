@@ -183,11 +183,12 @@ the newly selected favoriteColor
 */
 
 function changeColor(event){
-	
-	var currColor = document.body.style.backgroundColor;
+	var form = document.getElementById("firstForm");
+	var currColor = form.style.backgroundColor;
 	var nextColor = event.srcElement.value;
+	
 
-	document.body.style.backgroundColor = nextColor;
+	form.style.backgroundColor = nextColor;
 
 	alert("So you like " + nextColor + " more than " + currColor + " now?");
 
@@ -299,7 +300,8 @@ window.onload = function(){
 	skill.addEventListener("change", checkSkills);
 
 	var colors = document.getElementsByName("favoriteColor");
-	document.body.style.backgroundColor = "white";
+	var form = document.getElementById("firstForm");
+	form.style.backgroundColor = "white";
 	for (var i = 0; i < colors.length; i++) {
 		colors[i].addEventListener("change", changeColor);
 	}
