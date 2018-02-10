@@ -112,6 +112,7 @@ Print the value and the contents.
 		 if (option[i].selected===true)
 		 {
 			console.log(option[i].value);
+			console.log(option[i].innerHTML);
 		 }
 	 }
  };
