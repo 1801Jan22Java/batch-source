@@ -22,5 +22,11 @@
       <scope>test</scope>
     </dependency>
     
+    <dependency>
+      <groupId>com.oracle.jdbc</groupId>
+      <artifactId>ojdbc</artifactId>
+      <version>12.1.0.1</version>
+    </dependency>
+    
   </dependencies>
 </project>
