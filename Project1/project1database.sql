@@ -22,6 +22,7 @@ create table reimburse_request (
     reimburse_request_id   number,
     user_id                number,
     amount                 number(*,2),
+    amount_approved        number(*,2),
     reimburse_status_id    number,
     notes                  varchar2(140),
     resolved_by            number,
@@ -64,6 +65,9 @@ alter table reimburse_log
 -- Add default value for amount, resolved by
 alter table reimburse_request modify (
     amount default 0
+);
+alter table reimburse_request modify (
+    amount_approved default 0
 );
 alter table reimburse_request modify (
     resolved_by default 0
@@ -358,5 +362,7 @@ insert into reimburse_request (
 -- Since everything in the log is done via a trigger,
 -- this is a test to see if updates work.
 update reimburse_request
-set resolved_by=1, reimburse_status_id=2
+    set
+        resolved_by = 1,
+        reimburse_status_id = 2
 where reimburse_request_id = 5;

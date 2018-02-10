@@ -7,19 +7,24 @@ public class Reimbursement implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private int reimburse_id;
+	private int reimburse_status_id;
 	private int user_id;
 	private double amount;
 	private String notes;
+	// Temporarily removed from constructor til we learn how it's gonna be displayed
+	// or til I figure out how to get it into an output stream.
 	private String photo_url;
 	private int resolved_by;
 
-	public Reimbursement(int reimburse_id, int user_id, double amount, String notes, String photo_url) {
+	public Reimbursement(int reimburse_id, int reimburse_status_id, int user_id, double amount, String notes,
+			int resolved_by) {
 		super();
 		this.reimburse_id = reimburse_id;
 		this.user_id = user_id;
 		this.amount = amount;
 		this.notes = notes;
-		this.photo_url = photo_url;
+		this.reimburse_status_id = reimburse_status_id;
+		this.resolved_by = resolved_by;
 	}
 
 	public Reimbursement() {
@@ -72,6 +77,14 @@ public class Reimbursement implements Serializable {
 
 	public void setResolved_by(int resolved_by) {
 		this.resolved_by = resolved_by;
+	}
+
+	public int getReimburse_status_id() {
+		return reimburse_status_id;
+	}
+
+	public void setReimburse_status_id(int reimburse_status_id) {
+		this.reimburse_status_id = reimburse_status_id;
 	}
 
 }
