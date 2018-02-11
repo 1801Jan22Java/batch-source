@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+	
+		<title>Hello World</title>
+		<meta charset="UTF-8">
+		<style>
+			body {background-color:red}
+		</style>
+		<link rel="stylesheet" href="myCoolStyles.css"/>
+		
+	</head>
+	
+	<body style="background-color:#8eaa17">
+		<h1 class="classOne">this is a large heading</h1>
+		<h6>this is a small heading</h6>
+		
+		<div>
+		<a href="https://en.wikipedia.org/wiki/Galapagos_penguin" class="classOne">Galapagos Penguins</a>
+		 <img id="coolPenguin" src="https://s-media-cache-ak0.pinimg.com/originals/54/dd/ca/54ddcab54b1d56eedea2fd071a73910f.jpg" alt="penguin on the beach" width="200" height="150"/>
+		<p class="bobRoss">Even the worst thing we can do here is good. Do an almighty painting with us. Let's make a nice big leafy tree. 
+		Fluff it up a little and hypnotize it. You have freedom here. The only guide is your heart.</p>
+		<p class="bobRoss">Maybe there's a happy little waterfall happening over here. If you didn't have baby clouds, 
+		you wouldn't have big clouds. Maybe he has a little friend that lives right over here.</p>
+		</div>
+		<br>
+		<br>
+		<div> 
+			<form method="post" action="Congrats.html"> <!--specifies url to which form will be submitted-->
+					some text: <input type="text"/>
+					<br>
+					<br>
+					a number: <input type="number"/>
+					<br>
+					<br>
+					a date: <input type="date"/>
+					<br>
+					<br>
+					a dropdown:<br>
+					<select name="penguins">
+								<option value="emperor" selected>Emperor</option>
+								<option value="galapagos" >Galapagos</option>
+								<option value="macaroni" >Macaroni</option>
+						</select>
+					<br>
+					<br>
+					a text area: <textarea name="message" rows="4" cols="25">Your text here</textarea>
+					<br>
+					<br>
+					radio buttons: <br>
+					<input type="radio" name="penguinType" value="emperor" checked>Emperor</input><br>
+					<input type="radio" name="penguinType" value="galapagos" >Galapagos</input><br>
+					<input type="radio" name="penguinType" value="macaroni" >Macaroni</input>
+					<br>
+					<br>
+					<!-- from HTML 5: datalists and some other things -->
+					<input list="browsers"/>
+					<datalist id="browsers">
+							<option value="Firefox">
+							<option value="Chrome">
+							<option value="Tor">
+					</datalist>
+					<input type="submit" value="Submit"/>
+					<!--submits the form data to the form handler. -->
+					<!--if a form element does not have a name, it will not be submitted-->
+					
+			</form>
+		</div>
+	</body>
+	
+	
+
+</html>
