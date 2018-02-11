@@ -197,9 +197,9 @@ function getTheSum(){
 	var num2;
 	var sum=0;
 	numField1.onchange = function(){
-		 num1= parseInt(numField1.value);
-	//	sum+=num1;
-		console.log(num1);
+		num1= parseInt(numField1.value);
+		sum+=num1;
+	//	console.log(num1);
 	//	console.log(num1+sum);
 	}
 	numField2.onchange = function(){
@@ -208,18 +208,15 @@ function getTheSum(){
 		//console.log(num1+num2);
 		sum=num1+num2;
 		console.log(sum);
-		
-		//document.getElementById("sum").innerHTML=sum;
+		if(isNaN(sum)){
+			document.getElementById("sum").innerHTML="Cannot add";
+		}
+		else{
+		document.getElementById("sum").innerHTML=sum;}
 	}
 	
 	//sum=num1+num2;
-	//console.log(sum);
-	
-	
-	//console.log(num1.value);
-	//console.log(num2);
-	//console.log(sum);
-	
+	//console.log(sum);	
 }
 
 getTheSum();
