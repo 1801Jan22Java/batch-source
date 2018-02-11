@@ -1,0 +1,19 @@
+@charset "UTF-8";
+h1{
+	font-family:"verdana","arial","sans-serif";
+	text-align:center;
+}
+body{
+	font-family:"verdana","arial","sans-serif";
+	text-align:center;
+	}
+	
+#inputform
+{
+	background-color:powderblue;
+	color:"white";
+	text-align:center;
+	width: 300px;
+	margin-left:auto;
+	margin-right:auto;
+}
