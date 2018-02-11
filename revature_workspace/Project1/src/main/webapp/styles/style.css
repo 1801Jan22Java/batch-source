@@ -2,6 +2,9 @@
 h1{
 	font-family:"verdana","arial","sans-serif";
 	text-align:center;
+	background-color:powderblue;
+	padding-top: 8px;
+	padding-bottom: 3px;
 }
 body{
 	font-family:"verdana","arial","sans-serif";
@@ -16,4 +19,25 @@ body{
 	width: 300px;
 	margin-left:auto;
 	margin-right:auto;
+}
+
+#reimbursmentForm
+{
+	text-align:left;
+	
+}
+
+#reimbursement
+{
+	/*text-align:left;*/
+	margin-left:auto;
+	margin-right:auto;
+	width:450px;
+}
+#formcontainer
+{
+	padding:15px;
+	background-color:powderblue;
+	text-align:left;
+	
 }
