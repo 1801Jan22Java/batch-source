@@ -14,7 +14,7 @@ function showBears(){
 		console.log(bears[i]);
 		var newDiv = document.createElement("div");
 		newDiv.setAttribute("class","displayDiv");
-		newDiv.innerHTML="name: "+bears[i].name+"; cave: "+bears[i].cave.name;
+		newDiv.innerHTML="name: " + bears[i].name + "; cave: " + bears[i].cave.name;
 		bearDiv.appendChild(newDiv);
 	}
 }

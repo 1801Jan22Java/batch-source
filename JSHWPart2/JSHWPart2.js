@@ -103,7 +103,21 @@ Add <input> element values.
 Put the sum in the <span> element.
 If values cannot be added, put "Cannot add" in the <span> element
 */
+function sumEvent(event) {
+	var num1 = parseFloat(document.getElementById('num1').value);
+	var num2 = parseFloat(document.getElementById('num2').value);
 
+	if(isNaN(num1) || isNaN(num2)) {
+		document.getElementById('sum').innerHTML = 'Cannot add';
+	}
+	else {
+		var floatSum = num1 + num2;
+		var sum = Math.round(floatSum*100)/100;
+		document.getElementById('sum').innerHTML = sum;
+	}
+}
+document.getElementById('num1').addEventListener("change", sumEvent);
+document.getElementById('num2').addEventListener("change", sumEvent);
 
 /*
 7. Skills Event
@@ -112,7 +126,11 @@ When user selects a skill, create an alert with a message similar to:
 "Are you sure CSS is one of your skills?"
 NOTE: no alert should appear when user deselects a skill.
 */
-
+function skillsEvent(event) {
+	var something5 = document.getElementsByName('skills')[0].value;
+	alert('Are you sure ' + something5 + ' is one of your skills?');
+}
+document.getElementsByName('skills')[0].addEventListener("change", skillsEvent);
 
 /*
 8. Favorite Color Event
@@ -122,8 +140,29 @@ When a user selects a color, create an alert with a message similar to:
 "So you like green more than blue now?"
 In this example, green is the new value and blue is the old value.
 Make the background color (of all favoriteColor radio buttons) 
-the newly selected favoriteColor*/
+the newly selected favoriteColor
+*/
+var lastColor = 'white';
+function favColorEvent(event) {
+	
+	var something6 = event.srcElement.value;
+	console.log(something6);
+	alert('So you like ' + something6 + ' more than ' + lastColor);
+	lastColor = something6;
+	var x = document.getElementsByName('favoriteColor');
+	// console.log(x);
+	for (var i = 0; i < x.length; i++) {
+		// inline style is being applied, but color still doesn't show.
+		x[i].style.backgroundColor = something6;
+		// INSTEAD I applied it on the radio buttons PARENTNODE 
+		x[i].parentNode.style.backgroundColor = something6;
+	}
+}
 
+var radiosForFavoriteColor = document.getElementsByName('favoriteColor');
+for (var i = 0; i < radiosForFavoriteColor.length; i++) {
+	radiosForFavoriteColor[i].addEventListener("change", favColorEvent);
+}
 
 /*
 9. Show/Hide Event
@@ -132,6 +171,9 @@ When user hovers over an employees name:
 Hide the name if shown.
 	Show the name if hidden.
 */
+/**************/
+/**INCOMPLETE**/
+/**************/
 
 
 /*10. Current Time
