@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Ajax et al.</title>
+<link rel="stylesheet" href="../styles/styles.css" />
+<style>
+#toggleDiv{
+	height:100px;
+	width: 100px;
+	}</style>
+</head>
+<body>
+	<div class="displayDiv">
+	<h4>Enter a Pokeman id:</h4>
+	<input type = "number" id="pokeId"/><br><br>
+	<button type="button" id="pokeButton"/>What's its name?</button>
+	<div class="displayDiv" id="pokeResult"></div>
+	</div>
+	<div id="toggleDiv"></div>
+	<br>
+	<br>
+	<button onclick="stopColor()"> TURN IT OFF! </button>
+	
+</body>
+<script src="../scripts/ajaxEtc.js"></script>
+</html>

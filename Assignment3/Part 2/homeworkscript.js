@@ -208,8 +208,10 @@ function getTheSum(){
 		//console.log(num1+num2);
 		sum=num1+num2;
 		console.log(sum);
-		document.getElementById("sum").innerHTML=sum;
+		
+		//document.getElementById("sum").innerHTML=sum;
 	}
+	
 	//sum=num1+num2;
 	//console.log(sum);
 	
@@ -283,19 +285,20 @@ function changeColor(){
 	console.log("question 8");
 	var colorSelect= document.getElementsByName("favoriteColor");
 	//console.log(colorSelect[0].checked);
+	console.log(colorSelect);
 	//console.log(colorSelect);
-	//console.log(colorSelect);
+	var oldColor ="white"
 	for(var j =0;j<colorSelect.length;j++){
 	 colorSelect[j].onclick=function(){
 		for(var i =0;i<colorSelect.length;i++){
 			if(colorSelect[i].checked==true){
 				selectedColor =colorSelect[i].value;
 				//console.log(oldColor);
-				var oldColor =document.body.style.backgroundColor;
+				 oldColor =colorSelect[i].parentNode.style.backgroundColor;
 				//console.log(select.getElementsByTagName("option")[2].value);
 				//alert(selectedColor);
 				var selectColor=selectedColor;
-				document.body.style.backgroundColor=selectedColor;
+				colorSelect[i].parentNode.style.backgroundColor=selectedColor;
 				alert("So you like " + selectedColor + " more than " + oldColor+" now?" );
 				}	 
 			}
@@ -322,7 +325,29 @@ Hide the name if shown.
 
 function showHide(){
 	console.log("Question 9");
-}
+	var empList = document.getElementsByClassName("empName");
+	for(var j = 0;j<empList.length;j++){
+	empList[j].addEventListener("mouseover",function(event){
+		for(var i = 0;i<empList.length;i++){
+		var empName=document.getElementsByClassName("empName");
+		//var empName=document.getElementsByClassName("empName")[0];
+		//console.log(empName);
+		//console.log(empName[0].innerHTML);
+		//console.log(empList);
+		//console.log(empList[i].innerHTML);
+			if(empList[i].style.visibility==="visible"){
+			//	console.log(empList[i]);
+				empList[i].style.visibility="hidden";
+			}
+			else{
+				empList[i].style.visibility="visible";
+				//console.log(empList[i]);
+				}
+			
+		}});
+	}
+} 
+
 showHide();
 
 /*

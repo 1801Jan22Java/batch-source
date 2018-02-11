@@ -12,6 +12,7 @@ import com.revature.beans.BearType;
 import com.revature.beans.Cave;
 import com.revature.dao.BearDao;
 import com.revature.dao.BearDaoImpl;
+import com.revature.dao.BearDaoXMLImpl;
 import com.revature.dao.CaveDao;
 import com.revature.dao.CaveDaoImpl;
 import com.revature.util.ConnectionUtil;
@@ -20,6 +21,12 @@ public class Driver {
 	
 	public static void main(String [] args)
 	{
+		BearDao bd = new BearDaoXMLImpl();
+		bd.getBears();
+		//Breaking the dao pattern with this.
+		Bear b2 = ((BearDaoXMLImpl)bd).unmarshallBear("src/BearToUnmarshall.xml");
+		System.out.println(b.toString());
+		/*
 		
 		CaveDao cd = new CaveDaoImpl();
 		Calendar cal = Calendar.getInstance();
@@ -35,6 +42,6 @@ public class Driver {
 		Cave cv = new Cave("Reston",1);
 		System.out.println(bdi.getBearById(1));
 		bdi.feedBear(1,1,40);
-	
+	*/
 	}
 }
