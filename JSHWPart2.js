@@ -128,8 +128,8 @@ Put the sum in the <span> element.
 If values cannot be added, put "Cannot add" in the <span> element
 */
 function sumEvent() {
-    document.getElementById("num1").addEventListener("onchange", add);
-    document.getElementById("num2").addEventListener("onchange", add);
+    document.getElementById("num1").addEventListener("change", add);
+    document.getElementById("num2").addEventListener("change", add);
 
     function add() {
         var input1 = document.getElementById("num1");
@@ -158,10 +158,11 @@ When user selects a skill, create an alert with a message similar to:
 NOTE: no alert should appear when user deselects a skill.
  */
 function skillsEvent() {
-    getReqSelect().addEventListener("change", inquire);
+    var select = getReqSelect();
+    select.addEventListener("change", inquire);
 
     function inquire() {
-        alert("Are you sure CSS is one of your skills?");
+        alert("Are you sure " + select.options[select.selectedIndex].text + " is one of your skills?");
     }
 }
 
@@ -202,24 +203,140 @@ function favoriteColorEvent() {
     }
 }
 
-window.onload = function() {
+/*
+9. Show/Hide Event
 
-    // getUsa();
-    // getPeopleInSales();
-    // console.log(getAnchorChildren());
-    // getSkills();
-    // getCustomAttribute();
-    // sumEvent();
-    // skillsEvent();
-    favoriteColorEvent();
+NOTE: Write unobtrusive Javascript
 
+When user hovers over an employees name:
+
+Hide the name if shown.
+    Show the name if hidden.
+ */
+function showHideEvent() {
+    var employees = document.getElementsByClassName("empName");
+
+    function employeeListener(element) {
+        element.addEventListener("mouseover", toggleHidden);
+        element.addEventListener("mouseout", toggleVisible);
+        function toggleVisible() {
+            element.style.visibility = "visible";
+        }
+        function toggleHidden() {
+            element.style.visibility = "hidden";
+        }
+    }
+
+    for (var i = 0; i < employees.length; i++) {
+        employeeListener(employees[i]);
+    }
+}
 
 /*
-    document.getElementById("divWithText").addEventListener("mousemove", trackCursor, false);
-    // Don't need to pass in event object, but best practices to do so
-    function trackCursor(event) {
-        document.getElementById("mouseX").innerHtml = event.clientX;
-        document.getElementById("mouseY").innerHtml = event.clientY;
-    }*/
+10. Current Time
 
-};
+Regarding this element:
+    <h5 id="currentTime"></h5>
+
+Show the current time in this element in this format: 9:05:23 AM
+
+The time should be accurate to the second without having to reload the page.
+ */
+function currentTime() {
+    function checkAmPm(i) {
+        if (i > 12) {
+            return "PM";
+        }
+        return "AM";
+    }
+
+    function formatTime(i) {
+        if (i < 10) i = "0" + i;
+        return i;
+    }
+
+    function checkHourTime(i) {
+        if (i > 12) i = (i - 12);
+        return i;
+    }
+
+    function displayTime() {
+        var today = new Date();
+        var h = today.getHours();
+        var m = today.getMinutes();
+        var s = today.getSeconds();
+        var amPm = checkAmPm(h);
+        h = checkHourTime(h);
+        h = formatTime(h);
+        m = formatTime(m);
+        s = formatTime(s);
+        document.getElementById("currentTime").innerHTML =
+            h + ":" + m + ":" + s + " " + amPm;
+        setTimeout(displayTime, 500);
+    }
+
+    displayTime();
+}
+
+/*
+11. Delay
+Regarding this element:
+
+<p id="helloWorld">Hello, World!</p>
+
+Three seconds after a user clicks on this element, change the text to a random color.
+ */
+function delay() {
+    // random colors - taken from here:
+    // http://www.paulirish.com/2009/random-hex-color-code-snippets/
+    function randomColors() {
+        return '#' + Math.floor(Math.random() * 16777215).toString(16);
+    }
+
+    function changeToRandom() {
+        setTimeout(function () {
+            var helloElement = document.getElementById("helloWorld").style.color = randomColors();
+        }, 3000);
+    }
+
+    var helloElement = document.getElementById("helloWorld").addEventListener("click", changeToRandom);
+}
+
+/*
+12. Walk the DOM
+
+Define function walkTheDOM(node, func)
+
+This function should traverse every node in the DOM.
+Use recursion.
+
+On each node, call func(node).
+ */
+function walkTheDOM(node, func) {
+    func(node);
+    var children = node.childNodes;
+    for (var i = 0; i < children.length; i++) {
+        walkTheDOM(children[i], func);
+    }
+}
+
+// window.onload = function() {
+
+    getUsa();
+    getPeopleInSales();
+    console.log(getAnchorChildren());
+    getSkills();
+    getCustomAttribute();
+    sumEvent();
+    skillsEvent();
+    favoriteColorEvent();
+    showHideEvent();
+    currentTime();
+    delay();
+    var count = 0;
+    // walkTheDOM(document.body, function () {
+    //     count += 1;
+    //     console.log(count);
+    // });
+
+// };
