@@ -272,7 +272,6 @@ document.getElementById("helloWorld").addEventListener("click",delayColorChange)
 function delayColorChange(event) {
 
 	setTimeout(function() {
-		console.log("changed color");
 		event.target.style.color = getRandomColor();
 	},3000);
 }
