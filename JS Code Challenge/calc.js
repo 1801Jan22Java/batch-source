@@ -7,7 +7,7 @@ function add() {
 	var div = document.getElementById("ans");
 
 	if (isNaN(num1) || isNaN(num2)) {
-		div.innerHTML = "One entry is not a number";
+		div.innerHTML = "At least one of the entries is not a number";
 		div.style.backgroundColor = "red";
 	} else {
 		div.innerHTML = (num1 + num2);
@@ -21,7 +21,7 @@ function sub() {
 	var div = document.getElementById("ans");
 
 	if (isNaN(num1) || isNaN(num2)) {
-		div.innerHTML = "One entry is not a number";
+		div.innerHTML = "At least one of the entries is not a number";
 		div.style.backgroundColor = "red";
 	} else {
 		div.innerHTML = (num1 - num2);
@@ -35,7 +35,7 @@ function mult() {
 	var div = document.getElementById("ans");
 
 	if (isNaN(num1) || isNaN(num2)) {
-		div.innerHTML = "One entry is not a number";
+		div.innerHTML = "At least one of the entries is not a number";
 		div.style.backgroundColor = "red";
 	} else {
 		div.innerHTML = (num1 * num2);
@@ -49,7 +49,7 @@ function divide() {
 	var div = document.getElementById("ans");
 
 	if (isNaN(num1) || isNaN(num2)) {
-		div.innerHTML = "One entry is not a number";
+		div.innerHTML = "At least one of the entries is not a number";
 		div.style.backgroundColor = "red";
 	} else if (num2 == 0) {
 		div.innerHTML = "Cannot divide by zero";
