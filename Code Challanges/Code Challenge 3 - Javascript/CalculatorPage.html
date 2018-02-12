@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            body {font-family: Arial, Helvetica, sans-serif;}
+            form {border: 8px solid #f1f1f1;}
+            
+            input[type=text], input[type=password] {
+                width: 40%;
+                padding: 12px 20px;
+                margin: 4px 0;
+                display: inline-block;
+                border: 2px solid #ccc;
+                box-sizing: border-box;
+            }
+            
+            button {
+                background-color: #4CAF50;
+                color: white;
+                padding: 14px 20px;
+                margin: 8px 0;
+                border: none;
+                cursor: pointer;
+                width: 30%;
+            }
+            
+            button:hover {
+                opacity: 0.8;
+            }
+            
+            
+            .container {
+                padding: 16px;
+            }
+            
+            span.psw {
+                float: right;
+                padding-top: 16px;
+            } 
+        </style>
+    </head>
+    <body>
+        <header class="w3-container w3-teal" align="center">
+            <h1>Leonard's Calculator</h1>
+        </header>
+        <br><br>
+        <div align="center">
+            <form name="mathForm" action="JSCalculator.js">
+                <input name="num1" type="text" required><br>
+                <select id="operation" align="center">
+                    <option value="addition" selected="selected">X + Y (Addition)</option>
+                    <option value="subtraction" >X - Y (Subtraction)</option>
+                    <option value="multiplication">X * Y (Multiplication)</option>
+                    <option value="division">X / Y (Division)</option>
+                    <option value="exponent">X ^ Y (Exponentiation)</option>
+                </select> <br>
+                <input name="num2" type="text" required>
+            </form> <br>
+            <input id="submitButton" type="submit" align="center"  value="Submit"></button>
+        </div>
+        <div align="center" style:"block">
+            <p id="result"></p>
+        </div>
+        <script src="JSCalculator.js">          
+        </script>
+    </body>
+</html>
