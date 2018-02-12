@@ -1,0 +1,52 @@
+<!--
+JavaScript Calculator
+Build a calculator webpage with HTML, CSS, JavaScript, and (optional) Bootstrap.
+All logic must be performed by unobtrusive JS functions.
+The user must be able to enter two numbers and select an operation (+,-,*,/).
+User input validation (check out some features of Bootstrap forms) is a plus.
+-->
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+
+    <meta charset="utf-8" />
+    <title>Dashboard</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body class="bodyStyle">
+
+    <div class="colorDiv">
+        <h4> Calculator </h4>
+        <div>
+
+            <input type="number" class="form-control numInput" id="num1" />
+
+            <div class="btn-group">
+                <button type="button" class="btn btn-primary" id="buttonPlus">+</button>
+                <button type="button" class="btn btn-primary" id="buttonMinus">-</button>
+                <button type="button" class="btn btn-primary" id="buttonMult">x</button>
+                <button type="button" class="btn btn-primary" id="buttonDiv">/</button>
+            </div>
+
+            <input type="number" class="form-control numInput" id="num2" />
+
+            <br />
+
+            <p id="sum"> Result: </p>
+        </div>
+    </div>
+
+</body>
+
+<script src="./calculator.js"></script>
+
+</html>

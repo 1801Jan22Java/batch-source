@@ -1,0 +1,26 @@
+.centerDiv {
+    text-align: center;
+    width: 750px;
+}
+
+.numInput{
+    width:100px;
+    margin:10px;
+    margin-left: 110px;
+}
+
+.bodyStyle{
+    text-align:center;
+}
+
+.colorDiv {
+    background-color: #ffd885;
+    border-color: orange;
+    border-width: 5px;
+    border-radius: 10px;
+    margin-left: 600px;
+    margin-right: 600px;
+    margin-top: 150px;
+    padding: 10px;
+    outline-width: 25px;
+}
