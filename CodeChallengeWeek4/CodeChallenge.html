@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Code Challenge</title>
+	<link rel="stylesheet" href="codeChallengeStyle.css"/>
+</head>
+<body class = "bodyStyle">
+	<h1>Code Challenge Calculator</h1>
+	<br>
+	<br>
+	<h3>enter both inputs, then select an operator and the result will be computed</h3>
+
+	<br>
+	<br>
+	<div>
+		<form>
+			<input id="input1" class="numbers" type="text">input 1</input>
+			<br>
+			<br>
+			<input id="input2" class="numbers" type="text">input 2</input>
+		</form>
+		<br>
+		<form>
+			<input name="operators" type = "radio" value = "add">Add</input>
+			<br>
+			<input name="operators" type = "radio" value = "sub">Subtract</input>
+			<br>
+			<input name="operators" type = "radio" value = "mult">Multiply</input>
+			<br>
+			<input name="operators" type = "radio" value = "div">Divide</input>
+			<br>
+		</form>
+	</div>
+	<br>
+	<br>
+	<button onclick=calculate()>Compute</button>
+	<br>
+	<br>
+	<div id ="result"></div>
+	
+</body>
+<script src="codeChallengeJS.js"></script>
+</html>
