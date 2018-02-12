@@ -5,27 +5,31 @@ public class Employee {
 	private String lastName;
 	private String userName;
 	private String password;
+	private String email;
 	private int isManager;
 	private int managerID;
 	
 	public Employee() 
 	{}
-	public Employee(String firstName, String lastName, String userName,String password, int isManager, int managerID)
+	public Employee(String firstName, String lastName, String userName,String password,String email, int isManager, int managerID)
 	{
 		this.firstName=firstName;
 		this.lastName=lastName;
 		this.userName=userName;
 		this.password=password;
+		this.email=email;
 		this.isManager=isManager;
 		this.managerID=managerID;
 	}
-	public Employee(String firstName, String lastName, String userName,String password)
+	public Employee(String firstName, String lastName, String userName,String password,String email)
 	{
 		this.firstName=firstName;
 		this.lastName=lastName;
 		this.userName=userName;
 		this.password=password;
+		this.email=email;
 		this.isManager=1;
+		
 		
 	}
 	public String getFirstName() {
@@ -65,6 +69,22 @@ public class Employee {
 		this.managerID = managerID;
 	}
 	public Employee getManager() {
-		return null
+		return null;
 	}
+	public void setEmail(String email) 
+	{
+		this.email=email;
+	}
+	public String getEmail() 
+	{
+		return this.email;
+	}
+	@Override
+	public String toString() {
+		return "Employee name=" + firstName + " " + lastName 
+				+ ", userName=" + userName + ", password="
+				+ password + ", email=" + email + "\n isManager=" 
+				+ isManager + ", managerID=" + managerID;
+	}
+	
 }

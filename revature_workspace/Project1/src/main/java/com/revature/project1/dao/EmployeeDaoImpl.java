@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import com.revature.project1.beans.Employee;
@@ -16,10 +18,37 @@ public class EmployeeDaoImpl implements EmployeeDao{
 
 	private static String filename = "connection.properties";
 
-
-	public List<Employee> getEmployees() {
-		// TODO Auto-generated method stub
-		return null;
+	
+	@Override
+	public List<Employee> getEmployees(){
+		System.out.println("Entered method");
+		List<Employee> el = new ArrayList<Employee>();
+		Employee emp = null;
+		Connection con;
+		try {
+			con = ConnectionUtil.getConnectionFromFile(filename);
+			PreparedStatement prepStmt= con.prepareStatement("SELECT * FROM EMPLOYEE");
+			
+			prepStmt.execute();
+			ResultSet rs = prepStmt.getResultSet();
+			System.out.println("executing query");
+			while(rs.next()) {
+				System.out.println("Getting employee");
+				String user_name=rs.getString("USER_NAME");
+				String pass = rs.getString("USER_PASS");
+				String fname = rs.getString("FIRST_NAME");
+				String lname= rs.getString("LAST_NAME");
+				String email=rs.getString("EMP_EMAIL");
+				int isManager= rs.getInt("MANAGING");
+				int managedBy=rs.getInt("MANAGED_BY");
+				emp=new Employee(fname,lname,user_name,pass,email,isManager,managedBy);
+				el.add(emp);			
+			}	
+		} 
+		catch (IOException | SQLException e) {
+			e.printStackTrace();
+		}
+		return el;
 	}
 
 	public Employee getEmployeeById(int id) {
@@ -55,8 +84,6 @@ public class EmployeeDaoImpl implements EmployeeDao{
 		String name = sc.nextLine();
 		System.out.println("Please enter user lastname");
 		String lname = sc.nextLine();
-		System.out.println("Please enter user SSN");
-		String ssn = sc.nextLine();
 		System.out.println("Please enter user username");
 		String username=sc.nextLine();
 		System.out.println("Please enter user password");
@@ -65,25 +92,59 @@ public class EmployeeDaoImpl implements EmployeeDao{
 		return user;
 	}
 
+	/*
 	public void addEmployee(Employee user) {
 
 		if(!validateManager(user))
 		{
 			System.out.println("You do not carry the membership");
-			System.out.println(user.getManager());
+			System.out.println(user.getManagerID());
 		}
 		try(Connection conn = ConnectionUtil.getConnectionFromFile(filename))
 		{
-			Employee user2= createEmployeeObject();
+			Employee employee= createEmployeeObject();
 			conn.setAutoCommit(false);
 			//	System.out.println("In try statement"); //DEBUGGING
-			String sqlStmt="{CALL NEW_USER_PROC(?,?,?,?,?,?)}";
+			String sqlStmt="{CALL SP_ADD_EMPLOYEE(?,?,?,?,?,?,?)}";
 			CallableStatement cs = conn.prepareCall(sqlStmt);
-			cs.setString(1,user2.getUserName());
-			cs.setString(2,user2.getPassword());
-			cs.setString(3, user2.getFirstName());
-			cs.setString(4,user2.getLastName());
-			cs.setInt(5, user2.getManager().getManagerID());
+			cs.setString(1,employee.getUserName());
+			cs.setString(2,employee.getPassword());
+			cs.setString(3, employee.getFirstName());
+			cs.setString(4,employee.getLastName());
+			cs.setString(5, employee.getEmail());
+			cs.setInt(6, employee.getIsManager());
+			cs.setInt(7, employee.getManagerID());
+			cs.execute();
+			conn.commit();
+			System.out.println("Employee added");
+
+		}
+		catch(SQLIntegrityConstraintViolationException e)
+		{
+			System.out.println("A user with that username already exists!");
+		}
+		catch (SQLException | IOException e) {
+			//con.rollback();
+			e.printStackTrace();
+		}
+
+	}
+	*/
+	public void addEmployee(Employee employee) {
+
+		try(Connection conn = ConnectionUtil.getConnectionFromFile(filename))
+		{
+			conn.setAutoCommit(false);
+			//	System.out.println("In try statement"); //DEBUGGING
+			String sqlStmt="{CALL SP_ADD_EMPLOYEE(?,?,?,?,?,?,?)}";
+			CallableStatement cs = conn.prepareCall(sqlStmt);
+			cs.setString(1,employee.getUserName());
+			cs.setString(2,employee.getPassword());
+			cs.setString(3, employee.getFirstName());
+			cs.setString(4,employee.getLastName());
+			cs.setString(5,employee.getEmail());
+			cs.setInt(6,employee.getIsManager());
+			cs.setInt(7,employee.getManagerID());
 			cs.execute();
 			conn.commit();
 			System.out.println("Employee added");
@@ -100,20 +161,22 @@ public class EmployeeDaoImpl implements EmployeeDao{
 
 	}
 
-	public void addManager(Employee user) {
+	public void addManager(Employee employee) {
 
 		try(Connection conn = ConnectionUtil.getConnectionFromFile(filename))
 		{
 
 			conn.setAutoCommit(false);
 			//System.out.println("In try statement");//DEBUGGING
-			String sqlStmt="{CALL NEW_USER_PROC(?,?,?,?,?,?)}";
+			String sqlStmt="{CALL SP_ADD_EMPLOYEE(?,?,?,?,?,?,?)}";
 			CallableStatement cs = conn.prepareCall(sqlStmt);
-			cs.setString(1,user.getUserName());
-			cs.setString(2,user.getPassword());
-			cs.setString(3, user.getFirstName());
-			cs.setString(4,user.getLastName());
-			cs.setInt(5, user.getManager().getManagerID());
+			cs.setString(1,employee.getUserName());
+			cs.setString(2,employee.getPassword());
+			cs.setString(3, employee.getFirstName());
+			cs.setString(4,employee.getLastName());
+			cs.setString(5, employee.getEmail());
+			cs.setInt(6, employee.getIsManager());
+			cs.setInt(7, employee.getManagerID());
 			cs.execute();
 			conn.commit();
 
@@ -135,7 +198,7 @@ public class EmployeeDaoImpl implements EmployeeDao{
 		//	String sql = "SELECT USER_ID,USER_NAME,USER_PASS FROM USERS WHERE USER_NAME=?";
 		try(Connection conn = ConnectionUtil.getConnectionFromFile(filename))
 		{
-			PreparedStatement ps = conn.prepareStatement("SELECT USER_ID,USER_NAME,USER_PASS FROM USERS WHERE USER_NAME=?");
+			PreparedStatement ps = conn.prepareStatement("SELECT EMP_ID,USER_NAME,USER_PASS FROM EMPLOYEE WHERE USER_NAME=?");
 			ps.setString(1, username);
 			ps.execute();
 			ResultSet rs =ps.getResultSet();
@@ -167,19 +230,20 @@ public class EmployeeDaoImpl implements EmployeeDao{
 	 * @return Employee user
 	 * */
 	public Employee createEmployee() {
-		Employee user = createEmployeeObject();
+		Employee employee = createEmployeeObject();
 		try(Connection conn = ConnectionUtil.getConnectionFromFile(filename))
 		{
 			conn.setAutoCommit(false);
 			//	System.out.println("In try statement");//DEBUGGING
-			String sqlStmt="{CALL NEW_USER_PROC(?,?,?,?,?,?)}";
+			String sqlStmt="{CALL SP_ADD_EMPLOYEE(?,?,?,?,?,?,?)}";
 			CallableStatement cs = conn.prepareCall(sqlStmt);
-			cs.setString(1,user.getUserName());
-			cs.setString(2,user.getPassword());
-			cs.setString(3, user.getFirstName());
-			cs.setString(4,user.getLastName());
-			cs.setInt(5, user.getManager().getManagerID());
-			
+			cs.setString(1,employee.getUserName());
+			cs.setString(2,employee.getPassword());
+			cs.setString(3, employee.getFirstName());
+			cs.setString(4,employee.getLastName());
+			cs.setString(5, employee.getEmail());
+			cs.setInt(6, employee.getIsManager());
+			cs.setInt(7, employee.getManagerID());
 			cs.execute();
 			conn.commit();
 			System.out.println("Employee added");
@@ -194,14 +258,14 @@ public class EmployeeDaoImpl implements EmployeeDao{
 			e.printStackTrace();
 		}
 		System.out.println("Employee creation successful!");
-		return user;
+		return employee;
 
 	}
 
 	public int getEmployeeID(Employee user) {
 		int userId=0;
 		String username=user.getUserName();
-		String sql = "SELECT USER_ID FROM USERS WHERE USER_NAME=?";
+		String sql = "SELECT EMP_ID FROM EMPLOYEE WHERE USER_NAME=?";
 		try(Connection conn = ConnectionUtil.getConnectionFromFile(filename))
 		{
 			PreparedStatement ps = conn.prepareStatement(sql);
@@ -210,7 +274,7 @@ public class EmployeeDaoImpl implements EmployeeDao{
 			ResultSet rs =ps.getResultSet();
 			if(rs.next())
 			{
-				userId=rs.getInt("USER_ID");
+				userId=rs.getInt("EMP_ID");
 			}
 		}
 		catch(SQLException | IOException e){ e.printStackTrace();}
@@ -226,11 +290,11 @@ public class EmployeeDaoImpl implements EmployeeDao{
 	 * */
 	
 	public Employee getEmployeeByCredentials(String username, String password) {
-		Employee user = null;
+		Employee employee = null;
 		try(Connection con = ConnectionUtil.getConnectionFromFile(filename))
 		{
 
-			PreparedStatement prepStmt = con.prepareStatement("SELECT * FROM USERS WHERE USER_NAME=? AND USER_PASS=?");
+			PreparedStatement prepStmt = con.prepareStatement("SELECT * FROM EMPLOYEE WHERE USER_NAME=? AND USER_PASS=?");
 			prepStmt.setString(1, username);
 			prepStmt.setString(2,password);
 			prepStmt.execute();
@@ -241,9 +305,11 @@ public class EmployeeDaoImpl implements EmployeeDao{
 				String pass = rs.getString("USER_PASS");
 				String fname = rs.getString("FIRST_NAME");
 				String lname= rs.getString("LAST_NAME");
-				String ssn = rs.getString("SSN");
+				String email=rs.getString("EMP_EMAIL");
+				int isManager= rs.getInt("MANAGING");
+				int managedBy=rs.getInt("MANAGED_BY");
 
-			//	user=new Employee(username,pass,fname,lname,ssn);
+				employee=new Employee(fname,lname,username,password,email,isManager,managedBy);
 			}
 		} catch (SQLException | IOException e) {
 			// TODO Auto-generated catch block
@@ -251,7 +317,7 @@ public class EmployeeDaoImpl implements EmployeeDao{
 		}
 		finally
 		{
-			return user;
+			return employee;
 		}
 	}
 
@@ -330,12 +396,6 @@ public class EmployeeDaoImpl implements EmployeeDao{
 	}
 
 	@Override
-	public List<Employee> getEmloyees() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public Employee getManagerById(int id) {
 		// TODO Auto-generated method stub
 		return null;
@@ -351,6 +411,38 @@ public class EmployeeDaoImpl implements EmployeeDao{
 	public Employee getManager() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public List<Employee> getEmloyees() {
+		System.out.println("Entered method");
+		List<Employee> el = new ArrayList<Employee>();
+		Employee emp = null;
+		Connection con;
+		try {
+			con = ConnectionUtil.getConnectionFromFile(filename);
+			PreparedStatement prepStmt= con.prepareStatement("SELECT * FROM EMPLOYEE");
+			
+			prepStmt.execute();
+			ResultSet rs = prepStmt.getResultSet();
+			System.out.println("executing query");
+			while(rs.next()) {
+				System.out.println("Getting employee");
+				String user_name=rs.getString("USER_NAME");
+				String pass = rs.getString("USER_PASS");
+				String fname = rs.getString("FIRST_NAME");
+				String lname= rs.getString("LAST_NAME");
+				String email=rs.getString("EMP_EMAIL");
+				int isManager= rs.getInt("MANAGING");
+				int managedBy=rs.getInt("MANAGED_BY");
+				emp=new Employee(fname,lname,user_name,pass,email,isManager,managedBy);
+				el.add(emp);			
+			}	
+		} 
+		catch (IOException | SQLException e) {
+			e.printStackTrace();
+		}
+		return el;
 	}
 
 }

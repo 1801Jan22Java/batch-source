@@ -17,6 +17,7 @@ public interface EmployeeDao {
 	public void deleteEmployee(Employee employee,Employee manager);
 	public Employee createUser();
 	public Employee getManager();
+	List<Employee> getEmployees();
 	
 
 }

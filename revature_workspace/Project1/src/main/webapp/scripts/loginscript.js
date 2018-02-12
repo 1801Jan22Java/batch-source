@@ -5,7 +5,6 @@
 window.onload = function(){
 
 function login() {
-	alert("welcome");
 		var button = document.getElementById("submitButton");
 		var form = document.getElementsByTagName("form");
 		console.log(button);
@@ -18,13 +17,13 @@ function login() {
 				console.log(testVar.value);
 				console.log(testVar.innerHTML);
 				window.close();
-				alert("You're on your way!");
+				//alert("You're on your way!");
 				//window.open("main.html");
 				window.open("../views/main.html");
 			} else {
 				console.log(testVar);
 				console.log(pwvar);
-				alert("You do not have the membership!");
+				alert("The credentials you entered are invalid.  Please try again.");
 			}
 		
 		}
