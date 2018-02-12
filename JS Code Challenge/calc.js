@@ -51,7 +51,7 @@ function divide() {
 	if (isNaN(num1) || isNaN(num2)) {
 		div.innerHTML = "One entry is not a number";
 		div.style.backgroundColor = "red";
-	} else if (num2 === 0) {
+	} else if (num2 == 0) {
 		div.innerHTML = "Cannot divide by zero";
 		div.style.backgroundColor = "red";
 	}else {
