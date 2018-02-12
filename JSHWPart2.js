@@ -16,7 +16,7 @@ Due 5pm, Monday, February 12 in your branch.
 -----------------------------------------------------------------------------------*/
 
 window.onload = function() {
-	
+
 /*
 1. USA
 Define function getUSA()
@@ -70,9 +70,9 @@ function getAnchorChildren() {
 			if (children[j].nodeName == "SPAN") {
 				console.log(children[j].innerHTML);
 			}
-			
+
 		}
-		
+
 	}
 }
 
@@ -146,7 +146,7 @@ If values cannot be added, put "Cannot add" in the <span> element
 
 document.getElementById("num2").addEventListener("change",onChangeEventHandler);
 function onChangeEventHandler(event){
-	
+
 	var n1 = parseInt(document.getElementById("num1").value);
 	var n2 = parseInt(document.getElementById("num2").value);
 	var result = "";
@@ -156,10 +156,10 @@ function onChangeEventHandler(event){
 	else {
 		result = (n1 + n2);
 	}
-	
+
 	document.getElementById("sum").innerHTML = result;
 	console.log(result);
-	
+
 }
 
 /*
@@ -175,9 +175,10 @@ NOTE: no alert should appear when user deselects a skill.
 */
 document.getElementsByName("skills")[0].addEventListener("change",cssAlert);
 function cssAlert() {
-	if (document.getElementsByName("skills")[0].value == "css") {
-		alert("Are you sure CSS is one of your skills?");
-	}
+	alert("Are you sure " + document.getElementsByName("skills")[0].value + " is one of your skills?");
+
+}
+
 }
 
 
@@ -207,10 +208,14 @@ function favoriteColorChange(event) {
 	if (prev == "") {
 		prev = "white";
 	}
-	console.log(event.target);
+	// var radioButtons = document.getElementsByName("favoriteColor");
+	// for(var i = 0; i < radioButtons.length; i++) {
+	// 	radioButtons[i].style.color = event.target.value;
+	// 	console.log(radioButtons[i].style.color);
+	// }
 	document.body.style.backgroundColor = event.target.value;
 	alert("So you like " + event.target.value + " more than " + prev + " now?");
-	
+
 }
 
 /*
@@ -230,11 +235,15 @@ for(var i = 0; i <elements.length; i++) {
 }
 
 function mouseOverHandler(event) {
-	
-	if (event.target.style.color == "white") {
+	var color = document.body.style.backgroundColor;
+	console.log(color);
+	if (color == "") {
+		color = "white";
+	}
+	if (event.target.style.color == color) {
 		event.target.style.color = "black";
 	} else {
-		event.target.style.color = "white";
+		event.target.style.color = color;
 	}
 }
 
@@ -266,7 +275,7 @@ Three seconds after a user clicks on this element, change the text to a random c
 document.getElementById("helloWorld").addEventListener("click",delayColorChange);
 
 function delayColorChange(event) {
-	
+
 	setTimeout(function() {
 		console.log("changed color");
 		event.target.style.color = getRandomColor();
@@ -293,19 +302,17 @@ On each node, call func(node).
 */
 
 function walkTheDOM(node,val,func) {
-	
+
 	var children = node.childNodes;
 	if (children.length == 0) {
-		console.log("REEE");
 		return val + 1;
 	}
-	for (var i = 0; i < children.length) {
+	for (var i = 0; i < children.length; i++) {
 		val = func(children[i],val,walkTheDOM);
 	}
+
 	return val + 1;
 
 }
 
-walkTheDOM(document,0,walkTheDOM);
-
-}
+console.log(walkTheDOM(document,0,walkTheDOM));
