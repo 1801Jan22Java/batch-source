@@ -140,7 +140,6 @@ function sumEvent() {
         if (!isNaN(x) && !isNaN(y)) {
             document.getElementById("sum").innerHTML = (x + y);
         } else {
-
             document.getElementById("sum").innerHTML = "Cannot add";
         }
     }
@@ -320,7 +319,7 @@ function walkTheDOM(node, func) {
     }
 }
 
-// window.onload = function() {
+window.onload = function() {
 
     getUsa();
     getPeopleInSales();
@@ -339,4 +338,4 @@ function walkTheDOM(node, func) {
     //     console.log(count);
     // });
 
-// };
+};

@@ -1,0 +1,15 @@
+form {
+    font-family: "Comic Sans MS", cursive, sans-serif;
+}
+
+#formDiv {
+    border-color: blue;
+}
+
+#result {
+    color : magenta;
+}
+
+.operands {
+    border-color: blue;
+}
