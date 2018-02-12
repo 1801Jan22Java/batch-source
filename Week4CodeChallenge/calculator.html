@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Calculator</title>
+    <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+  <div class="inputDiv">
+    <h3>Input 1</h3>
+    <input id="input1" type="text" />
+    <h3>Input 2</h3>
+    <input id="input2" type="text" />
+    <br>
+    <br>
+    <h3> Operation </h3>
+    <select id="operation" name="operations">
+      <option value="addition">Addtion</option>
+      <option value="subtraction">Subtraction</option>
+      <option value="multiplication">Multiplication</option>
+      <option value="division" selected="selected">Division</option>
+    </select>
+    <br>
+    <br>
+    <button id="calculate" type="button">Calculate!</button>
+  </div>
+  <div class="answerDiv">
+    <h2 id="answer"></h2>
+  </div>
+<script src="CodeChallenge.js"></script>
+</body>
+</html>
