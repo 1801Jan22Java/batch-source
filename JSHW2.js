@@ -272,6 +272,19 @@ Regarding this element:
 <p id="helloWorld">Hello, World!</p>
 
 Three seconds after a user clicks on this element, change the text to a random color.*/
+var hello = document.getElementById("helloWorld");
+        hello.onclick = function () {
+            function randomColor() {
+                var hexValues = ["1","2","3","4","5","6","7","8","9", "a","b","c","d","e","f"];
+                var colour;
+                for (var i = 0; i < 6; i++) {
+                    var rand = (Math.floor(Math.random() * 16));
+                    colour = colour + hexValues[rand];
+                }
+                hello.style.color = colour;
+            }
+            setTimeout(randomColor, 3000);
+        }
 
 /*
 12. Walk the DOM
