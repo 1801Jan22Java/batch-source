@@ -204,16 +204,12 @@ document.getElementsByName("favoriteColor").forEach(function(elem) {
 });
 
 function favoriteColorChange(event) {
-	var prev = document.body.style.backgroundColor;
+	var prev = event.target.parentNode.style.backgroundColor;
 	if (prev == "") {
 		prev = "white";
 	}
-	// var radioButtons = document.getElementsByName("favoriteColor");
-	// for(var i = 0; i < radioButtons.length; i++) {
-	// 	radioButtons[i].style.color = event.target.value;
-	// 	console.log(radioButtons[i].style.color);
-	// }
-	document.body.style.backgroundColor = event.target.value;
+
+	event.target.parentNode.style.backgroundColor = event.target.value;
 	alert("So you like " + event.target.value + " more than " + prev + " now?");
 
 }
@@ -235,15 +231,14 @@ for(var i = 0; i <elements.length; i++) {
 }
 
 function mouseOverHandler(event) {
-	var color = document.body.style.backgroundColor;
-	console.log(color);
-	if (color == "") {
-		color = "white";
+	if (event.target.style.opacity == "") {
+		event.target.style.opacity = 1.0;
 	}
-	if (event.target.style.color == color) {
-		event.target.style.color = "black";
+
+	if (event.target.style.opacity == 0.0) {
+		event.target.style.opacity = 1.0;
 	} else {
-		event.target.style.color = color;
+		event.target.style.opacity = 0.0;
 	}
 }
 
