@@ -1,12 +1,14 @@
 .inputDiv {
     margin: 20px;
     padding: 20px;
+    font: Helvetica, Courier;
 }
 
 .answerDiv {
   margin: 20px;
   padding: 20px;
   border: solid 5px black;
-  background-color: #289fe7;
+  font: Helvetica, Courier;
+  background-color: #33cc33;
 
 }

@@ -1,4 +1,23 @@
 window.onload = function() {
+
+  var toggle = setInterval(function(){
+  	setColor();
+  },50);
+
+  function setColor() {
+  	var x = document.getElementById("title");
+  	x.style.color = getRandomColor();
+  }
+
+  function getRandomColor() {
+  	  var letters = '0123456789ABCDEF';
+  	  var color = '#';
+  	  for (var i = 0; i < 6; i++) {
+  	    color += letters[Math.floor(Math.random() * 16)];
+  	  }
+  	  return color;
+  }
+
   document.getElementById("calculate").addEventListener("click",mathOperation);
 
   function mathOperation() {
@@ -13,16 +32,16 @@ window.onload = function() {
   	else {
   		switch(op) {
         case "division":
-          result = n1/n2;
+          result = (n1 + " / " + n2 + " = " + (n1/n2).toFixed(4));
           break;
         case "multiplication":
-          result = n1*n2;
+          result = (n1 + " x " + n2 + " = " + (n1*n2).toFixed(4));
           break
         case "addition":
-          result = n1+n2;
+          result = (n1 + " + " + n2 + " = " + (n1+n2).toFixed(4));
           break;
         case "subtraction":
-          result = n1-n2;
+          result = (n1 + " - " + n2 + " = " + (n1-n2).toFixed(4));
           break;
       }
   	}
