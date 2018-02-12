@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>JavaScript Code Challenge</title>
+</head>
+
+
+<body>
+
+<h1>Javascript Calculator</h1>
+
+	<form id = "num1">
+		Enter first value:<br>
+	<input type="text" name="First Number">
+	<br>
+	</form>
+	
+    Operation: <br>
+        <form id = "operator">
+          <input type="text" name="operator">
+        </form>
+	
+	<form id = "num2">
+		Enter second value:<br>
+	<input type="text" name="First Number">
+	<br>
+	</form>
+<h3>The result is:</h3>
+<span id="result"></span>
+    
+</body>
+
+<script>
+
+    var a = document.getElementById("num1");
+    var b = document.getElementById("num2");
+    var o = document.getElementById("operator");
+    var sum;
+    var answer;
+    function calculateEvent() {
+        var val1 = a.value;
+        var val2 = b.value;
+        var op = o.value;
+        if(o == "+"){
+            answer = (parseInt(val1) + parseInt(val2))
+            sum = document.getElementById("result");
+        }
+        
+        if (!isNaN(result)) {
+            sum.textContent = answer;
+        } else {
+            sum.textContent = "Cannot add";
+        }
+    }
+    a.addEventListener("change", calculateEvent, false);
+    b.addEventListener("change", calculateEvent, false);
+    
+    
+</script>
+</html>
