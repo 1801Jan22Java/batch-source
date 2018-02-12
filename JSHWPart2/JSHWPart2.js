@@ -171,22 +171,20 @@ When user hovers over an employees name:
 Hide the name if shown.
 	Show the name if hidden.
 */
-/**************/
-/**INCOMPLETE**/
-/**************/
 function hideOrShow(event) {
+	console.log(event.srcElement);
 	var something8 = event.srcElement;
-	if (something8.style.display === "none") {
-        something8.style.display = "block";
+	if (something8.style.opacity == 1) {
+        something8.style.opacity = 0;
     } else {
-        something8.style.display = "none";
+        something8.style.opacity = 1;
     }
 }
 
 var empNames = document.getElementsByClassName('empName');
-console.log(empNames);
+// console.log(empNames);
 for (var j = 0; j < empNames.length; j++) {
-	empNames[i].addEventListener("click", hideOrShow);
+	empNames[j].addEventListener("mouseover", hideOrShow);
 }
 
 /*10. Current Time
