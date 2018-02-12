@@ -174,7 +174,20 @@ Hide the name if shown.
 /**************/
 /**INCOMPLETE**/
 /**************/
+function hideOrShow(event) {
+	var something8 = event.srcElement;
+	if (something8.style.display === "none") {
+        something8.style.display = "block";
+    } else {
+        something8.style.display = "none";
+    }
+}
 
+var empNames = document.getElementsByClassName('empName');
+console.log(empNames);
+for (var j = 0; j < empNames.length; j++) {
+	empNames[i].addEventListener("click", hideOrShow);
+}
 
 /*10. Current Time
 Regarding this element:
@@ -229,7 +242,20 @@ document.getElementById('helloWorld').addEventListener('click', delayedColor);
 Define function walkTheDOM(node, func)
 This function should traverse every node in the DOM. 
 Use recursion.
-On each node, call func(node).*/
+On each node, call func(node).
+*/
+
+function walkTheDOM(node, func) {
+    func(node);
+    node = node.firstChild;
+    // console.log(node.nodeName);
+    while (node) {
+        walkTheDOM(node, func);
+        node = node.nextSibling;
+        // console.log(node.nodeName);
+    }
+}
+
 
 
 
