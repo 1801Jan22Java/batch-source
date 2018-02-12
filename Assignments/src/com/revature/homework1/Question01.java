@@ -9,20 +9,22 @@ import java.util.Arrays;
  */
 public class Question01 {
 	public static void main(String[] args) {
-		int[] list = {1,0,5,6,3,2,3,7,9,8,4};
+		int[] list = {4,0,5,6,3,2,3,7,9,8,1};
 		System.out.println("Original array:\t" + Arrays.toString(list));
 		// Iterate through each place in the array
-		for (int i = 0; i < list.length; i++) {
+		for (int i = list.length; i >= 0; i--) {
 			// Iterate through each remaining place in the array
-			for (int j = i; j < list.length - 1 - i; j++) {
-				// If place A is greater than place B, switch places
-				if (list[j] > list[j + 1]) {
-					// Save value of place A
-					int temp= list[j];
-					// Copy value of place B into place A
-					list[j] = list[j + 1];
-					// Copy saved value of place A into place B
-					list[j + 1] = temp;
+			if (list.length > 1) {
+				for (int j = list.length - 2; j >= 0; j--) {
+					// If place j is greater than place i, switch places
+					if (list[j] >= list[j + 1]) {
+						// Save value of place A
+						int temp= list[j];
+						// Copy value of place B into place A
+						list[j] = list[j + 1];
+						// Copy saved value of place A into place B
+						list[j + 1] = temp;
+					}
 				}
 			}
 		}

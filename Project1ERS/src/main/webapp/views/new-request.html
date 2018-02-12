@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="ISO-8859-1">
+    <title>Company | New Request</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../styles/form-validation.css">
+    <link rel="stylesheet" type="text/css" href="../styles/main.css">
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container">
+      <a class="navbar-brand col-sm-6 col-md-6 mr-0" href="home.html" title="Home">Company Expense Reimbursement System</a>
+      <ul class="navbar-nav ml-auto px-3">
+        <li class="nav-item text-nowrap">
+          <a class="nav-link" href="profile.html">Profile</a>
+        </li>
+        <li class="nav-item text-nowrap">
+          <a class="nav-link" href="../index.html">Sign out</a>
+        </li>
+      </ul>
+      </div>
+    </nav>
+    <main>
+      <br>
+      <div class="container">
+        <div class="py-5 text-center">
+          <h2>Calvin Milliron</h2>
+          <p class="lead">CEO of Company</p>
+        </div>
+
+        <div class="row">
+
+          <div class="col-md-12 order-md-1">
+            <h4 class="mb-3">New Request</h4>
+            <form class="needs-validation" novalidate>
+              
+              <div class="row">
+                <div class="col-md-5 mb-3">
+                  <label for="request-type">Request Type</label>
+                  <select class="custom-select d-block w-100" id="request-type" required>
+                    <option value="">Choose...</option>
+                    <option>Travel</option>
+                  </select>
+                  <div class="invalid-feedback">
+                    Please select a request type.
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="comment">Comment:</label>
+                <textarea class="form-control" rows="5" id="comment"></textarea>
+              </div>
+              <span class="btn btn-default btn-file">
+                Browse <input type="file">
+              </span>
+              <hr class="mb-4">
+              <button class="btn btn-primary btn-lg btn-block" type="submit">Send Request</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </main>
+    
+    <br><br><br><br>
+
+    <script src="main.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+</html>
