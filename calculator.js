@@ -2,6 +2,8 @@ window.addEventListener("load", function () {
     var calculate = document.getElementById("calculate");
 
     function checkNaN(val1, val2) {
+        val1+=val1;
+        val2+=val2;
         if (isNaN(val1) || isNaN(val2)) {
             return true;
         }
