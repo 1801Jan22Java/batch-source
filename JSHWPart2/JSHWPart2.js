@@ -182,7 +182,27 @@ Regarding this element:
 Show the current time in this element in this format: 9:05:23 AM
 The time should be accurate to the second without having to reload the page.
 */
+function getCurrTime() {
+	var currTime = new Date();
+	var currHour = currTime.getHours();
+	var currMin = currTime.getMinutes();
+	var currSec = currTime.getSeconds();
 
+	currMin = (currMin < 10 ? '0' : '') + currMin;
+	currSec = (currSec < 10 ? '0' : '') + currSec;
+	var amOrPm = (currHour < 12) ? 'AM' : 'PM';
+	currHour = (currHour > 12) ? currHour - 12 : currHour;
+	currHour = (currHour == 0) ? 12 : currHour;
+
+	var formattedTime = currHour + ":" + currMin + ":" + currSec + " " + amOrPm;
+
+	document.getElementById('currentTime').innerHTML = formattedTime;
+}
+
+var toggle = setInterval(function() {
+ 	// console.log("clock ticking");
+ 	getCurrTime();
+ }, 1000);
 
 /*
 11. Delay
@@ -190,6 +210,19 @@ Regarding this element:
 <p id="helloWorld">Hello, World!</p>
 Three seconds after a user clicks on this element, change the text to a random color.
 */
+
+function executeColorChange() {
+	var x = 'rgb(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ')';
+	document.getElementById('helloWorld').style.color = x;
+}
+
+var something7;
+
+function delayedColor() { 
+	something7 = setTimeout(executeColorChange, 3000); 
+}
+
+document.getElementById('helloWorld').addEventListener('click', delayedColor);
 
 /*
 12. Walk the DOM
