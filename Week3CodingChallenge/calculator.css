@@ -1,0 +1,36 @@
+@CHARSET "ISO-8859-1";
+
+#calculator {
+    align-content : center;
+    margin-left : 30%;
+    margin-right: 30%;
+}
+
+.operands {
+    align-content : center;
+    margin-left : 30%;
+    margin-right: 30%;
+}
+
+#operations {
+    align-content : center;
+    margin-left : 42%;
+    margin-right: 30%;
+}
+
+#calcButton {
+    align-content : center;
+    margin-left : 37%;
+    margin-right: 30%;
+}
+
+#resultSection {
+    align-content : center;
+    margin-left : 30%;
+    margin-right: 30%;
+}
+
+#everything {
+    background-color : #00f7ff;
+    size : 100%, 100%;
+}

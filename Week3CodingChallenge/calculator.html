@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="ISO-8859-1">
+        <title>Calculator!</title>
+        <link rel="stylesheet" href="calculator.css"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    </head>
+
+    <body>
+        <div id="everything">
+            <div id="calculator">
+                <br>
+                <br>
+                <h1>Handy Dandy Calculator!</h1>
+                <br>
+                <br>
+                <div class="operands">
+                    <input type="text" id="firstOp"/>
+                </div>
+                <br>
+                <select id="operations">
+                    <option value="plus" selected="selected">+</option>
+                    <option value="subtract">-</option>
+                    <option value="multiply">*</option>
+                    <option value="divide">/</option>
+                </select>
+                <br> <br>
+                <div class="operands">
+                    <input type="text" id="secondOp"/>
+                </div>
+                <br>
+                <div id="calcButton">
+                    <button id="calculate">Calculate!</button>
+                </div>
+                <br>
+                <div id="resultSection">
+                    Result is: 
+                    <br>
+                    <span id="result"></span>
+                </div>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+            </div>
+        </div>
+    </body>
+    <script src="Calc.js"></script>
+</html>
