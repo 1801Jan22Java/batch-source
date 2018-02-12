@@ -1,0 +1,102 @@
+ 
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+<title>calculator</title>
+
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-2"></div>
+			<div class="col-md-8">
+				<div class="row">
+					<div class="jumbotron" style="background-color: orange !important;">
+						<h1>Welcome to the best calculator!</h1>
+
+
+					</div>
+					<table class="table table-bordered">
+						<thead>
+							<tr>
+								<th colspan="4" id="result" style="height: 50px;"></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td style="width: 25%">7</td>
+								<td style="width: 25%">8</td>
+								<td style="width: 25%">9</td>
+								<td style="width: 25%">*</td>
+							</tr>
+							<tr>
+								<td>4</td>
+								<td>5</td>
+								<td>6</td>
+								<td>-</td>
+							</tr>
+							<tr>
+								<td>1</td>
+								<td>2</td>
+								<td>3</td>
+								<td>+</td>
+							</tr>
+							<tr>
+								<td>0</td>
+								<td>reset</td>
+								<td>=</td>
+								<td>/</td>
+							</tr>
+
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="col-md-2"></div>
+		</div>
+	</div>
+</body>
+
+<script>
+	var allTd = document.getElementsByTagName("td");
+	for (var i = 0; i < allTd.length; i++) {
+		allTd[i].addEventListener('click', calculator, false);
+	}
+
+	function calculator(event) {
+		var theResult = document.getElementById("result");
+		var chosenValue = event.target.innerHTML; // value inside each TD
+		var operator = [ "*", "/", "+", "-" ];
+			
+		if (chosenValue == "=") {
+			
+		    final = theResult.innerHTML;
+			
+			console.log("you want to calculate!" + final)
+			
+		} else if (chosenValue == "reset") {
+			console.log("you want to reset!");
+			theResult.innerHTML = "";
+		} else {
+			console.log(chosenValue)
+			if (operator.indexOf(chosenValue) > 0 ) {
+				if (theResult.innerHTML.length < 0) {
+					console.log("you enter wrong number!");
+				} else {
+					var cur = theResult.innerHTML.split("");
+					console.log("last word:" + cur[cur.length-1]);
+					if (operator.indexOf(cur[cur.length-1]) > 0 ) {
+						console.log("you enter wrong number!");
+					} else {
+						theResult.innerHTML += chosenValue;
+					}
+				}
+			} else {
+				theResult.innerHTML += chosenValue;
+			}
+		}
+	}
+</script>
+</body>
+</html>
