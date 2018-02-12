@@ -1,4 +1,4 @@
- 
+
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -64,20 +64,27 @@
 		allTd[i].addEventListener('click', calculator, false);
 	}
 
+	var ope = function (){
+		var over = false;
+		var num  = num;
+	}
+	
 	function calculator(event) {
+		
 		var theResult = document.getElementById("result");
 		var chosenValue = event.target.innerHTML; // value inside each TD
 		var operator = [ "*", "/", "+", "-" ];
-			
+		
 		if (chosenValue == "=") {
 			
 		    final = theResult.innerHTML;
 			
 			console.log("you want to calculate!" + final)
-			
+			theResult.innerHTML = eval(final);
 		} else if (chosenValue == "reset") {
 			console.log("you want to reset!");
 			theResult.innerHTML = "";
+			reset = false;
 		} else {
 			console.log(chosenValue)
 			if (operator.indexOf(chosenValue) > 0 ) {

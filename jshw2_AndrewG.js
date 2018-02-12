@@ -125,8 +125,6 @@ Add <input> element values.
 Put the sum in the <span> element.
 If values cannot be added, put "Cannot add" in the <span> element
 */
-document.getElementById("num1").addEventListener("change", sumNums);
-document.getElementById("num2").addEventListener("change", sumNums);
 
 function sumNums() {
 	var num1 = parseInt(document.getElementById("num1").value);
@@ -136,10 +134,10 @@ function sumNums() {
 	} else {
 		sum = "Cannot add";
 	}
-	event.stopPropagation();
+	//event.stopPropagation();
 	document.getElementById("sum").innerHTML = sum
 }
-
+sumNums();
 /*
 
 
@@ -149,6 +147,10 @@ When user selects a skill, create an alert with a message similar to:
 "Are you sure CSS is one of your skills?"
 NOTE: no alert should appear when user deselects a skill.
 */
+/*function detectSkillChange() {
+	var skills = document.querySelector('[name=skills]');
+	console.log("Are you sure " + skills[skills.selectedIndex].text + " is one of your skills?");
+}*/
 function detectSkillChange() {
 	var skills = document.querySelector('[name=skills]');
 	console.log("Are you sure " + skills[skills.selectedIndex].text + " is one of your skills?");
@@ -199,13 +201,10 @@ function showAndHideListener(event) {
 		theTd.innerHTML = savedName; // and fill up the name!
 	}
 }
-window.onload = function() {
-	var empNames = document.getElementsByClassName('empName'); // td들임.
-	for (var i = 0; i < empNames.length; i++) {
-		empNames[i].addEventListener('mouseover', showAndHideListener, false);
-	}
+var empNames = document.getElementsByClassName('empName'); // td들임.
+for (var i = 0; i < empNames.length; i++) {
+	empNames[i].addEventListener('mouseover', showAndHideListener, false);
 }
-
 /*
 
 
@@ -262,16 +261,17 @@ This function should traverse every node in the DOM.
 Use recursion.
 On each node, call func(node).
 */
-/*function walkTheDOM(node, func){
-	var all = document.getElementsByTagName("*");
- 	
-	var count = 0;
-	for (var i=0 ; i < all.length ; i++) {
-		count ++;
-		// Do something with the element here
-	}
-	//console.log(count);
-}
 
-*/
- 
+function callNode(node){
+	console.log("let me introduce myself. I am : " + node.tagName);
+}
+function walkTheDOM(node, func){
+	
+	var all = node;
+	var cnt = 0 ;
+	for (var i = 0 ; i <all.length ; i++){
+		cnt++;
+		func(all[i]);
+	}	
+};
+walkTheDOM(document.getElementsByTagName("*"), callNode);
