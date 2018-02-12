@@ -1,0 +1,21 @@
+h3 {
+	color : purple;
+	font-family: "Courier New";
+	text-align: center;
+}
+
+#calcEntry {
+	background-color: #208e4a;
+	text-align: center;
+}
+
+#buttons {
+	text-align: center;
+	background-color: #6c94e2;
+}
+
+#ans {
+	text-align: center;
+	font-weight: bold;
+}
+
