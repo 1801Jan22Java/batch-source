@@ -37,8 +37,9 @@ function getAnchorChildren(){
 //4
   function getSkills(){
     var skills = document.getElementsByTagName("select")[2];
-    var text= skills.options[sel.selectedIndex].text;
+    var text= skills.options[skills.selectedIndex].text;
     console.log(text);
+
 
   }
 
@@ -53,6 +54,89 @@ function getCustomAttribute(){
   }
 
 }
+
+//6
+function sumEvents(){
+  document.getElementById("num1").onchange = function() {add()};
+  document.getElementById("num2").onchange = function() {add()};
+  function add() {
+      var num1 = document.getElementById("num1").value;
+      var num2 = document.getElementById("num2").value;
+      var float1 = parseFloat(num1);
+      var float2 = parseFloat(num2);
+
+      if (isNaN(float1) || isNaN(float2)) {
+        document.getElementById("sum").innerHTML = "Cannot add";
+      } else {
+          document.getElementById("sum").innerHTML = (float1+ float2);
+          }
+  }
+
+}
+
+//7
+var skillsSelect = document.getElementsByName("skills");
+
+function validationSelect() {
+for (var i = 0; i < skillsSelect.length; i++) {
+    skillsSelect[i].onchange = validationSelect;
+}
+    alert("Are you sure " + event.target.children[event.target.selectedIndex].textContent + " is one of your skills?")
+    console.log("Are you sure " + event.target.children[event.target.selectedIndex].textContent + " is one of your skills?");
+};
+
+//8
+function favoriteColor(){
+}
+
+
+
+//9
+var employees = document.getElementsByClassName("empName");
+for (var i = 0; i<employees.length; i++){
+    employees[i].onmouseover = employeeHover;
+    employees[i].style.color = "black";
+}
+function employeeHover() {
+    if(event.target.style.color == "black"){
+      event.target.style.color = "white";
+    } else
+    if(event.target.style.color == "white"){
+      event.target.style.color = "black";
+      }
+
+}
+
+//10
+
+function timer() {
+
+  var t = true
+  while(t == true){
+    var date = new Date();
+    var timeString = date.toLocaleTimeString();
+    timeElement = document.getElementById("currentTime").innerHTML;
+    timeElement = timeString;
+  console.log(timeElement.valueOf());}
+}
+
+//11
+
+var helloTrigger = document.getElementById("helloWorld");
+helloTrigger.onclick = changeColor;
+
+function changeColor() {
+    setTimeout(function () { helloTrigger.style.color = '#'+Math.random().toString(16).substr(-6) }, 3000);
+}
+
+//12
+
+
+
+
+
+
+
 
 
 
