@@ -8,7 +8,9 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.revature.project1.beans.Employee;
+import com.revature.project1.beans.ReimbursementRequest;
 import com.revature.project1.dao.EmployeeDaoImpl;
+import com.revature.project1.dao.ReimbursementRequestDaoImpl;
 import com.revature.project1.util.ConnectionUtil;
 
 public class Driver {
@@ -20,15 +22,17 @@ public class Driver {
 			try {
 				Connection conn = cu.getConnectionFromFile(filename);
 				EmployeeDaoImpl edi = new EmployeeDaoImpl();
+				ReimbursementRequestDaoImpl rrdi = new ReimbursementRequestDaoImpl();
 			//	Employee emp = new Employee("Mikhail","Bulgakov","mbulgakov","margarita","mbulgakov@yandex.ru",0,0);
 				//System.out.println(emp.getEmail());
 				//edi.addEmployee(emp);
+				List<ReimbursementRequest> rl=rrdi.getReimbursementRequests();
 				List<Employee> el = edi.getEmloyees();
 				System.out.println("after getEmployee");
 				//System.out.println(el);
-				for(int i =0;i<el.size();i++) 
+				for(int i =0;i<rl.size();i++) 
 				{
-					System.out.println(el.get(i));
+					System.out.println(rl.get(i));
 				}
 				
 			} catch (IOException | SQLException e) {

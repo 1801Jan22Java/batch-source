@@ -63,5 +63,24 @@ public class ReimbursementRequest {
 	public void setReceiptID(int receiptID) {
 		this.receiptID = receiptID;
 	}
+
+	@Override
+	public String toString() {
+		String approvedStr="";
+		String pendingStr="";
+		if(this.approved==0) 
+		{
+		approvedStr="not approved";
+		}
+		else {approvedStr="approved";}
+		if(pending==1) 
+		{
+			pendingStr="pending";
+		}
+		else {
+			pendingStr="no longer pending";
+		}
+		return "ReimbursementRequest [pending=" + pendingStr + ", approved=" + approvedStr + ", receiptID=" + receiptID + "]";
+	}
 	
 }
