@@ -13,8 +13,8 @@ var changeToRed = function () {
 var addition = function () {
     var result = document.getElementById("result");
     var boxes = document.getElementsByClassName("operands");
-    var x = parseInt(boxes[0].value);
-    var y = parseInt(boxes[1].value);
+    var x = parseFloat(boxes[0].value);
+    var y = parseFloat(boxes[1].value);
     if (!isNaN(x) && !isNaN(y)) {
         result.innerHTML = (x + y);
         changeToWhite();
@@ -27,8 +27,8 @@ var addition = function () {
 var subtraction = function () {
     var result = document.getElementById("result");
     var boxes = document.getElementsByClassName("operands");
-    var x = parseInt(boxes[0].value);
-    var y = parseInt(boxes[1].value);
+    var x = parseFloat(boxes[0].value);
+    var y = parseFloat(boxes[1].value);
     if (!isNaN(x) && !isNaN(y)) {
         result.innerHTML = (x - y);
         changeToWhite();
@@ -41,8 +41,8 @@ var subtraction = function () {
 var multiplication = function () {
     var result = document.getElementById("result");
     var boxes = document.getElementsByClassName("operands");
-    var x = parseInt(boxes[0].value);
-    var y = parseInt(boxes[1].value);
+    var x = parseFloat(boxes[0].value);
+    var y = parseFloat(boxes[1].value);
     if (!isNaN(x) && !isNaN(y)) {
         result.innerHTML = (x * y);
         changeToWhite();
@@ -55,8 +55,8 @@ var multiplication = function () {
 var division = function () {
     var result = document.getElementById("result");
     var boxes = document.getElementsByClassName("operands");
-    var x = parseInt(boxes[0].value);
-    var y = parseInt(boxes[1].value);
+    var x = parseFloat(boxes[0].value);
+    var y = parseFloat(boxes[1].value);
     if (!isNaN(x) && !isNaN(y)) {
         result.innerHTML = (x / y);
         changeToWhite();
