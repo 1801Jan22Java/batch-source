@@ -15,7 +15,7 @@ window.addEventListener("load", function () {
             document.getElementById("output").textContent = "Cannot calculate."
         } else {
 
-            document.getElementById("output").textContent = num1 + num2;
+            document.getElementById("output").textContent = parseFloat(num1) + parseFloat(num2);
         }
     }
     function sub() {
@@ -25,12 +25,12 @@ window.addEventListener("load", function () {
             document.getElementById("output").textContent = "Cannot calculate."
         } else {
 
-            document.getElementById("output").textContent = num1 - num2;
+            document.getElementById("output").textContent = parseFloat(num1) - parseFloat(num2);
         }
     }
     function div() {
-        var num1 = parseFloat(document.getElementById("num1").value);
-        var num2 = parseFloat(document.getElementById("num2").value);
+        var num1 = document.getElementById("num1").value;
+        var num2 = document.getElementById("num2").value;
         if (checkNaN(num1, num2)) {
             document.getElementById("output").textContent = "Cannot calculate."
         } else {
@@ -38,7 +38,7 @@ window.addEventListener("load", function () {
                 document.getElementById("output").textContent = "Cannot divide by 0"
                 return 0;
             }
-            document.getElementById("output").textContent = num1 / num2;
+            document.getElementById("output").textContent = parseFloat(num1) / parseFloat(num2);
         }
 
     }
@@ -49,7 +49,7 @@ window.addEventListener("load", function () {
             document.getElementById("output").textContent = "Cannot calculate."
         } else {
 
-            document.getElementById("output").textContent = num1 * num2;
+            document.getElementById("output").textContent = parseFloat(num1) * parseFloat(num2);
         }
     }
 
