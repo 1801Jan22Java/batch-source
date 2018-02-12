@@ -17,9 +17,8 @@ window.onload = function() {
         for (var i = 0; i < elements.length; i++) {
             //if the first child exists and the text inside it is USA
             if (elements[i].childNodes[0] && elements[i].childNodes[0].textContent.includes("USA")) {
-                var result = elements[i].childNodes[0];
                 //print the elements contents.
-                console.log(result);
+                console.log(elements[i].childNodes[0].textContent);
             }
         }
     }
@@ -181,7 +180,6 @@ window.onload = function() {
     8. Favorite Color Event
     NOTE: Write unobtrusive Javascript
     NOTE: This is regarding the favoriteColor radio buttons.
-
     When a user selects a color, create an alert with a message similar to: 
     "So you like green more than blue now?"
     In this example, green is the new value and blue is the old value.
@@ -194,43 +192,27 @@ window.onload = function() {
     //initial value to be displayed when the user first picks a color radio button
     var last = "liking no color";
 
-    //when a radio button of favoriteColor is selected
-    colors[0].onchange = function() {
-        //update curr to that radio buttons value
-        curr = colors[0].value;
-        //alert the user
-        alert("So you like " + curr + " more than " + last + " now?");
-        //change the background color of the divs
-        //cannot change radio button background, so need to change
-        //parents color
-        colors[0].parentNode.style.backgroundColor = curr;
-        //update last for the next selection
-        last = curr;
-    };
-    colors[1].onchange = function() {
-        curr = colors[1].value;
-        alert("So you like " + curr + " more than " + last + " now?");
-        colors[1].parentNode.style.backgroundColor = curr;
-        last = curr;
-    };
-    colors[2].onchange = function() {
-        curr = colors[2].value;
-        alert("So you like " + curr + " more than " + last + " now?");
-        colors[2].parentNode.style.backgroundColor = curr;
-        last = curr;
-    };
-    colors[3].onchange = function() {
-        curr = colors[3].value;
-        alert("So you like " + curr + " more than " + last + " now?");
-        colors[3].parentNode.style.backgroundColor = curr;
-        last = curr;
-    };
+    //iterate through the colors
+    for(var i = 0; i < colors.length; i++){
+        //to each color, add a change event listener, which will execute a function called changeDiv
+        colors[i].addEventListener("change", changeDiv, false); 
+    }
 
+    function changeDiv() {
+        //the current div is the div that is the target of this event listener
+        var currDiv = event.target;
+        //update the current color by the value of the current div's value
+        curr = currDiv.value;
+        alert("So you like " + curr + " more than " + last + " now?");
+        //change the color of this div's parent div's background
+        currDiv.parentNode.style.backgroundColor = curr;
+        //update the last color to this current color for the next change.
+        last = curr;
+    };
 
     /*********************** PROBLEM 9 ********************************* 
     9. Show/Hide Event
     NOTE: Write unobtrusive Javascript
-
     When user hovers over an employees name:
     Hide the name if shown.
     Show the name if hidden.
@@ -266,10 +248,8 @@ window.onload = function() {
     10. Current Time
     Regarding this element:
         <h5 id="currentTime"></h5>
-
     Show the current time in this element in this format: 9:05:23 AM
     The time should be accurate to the second without having to reload the page.
-
     */
     function currTime() {
         //save the div that we will be updating
