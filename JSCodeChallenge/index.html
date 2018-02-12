@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>JavaScript Calculator!</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div class="container">
+      <h1>This is a JavaScript Calculator</h1>
+
+      <h3>Please enter in your two values and operation</h4>
+        <form>
+          <div class="form-group row">
+
+              First Number: <input type="number" id="first_num" class="form-control">
+              Second Number: <input type="number" id="sec_num" class="form-control">
+              Operation: <select id="operation" class="form-control">
+                <option value="+">+</option>
+                <option value="-">-</option>
+                <option value="*">*</option>
+                <option value="/">/</option>
+              </select>
+          </div>
+          <button type="button" class="btn btn-primary" id="calculate_Button">Calculate!</button>
+        </form>
+        <br>
+        <div class="sumBox">
+          <h4>The sum of the values is: <span id="sum"></span></h4>
+        </div>
+    </div>
+  </body>
+  <script src="calculator.js"></script>
+</html>
