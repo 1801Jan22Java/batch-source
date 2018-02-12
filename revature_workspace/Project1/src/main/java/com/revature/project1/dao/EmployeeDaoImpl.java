@@ -52,7 +52,7 @@ public class EmployeeDaoImpl implements EmployeeDao{
 	}
 
 	public Employee getEmployeeById(int id) {
-		Employee user = null;
+		Employee emp = null;
 		try(Connection con = ConnectionUtil.getConnectionFromFile(filename))
 		{
 
@@ -61,11 +61,15 @@ public class EmployeeDaoImpl implements EmployeeDao{
 			ResultSet rs= prepStmt.getResultSet();
 			if(rs.next())
 			{
-				String username=rs.getString("USER_NAME");
+				System.out.println("Getting employee");
+				String user_name=rs.getString("USER_NAME");
 				String pass = rs.getString("USER_PASS");
 				String fname = rs.getString("FIRST_NAME");
 				String lname= rs.getString("LAST_NAME");
-				//user=new Employee(username,pass,fname,lname,ssn);
+				String email=rs.getString("EMP_EMAIL");
+				int isManager= rs.getInt("MANAGING");
+				int managedBy=rs.getInt("MANAGED_BY");
+				emp=new Employee(fname,lname,user_name,pass,email,isManager,managedBy);
 			}
 		} catch (SQLException | IOException e) {
 			// TODO Auto-generated catch block
@@ -73,7 +77,7 @@ public class EmployeeDaoImpl implements EmployeeDao{
 		}
 		finally
 		{
-			return user;
+			return emp;
 		}
 	}
 
