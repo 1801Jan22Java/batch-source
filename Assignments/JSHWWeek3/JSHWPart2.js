@@ -1,28 +1,72 @@
 window.onload = function()
 {
 	//1
-	//getUSA();
+	getUSA();
 	//2
-	//getPeopleInSales();
+	getPeopleInSales();
 	//3
-	//getAnchorChildren();
+	getAnchorChildren();
 	//4
-	//getSkills();
+	getSkills();
 	//5
-	//getCustomAttribute();
+	getCustomAttribute();
 	//6
-	 //onchange();
+	onchange();
 	//7
 	//onSkillSelect();
+	skillSelect = document.getElementsByName("skills")[0];
+	skillSelect.addEventListener("change", onSkillSelect);
 	//8
+	for(var k = 0; k < buttons.length; k++){
+		buttons[k].addEventListener("change",favoriteColor);
+		//console.log("hi");
+	}
 	//favoriteColor();'
 	//9
+	
+	for( var i = 0; i< emps.length; i++){
+		emps[i].addEventListener("mouseover",hideEmps);
+		//console.log("wat");
+	}
 	//hideEmps();
 	//10
-	while(true)
-		{
-			document.getElementById("currentTime").innerHTML = formatAMPM();
+	var toggle = setInterval(function(){
+	    var date = new Date();
+		document.getElementById("currentTime").textContent = date.toLocaleTimeString();;
+	},500);
+	   
+	//11
+	setInterval(colorDelay, 3000);
+	function getRandomColor() {
+		  var letters = '0123456789ABCDEF';
+		  var color = '#';
+		  for (var i = 0; i < 6; i++) {
+		    color += letters[Math.floor(Math.random() * 16)];
+		  }
+		  return color;
 		}
+	function colorDelay(){
+		var randomColor =getRandomColor();
+		document.getElementById("helloWorld").setAttribute("style","color: "+randomColor)
+	}
+	//12
+	function walkTheDOM(node, func){
+		//base case
+		//this node has no children
+		//console.log("wat");
+		if(node.children.length == 0){
+				//console.log(node);
+				func(node);
+			}
+		else{
+			for(var i = 0; i< node.children.length; i++)
+				{
+					//console.log("wat");
+					walkTheDOM(node.children[i], func);
+				}
+		}
+	}
+	walkTheDOM(document, function(n){console.log(n)});
 }
 /**
  * 1. USA
@@ -185,41 +229,22 @@ var onchange = function(){
 		sum.children[0].textContent = "Cannot add";
 	}
 }
-nums[1].addEventListener("onchange", onchange);
+//nums[1].addEventListener("onchange", onchange);
 //console.log(nums[1]);
 /*
 
 7. Skills Event
 
-NOTE: Write unobtrusive Javascript
-
-When user selects a skill, create an alert with a message similar to:
-	
-"Are you sure CSS is one of your skills?"
-
-NOTE: no alert should appear when user deselects a skill.
 */
-var skillSelect = document.getElementsByName("skills")[0];
 var onSkillSelect = function(){
 	//find the selected skills
 	var skills = skillSelect.children;
-	var selectedSkill;
-	for(var i =0; i< skills.length; i++)
-		{
-			//console.log(skills[i].value);
-			if(skills[i].selected == true)
-				{
-					selectedSkill = skills[i].value;
-				}
-		}
+	var selectedSkill = skillSelect.value;
 	alert("are you sure "+selectedSkill+" is one of your skills?");
 }
 //console.log(nums[1]);
 //console.log(skillSelect);
-for(var i =0 ; i<skillSelect.children.length; i++){
-	skillSelect.children[i].addEventListener("onselect", onSkillSelect);
-	//console.log(skillSelect.children[i]	);
-}
+
 //skillSelect.addEventListener("onchange", onSkillSelect);
 /*
 
@@ -238,23 +263,23 @@ In this example, green is the new value and blue is the old value.
 Make the background color (of all favoriteColor radio buttons) 
 the newly selected favoriteColor
 */
-var buttons = document.getElementsByName("favoriteColor");
-var oldColor = '';
-var favoriteColor = function(e){
+buttons = document.getElementsByName("favoriteColor");
+oldColor = "";
+var favoriteColor = function(event){
 	if(oldColor){
-		alert("So you like "+e.value+" more than "+oldColor+"?")
+		alert("So you like "+event.target.value+" more than "+oldColor+"?");
+		oldColor = event.target.value;
+		for(var k = 0; k < buttons.length; k++){
+			buttons[k].setAttribute("style", "background-color: "+event.target.value);
+		}
+		
 	}
-	oldColor = e.value;
-	console.log(oldColor)
-	for(var k = 0; k < buttons.length; k++){
-		buttons[k].setAttribute("style", "background-color: "+oldColor);
+	else{
+		oldColor = event.target.value;
 	}
+	console.log(oldColor);
+}
 
-}
-for(var k = 0; k < buttons.length; k++){
-	buttons[k].onclick=favoriteColor(buttons[k]);
-	//console.log("hi");
-}
 
 /*
 
@@ -267,20 +292,17 @@ When user hovers over an employees name:
 Hide the name if shown.
 	Show the name if hidden.
 */
-function hideEmps(x) {
-    if (x.style.display === "none") {
-        x.style.display = "block";
+function hideEmps(event) {
+    if (event.target.style.color == "white") {
+        event.target.setAttribute("style", "color:black");
     } else {
-        x.style.display = "none";
+        event.target.setAttribute("style", "color:white");
     }
 }
 //Find the employees
 emps = document.getElementsByClassName("empName");
-console.log(emps);
-for( var i = 0; i< emps.length; i++){
-	emps[i].addEventListener("onmouseover",hideEmps(emps[1]));
-	//console.log("wat");
-}
+//console.log(emps);
+
 /*
 
 10. Current Time
@@ -292,18 +314,6 @@ Show the current time in this element in this format: 9:05:23 AM
 
 The time should be accurate to the second without having to reload the page.
 */
-function formatAMPM() {
-    var date = new Date();
-    var hours = date.getHours();
-    var days = date.getDay(); 
-    var minutes = date.getMinutes();
-    var ampm = hours >= 12 ? 'pm' : 'am';
-    hours = hours % 12;
-    hours = hours ? hours : 12; // the hour '0' should be '12'
-    minutes = minutes < 10 ? '0'+minutes : minutes;
-    var strTime = date + ' ' + hours + ':' + minutes + ' ' + ampm;
-    return strTime;
-}
 
 /*
 
@@ -313,6 +323,9 @@ Regarding this element:
 <p id="helloWorld">Hello, World!</p>
 
 Three seconds after a user clicks on this element, change the text to a random color.
+ */
+
+/*
 12. Walk the DOM
 
 Define function walkTheDOM(node, func)
