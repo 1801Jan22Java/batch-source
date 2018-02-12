@@ -2,9 +2,9 @@ window.addEventListener("load", function () {
     var calculate = document.getElementById("calculate");
 
     function checkNaN(val1, val2) {
-        val1+=val1;
-        val2+=val2;
-        if (isNaN(val1) || isNaN(val2)) {
+        var validator = val1 + val2
+        console.log(validator)
+        if (isNaN(validator)) {
             return true;
         }
         return false;
@@ -31,8 +31,8 @@ window.addEventListener("load", function () {
         }
     }
     function div() {
-        var num1 = document.getElementById("num1").value;
-        var num2 = document.getElementById("num2").value;
+        var num1 = parseFloat(document.getElementById("num1").value);
+        var num2 = parseFloat(document.getElementById("num2").value);
         if (checkNaN(num1, num2)) {
             document.getElementById("output").textContent = "Cannot calculate."
         } else {
