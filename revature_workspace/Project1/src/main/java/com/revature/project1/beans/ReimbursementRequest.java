@@ -1,12 +1,16 @@
 package com.revature.project1.beans;
 
+import java.io.File;
+
 public class ReimbursementRequest {
 	private Employee employee;
 	private Employee manager;
 	private int pending;
 	private int approved;
-	private int receiptID;
-	
+	private int requestID;
+	private File file;
+	private float amount;
+
 	public ReimbursementRequest(){}
 	
 	public ReimbursementRequest(Employee employee) 
@@ -14,15 +18,29 @@ public class ReimbursementRequest {
 		this.employee=employee;
 	}
 	
-	public ReimbursementRequest(Employee employee, Employee manager, int pending, int approved, int receiptID)
+	public ReimbursementRequest(Employee employee, Employee manager, int pending, int approved, float amount)
 	{
 		this.employee=employee;
 		this.manager=manager;
 		this.pending=pending;
 		this.approved=approved;
-		this.receiptID=receiptID;
+		this.amount=amount;
 	}
-	
+	public ReimbursementRequest(int requestID,Employee employee, Employee manager, int pending, int approved, float amount)
+	{
+		this.requestID=requestID;
+		this.employee=employee;
+		this.manager=manager;
+		this.pending=pending;
+		this.approved=approved;
+		this.amount=amount;
+	}
+	public ReimbursementRequest(Employee employee, File file, float amount)
+	{
+		this.employee=employee;
+		this.file=file;
+		this.amount=amount;
+	}
 
 	public Employee getEmployee() {
 		return employee;
@@ -56,31 +74,24 @@ public class ReimbursementRequest {
 		this.approved = approved;
 	}
 
-	public int getReceiptID() {
-		return receiptID;
-	}
-
-	public void setReceiptID(int receiptID) {
-		this.receiptID = receiptID;
-	}
-
 	@Override
 	public String toString() {
 		String approvedStr="";
 		String pendingStr="";
-		if(this.approved==0) 
+		if(pending ==1 &&approved==0) 
 		{
-		approvedStr="not approved";
+		approvedStr="not yet approved";
 		}
-		else {approvedStr="approved";}
-		if(pending==1) 
+		else if(pending==0 && approved==1) 
 		{
-			pendingStr="pending";
+			approvedStr="approved";
 		}
 		else {
-			pendingStr="no longer pending";
+			approvedStr="denied";
 		}
-		return "ReimbursementRequest [pending=" + pendingStr + ", approved=" + approvedStr + ", receiptID=" + receiptID + "]";
+		return "Reimbursement request: "+this.requestID +" from " + employee.getFirstName()+ " "+employee.getLastName()+
+				" for an amount of " + amount + " has been " + approvedStr +  " by "+
+				manager.getFirstName() + " " + manager.getLastName();
 	}
 	
 }

@@ -1,5 +1,6 @@
 package com.revature.project1.dao;
 
+import java.io.File;
 import java.util.List;
 
 import com.revature.project1.beans.Employee;
@@ -10,6 +11,10 @@ public interface ReimbursementRequestDao {
 	public List<ReimbursementRequest> getReimbursementRequests();
 	public List<ReimbursementRequest> getReimbursementRequestsByEmployee(Employee employee);
 	public ReimbursementRequest getReimbursementRequestById(int id);
+	public void denyReimbursementRequest(int id, Employee manager);
+	public void approveReimbursementRequest(int id, Employee manager);
+	public void addReimbursementRequest(Employee emp, File file, float amount);
+	public void deleteReimbursementRequest(int id, Employee emp);
 	
 	
 

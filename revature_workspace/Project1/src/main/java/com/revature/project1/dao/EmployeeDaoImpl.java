@@ -40,7 +40,8 @@ public class EmployeeDaoImpl implements EmployeeDao{
 				String lname= rs.getString("LAST_NAME");
 				String email=rs.getString("EMP_EMAIL");
 				int isManager= rs.getInt("MANAGING");
-				int managedBy=rs.getInt("MANAGED_BY");
+				int managerId=rs.getInt("MANAGED_BY");
+				Employee managedBy= getEmployeeById(managerId);
 				emp=new Employee(fname,lname,user_name,pass,email,isManager,managedBy);
 				el.add(emp);			
 			}	
@@ -68,7 +69,8 @@ public class EmployeeDaoImpl implements EmployeeDao{
 				String lname= rs.getString("LAST_NAME");
 				String email=rs.getString("EMP_EMAIL");
 				int isManager= rs.getInt("MANAGING");
-				int managedBy=rs.getInt("MANAGED_BY");
+				int managerID=rs.getInt("MANAGED_BY");
+				Employee managedBy=getEmployeeById(managerID);
 				emp=new Employee(fname,lname,user_name,pass,email,isManager,managedBy);
 			}
 		} catch (SQLException | IOException e) {
@@ -135,9 +137,10 @@ public class EmployeeDaoImpl implements EmployeeDao{
 	}
 	*/
 	public void addEmployee(Employee employee) {
-
+		int managerID = getEmployeeID(employee.getManager());
 		try(Connection conn = ConnectionUtil.getConnectionFromFile(filename))
 		{
+			if(verifyUniqueUsername(employee)) {
 			conn.setAutoCommit(false);
 			//	System.out.println("In try statement"); //DEBUGGING
 			String sqlStmt="{CALL SP_ADD_EMPLOYEE(?,?,?,?,?,?,?)}";
@@ -148,10 +151,15 @@ public class EmployeeDaoImpl implements EmployeeDao{
 			cs.setString(4,employee.getLastName());
 			cs.setString(5,employee.getEmail());
 			cs.setInt(6,employee.getIsManager());
-			cs.setInt(7,employee.getManagerID());
+			cs.setInt(7,managerID);
 			cs.execute();
 			conn.commit();
 			System.out.println("Employee added");
+			}
+			else {
+				System.out.println("Username must be unique!");
+			}
+			
 
 		}
 		catch(SQLIntegrityConstraintViolationException e)
@@ -165,7 +173,7 @@ public class EmployeeDaoImpl implements EmployeeDao{
 
 	}
 
-	public void addManager(Employee employee) {
+	/*public void addManager(Employee employee) {
 
 		try(Connection conn = ConnectionUtil.getConnectionFromFile(filename))
 		{
@@ -180,7 +188,7 @@ public class EmployeeDaoImpl implements EmployeeDao{
 			cs.setString(4,employee.getLastName());
 			cs.setString(5, employee.getEmail());
 			cs.setInt(6, employee.getIsManager());
-			cs.setInt(7, employee.getManagerID());
+			cs.setInt(7, getEmployeeByID(employee.getManagerID()));
 			cs.execute();
 			conn.commit();
 
@@ -194,7 +202,7 @@ public class EmployeeDaoImpl implements EmployeeDao{
 
 
 	}
-
+*/
 	public boolean validateCredentials(String username, String password) {
 		boolean validated=false;
 		String userPass=null;
@@ -224,6 +232,33 @@ public class EmployeeDaoImpl implements EmployeeDao{
 		}
 	}
 
+	private boolean verifyUniqueUsername(Employee employee) {
+		boolean unique =false;
+		String username=employee.getUserName();
+		try(Connection con = ConnectionUtil.getConnectionFromFile(filename))
+		{
+
+			PreparedStatement prepStmt = con.prepareStatement("SELECT * FROM EMPLOYEE WHERE USER_NAME=?");
+			prepStmt.setString(1, username);
+			prepStmt.execute();
+			ResultSet rs= prepStmt.getResultSet();
+			if(rs.next())
+			{
+				String usename=rs.getString("USER_NAME");
+				unique=false;
+			}
+			else {
+				unique=true;
+			}
+		} catch (SQLException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally
+		{
+		return unique;
+		}
+	}
 	/*
 	 * createEmployee for average users.  
 	 * Does not attempt any kind of user validation for a super user. 
@@ -247,7 +282,7 @@ public class EmployeeDaoImpl implements EmployeeDao{
 			cs.setString(4,employee.getLastName());
 			cs.setString(5, employee.getEmail());
 			cs.setInt(6, employee.getIsManager());
-			cs.setInt(7, employee.getManagerID());
+			cs.setInt(7, getEmployeeID(employee.getManager()));
 			cs.execute();
 			conn.commit();
 			System.out.println("Employee added");
@@ -266,9 +301,9 @@ public class EmployeeDaoImpl implements EmployeeDao{
 
 	}
 
-	public int getEmployeeID(Employee user) {
+	public int getEmployeeID(Employee employee) {
 		int userId=0;
-		String username=user.getUserName();
+		String username=employee.getUserName();
 		String sql = "SELECT EMP_ID FROM EMPLOYEE WHERE USER_NAME=?";
 		try(Connection conn = ConnectionUtil.getConnectionFromFile(filename))
 		{
@@ -311,8 +346,8 @@ public class EmployeeDaoImpl implements EmployeeDao{
 				String lname= rs.getString("LAST_NAME");
 				String email=rs.getString("EMP_EMAIL");
 				int isManager= rs.getInt("MANAGING");
-				int managedBy=rs.getInt("MANAGED_BY");
-
+				int managerID=rs.getInt("MANAGED_BY");
+				Employee managedBy = getEmployeeById(managerID);
 				employee=new Employee(fname,lname,username,password,email,isManager,managedBy);
 			}
 		} catch (SQLException | IOException e) {
@@ -438,7 +473,8 @@ public class EmployeeDaoImpl implements EmployeeDao{
 				String lname= rs.getString("LAST_NAME");
 				String email=rs.getString("EMP_EMAIL");
 				int isManager= rs.getInt("MANAGING");
-				int managedBy=rs.getInt("MANAGED_BY");
+				int managerID=rs.getInt("MANAGED_BY");
+				Employee managedBy = getEmployeeById(managerID);
 				emp=new Employee(fname,lname,user_name,pass,email,isManager,managedBy);
 				el.add(emp);			
 			}	

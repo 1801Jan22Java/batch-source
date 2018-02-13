@@ -7,11 +7,11 @@ public class Employee {
 	private String password;
 	private String email;
 	private int isManager;
-	private int managerID;
+	private Employee manager;
 	
 	public Employee() 
 	{}
-	public Employee(String firstName, String lastName, String userName,String password,String email, int isManager, int managerID)
+	public Employee(String firstName, String lastName, String userName,String password,String email, int isManager, Employee manager)
 	{
 		this.firstName=firstName;
 		this.lastName=lastName;
@@ -19,7 +19,7 @@ public class Employee {
 		this.password=password;
 		this.email=email;
 		this.isManager=isManager;
-		this.managerID=managerID;
+		this.manager=manager;
 	}
 	public Employee(String firstName, String lastName, String userName,String password,String email)
 	{
@@ -62,14 +62,14 @@ public class Employee {
 	public void setIsManager(int isManager) {
 		this.isManager = isManager;
 	}
-	public int getManagerID() {
-		return managerID;
+	public Employee getManagerID() {
+		return manager;
 	}
-	public void setManagerID(int managerID) {
-		this.managerID = managerID;
+	public void setManagerID(Employee manager) {
+		this.manager = manager;
 	}
 	public Employee getManager() {
-		return null;
+		return manager;
 	}
 	public void setEmail(String email) 
 	{
@@ -84,7 +84,7 @@ public class Employee {
 		return "Employee name=" + firstName + " " + lastName 
 				+ ", userName=" + userName + ", password="
 				+ password + ", email=" + email + "\n isManager=" 
-				+ isManager + ", managerID=" + managerID;
+				+ isManager + ", managerID=" + manager;
 	}
 	
 }
