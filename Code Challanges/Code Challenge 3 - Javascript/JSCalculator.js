@@ -7,7 +7,6 @@ if ((x === "") || (y=== "")) {
 var resultP = document.getElementById("result");
 var a = document.forms["mathForm"]["num1"].value;
 var b = document.forms["mathForm"]["num2"].value;
-
 var whatToDo = document.forms["mathForm"]["operation"].value;
 console.log("A= "+a+" B = "+b);
 var operation = document.getElementById("operation");
