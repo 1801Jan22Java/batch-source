@@ -6,14 +6,19 @@ h1{
 	padding-top: 8px;
 	padding-bottom: 3px;
 }
+
 body{
 	font-family:"verdana","arial","sans-serif";
 	text-align:center;
+	backround-image: url('../hSHmeL.jpg');
+	background-size:cover;
+	background-color: rose;
 	}
 	
 #inputform
 {
-	background-color:powderblue;
+	background-color:pink;
+	backround-image: url('../hSHmeL.jpg');
 	color:"white";
 	text-align:center;
 	width: 300px;
