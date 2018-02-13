@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.sql.Blob;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -53,40 +54,77 @@ public class ReimbursementRequestDaoImpl implements ReimbursementRequestDao {
 
 	@Override
 	public List<ReimbursementRequest> getReimbursementRequestsByEmployee(Employee employee) {
-		System.out.println("Entered method");
-		List<ReimbursementRequest> rl = new ArrayList<ReimbursementRequest>();
 		EmployeeDaoImpl edi = new EmployeeDaoImpl();
-		int id = edi.getEmployeeID(employee);
-		ReimbursementRequest reibReq = null;
-		Connection con;
-		try {
-			con = ConnectionUtil.getConnectionFromFile(filename);
-			PreparedStatement prepStmt = con.prepareStatement("SELECT * FROM REIBREQUEST WHERE EMP_ID=?");
-			prepStmt.setInt(1, id);
-			prepStmt.execute();
-			ResultSet rs = prepStmt.getResultSet();
-			System.out.println("executing query");
-			while (rs.next()) {
-				System.out.println("Getting reimbursement");
-				int requestingEmpId = rs.getInt("REQ_EMP_ID");
-				int approvingEmpId = rs.getInt("APPROVING_EMP_ID");
-				int approved = rs.getInt("APPROVED");
-				int pending = rs.getInt("PENDING");
-				float amount = rs.getFloat("AMOUNT");
-				reibReq = new ReimbursementRequest(edi.getEmployeeById(requestingEmpId),
-						edi.getEmployeeById(approvingEmpId), pending, approved, amount);
-				rl.add(reibReq);
+		List<ReimbursementRequest> rl = new ArrayList<ReimbursementRequest>();
+		ReimbursementRequest rr = null;
+
+		if (verifyEmployeePermission(employee)) {
+			int id = edi.getEmployeeID(employee);
+			try (Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
+				String sql = "SELECT * FROM REIBREQUEST WHERE APPROVING_EMP_ID=? OR REQ_EMP_ID=?";
+				PreparedStatement prepStmt = con.prepareStatement(sql);
+				prepStmt.setInt(1, id);
+				prepStmt.setInt(2, id);
+				ResultSet rs = prepStmt.executeQuery();
+				while (rs.next()) {
+					int empID = rs.getInt("REQ_EMP_ID");
+					int mgrID = rs.getInt("APPROVING_EMP_ID");
+					int approved = rs.getInt("APPROVED");
+					int pending = rs.getInt("PENDING");
+					float amount = rs.getFloat("AMOUNT");
+					// Blob receipt = rs.getBlob("RECEIPT");
+					Employee verified = edi.getEmployeeById(empID);
+					Employee manager = edi.getEmployeeById(mgrID);
+					rr = new ReimbursementRequest(verified, manager, pending, approved, amount);
+					rl.add(rr);
+				}
+			} catch (SQLException | IOException e) {
+				e.printStackTrace();
 			}
-		} catch (IOException | SQLException e) {
-			e.printStackTrace();
+		} else {
+			System.out.println("You do not have any requests to view");
 		}
 		return rl;
+	}
+
+	public boolean verifyEmployeePermission(Employee employee) {
+		EmployeeDaoImpl edi = new EmployeeDaoImpl();
+		boolean verified = false;
+		List<ReimbursementRequest> rl = new ArrayList<ReimbursementRequest>();
+		int id=0;
+		ReimbursementRequest rr = null;
+		try {
+		 id = edi.getEmployeeID(employee);
+		}
+		catch(NullPointerException e) 
+		{
+			System.out.println("There is no such employee");
+		}
+		try (Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
+			String sql = "SELECT * FROM REIBREQUEST WHERE APPROVING_EMP_ID=? OR REQ_EMP_ID=?";
+			PreparedStatement prepStmt = con.prepareStatement(sql);
+			prepStmt.setInt(1, id);
+			prepStmt.setInt(2, id);
+			ResultSet rs = prepStmt.executeQuery();
+			if (rs.next()) {
+				verified = true;
+			} else {
+				verified = false;
+			}
+		} catch (SQLException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			return verified;
+		}
+
 	}
 
 	@Override
 	public ReimbursementRequest getReimbursementRequestById(int id) {
 		EmployeeDaoImpl edi = new EmployeeDaoImpl();
 		ReimbursementRequest reibReq = null;
+		File file = null;
 		Connection con;
 		try {
 			con = ConnectionUtil.getConnectionFromFile(filename);
@@ -166,9 +204,9 @@ public class ReimbursementRequestDaoImpl implements ReimbursementRequestDao {
 	public void addReimbursementRequest(Employee emp, File file, float amount) {
 		EmployeeDaoImpl edi = new EmployeeDaoImpl();
 		int empID = edi.getEmployeeID(emp);
-		System.out.println("employee id is: " +empID);
+		System.out.println("employee id is: " + empID);
 		Connection con;
-		FileInputStream input= null;
+		FileInputStream input = null;
 		try {
 			input = new FileInputStream(file);
 		} catch (FileNotFoundException e1) {

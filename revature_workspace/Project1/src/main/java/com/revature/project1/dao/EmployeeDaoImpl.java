@@ -21,7 +21,7 @@ public class EmployeeDaoImpl implements EmployeeDao{
 	
 	@Override
 	public List<Employee> getEmployees(){
-		System.out.println("Entered method");
+		//System.out.println("Entered method");
 		List<Employee> el = new ArrayList<Employee>();
 		Employee emp = null;
 		Connection con;
@@ -31,9 +31,9 @@ public class EmployeeDaoImpl implements EmployeeDao{
 			
 			prepStmt.execute();
 			ResultSet rs = prepStmt.getResultSet();
-			System.out.println("executing query");
+			//System.out.println("executing query");
 			while(rs.next()) {
-				System.out.println("Getting employee");
+				//System.out.println("Getting employee");
 				String user_name=rs.getString("USER_NAME");
 				String pass = rs.getString("USER_PASS");
 				String fname = rs.getString("FIRST_NAME");
@@ -62,7 +62,7 @@ public class EmployeeDaoImpl implements EmployeeDao{
 			ResultSet rs= prepStmt.getResultSet();
 			if(rs.next())
 			{
-				System.out.println("Getting employee");
+				//System.out.println("Getting employee");
 				String user_name=rs.getString("USER_NAME");
 				String pass = rs.getString("USER_PASS");
 				String fname = rs.getString("FIRST_NAME");
@@ -419,7 +419,7 @@ public class EmployeeDaoImpl implements EmployeeDao{
 			int userID = getEmployeeID(user2);
 			try(Connection conn=  ConnectionUtil.getConnectionFromFile(filename))
 			{
-				String sqlStr = "{CALL SP_DELETE_USER(?)}";
+				String sqlStr = "{CALL SP_DELETE_EMPLOYEE(?)}";
 				CallableStatement cs = conn.prepareCall(sqlStr);
 				cs.setInt(1, userID);
 				cs.execute();

@@ -10,7 +10,7 @@ h1{
 body{
 	font-family:"verdana","arial","sans-serif";
 	text-align:center;
-	backround-image: url('../hSHmeL.jpg');
+	background-image: url('../hSHmeL.jpg');
 	background-size:cover;
 	background-color: rose;
 	}
@@ -18,7 +18,6 @@ body{
 #inputform
 {
 	background-color:pink;
-	backround-image: url('../hSHmeL.jpg');
 	color:"white";
 	text-align:center;
 	width: 300px;
@@ -48,6 +47,7 @@ body{
 }
 
 table,td,th{
+	background-color: white;
 	border: 1px solid black;
 	padding: 3px 10px 3px 10px;
 }
@@ -55,4 +55,9 @@ table,td,th{
 .requestTable{
 	margin-left:auto;
 	margin-right:auto;
+}
+
+#employeeFilterPrompt{
+	background-color: white;
+	color:white;
 }

@@ -26,29 +26,30 @@ public class Driver {
 				ReimbursementRequestDaoImpl rrdi = new ReimbursementRequestDaoImpl();
 				Employee manager =edi.getEmployeeById(1022);
 				Employee notManager = edi.getEmployeeById(1042);
+				Employee emp2= edi.getEmployeeByCredentials("ngogol", "nose");
+				System.out.println(emp2);
 				Employee emp = new Employee("Marina","Tsvetaeva","mtsvetaeva","tsardevitsa","mtsvetaeva@yandex.ru",0,manager);
 				//System.out.println(emp.getEmail());
-				edi.addEmployee(emp);
+				//edi.addEmployee(emp);
 				//int id =edi.getEmployeeID(emp);
 				//System.out.println(manager.getFirstName());
 				//System.out.println(id);
-				rrdi.denyReimbursementRequest(1001, manager);
-				rrdi.approveReimbursementRequest(1002, manager);
-				rrdi.denyReimbursementRequest(1002, notManager);
-				List<ReimbursementRequest> rl=rrdi.getReimbursementRequests();
+				//rrdi.denyReimbursementRequest(1001, manager);
+				//rrdi.approveReimbursementRequest(1002, manager);
+				//rrdi.denyReimbursementRequest(1002, notManager);
+				List<ReimbursementRequest> rl=rrdi.getReimbursementRequestsByEmployee(emp2);
 				//File file = new File("samples/interceptor.jpg");
 				//System.out.println(file.getAbsolutePath());
-				
 				//rrdi.addReimbursementRequest(emp, file, 60);
-				List<Employee> el = edi.getEmloyees();
-				
+				//List<Employee> el = edi.getEmloyees();
 				//System.out.println("after getEmployee");
 				//System.out.println(el);
-				for(int i =0;i<el.size();i++) 
-				{
-					System.out.println(el.get(i));
-				}
-				
+				/*	
+				 * for(int i =0;i<el.size();i++) 
+					{
+						System.out.println(el.get(i));
+					}
+				*/
 				for(int i =0;i<rl.size();i++) 
 				{
 					System.out.println(rl.get(i));

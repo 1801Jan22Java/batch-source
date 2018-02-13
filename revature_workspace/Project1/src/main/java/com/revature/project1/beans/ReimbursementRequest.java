@@ -80,7 +80,7 @@ public class ReimbursementRequest {
 		String pendingStr="";
 		if(pending ==1 &&approved==0) 
 		{
-		approvedStr="not yet approved";
+		approvedStr="not yet processed";
 		}
 		else if(pending==0 && approved==1) 
 		{
