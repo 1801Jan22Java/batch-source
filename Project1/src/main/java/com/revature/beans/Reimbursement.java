@@ -1,6 +1,6 @@
 package com.revature.beans;
 
-import javax.sql.rowset.serial.SerialBlob;
+import java.sql.Blob;
 
 public class Reimbursement {
 	
@@ -9,13 +9,13 @@ public class Reimbursement {
 	private int managerId;
 	private int status;
 	private double reimbursementValue;
-	private SerialBlob image; //TODO:idk what to do
+	private Blob image; //TODO:idk what to do
 	
 	public Reimbursement() {
 		super();
 	}
 	
-	public Reimbursement(int reimbursementId, int employeeId, int managerId, int status, double reimbursementValue, SerialBlob image) {
+	public Reimbursement(int reimbursementId, int employeeId, int managerId, int status, double reimbursementValue, Blob image) {
 		super();
 		this.reimbursementId = reimbursementId;
 		this.employeeId = employeeId;
@@ -65,11 +65,11 @@ public class Reimbursement {
 		this.reimbursementValue = reimbursementValue;
 	}
 
-	public SerialBlob getImage() {
+	public Blob getImage() {
 		return image;
 	}
 
-	public void setImage(SerialBlob image) {
+	public void setImage(Blob image) {
 		this.image = image;
 	}
 

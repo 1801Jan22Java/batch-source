@@ -15,7 +15,7 @@ import com.revature.util.ConnectionUtil;
 public class EmployeeDaoSQL implements EmployeeDao {
 
 	// get a list of all the employees in the database
-	public List<Employee> getEmployee() {
+	public List<Employee> getEmployees() {
 		
 		// create a list object to store the employees,
 		//if the list is empty then nothing was in the DB
@@ -131,35 +131,5 @@ public class EmployeeDaoSQL implements EmployeeDao {
 		}
 		return employeeId;
 	}
-
-
-	public void submitReimbursement(int employeeId, double reimbursementValue, SerialBlob image) {
-		
-		try(Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
-			con.setAutoCommit(false);
-			String sql = "{call ADD_REIMBURSEMENT(?,?,?,?)}";
-			CallableStatement cs = con.prepareCall(sql);
-			cs.setInt(1, employeeId);
-			cs.setDouble(2, reimbursementValue);
-			
-			cs.registerOutParameter(4, java.sql.Types.INTEGER);
-			cs.execute();
-			employeeId = cs.getInt(4);
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-	}
-
-	@Override
-	public void submitReimbursement(double reimbursementValue) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
 
 }
