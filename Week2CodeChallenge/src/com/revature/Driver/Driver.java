@@ -3,42 +3,43 @@ package com.revature.Driver;
 import com.revature.dao.*;
 import com.revature.util.ConnectionUtil;
 
-import java.io.IOException;
-import java.sql.CallableStatement;
-import java.sql.Connection;
-import java.sql.SQLException;
+import java.io.*;
+import java.sql.*;
 
 public class Driver {
 	
 	public static void main(String[] args) {
 		
-		DepartmentDao dd = new DepartmentDaoSQL();
-		dd.getNameAvg(1003);
-		
 		try(Connection con = ConnectionUtil.getConnectionFromFile("connection.properties")) {
-			con.setAutoCommit(false);
-			String sql = "{call SP_GIVE_RAISE(?,?,?)}";
-			CallableStatement cs = con.prepareCall(sql);
-			int valid = -1;
-			cs.setInt(1, 1003);
-			cs.registerOutParameter(2, java.sql.Types.DOUBLE);
-			cs.registerOutParameter(3, java.sql.Types.INTEGER);
-			cs.execute();
-			valid = cs.getInt(3);
-			if (valid == 0) {
-				System.out.println("Callable statement was successful");
+
+//			String sql = "insert into images(image_name,image) values(?,?)";
+//			PreparedStatement ps = con.prepareStatement(sql);
+//			FileInputStream imageInputStream = new FileInputStream(new File("naruto.jpg"));
+//            // inform the statement that first parameter in the query is of binary type
+//			ps.setString(1, "helpme");
+//			ps.setBinaryStream(2, imageInputStream);
+//			ps.executeUpdate();
+			
+			String sql2 = "select image from images where image_name='helpme' ";
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery(sql2);
+			InputStream in = null;
+			OutputStream out = null;
+			while(rs.next()) {
+				in = rs.getBinaryStream(1);
+				out = new FileOutputStream(new File("fromdb.jpg"));
+				int c = 0;
+				while((c=in.read()) != -1) {
+					out.write(c);
+				}
+				
 			}
-			
-			
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		} 
-		
-		dd.getNameAvg(1003);
-		
+
 	}
 
 }
