@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="ISO-8859-1">
+		<title>Calculator</title>
+		<link rel="stylesheet" href="style/myCoolStyles.css">
+	</head>
+	<body>
+		<div class="calcFormDiv">
+			<form action="calculator" method="post">
+				<fieldset>
+					<legend>Number 1:</legend>
+					<input name="n1" type="number">
+				</fieldset>
+				<fieldset>
+					<legend>Number 2:</legend>
+					<input name="n2" type="number"/>
+				</fieldset>
+				<fieldset>
+					<legend>Operation: </legend>
+					<input list="operation" name="operation"/>
+					<datalist id="operation">
+						<option value = "add">
+						<option value = "substract">
+						<option value = "multiply">
+						<option value = "divide">
+					</datalist>
+				</fieldset>
+				<br>
+				<input type="submit" value="Calculate!">
+			</form>
+		</div>
+	</body>
+</html>
