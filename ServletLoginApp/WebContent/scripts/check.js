@@ -20,10 +20,15 @@ function sendAjaxGet(url, func){
 };
 
 function populateUser(xhr){
-	var res = JSON.parse(xhr.responseText);
-	if(res.username != "null"){
-		document.getElementById("user").innerHTML="You are logged in as "+res.username;
-	} else {
+	
+	//Check whether there is any response text
+	//If no, don't parse it.
+	if(xhr.resp){
+		var res = JSON.parse(xhr.responseText);
+		if(res.username != "null"){
+			document.getElementById("user").innerHTML="You are logged in as "+res.username;
+		} 
+	}else {
 		//Redirect if unsuccessful
 		window.location = "http://localhost:8084/ServletLoginApp/login";
 	}
