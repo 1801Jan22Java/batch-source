@@ -1,0 +1,49 @@
+h2 {color : purple;
+	font-family: "Courier New"}
+
+.link {
+	color: black;
+	font-family: "Comic Sans MS";
+}
+
+.monospace {
+	font-weight: bold;
+	font-family: "Courier New";
+	font-size: 100px;
+}
+
+.scale{
+	top:10%;
+	left:0%;
+	height: 500px;
+	width: 50%;
+}
+
+div {
+	background-color: #41b6c4;
+}
+
+.classOne{
+	color : #005824;
+	font-family: "Courier New";
+	text-align: center;
+}
+
+img {
+	display: block;
+}
+
+#coolPenguin {
+	display: block;
+	padding: 40px;
+	margin: 40px;
+	border: 5px;
+	border-color: #ff0000;
+	border-style: solid;
+	border-width: 10px;
+}
+
+.bobRoss {
+	margin: 50px;
+	background-color: #8fa42c;
+}

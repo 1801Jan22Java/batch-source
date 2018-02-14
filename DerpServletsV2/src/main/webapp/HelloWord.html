@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<!-- comment -->
+		<title>Hello World</title>
+		<meta charset = "UTF-8"><!--attrubute -->
+
+		<!-- Internal style -->
+		<style>
+			body {background-color: red}
+		</style>
+
+		<!-- External Style -->
+		<link rel="stylesheet" href="style.css">
+
+	</head>
+	<body style="background-color: #8eaa17"><!-- content to be displayed -->
+		<h1 font-weight=bold class="classOne">This is a large Heading</h1><!-- Inline styling on the open tag -->
+		<h2>This is a slightly smaller one</h2>
+		<h6>This is a small heading</h6>
+		<!-- Heading: h1->h6, decreasing size -->
+		<div><!-- Grouped Paragraph -->
+			<p>This will be a paragraph</p>
+			<p>Ths will also be another paragraph</p>
+		</div><!-- Grouped Paragraph -->
+
+		<div>
+			<a class="classOne" href="https://en.wikipedia.org/wiki/Galapagos_penguin">Galapagos Penguins</a>
+			<img id="coolPenguin" src="https://i.pinimg.com/736x/54/dd/ca/54ddcab54b1d56eedea2fd071a73910f--summer-beach-summer-fun.jpg" alt="Penguin on the beach" width="200" height="150">
+
+			<p class="bobRoss">Let's put some happy little bushes on the other side now. We tell people sometimes: we're like drug dealers, come into town and get everybody absolutely addicted to painting. It doesn't take much to get you addicted. You gotta think like a tree.
+			</p>
+
+			<p class="bobRoss">I'll go over the colors one more time that we use: Titanium white, Thalo green, Prussian blue, Van Dyke brown, Alizarin crimson, Sap green, Cad yellow, and Permanent red. If you don't like it - change it. It's your world. Very easy to work these to death. That's what painting is all about. It should make you feel good when you paint. Painting should do one thing. It should put happiness in your heart.
+			</p>
+
+			<p class="bobRoss">Use your imagination, let it go. The little tiny Tim easels will let you down. Everyone wants to enjoy the good parts - but you have to build the framework first. You can create anything that makes you happy.
+			</p>
+
+		</div>
+
+		<a href="https://www.google.com">Google</a><!-- This is a link (anchor tag) allows links -->
+
+		<img src="cats.jpg" width = 200 alt="this is cats"> <!-- This is for images. Source can be a link. This one is a filepath -->
+
+		<br>
+			
+		<br>
+
+		<div>
+			<form method="post" action="congrats.html"><!-- This specifies the ural in which the form will be submitted -->
+				some text: <input type="text" name="">
+				<br>
+				<br>
+				a number: <input type="number" name="">
+				<br>
+				<br>
+				a date: <input type="date" name="">
+				<br>
+				<br>
+				a dropdown: <br> 
+				<select name="penguins">
+					<option value="emperor" selected>Emperor</option>
+					<option value="galapagos">Galapagos</option>
+					<option value="macaroni">Macaroni</option>
+				</select>
+				<br>
+				<br>
+				a text area: <textarea name="message" rows="4" cols="25"> Your text here</textarea>
+				<br>
+				<br>
+				radio button: <br>
+				<input type="radio" name="penguinType" value="emperor" checked>Emperor</input><br>
+				<input type="radio" name="penguinType" value="galapagos">Galapagos</input><br>
+				<input type="radio" name="penguinType" value="macaroni">Macaroni</input><br>
+				<br>
+				<br>
+
+				<!-- from HTML 5: datalists and some other things -->
+				<input list="browsers">
+					<datalist id="browsers">
+						<option value="Firefox"></option>
+						<option value="Chrome"></option>
+						<option value="Tor"></option>
+					</datalist>
+				</input>
+				<br>
+				<br>
+				<br>
+
+				<input type="submit" value="Submit"/>
+				<!-- Submits the form data to the form handler. -->
+				<!-- if a form element does not have a name the data gets lost -->
+
+			</form>
+		</div>
+
+
+	</body>
+
+</html>

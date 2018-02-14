@@ -1,3 +1,6 @@
+/**
+ * 
+ */
 
 function sendAjaxGet(url, func) {
 	// step 1: obtain XHR
@@ -21,19 +24,6 @@ function sendAjaxGet(url, func) {
 
 };
 
-function populateUser(xhr) {
-	if (xhr.responseText) {
-		var res = JSON.parse(xhr.responseText);
-		if (res.username) {
-			document.getElementById("user").innerHTML = "you are logged in as "
-					+ res.username;
-
-		} else {
-			window.location = "http://localhost:8084/ServletLoginApp/login";
-		}
-	}
+window.onload = function(){
+	document.getElementById("button").addEventListener("click", getPages);
 };
-
-window.onload = function() {
-	sendAjaxGet("http://localhost:8084/ServletLoginApp/session", populateUser)
-}
