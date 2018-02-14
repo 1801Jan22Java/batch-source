@@ -42,7 +42,7 @@ public class TestServlet extends HttpServlet {
 		ReimburseUtil ru = new ReimburseUtil();
 		List<Reimbursement> rList = ru.getPending("asdf");
 		
-		jsonOutput.println(rList.size());
+		jsonOutput.println(gson.toJson(rList));
 	}
 
 	/**
