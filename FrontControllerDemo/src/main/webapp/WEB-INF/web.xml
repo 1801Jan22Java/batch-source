@@ -1,12 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
   <display-name>FrontControllerDemo</display-name>
- <servlet>
- 	<servlet-name>bear</servlet-name>
- 	<servlet-class>com.revature.servlet.BearServlet</servlet-class>
- </servlet>
- <servlet-mapping>
- 	<servlet-name>bear</servlet-name>
- 	<url-pattern>/bear</url-pattern>
- </servlet-mapping>
+  
+  <context-param>
+  	<param-name>whereAreWe</param-name>
+  	<param-value>HundredAcreWoods</param-value>
+  </context-param>
+  
+  <servlet>
+    <servlet-name>bear</servlet-name>
+    <servlet-class>com.revature.servlet.BearServlet</servlet-class>
+    <init-param>
+    	<param-name>whatAmI</param-name>
+    	<param-value>ABear</param-value>
+    </init-param>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>bear</servlet-name>
+    <url-pattern>/bear</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>home</servlet-name>
+    <servlet-class>com.revature.servlet.MasterServlet</servlet-class>
+  	<load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>home</servlet-name>
+    <url-pattern>/home</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>cave</servlet-name>
+    <servlet-class>com.revature.servlet.CaveServlet</servlet-class>
+ 	<init-param>
+    	<param-name>whatAmI</param-name>
+    	<param-value>aCave</param-value>
+    </init-param>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>cave</servlet-name>
+    <url-pattern>/cave</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ErrorServlet</servlet-name>
+    <servlet-class>com.revature.servlet.ErrorServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ErrorServlet</servlet-name>
+    <url-pattern>/error</url-pattern>
+  </servlet-mapping>
 </web-app>
