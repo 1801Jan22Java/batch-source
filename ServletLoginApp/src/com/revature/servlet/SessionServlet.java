@@ -18,7 +18,7 @@ public class SessionServlet extends HttpServlet {
 			resp.getWriter().write("{\"username\":\"" + session.getAttribute("username") + "\"}");
 		} else {
 			resp.setContentType("application/json");
-			resp.getWriter().write("{\"username\":null}");
+			//resp.getWriter().write("{\"username\":null}");
 		}
 	}
 }
