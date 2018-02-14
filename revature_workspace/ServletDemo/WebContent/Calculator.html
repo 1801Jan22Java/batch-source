@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Calculatrix</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" href="styles/myLameStyles.css"/>
+</head>
+<body>
+<h1>Calculatrix</h1>
+<div class="calcFormDiv">
+<form action="calculator" method="post"> <!--form action should correspond to url pattern of desired servlet -->
+	<fieldset>
+		<legend>
+		Number 1: 
+		</legend>
+		<input name="n1" type="number">
+	</fieldset>
+		<fieldset>
+		<legend>
+		Number 2: 
+		</legend>
+		<input name="n2" type="number">
+	</fieldset>
+	<fieldset><legend>
+	Operation:</br>
+	<input list="operation" name="operation"/>
+	<dataList id="operation">
+	<option value="add">
+	<option value="subtract">
+	<option value="multiply">
+	<option value="divide">
+	</dataList>
+	</legend></fieldset>
+	<br>
+	<input type="submit" value="Calculate!">
+</form>
+</div>
+</body>
+</html>
