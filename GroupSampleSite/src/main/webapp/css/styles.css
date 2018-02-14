@@ -61,22 +61,22 @@
 }
 
 .pimg1 {
-    background-image: url("/images/KittenRescue_CatsAreCool-2.jpg");
+    background-image: url("../images/KittenRescue_CatsAreCool-2.jpg");
     min-height: 100%;
 }
 
 .pimg2 {
-    background-image: url("/images/cosiechattaway-web.jpg");
+    background-image: url("../images/cosiechattaway-web.jpg");
     min-height: 500px;
 }
 
 .pimg3 {
-    background-image: url("/images/cat-iphone.jpg");
+    background-image: url("../images/cat-iphone.jpg");
     min-height: 500px;
 }
 
 .pimg4 {
-    background-image: url("/images/4913786-cat-m.jpg");
+    background-image: url("../images/4913786-cat-m.jpg");
     min-height: 100%;
 }
 
