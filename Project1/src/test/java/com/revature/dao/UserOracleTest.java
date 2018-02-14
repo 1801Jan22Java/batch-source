@@ -6,6 +6,7 @@ import static org.junit.Assert.assertNotEquals;
 import org.junit.*;
 
 import com.revature.beans.User;
+import com.revature.util.UserUtil;
 
 public class UserOracleTest {
 
@@ -19,7 +20,7 @@ public class UserOracleTest {
 	 */
 	@Test
 	public void loginValidUser() {
-		User user = uo.login("asdf", "asdf");
+		User user = uo.getUser("asdf", "asdf");
 		// Assert that all fields are equal.
 		User test = new User(1, "asdf", "asdf", "asdf", "asdf", 2);
 		assertEquals(
@@ -30,13 +31,13 @@ public class UserOracleTest {
 	}
 	@Test
 	public void loginInvalidPassword() {
-		User user = uo.login("asdf", "null");
+		User user = uo.getUser("asdf", "null");
 		// Assert that all fields are equal.
 		assertEquals(user, null);
 	}
 	@Test
 	public void loginInvalidUsername() {
-		User user = uo.login("null", "asdf");
+		User user = uo.getUser("null", "asdf");
 		// Assert that all fields are equal.
 		assertEquals(user, null);
 	}
@@ -47,7 +48,7 @@ public class UserOracleTest {
 	@Test
 	public void updateInfoValidId() {
 		uo.editInfo(1, "qwer", "qwer", "qwer");
-		User user = uo.login("asdf", "qwer");
+		User user = uo.getUser("asdf", "qwer");
 		User test = new User(1, "asdf", "qwer", "qwer", "qwer", 2);
 		assertEquals(
 				user.getUser_id() + user.getFirstname() + user.getLastname() + user.getPassword() + user.getUsername()
@@ -59,8 +60,8 @@ public class UserOracleTest {
 	}
 	@Test
 	public void updateInfoInvalidId() {
-		uo.editInfo(-1, "qwer", "qwer", "qwer");
-		User user = uo.login("asdf", "qwer");
+		uo.editInfo(-3, "qwer", "qwer", "qwer");
+		User user = uo.getUser("asdf", "asdf");
 		User test = new User(5000, "asdf", "qwer", "qwer", "qwer", 2);
 		assertNotEquals(
 				user.getUser_id() + user.getFirstname() + user.getLastname() + user.getPassword() + user.getUsername()

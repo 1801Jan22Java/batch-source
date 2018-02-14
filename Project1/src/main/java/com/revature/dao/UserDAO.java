@@ -13,7 +13,7 @@ public interface UserDAO {
 	// -An Employee can logout
 	// -A Manager can login
 	// -A Manager can logout
-	public User login(String username, String password);
+	public User getUser(String username, String password);
 	
 	// -An Employee can view their information
 	// Can be done via returning User object in login. 

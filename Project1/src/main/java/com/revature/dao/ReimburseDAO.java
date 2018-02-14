@@ -38,13 +38,12 @@ public interface ReimburseDAO {
 	// -A Manager can view reimbursement requests from a single Employee
 	public List<Reimbursement> viewRequestsEmp(int user_id);
 
+	// Next 2 done in servlets/util class. ReimburseUtil.java
 	// -A Manager can view all resolved requests from all employees and see which
 	// manager resolved it
-	public List<Reimbursement> viewAllResolvedRequests();
 
 	// -A Manager can view all pending requests from all employees
 	// Return a list of all reimbursements, to be parsed into HTML
-	public List<Reimbursement> viewAllPendingRequests();
 
 	public boolean reimburseRequest(int user_id, double amount, String notes);
 	
@@ -58,6 +57,10 @@ public interface ReimburseDAO {
 	// -An Employee can upload an image of his/her receipt as part of the
 	// reimbursement request
 	public boolean uploadImage(String filename);
+
+	List<Reimbursement> viewPendingRequests(String username);
+
+	List<Reimbursement> viewAllRequestsEmp(String username);
 
 }
 // 10 requirements

@@ -27,7 +27,7 @@ public class UserOracle implements UserDAO {
 	}
 
 	@Override
-	public User login(String username, String password) {
+	public User getUser(String username, String password) {
 		String sql = "SELECT * FROM USERS WHERE USERNAME = ? AND PASSWORD = ?";
 		User user = null;
 		try {

@@ -14,7 +14,10 @@ public class ConnectionUtil {
 	public static Connection getConnectionFromFile(String filename) throws SQLException,IOException {
 		Properties prop = new Properties();
 		InputStream in = new FileInputStream(filename);
-		
+		if(in.equals(null)) {
+			ClassLoader loader = Thread.currentThread().getContextClassLoader();
+		    in = loader.getResourceAsStream("/connection.properties");
+		}
 		// Load the connection.properties file into prop
 		prop.load(in);
 		

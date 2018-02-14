@@ -1,28 +1,23 @@
 package com.revature.main;
 
+import java.awt.Robot;
+import java.io.IOException;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
 
 import com.revature.beans.Reimbursement;
+import com.revature.beans.User;
 import com.revature.dao.ReimburseOracle;
 import com.revature.dao.UserOracle;
-import com.revature.util.ReimburseUtil;
+import com.revature.util.ConnectionUtil;
 
-public class ReimbursorSystemTest {
+public class ReimbursorSystemTest2 {
 	public static void main(String[] args) {
 		UserOracle uo = new UserOracle();
 		Connection conn = null;
 		ReimburseOracle ro = new ReimburseOracle();
-		List<Reimbursement> rlist = ro.viewAllRequestsEmp("asdf");
-//		for(Reimbursement r : rlist) {
-//			System.out.println(r.getAmount());
-//		}
-		
-		ReimburseUtil ru = new ReimburseUtil();
-		for(Reimbursement r: ru.getPending("asdf")) {
 
-			System.out.println(r.getAmount());
-		}
 
 //		List<User> users = uo.getAllEmployees();
 //		for (User u : users) {
