@@ -2,6 +2,7 @@ package com.revature.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Enumeration;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -14,6 +15,7 @@ public class AnswerServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
 		// display answer with PrintWriter
 		String answer = (String) req.getAttribute("answer");
 		PrintWriter pw = resp.getWriter();
@@ -24,6 +26,13 @@ public class AnswerServlet extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		//view the attributes of request 
+		Enumeration<String> atts = req.getAttributeNames();
+		while (atts.hasMoreElements()) {
+			String s = atts.nextElement();
+			System.out.println(s+ " : "+req.getAttribute(s));
+		}
+		
 		// display answer with PrintWriter
 		String answer = (String) req.getAttribute("answer");
 		PrintWriter pw = resp.getWriter();
