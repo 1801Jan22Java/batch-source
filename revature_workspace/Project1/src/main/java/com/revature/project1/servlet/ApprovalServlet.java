@@ -55,12 +55,14 @@ public class ApprovalServlet extends HttpServlet {
 		rd =req.getRequestDispatcher("views/approvalpage.html");
 		ReimbursementRequestDao rrdi = new ReimbursementRequestDaoImpl();
 		rd.include(req,res);
+		pw.println("<div id=\"results\">");
 		if(rrdi.getReimbursementRequestsByEmployee(emp).size()>0) {
 		for (ReimbursementRequest rr : rrdi.getReimbursementRequestsByEmployee(emp)){
-			pw.println("<p>"+rr.toString()+"</p>");
+			pw.println("<p style=\"background-color:powderblue; width:450px;margin-left:auto;margin-right:auto;\">"+rr.toString()+"</p>");
 			//res.getWriter().write(rr.toString());
 			
 		}
+		pw.println("</div>");
 		}
 		else {
 			pw.println("<p>There is no employee with ID " +empStr+"</p>");
