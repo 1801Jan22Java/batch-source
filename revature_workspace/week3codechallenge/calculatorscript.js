@@ -14,7 +14,7 @@ window.onload = function(){
 	function getOperand1(){
 		operand1.onchange=function()
 		{
-			num1=parseInt(operand1.value);
+			num1=parseFloat(operand1.value);
 			console.log(operand1.value);
 			//alert("operand entered");
 		}
@@ -22,7 +22,7 @@ window.onload = function(){
 	function getOperand2(){
 		operand2.onchange=function()
 		{
-			num2=parseInt(operand2.value);
+			num2=parseFloat(operand2.value);
 			console.log(operand2.value);
 			//alert("operand entered");
 		}

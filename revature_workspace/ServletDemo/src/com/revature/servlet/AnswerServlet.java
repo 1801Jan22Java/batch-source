@@ -19,7 +19,7 @@ public class AnswerServlet extends HttpServlet {
 		String answer =(String) req.getAttribute("answer");
 		PrintWriter prw = res.getWriter();
 		prw.write("<p style= \"margin:30px\"> The answer is: "+ answer+"</p>");
-		prw.write("<p style = \"margin:30px\"><a href=\"Calculator.html\">Do more calculashunz</a></p>");
+		prw.write("<p style = \"margin:30px\"><a href=\"Calculator.html\">Do more calculations</a></p>");
 	}
 
 	@Override 
@@ -37,6 +37,6 @@ public class AnswerServlet extends HttpServlet {
 		String answer =(String) req.getAttribute("answer");
 		PrintWriter prw = res.getWriter();
 		prw.write("<p style= \"margin:30px\"> The answer is: "+ answer+"</p>");
-		prw.write("<p style = \"margin:30px\"><a href=\"Calculator.html\">Do more calculashunz</a></p>");
+		prw.write("<p style = \"margin:30px\"><a href=\"Calculator.html\">Do more calculations</a></p>");
 	}
 }

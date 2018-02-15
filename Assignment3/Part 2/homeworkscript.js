@@ -323,17 +323,10 @@ Hide the name if shown.
 function showHide(){
 	console.log("Question 9");
 	var empList = document.getElementsByClassName("empName");
-	for(var j = 0;j<empList.length;j++){
-	empList[j].addEventListener("mouseover",function(event){
+	empList.onmouseover=function(){
 		for(var i = 0;i<empList.length;i++){
-		var empName=document.getElementsByClassName("empName");
-		//var empName=document.getElementsByClassName("empName")[0];
-		//console.log(empName);
-		//console.log(empName[0].innerHTML);
-		//console.log(empList);
-		//console.log(empList[i].innerHTML);
-			if(empList[i].style.visibility==="visible"){
-			//	console.log(empList[i]);
+			if(empList[i].style.visibility=="visible"){
+				console.log(empList[i]);
 				empList[i].style.visibility="hidden";
 			}
 			else{
@@ -341,8 +334,9 @@ function showHide(){
 				//console.log(empList[i]);
 				}
 			
-		}});
-	}
+		}
+		}
+	
 } 
 
 showHide();
