@@ -1,3 +1,9 @@
 body {
 	
 }
+
+.test{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

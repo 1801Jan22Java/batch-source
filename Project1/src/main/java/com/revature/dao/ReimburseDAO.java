@@ -1,5 +1,7 @@
 package com.revature.dao;
 
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.List;
 
 import com.revature.beans.Reimbursement;
@@ -53,10 +55,10 @@ public interface ReimburseDAO {
 	 */
 	// -A Manager can view images of the receipts from reimbursement requests
 	// Figure out image transfer via servlets, void return type for now
-	public void viewImage(int request_id);
+	public OutputStream viewImage(int request_id);
 	// -An Employee can upload an image of his/her receipt as part of the
 	// reimbursement request
-	public boolean uploadImage(String filename);
+	public boolean uploadImage(int request_id, InputStream is);
 
 	List<Reimbursement> viewPendingRequests(String username);
 

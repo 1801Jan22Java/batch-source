@@ -7,6 +7,7 @@ import com.revature.beans.Reimbursement;
 import com.revature.dao.ReimburseOracle;
 import com.revature.dao.UserOracle;
 import com.revature.util.ReimburseUtil;
+import com.revature.util.UserUtil;
 
 public class ReimbursorSystemTest {
 	public static void main(String[] args) {
@@ -18,11 +19,17 @@ public class ReimbursorSystemTest {
 //			System.out.println(r.getAmount());
 //		}
 		
+		UserUtil uu = new UserUtil();
+		System.out.println(uu.login("asdf", "asdf"));
+		System.out.println(uu.getUser("asdf", "asdf"));
+		
+		
 		ReimburseUtil ru = new ReimburseUtil();
-		for(Reimbursement r: ru.getPending("asdf")) {
-
-			System.out.println(r.getAmount());
-		}
+//		for(Reimbursement r: ru.getPending("asdf")) {
+//		
+//			System.out.println(r.getAmount());
+//		}
+		
 
 //		List<User> users = uo.getAllEmployees();
 //		for (User u : users) {

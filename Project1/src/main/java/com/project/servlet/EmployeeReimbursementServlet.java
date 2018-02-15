@@ -1,29 +1,25 @@
 package com.project.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.google.gson.Gson;
-import com.revature.beans.Reimbursement;
-import com.revature.beans.User;
-import com.revature.util.ReimburseUtil;
+import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class TestServlet
+ * Servlet implementation class EmployeeReimbursementServlet
  */
-public class TestServlet extends HttpServlet {
+public class EmployeeReimbursementServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+       
     /**
-     * Default constructor. 
+     * @see HttpServlet#HttpServlet()
      */
-    public TestServlet() {
+    public EmployeeReimbursementServlet() {
+        super();
         // TODO Auto-generated constructor stub
     }
 
@@ -31,18 +27,13 @@ public class TestServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
-		PrintWriter pw = response.getWriter();
-		response.setContentType("JSON");
-		
-		// Use google gson to convert json
-		Gson gson = new Gson();
-		
-		ReimburseUtil ru = new ReimburseUtil();
-		List<Reimbursement> rList = ru.getPending("asdf");
-		
-		pw.println(gson.toJson(rList));
+		HttpSession session = request.getSession(false);	//Defaults to false
+		if(session != null && session.getAttribute("username") != null) {
+			RequestDispatcher rd = request.getRequestDispatcher("views/employeeReimbursement.html");
+			rd.forward(request, response);
+		} else {
+			response.sendRedirect("login");
+		}
 	}
 
 	/**

@@ -1,6 +1,8 @@
 package com.revature.dao;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -147,15 +149,33 @@ public class ReimburseOracle implements ReimburseDAO {
 	}
 
 	@Override
-	public boolean uploadImage(String filename) {
-		// TODO Auto-generated method stub
+	public boolean uploadImage(int request_id, InputStream is) {
+		String dml = "INSERT INTO REIMBURSE_REQUEST (PHOTO_BLOB) VALUES (?) WHERE REQUEST_ID = ?";
+		try(Connection con = ConnectionUtil.getConnectionFromFile(this.filename)) {
+			PreparedStatement ps = con.prepareStatement(dml);
+			ps.setBinaryStream(1, is);
+			ps.setInt(2, request_id);
+			return true;
+		} catch (SQLException | IOException e) {
+			e.printStackTrace();
+		}
 		return false;
 	}
 
+	// Still implementing
 	@Override
-	public void viewImage(int request_id) {
-		// TODO Auto-generated method stub
+	public OutputStream viewImage(int request_id) {
+		String dml = "SELECT PHOTO_BLOB FROM REIMBURSE_REQUEST WHERE REQUEST_ID = ?";
+		OutputStream os = null;
+		try(Connection con = ConnectionUtil.getConnectionFromFile(this.filename)) {
+			PreparedStatement ps = con.prepareStatement(dml);
 
+			ps.setInt(1, request_id);
+			
+		} catch (SQLException | IOException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	@Override

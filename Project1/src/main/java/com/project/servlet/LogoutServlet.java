@@ -2,28 +2,26 @@ package com.project.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.google.gson.Gson;
-import com.revature.beans.Reimbursement;
-import com.revature.beans.User;
-import com.revature.util.ReimburseUtil;
+import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class TestServlet
+ * Servlet implementation class LogoutServlet
  */
-public class TestServlet extends HttpServlet {
+@WebServlet("/LogoutServlet")
+public class LogoutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+       
     /**
-     * Default constructor. 
+     * @see HttpServlet#HttpServlet()
      */
-    public TestServlet() {
+    public LogoutServlet() {
+        super();
         // TODO Auto-generated constructor stub
     }
 
@@ -31,18 +29,13 @@ public class TestServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
+		response.setContentType("text/html");
 		PrintWriter pw = response.getWriter();
-		response.setContentType("JSON");
-		
-		// Use google gson to convert json
-		Gson gson = new Gson();
-		
-		ReimburseUtil ru = new ReimburseUtil();
-		List<Reimbursement> rList = ru.getPending("asdf");
-		
-		pw.println(gson.toJson(rList));
+		request.getRequestDispatcher("views/logout.html").include(request, response);
+		HttpSession session = request.getSession();
+		if(session != null){
+			session.invalidate();
+		}
 	}
 
 	/**
