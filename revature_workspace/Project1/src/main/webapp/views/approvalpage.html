@@ -1,90 +1,45 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+<link rel="stylesheet" href="../styles/style.css"/>
 <meta charset="UTF-8">
 <title>Reimbursement Portal</title>
-<link rel="stylesheet" href="../styles/style.css" />
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-	crossorigin="anonymous">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </head>
 <body>
+<nav class="navbar navbar-expand-md" style="background-color:powderblue;">
 
-	<nav class="navbar navbar-expand-md"
-		style="background-color: powderblue;">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" 
+  style="background-color:white;"
+data-target="#collapsibleNavbar">
+   <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <ul class="navbar-nav">
+	<li class="nav-item">
+        <a class="nav-link" href="main.html">Main</a>
+      </li>
+	<li class="nav-item">
+        <a class="nav-link" href="approvalpage.html">Approve Requests</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="status_page.html">View your requests</a>
+      </li>
+    </ul>
+</div>
+</nav>
+<h1>Manager Request Approval Page</h1>
+<div>
+<form id="approvalForm" action="approval" name="approval" method="post">
+Enter the Employee ID :<input type="number" id="employeeid" name="employeeid">
+<input type="submit" value="Find Employee"></form></div>
 
-		<button class="navbar-toggler" type="button" data-toggle="collapse"
-			style="background-color: white;" data-target="#collapsibleNavbar">
-			<span class="navbar-toggler-icon"></span>
-		</button>
-		<div class="collapse navbar-collapse" id="collapsibleNavbar">
-			<ul class="navbar-nav">
-				<li class="nav-item"><a class="nav-link" href="main.html">Main</a>
-				</li>
-				<li class="nav-item"><a class="nav-link"
-					href="approvalpage.html">Approve Requests</a></li>
-				<li class="nav-item"><a class="nav-link"
-					href="status_page.html">View your requests</a></li>
-			</ul>
-		</div>
-	</nav>
-	<h1>Managerial Receipt Approval</h1>
-	<div id="approvalForm">
-		<form action="approval" method="post">
-
-			<br>View reimbursement requests by employee:<fieldset>
-			<input name="employeeid" type="text" id="employeeFilter"></fieldset><br>
-			<br>
-			<table class="requestTable">
-				<tr>
-					<th>Employee</th>
-					<th>Amount Requested for Reimbursement</th>
-					<th>Description</th>
-					<th>Receipt</th>
-					<th>Pending?</th>
-					<th>Approved?</th>
-				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-			</table>
-		</form>
-	</div>
-
+<div id="employeeData" name="employeeData"></div>
 </body>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </html>

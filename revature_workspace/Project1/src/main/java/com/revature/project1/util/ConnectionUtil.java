@@ -10,6 +10,7 @@ import java.util.Properties;
 
 
 public class ConnectionUtil {
+	private static String filename="connection.properties";
 
 	public static Connection getConnection() throws SQLException
 	{
@@ -19,11 +20,17 @@ public class ConnectionUtil {
 		return DriverManager.getConnection(url,username,password);
 	}
 	
-	public static Connection getConnectionFromFile(String filename) throws IOException, SQLException
+	public static Connection getConnectionFromFile() throws IOException, SQLException
 	{
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+		}
+		catch(ClassNotFoundException e) {
+			e.printStackTrace();
+		}
 		Properties prop = new Properties();
-		InputStream in = new FileInputStream(filename);
-		prop.load(in);
+		ClassLoader loader = Thread.currentThread().getContextClassLoader();
+		prop.load(loader.getResourceAsStream(filename));
 		String url = prop.getProperty("url");
 		String username = prop.getProperty("username");
 		String password=  prop.getProperty("password");

@@ -28,7 +28,7 @@ public class ReimbursementRequestDaoImpl implements ReimbursementRequestDao {
 		ReimbursementRequest reibReq = null;
 		Connection con;
 		try {
-			con = ConnectionUtil.getConnectionFromFile(filename);
+			con = ConnectionUtil.getConnectionFromFile();
 			PreparedStatement prepStmt = con.prepareStatement("SELECT * FROM REIBREQUEST");
 
 			prepStmt.execute();
@@ -60,7 +60,8 @@ public class ReimbursementRequestDaoImpl implements ReimbursementRequestDao {
 
 		if (verifyEmployeePermission(employee)) {
 			int id = edi.getEmployeeID(employee);
-			try (Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
+			//try (Connection con = ConnectionUtil.getConnectionFromFile(filename))
+			try (Connection con = ConnectionUtil.getConnectionFromFile()){
 				String sql = "SELECT * FROM REIBREQUEST WHERE APPROVING_EMP_ID=? OR REQ_EMP_ID=?";
 				PreparedStatement prepStmt = con.prepareStatement(sql);
 				prepStmt.setInt(1, id);
@@ -100,7 +101,7 @@ public class ReimbursementRequestDaoImpl implements ReimbursementRequestDao {
 		{
 			System.out.println("There is no such employee");
 		}
-		try (Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
+		try (Connection con = ConnectionUtil.getConnectionFromFile()) {
 			String sql = "SELECT * FROM REIBREQUEST WHERE APPROVING_EMP_ID=? OR REQ_EMP_ID=?";
 			PreparedStatement prepStmt = con.prepareStatement(sql);
 			prepStmt.setInt(1, id);
@@ -127,7 +128,7 @@ public class ReimbursementRequestDaoImpl implements ReimbursementRequestDao {
 		File file = null;
 		Connection con;
 		try {
-			con = ConnectionUtil.getConnectionFromFile(filename);
+			con = ConnectionUtil.getConnectionFromFile();
 			PreparedStatement prepStmt = con.prepareStatement("SELECT * FROM REIBREQUEST WHERE REQ_ID=?");
 			prepStmt.setInt(1, id);
 			;
@@ -161,7 +162,7 @@ public class ReimbursementRequestDaoImpl implements ReimbursementRequestDao {
 		if (req.getManager().getUserName().equals(manager.getUserName())) {
 			int managerID = edi.getEmployeeID(manager);
 			try {
-				con = ConnectionUtil.getConnectionFromFile(filename);
+				con = ConnectionUtil.getConnectionFromFile();
 				CallableStatement cs = con.prepareCall("{CALL SP_DENY_REQUEST(?,?)}");
 				cs.setInt(1, reqID);
 				cs.setInt(2, managerID);
@@ -185,7 +186,7 @@ public class ReimbursementRequestDaoImpl implements ReimbursementRequestDao {
 		if (req.getManager().getUserName().equals(manager.getUserName())) {
 			int managerID = edi.getEmployeeID(manager);
 			try {
-				con = ConnectionUtil.getConnectionFromFile(filename);
+				con = ConnectionUtil.getConnectionFromFile();
 				CallableStatement cs = con.prepareCall("{CALL SP_APPROVE_REQUEST(?,?)}");
 				cs.setInt(1, reqID);
 				cs.setInt(2, managerID);
@@ -215,7 +216,7 @@ public class ReimbursementRequestDaoImpl implements ReimbursementRequestDao {
 			System.out.println("That file was not found");
 		}
 		try {
-			con = ConnectionUtil.getConnectionFromFile(filename);
+			con = ConnectionUtil.getConnectionFromFile();
 			CallableStatement cs = con.prepareCall("{CALL SP_ADD_REIB_REQUEST(?,?,?)}");
 			cs.setInt(1, empID);
 			cs.setFloat(2, amount);

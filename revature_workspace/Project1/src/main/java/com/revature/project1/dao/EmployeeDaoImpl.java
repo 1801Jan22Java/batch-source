@@ -26,7 +26,7 @@ public class EmployeeDaoImpl implements EmployeeDao{
 		Employee emp = null;
 		Connection con;
 		try {
-			con = ConnectionUtil.getConnectionFromFile(filename);
+			con = ConnectionUtil.getConnectionFromFile();
 			PreparedStatement prepStmt= con.prepareStatement("SELECT * FROM EMPLOYEE");
 			
 			prepStmt.execute();
@@ -54,7 +54,7 @@ public class EmployeeDaoImpl implements EmployeeDao{
 
 	public Employee getEmployeeById(int id) {
 		Employee emp = null;
-		try(Connection con = ConnectionUtil.getConnectionFromFile(filename))
+		try(Connection con = ConnectionUtil.getConnectionFromFile())
 		{
 
 			PreparedStatement prepStmt = con.prepareStatement("SELECT * FROM EMPLOYEE WHERE EMP_ID="+id);
@@ -138,7 +138,7 @@ public class EmployeeDaoImpl implements EmployeeDao{
 	*/
 	public void addEmployee(Employee employee) {
 		int managerID = getEmployeeID(employee.getManager());
-		try(Connection conn = ConnectionUtil.getConnectionFromFile(filename))
+		try(Connection conn = ConnectionUtil.getConnectionFromFile())
 		{
 			if(verifyUniqueUsername(employee)) {
 			conn.setAutoCommit(false);
@@ -208,7 +208,7 @@ public class EmployeeDaoImpl implements EmployeeDao{
 		String userPass=null;
 		String userName= null;
 		//	String sql = "SELECT USER_ID,USER_NAME,USER_PASS FROM USERS WHERE USER_NAME=?";
-		try(Connection conn = ConnectionUtil.getConnectionFromFile(filename))
+		try(Connection conn = ConnectionUtil.getConnectionFromFile())
 		{
 			PreparedStatement ps = conn.prepareStatement("SELECT EMP_ID,USER_NAME,USER_PASS FROM EMPLOYEE WHERE USER_NAME=?");
 			ps.setString(1, username);
@@ -235,7 +235,7 @@ public class EmployeeDaoImpl implements EmployeeDao{
 	private boolean verifyUniqueUsername(Employee employee) {
 		boolean unique =false;
 		String username=employee.getUserName();
-		try(Connection con = ConnectionUtil.getConnectionFromFile(filename))
+		try(Connection con = ConnectionUtil.getConnectionFromFile())
 		{
 
 			PreparedStatement prepStmt = con.prepareStatement("SELECT * FROM EMPLOYEE WHERE USER_NAME=?");
@@ -270,7 +270,7 @@ public class EmployeeDaoImpl implements EmployeeDao{
 	 * */
 	public Employee createEmployee() {
 		Employee employee = createEmployeeObject();
-		try(Connection conn = ConnectionUtil.getConnectionFromFile(filename))
+		try(Connection conn = ConnectionUtil.getConnectionFromFile())
 		{
 			conn.setAutoCommit(false);
 			//	System.out.println("In try statement");//DEBUGGING
@@ -305,7 +305,7 @@ public class EmployeeDaoImpl implements EmployeeDao{
 		int userId=0;
 		String username=employee.getUserName();
 		String sql = "SELECT EMP_ID FROM EMPLOYEE WHERE USER_NAME=?";
-		try(Connection conn = ConnectionUtil.getConnectionFromFile(filename))
+		try(Connection conn = ConnectionUtil.getConnectionFromFile())
 		{
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, username);
@@ -330,7 +330,7 @@ public class EmployeeDaoImpl implements EmployeeDao{
 	
 	public Employee getEmployeeByCredentials(String username, String password) {
 		Employee employee = null;
-		try(Connection con = ConnectionUtil.getConnectionFromFile(filename))
+		try(Connection con = ConnectionUtil.getConnectionFromFile())
 		{
 
 			PreparedStatement prepStmt = con.prepareStatement("SELECT * FROM EMPLOYEE WHERE USER_NAME=? AND USER_PASS=?");
@@ -363,7 +363,7 @@ public class EmployeeDaoImpl implements EmployeeDao{
 	
 	public Employee logout() {
 		Employee user =null;
-		try(Connection conn = new ConnectionUtil().getConnectionFromFile(filename))
+		try(Connection conn = new ConnectionUtil().getConnectionFromFile())
 		{
 			try{
 				conn.close();
@@ -383,7 +383,7 @@ public class EmployeeDaoImpl implements EmployeeDao{
 
 	public boolean validateManager(Employee user) {
 		boolean isSuperEmployee=  false;
-		try(Connection conn = new ConnectionUtil().getConnectionFromFile(filename))
+		try(Connection conn = new ConnectionUtil().getConnectionFromFile())
 		{
 			String username = user.getUserName();
 			String password = user.getPassword();
@@ -417,7 +417,7 @@ public class EmployeeDaoImpl implements EmployeeDao{
 		else
 		{
 			int userID = getEmployeeID(user2);
-			try(Connection conn=  ConnectionUtil.getConnectionFromFile(filename))
+			try(Connection conn=  ConnectionUtil.getConnectionFromFile())
 			{
 				String sqlStr = "{CALL SP_DELETE_EMPLOYEE(?)}";
 				CallableStatement cs = conn.prepareCall(sqlStr);
@@ -459,7 +459,7 @@ public class EmployeeDaoImpl implements EmployeeDao{
 		Employee emp = null;
 		Connection con;
 		try {
-			con = ConnectionUtil.getConnectionFromFile(filename);
+			con = ConnectionUtil.getConnectionFromFile();
 			PreparedStatement prepStmt= con.prepareStatement("SELECT * FROM EMPLOYEE");
 			
 			prepStmt.execute();
