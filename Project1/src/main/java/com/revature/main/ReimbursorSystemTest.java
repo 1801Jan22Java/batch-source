@@ -21,7 +21,7 @@ public class ReimbursorSystemTest {
 		
 		UserUtil uu = new UserUtil();
 		System.out.println(uu.login("asdf", "asdf"));
-		System.out.println(uu.getUser("asdf", "asdf"));
+		System.out.println(uu.getUser("asdf").getFirstname());
 		
 		
 		ReimburseUtil ru = new ReimburseUtil();

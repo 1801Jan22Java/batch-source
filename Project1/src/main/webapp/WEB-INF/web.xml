@@ -57,13 +57,61 @@
     <url-pattern>/logout</url-pattern>
   </servlet-mapping>
   <servlet>
-    <description></description>
-    <display-name>Master</display-name>
-    <servlet-name>Master</servlet-name>
-    <servlet-class>com.project.servlet.Master</servlet-class>
+    <servlet-name>ManagerProfile</servlet-name>
+    <servlet-class>com.project.servlet.ManagerProfile</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>Master</servlet-name>
-    <url-pattern>/Master</url-pattern>
+    <servlet-name>ManagerProfile</servlet-name>
+    <url-pattern>/mprofile</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ManagerEmployees</display-name>
+    <servlet-name>ManagerEmployees</servlet-name>
+    <servlet-class>com.project.servlet.ManagerEmployees</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ManagerEmployees</servlet-name>
+    <url-pattern>/memployees</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ManagerResolve</display-name>
+    <servlet-name>ManagerResolve</servlet-name>
+    <servlet-class>com.project.servlet.ManagerResolve</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ManagerResolve</servlet-name>
+    <url-pattern>/mresolve</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ManagerReimbursement</display-name>
+    <servlet-name>ManagerReimbursement</servlet-name>
+    <servlet-class>com.project.servlet.ManagerReimbursement</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ManagerReimbursement</servlet-name>
+    <url-pattern>/mreimbursement</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UpdateProfileServlet</display-name>
+    <servlet-name>UpdateProfileServlet</servlet-name>
+    <servlet-class>com.project.servlet.UpdateProfileServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdateProfileServlet</servlet-name>
+    <url-pattern>/updateprofile</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GetProfileServlet</display-name>
+    <servlet-name>GetProfileServlet</servlet-name>
+    <servlet-class>com.project.servlet.GetProfileServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetProfileServlet</servlet-name>
+    <url-pattern>/getprofile</url-pattern>
   </servlet-mapping>
 </web-app>

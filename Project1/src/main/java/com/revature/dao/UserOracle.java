@@ -27,13 +27,12 @@ public class UserOracle implements UserDAO {
 	}
 
 	@Override
-	public User getUser(String username, String password) {
-		String sql = "SELECT * FROM USERS WHERE USERNAME = ? AND PASSWORD = ?";
+	public User getUser(String username) {
+		String sql = "SELECT * FROM USERS WHERE USERNAME = ? ";
 		User user = null;
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, username);
-			ps.setString(2, password);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				int user_id = rs.getInt("USER_ID");

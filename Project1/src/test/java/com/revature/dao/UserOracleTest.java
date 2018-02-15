@@ -20,7 +20,7 @@ public class UserOracleTest {
 	 */
 	@Test
 	public void loginValidUser() {
-		User user = uo.getUser("asdf", "asdf");
+		User user = uo.getUser("asdf");
 		// Assert that all fields are equal.
 		User test = new User(1, "asdf", "asdf", "asdf", "asdf", 2);
 		assertEquals(
@@ -31,13 +31,13 @@ public class UserOracleTest {
 	}
 	@Test
 	public void loginInvalidPassword() {
-		User user = uo.getUser("asdf", "null");
+		User user = uo.getUser("asdf");
 		// Assert that all fields are equal.
 		assertEquals(user, null);
 	}
 	@Test
 	public void loginInvalidUsername() {
-		User user = uo.getUser("null", "asdf");
+		User user = uo.getUser("null");
 		// Assert that all fields are equal.
 		assertEquals(user, null);
 	}
@@ -48,7 +48,7 @@ public class UserOracleTest {
 	@Test
 	public void updateInfoValidId() {
 		uo.editInfo(1, "qwer", "qwer", "qwer");
-		User user = uo.getUser("asdf", "qwer");
+		User user = uo.getUser("asdf");
 		User test = new User(1, "asdf", "qwer", "qwer", "qwer", 2);
 		assertEquals(
 				user.getUser_id() + user.getFirstname() + user.getLastname() + user.getPassword() + user.getUsername()
@@ -61,7 +61,7 @@ public class UserOracleTest {
 	@Test
 	public void updateInfoInvalidId() {
 		uo.editInfo(-3, "qwer", "qwer", "qwer");
-		User user = uo.getUser("asdf", "asdf");
+		User user = uo.getUser("asdf");
 		User test = new User(5000, "asdf", "qwer", "qwer", "qwer", 2);
 		assertNotEquals(
 				user.getUser_id() + user.getFirstname() + user.getLastname() + user.getPassword() + user.getUsername()

@@ -274,6 +274,19 @@ insert into users (
     'sql',
     1
 );
+insert into users (
+    username,
+    first_name,
+    last_name,
+    password,
+    position_id
+) values (
+    'qwer',
+    'qwer',
+    'qwer',
+    'qwer',
+    1
+);
 
 -- reimburse_request
 insert into reimburse_request (
@@ -366,3 +379,5 @@ update reimburse_request
         resolved_by = 1,
         reimburse_status_id = 2
 where reimburse_request_id = 5;
+/
+commit;

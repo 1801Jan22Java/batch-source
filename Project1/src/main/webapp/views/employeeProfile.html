@@ -26,7 +26,8 @@
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-				<div class="navbar-nav"><a class="nav-item nav-link selected" href="#">View Profile</a> <a
+				<div class="navbar-nav">
+					<a class="nav-item nav-link selected" href="#">View Profile</a> <a
 						class="nav-item nav-link" href="reimbursement">Reimbursements</a>
 
 					<a class="nav-item nav-link" href="logout">Logout</a>
@@ -36,17 +37,28 @@
 
 		<div class="container col rounded">
 			<div class="jumbotron col-sm-6 justify-content-center">
-				<h4>Username:</h4>
-				<label id="username"></label>
-				<h4>First Name:</h4>
-				<label id="firstname"></label>
-				<h4>Last Name:</h4>
-				<label id="lastname"></label>
-				<h4>Position:</h4>
-				<label id="position"></label>
+				<form class="field" method="POST" action="updateprofile">
+					<h4>Username:</h4>
+					<label name="username" id="username"></label>
+					<h4>First Name:</h4>
+					<input name="firstname" id="firstname"></input>
+					<h4>Last Name:</h4>
+					<input name="lastname" id="lastname"></input>
+					<h4>Position:</h4>
+					<label name="position" id="position"></label>
+					<h4>Password:</h4>
+					<input name="password" id="password"></input>
+					<br>
+					<br>
+					<input type="submit" value="Update Profile">
+				</form>
+
 			</div>
 		</div>
 	</div>
+	
+	<script src="scripts/profileAjax.js"></script>
+	
 	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
@@ -61,7 +73,6 @@
 		integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
 		crossorigin="anonymous"></script>
 
-	<script src="../scripts/employeeProfileAjax.js"></script>
 
 </body>
 

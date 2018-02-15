@@ -10,15 +10,15 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class ManagerProfile
+ * Servlet implementation class ManagerResolve
  */
-public class ManagerProfile extends HttpServlet {
+public class ManagerResolve extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ManagerProfile() {
+    public ManagerResolve() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,7 +29,7 @@ public class ManagerProfile extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
 		if(session != null && session.getAttribute("username") != null) {
-			RequestDispatcher rd = request.getRequestDispatcher("views/managerProfile.html");
+			RequestDispatcher rd = request.getRequestDispatcher("views/managerResolve.html");
 			rd.forward(request, response);
 		} else {
 			response.sendRedirect("login");
