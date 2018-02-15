@@ -1,0 +1,15 @@
+{
+  "name": "typescript-bank",
+  "version": "1.0.0",
+  "description": "",
+  "main": "account.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^9.4.6"
+  }
+}
