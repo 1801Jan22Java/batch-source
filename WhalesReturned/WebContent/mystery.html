@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html class="bgClass">
+
+<head>
+
+    <title>B L U E</title>
+    <meta charset="UTF-8">
+
+    <style>
+        body {
+            background-image:  url("./res/whales.jpg");
+            background-size: cover;
+            background-repeat: repeat;
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+</head>
+	
+<body>
+
+    <nav class="navbar navbar-default">
+        <div class="container-fluid>
+            <div class="navbar-header">
+                <a href="home.html" class="btn btn-warning navbar-btn">Home</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <div class="btn-group">
+                    <li>  <a href="mystery.html" class="btn btn-warning navbar-btn">Mystery</a></li>
+                    <li>  <a href="bluewhale.html" class="btn btn-warning navbar-btn">Blue Whale</a></li>
+                    <li>  <a href="pokemonBlue.html" class="btn btn-warning navbar-btn">Pokemon</a></li>
+                </div>
+            </ul>
+        </div>
+    </nav>
+
+	<div id="DA">
+	</div>
+    <p class=bodyTextClass>Whales are nature's most curious wonders. Not even David Attenborough knows a thing about them!</p>
+    <img onclick = "david()" src="http://c3.thejournal.ie/media/2014/01/television-david-attenborough-great-white-shark-the-silent-stalker-photocall-390x285.jpg">
+
+    <p class=bodyTextClass>There is nothing a whale can't do. 52 Hertz is not an issue.</p>
+    <img src="https://cdn-images-1.medium.com/max/600/1*RIEM6OyVfiqzcMXLPBj4Zg.jpeg">
+
+	<div id="whales">
+	</div>
+	
+    <form>
+        <div class="form-check">
+            <input onclick = "whale()" type="checkbox" class="form-check-input" id="exampleCheck1">
+            <label class="form-check-label" for="exampleCheck1">Check this box if you truly love whales</label>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</body>
+
+<script src="Blue.js"></script>
+</html>
