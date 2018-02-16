@@ -4,6 +4,10 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Employee {
+	public Employee() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	public Employee(int employeeId, String firstname, String lastname, String email, String jobTitle,
 			LocalDate creationDate, Employee reportsTo) {
 		super();

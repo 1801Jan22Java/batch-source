@@ -11,13 +11,12 @@ import com.revature.beans.*;
 import com.revature.util.ConnectionUtil;
 
 public class EventDaoImpl implements EventDao{
-	private static String filename = "connection.properties";
 
 	@Override
 	public boolean getEvents(Request thisRequest) {
 		thisRequest.getEvents().clear();
 		PreparedStatement pstmt = null;
-		try(Connection con = ConnectionUtil.getConnectionFromFile(filename)){
+		try(Connection con = ConnectionUtil.getConnectionFromFile()){
 			String sql = "SELECT ev.event_id, em.employee_id, em.firstname, em.lastname, em.email, em.job_title, em.creation_date AS emp_creation_date, c.common_lookup_id AS request_status, ev.message, ev.creation_date " + 
 					"FROM event ev " + 
 					"INNER JOIN employee em ON em.employee_id = ev.event_author_id " + 

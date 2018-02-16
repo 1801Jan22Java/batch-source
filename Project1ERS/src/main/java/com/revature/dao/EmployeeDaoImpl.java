@@ -9,13 +9,13 @@ import com.revature.beans.*;
 import com.revature.util.ConnectionUtil;
 
 public class EmployeeDaoImpl implements EmployeeDao{
-	private static String filename = "connection.properties";
+	private static final int TEMP_PASSWORD_LENGTH = 10;
 	
 	@Override
 	public Employee login(String email, String password) {
 		PreparedStatement pstmt = null;
 		Employee thisEmployee = null;
-		try (Connection con = ConnectionUtil.getConnectionFromFile(filename)){
+		try (Connection con = ConnectionUtil.getConnectionFromFile()){
 			String sql = "SELECT employee_id, firstname, lastname, email, job_title, creation_date " +
 						 "FROM employee " +
 						 "WHERE email = ? AND password = ? ";
@@ -42,10 +42,39 @@ public class EmployeeDaoImpl implements EmployeeDao{
 	}
 	
 	@Override
+	public Employee getEmployee (int employeeId) {
+		PreparedStatement pstmt = null;
+		Employee thisEmployee = null;
+		try (Connection con = ConnectionUtil.getConnectionFromFile()){
+			String sql = "SELECT firstname, lastname, email, job_title, creation_date " +
+						 "FROM employee " +
+						 "WHERE employee_id = ? ";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, employeeId);
+			ResultSet rs = pstmt.executeQuery();
+			// If rs.next() returns true, then the password matches the username, so save all info to object
+			if(rs.next()){
+				String firstname = rs.getString("firstname");
+				String lastname = rs.getString("lastname");
+				String email = rs.getString("email");
+				String jobTitle = rs.getString("job_title");
+				LocalDate creationDate = rs.getDate("creation_date").toLocalDate();
+				thisEmployee = new Employee(employeeId, firstname, lastname, email, jobTitle, creationDate);
+			}
+			con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		return thisEmployee;
+	}
+	
+	@Override
 	public boolean isManager(Employee thisManager) {
 		PreparedStatement pstmt = null;
 		boolean isManager = false;
-		try (Connection con = ConnectionUtil.getConnectionFromFile(filename)){
+		try (Connection con = ConnectionUtil.getConnectionFromFile()){
 			String sql = "SELECT reports_to FROM employee WHERE reports_to = ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, thisManager.getEmployeeId());
@@ -67,7 +96,7 @@ public class EmployeeDaoImpl implements EmployeeDao{
 		thisManager.getEmployees().clear();
 		PreparedStatement pstmt = null;
 		boolean success = false;
-		try(Connection con = ConnectionUtil.getConnectionFromFile(filename)){
+		try(Connection con = ConnectionUtil.getConnectionFromFile()){
 			String sql = "SELECT emp.employee_id, emp.firstname, emp.lastname, emp.email, emp.job_title, emp.creation_date, " + 
 					"man.employee_id AS man_employee_id, man.firstname AS man_firstname, man.lastname AS man_lastname, " +
 					"man.email AS man_email, man.job_title AS man_job_title, man.creation_date AS man_creation_date " +
@@ -113,7 +142,7 @@ public class EmployeeDaoImpl implements EmployeeDao{
 		CallableStatement cs = null;
 		boolean success = false;
 		try{
-			Connection con = ConnectionUtil.getConnectionFromFile(filename);
+			Connection con = ConnectionUtil.getConnectionFromFile();
 			String sql = "{ call update_employee(?, ?, ?, ?, ?, ?, ?) }";
 			cs = con.prepareCall(sql);
 			cs.setInt(1, thisEmployee.getEmployeeId());
@@ -146,7 +175,6 @@ public class EmployeeDaoImpl implements EmployeeDao{
 	public boolean addEmployee(String firstname, String lastname, String email, String jobTitle, Employee thisManager) {
 		CallableStatement cs = null;
 		boolean success = false;
-		int len = 8;
 		/* ****************************************************************************************** */
 		/* Random Password Generator from https://www.geeksforgeeks.org/generating-password-otp-java/ */
         String Capital_chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -155,15 +183,15 @@ public class EmployeeDaoImpl implements EmployeeDao{
         String symbols = "!@#$%^&*_=+-/.?<>)";
         String values = Capital_chars + Small_chars + numbers + symbols;
         Random rndm_method = new Random();
-        char[] passwordChars = new char[len];
-        for (int i = 0; i < len; i++) {
+        char[] passwordChars = new char[TEMP_PASSWORD_LENGTH];
+        for (int i = 0; i < TEMP_PASSWORD_LENGTH; i++) {
         	passwordChars[i] = values.charAt(rndm_method.nextInt(values.length()));
         }
         /* ****************************************************************************************** */
         String password = new String(passwordChars);
         
         try{
-			Connection con = ConnectionUtil.getConnectionFromFile(filename);
+        	Connection con = ConnectionUtil.getConnectionFromFile();
 			String sql = "{ call add_employee(?, ?, ?, ?, ?, ?, ?, ?, ?) }";
 			cs = con.prepareCall(sql);
 			cs.setString(1, firstname);
@@ -178,11 +206,11 @@ public class EmployeeDaoImpl implements EmployeeDao{
 			
 			// Returns 1 if there is an OUT parameter, and 0 for no OUT parameter
 			cs.executeUpdate();
-			int employeeId = cs.getInt(7);
-			LocalDate creationDate = cs.getDate(8).toLocalDate();
 			int response =  cs.getInt(9);
 			if (response > 0) {
 				success = true;
+				int employeeId = cs.getInt(7);
+				LocalDate creationDate = cs.getDate(8).toLocalDate();
 				
 				int manEmployeeId = thisManager.getEmployeeId();
 				String manFirstname = thisManager.getFirstname();
@@ -202,6 +230,27 @@ public class EmployeeDaoImpl implements EmployeeDao{
 			e1.printStackTrace();
 		}
 		return success;
+	}
+
+	@Override
+	public boolean isAvailable(String email) {
+		PreparedStatement pstmt = null;
+		boolean isAvailable = true;
+		try (Connection con = ConnectionUtil.getConnectionFromFile()){
+			String sql = "SELECT employee_id FROM employee WHERE email = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1,email);
+			ResultSet rs = pstmt.executeQuery();
+			// If rs.next() returns true, then the username is taken, so set isUnique to false
+			// IF rs.next() returns false, then the username is available, so set isUnique to true
+			isAvailable = !rs.next();
+			con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		return isAvailable;
 	}
 
 }

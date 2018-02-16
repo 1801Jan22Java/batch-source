@@ -3,6 +3,10 @@ package com.revature.beans;
 import java.time.LocalDate;
 
 public class Event {
+	public Event() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	public Event(int eventId, Employee eventAuthor, String requestStatus, String message, LocalDate creationDate) {
 		super();
 		this.eventId = eventId;

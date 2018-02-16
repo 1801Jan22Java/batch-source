@@ -4,6 +4,10 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Request {
+	public Request() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	public Request(int requestId, String requestType, String currentStatus, Employee currentManager, double amount, String description,
 			LocalDate creationDate) {
 		super();
