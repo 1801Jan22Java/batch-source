@@ -9,17 +9,18 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 public class ConnectionUtil {
-
-	// THIS IS BAD
-	// not secure, tightly coupled. credentials in source code is not good.
+	
+	
+	//THIS IS BAD
+	//not secure, tightly coupled. credentials in source code is not good.
 	public static Connection getConnection() throws SQLException {
 		String url = "";
 		String username = "";
 		String password = "";
-		return DriverManager.getConnection(url, username, password);
+		return DriverManager.getConnection(url,username,password);
 	}
-
-	// better way
+	
+	//better way
 	public static Connection getConnectionFromFile(String filename) throws IOException, SQLException {
 		Properties prop = new Properties();
 		InputStream in = new FileInputStream(filename);
@@ -27,7 +28,10 @@ public class ConnectionUtil {
 		String url = prop.getProperty("url");
 		String username = prop.getProperty("username");
 		String password = prop.getProperty("password");
-		return DriverManager.getConnection(url, username, password);
+		return DriverManager.getConnection(url,username,password);
 	}
+	
+	
+	
 
 }

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
+  <display-name>ServletDemo</display-name>
+  
+	<servlet>
+		<servlet-name>calculator</servlet-name>
+		<servlet-class>com.revature.servlet.CalculatorServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>calculator</servlet-name>
+		<url-pattern>/calculator</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>answer</servlet-name>
+		<servlet-class>com.revature.servlet.AnswerServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>answer</servlet-name>
+		<url-pattern>/answer</url-pattern>
+	</servlet-mapping>
+</web-app>

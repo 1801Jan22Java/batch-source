@@ -9,25 +9,24 @@ import com.revature.beans.BearType;
 import com.revature.util.ConnectionUtil;
 
 public class BearTypeDaoImpl implements BearTypeDao {
-
+	
 	private static String filename = "connection.properties";
-
 	@Override
 	public List<BearType> getBearTypes() {
 		List<BearType> btl = new ArrayList<>();
-		try (Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
-			// use a Statement - remember the danger of SQL injection
+		try(Connection con = ConnectionUtil.getConnectionFromFile(filename)){
+			//use a Statement - remember the danger of SQL injection 
 			String sql = "SELECT * FROM BEAR_TYPE";
 			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery(sql);
-			while (rs.next()) {
+			while (rs.next()){
 				int id = rs.getInt("BEAR_TYPE_ID");
 				String name = rs.getString("BEAR_TYPE_NAME");
-				BearType newBT = new BearType(id, name);
+				BearType newBT = new BearType(id,name);
 				btl.add(newBT);
 			}
 			con.close();
-		} catch (SQLException e) {
+		} catch (SQLException e){
 			e.printStackTrace();
 		} catch (IOException e1) {
 			e1.printStackTrace();
@@ -38,15 +37,15 @@ public class BearTypeDaoImpl implements BearTypeDao {
 	@Override
 	public BearType getBearTypeById(int id) {
 		PreparedStatement pstmt = null;
-		BearType bt = null;
-		try (Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
+		BearType bt = null; 
+		try(Connection con = ConnectionUtil.getConnectionFromFile(filename)){
 			String sql = "SELECT * FROM BEAR_TYPE WHERE BEAR_TYPE_ID = ?";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, id);
+			pstmt.setInt(1,id);
 			ResultSet rs = pstmt.executeQuery();
-			while (rs.next()) {
-				String name = rs.getString("BEAR_TYPE_NAME");
-				bt = new BearType(id, name);
+			while(rs.next()){
+				String name  = rs.getString("BEAR_TYPE_NAME");
+				bt = new BearType(id,name);
 			}
 			con.close();
 		} catch (SQLException e) {
@@ -54,7 +53,7 @@ public class BearTypeDaoImpl implements BearTypeDao {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
+		
 		return bt;
 	}
 

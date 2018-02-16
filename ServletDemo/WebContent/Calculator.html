@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Calculator</title>
+<link rel="stylesheet" href="style/myCoolStyles.css">
+</head>
+<body>
+
+	<div class="calcFormDiv">
+		<!-- for action should correspond to the url pattern of desired servlet -->
+		<form action="calculator" method="post">
+			<fieldset>
+				<legend>Number 1:</legend>
+				<input type="number" name="n1">
+			</fieldset>
+			<fieldset>
+				<legend>Number 2:</legend>
+				<input type="number" name="n2">
+			</fieldset>
+			<fieldset>
+				<legend>Operation:</legend>
+				<input list="operation" name="operation"/>
+				<datalist id="operation"></datalist>
+					<option value="add">
+					<option value="subtract">
+					<option value="multiply">
+					<option value="divide">
+			</fieldset>
+			<br>
+			<input type="submit" value="calculate">
+		</form>
+	</div>
+
+
+</body>
+</html>
