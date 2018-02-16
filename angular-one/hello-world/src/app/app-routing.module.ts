@@ -22,6 +22,8 @@ import { ServiceComponent } from './components/service/service.component';
 import { AngularJSComponent } from './components/angularjs/angularjs.component';
 import { HttpModule } from '@angular/http';
 import { DatabindingComponent } from './components/databinding/databinding.component'
+import { PipeComponent } from './components/pipe/pipe.component';
+import { StructuralComponent } from './components/structural/structural.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/main', pathMatch: 'full' },
@@ -43,6 +45,8 @@ export const routes: Routes = [
   { path: 'service',  component: ServiceComponent },
   { path: 'angularjs',  component: AngularJSComponent },
   { path: 'databinding', component: DatabindingComponent },
+  { path: 'pipe', component: PipeComponent },
+  { path: 'structural', component: StructuralComponent },
   { path: '**', redirectTo: '/main' }
 ];
  

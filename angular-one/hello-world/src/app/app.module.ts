@@ -27,8 +27,13 @@ import { DiComponent } from './components/di/di.component';
 import { ServiceComponent } from './components/service/service.component';
 import { AngularJSComponent } from './components/angularjs/angularjs.component';
 import { DatabindingComponent } from './components/databinding/databinding.component'
+import { PipeComponent } from './components/pipe/pipe.component';
+import { StructuralComponent } from './components/structural/structural.component';
+import { FlashcardComponent } from './components/structural/flashcard/flashcard.component';
 //Services
 import { BearService } from './services/bear.service';
+
+
 
 @NgModule({
   declarations: [
@@ -51,7 +56,10 @@ import { BearService } from './services/bear.service';
     DiComponent,
     ServiceComponent,
     AngularJSComponent,
-    DatabindingComponent
+    DatabindingComponent,
+    PipeComponent,
+    StructuralComponent,
+    FlashcardComponent
   ],
   imports: [
     BrowserModule,

@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
   selector: 'app-databinding',
   templateUrl: './databinding.component.html'
 })
-export class DatabindingComponent implements OnInit {
+export class DatabindingComponent {
 
   title = 'Data Binding';
   image = 'assets/images/databinding.png';
