@@ -1,0 +1,7 @@
+{
+  "name": "",
+  "version": "",
+  "devDependencies": {
+    "@types/node": "^9.4.6"
+  }
+}

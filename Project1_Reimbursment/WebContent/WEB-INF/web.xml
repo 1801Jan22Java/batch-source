@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
+  <display-name>Project1_Reimbursment</display-name>
+  <servlet>
+  	<servlet-name>Master</servlet-name>
+  	<servlet-class>com.revature.servlet.MasterServlet</servlet-class>
+  </servlet>
+  
+  <servlet>
+  	<servlet-name>Error</servlet-name>
+  	<servlet-class>com.revature.servlet.ErrorServlet</servlet-class>
+  </servlet>
+  
+  <servlet>
+  	<servlet-name>Login</servlet-name>
+  	<servlet-class>com.revature.servlet.LoginServlet</servlet-class>
+  </servlet>
+  
+  <servlet>
+  	<servlet-name>NewRequest</servlet-name>
+  	<servlet-class>com.revature.servlet.SubmitRequestServlet</servlet-class>
+  </servlet>
+  
+  <servlet>
+  	<servlet-name>SeeEmployeeRequest</servlet-name>
+  	<servlet-class>com.revature.servlet.ViewEmployeeRequestServlet</servlet-class>
+  </servlet>
+  
+  <servlet>
+  	<servlet-name>EmployeeInfo</servlet-name>
+  	<servlet-class>com.revature.servlet.EmployeeServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>Master</servlet-name>
+  	<url-pattern>/error</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+  	<servlet-name>Master</servlet-name>
+  	<url-pattern>/login</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+  	<servlet-name>Master</servlet-name>
+  	<url-pattern>/submitRequest</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+  	<servlet-name>Master</servlet-name>
+  	<url-pattern>/request_by_employee</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+  	<servlet-name>Master</servlet-name>
+  	<url-pattern>/index</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+  	<servlet-name>Master</servlet-name>
+  	<url-pattern>/employee_info</url-pattern>
+  </servlet-mapping>
+</web-app>

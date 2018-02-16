@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Page for Entering employee information">
+    <meta name="author" content="Leonard Blumberg">
+    
+    <!-- Bootstrap core CSS -->
+    <link href="../dist/css/bootstrap.min.css" rel="stylesheet">
+    
+	<title>View Employee Requests</title>
+	<style>
+        body{
+            background-image: url(../background.png);
+        }
+        
+        .container {
+        	align:"center";
+       		padding:10px;
+		   	background-color: #c2e7eb;
+			border: solid;
+			border-radius: 25px;
+			border-color: #20B2AA;
+			border-width: 5px;
+        }
+    </style>
+</head>
+<body>
+	<div class="container" align = "center">
+		<h1>Employee Requests</h1>
+		<br>
+		<div>
+			<div class="bd-example">
+				<table class="table table-hover" id="empReqTable">
+				  <thead>
+				    <tr>
+				      <th>Employee Name</th>
+				      <th>Request Date</th>
+				      <th>Amount</th>
+				      <th>Message</th>
+				      <th>Status</th>
+				    </tr>
+				  </thead>
+				  <tbody id="empReqTableBody">
+					
+				  </tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
