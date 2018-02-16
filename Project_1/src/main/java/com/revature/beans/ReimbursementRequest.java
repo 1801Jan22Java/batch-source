@@ -1,44 +1,47 @@
 package com.revature.beans;
 
 import java.sql.Blob;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class ReimbursementRequest {
 	private int id;
-	private int amount;
-	private Date dateReq;
+	private double amount;
+	private LocalDateTime dateReq;
 	private int emplId;
 	private String description;
 	private Blob receipt;
 	private RequestStatus status;
 	private int managerId;
-	private Date datePro;
+	private LocalDateTime datePro;
 
 	public ReimbursementRequest() {
 		super();
 	}
 
-	public ReimbursementRequest(int amount, Date dateReq, int emplId,
-			Blob receipt) {
+	public ReimbursementRequest(double amount, LocalDateTime dateReq, int emplId,
+			Blob receipt, String description) {
 		super();
 		this.amount = amount;
 		this.dateReq = dateReq;
 		this.emplId = emplId;
 		this.receipt = receipt;
+		this.description = description;
 	}
 
-	public ReimbursementRequest(int id, int amount, Date dateReq, int emplId,
-			Blob receipt) {
+	public ReimbursementRequest(int id, double amount, LocalDateTime dateReq,
+			int emplId, Blob receipt, String description) {
 		super();
 		this.id = id;
 		this.amount = amount;
 		this.dateReq = dateReq;
 		this.emplId = emplId;
 		this.receipt = receipt;
+		this.description = description;
 	}
 
-	public ReimbursementRequest(int amount, Date dateReq, int emplId,
-			Blob receipt, RequestStatus status, int managerId, Date datePro) {
+	public ReimbursementRequest(double amount, LocalDateTime dateReq, int emplId,
+			Blob receipt, String description, RequestStatus status,
+			int managerId, LocalDateTime datePro) {
 		super();
 		this.amount = amount;
 		this.dateReq = dateReq;
@@ -47,10 +50,12 @@ public class ReimbursementRequest {
 		this.status = status;
 		this.managerId = managerId;
 		this.datePro = datePro;
+		this.description = description;
 	}
 
-	public ReimbursementRequest(int id, int amount, Date dateReq, int emplId,
-			Blob receipt, RequestStatus status, int managerId, Date datePro) {
+	public ReimbursementRequest(int id, double amount, LocalDateTime dateReq,
+			int emplId, Blob receipt, String description, RequestStatus status,
+			int managerId, LocalDateTime datePro) {
 		super();
 		this.id = id;
 		this.amount = amount;
@@ -60,6 +65,7 @@ public class ReimbursementRequest {
 		this.status = status;
 		this.managerId = managerId;
 		this.datePro = datePro;
+		this.description = description;
 	}
 
 	public int getId() {
@@ -68,25 +74,25 @@ public class ReimbursementRequest {
 
 	public ReimbursementRequest setId(int id) {
 		return new ReimbursementRequest(id, amount, dateReq, emplId, receipt,
-				status, managerId, datePro);
+				description, status, managerId, datePro);
 	}
 
-	public int getAmount() {
+	public double getAmount() {
 		return amount;
 	}
 
 	public ReimbursementRequest setAmount(int amount) {
 		return new ReimbursementRequest(id, amount, dateReq, emplId, receipt,
-				status, managerId, datePro);
+				description, status, managerId, datePro);
 	}
 
-	public Date getDateReq() {
+	public LocalDateTime getDateReq() {
 		return dateReq;
 	}
 
-	public ReimbursementRequest setDateReq(Date dateReq) {
+	public ReimbursementRequest setDateReq(LocalDateTime dateReq) {
 		return new ReimbursementRequest(id, amount, dateReq, emplId, receipt,
-				status, managerId, datePro);
+				description, status, managerId, datePro);
 	}
 
 	public int getEmplId() {
@@ -95,7 +101,7 @@ public class ReimbursementRequest {
 
 	public ReimbursementRequest setEmplId(int emplId) {
 		return new ReimbursementRequest(id, amount, dateReq, emplId, receipt,
-				status, managerId, datePro);
+				description, status, managerId, datePro);
 	}
 
 	public Blob getReceipt() {
@@ -104,7 +110,7 @@ public class ReimbursementRequest {
 
 	public ReimbursementRequest setReceipt(Blob receipt) {
 		return new ReimbursementRequest(id, amount, dateReq, emplId, receipt,
-				status, managerId, datePro);
+				description, status, managerId, datePro);
 	}
 
 	public RequestStatus getStatus() {
@@ -113,7 +119,7 @@ public class ReimbursementRequest {
 
 	public ReimbursementRequest setStatus(RequestStatus status) {
 		return new ReimbursementRequest(id, amount, dateReq, emplId, receipt,
-				status, managerId, datePro);
+				description, status, managerId, datePro);
 	}
 
 	public int getManagerId() {
@@ -122,16 +128,16 @@ public class ReimbursementRequest {
 
 	public ReimbursementRequest setManagerId(int managerId) {
 		return new ReimbursementRequest(id, amount, dateReq, emplId, receipt,
-				status, managerId, datePro);
+				description, status, managerId, datePro);
 	}
 
-	public Date getDatePro() {
+	public LocalDateTime getDatePro() {
 		return datePro;
 	}
 
-	public ReimbursementRequest setDatePro(Date datePro) {
+	public ReimbursementRequest setDatePro(LocalDateTime datePro) {
 		return new ReimbursementRequest(id, amount, dateReq, emplId, receipt,
-				status, managerId, datePro);
+				description, status, managerId, datePro);
 	}
 
 	public String getDescription() {
@@ -140,7 +146,7 @@ public class ReimbursementRequest {
 
 	public ReimbursementRequest setDescription(String description) {
 		return new ReimbursementRequest(id, amount, dateReq, emplId, receipt,
-				status, managerId, datePro);
+				description, status, managerId, datePro);
 	}
 
 }
