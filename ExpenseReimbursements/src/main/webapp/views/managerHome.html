@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<div>
+		<h3 id="currentUser"></h3>
+		<form action="managerAction" method="post">
+			<p>What would you like to do today?</p>
+			<select name="destination">
+				<option value="allEmployees">View All Employees</option>
+				<option value="viewAllPendingRequests">View All Pending Requests</option>
+				<option value="viewAllResolvedRequests">View All Resolved Requests</option>
+			</select>
+			<input type="button" id="button" value="Show me the information!">
+		</form>
+		
+	</div>
+	<div id="tables">
+	</div>
+	
+</body>
+<script src="scripts/checkUser.js"></script>
+<script src="scripts/allUsers.js"></script>
+</html>
