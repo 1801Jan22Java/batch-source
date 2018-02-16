@@ -51,4 +51,14 @@
     <servlet-name>session</servlet-name>
     <url-pattern>/session</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>approverequest</display-name>
+    <servlet-name>approverequest</servlet-name>
+    <servlet-class>com.revature.project1.servlet.ApproveRequestServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>approverequest</servlet-name>
+    <url-pattern>/approverequest</url-pattern>
+  </servlet-mapping>
 </web-app>

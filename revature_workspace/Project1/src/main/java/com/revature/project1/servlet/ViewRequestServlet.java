@@ -36,25 +36,66 @@ public class ViewRequestServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher rd = request.getRequestDispatcher("views/status_page.html");
-		rd.forward(request, response);
+		//rd.forward(request, response);
+		EmployeeDao ed = new EmployeeDaoImpl();
+		HttpSession session = request.getSession();
+		String name =session.getAttribute("username").toString();
+		String password= session.getAttribute("password").toString();
+		System.out.println("username entered: " + name + " "+ "password entered: "+password);
+		Employee currentUser =ed.getEmployeeByCredentials(name,password);
+		//res.getWriter().append("Served at: ").append(req.getContextPath());
+		PrintWriter pw = response.getWriter();
+		response.setContentType("text/html");
+		ReimbursementRequestDao rrdi = new ReimbursementRequestDaoImpl();
+		rd.include(request,response);
+		pw.println("<div id=\"results\">");
+		pw.println("<table class=\"requestTable\"><tr><th>Employee</th><th>"+
+		"Amount Requested for Reimbursement</th>"
+		+"<th>Description</th>"+
+		"<th>Receipt</th>"+
+		"<th>Pending?</th>"+
+		"<th>Approved?</th>");
+		if(rrdi.getReimbursementRequestsByEmployee(currentUser).size()>0) {
+		for (ReimbursementRequest rr : rrdi.getReimbursementRequestsByEmployee(currentUser)){	
+		pw.println("<tr style=\"background-color:powderblue; width:450px;margin-left:auto;margin-right:auto;\"><td>"
+		+ rr.getEmployee().getFirstName()+ " "+rr.getEmployee().getLastName()
+		+"</td><td>"+rr.getAmount()
+		+"</td><td>Some description"
+		+"</td><td>No receit available"
+		+"</td><td>"+rr.getPending()
+		+"</td><td>"+rr.getApproved()
+		+"</td>"+"</tr>");
+			//res.getWriter().write(rr.toString());
+			
+		}
+		pw.println("</table></div>");
+		}
+		else {
+			pw.println("<p>There are no requests for " +currentUser.getFirstName() + " " +currentUser.getLastName()+"</p>");
+		}
+		//response.sendRedirect("views/status_page.html");
 	}
+
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("views/status_page.html");
+		
+		/*
+		 * RequestDispatcher rd = request.getRequestDispatcher("views/status_page.html");
 		String empStr = request.getParameter("employeeid");
 		//String empData =req.getParameter("employeeData");
 		int empID=Integer.parseInt(empStr);
 		EmployeeDao ed = new EmployeeDaoImpl();
 		//Employee emp =ed.getEmployeeById(empID);
-		String loginStr=request.getParameter("username");
-		String passwordStr=request.getParameter("password");
-		System.out.println("username entered: " + loginStr + " "+ "password entered: "+passwordStr);
+		//String loginStr=request.getParameter("username");
+		//String passwordStr=request.getParameter("password");
+		
 		HttpSession session = request.getSession();
 		String name =session.getAttribute("username").toString();
 		String password= session.getAttribute("password").toString();
+		System.out.println("username entered: " + name + " "+ "password entered: "+password);
 		Employee currentUser =ed.getEmployeeByCredentials(name,password);
 		//res.getWriter().append("Served at: ").append(req.getContextPath());
 		PrintWriter pw = response.getWriter();
@@ -64,13 +105,13 @@ public class ViewRequestServlet extends HttpServlet {
 		pw.println("<div id=\"results\">");
 		if(rrdi.getReimbursementRequestsByEmployee(currentUser).size()>0) {
 		for (ReimbursementRequest rr : rrdi.getReimbursementRequestsByEmployee(currentUser)){
-			/*
-			 * <tr><th>Employee</th>
-<th>Amount Requested for Reimbursement</th>
-<th>Description</th>
-<th>Receipt</th>
-<th>Pending?</th>
-<th>Approved?</th>*/
+	
+		//<tr><th>Employee</th>
+		//<th>Amount Requested for Reimbursement</th>
+		//<th>Description</th>
+		//<th>Receipt</th>
+		//<th>Pending?</th>
+		//<th>Approved?</th>
 			pw.println("<tr style=\"background-color:powderblue; width:450px;margin-left:auto;margin-right:auto;\"><td>"
 		+ rr.getEmployee().getFirstName()
 		+"</td><td>"+rr.getAmount()
@@ -87,6 +128,7 @@ public class ViewRequestServlet extends HttpServlet {
 		else {
 			pw.println("<p>There are no requests for " +currentUser.getFirstName() + " " +currentUser.getLastName()+"</p>");
 		}
+		*/
 		//response.sendRedirect("views/status_page.html");
 	}
 

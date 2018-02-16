@@ -69,12 +69,26 @@ public class ApprovalServlet extends HttpServlet {
 			pw.println("<p>There is no employee with ID " +empStr+"</p>");
 		}
 		else  {
+			pw.println("<table class=\"requestTable\"><tr><th>Employee</th><th>"+
+					"Amount Requested for Reimbursement</th>"
+					+"<th>Description</th>"+
+					"<th>Receipt</th>"+
+					"<th>Pending Status</th>"+
+					"<th>Approval Status</th>"+
+					"<th>Approve or Deny?</th>");	
 		for (ReimbursementRequest rr : rrdi.getReimbursementRequestsByEmployee(emp)){
-			pw.println("<p style=\"background-color:powderblue; width:450px;margin-left:auto;margin-right:auto;\">"+rr.toString()+"</p>");
-			//res.getWriter().write(rr.toString());
-			
+			pw.println("<tr style=\"background-color:powderblue; width:450px;margin-left:auto;margin-right:auto;\"><td>"
+					+ rr.getEmployee().getFirstName()+ " "+rr.getEmployee().getLastName()
+					+"</td><td>"+rr.getAmount()
+					+"</td><td>Some description"
+					+"</td><td>No receit available"
+					+"</td><td>"+rr.getPending()
+					+"</td><td>"+rr.getApproved()
+					+"</td><form action=\"approverequest\"><td>Approve<input type=\"radio\" name=\"approverequest\" value=\"Approve\">"
+					+"Deny<input type=\"radio\" name=\"approverequest\" value=\"Deny\">"
+					+"</td></form>"+"</tr>");
 		}
-		pw.println("</div>");
+		pw.println("<input type=\"submit\" name=\"approverequest\" action=\"approverequest\"></table></div>");
 		}
 		
 		}
