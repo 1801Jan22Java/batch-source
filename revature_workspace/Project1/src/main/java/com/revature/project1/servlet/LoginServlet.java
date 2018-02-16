@@ -54,6 +54,7 @@ public class LoginServlet extends HttpServlet {
 		HttpSession session = req.getSession();
 		if(emp!=null) {
 			session.setAttribute("username", loginStr);
+			session.setAttribute("password", passwordStr);
 			session.setAttribute("problem", null);
 			res.sendRedirect("MasterServlet");
 		}

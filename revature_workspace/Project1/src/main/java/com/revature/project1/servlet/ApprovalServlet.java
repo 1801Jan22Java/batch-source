@@ -59,8 +59,16 @@ public class ApprovalServlet extends HttpServlet {
 		pw.println("<div id=\"results\">");
 		HttpSession session = req.getSession();
 		String name =session.getAttribute("username").toString();
+		String password= session.getAttribute("password").toString();
+		Employee currentUser = ed.getEmployeeByCredentials(name, password);
 		System.out.println(name + "  is currently logged in");
-		if(rrdi.getReimbursementRequestsByEmployee(emp).size()>0) {
+		if(!emp.getManager().getUserName().equals(currentUser.getUserName())) {
+			pw.println("<p style=\"background-color:powderblue; width:450px;margin-left:auto;margin-right:auto;\">You are not authorized to approve these requests</p>");
+		}
+		else if(rrdi.getReimbursementRequestsByEmployee(emp).size()<=0)  {
+			pw.println("<p>There is no employee with ID " +empStr+"</p>");
+		}
+		else  {
 		for (ReimbursementRequest rr : rrdi.getReimbursementRequestsByEmployee(emp)){
 			pw.println("<p style=\"background-color:powderblue; width:450px;margin-left:auto;margin-right:auto;\">"+rr.toString()+"</p>");
 			//res.getWriter().write(rr.toString());
@@ -68,9 +76,7 @@ public class ApprovalServlet extends HttpServlet {
 		}
 		pw.println("</div>");
 		}
-		else {
-			pw.println("<p>There is no employee with ID " +empStr+"</p>");
-		}
+		
 		}
 		
 		

@@ -93,5 +93,13 @@ public class ReimbursementRequest {
 				" for an amount of " + amount + " has been " + approvedStr +  " by "+
 				manager.getFirstName() + " " + manager.getLastName();
 	}
+
+	public float getAmount() {
+		return amount;
+	}
+
+	public void setAmount(float amount) {
+		this.amount = amount;
+	}
 	
 }
