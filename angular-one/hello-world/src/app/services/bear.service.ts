@@ -19,6 +19,10 @@ export class BearService {
                 .catch(this.handleError);
     }
 
+    public fetchFullResponse(){
+        
+    }
+
     private handleError(error: Response) {
         return Observable.throw(error.statusText);
     }

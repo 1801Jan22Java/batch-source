@@ -30,8 +30,10 @@ import { DatabindingComponent } from './components/databinding/databinding.compo
 import { PipeComponent } from './components/pipe/pipe.component';
 import { StructuralComponent } from './components/structural/structural.component';
 import { FlashcardComponent } from './components/structural/flashcard/flashcard.component';
+import { HttpComponent } from './components/http/http.component';
 //Services
 import { BearService } from './services/bear.service';
+
 
 
 
@@ -59,7 +61,8 @@ import { BearService } from './services/bear.service';
     DatabindingComponent,
     PipeComponent,
     StructuralComponent,
-    FlashcardComponent
+    FlashcardComponent,
+    HttpComponent
   ],
   imports: [
     BrowserModule,
