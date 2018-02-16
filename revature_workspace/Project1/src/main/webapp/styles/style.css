@@ -57,7 +57,7 @@ body{
 	
 }
 
-#approvalForm, #viewForm
+#approvalForm, #viewForm,,#uploadForm
 {
 	padding:15px;
 	background-color:powderblue;

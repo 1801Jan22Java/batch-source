@@ -8,6 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.revature.project1.beans.Employee;
 import com.revature.project1.dao.EmployeeDao;
@@ -39,7 +40,7 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
-		
+	
 		EmployeeDao ed = new EmployeeDaoImpl();
 		String loginStr=req.getParameter("username");
 		String passwordStr=req.getParameter("password");
@@ -50,7 +51,10 @@ public class LoginServlet extends HttpServlet {
 		res.setContentType("text/html");
 		RequestDispatcher rd= null;
 		rd =req.getRequestDispatcher("views/login.html");
+		HttpSession session = req.getSession();
 		if(emp!=null) {
+			session.setAttribute("username", loginStr);
+			session.setAttribute("problem", null);
 			res.sendRedirect("MasterServlet");
 		}
 		else {

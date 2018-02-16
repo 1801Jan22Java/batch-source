@@ -8,6 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.revature.project1.beans.Employee;
 import com.revature.project1.beans.ReimbursementRequest;
@@ -56,6 +57,9 @@ public class ApprovalServlet extends HttpServlet {
 		ReimbursementRequestDao rrdi = new ReimbursementRequestDaoImpl();
 		rd.include(req,res);
 		pw.println("<div id=\"results\">");
+		HttpSession session = req.getSession();
+		String name =session.getAttribute("username").toString();
+		System.out.println(name + "  is currently logged in");
 		if(rrdi.getReimbursementRequestsByEmployee(emp).size()>0) {
 		for (ReimbursementRequest rr : rrdi.getReimbursementRequestsByEmployee(emp)){
 			pw.println("<p style=\"background-color:powderblue; width:450px;margin-left:auto;margin-right:auto;\">"+rr.toString()+"</p>");

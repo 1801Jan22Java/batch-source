@@ -41,4 +41,14 @@
     <servlet-name>viewrequest</servlet-name>
     <url-pattern>/viewrequest</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>session</display-name>
+    <servlet-name>session</servlet-name>
+    <servlet-class>com.revature.project1.servlet.SessionServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>session</servlet-name>
+    <url-pattern>/session</url-pattern>
+  </servlet-mapping>
 </web-app>
