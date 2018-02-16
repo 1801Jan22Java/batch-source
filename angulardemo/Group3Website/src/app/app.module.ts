@@ -1,13 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
-
 import { AppComponent } from './app.component';
-import { RecipesubComponent } from './recipesub/recipesub.component';
-import { CandylistComponent } from './candylist/candylist.component';
-import { LoginComponent } from './login/login.component';
-import { MainComponent } from './main/main.component';
-
+import { RecipesubComponent } from './components/recipesub/recipesub.component';
+import { CandylistComponent } from './components/candylist/candylist.component';
+import { LoginComponent } from './components/login/login.component';
+import { MainComponent } from './components/main/main.component';
+import { RoutingComponent } from './routing/routing.component';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -15,10 +14,12 @@ import { MainComponent } from './main/main.component';
     RecipesubComponent,
     CandylistComponent,
     LoginComponent,
-    MainComponent
+    MainComponent,
+    RoutingComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
