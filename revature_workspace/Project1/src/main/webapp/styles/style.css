@@ -10,8 +10,11 @@ h1{
 body{
 	font-family:"verdana","arial","sans-serif";
 	text-align:center;
-	background-image: url('../hSHmeL.jpg');
-	background-size:cover;
+	background-image: url('../hSHmeL.jpg') no-repeat center center fixed;
+	  -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
 	background-color: rose;
 	}
 	
@@ -54,7 +57,7 @@ body{
 	
 }
 
-#approvalForm
+#approvalForm, #viewForm
 {
 	padding:15px;
 	background-color:powderblue;

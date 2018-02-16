@@ -28,7 +28,7 @@ public class MasterServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("views/approvalpage.html");
+		RequestDispatcher rd = request.getRequestDispatcher("views/main.html");
 		rd.forward(request, response);
 	}
 
@@ -36,8 +36,8 @@ public class MasterServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("views/approvalpage.html");
-		response.sendRedirect("views/approvalpage.html");
+		RequestDispatcher rd = request.getRequestDispatcher("views/main.html");
+		response.sendRedirect("views/main.html");
 		//String destination = RequestHelper.process(request);
 		//response.sendRedirect(destination);
 	}

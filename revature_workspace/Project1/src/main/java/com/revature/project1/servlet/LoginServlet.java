@@ -51,7 +51,7 @@ public class LoginServlet extends HttpServlet {
 		RequestDispatcher rd= null;
 		rd =req.getRequestDispatcher("views/login.html");
 		if(emp!=null) {
-			res.sendRedirect("approval");
+			res.sendRedirect("MasterServlet");
 		}
 		else {
 			
