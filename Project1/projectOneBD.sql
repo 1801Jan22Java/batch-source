@@ -10,6 +10,7 @@ DROP SEQUENCE MAN_SEQ;
 DROP SEQUENCE MAN_INFO_SEQ;
 DROP SEQUENCE REIM_SEQ;
 
+
 /****************************************************
     Create Tables
 ****************************************************/
@@ -55,7 +56,7 @@ CREATE TABLE Reimbursement
     MANAGER_ID INTEGER,
     STATUS_ID INTEGER,
     REIMBURSEMENT_VALUE DECIMAL(20,2),
-    IMAGE BLOB
+    IMAGE BLOB DEFAULT EMPTY_BLOB()
 );
 
 CREATE TABLE Status
@@ -261,7 +262,11 @@ CREATE OR REPLACE PROCEDURE ADD_REIMBURSEMENT
 )
 AS
 BEGIN
-    INSERT INTO REIMBURSEMENT VALUES(0,EMP_ID,NULL,1,VAL,IMG);
+    IF IMG IS NULL THEN
+        INSERT INTO REIMBURSEMENT VALUES(0,EMP_ID,NULL,0,VAL,EMPTY_BLOB);
+    ELSE
+        INSERT INTO REIMBURSEMENT VALUES(0,EMP_ID,NULL,0,VAL,IMG);
+    END IF;
     SELECT MAX(REIMBURSEMENT_ID) INTO REI_ID FROM REIMBURSEMENT;
 END;
 /
@@ -321,3 +326,7 @@ INSERT INTO STATUS VALUES(2,'CANCELED');
 insert into employeeinfo values(0,'email','first','second',null);
 insert into employee values(0,'f','p',1000);
 select * from employee where (username = 'f') and (password = 'p');
+select * from employeeinfo where employee_info_id = 1000;
+select * from employeeinfo;
+select * from employee;
+commit;

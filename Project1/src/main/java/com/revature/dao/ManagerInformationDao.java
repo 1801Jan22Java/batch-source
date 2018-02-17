@@ -9,6 +9,6 @@ public interface ManagerInformationDao {
 
 	public List<ManagerInformation> getManagerInformation();
 	public ManagerInformation getManagerInformationByID(int ManagerInformationId);
-	public boolean updateInformation(int managerInformationId,String email,String fname,String lname,String address);
+	public void updateInformation(int managerInformationId,String email,String fname,String lname,String address);
 
 }

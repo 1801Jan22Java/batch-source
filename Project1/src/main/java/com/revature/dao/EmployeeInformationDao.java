@@ -10,5 +10,5 @@ public interface EmployeeInformationDao {
 
 	public List<EmployeeInformation> getEmployeeInformation();
 	public EmployeeInformation getEmployeeInformationByID(int employeeInformationId);
-	public boolean updateInformation(int employeeInformationId,String email,String fname,String lname,String address);
+	public void updateInformation(int employeeInformationId,String email,String fname,String lname,String address);
 }

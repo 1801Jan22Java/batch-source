@@ -1,5 +1,6 @@
 package com.revature.beans;
 
+import java.io.InputStream;
 import java.sql.Blob;
 
 public class Reimbursement {
@@ -9,20 +10,20 @@ public class Reimbursement {
 	private int managerId;
 	private int status;
 	private double reimbursementValue;
-	private Blob image; //TODO:idk what to do
+	private byte [] byteArr; //TODO:idk what to do
 	
 	public Reimbursement() {
 		super();
 	}
 	
-	public Reimbursement(int reimbursementId, int employeeId, int managerId, int status, double reimbursementValue, Blob image) {
+	public Reimbursement(int reimbursementId, int employeeId, int managerId, int status, double reimbursementValue, byte [] byteArr) {
 		super();
 		this.reimbursementId = reimbursementId;
 		this.employeeId = employeeId;
 		this.managerId = managerId;
 		this.status = status;
 		this.reimbursementValue = reimbursementValue;
-		this.image = image;
+		this.byteArr = byteArr;
 	}
 
 	public int getReimbursementId() {
@@ -65,18 +66,18 @@ public class Reimbursement {
 		this.reimbursementValue = reimbursementValue;
 	}
 
-	public Blob getImage() {
-		return image;
+	public byte [] getImage() {
+		return byteArr;
 	}
 
-	public void setImage(Blob image) {
-		this.image = image;
+	public void setImage(byte [] byteArr) {
+		this.byteArr = byteArr;
 	}
 
 	@Override
 	public String toString() {
 		return "Reimbursement [reimbursementId=" + reimbursementId + ", employeeId=" + employeeId + ", managerId="
-				+ managerId + ", status=" + status + ", reimbursementValue=" + reimbursementValue + ", image=" + image
+				+ managerId + ", status=" + status + ", reimbursementValue=" + reimbursementValue + ", byteArr=" + byteArr
 				+ "]";
 	}
 

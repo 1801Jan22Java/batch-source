@@ -1,6 +1,6 @@
 package com.revature.beans;
 
-public class Employee {
+public class Employee implements User{
 	private int employeeId;
 	private String username;
 	private String password;

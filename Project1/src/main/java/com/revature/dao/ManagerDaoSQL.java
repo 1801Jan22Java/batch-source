@@ -13,7 +13,7 @@ public class ManagerDaoSQL implements ManagerDao {
 	@Override
 	public List<Manager> getManagers() {
 		List<Manager> listManager = new ArrayList<Manager>();
-		try(Connection con = ConnectionUtil.getConnectionFromFile("connection.properties")) {
+		try(Connection con = ConnectionUtil.getConnectionFromFile()) {
 			Manager result;
 			String sql = "SELECT * FROM Manager";
 			PreparedStatement ps = con.prepareStatement(sql);
@@ -39,7 +39,7 @@ public class ManagerDaoSQL implements ManagerDao {
 	@Override
 	public Manager getManagerByID(int requestedManagerId) {
 		Manager managerResult = null;
-		try(Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
+		try(Connection con = ConnectionUtil.getConnectionFromFile()) {
 			
 			String sql = "SELECT * FROM MANAGER WHERE MANAGER_ID = ?";
 			PreparedStatement ps = con.prepareStatement(sql);
@@ -65,7 +65,7 @@ public class ManagerDaoSQL implements ManagerDao {
 	@Override
 	public Manager getManagerByCredentials(String username, String password) {
 		Manager managerResult = null;
-		try(Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
+		try(Connection con = ConnectionUtil.getConnectionFromFile()) {
 			
 			String sql = "SELECT * FROM MANAGER WHERE (USERNAME = ?) AND (PASSWORD = ?)";
 			PreparedStatement ps = con.prepareStatement(sql);
@@ -91,7 +91,7 @@ public class ManagerDaoSQL implements ManagerDao {
 	public int addManager(String username, String password, String email, String firstname, String lastname,
 			String address) {
 		int managerId = -1;
-		try(Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
+		try(Connection con = ConnectionUtil.getConnectionFromFile()) {
 			con.setAutoCommit(false);
 			String sql = "{call ADD_MANAGER(?,?,?,?,?,?,?)}";
 			CallableStatement cs = con.prepareCall(sql);

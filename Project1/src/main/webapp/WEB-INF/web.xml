@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+  <display-name>Project1</display-name>
+  <welcome-file-list>
+        <welcome-file>views/index.html</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <servlet-name>insertimage</servlet-name>
+    <servlet-class>com.revature.servlets.InsertImageServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>insertimage</servlet-name>
+    <url-pattern>/insertimage</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <display-name>employeelogin</display-name>
+    <servlet-name>employeelogin</servlet-name>
+    <servlet-class>com.revature.servlets.EmployeeLoginServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>employeelogin</servlet-name>
+    <url-pattern>/employeelogin</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>employeehomepage</servlet-name>
+    <servlet-class>com.revature.servlets.EmployeeHomepageServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>employeehomepage</servlet-name>
+    <url-pattern>/employeehomepage</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>employeelogout</servlet-name>
+    <servlet-class>com.revature.servlets.EmployeeLogoutServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>employeelogout</servlet-name>
+    <url-pattern>/employeelogout</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>errorservlet</servlet-name>
+    <servlet-class>com.revature.servlets.ErrorServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>errorservlet</servlet-name>
+    <url-pattern>/errorservlet</url-pattern>
+  </servlet-mapping>
+</web-app>

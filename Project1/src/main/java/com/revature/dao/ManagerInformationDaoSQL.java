@@ -21,11 +21,11 @@ public class ManagerInformationDaoSQL implements ManagerInformationDao {
 			// initializes a list to return, if the list is empty it is not for the
 			// Dao object to decide
 			List<ManagerInformation> listManagerInformation = new ArrayList<ManagerInformation>();
-			try(Connection con = ConnectionUtil.getConnectionFromFile("connection.properties")) {
+			try(Connection con = ConnectionUtil.getConnectionFromFile()) {
 				
 				// result is a placeholder variable for creating Managers to insert into the list
 				ManagerInformation result;
-				String sql = "SELECT * FROM Manager";
+				String sql = "SELECT * FROM ManagerInfo";
 				PreparedStatement ps = con.prepareStatement(sql);
 				ResultSet rs = ps.executeQuery();
 				while(rs.next()) {
@@ -52,9 +52,9 @@ public class ManagerInformationDaoSQL implements ManagerInformationDao {
 			// if ManagerInformationResult is null then you could not find the requested Id
 			// not for this function to decide what to do with that information
 			ManagerInformation managerInformationResult = null;
-			try(Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
+			try(Connection con = ConnectionUtil.getConnectionFromFile()) {
 				
-				String sql = "SELECT * FROM MANAGERINFO WHERE MANAGER_ID = ?";
+				String sql = "SELECT * FROM MANAGERINFO WHERE MANAGER_INFO_ID = ?";
 				PreparedStatement ps = con.prepareStatement(sql);
 				ps.setInt(1, requestedManagerInformationId);
 				ResultSet rs = ps.executeQuery();
@@ -77,9 +77,8 @@ public class ManagerInformationDaoSQL implements ManagerInformationDao {
 		}
 
 		@Override
-		public boolean updateInformation(int managerInformationId,String email,String fname,String lname,String address) {
-			boolean flag = false;
-			try(Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
+		public void updateInformation(int managerInformationId,String email,String fname,String lname,String address) {
+			try(Connection con = ConnectionUtil.getConnectionFromFile()) {
 				con.setAutoCommit(false);
 				String sql = "{call UPDATE_MANAGER_INFORMATION(?,?,?,?,?)}";
 				CallableStatement cs = con.prepareCall(sql);
@@ -89,14 +88,13 @@ public class ManagerInformationDaoSQL implements ManagerInformationDao {
 				cs.setString(4, lname);
 				cs.setString(5, address);
 				
-				flag = cs.execute();
+				cs.execute();
 
 			} catch (SQLException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			return flag;
 		}
 
 }

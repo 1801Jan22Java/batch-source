@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Testing forms</title>
+</head>
+<body>
+	<div id="div">
+		<!--  <form>-->
+			<fieldset>
+				<legend>filename: </legend>
+				<input type="file" name="image" id="image"  accept="image/*"/>
+			</fieldset>
+			
+			<input type="submit" name="submit" id="submit" value="Submit" />
+		<!--  </form>-->
+	</div>
+	<br>
+	<div>
+		<br>
+		<br>
+		<img id="output" src="" height="200" alt="img output">
+		<br>
+		<br>
+		<input type="submit" id="fromdb" value="Get Image" />
+	</div>
+</body>
+<script src="scripts/FileInOut.js"></script>
+</html>	

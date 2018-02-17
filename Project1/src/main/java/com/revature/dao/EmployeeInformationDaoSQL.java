@@ -22,11 +22,11 @@ public class EmployeeInformationDaoSQL implements EmployeeInformationDao{
 		// initializes a list to return, if the list is empty it is not for the
 		// Dao object to decide
 		List<EmployeeInformation> listEmployeeInformation = new ArrayList<EmployeeInformation>();
-		try(Connection con = ConnectionUtil.getConnectionFromFile("connection.properties")) {
+		try(Connection con = ConnectionUtil.getConnectionFromFile()) {
 			
 			// result is a placeholder variable for creating employees to insert into the list
 			EmployeeInformation result;
-			String sql = "SELECT * FROM EMPLOYEEINFO";
+			String sql = "SELECT * FROM EmployeeInfo";
 			PreparedStatement ps = con.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {
@@ -53,12 +53,14 @@ public class EmployeeInformationDaoSQL implements EmployeeInformationDao{
 		// if employeeInformationResult is null then you could not find the requested Id
 		// not for this function to decide what to do with that information
 		EmployeeInformation employeeInformationResult = null;
-		try(Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
-			
-			String sql = "SELECT * FROM EMPLOYEEINFO WHERE EMPLOYEE_ID = ?";
+		try(Connection con = ConnectionUtil.getConnectionFromFile()) {
+			System.out.println(requestedEmployeeInformationId);
+			String sql = "SELECT * FROM EMPLOYEEINFO WHERE EMPLOYEE_INFO_ID = ?";
 			PreparedStatement ps = con.prepareStatement(sql);
+			System.out.println(con.getMetaData().getDatabaseProductName());
 			ps.setInt(1, requestedEmployeeInformationId);
 			ResultSet rs = ps.executeQuery();
+			System.out.println();
 			while(rs.next()) {
 				int employeeInformationId = rs.getInt("EMPLOYEE_INFO_ID");
 				String email = rs.getString("EMAIL");
@@ -77,29 +79,10 @@ public class EmployeeInformationDaoSQL implements EmployeeInformationDao{
 		return employeeInformationResult;
 	}
 
-//	@Override
-//	public int addEmployeeInformation(String email, String fname, String lname, String address) {
-//		// employeeId should never be negative, so if the returned integer
-//		// is -1, something went wrong inserting the employee
-//		int employeeInformationId = -1;
-//		try(Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
-//			con.setAutoCommit(false);
-//			String sql = "{call ADD_EMPLOYEE(?,?,?,?,?,?,?)}";
-//			CallableStatement cs = con.prepareCall(sql);
-//			
-//			
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//		return employeeInformationId;
-//	}
-
-	@Override
-	public boolean updateInformation(int employeeInformationId,String email,String fname,String lname,String address) {
-		boolean flag = false;
-		try(Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
+	// updates the employeeinformation based on the employeeinformationid
+	// returns false if nothing
+	public void updateInformation(int employeeInformationId,String email,String fname,String lname,String address) {
+		try(Connection con = ConnectionUtil.getConnectionFromFile()) {
 			con.setAutoCommit(false);
 			String sql = "{call UPDATE_EMPLOYEE_INFORMATION(?,?,?,?,?)}";
 			CallableStatement cs = con.prepareCall(sql);
@@ -109,14 +92,13 @@ public class EmployeeInformationDaoSQL implements EmployeeInformationDao{
 			cs.setString(4, lname);
 			cs.setString(5, address);
 			
-			flag = cs.execute();
+			cs.execute();
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return flag;
 	}
 
 }

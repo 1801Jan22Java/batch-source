@@ -20,7 +20,7 @@ public class EmployeeDaoSQL implements EmployeeDao {
 		// create a list object to store the employees,
 		//if the list is empty then nothing was in the DB
 		List<Employee> listEmployee = new ArrayList<Employee>();
-		try(Connection con = ConnectionUtil.getConnectionFromFile("connection.properties")) {
+		try(Connection con = ConnectionUtil.getConnectionFromFile()) {
 			
 			// result is a placeholder variable for creating employees to insert into the list
 			Employee result;
@@ -52,7 +52,7 @@ public class EmployeeDaoSQL implements EmployeeDao {
 		// if employeeResult is null then you could not find the requested Id
 		// not for this function to decide what to do with that information
 		Employee employeeResult = null;
-		try(Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
+		try(Connection con = ConnectionUtil.getConnectionFromFile()) {
 			
 			String sql = "SELECT * FROM EMPLOYEE WHERE EMPLOYEE_ID = ?";
 			PreparedStatement ps = con.prepareStatement(sql);
@@ -82,7 +82,7 @@ public class EmployeeDaoSQL implements EmployeeDao {
 		// if employeeResult is null then you could not find the requested Id
 		// not for this function to decide what to do with that information
 		Employee employeeResult = null;
-		try(Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
+		try(Connection con = ConnectionUtil.getConnectionFromFile()) {
 			
 			String sql = "SELECT * FROM EMPLOYEE WHERE (USERNAME = ?) AND (PASSWORD = ?)";
 			PreparedStatement ps = con.prepareStatement(sql);
@@ -110,7 +110,7 @@ public class EmployeeDaoSQL implements EmployeeDao {
 		// employeeId should never be negative, so if the returned integer
 		// is -1, something went wrong inserting the employee
 		int employeeId = -1;
-		try(Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
+		try(Connection con = ConnectionUtil.getConnectionFromFile()) {
 			con.setAutoCommit(false);
 			String sql = "{call ADD_EMPLOYEE(?,?,?,?,?,?,?)}";
 			CallableStatement cs = con.prepareCall(sql);
