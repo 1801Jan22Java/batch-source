@@ -3,6 +3,7 @@ package com.revature.beans;
 public class ReimbReq {
 	
 	private int reimbId;
+	private String reqName;
 	private int employeeId;
 	private int modByManagerId;
 	/*
@@ -16,11 +17,12 @@ public class ReimbReq {
 		super();
 	}
 
-	public ReimbReq(int reimbId, int employeeId, int managerId, String reqStatus, String receipt) {
+	public ReimbReq(int reimbId, String reqName, int employeeId, int modByManagerId, String reqStatus, String receipt) {
 		super();
 		this.reimbId = reimbId;
+		this.reqName = reqName;
 		this.employeeId = employeeId;
-		this.modByManagerId = managerId;
+		this.modByManagerId = modByManagerId;
 		this.reqStatus = reqStatus;
 		this.receipt = receipt;
 	}
@@ -31,6 +33,14 @@ public class ReimbReq {
 
 	public void setReimbId(int reimbId) {
 		this.reimbId = reimbId;
+	}
+
+	public String getReqName() {
+		return reqName;
+	}
+
+	public void setReqName(String reqName) {
+		this.reqName = reqName;
 	}
 
 	public int getEmployeeId() {
@@ -45,8 +55,8 @@ public class ReimbReq {
 		return modByManagerId;
 	}
 
-	public void setModByManagerId(int managerId) {
-		this.modByManagerId = managerId;
+	public void setModByManagerId(int modByManagerId) {
+		this.modByManagerId = modByManagerId;
 	}
 
 	public String getReqStatus() {
@@ -67,7 +77,7 @@ public class ReimbReq {
 
 	@Override
 	public String toString() {
-		return "ReimbReq [reimbId=" + reimbId + ", employeeId=" + employeeId + ", managerId=" + modByManagerId + ", reqStatus="
+		return "ReimbReq [reimbId=" + reimbId + ", employeeId=" + employeeId + ", ModByManagerId=" + modByManagerId + ", reqStatus="
 				+ reqStatus + "]";
 	}
 

@@ -29,10 +29,10 @@ BEGIN
 END;
 /
 
-INSERT INTO Staff (LastName, FirstName, Email, Pass, IsManager)
-    VALUES ('Boo', 'John', 'jaja@gmail.com', 'jaja1', 1);
-INSERT INTO Staff (LastName, FirstName, Email, Pass, ReportsTo)
-    VALUES ('Doe', 'Jane', 'jaja2@gmail.com', 'jaja3', 1);
+INSERT INTO Staff (LastName, FirstName, Email, Pass, IsManager, ReportsTo)
+    VALUES ('Boo', 'John', 'jaja@gmail.com', 'jaja1', 1, 0);
+INSERT INTO Staff (LastName, FirstName, Email, Pass, IsManager, ReportsTo)
+    VALUES ('Doe', 'Jane', 'jaja2@gmail.com', 'jaja3', 0, 1);
 --UPDATE Staff SET ReportsTo = 1 WHERE EmployeeId = 2;
 commit;
 --DROP TABLE STAFF;
@@ -42,6 +42,7 @@ commit;
 CREATE TABLE ReimbReq
 (
     ReqId NUMBER NOT NULL,
+    ReqName VARCHAR2(20),
     EmployeeId NUMBER NOT NULL,
     ModByManagerId NUMBER,
     ReqStatus VARCHAR2(20),
@@ -74,6 +75,6 @@ END;
 --DROP TRIGGER ReimbReqTable_ReqId;
 --COMMIT;
 
-INSERT INTO ReimbReq (EmployeeId, ReqStatus)
-    VALUES (2, 'pending');
+INSERT INTO ReimbReq (EmployeeId, ReqName, ReqStatus)
+    VALUES (2, 'Gas', 'pending');
 commit;
