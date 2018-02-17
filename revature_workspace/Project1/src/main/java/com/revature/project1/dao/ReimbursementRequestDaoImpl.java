@@ -42,8 +42,9 @@ public class ReimbursementRequestDaoImpl implements ReimbursementRequestDao {
 				int approved = rs.getInt("APPROVED");
 				int pending = rs.getInt("PENDING");
 				float amount = rs.getFloat("AMOUNT");
+				String description=rs.getString("DESCRIPTION");
 				reibReq = new ReimbursementRequest(requestID, edi.getEmployeeById(requestingEmpId),
-						edi.getEmployeeById(approvingEmpId), pending, approved, amount);
+						edi.getEmployeeById(approvingEmpId), pending, approved, amount,description);
 				rl.add(reibReq);
 			}
 		} catch (IOException | SQLException e) {
@@ -68,15 +69,17 @@ public class ReimbursementRequestDaoImpl implements ReimbursementRequestDao {
 				prepStmt.setInt(2, id);
 				ResultSet rs = prepStmt.executeQuery();
 				while (rs.next()) {
+					int reqID = rs.getInt("REQ_ID");
 					int empID = rs.getInt("REQ_EMP_ID");
 					int mgrID = rs.getInt("APPROVING_EMP_ID");
 					int approved = rs.getInt("APPROVED");
 					int pending = rs.getInt("PENDING");
 					float amount = rs.getFloat("AMOUNT");
+					String description=rs.getString("DESCRIPTION");
 					// Blob receipt = rs.getBlob("RECEIPT");
 					Employee verified = edi.getEmployeeById(empID);
 					Employee manager = edi.getEmployeeById(mgrID);
-					rr = new ReimbursementRequest(verified, manager, pending, approved, amount);
+					rr = new ReimbursementRequest(reqID,verified, manager, pending, approved, amount,description);
 					rl.add(rr);
 				}
 			} catch (SQLException | IOException e) {
@@ -143,8 +146,9 @@ public class ReimbursementRequestDaoImpl implements ReimbursementRequestDao {
 				int approved = rs.getInt("APPROVED");
 				int pending = rs.getInt("PENDING");
 				float amount = rs.getFloat("AMOUNT");
+				String description=rs.getString("DESCRIPTION");
 				reibReq = new ReimbursementRequest(requestID, edi.getEmployeeById(requestingEmpId),
-						edi.getEmployeeById(approvingEmpId), pending, approved, amount);
+						edi.getEmployeeById(approvingEmpId), pending, approved, amount,description);
 			}
 		} catch (IOException | SQLException e) {
 			e.printStackTrace();
@@ -202,7 +206,7 @@ public class ReimbursementRequestDaoImpl implements ReimbursementRequestDao {
 	}
 
 	@Override
-	public void addReimbursementRequest(Employee emp, File file, float amount) {
+	public void addReimbursementRequest(Employee emp, File file, float amount, String descript) {
 		EmployeeDaoImpl edi = new EmployeeDaoImpl();
 		int empID = edi.getEmployeeID(emp);
 		System.out.println("employee id is: " + empID);
@@ -217,10 +221,11 @@ public class ReimbursementRequestDaoImpl implements ReimbursementRequestDao {
 		}
 		try {
 			con = ConnectionUtil.getConnectionFromFile();
-			CallableStatement cs = con.prepareCall("{CALL SP_ADD_REIB_REQUEST(?,?,?)}");
+			CallableStatement cs = con.prepareCall("{CALL SP_ADD_REIB_REQUEST(?,?,?,?)}");
 			cs.setInt(1, empID);
 			cs.setFloat(2, amount);
 			cs.setBlob(3, input);
+			cs.setString(4, descript);
 			cs.execute();
 			System.out.println("request successfully added.  Good luck on that...");
 		} catch (IOException | SQLException e) {

@@ -10,6 +10,7 @@ public class ReimbursementRequest {
 	private int requestID;
 	private File file;
 	private float amount;
+	private String description;
 
 	public ReimbursementRequest(){}
 	
@@ -18,15 +19,18 @@ public class ReimbursementRequest {
 		this.employee=employee;
 	}
 	
-	public ReimbursementRequest(Employee employee, Employee manager, int pending, int approved, float amount)
+	public ReimbursementRequest(Employee employee, Employee manager, int pending, int approved, float amount, 
+			String desc)
 	{
 		this.employee=employee;
 		this.manager=manager;
 		this.pending=pending;
 		this.approved=approved;
 		this.amount=amount;
+		this.description=desc;
 	}
-	public ReimbursementRequest(int requestID,Employee employee, Employee manager, int pending, int approved, float amount)
+	public ReimbursementRequest(int requestID,Employee employee, Employee manager, int pending, int approved, float amount,
+			String desc)
 	{
 		this.requestID=requestID;
 		this.employee=employee;
@@ -34,6 +38,7 @@ public class ReimbursementRequest {
 		this.pending=pending;
 		this.approved=approved;
 		this.amount=amount;
+		this.description=desc;
 	}
 	public ReimbursementRequest(Employee employee, File file, float amount)
 	{
@@ -100,6 +105,30 @@ public class ReimbursementRequest {
 
 	public void setAmount(float amount) {
 		this.amount = amount;
+	}
+
+	public int getRequestID() {
+		return requestID;
+	}
+
+	public void setRequestID(int requestID) {
+		this.requestID = requestID;
+	}
+
+	public File getFile() {
+		return file;
+	}
+
+	public void setFile(File file) {
+		this.file = file;
+	}
+	
+	public String getDescription() {
+		return description;
+	}
+	
+	public void setDescription(String description) {
+		this.description=description;
 	}
 	
 }

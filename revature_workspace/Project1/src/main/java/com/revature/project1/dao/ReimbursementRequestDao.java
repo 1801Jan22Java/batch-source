@@ -13,8 +13,8 @@ public interface ReimbursementRequestDao {
 	public ReimbursementRequest getReimbursementRequestById(int id);
 	public void denyReimbursementRequest(int id, Employee manager);
 	public void approveReimbursementRequest(int id, Employee manager);
-	public void addReimbursementRequest(Employee emp, File file, float amount);
 	public void deleteReimbursementRequest(int id, Employee emp);
+	void addReimbursementRequest(Employee emp, File file, float amount, String descript);
 	
 	
 

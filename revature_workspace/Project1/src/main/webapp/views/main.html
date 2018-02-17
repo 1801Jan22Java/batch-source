@@ -35,23 +35,24 @@ data-target="#collapsibleNavbar">
 <h1>Welcome to the Employee Reimbursment Portal </h1>
 <div id="reimbursement">
 <div id="formcontainer">
-<form id ="reimbursementForm" action="MasterServlet"  name="MasterServlet" method="post"><br>
-Please enter your username:<br> <input type="text" id="firstname" name="firstName"/>
+<form id ="reimbursementForm" action="MasterServlet"  name="fileInput" method="post" enctype="multipart/form-data"><br>
 <br>
 <br>
-OR 
-<br>
-<br>
-Enter your employee id: <br><input type="number" id="employeeid" name="employeeid"/>
+Please enter your employee id: <br><input type="number" id="employeeid" name="employeeid">
+<br><br>
+Please enter the description / reason for the charges: <br><input type="textfield" id="description" name="description">
 <br><br>
 Please enter the sum of the charges <br> for which you want to be reimbursed:
-<input type="number" id = "charges" name="charges"/>
+<input type="number" id = "charges" name="charges"><br><br>
+Please upload an image of your receipt:<br><input type="file" id="fileinput" accept="image" name ="fileInput">
+<br><br>
 <input type="submit" value="Submit request!">
+
 </form>
 <br><br>
-<form id="uploadForm" action="upload" name="upload" enctype="multipart/form-data">
+<!-- <form id="uploadForm" action="upload" name="upload" >
 Please upload an image of your receipt:<br><input type="file" id="fileinput" accept="image" name ="fileInput"/>
-<br><br></form>
+<br><br></form>-->
 </div>
 </div>
 </body>

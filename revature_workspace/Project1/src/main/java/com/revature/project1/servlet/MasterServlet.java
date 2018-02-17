@@ -5,12 +5,20 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileItemIterator;
+import org.apache.commons.fileupload.FileItemStream;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import com.revature.project1.beans.Employee;
 import com.revature.project1.dao.EmployeeDao;
@@ -47,25 +55,53 @@ public class MasterServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher rd = request.getRequestDispatcher("views/main.html");
-		String firstName = request.getParameter("username");
-		String empStr = request.getParameter("employeeid");
-		String amountStr=request.getParameter("charges");
-		int employeeInt = Integer.parseInt(empStr);
-		float amount = Float.parseFloat(amountStr);
-		File file = new File(request.getParameter("fileInput"));
-		//OutputStream out = null;
-		//FileInputStream filecontent=null;
-		
-		System.out.println(file);
-		System.out.println(file.getPath());
-		
+	
+		File file = null;
 		EmployeeDao ed = new EmployeeDaoImpl();
-		Employee emp =ed.getEmployeeById(employeeInt);
+		Employee emp = null;
+		float amount=0;
+		String description = "";
+		/*try {
 		ReimbursementRequestDao rrd = new ReimbursementRequestDaoImpl();
-		rrd.addReimbursementRequest(emp, file, amount);
+		if(	ServletFileUpload.isMultipartContent(request)) {
+			ServletFileUpload upload = new ServletFileUpload();
+			FileItemIterator items = upload.getItemIterator(request);
+			while(items.hasNext()) {
+				FileItemStream item = items.next();
+			
+			if(item.isFormField()) {
+				String empStr = request.getParameter("employeeid");
+				String amountStr=request.getParameter("charges");
+				 description = request.getParameter("description");
+				int employeeInt = Integer.parseInt(empStr);
+				 amount = Float.parseFloat(amountStr);
+				System.out.println(file);
+				System.out.println(file.getPath());	
+				emp =ed.getEmployeeById(employeeInt);
+				
+			}
+			else {
+					//item.write(file);
+				}
+			}
+			rrd.addReimbursementRequest(emp, file, amount,description);
+		}}
+		 catch (FileUploadException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+	
+		*/
+	
+
+	}
+}
 	//response.sendRedirect("views/main.html");
 		//String destination = RequestHelper.process(request);
 		//response.sendRedirect(destination);
-	}
+	
 
-}

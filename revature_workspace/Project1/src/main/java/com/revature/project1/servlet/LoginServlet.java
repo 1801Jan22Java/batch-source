@@ -59,7 +59,7 @@ public class LoginServlet extends HttpServlet {
 			res.sendRedirect("MasterServlet");
 		}
 		else {
-			
+			res.sendRedirect("login");
 		}
 		
 		//doGet(req, res);

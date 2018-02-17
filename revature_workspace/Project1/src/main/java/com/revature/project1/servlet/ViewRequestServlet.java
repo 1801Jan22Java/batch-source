@@ -61,7 +61,7 @@ public class ViewRequestServlet extends HttpServlet {
 		+ rr.getEmployee().getFirstName()+ " "+rr.getEmployee().getLastName()
 		+"</td><td>"+rr.getAmount()
 		+"</td><td>Some description"
-		+"</td><td>No receit available"
+		+"</td><td>No receipt available"
 		+"</td><td>"+rr.getPending()
 		+"</td><td>"+rr.getApproved()
 		+"</td>"+"</tr>");

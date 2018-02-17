@@ -53,12 +53,22 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>approverequest</display-name>
-    <servlet-name>approverequest</servlet-name>
+    <display-name>confirm</display-name>
+    <servlet-name>confirm</servlet-name>
     <servlet-class>com.revature.project1.servlet.ApproveRequestServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>approverequest</servlet-name>
-    <url-pattern>/approverequest</url-pattern>
+    <servlet-name>confirm</servlet-name>
+    <url-pattern>/confirm</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>deny</display-name>
+    <servlet-name>deny</servlet-name>
+    <servlet-class>com.revature.project1.servlet.DenyRequestServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>deny</servlet-name>
+    <url-pattern>/deny</url-pattern>
   </servlet-mapping>
 </web-app>

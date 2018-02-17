@@ -301,6 +301,25 @@ public class EmployeeDaoImpl implements EmployeeDao{
 
 	}
 
+	public int getEmployeeByUsername(String username) {
+		int userId=0;
+		String sql = "SELECT EMP_ID FROM EMPLOYEE WHERE USER_NAME=?";
+		try(Connection conn = ConnectionUtil.getConnectionFromFile())
+		{
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, username);
+			ps.execute();
+			ResultSet rs =ps.getResultSet();
+			if(rs.next())
+			{
+				userId=rs.getInt("EMP_ID");
+			}
+		}
+		catch(SQLException | IOException e){ e.printStackTrace();}
+		return userId;
+	}
+	
+	
 	public int getEmployeeID(Employee employee) {
 		int userId=0;
 		String username=employee.getUserName();
