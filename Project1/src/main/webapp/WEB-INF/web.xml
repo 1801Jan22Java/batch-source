@@ -2,7 +2,7 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
   <display-name>Project1</display-name>
   <welcome-file-list>
-        <welcome-file>views/index.html</welcome-file>
+    <welcome-file>views/index.html</welcome-file>
   </welcome-file-list>
   <servlet>
     <servlet-name>insertimage</servlet-name>
@@ -37,7 +37,6 @@
     <servlet-name>employeelogout</servlet-name>
     <url-pattern>/employeelogout</url-pattern>
   </servlet-mapping>
-
   <servlet>
     <servlet-name>errorservlet</servlet-name>
     <servlet-class>com.revature.servlets.ErrorServlet</servlet-class>
@@ -45,5 +44,33 @@
   <servlet-mapping>
     <servlet-name>errorservlet</servlet-name>
     <url-pattern>/errorservlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>viewinfo</display-name>
+    <servlet-name>viewinfo</servlet-name>
+    <servlet-class>com.revature.servlets.ViewInformationServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>viewinfo</servlet-name>
+    <url-pattern>/viewinfo</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>session</display-name>
+    <servlet-name>session</servlet-name>
+    <servlet-class>com.revature.servlets.SessionServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>session</servlet-name>
+    <url-pattern>/session</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>updateinfo</servlet-name>
+    <servlet-class>com.revature.servlets.UpdateInformationServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>updateinfo</servlet-name>
+    <url-pattern>/updateinfo</url-pattern>
   </servlet-mapping>
 </web-app>

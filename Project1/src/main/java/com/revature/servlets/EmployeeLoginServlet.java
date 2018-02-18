@@ -29,10 +29,14 @@ public class EmployeeLoginServlet extends HttpServlet {
 		
 		// call the check credentials function to make sure the employees credentials
 		// are a part of the database
-		if (checkCredentials(username,password)) {
+		EmployeeDao ed = new EmployeeDaoSQL();
+		Employee resultEmployee = ed.getEmployeeByCredentials(username, password);
+		
+		if (resultEmployee != null) {
 			System.out.println("correct user");
 			// set the session attributes so the username will be remembered
 			session.setAttribute("username", username);
+			session.setAttribute("id", resultEmployee.getEmployeeId());
 			session.setAttribute("problem", null);
 			req.getRequestDispatcher("employeehomepage").forward(req,resp);
 		} else {
@@ -40,15 +44,6 @@ public class EmployeeLoginServlet extends HttpServlet {
 			resp.sendRedirect("employeelogin");
 		}
 		
-	}
-	
-	private boolean checkCredentials(String username, String password) {
-		EmployeeDao ed = new EmployeeDaoSQL();
-		Employee resultEmployee = ed.getEmployeeByCredentials(username, password);
-		if (resultEmployee != null) {
-			return true;
-		}
-		return false;
 	}
 
 }

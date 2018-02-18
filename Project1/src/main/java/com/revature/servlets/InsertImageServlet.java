@@ -34,7 +34,6 @@ public class InsertImageServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession();
-		System.out.println("not");
 		ReimbursementDao rd = new ReimbursementDaoSQL();
 		Reimbursement gotReimbursement = rd.getReimbursementByID(1003);
 		byte [] byteArr = gotReimbursement.getImage();
@@ -44,15 +43,11 @@ public class InsertImageServlet extends HttpServlet {
 			out.close();
             
 		}
-		else {
-			System.out.println("not werking");
-		}
-		System.out.println("on ur way");		
+		
 	}
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		System.out.println("greetings");
 		HttpSession session = req.getSession();
 		ServletInputStream in = req.getInputStream();
 		ByteArrayOutputStream bao = new ByteArrayOutputStream();
@@ -67,9 +62,6 @@ public class InsertImageServlet extends HttpServlet {
 			}
 			byte [] byteArr = bao.toByteArray();
 			rd.submitReimbursement(1000, 123.5, byteArr);
-		}
-		else {
-			System.out.println("idk this is empty");
 		}
 		
 	}

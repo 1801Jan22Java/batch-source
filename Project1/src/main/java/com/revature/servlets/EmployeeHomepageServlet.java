@@ -17,10 +17,10 @@ public class EmployeeHomepageServlet extends HttpServlet {
 		HttpSession session = req.getSession(false);
 		if( session != null && session.getAttribute("username") != null){
 			System.out.println(session.getAttribute("username"));
-			req.getRequestDispatcher("views/employeehomepage.html").forward(req, resp);
+			req.getRequestDispatcher("views/employeehomepage.html").include(req, resp);
 		} else {
 			System.out.println("redirect");
-			resp.sendRedirect("views/index.html");
+			resp.sendRedirect("employeelogin");
 		}
 	}
 

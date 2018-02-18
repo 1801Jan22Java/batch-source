@@ -46,6 +46,7 @@ public class EmployeeInformationDaoSQL implements EmployeeInformationDao{
 		}
 		return listEmployeeInformation;
 	}
+	
 
 	// get an employeeInformation from the database using the Id 
 	// to be used predominately by the application no the user
@@ -57,7 +58,6 @@ public class EmployeeInformationDaoSQL implements EmployeeInformationDao{
 			System.out.println(requestedEmployeeInformationId);
 			String sql = "SELECT * FROM EMPLOYEEINFO WHERE EMPLOYEE_INFO_ID = ?";
 			PreparedStatement ps = con.prepareStatement(sql);
-			System.out.println(con.getMetaData().getDatabaseProductName());
 			ps.setInt(1, requestedEmployeeInformationId);
 			ResultSet rs = ps.executeQuery();
 			System.out.println();
