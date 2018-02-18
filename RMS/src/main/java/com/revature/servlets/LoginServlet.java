@@ -16,7 +16,6 @@ public class LoginServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		resp.getWriter().append("Called Login Post").append(req.getContextPath());
 		EmployeeDaoImpl edi = new EmployeeDaoImpl();
 		String username = req.getParameter("username");
 		String password = req.getParameter("password");
@@ -35,7 +34,6 @@ public class LoginServlet extends HttpServlet {
 			if (loginVar[1] == 1) {
 				req.getRequestDispatcher("ManagerPage.html").forward(req, resp);
 			} else {
-				System.out.println(session.getAttribute("empID").toString());
 				System.out.println(session.toString());
 				req.getRequestDispatcher("employee").forward(req, resp);
 			}

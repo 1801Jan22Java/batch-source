@@ -41,7 +41,7 @@ public class EmployeeServlet extends HttpServlet {
 		HttpSession session = req.getSession();
 		System.out.println(req.getSession().toString()+"1");
 		if (req.getParameter("request") != null) {
-			RequestDaoImpl rdi = new RequestDaoImpl();;
+			RequestDaoImpl rdi = new RequestDaoImpl();
 			float amount = Float.parseFloat(req.getParameter("amount"));
 			String description = req.getParameter("description");
 			String filename = "filename";
