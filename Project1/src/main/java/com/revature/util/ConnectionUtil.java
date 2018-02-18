@@ -1,0 +1,28 @@
+package com.revature.util;
+
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.Properties;
+
+public class ConnectionUtil {
+	
+	public static Connection getConnectionFromFile(String filename) throws IOException, SQLException {
+		//check that driver is being seen by Maven
+		try{
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+		} catch (ClassNotFoundException e){
+			e.printStackTrace();
+		}
+		//load connection credentials from file
+		Properties prop = new Properties();
+		ClassLoader loader = Thread.currentThread().getContextClassLoader();
+		prop.load(loader.getResourceAsStream(filename));
+		String url = prop.getProperty("dburl");
+		String username = prop.getProperty("dbusername");
+		String password = prop.getProperty("dbpassword");
+		return DriverManager.getConnection(url,username,password);
+	}
+	
+}
