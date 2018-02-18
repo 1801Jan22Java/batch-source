@@ -79,7 +79,8 @@ public class ReimbursementRequestDaoImpl implements ReimbursementRequestDao {
 					float amount = rs.getFloat("AMOUNT");
 					String description=rs.getString("DESCRIPTION");
 					String extension = rs.getString("EXTENSION");
-					if(!(rs.getBlob("RECEIPT")==null))	{
+					
+					/*if(!(rs.getBlob("RECEIPT")==null))	{
 					Blob blob = rs.getBlob("RECEIPT");
 					InputStream is = blob.getBinaryStream();
 					int b= is.read();
@@ -96,7 +97,7 @@ public class ReimbursementRequestDaoImpl implements ReimbursementRequestDao {
 				
 					}
 					
-					
+					*/
 					Employee verified = edi.getEmployeeById(empID);
 					Employee manager = edi.getEmployeeById(mgrID);
 					rr = new ReimbursementRequest(reqID,verified, manager, pending, approved, receipt, amount, description,extension);

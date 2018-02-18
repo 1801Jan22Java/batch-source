@@ -28,6 +28,9 @@ data-target="#collapsibleNavbar">
       <li class="nav-item">
         <a class="nav-link" href="/Project1/viewrequest">View your requests</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/Project1/LogoutServlet">Logout</a>
+      </li>
     </ul>
 </div>
 </nav>
@@ -35,17 +38,6 @@ data-target="#collapsibleNavbar">
 <h1>Welcome to the Employee Reimbursment Portal </h1>
 <div id="reimbursement">
 <div id="formcontainer">
-<form id ="reimbursementForm" action="MasterServlet"  name="requestinfo" method="post" ><br>
-<br>
-<br>
-Please enter your employee id: <br><input type="number" id="employeeid" name="employeeid">
-<br><br>
-Please enter the description / reason for the charges: <br><input type="textfield" id="description" name="description">
-<br><br>
-Please enter the sum of the charges <br> for which you want to be reimbursed:
-<input type="number" id = "charges" name="charges"><br><br>
-<input type="submit" value="Submit request!">
-</form>
 <br><br>
 <form id="uploadForm" name="upload" method="post" action="UploadServlet" enctype="multipart/form-data">
 Please enter your employee id: <br><input type="number" id="employeeid" name="employeeid">

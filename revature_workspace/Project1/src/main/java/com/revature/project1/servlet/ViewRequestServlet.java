@@ -55,13 +55,25 @@ public class ViewRequestServlet extends HttpServlet {
 		"<th>Receipt</th>"+
 		"<th>Pending?</th>"+
 		"<th>Approved?</th>");
+		String fileStr="";
 		if(rrdi.getReimbursementRequestsByEmployee(currentUser).size()>0) {
-		for (ReimbursementRequest rr : rrdi.getReimbursementRequestsByEmployee(currentUser)){	
-		pw.println("<tr style=\"background-color:powderblue; width:450px;margin-left:auto;margin-right:auto;\"><td>"
+		for (ReimbursementRequest rr : rrdi.getReimbursementRequestsByEmployee(currentUser)){
+		if(rr.getExtent()!=null) {
+			String fullStr= rr.getExtent();
+			int lastSlash = fullStr.lastIndexOf("\\");
+			System.out.println(lastSlash);
+			 fileStr = fullStr.substring(lastSlash+1);
+			 System.out.println(fileStr);	
+		}
+		else {
+			fileStr="nope.gif";
+		}
+		pw.write("<tr style=\"background-color:powderblue; width:450px;margin-left:auto;margin-right:auto;\"><td>"
 		+ rr.getEmployee().getFirstName()+ " "+rr.getEmployee().getLastName()
 		+"</td><td>"+rr.getAmount()
-		+"</td><td>Some description"
-		+"</td><td>No receipt available"
+		+"</td><td>"+rr.getDescription()
+		/*+"</td><td><a href='file:///"+rr.getExtent()+"'>view receipt</a>"*/
+		+"</td><td><a href=\"images/"+fileStr+"\">view receipt</a>"
 		+"</td><td>"+rr.getPending()
 		+"</td><td>"+rr.getApproved()
 		+"</td>"+"</tr>");
@@ -73,6 +85,7 @@ public class ViewRequestServlet extends HttpServlet {
 		else {
 			pw.println("<p>There are no requests for " +currentUser.getFirstName() + " " +currentUser.getLastName()+"</p>");
 		}
+		pw.close();
 		//response.sendRedirect("views/status_page.html");
 	}
 

@@ -2,6 +2,9 @@ package com.revature.project1.servlet;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.time.LocalDateTime;
+import java.time.format.*;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -25,69 +28,98 @@ import com.revature.project1.dao.ReimbursementRequestDaoImpl;
  * Servlet implementation class UploadServlet
  */
 public class UploadServlet extends HttpServlet {
-	
-    public UploadServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
+	public UploadServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	 request.getRequestDispatcher("/views/main.html").forward(request,response);
-    	
-    }
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		request.getRequestDispatcher("/views/main.html").forward(request, response);
+
+	}
+
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		System.out.println("In upload servlet");
-	
+		HttpSession session = request.getSession();
+		String username = session.getAttribute("username").toString();
+		String password = session.getAttribute("password").toString();
+		EmployeeDaoImpl edi = new EmployeeDaoImpl();
+		Employee loggedInEmp = edi.getEmployeeByCredentials(username, password);
+		LocalDateTime ldt = LocalDateTime.now();
+		DateTimeFormatter df = DateTimeFormatter.ofPattern("yyMMdd-HH-mm");
+		String dateStr = ldt.format(df);
 		ServletFileUpload sf = new ServletFileUpload(new DiskFileItemFactory());
-		String empStr="";
-		String amountStr="";
-		String desc ="";
-		String extent="";
-		File file =null;
+		String empStr = "";
+		String amountStr = "";
+		String desc = "";
+		String extent = "";
+		File file = null;
 		try {
-			
+
 			List<FileItem> multiFiles = sf.parseRequest(request);
-			for(FileItem item : multiFiles) {
-				if(item.isFormField()) {
-					String fieldname=item.getFieldName();
-					String fieldvalue=item.getString();
-					switch(fieldname) {
-					case "employeeid":empStr=fieldvalue;break;
-					case "charges": amountStr=fieldvalue;break;
-					case "description": desc=fieldvalue;break;
+			for (FileItem item : multiFiles) {
+				if (item.isFormField()) {
+					String fieldname = item.getFieldName();
+					String fieldvalue = item.getString();
+					switch (fieldname) {
+					case "employeeid":
+						empStr = fieldvalue;
+						break;
+					case "charges":
+						amountStr = fieldvalue;
+						break;
+					case "description":
+						desc = fieldvalue;
+						break;
 					}
+				} else if (item.getFieldName().equals("fileInput")) {
+					System.out.println(item.getName().indexOf("."));
+					int period = item.getName().indexOf(".");
+					extent = item.getName().substring(period + 1);
+					item.write(new File("C:\\Users\\user\\Desktop\\Cornu Sinistra\\gitrepos\\batch-source\\revature_workspace\\Project1\\src\\main\\webapp\\images\\" + dateStr + empStr + "." + extent));
+					file = new File("C:\\Users\\user\\Desktop\\Cornu Sinistra\\gitrepos\\batch-source\\revature_workspace\\Project1\\src\\main\\webapp\\images\\" + dateStr + empStr + "." + extent);
+					System.out.println(file.getAbsolutePath());
+					String filename = file.getName();
+					System.out.println("File uploaded");
+					
+					System.out.println(empStr + " " + amountStr + " " + desc);
 				}
-				else if(item.getFieldName().equals("fileInput")) {
-				item.write(new File("/temp/"+ item.getName()));
-				 file = new File("/temp/"+item.getName());
-				 System.out.println(file.getAbsolutePath());
-				 String filename = file.getName();
-				System.out.println("File uploaded");
-				System.out.println(filename.indexOf("."));
-				int period = filename.indexOf(".");
-				extent =filename.substring(period+1);
-				System.out.println(empStr + " "+ amountStr+ " " +desc);
-				}
-			
+
 			}
-			EmployeeDaoImpl edi = new EmployeeDaoImpl();
+		
 			int empInt = Integer.parseInt(empStr);
 			float amount = Float.parseFloat(amountStr);
 			Employee emp = edi.getEmployeeById(empInt);
-			ReimbursementRequestDaoImpl rrdi = new ReimbursementRequestDaoImpl();
-			rrdi.addReimbursementRequest(emp, file, amount, desc,file.getName());
-			System.out.println("Request added");
+			if(!loggedInEmp.getUserName().equals(emp.getUserName())) {
+				PrintWriter pw = response.getWriter();
+				RequestDispatcher rd = request.getRequestDispatcher("views/main.html");
+				rd.include(request, response);
+				response.setContentType("text/html");
+				pw.println("<div><p style=\"background-color:yellow; width:450px;margin-left:auto;margin-right:auto;\">You may only add reimbursement requests for yourself");
+				
+				pw.println("<br>Request not added</p></div>");
+				//response.sendRedirect("MasterServlet");
 			
-		}  catch (Exception e) {
+			}
+			else {
+			ReimbursementRequestDaoImpl rrdi = new ReimbursementRequestDaoImpl();
+			rrdi.addReimbursementRequest(emp, file, amount, desc, file.getAbsolutePath());
+			System.out.println("Request added");
+			}
+
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-	response.sendRedirect("UploadServlet");	
+
+	//	response.sendRedirect("UploadServlet");
 	}
 
 }

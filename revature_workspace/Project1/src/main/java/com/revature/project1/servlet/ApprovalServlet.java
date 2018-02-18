@@ -79,7 +79,7 @@ public class ApprovalServlet extends HttpServlet {
 				pw.println(
 						"<tr style=\"background-color:powderblue; width:450px;margin-left:auto;margin-right:auto;\"><td>"
 								+ rr.getEmployee().getFirstName() + " " + rr.getEmployee().getLastName() + "</td><td>"
-								+ rr.getAmount() + "</td><td>"+rr.getDescription()+"</td><td><a href="+rr.getFile()
+								+ rr.getAmount() + "</td><td>"+rr.getDescription()+"</td><td><a href="+rr.getExtent()
 								+ ">View receipt</a></td><td>" + rr.getPending() + "</td><td>" + rr.getApproved()
 								+ "</td>"+
 								"<td><a href='/Project1/confirm?id="+rr.getRequestID()+"'>Approve</a></td>"

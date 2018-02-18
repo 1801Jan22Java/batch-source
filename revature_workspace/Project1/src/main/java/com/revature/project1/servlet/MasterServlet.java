@@ -48,48 +48,6 @@ public class MasterServlet extends HttpServlet {
 		// TODO Auto-generated constructor stub
 	}
 
-	protected void processRequest(HttpServletRequest req, HttpServletResponse res)
-			throws ServletException, IOException {
-
-		RequestDispatcher rd = req.getRequestDispatcher("views/main.html");
-		res.setContentType("text/html;charset=UTF-8");
-		String empStr = req.getParameter("employeeid");
-		String amountStr = req.getParameter("charges");
-		String description = req.getParameter("description");
-		String applicationPath = req.getServletContext().getRealPath("");
-		String uploadFilePath = applicationPath + File.separator + "uploads";
-		System.out.println(empStr);
-		System.out.println(description);
-		Part filePart = req.getPart("fileinput");
-		String filename = req.getParameter("fileinput");
-		System.out.println(filename);
-		System.out.println(filePart);
-		InputStream is = null;
-		OutputStream os = null;
-		InputStream filecontent = null;
-		try {
-			os = new FileOutputStream(new File(uploadFilePath + File.separator + filename));
-			is = filePart.getInputStream();
-			int read = 0;
-			final byte[] bytes = new byte[1024];
-			while ((read = filecontent.read(bytes)) != -1) {
-				os.write(bytes, 0, read);
-			}
-			System.out.println("New file " + filename + " created at " + uploadFilePath);
-
-		} catch (FileNotFoundException fne) {
-			System.out.println("You either did not specify a file to upload or are "
-					+ "trying to upload a file to a protected or nonexistent " + "location.");
-
-		} finally {
-			if (os != null) {
-				os.close();
-			}
-			if (filecontent != null) {
-				filecontent.close();
-			}
-		}
-	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse

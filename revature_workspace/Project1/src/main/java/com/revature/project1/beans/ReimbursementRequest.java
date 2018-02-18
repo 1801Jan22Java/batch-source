@@ -158,5 +158,13 @@ public class ReimbursementRequest {
 	public void setDescription(String description) {
 		this.description=description;
 	}
+
+	public String getExtent() {
+		return extent;
+	}
+
+	public void setExtent(String extent) {
+		this.extent = extent;
+	}
 	
 }
