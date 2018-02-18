@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Employee Reimbursement Portal</title>
+</head>
+<body>
+	<div id="options">
+		<p>What action would you like to take?</p>
+		<button id="request">Submit a request</button>
+		<button id="pending">View pending requests</button>
+		<button id="resolved">View resolved requests</button>
+		<button id="view">View personal information</button>
+		<button id="update">Update personal information</button>
+	</div> <br>
+	<div id="forms">
+		<form id="requestForm" action="employee" method="post" style="display: none"> 
+			<fieldset> 
+				<legend>Amount:</legend> 
+				<input name="amount" type="number"> 
+			</fieldset> 
+				<fieldset> 
+				<legend>Description:</legend> 
+				<textarea name="description" rows="10" cols="100"></textarea> 
+			</fieldset> 
+			<fieldset> 
+				<legend>Receipt:</legend> 
+				<input type="file" name="receipt" accept="image/*"> 
+			</fieldset><br>
+			<input type="submit" name="request" value="Submit request">
+		</form>
+		<form id="updateForm" action="employee" method="post" style="display: none"> 
+			<fieldset>
+				<legend>New Username:</legend>
+				<input name="username">
+			</fieldset>
+			<fieldset>
+				<legend>New Password:</legend>
+				<input name="password" type="password">
+			</fieldset>
+			<fieldset> 
+				<legend>First name:</legend> 
+				<input type="text" name="fName"> 
+			</fieldset>
+			<fieldset> 
+				<legend>Last name:</legend> 
+				<input type="text" name="lName"> 
+			</fieldset>
+			<fieldset> 
+				<legend>Email:</legend> 
+				<input type="email" name="email"> 
+			</fieldset><br>
+			<input type="submit" name="update" value="Submit update">
+		</form>			
+	</div>
+	<div id="results" style="display: none"></div>
+</body>
+<script src = "scripts/EmployeePage.js"></script>
+</html>
