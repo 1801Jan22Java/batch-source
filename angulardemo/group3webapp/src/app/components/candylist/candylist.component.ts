@@ -42,6 +42,14 @@ export class CandylistComponent implements OnInit {
         this.candy1.name="chocolate";
       }
     }
+    addCandy(name,type,ingredients){
+      console.log("Entered");
+      console.log(name);
+      let newcandy: Candy;
+      newcandy= {name,type,ingredients};
+      this.candyList.unshift(newcandy);
+      return false;
+    }
   }  
 
 

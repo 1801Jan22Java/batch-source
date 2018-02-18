@@ -16,7 +16,7 @@ import com.revature.project1.util.ConnectionUtil;
 
 public class EmployeeDaoImpl implements EmployeeDao{
 
-	private static String filename = "connection.properties";
+	//private static String filename = "connection.properties";
 
 	
 	@Override
@@ -496,6 +496,40 @@ public class EmployeeDaoImpl implements EmployeeDao{
 				Employee managedBy = getEmployeeById(managerID);
 				emp=new Employee(fname,lname,user_name,pass,email,isManager,managedBy);
 				el.add(emp);			
+			}	
+		} 
+		catch (IOException | SQLException e) {
+			e.printStackTrace();
+		}
+		return el;
+	}
+
+	@Override
+	public List<Employee> getEmployeesByManager(Employee manager) {
+		int managerID = getEmployeeID(manager);
+		List<Employee> el= new ArrayList<Employee>();
+		Employee underling = null;
+		Connection con;
+		try {
+			con = ConnectionUtil.getConnectionFromFile();
+			PreparedStatement prepStmt= con.prepareStatement("SELECT * FROM EMPLOYEE");
+			
+			prepStmt.execute();
+			ResultSet rs = prepStmt.getResultSet();
+			//System.out.println("executing query");
+			while(rs.next()) {
+				//System.out.println("Getting employee");
+				String user_name=rs.getString("USER_NAME");
+				String pass = rs.getString("USER_PASS");
+				String fname = rs.getString("FIRST_NAME");
+				String lname= rs.getString("LAST_NAME");
+				String email=rs.getString("EMP_EMAIL");
+				int isManager= rs.getInt("MANAGING");
+				int managerId=rs.getInt("MANAGED_BY");
+				int empID = rs.getInt("EMP_ID");
+				Employee managedBy= getEmployeeById(managerId);
+				underling=new Employee(fname,lname,user_name,pass,email,isManager,managedBy,empID);
+				el.add(underling);			
 			}	
 		} 
 		catch (IOException | SQLException e) {

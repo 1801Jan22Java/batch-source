@@ -18,6 +18,7 @@ public interface EmployeeDao {
 	public Employee createUser();
 	public Employee getManager();
 	List<Employee> getEmployees();
+	public List<Employee> getEmployeesByManager(Employee manager);
 	
 
 }
