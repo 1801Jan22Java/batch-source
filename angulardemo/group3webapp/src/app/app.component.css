@@ -1,0 +1,45 @@
+body{
+    background-image: url("../images/candy.jpg");
+    background-repeat: no-repeat center center;
+    background-size:100%;
+    background-color: black;
+    color: white;
+    font-size: 20pt;
+    font-family: verdana,arial, sans-serif;
+    
+    }
+    a
+    {}
+    
+    .candyTypesAndDisappointment
+    {
+        text-shadow:-1px 0 black, 0 2px black, 2px 0 black, 0 -1px black;
+    }
+    .beetTitle 
+    {
+        text-shadow:-1px 0 black, 0 2px black, 2px 0 black, 0 -1px black;
+        text-align:center;
+    }
+    .beetImage
+    {
+        text-align:center;
+    }
+    h1 
+    {
+        text-shadow:-1px 0 black, 0 2px black, 2px 0 black, 0 -1px black;
+        text-align:center;
+    }
+    
+    a
+    {
+        color:white;
+    }
+    
+    #constructionImage{
+        margin: auto;
+        text-align: center;
+    }
+    .login
+    {
+        text-align:center;
+    }
