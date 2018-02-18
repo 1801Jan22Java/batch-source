@@ -14,7 +14,7 @@ public interface ReimbursementRequestDao {
 	public void denyReimbursementRequest(int id, Employee manager);
 	public void approveReimbursementRequest(int id, Employee manager);
 	public void deleteReimbursementRequest(int id, Employee emp);
-	void addReimbursementRequest(Employee emp, File file, float amount, String descript);
+	void addReimbursementRequest(Employee emp, File file, float amount, String descript, String filename);
 	
 	
 

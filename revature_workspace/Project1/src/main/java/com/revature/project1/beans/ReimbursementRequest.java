@@ -11,6 +11,7 @@ public class ReimbursementRequest {
 	private File file;
 	private float amount;
 	private String description;
+	private String extent;
 
 	public ReimbursementRequest(){}
 	
@@ -28,6 +29,29 @@ public class ReimbursementRequest {
 		this.approved=approved;
 		this.amount=amount;
 		this.description=desc;
+	}
+	public ReimbursementRequest(Employee employee, Employee manager, int pending, int approved,File file, float amount, 
+			String desc)
+	{
+		this.employee=employee;
+		this.manager=manager;
+		this.pending=pending;
+		this.approved=approved;
+		this.amount=amount;
+		this.description=desc;
+	}
+	public ReimbursementRequest(int requestID,Employee employee, Employee manager, int pending, int approved, File file, float amount,
+			String desc,String extent)
+	{
+		this.requestID=requestID;
+		this.employee=employee;
+		this.manager=manager;
+		this.pending=pending;
+		this.approved=approved;
+		this.file=file;
+		this.amount=amount;
+		this.description=desc;
+		this.extent=extent;
 	}
 	public ReimbursementRequest(int requestID,Employee employee, Employee manager, int pending, int approved, float amount,
 			String desc)
@@ -116,7 +140,11 @@ public class ReimbursementRequest {
 	}
 
 	public File getFile() {
-		return file;
+	if(file!=null) {
+		return file;}
+	else {
+		return null;
+	}
 	}
 
 	public void setFile(File file) {

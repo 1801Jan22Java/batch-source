@@ -3,7 +3,9 @@ package com.revature.project1.dao;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -58,7 +60,7 @@ public class ReimbursementRequestDaoImpl implements ReimbursementRequestDao {
 		EmployeeDaoImpl edi = new EmployeeDaoImpl();
 		List<ReimbursementRequest> rl = new ArrayList<ReimbursementRequest>();
 		ReimbursementRequest rr = null;
-
+		File receipt=null;
 		if (verifyEmployeePermission(employee)) {
 			int id = edi.getEmployeeID(employee);
 			//try (Connection con = ConnectionUtil.getConnectionFromFile(filename))
@@ -76,10 +78,28 @@ public class ReimbursementRequestDaoImpl implements ReimbursementRequestDao {
 					int pending = rs.getInt("PENDING");
 					float amount = rs.getFloat("AMOUNT");
 					String description=rs.getString("DESCRIPTION");
-					// Blob receipt = rs.getBlob("RECEIPT");
+					String extension = rs.getString("EXTENSION");
+					if(!(rs.getBlob("RECEIPT")==null))	{
+					Blob blob = rs.getBlob("RECEIPT");
+					InputStream is = blob.getBinaryStream();
+					int b= is.read();
+					receipt=new File("C:\\temp\\"+extension);
+					FileOutputStream os = new FileOutputStream(receipt);
+				
+					
+					while(is.read()!=-1) {
+						os.write(b);
+						os.flush();
+					}
+					is.close();
+					os.close();
+				
+					}
+					
+					
 					Employee verified = edi.getEmployeeById(empID);
 					Employee manager = edi.getEmployeeById(mgrID);
-					rr = new ReimbursementRequest(reqID,verified, manager, pending, approved, amount,description);
+					rr = new ReimbursementRequest(reqID,verified, manager, pending, approved, receipt, amount, description,extension);
 					rl.add(rr);
 				}
 			} catch (SQLException | IOException e) {
@@ -206,7 +226,7 @@ public class ReimbursementRequestDaoImpl implements ReimbursementRequestDao {
 	}
 
 	@Override
-	public void addReimbursementRequest(Employee emp, File file, float amount, String descript) {
+	public void addReimbursementRequest(Employee emp, File file, float amount, String descript,String filename) {
 		EmployeeDaoImpl edi = new EmployeeDaoImpl();
 		int empID = edi.getEmployeeID(emp);
 		System.out.println("employee id is: " + empID);
@@ -221,11 +241,12 @@ public class ReimbursementRequestDaoImpl implements ReimbursementRequestDao {
 		}
 		try {
 			con = ConnectionUtil.getConnectionFromFile();
-			CallableStatement cs = con.prepareCall("{CALL SP_ADD_REIB_REQUEST(?,?,?,?)}");
+			CallableStatement cs = con.prepareCall("{CALL SP_ADD_REIB_REQUEST(?,?,?,?,?)}");
 			cs.setInt(1, empID);
 			cs.setFloat(2, amount);
 			cs.setBlob(3, input);
 			cs.setString(4, descript);
+			cs.setString(5, filename);
 			cs.execute();
 			System.out.println("request successfully added.  Good luck on that...");
 		} catch (IOException | SQLException e) {
@@ -240,5 +261,7 @@ public class ReimbursementRequestDaoImpl implements ReimbursementRequestDao {
 		ReimbursementRequest req = getReimbursementRequestById(reqID);
 
 	}
+
+
 
 }
