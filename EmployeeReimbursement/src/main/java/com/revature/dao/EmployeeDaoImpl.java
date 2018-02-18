@@ -39,11 +39,10 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		return false;
 	}
 	
-	@Override
+	
 	public Employee readEmployee(String email) {
 		
 		Employee emp = null;
-		
 		try(Connection conn = ConnectionUtil.getConnectionFromFile("connection.properties")) {
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
@@ -54,14 +53,9 @@ public class EmployeeDaoImpl implements EmployeeDao {
 			
 			//Email exists
 			if(rs.next()) {
-				if(email.equals(rs.getString("email"))){
-					emp = new Employee(rs.getInt("EMPLOYEE_ID"), rs.getString("FIRST_NAME"),
-										rs.getString("LAST_NAME"), rs.getString("EMAIL"));
-					return emp;
-				}
-				else {
-					throw new InvalidPasswordException("Invalid credentials!");
-				}
+				emp = new Employee(rs.getInt("EMPLOYEE_ID"), rs.getString("FIRST_NAME"),
+									rs.getString("LAST_NAME"), rs.getString("EMAIL"), rs.getString("PASS"));
+				return emp;
 			}
 			
 			//Email does not exist
@@ -71,9 +65,6 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (InvalidPasswordException e) {
-			// TODO Auto-generated catch block
-			System.out.println(e);
 		}
 		
 		return emp;
@@ -91,9 +82,10 @@ public class EmployeeDaoImpl implements EmployeeDao {
 			pstmt.setInt(1,employeeID);
 			rs = pstmt.executeQuery();
 			
-			emp = new Employee(rs.getInt("EMPLOYEE_ID"), rs.getString("FIRST_NAME"), 
-					rs.getString("LAST_NAME"), rs.getString("EMAIL"));
-			
+			if(rs.next()) {
+				emp = new Employee(rs.getInt("EMPLOYEE_ID"), rs.getString("FIRST_NAME"), 
+						rs.getString("LAST_NAME"), rs.getString("EMAIL"), rs.getString("PASS"));
+			}
 			return emp;
 			
 		} catch (SQLException e) {
@@ -106,5 +98,67 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		
 		return emp;
 	}
+	
+	
+	/*
+	 * Updates
+	 */
 
+	public void updateEmployeeFirstName(int empID, String firstName) {
+		try(Connection conn = ConnectionUtil.getConnectionFromFile("connection.properties")) {
+			PreparedStatement pstmt = null;
+			
+			pstmt = conn.prepareStatement("UPDATE EMPLOYEE "
+					+ "SET FIRST_NAME=? WHERE EMPLOYEE_ID=?");
+			pstmt.setString(1, firstName);
+			pstmt.setInt(2, empID);
+			pstmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	public void updateEmployeeLastName(int empID, String lastName) {
+		try(Connection conn = ConnectionUtil.getConnectionFromFile("connection.properties")) {
+			PreparedStatement pstmt = null;
+			
+			pstmt = conn.prepareStatement("UPDATE EMPLOYEE "
+					+ "SET LAST_NAME=? WHERE EMPLOYEE_ID=?");
+			pstmt.setString(1, lastName);
+			pstmt.setInt(2, empID);
+			pstmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	public void updateEmployeeEmail(int empID, String email) {
+		try(Connection conn = ConnectionUtil.getConnectionFromFile("connection.properties")) {
+			PreparedStatement pstmt = null;
+			
+			pstmt = conn.prepareStatement("UPDATE EMPLOYEE "
+					+ "SET EMAIL=? WHERE EMPLOYEE_ID=?");
+			pstmt.setString(1, email);
+			pstmt.setInt(2, empID);
+			pstmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

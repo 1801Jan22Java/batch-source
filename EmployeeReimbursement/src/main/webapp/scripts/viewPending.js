@@ -1,11 +1,11 @@
-/**
- * 
- */
-function postAjax(url, func){
+
+
+
+function getAjax(url, func){
 	let xhr = new XMLHttpRequest() || new ActiveXObject("Microsoft.HTTPRequest");
 
 	xhr.onreadystatechange = function(){
-		if(this.readyState == 4){
+		if(this.readyState === 4){
 			func(this);
 		}
 	};
@@ -15,7 +15,8 @@ function postAjax(url, func){
 	return xhr;
 }
 
-function fillTableResolved(xhr){
+function fillTablePending(xhr){
+	
 	res = JSON.parse(xhr.responseText);
 	//console.log(xhr.responseText);
 	
@@ -94,8 +95,10 @@ function fillTableResolved(xhr){
 	
 }
 
-//window.onload = function() {
-	document.getElementById("viewresolved").addEventListener('click', function () {
-		postAjax('http://localhost:8084/EmployeeReimbursement/viewresolved', fillTableResolved);
+//window.onload = function(xhr) {
+	document.getElementById("viewpending").addEventListener('click', function () {
+
+		getAjax('http://localhost:8084/EmployeeReimbursement/viewpending', fillTablePending);
 	});
+	
 //}

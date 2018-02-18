@@ -21,17 +21,19 @@ public class HomeServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		HttpSession session = req.getSession();
-
-		RequestDispatcher rd = req.getRequestDispatcher("Index.html");
-		rd.forward(req, resp);
 	}
 
 	
 	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		HttpSession session = req.getSession();
+		RequestDispatcher rd = null;
+		if(session.getAttribute("isManager") == "true") {
+			rd = req.getRequestDispatcher("ManagerIndex.html");
+		} else {
+			rd = req.getRequestDispatcher("Index.html");
+		}
+		rd.forward(req, resp);
 	}
 
 }

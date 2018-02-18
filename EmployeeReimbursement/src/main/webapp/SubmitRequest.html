@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="ISO-8859-1">
+		<title>Submit a Reimbursement Request</title>
+	</head>
+	<body>
+		<form action="submitrequest" method="post">
+			<br>
+			<fieldset>
+				<legend>Amount: </legend>
+				<input name="amount" type="number">
+			</fieldset>
+			<br>
+			<fieldset>
+				<legend>Description (500 character limit): </legend>
+				<input name="description" type="text">
+			</fieldset>
+			<br>
+			<input type="reset" value="Reset">
+			<input type="submit" value="Submit">
+		</form>
+		<form action="home" method="post">
+			<input id="backButton" type="submit" value="Back">
+		</form>
+	</body>
+	<script src="scripts/redirector.js"></script>
+</html>

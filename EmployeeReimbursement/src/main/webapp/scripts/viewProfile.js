@@ -1,9 +1,9 @@
-function getAjax(url, func){
-	let xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("MicrosoftXMLHTTP");
+function postAjax(url, func){
+	let xhr = new XMLHttpRequest() || new ActiveXObject("Microsoft.HTTPRequest");
 	
 	xhr.onreadystatechange = function(){
-		if(this.readyState == 4){
-			func(this);
+		if(xhr.readyState == 4){
+			func(xhr);
 		}
 	};
 	
@@ -12,12 +12,15 @@ function getAjax(url, func){
 	return xhr;
 }
 
+function fillView(xhr){
+	let res = JSON.parse(xhr.responseText);
+	document.getElementById("empFirstName").innerHTML = res.firstName;
+	document.getElementById("empLastName").innerHTML = res.lastName;
+	document.getElementById("empEmail").innerHTML = res.email;
+	document.getElementById("empID").innerHTML = res.id;
+}
+
+
 window.onload = function(xhr) {
-	getAjax('http://localhost:8084/EmployeeReimbursement/viewpending', function(){
-		var res = JSON.parse(xhr.responseText);
-		document.getElementById("empFirstName").innerHTML = res.firstName;
-		document.getElementById("empLastName").innerHTML = res.lastName;
-		document.getElementById("empEmail").innerHTML = res.email;
-		document.getElementById("empID").innerHTML = res.id;
-	});
+	postAjax('http://localhost:8084/EmployeeReimbursement/viewprofile', fillView);
 }

@@ -183,5 +183,6 @@ END;
 /
 
 
+
 --MANAGERS
 INSERT INTO EMPLOYEE (FIRST_NAME, LAST_NAME, EMAIL, PASS) VALUES ('Mickey', 'Mouse', 'MickeyMouse@magic.com', 'disneyMagic');

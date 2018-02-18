@@ -8,17 +8,46 @@
 	<body>
 		<div>
 			<br>
-			<span>First Name: </span><p id="empFirstName"></p>
-			<br>
-			<span>Last Name: </span><p id="empLastName"></p>
-			<br>
-			<span>E-mail: </span><p id="empEmail"></p>
-			<br>
-			<span>Your Employee ID: </span><p id="empID"></p>
-			<br>
+			<form action="modifyprofile" method="post">
+				<table>
+					<tr>
+						<th>First Name</th>
+						<td id="empFirstName"></td>
+						<td><input type="text" name="modifyFirstName"></td>
+						<td><input type="submit" value="Save">
+					</tr>
+				</table>
+				<table>
+					<tr>
+						<th>Last Name</th>
+						<td id="empLastName"></td>
+						<td><input type="text" name="modifyLastName"></td>
+						<td><input type="submit" value="Save">
+					</tr>
+				</table>
+				<table>
+					<tr>
+						<th>E-mail</th>
+						<td id="empEmail"></td>
+						<td><input type="text" name="modifyEmail"></td>
+						<td><input type="submit" value="Save">
+					</tr>
+				</table>
+				<table>
+					<tr>
+						<th>Your Employee ID: </th>
+						<td id="empID"></td>
+					</tr>
+				</table>
+			</form>
+			
+			<form action="home" method="post">
+				<input id="backButton" type="submit" value="Back">
+			</form>
 		</div>
 		
 		
 	</body>
+	<script src="scripts/check.js"></script>
 	<script src="scripts/viewProfile.js"></script>
 </html>

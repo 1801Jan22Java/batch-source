@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.revature.beans.Employee;
+import com.revature.dao.EmployeeDaoImpl;
+import com.revature.dao.ManagerDaoImpl;
 import com.revature.util.RequestHelper;
 
 /**
@@ -33,21 +36,29 @@ public class CheckLoginServlet extends HttpServlet {
 
 		resp.setContentType("text/html");
 		
-		//Find correct password here
-		if(password.equals("admin123")) {
-			//pw.println("Welcome, "+username);
-			//pw.println("<a href=\"Index.html\">Go back</a>");
+		EmployeeDaoImpl edi = new EmployeeDaoImpl();
 
+		//Find correct password here
+		Employee toCheck = edi.readEmployee(email);
+		if(password.equals(toCheck.getPassword())) {
 			
 			//Set appropriate attributes to user's info
+			session.setAttribute("id", toCheck.getId());
+			session.setAttribute("firstName", toCheck.getFirstName());
+			session.setAttribute("lastName", toCheck.getLastName());
 			session.setAttribute("email", email);
 			session.setAttribute("problem", null);
 			
+			ManagerDaoImpl mdi = new ManagerDaoImpl();
+			if(mdi.isManager(toCheck.getId())) {
+				session.setAttribute("isManager", "true");
+			} else {
+				session.setAttribute("isManager", "false");
+			}
+			RequestDispatcher rd = req.getRequestDispatcher("CheckingLogin.html");
+			rd.forward(req, resp);
 			
-			resp.sendRedirect("Index.html");
 		} else {
-			//pw.println("nope");
-			//pw.println("<a href=\"Index.html\">Go back</a>");
 			session.setAttribute("problem", "Incorrect password");
 			resp.sendRedirect("login");
 		}

@@ -8,4 +8,8 @@ public interface EmployeeDao {
 	
 	public Employee readEmployee(String email);
 	public Employee readEmployee(int employeeID);
+	
+	public void updateEmployeeFirstName(int empID, String firstName);
+	public void updateEmployeeLastName(int empID, String lastName);
+	public void updateEmployeeEmail(int empID, String email);
 }

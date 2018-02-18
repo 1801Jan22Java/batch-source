@@ -18,10 +18,7 @@ public class LogOutServlet extends HttpServlet {
 
 	
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		resp.setContentType("text/html");
-		PrintWriter pw = resp.getWriter();
-
-		req.getRequestDispatcher("Base.html").include(req, resp);
+		
 		HttpSession session = req.getSession(false);	//Defaults to false
 		
 		
@@ -29,9 +26,9 @@ public class LogOutServlet extends HttpServlet {
 			//Note: this does NOT delete JSESSIONID. It DOES log you out, however.
 			session.invalidate();
 		}
-		pw.println("You are successfully logged out!");
-		pw.println("<a href=\"LogIn.html\">Go back</a>");
-		pw.write("</body></html>");
+		
+		RequestDispatcher rd = req.getRequestDispatcher("LogOut.html");
+		rd.forward(req, resp);
 	}
 
 

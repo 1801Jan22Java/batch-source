@@ -7,20 +7,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class ProfileServlet
+ * Servlet implementation class SubmitServlet
  */
-public class ProfileServlet extends HttpServlet {
+public class SubmitServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+
+
 	
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+
+	
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.getRequestDispatcher("Profile.html").forward(req, resp);
+		req.getRequestDispatcher("SubmitRequest.html").forward(req, resp);
 	}
 
 }

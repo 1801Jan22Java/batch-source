@@ -21,7 +21,7 @@ public class RequestLogDaoImpl implements RequestLogDao {
 			
 			pstmt = conn.prepareStatement("INSERT INTO REQUEST_LOG "
 					+ "(REQUEST_ID,RESPONSE,MANAGER_ID,STATUS_ID,DISPENSED)"
-					+ " VALUES (?,?,?,?,?);");
+					+ " VALUES (?,?,?,?,?)");
 			pstmt.setInt(1, requestID);
 			pstmt.setString(2, response);
 			pstmt.setInt(3, managerID);	//1 - NOT SUBMITTED
@@ -53,6 +53,7 @@ public class RequestLogDaoImpl implements RequestLogDao {
 			ResultSet rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
+				rl = new RequestLog();
 				rl.setLogID(rs.getInt("LOG_ID"));
 				rl.setRequestID(rs.getInt("REQUEST_ID"));
 				rl.setResponse(rs.getString("RESPONSE"));

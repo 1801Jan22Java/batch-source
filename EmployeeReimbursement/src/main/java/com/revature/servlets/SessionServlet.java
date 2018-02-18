@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
-import com.revature.util.RequestHelper;
 
 
 public class SessionServlet extends HttpServlet {
@@ -24,7 +23,6 @@ public class SessionServlet extends HttpServlet {
 			
 			//Use the Jackson API for JSON-formatted strings.
 			//resp.getWriter().write("{\"email\":\""+session.getAttribute("email")+"\"}");
-			RequestHelper.printAThing(gson.toJson(session));
 			resp.getWriter().write(gson.toJson(session));
 			
 		} else {

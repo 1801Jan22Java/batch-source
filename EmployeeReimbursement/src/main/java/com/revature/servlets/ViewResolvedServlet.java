@@ -13,8 +13,10 @@ import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 import com.revature.beans.Employee;
+import com.revature.beans.Request;
 import com.revature.beans.RequestLog;
 import com.revature.dao.EmployeeDaoImpl;
+import com.revature.dao.RequestDaoImpl;
 import com.revature.dao.RequestLogDaoImpl;
 
 /**
@@ -26,8 +28,28 @@ public class ViewResolvedServlet extends HttpServlet {
 
 	
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		RequestDispatcher rd = req.getRequestDispatcher("ViewResolved.html");
-		rd.forward(req, resp);
+		//Get this employee's information
+		HttpSession session = req.getSession(false);
+
+		EmployeeDaoImpl edi = new EmployeeDaoImpl();
+		Employee currentEmployee = edi.readEmployee(session.getAttribute("email").toString());
+		
+		RequestDaoImpl rdi = new RequestDaoImpl();
+		List<Request> requests = rdi.readResolvedRequests(currentEmployee.getId());
+		
+		//Find the request logs belonging to the current employee
+		RequestLogDaoImpl rldi = new RequestLogDaoImpl();
+		List<RequestLog> logs = rldi.getRequestLogs(currentEmployee.getId());
+		
+		
+		//Parse the information into JSON format
+		Gson gson = new Gson();
+		String parsedLogs = gson.toJson(requests);
+		System.out.println(parsedLogs);
+		
+		resp.setContentType("application/json");
+		resp.setCharacterEncoding("ISO-8859-1");
+		resp.getWriter().write(parsedLogs);
 	}
 
 
@@ -35,9 +57,9 @@ public class ViewResolvedServlet extends HttpServlet {
 		
 		//Get this employee's information
 		HttpSession session = req.getSession(false);
+
 		EmployeeDaoImpl edi = new EmployeeDaoImpl();
-		Employee currentEmployee = edi.readEmployee("MickeyMouse@magic.com");
-		//Employee currentEmployee = edi.readEmployee(session.getAttribute("email").toString());
+		Employee currentEmployee = edi.readEmployee(session.getAttribute("email").toString());
 		
 		//Find the request logs belonging to the current employee
 		RequestLogDaoImpl rldi = new RequestLogDaoImpl();

@@ -34,14 +34,15 @@ function fillTableResolved(xhr){
 	table.appendChild(thead);
 	
 	let tr = table.insertRow(0);
+	let amountIndex;
 	for(let i = 0; i < col.length; i++){
 		let th = document.createElement("th")	//Table header
 		switch (col[i]){
 		case "requestID":
 			th.innerHTML = "Request ID";
 			break;
-		case "employeeID":
-			th.innerHTML = "Employee ID";
+		case "employeeName":
+			th.innerHTML = "Employee Name";
 			break;
 		case "dateSubmitted":
 			th.innerHTML = "Date Submitted";
@@ -54,6 +55,16 @@ function fillTableResolved(xhr){
 			break;
 		case "amount":
 			th.innerHTML = "Amount";
+			amountIndex = i;
+			break;
+		case "managerName":
+			th.innerHTML = "Manager Name";
+			break;
+		case "dispensed":
+			th.innerHTML = "Dispensed";
+			break;
+		case "response":
+			th.innerHTML = "Response";
 			break;
 		}
 //		th.innerHTML = col[i];
@@ -66,7 +77,7 @@ function fillTableResolved(xhr){
 		tr = table.insertRow(-1);
 		for(let j = 0; j < col.length; j++){
 			let cell = tr.insertCell(-1);
-			if(j === col.length-1){
+			if(j === amountIndex){
 				cell.innerHTML = "$"+res[i][col[j]];
 			}
 			else if(j === 3){
@@ -94,8 +105,6 @@ function fillTableResolved(xhr){
 	
 }
 
-//window.onload = function() {
-	document.getElementById("viewresolved").addEventListener('click', function () {
-		postAjax('http://localhost:8084/EmployeeReimbursement/viewresolved', fillTableResolved);
-	});
-//}
+window.onload = function() {
+		postAjax('http://localhost:8084/EmployeeReimbursement/viewcompleted', fillTableResolved);
+}

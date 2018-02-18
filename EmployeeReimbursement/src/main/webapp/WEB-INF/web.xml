@@ -37,7 +37,6 @@
     <error-code>404</error-code>
     <location>/error</location>
   </error-page>
-  
   <servlet>
     <servlet-name>session</servlet-name>
     <servlet-class>com.revature.servlets.SessionServlet</servlet-class>
@@ -46,7 +45,6 @@
     <servlet-name>session</servlet-name>
     <url-pattern>/session</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>home</servlet-name>
     <servlet-class>com.revature.servlets.HomeServlet</servlet-class>
@@ -94,5 +92,85 @@
   <servlet-mapping>
     <servlet-name>viewresolved</servlet-name>
     <url-pattern>/viewresolved</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>viewpage</servlet-name>
+    <servlet-class>com.revature.servlets.ViewRequestsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>viewpage</servlet-name>
+    <url-pattern>/viewpage</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>submitrequest</servlet-name>
+    <servlet-class>com.revature.servlets.SubmitRequestServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>submitrequest</servlet-name>
+    <url-pattern>/submitrequest</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>submitpage</servlet-name>
+    <servlet-class>com.revature.servlets.SubmitPageServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>submitpage</servlet-name>
+    <url-pattern>/submitpage</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>submitredirect</servlet-name>
+    <servlet-class>com.revature.servlets.SubmitServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>submitredirect</servlet-name>
+    <url-pattern>/submitredirect</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>modifyprofile</servlet-name>
+    <servlet-class>com.revature.servlets.ModifyProfileServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>modifyprofile</servlet-name>
+    <url-pattern>/modifyprofile</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>managerequests</servlet-name>
+    <servlet-class>com.revature.servlets.ManageRequestsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>managerequests</servlet-name>
+    <url-pattern>/managerequests</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>viewallpending</servlet-name>
+    <servlet-class>com.revature.servlets.ViewAllPendingServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>viewallpending</servlet-name>
+    <url-pattern>/viewallpending</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>respond</servlet-name>
+    <servlet-class>com.revature.servlets.RespondServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>respond</servlet-name>
+    <url-pattern>/respond</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>viewcompleted</servlet-name>
+    <servlet-class>com.revature.servlets.ViewCompletedRequestsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>viewcompleted</servlet-name>
+    <url-pattern>/viewcompleted</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>resolvedrequests</servlet-name>
+    <servlet-class>com.revature.servlets.ResolvedRequestsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>resolvedrequests</servlet-name>
+    <url-pattern>/resolvedrequests</url-pattern>
   </servlet-mapping>
 </web-app>

@@ -8,16 +8,21 @@ public class RequestLog {
 	private int managerID;
 	private int statusID;
 	private double dispensed;
+	
+	private int employeeID;
+	private String description;
+	private double amount;		//Amount requested.
 
 	public RequestLog() {}
 	
-	public RequestLog(int logID, int requestID, String response, int managerID, int statusID) {
+	public RequestLog(int logID, int requestID, String response, int managerID, int statusID, double dispensed) {
 		super();
 		this.logID = logID;
 		this.requestID = requestID;
 		this.response = response;
 		this.managerID = managerID;
 		this.statusID = statusID;
+		this.dispensed = dispensed;
 	}
 	
 	

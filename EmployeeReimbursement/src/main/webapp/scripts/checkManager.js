@@ -1,6 +1,3 @@
-/**
- * 
- */
 
 function sendAjaxGet(url, func){
 	//Step 1: obtain XHR
@@ -24,10 +21,12 @@ function populateUser(xhr){
 	//If no, don't parse it.
 	if(xhr.response){
 		var res = JSON.parse(xhr.responseText);
-		if(res.session.attributes.email != "null"){
-			document.getElementById("user").innerHTML="You are logged in as "
-				+res.session.attributes.firstName + " " +res.session.attributes.lastName + ".";
-		} 
+		if(res.session.attributes.isManager !== "true"){
+			window.location = "/EmployeeReimbursement/error";
+		} else if(res.session.attributes.email != "null") {
+			document.getElementById("user").innerHTML="Welcome back, Lord "
+				+res.session.attributes.firstName + " " +res.session.attributes.lastName + "!";
+		}
 	} else {
 		//Redirect if unsuccessful
 		window.location = "http://localhost:8084/EmployeeReimbursement/login";
