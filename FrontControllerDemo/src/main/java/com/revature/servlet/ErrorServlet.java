@@ -1,8 +1,5 @@
 package com.revature.servlet;
 
-/*
- * This servlet handle ERROR on load to show an ERROR page.
- * */
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
@@ -22,20 +19,22 @@ public class ErrorServlet extends HttpServlet {
      */
     public ErrorServlet() {
         super();
+        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		RequestDispatcher rd = req.getRequestDispatcher("views/error.html");
-		rd.forward(req, resp);
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		RequestDispatcher rd = request.getRequestDispatcher("views/error.html");
+		rd.forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

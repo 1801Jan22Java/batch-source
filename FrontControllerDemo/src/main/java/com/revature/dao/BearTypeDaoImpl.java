@@ -10,6 +10,7 @@ import com.revature.util.ConnectionUtil;
 
 public class BearTypeDaoImpl implements BearTypeDao {
 	
+	
 	@Override
 	public List<BearType> getBearTypes() {
 		List<BearType> btl = new ArrayList<>();

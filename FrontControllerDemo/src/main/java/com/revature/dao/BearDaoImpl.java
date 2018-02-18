@@ -1,15 +1,24 @@
 package com.revature.dao;
 
 import java.io.IOException;
-import java.sql.*;
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.revature.beans.*;
+import com.revature.beans.Bear;
+import com.revature.beans.BearType;
+import com.revature.beans.Cave;
 import com.revature.util.ConnectionUtil;
 
 public class BearDaoImpl implements BearDao {
+	
 	
 	
 	@Override

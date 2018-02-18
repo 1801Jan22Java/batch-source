@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Login Page</title>
+	<!-- CSS -->
+	<link rel="stylesheet" type="text/css" href="styles/main.css">
+	<!-- Bootstrap CSS-->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<!-- UIkit CSS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.40/css/uikit.min.css" />
+
+
+</head>
+<body>
+	
+	<div class="uk-cover-container" uk-height-viewport>
+	    <video autoplay loop muted playsinline uk-cover>
+	        <source src="Sunset-Lapse/MP4/Sunset-Lapse.mp4" type="video/mp4">
+	        <source src="Sunset-Lapse/OGV/Sunset-Lapse.ogv" type="video/ogg">
+	    </video>
+
+	    <div class="uk-position-top">
+	        <nav class="uk-navbar-container uk-navbar-transparent" uk-navbar>
+	            <div class="uk-navbar-center">
+	                <a class="uk-navbar-item uk-logo" href="#">Reimburse</a>
+	            </div>
+	        </nav>
+	    </div>
+
+	    <div class="container col-6">
+			<form id="mainForm" action="login" method="post">
+				<div class="form-group">
+					<label for="inputEmail">Email address</label>
+			    	<input type="email" name="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" placeholder="Enter email">
+			    	<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+			  	</div>
+			  	<div class="form-group">
+			    	<label for="inputPassword">Password</label>
+			    	<input onkeyup="checkPassword(this)" type="password" name="password" class="form-control" id="inputPassword" placeholder="Password">
+			  	</div>
+			  	
+			  	<button type="submit" class="btn btn-primary">Submit</button>
+			</form>
+		</div>
+	</div>
+
+
+	
+</body>
+<!-- Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<!-- UIkit JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.40/js/uikit.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.40/js/uikit-icons.min.js"></script>
+
+<!-- In house JS -->
+<script src="scripts/main.js"></script>
+</html>

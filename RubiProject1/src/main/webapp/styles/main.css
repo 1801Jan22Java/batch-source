@@ -1,0 +1,16 @@
+#appIntro {
+	background: none;
+	color: #ffc966;
+	font-size: 72px;
+	font-family: Helvetica;
+}
+
+#mainForm {
+    margin-top: 250px;
+}
+
+a.uk-navbar-item.uk-logo {
+    color: white;
+    font-size: 48px;
+    font-family: helvetica;
+}

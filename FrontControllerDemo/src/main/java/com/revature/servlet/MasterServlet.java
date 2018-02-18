@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.revature.util.RequestHelper;
+
 /**
  * Servlet implementation class MasterServlet
  */
@@ -19,6 +21,7 @@ public class MasterServlet extends HttpServlet {
      */
     public MasterServlet() {
         super();
+        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -33,7 +36,8 @@ public class MasterServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+		String destination = RequestHelper.process(request);
+		response.sendRedirect(destination);
 	}
 
 }
