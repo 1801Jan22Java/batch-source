@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="styles/ProfileStyle.css">
+<meta charset="ISO-8859-1">
+<title>Profile</title>
+</head>
+<body>
+	<div class="box">
+		<p id="Id"></p>
+		<p id="Name"></p>
+		<img src="http://localhost:8084/Project1Reimbersments/DisplayImage" width = "200px" height = "200px">
+		<p id="email"></p>
+		<a href="Logout">Logout</a>
+		<div>
+		<center>
+		<h4> Reimbursement Requests</h4>
+			<table id="Requests" class="table table-dark">
+				 
+				 <thead>
+    				<tr>
+      					<th scope="col">Request ID</th>
+     					<th scope="col">Request Status</th>
+      					<th scope="col">Status</th>
+      					<th scope="col">Document</th>
+    				</tr>
+ 				 </thead>
+			</table>
+			</center>
+		</div>
+	</div>
+</body>
+<script src = "scripts/profileScript.js"></script>
+</html>
