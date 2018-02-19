@@ -24,6 +24,7 @@ import { HttpModule } from '@angular/http';
 import { DatabindingComponent } from './components/databinding/databinding.component';
 import {PipeComponent} from './components/pipe/pipe.component';
 import { StructuralComponent } from './components/structural/structural.component';
+import { HttpComponent } from './components/http/http.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/main', pathMatch: 'full' },
@@ -47,6 +48,7 @@ export const routes: Routes = [
   { path: 'databinding', component: DatabindingComponent },
   { path: 'pipe', component: PipeComponent},
   { path: 'structural', component: StructuralComponent},
+  { path: 'http', component: HttpComponent},
   { path: '**', redirectTo: '/main' }
 ];
  

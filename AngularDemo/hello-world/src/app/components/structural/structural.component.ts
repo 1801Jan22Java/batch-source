@@ -10,7 +10,7 @@ export class StructuralComponent implements OnInit {
   title = 'Structural Directive';
   documentation = 'https://angular.io/guide/structural-directives';
 
-  public flashCards = [
+  public flashcards = [
     {
       question: 'How are you?',
       answer: 'indoors'
@@ -20,14 +20,13 @@ export class StructuralComponent implements OnInit {
       answer: 'yes'
     },
     {
-      question: 'How much wood could a woodchuck if a woodchuck could chuck wood?',
+      question: 'How much wood could a woodchuck chuck if a woodchuck could chuck wood?',
       answer: '5'
     },
     {
       question: 'What is the meaning of life, the universe, and everything?',
       answer: '43'
     }
-    
 
   ];
 

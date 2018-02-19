@@ -14,9 +14,9 @@ public interface ReimbursementRequestDAO {
 
 	public List<ReimbursementRequest> getReimbursementRequests();
 
-	public List<ReimbursementRequest> getPendingReimbursementRequests();
+	public List<ReimbursementRequest> getPendingReimbursementRequests(int emplId);
 
-	public List<ReimbursementRequest> getProcessedReimbursementRequests();
+	public List<ReimbursementRequest> getProcessedReimbursementRequests(int emplId);
 
 	public ReimbursementRequest updatePendingReimbursementRequest(
 			ReimbursementRequest req);

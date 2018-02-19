@@ -11,7 +11,7 @@ public class EmployeeTest {
 	@Test
 	public void testNoArgsConstructor() {
 		Employee empl = new Employee();
-
+		
 		assertEquals(0, empl.getId());
 		assertEquals(null, empl.getFirstName());
 		assertEquals(null, empl.getLastName());

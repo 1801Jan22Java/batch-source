@@ -17,8 +17,9 @@ public class Employee {
 		super();
 	}
 
-	public Employee(String firstName, String lastName, String userName, String password, EmployeeTitle title,
-			String email, List<ReimbursementRequest> requests) {
+	public Employee(String firstName, String lastName, String userName,
+			String password, EmployeeTitle title, String email,
+			List<ReimbursementRequest> requests) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -29,8 +30,9 @@ public class Employee {
 		this.requests = requests;
 	}
 
-	public Employee(int id, String firstName, String lastName, String userName, String password, EmployeeTitle title,
-			String email, List<ReimbursementRequest> requests) {
+	public Employee(int id, String firstName, String lastName, String userName,
+			String password, EmployeeTitle title, String email,
+			List<ReimbursementRequest> requests) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
@@ -47,7 +49,8 @@ public class Employee {
 	}
 
 	public Employee setId(int id) {
-		return new Employee(id, firstName, lastName, userName, password, title, email, requests);
+		return new Employee(id, firstName, lastName, userName, password, title,
+				email, requests);
 	}
 
 	public String getFirstName() {
@@ -55,7 +58,8 @@ public class Employee {
 	}
 
 	public Employee setFirstName(String firstName) {
-		return new Employee(id, firstName, lastName, userName, password, title, email, requests);
+		return new Employee(id, firstName, lastName, userName, password, title,
+				email, requests);
 	}
 
 	public String getLastName() {
@@ -63,7 +67,8 @@ public class Employee {
 	}
 
 	public Employee setLastName(String lastName) {
-		return new Employee(id, firstName, lastName, userName, password, title, email, requests);
+		return new Employee(id, firstName, lastName, userName, password, title,
+				email, requests);
 	}
 
 	public String getUserName() {
@@ -71,7 +76,8 @@ public class Employee {
 	}
 
 	public Employee setUserName(String userName) {
-		return new Employee(id, firstName, lastName, userName, password, title, email, requests);
+		return new Employee(id, firstName, lastName, userName, password, title,
+				email, requests);
 	}
 
 	public String getPassword() {
@@ -79,7 +85,8 @@ public class Employee {
 	}
 
 	public Employee setPassword(String password) {
-		return new Employee(id, firstName, lastName, userName, password, title, email, requests);
+		return new Employee(id, firstName, lastName, userName, password, title,
+				email, requests);
 	}
 
 	public EmployeeTitle getTitle() {
@@ -87,7 +94,8 @@ public class Employee {
 	}
 
 	public Employee setTitle(EmployeeTitle title) {
-		return new Employee(id, firstName, lastName, userName, password, title, email, requests);
+		return new Employee(id, firstName, lastName, userName, password, title,
+				email, requests);
 	}
 
 	public String getEmail() {
@@ -95,7 +103,8 @@ public class Employee {
 	}
 
 	public Employee setEmail(String email) {
-		return new Employee(id, firstName, lastName, userName, password, title, email, requests);
+		return new Employee(id, firstName, lastName, userName, password, title,
+				email, requests);
 	}
 
 	public List<ReimbursementRequest> getRequests() {
@@ -103,7 +112,8 @@ public class Employee {
 	}
 
 	public Employee setRequests(List<ReimbursementRequest> requests) {
-		return new Employee(id, firstName, lastName, userName, password, title, email, requests);
+		return new Employee(id, firstName, lastName, userName, password, title,
+				email, requests);
 	}
 
 }
