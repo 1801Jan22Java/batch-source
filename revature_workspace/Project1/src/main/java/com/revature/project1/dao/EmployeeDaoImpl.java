@@ -173,36 +173,7 @@ public class EmployeeDaoImpl implements EmployeeDao{
 
 	}
 
-	/*public void addManager(Employee employee) {
-
-		try(Connection conn = ConnectionUtil.getConnectionFromFile(filename))
-		{
-
-			conn.setAutoCommit(false);
-			//System.out.println("In try statement");//DEBUGGING
-			String sqlStmt="{CALL SP_ADD_EMPLOYEE(?,?,?,?,?,?,?)}";
-			CallableStatement cs = conn.prepareCall(sqlStmt);
-			cs.setString(1,employee.getUserName());
-			cs.setString(2,employee.getPassword());
-			cs.setString(3, employee.getFirstName());
-			cs.setString(4,employee.getLastName());
-			cs.setString(5, employee.getEmail());
-			cs.setInt(6, employee.getIsManager());
-			cs.setInt(7, getEmployeeByID(employee.getManagerID()));
-			cs.execute();
-			conn.commit();
-
-		}catch(SQLIntegrityConstraintViolationException e)
-		{
-			System.out.println("A user with that username already exists!");
-		} catch (SQLException | IOException e) {
-			//con.rollback();
-			e.printStackTrace();
-		}
-
-
-	}
-*/
+	
 	public boolean validateCredentials(String username, String password) {
 		boolean validated=false;
 		String userPass=null;
@@ -301,22 +272,36 @@ public class EmployeeDaoImpl implements EmployeeDao{
 
 	}
 
-	public int getEmployeeByUsername(String username) {
-		int userId=0;
-		String sql = "SELECT EMP_ID FROM EMPLOYEE WHERE USER_NAME=?";
-		try(Connection conn = ConnectionUtil.getConnectionFromFile())
+	@Override
+	public Employee getEmployeeByUsername(String username) {
+		Employee employee = null;
+		try(Connection con = ConnectionUtil.getConnectionFromFile())
 		{
-			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setString(1, username);
-			ps.execute();
-			ResultSet rs =ps.getResultSet();
+
+			PreparedStatement prepStmt = con.prepareStatement("SELECT * FROM EMPLOYEE WHERE USER_NAME=?");
+			prepStmt.setString(1, username);
+			prepStmt.execute();
+			ResultSet rs= prepStmt.getResultSet();
 			if(rs.next())
 			{
-				userId=rs.getInt("EMP_ID");
+			
+				String pass = rs.getString("USER_PASS");
+				String fname = rs.getString("FIRST_NAME");
+				String lname= rs.getString("LAST_NAME");
+				String email=rs.getString("EMP_EMAIL");
+				int isManager= rs.getInt("MANAGING");
+				int managerID=rs.getInt("MANAGED_BY");
+				Employee managedBy = getEmployeeById(managerID);
+				employee=new Employee(fname,lname,username,pass,email,isManager,managedBy);
 			}
+		} catch (SQLException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		catch(SQLException | IOException e){ e.printStackTrace();}
-		return userId;
+		finally
+		{
+			return employee;
+		}
 	}
 	
 	
@@ -359,7 +344,7 @@ public class EmployeeDaoImpl implements EmployeeDao{
 			ResultSet rs= prepStmt.getResultSet();
 			if(rs.next())
 			{
-				String usenam=rs.getString("USER_NAME");
+			
 				String pass = rs.getString("USER_PASS");
 				String fname = rs.getString("FIRST_NAME");
 				String lname= rs.getString("LAST_NAME");
@@ -367,7 +352,7 @@ public class EmployeeDaoImpl implements EmployeeDao{
 				int isManager= rs.getInt("MANAGING");
 				int managerID=rs.getInt("MANAGED_BY");
 				Employee managedBy = getEmployeeById(managerID);
-				employee=new Employee(fname,lname,username,password,email,isManager,managedBy);
+				employee=new Employee(fname,lname,username,pass,email,isManager,managedBy);
 			}
 		} catch (SQLException | IOException e) {
 			// TODO Auto-generated catch block
@@ -536,6 +521,56 @@ public class EmployeeDaoImpl implements EmployeeDao{
 			e.printStackTrace();
 		}
 		return el;
+	}
+
+	@Override
+	public void updateEmail(Employee emp, String email) {
+		int id = getEmployeeID(emp);
+		Connection con;
+			try {
+				con = ConnectionUtil.getConnectionFromFile();
+				PreparedStatement prepStmt= con.prepareStatement("UPDATE EMPLOYEE SET EMP_EMAIL = ? WHERE EMP_ID=?");
+				prepStmt.setString(1, email);
+				prepStmt.setInt(2, id);
+				prepStmt.execute();
+			} catch (IOException | SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	}
+
+	@Override
+	public void updateFirstName(Employee emp, String fName) {
+		int id = getEmployeeID(emp);
+		Connection con;
+			try {
+				con = ConnectionUtil.getConnectionFromFile();
+				PreparedStatement prepStmt= con.prepareStatement("UPDATE EMPLOYEE SET FIRST_NAME = ? WHERE EMP_ID=?");
+				prepStmt.setString(1, fName);
+				prepStmt.setInt(2, id);
+				prepStmt.execute();
+			} catch (IOException | SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
+	}
+
+	@Override
+	public void updateLastName(Employee emp, String lName) {
+		int id = getEmployeeID(emp);
+		Connection con;
+			try {
+				con = ConnectionUtil.getConnectionFromFile();
+				PreparedStatement prepStmt= con.prepareStatement("UPDATE EMPLOYEE SET LAST_NAME = ? WHERE EMP_ID=?");
+				prepStmt.setString(1, lName);
+				prepStmt.setInt(2, id);
+				prepStmt.execute();
+			} catch (IOException | SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
 	}
 
 }

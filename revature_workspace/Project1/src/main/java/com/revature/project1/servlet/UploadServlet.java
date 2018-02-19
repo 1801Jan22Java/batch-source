@@ -36,7 +36,7 @@ public class UploadServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		request.getRequestDispatcher("/views/main.html").forward(request, response);
+		request.getRequestDispatcher("views/main_employee.html").forward(request, response);
 
 	}
 
@@ -46,6 +46,7 @@ public class UploadServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		PrintWriter pw = response.getWriter();
 		System.out.println("In upload servlet");
 		HttpSession session = request.getSession();
 		String username = session.getAttribute("username").toString();
@@ -91,14 +92,15 @@ public class UploadServlet extends HttpServlet {
 					
 					System.out.println(empStr + " " + amountStr + " " + desc);
 				}
-
+				
+			
 			}
 		
 			int empInt = Integer.parseInt(empStr);
 			float amount = Float.parseFloat(amountStr);
 			Employee emp = edi.getEmployeeById(empInt);
 			if(!loggedInEmp.getUserName().equals(emp.getUserName())) {
-				PrintWriter pw = response.getWriter();
+				
 				RequestDispatcher rd = request.getRequestDispatcher("views/main.html");
 				rd.include(request, response);
 				response.setContentType("text/html");
@@ -114,7 +116,16 @@ public class UploadServlet extends HttpServlet {
 			System.out.println("Request added");
 			}
 
-		} catch (Exception e) {
+		}
+		catch(NumberFormatException e) {
+			pw.println(
+					"<html><body style=\"background-color:black; color:white; width:450px;margin-left:auto;margin-right:auto;\">");
+			pw.println("No information entered!");
+			pw.println("<a style=\"color:white\" href=\"EmployeeServlet\">Back to upload page.</a>");
+			pw.write("</div></body></html>");
+			
+		}
+		 catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

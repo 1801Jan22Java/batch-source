@@ -14,6 +14,9 @@ h3{
 	padding-top: 8px;
 	padding-bottom: 3px;
 }
+
+
+
 body{
 	font-family:"verdana","arial","sans-serif";
 	text-align:center;
@@ -82,9 +85,20 @@ table,td,th{
 	width:800px;
 }
 
+#infoForm{
+	margin-left:auto;
+	margin-right:auto;
+}
 
 
 #employeeFilterPrompt{
 	background-color: white;
 	color:white;
+}
+
+#updateEmpButton{
+	color:white;
+	background-color:powderblue;
+	margin-left:auto;
+	margin-right:auto;
 }

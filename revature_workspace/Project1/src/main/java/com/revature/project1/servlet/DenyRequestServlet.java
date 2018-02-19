@@ -1,6 +1,8 @@
 package com.revature.project1.servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,19 +19,21 @@ import com.revature.project1.dao.ReimbursementRequestDaoImpl;
  */
 public class DenyRequestServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public DenyRequestServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public DenyRequestServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		String reqIDStr = request.getParameter("id");
 		int reqID = Integer.parseInt(reqIDStr);
 		HttpSession session = request.getSession();
@@ -38,17 +42,15 @@ public class DenyRequestServlet extends HttpServlet {
 		EmployeeDaoImpl edi = new EmployeeDaoImpl();
 		Employee currentUser = edi.getEmployeeByCredentials(name, password);
 		ReimbursementRequestDaoImpl rdi = new ReimbursementRequestDaoImpl();
-		ReimbursementRequest rr =rdi.getReimbursementRequestById(reqID);
+		ReimbursementRequest rr = rdi.getReimbursementRequestById(reqID);
 		rdi.denyReimbursementRequest(reqID, currentUser);
-		request.getRequestDispatcher("deny").forward(request, response);
-	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.sendRedirect("/Project1/approval");
+		PrintWriter pw = response.getWriter();
+		pw.println(
+				"<html><body style=\"background-color:black; color:white; width:450px;margin-left:auto;margin-right:auto;\">");
+		pw.println("Request successfully denied!");
+		pw.println("<a style=\"color:white\" href=\"approval\">Back to approval page.</a>");
+		pw.write("</div></body></html>");
 	}
 
 }

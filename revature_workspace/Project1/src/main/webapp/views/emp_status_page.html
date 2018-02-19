@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="styles/style.css"/>
 <meta charset="UTF-8">
 <title>Reimbursement Portal</title>
-<link rel="stylesheet" href="styles/style.css"/>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </head>
-<body>
+<body action="viewrequest" method="post">
 <nav class="navbar navbar-expand-md" style="background-color:powderblue;">
 
   <button class="navbar-toggler" type="button" data-toggle="collapse" 
@@ -20,16 +20,13 @@ data-target="#collapsibleNavbar">
   <div class="collapse navbar-collapse" id="collapsibleNavbar">
     <ul class="navbar-nav">
 	<li class="nav-item">
-        <a class="nav-link" href="/Project1/MasterServlet">Main</a>
-      </li>
-	<li class="nav-item">
-        <a class="nav-link"  href = "/Project1/approval" name="approval">Approve Requests</a>
+        <a class="nav-link" href="/Project1/EmployeeServlet">Main</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/Project1/viewrequest">View your requests</a>
+        <a class="nav-link" href="/Project1/ViewRequestEmp">View your requests</a>
       </li>
-         <li class="nav-item">
-        <a class="nav-link" href="/Project1/ViewEmployeesServlet">View Employees</a>
+      <li class="nav-item">
+        <a class="nav-link" href="/Project1/EmployeeInfoServlet">View your information</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="/Project1/LogoutServlet">Logout</a>
@@ -37,14 +34,18 @@ data-target="#collapsibleNavbar">
     </ul>
 </div>
 </nav>
+<h1>Employee Reimbursement Request Status</h1>
+<div>
 
-<h1>Welcome to the Manager  Portal </h1>
-<div id="reimbursement">
-<div id="formcontainer">
-<br><br>
+<!--<form id="viewForm" action="viewrequest" name="viewrequest" method="post">
+Enter the Employee ID :<input type="number" id="employeeid" name="employeeid">
+<input type="submit" value="Find Employee"></form>-->
+</div>
 
-</div>
-</div>
+
 </body>
-<script src="scripts/check.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="scripts/check.js"></script>
 </html>

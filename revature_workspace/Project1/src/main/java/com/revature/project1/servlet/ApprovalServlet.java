@@ -73,26 +73,30 @@ public class ApprovalServlet extends HttpServlet {
 		} else {
 			pw.println("<table class=\"requestTable\"><tr><th>Employee</th><th>"
 					+ "Amount Requested for Reimbursement</th>" + "<th>Description</th>" + "<th>Receipt</th>"
-					+ "<th>Pending Status</th>" + "<th>Approval Status</th>" + "<th>Approve?</th><th>Deny?</th>");
+					+ "<th>Pending Status</th>" + "<th>Approval Status</th>"
+					+ "<th>Approve?</th><th>Deny?</th><th>Approving manager</th>");
 			ServletConfig config = getServletConfig();
 			for (ReimbursementRequest rr : rrdi.getReimbursementRequestsByEmployee(emp)) {
 				pw.println(
 						"<tr style=\"background-color:powderblue; width:450px;margin-left:auto;margin-right:auto;\"><td>"
 								+ rr.getEmployee().getFirstName() + " " + rr.getEmployee().getLastName() + "</td><td>"
-								+ rr.getAmount() + "</td><td>"+rr.getDescription()+"</td><td><a href="+rr.getExtent()
-								+ ">View receipt</a></td><td>" + rr.getPending() + "</td><td>" + rr.getApproved()
-								+ "</td>"+
-								"<td><a href='/Project1/confirm?id="+rr.getRequestID()+"'>Approve</a></td>"
-								+"<td><a href='/Project1/deny?id="+rr.getRequestID()+"'>Deny</a></td>" + "</tr>");
+								+ rr.getAmount() + "</td><td>" + rr.getDescription() + "</td><td><a href="
+								+ rr.getExtent() + ">View receipt</a></td><td>"
+								+ (rr.getPending() == 1 ? "Pending" : "Decided") + "</td><td>"
+								+ (rr.getApproved() == 1 ? "Approved" : "Not approved") + "</td>"
+								+ "<td><a href='/Project1/confirm?id=" + rr.getRequestID() + "'>Approve</a></td>"
+								+ "<td><a href='/Project1/deny?id=" + rr.getRequestID() + "'>Deny</a></td><td>"
+								+ rr.getEmployee().getManager().getFirstName() + " "
+								+ rr.getEmployee().getManager().getLastName() + "</td></tr>");
 			}
 			pw.println("</table></div>");
-		
-		//	System.out.println(req.getParameter("approverequest"));
-			
+
+			// System.out.println(req.getParameter("approverequest"));
+
 		}
-		
-		//System.out.println(getServletInfo());
-	//	System.out.println(req.getParameter("approverequest"));
+
+		// System.out.println(getServletInfo());
+		// System.out.println(req.getParameter("approverequest"));
 
 	}
 }

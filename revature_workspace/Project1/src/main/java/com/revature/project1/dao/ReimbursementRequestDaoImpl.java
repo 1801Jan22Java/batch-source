@@ -65,7 +65,7 @@ public class ReimbursementRequestDaoImpl implements ReimbursementRequestDao {
 			int id = edi.getEmployeeID(employee);
 			//try (Connection con = ConnectionUtil.getConnectionFromFile(filename))
 			try (Connection con = ConnectionUtil.getConnectionFromFile()){
-				String sql = "SELECT * FROM REIBREQUEST WHERE APPROVING_EMP_ID=? OR REQ_EMP_ID=?";
+				String sql = "SELECT * FROM REIBREQUEST WHERE APPROVING_EMP_ID=? OR REQ_EMP_ID=? ORDER BY PENDING, APPROVED";
 				PreparedStatement prepStmt = con.prepareStatement(sql);
 				prepStmt.setInt(1, id);
 				prepStmt.setInt(2, id);

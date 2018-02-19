@@ -19,6 +19,9 @@ public interface EmployeeDao {
 	public Employee getManager();
 	List<Employee> getEmployees();
 	public List<Employee> getEmployeesByManager(Employee manager);
-	
+	public Employee getEmployeeByUsername(String username);
+	public void updateEmail(Employee emp, String email);
+	public void updateFirstName(Employee emp, String fName);
+	public void updateLastName(Employee emp, String lName);
 
 }

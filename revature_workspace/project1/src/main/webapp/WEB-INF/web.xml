@@ -121,4 +121,24 @@
     <servlet-name>EmployeeServlet</servlet-name>
     <url-pattern>/EmployeeServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>EmployeeInfoServlet</display-name>
+    <servlet-name>EmployeeInfoServlet</servlet-name>
+    <servlet-class>com.revature.project1.servlet.EmployeeInfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EmployeeInfoServlet</servlet-name>
+    <url-pattern>/EmployeeInfoServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ViewRequestEmp</display-name>
+    <servlet-name>ViewRequestEmp</servlet-name>
+    <servlet-class>com.revature.project1.servlet.ViewRequestEmp</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ViewRequestEmp</servlet-name>
+    <url-pattern>/ViewRequestEmp</url-pattern>
+  </servlet-mapping>
 </web-app>

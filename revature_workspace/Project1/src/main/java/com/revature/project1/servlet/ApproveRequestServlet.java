@@ -21,20 +21,22 @@ import com.revature.project1.dao.ReimbursementRequestDaoImpl;
  */
 public class ApproveRequestServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ApproveRequestServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	public ApproveRequestServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		String reqIDStr = request.getParameter("id");
 		int reqID = Integer.parseInt(reqIDStr);
 		HttpSession session = request.getSession();
@@ -43,23 +45,16 @@ public class ApproveRequestServlet extends HttpServlet {
 		EmployeeDaoImpl edi = new EmployeeDaoImpl();
 		Employee currentUser = edi.getEmployeeByCredentials(name, password);
 		ReimbursementRequestDaoImpl rdi = new ReimbursementRequestDaoImpl();
-		ReimbursementRequest rr =rdi.getReimbursementRequestById(reqID);
+		ReimbursementRequest rr = rdi.getReimbursementRequestById(reqID);
 		rdi.approveReimbursementRequest(reqID, currentUser);
-		request.getRequestDispatcher("approval").forward(request, response);
-		//System.out.println(request.getParameter("approverequest"));
-		//System.out.println("Hello");
-		
+		PrintWriter pw = response.getWriter();
+		pw.println(
+				"<html><body style=\"background-color:black; color:white; width:450px;margin-left:auto;margin-right:auto;\">");
+		pw.println("Request successfully approved!");
+		pw.println("<a style=\"color:white\" href=\"approval\">Back to approval page.</a>");
+		pw.write("</div></body></html>");
+
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	//	String empStr = request.getParameter("employeeid");
-		// String empData =req.getParameter("employeeData");
-		//System.out.println("ApprovalRequestServlet reached");
-		response.sendRedirect("/Project1/approval");
-	
-	}
 
 }

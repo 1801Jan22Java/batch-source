@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="styles/style.css"/>
 <meta charset="UTF-8">
 <title>Reimbursement Portal</title>
-<link rel="stylesheet" href="styles/style.css"/>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </head>
-<body>
+<body action="viewrequest" method="post">
 <nav class="navbar navbar-expand-md" style="background-color:powderblue;">
 
   <button class="navbar-toggler" type="button" data-toggle="collapse" 
@@ -34,26 +34,31 @@ data-target="#collapsibleNavbar">
     </ul>
 </div>
 </nav>
+<h1>Employee Information Page</h1>
+<br><br>
+<table class="requestTable"><tr>
+<th>Employee First Name</th>
+<th>Employee Last Name</th>
+<th>Employee Email</th>
+</tr>
 
-<h1>Welcome to the Employee Reimbursement Portal </h1>
-<div id="reimbursement">
-<div id="formcontainer">
-<br><br>
-<form id="uploadForm" name="upload" method="post" action="UploadServlet" enctype="multipart/form-data">
-Please enter your employee id: <br><input type="number" id="employeeid" name="employeeid">
-<br><br>
-Please enter the description / reason for the charges: <br><input type="textfield" id="description" name="description">
-<br><br>
-Please enter the sum of the charges <br> for which you want to be reimbursed:
-<input type="number" id = "charges" name="charges"><br><br>
-Please upload an image of your receipt:<br>
+<form id="infoForm" action="UpdateEmployeeServlet" method="post">
+<tr>
+<td>Update first name:<br> <input type="text" name="firstNameChange"></td>
+<td>Update last name: <br><input type="text" name="lastNameChange"></td>
+<td>Update email address:<br> <input type="text" name="emailChange"></td>
 
-<input type="file" id="fileinput" accept="image" name ="fileInput" />
-<br><br>
-<input type="submit" value="Submit request!">
-<br><br></form>
-</div>
-</div>
+</tr>
+
+</table>
+<input type="submit" value="Confirm changes" id="updateEmpButton"></form>
+
+<br>
+<br>
+
 </body>
-<script src="scripts/check.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="scripts/check.js"></script>
 </html>

@@ -47,16 +47,21 @@ public class LoginServlet extends HttpServlet {
 		System.out.println("username entered: " + loginStr + " "+ "password entered: "+passwordStr);
 		Employee emp =ed.getEmployeeByCredentials(loginStr,passwordStr);
 		//res.getWriter().append("Served at: ").append(req.getContextPath());
-		PrintWriter pw = res.getWriter();
+	
 		res.setContentType("text/html");
-		RequestDispatcher rd= null;
-		rd =req.getRequestDispatcher("views/login.html");
+		//RequestDispatcher rd= null;
+		//rd =req.getRequestDispatcher("views/login.html");
 		HttpSession session = req.getSession();
 		if(emp!=null) {
 			session.setAttribute("username", loginStr);
 			session.setAttribute("password", passwordStr);
 			session.setAttribute("problem", null);
+			if(emp.getIsManager()==1) {
 			res.sendRedirect("MasterServlet");
+			}
+			else {
+				res.sendRedirect("EmployeeServlet");
+			}
 		}
 		else {
 			res.sendRedirect("login");
