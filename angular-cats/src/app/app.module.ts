@@ -9,7 +9,7 @@ import { CatComponent } from './components/cat/cat.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { HomepageComponent } from './components/homepage/homepage.component';
 
-import { ServiceService } from './service/service.service';
+import { CatService } from './service/service.service';
 
 
 @NgModule({
@@ -25,7 +25,7 @@ import { ServiceService } from './service/service.service';
     FormsModule,
     HttpClientModule
   ],
-  providers: [ServiceService],
+  providers: [CatService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

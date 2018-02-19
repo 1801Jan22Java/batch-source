@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ServiceService } from './service/service.service';
+import { CatService } from './service/service.service';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +10,7 @@ export class AppComponent implements OnInit{
   title = 'app';
   image = './assets/images'
 
-  constructor(private service:ServiceService) {
+  constructor(private service:CatService) {
 
   }
 

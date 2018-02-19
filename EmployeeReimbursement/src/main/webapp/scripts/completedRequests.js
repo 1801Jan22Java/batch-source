@@ -35,6 +35,7 @@ function fillTableResolved(xhr){
 	
 	let tr = table.insertRow(0);
 	let amountIndex;
+	let dispensedIndex;
 	for(let i = 0; i < col.length; i++){
 		let th = document.createElement("th")	//Table header
 		switch (col[i]){
@@ -62,6 +63,7 @@ function fillTableResolved(xhr){
 			break;
 		case "dispensed":
 			th.innerHTML = "Dispensed";
+			dispensedIndex = i;
 			break;
 		case "response":
 			th.innerHTML = "Response";
@@ -78,6 +80,9 @@ function fillTableResolved(xhr){
 		for(let j = 0; j < col.length; j++){
 			let cell = tr.insertCell(-1);
 			if(j === amountIndex){
+				cell.innerHTML = "$"+res[i][col[j]];
+			}
+			else if(j === dispensedIndex){
 				cell.innerHTML = "$"+res[i][col[j]];
 			}
 			else if(j === 3){

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 /*import com.revature.beans.Bear;
 import com.revature.dao.BearDao;
 import com.revature.dao.BearDaoImpl;*/
@@ -29,13 +30,13 @@ public class IndexServlet extends HttpServlet {
 			//req.getRequestDispatcher("index.html").forward(req, resp);
 			/*CatDao cd = new CatDaoImpl();*/
 			List<Cat> catList = new ArrayList<Cat>();
-			Cat cat = new Cat("Jimmy", "Persian");
+			Cat cat = new Cat(1, "Jimmy", "Persian");
 			catList.add(cat);
 			resp.setContentType("application/json");
 			
-			ObjectMapper om = new ObjectMapper();
-			String catString = om.writeValueAsString(catList);
-			resp.getWriter().write("{\"cats\":"+catString+"}");
+			Gson gson = new Gson();
+			String catString = gson.toJson(catList);
+			resp.getWriter().write("{\"Cat\":"+catString+"}");
 		} else {
 			resp.sendRedirect("login");
 		}

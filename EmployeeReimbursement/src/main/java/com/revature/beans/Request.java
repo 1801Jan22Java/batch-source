@@ -8,8 +8,8 @@ public class Request {
 	private int employeeID;
 	private Date dateSubmitted;
 	private int statusID;
-	private String description;
 	private double amount;
+	private String description;
 	
 	
 	public Request() {}

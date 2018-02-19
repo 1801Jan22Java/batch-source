@@ -173,4 +173,40 @@
     <servlet-name>resolvedrequests</servlet-name>
     <url-pattern>/resolvedrequests</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>viewallemployees</display-name>
+    <servlet-name>viewallemployees</servlet-name>
+    <servlet-class>com.revature.servlets.ViewAllEmployeesServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>viewallemployees</servlet-name>
+    <url-pattern>/viewallemployees</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>employeetable</display-name>
+    <servlet-name>employeetable</servlet-name>
+    <servlet-class>com.revature.servlets.EmployeeTableServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>employeetable</servlet-name>
+    <url-pattern>/employeetable</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>searchpage</servlet-name>
+    <servlet-class>com.revature.servlets.SearchPageServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>searchpage</servlet-name>
+    <url-pattern>/searchpage</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>searchemployee</servlet-name>
+    <servlet-class>com.revature.servlets.SearchEmployeeServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>searchemployee</servlet-name>
+    <url-pattern>/searchemployee</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import com.revature.beans.Employee;
 import com.revature.exceptions.InvalidPasswordException;
@@ -97,6 +98,36 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		}
 		
 		return emp;
+	}
+	
+	
+	public ArrayList<Employee> readAllEmployees(){
+		ArrayList<Employee> empList = null;
+		
+		try(Connection conn = ConnectionUtil.getConnectionFromFile("connection.properties")) {
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			pstmt = conn.prepareStatement("SELECT * FROM EMPLOYEE ORDER BY LAST_NAME");
+			rs = pstmt.executeQuery();
+			
+			empList = new ArrayList<Employee>();
+			
+			while(rs.next()) {
+				empList.add(new Employee(rs.getInt("EMPLOYEE_ID"), rs.getString("FIRST_NAME"), 
+						rs.getString("LAST_NAME"), rs.getString("EMAIL"), rs.getString("PASS")));
+			}
+			return empList;
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return empList;
 	}
 	
 	

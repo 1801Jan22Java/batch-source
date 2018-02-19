@@ -1,15 +1,22 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
+
+import { Cat } from '../models/cat.model';
 
 @Injectable()
-export class ServiceService {
+export class CatService {
 
-  constructor() { }
+
+  constructor(private http: HttpClient) { }
 
   cats = [
-    'Persian', 'Chitzhu', 'Brown Tabby'
+    new Cat('Persian', 1), new Cat('Chitzhu',2), new Cat('Brown Tabby',3)
   ];
 
-  returnCats() {
+
+  getCats() {
     return this.cats;
-  }
+  } 
+
 }

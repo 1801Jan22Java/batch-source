@@ -10,12 +10,12 @@ import { CatComponent } from './components/cat/cat.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { HomepageComponent } from './components/homepage/homepage.component';
 
-import { ServiceService } from './service/service.service';
+import { CatService } from './service/service.service';
 
 
 export const routes: Routes = [
     { path: '', redirectTo: '/homepage', pathMatch: 'full'},
-    { path: 'cat', component: CatComponent },
+    { path: 'app-cat', component: CatComponent },
     { path: 'navbar', component: NavbarComponent },
     { path: 'homepage', component: HomepageComponent },
     { path: '**', redirectTo: '/homepage'}
