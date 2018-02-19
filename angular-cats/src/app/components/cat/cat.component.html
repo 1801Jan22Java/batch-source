@@ -1,4 +1,4 @@
-<form action="FormResult.html">
+<form action="">
   <div class="container">
 
     <div class="row">
@@ -49,23 +49,23 @@
           <table class="table table-hover">
             <thead>
               <tr>
-                <th>Firstname</th>
-                <th>Lastname</th>
+                <th>Cat Name</th>
+                <th>Id</th>
                 <th>Email</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td>Cat name: {{app-cat.cats[0].name}}</td>
-                <td>Cat ID: {{app-cat.cats[0].id}}</td>
+                <td>Cat name: {{app-cat.getCats(0).name | uppercase}}</td>
+                <td>Cat ID: {{app-cat.cats.id}}</td>
               </tr>
               <tr>
-                <td>Cat name: {{app-cat.cats[1].name}}</td>
-                <td>Cat ID: {{app-cat.cats[1].id}}</td>
+                <td>Cat name: {{app-cat.cats.name | uppercase}}</td>
+                <td>Cat ID: {{app-cat.cats.id}}</td>
               </tr>
               <tr>
-                <td>Cat name: {{app-cat.cats[2].name}}</td>
-                <td>Cat ID: {{app-cat.cats[2].id}}</td>
+                <td>Cat name: {{app-cat.cats.name | uppercase}}</td>
+                <td>Cat ID: {{app-cat.cats.id}}</td>
               </tr>
             </tbody>
           </table>
@@ -94,21 +94,9 @@
 
         </div>
 
-
       </div>
-
-
-
 
       <div class="col-md-2"></div>
     </div>
-
-
-
-
-
-
-
-
   </div>
 </form>

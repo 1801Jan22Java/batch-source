@@ -8,7 +8,7 @@
       </div>
   </div>
   <section class="section section-light">
-      <h2>WELCOME!!</h2>
+      <h2>{{"welcome!!" | uppercase}}</h2>
       <p>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt, laudantium, quibusdam? Nobis, delectus, commodi, fugit amet tempora facere dolores nisi facilis consequatur, odio hic minima nostrum. Perferendis eos earum praesentium, blanditiis sapiente
           labore aliquam ipsa architecto vitae. Minima soluta temporibus voluptates inventore commodi cumque esse suscipit optio aliquam et, dolorem a cupiditate nihil fuga laboriosam fugiat placeat dignissimos! Unde eveniet placeat quisquam blanditiis
@@ -51,8 +51,11 @@
 
   <div class="pimg4">
       <div class="ptext">
-          <span class="border">
-                  Come Visit Us Today
+          <span class="border">Come visit us
+                {{app-homepage.service.getCats(0).name | uppercase}}
             </span>
       </div>
   </div>
+
+
+

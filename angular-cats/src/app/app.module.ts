@@ -10,6 +10,9 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { HomepageComponent } from './components/homepage/homepage.component';
 
 import { CatService } from './service/service.service';
+import { UppercasePipe } from './uppercase.pipe';
+import { FounderComponent } from './components/founder/founder.component';
+import { LoginComponent } from './components/login/login.component';
 
 
 @NgModule({
@@ -17,7 +20,10 @@ import { CatService } from './service/service.service';
     AppComponent,
     CatComponent,
     NavbarComponent,
-    HomepageComponent
+    HomepageComponent,
+    UppercasePipe,
+    FounderComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
