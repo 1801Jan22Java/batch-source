@@ -7,6 +7,13 @@ h1{
 	padding-bottom: 3px;
 }
 
+h3{
+	font-family:"verdana","arial","sans-serif";
+	text-align:center;
+	background-color:white;
+	padding-top: 8px;
+	padding-bottom: 3px;
+}
 body{
 	font-family:"verdana","arial","sans-serif";
 	text-align:center;

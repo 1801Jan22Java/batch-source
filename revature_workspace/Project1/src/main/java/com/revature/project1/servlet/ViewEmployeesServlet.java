@@ -52,7 +52,7 @@ public class ViewEmployeesServlet extends HttpServlet {
 		}
 		
 		if (!(currentUser.getIsManager()==1)) {
-		pw.println("<p style=\"background-color:powderblue; width:450px;margin-left:auto;margin-right:auto;\">You are not authorized to approve these requests</p>");
+		pw.println("<p style=\"background-color:powderblue; width:450px;margin-left:auto;margin-right:auto;\">You do not seem to be managing anyone</p>");
 		} else if (edi.getEmployeesByManager(currentUser).size() <= 0) {
 			pw.println("<p>You do not seem to be managing anyone</p>");
 		} else {
