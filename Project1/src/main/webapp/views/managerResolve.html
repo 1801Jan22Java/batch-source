@@ -14,6 +14,15 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
 	integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
 	crossorigin="anonymous">
+<style>
+.darken {
+	background-color: black;
+}
+
+.lighten {
+	background-color: gray;
+}
+</style>
 </head>
 
 <body>
@@ -27,7 +36,7 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 				<div class="navbar-nav">
-				<a class="nav-item nav-link" href="mprofile">View Profile</a> <a
+					<a class="nav-item nav-link" href="mprofile">View Profile</a> <a
 						class="nav-item nav-link" href="mreimbursement">Reimbursements</a><a
 						class="nav-item nav-link" href="mresolve">Resolve</a> <a
 						class="nav-item nav-link" href="memployees">Employees</a> <a
@@ -35,77 +44,38 @@
 				</div>
 			</div>
 		</nav>
+		<form method="POST" action="resolve">
+			<div class=" pre-scrollable">
+				<table class="table table-dark" id="pending">
 
-		<ul class="nav nav-tabs" id="myTab" role="tablist">
-			<li class="nav-item" id="test"><a class="nav-link fill active"
-				id="pending-tab" data-toggle="tab" href="#home" role="tab"
-				aria-controls="home" aria-selected="true">Pending</a></li>
-			<li class="nav-item"><a class="nav-link fill " id="resolved-tab"
-				data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
-				aria-selected="true">Resolved</a></li>
-			<li class="nav-item"><a class="nav-link fill" id="request-tab"
-				data-toggle="tab" href="#contact" role="tab" aria-controls="contact"
-				aria-selected="true">New Request</a></li>
-		</ul>
-
-
-		<div class="tab-content" id="myTabContent">
-			<div class="tab-pane fade" id="home" role="tabpanel"
-				aria-labelledby="pending-tab" action="/employee">
-				<table class="table table-dark">
-					<tbody>
-						<tr>
-							<th>Amount</th>
-							<th>Date</th>
-							<th>Request ID</th>
-						</tr>
-						<tr>
-							<td>$90.00</td>
-							<td>1/23/2018</td>
-							<td>18</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-			<div class="tab-pane fade active show" id="profile" role="tabpanel"
-				aria-labelledby="resolved-tab">
-				<table class="table table-dark">
 					<tr>
 						<th>Amount</th>
-						<th>Request ID</th>
+						<th>Reimburse ID</th>
+						<th>User ID</th>
 						<th>Status</th>
 					</tr>
 
 				</table>
+
 			</div>
-
-			<div class="tab-pane fade" id="contact" role="tabpanel"
-				aria-labelledby="request-tab">
-				<form class="form-group col" action="POST">
-					<div class="row justify-content-center"></div>
-					<div class="row justify-content-center">
-						<input class="form-control col-sm-6" name="amount"
-							placeholder="Amount" type="text">
-					</div>
-					<div class="row justify-content-center">
-						<div class="form-control row col-sm-6">Photo (optional):</div>
-					</div>
-					<div class="row justify-content-center">
-
-						<input class="form-control row col-sm-6" name="image"
-							accept="image/*" type="file">
-					</div>
-					<div class="row justify-content-center">
-
-						<input class="form-control row col-sm-6" value="Submit Request"
-							type="submit">
-
-					</div>
-
-				</form>
+			<div class="row mx-auto">
+				<div class="col-sm-5 ">
+					<input class="" type="radio" name="resolve" value="approve" checked>Approve
+				</div>
+				<div class="col-sm-5">
+					<input class="" type="radio" name="resolve" value="reject">Reject
+				</div>
 			</div>
-		</div>
+			<input type="hidden" name="requestid" id="ninja" value="0">
+			<div class='row'>
+				<input type="submit" class="button btn-primary border-0 col-sm-12"
+					value="Submit" id="submit">
+			</div>
+		</form>
 	</div>
+
+
+
 
 	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -121,7 +91,7 @@
 		integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
 		crossorigin="anonymous"></script>
 
-	<script src="../scripts/employeeAjax.js"></script>
+	<script src="scripts/getSelectablePending.js"></script>
 
 </body>
 

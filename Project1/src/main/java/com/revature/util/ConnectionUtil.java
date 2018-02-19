@@ -19,6 +19,7 @@ public class ConnectionUtil {
 		} catch(ClassNotFoundException e){
 			e.printStackTrace();
 		}
+
 		ClassLoader loader = Thread.currentThread().getContextClassLoader();
 
 		prop.load(loader.getResourceAsStream(filename));

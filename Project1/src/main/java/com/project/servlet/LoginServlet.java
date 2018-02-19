@@ -35,7 +35,7 @@ public class LoginServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession();
-		PrintWriter pw = resp.getWriter();		//We get our writer from the response
+		
 		UserUtil uu = new UserUtil();
 		String username = req.getParameter("username");
 		String password = req.getParameter("password");

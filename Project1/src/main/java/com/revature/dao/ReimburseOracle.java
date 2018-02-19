@@ -1,14 +1,22 @@
 package com.revature.dao;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.lang.ref.PhantomReference;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.xml.ws.Response;
+
+import com.revature.beans.Image;
 import com.revature.beans.Reimbursement;
 import com.revature.util.ConnectionUtil;
 
@@ -31,7 +39,7 @@ public class ReimburseOracle implements ReimburseDAO {
 			sql = "SELECT * FROM REIMBURSE_REQUEST WHERE USER_ID = ? AND REIMBURSE_STATUS_ID = 1";
 		}
 		List<Reimbursement> reim = new ArrayList<>();
-		try(Connection con = ConnectionUtil.getConnectionFromFile(this.filename)) {
+		try (Connection con = ConnectionUtil.getConnectionFromFile(this.filename)) {
 
 			PreparedStatement ps = con.prepareStatement(sql);
 			if (user_id != 0) {
@@ -60,9 +68,9 @@ public class ReimburseOracle implements ReimburseDAO {
 		String sql = "";
 
 		sql = "SELECT * " + "FROM REIMBURSE_REQUEST, USERS "
-				+ "WHERE USERS.USERNAME = ? AND REIMBURSE_STATUS_ID = 1 AND USERS.USER_ID = REIMBURSE_REQUEST.USER_ID";
+				+ "WHERE USERS.USERNAME = ? AND REIMBURSE_STATUS_ID = 1 AND USERS.USER_ID = REIMBURSE_REQUEST.USER_ID ORDER BY REIMBURSE_REQUEST DESC";
 		List<Reimbursement> reim = new ArrayList<>();
-		try(Connection con = ConnectionUtil.getConnectionFromFile(this.filename)) {
+		try (Connection con = ConnectionUtil.getConnectionFromFile(this.filename)) {
 
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, username);
@@ -88,13 +96,13 @@ public class ReimburseOracle implements ReimburseDAO {
 	public List<Reimbursement> viewResolvedRequests(int user_id) {
 		String sql = "";
 		if (user_id == 0) {
-			sql = "SELECT * FROM REIMBURSE_REQUEST WHERE REIMBURSE_STATUS_ID > 1";
+			sql = "SELECT * FROM REIMBURSE_REQUEST WHERE REIMBURSE_STATUS_ID > 1 ORDER BY REIMBURSE_REQUEST DESC";
 		} else {
-			sql = "SELECT * FROM REIMBURSE_REQUEST WHERE USER_ID = ? AND REIMBURSE_STATUS_ID > 1";
+			sql = "SELECT * FROM REIMBURSE_REQUEST WHERE USER_ID = ? AND REIMBURSE_STATUS_ID > 1 ORDER BY REIMBURSE_REQUEST DESC";
 		}
 
 		List<Reimbursement> reim = new ArrayList<>();
-		try(Connection con = ConnectionUtil.getConnectionFromFile(this.filename)) {
+		try (Connection con = ConnectionUtil.getConnectionFromFile(this.filename)) {
 			PreparedStatement ps = con.prepareStatement(sql);
 			if (user_id != 0) {
 				ps.setInt(1, user_id);
@@ -135,7 +143,7 @@ public class ReimburseOracle implements ReimburseDAO {
 	@Override
 	public boolean reimburseRequest(int user_id, double amount, String notes) {
 		String dml = "INSERT INTO REIMBURSE_REQUEST (USER_ID, AMOUNT, NOTES) VALUES (?,?,?)";
-		try(Connection con = ConnectionUtil.getConnectionFromFile(this.filename)) {
+		try (Connection con = ConnectionUtil.getConnectionFromFile(this.filename)) {
 			PreparedStatement ps = con.prepareStatement(dml);
 			ps.setInt(1, user_id);
 			ps.setDouble(2, amount);
@@ -150,11 +158,12 @@ public class ReimburseOracle implements ReimburseDAO {
 
 	@Override
 	public boolean uploadImage(int request_id, InputStream is) {
-		String dml = "INSERT INTO REIMBURSE_REQUEST (PHOTO_BLOB) VALUES (?) WHERE REQUEST_ID = ?";
-		try(Connection con = ConnectionUtil.getConnectionFromFile(this.filename)) {
+		String dml = "UPDATE REIMBURSE_REQUEST SET PHOTO_BLOB = ? WHERE REIMBURSE_REQUEST_ID = "
+				+ "(SELECT MAX(REIMBURSE_REQUEST_ID) FROM REIMBURSE_REQUEST)";
+		try (Connection con = ConnectionUtil.getConnectionFromFile(this.filename)) {
 			PreparedStatement ps = con.prepareStatement(dml);
-			ps.setBinaryStream(1, is);
-			ps.setInt(2, request_id);
+			ps.setBlob(1, is);
+			ps.executeUpdate();
 			return true;
 		} catch (SQLException | IOException e) {
 			e.printStackTrace();
@@ -164,14 +173,60 @@ public class ReimburseOracle implements ReimburseDAO {
 
 	// Still implementing
 	@Override
-	public OutputStream viewImage(int request_id) {
-		String dml = "SELECT PHOTO_BLOB FROM REIMBURSE_REQUEST WHERE REQUEST_ID = ?";
+	public ByteArrayOutputStream viewImage(int request_id) {
+		String dml = "SELECT PHOTO_BLOB FROM REIMBURSE_REQUEST WHERE REIMBURSE_REQUEST_ID = ?";
 		OutputStream os = null;
-		try(Connection con = ConnectionUtil.getConnectionFromFile(this.filename)) {
+		try (Connection con = ConnectionUtil.getConnectionFromFile(this.filename)) {
 			PreparedStatement ps = con.prepareStatement(dml);
 
 			ps.setInt(1, request_id);
-			
+			ResultSet rs = ps.executeQuery();
+
+			Blob blob = null;
+			while (rs.next()) {
+				blob = rs.getBlob("PHOTO_BLOB");
+			}
+
+			if (blob != null) {
+				InputStream in = blob.getBinaryStream();
+				ByteArrayOutputStream out = new ByteArrayOutputStream();
+
+				int length = (int) blob.length();
+//				System.out.println(length); 
+				int bufferSize = 1024;
+				byte[] buffer = new byte[bufferSize];
+				
+				while((length = in.read(buffer))!=-1) {
+					out.write(buffer, 0, length);
+				}
+				return out;
+				
+
+			}
+
+			return null;
+		} catch (SQLException | IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public List<Image> getAllImages() {
+		String dml = "SELECT REIMBURSE_REQUEST_ID, PHOTO_BLOB FROM REIMBURSE_REQUEST WHERE PHOTO_BLOB IS NOT NULL";
+		OutputStream os = null;
+		try (Connection con = ConnectionUtil.getConnectionFromFile(this.filename)) {
+			PreparedStatement ps = con.prepareStatement(dml);
+
+			ResultSet rs = ps.executeQuery();
+
+			List<Image> images = new ArrayList<>();
+
+			while (rs.next()) {
+				InputStream is = rs.getBinaryStream("PHOTO_BLOB");
+				int request_id = rs.getInt("REIMBURSE_REQUEST_ID");
+				images.add(new Image(is, request_id));
+			}
+			return images;
 		} catch (SQLException | IOException e) {
 			e.printStackTrace();
 		}
@@ -184,7 +239,7 @@ public class ReimburseOracle implements ReimburseDAO {
 			return false;
 		}
 		String dml = "UPDATE REIMBURSE_REQUEST SET REIMBURSE_STATUS_ID = 3, AMOUNT_APPROVED = ?, RESOLVED_BY = ? WHERE REIMBURSE_REQUEST_ID = ?";
-		try(Connection con = ConnectionUtil.getConnectionFromFile(this.filename)) {
+		try (Connection con = ConnectionUtil.getConnectionFromFile(this.filename)) {
 			PreparedStatement ps = con.prepareStatement(dml);
 			ps.setDouble(1, amount);
 			ps.setInt(2, manager_id);
@@ -197,10 +252,25 @@ public class ReimburseOracle implements ReimburseDAO {
 		return false;
 	}
 
+	public boolean approveRequest(int request_id, int manager_id) {
+
+		String dml = "UPDATE REIMBURSE_REQUEST SET REIMBURSE_STATUS_ID = 3,  RESOLVED_BY = ? WHERE REIMBURSE_REQUEST_ID = ?";
+		try (Connection con = ConnectionUtil.getConnectionFromFile(this.filename)) {
+			PreparedStatement ps = con.prepareStatement(dml);
+			ps.setInt(1, manager_id);
+			ps.setInt(2, request_id);
+			ps.executeUpdate();
+			return true;
+		} catch (SQLException | IOException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
 	@Override
 	public boolean denyRequest(int request_id, int manager_id) {
 		String dml = "UPDATE REIMBURSE_REQUEST SET REIMBURSE_STATUS_ID = 2, RESOLVED_BY = ? WHERE REIMBURSE_REQUEST_ID = ?";
-		try(Connection con = ConnectionUtil.getConnectionFromFile(this.filename)) {
+		try (Connection con = ConnectionUtil.getConnectionFromFile(this.filename)) {
 			PreparedStatement ps = con.prepareStatement(dml);
 			ps.setInt(1, manager_id);
 			ps.setInt(2, request_id);
@@ -227,7 +297,7 @@ public class ReimburseOracle implements ReimburseDAO {
 				+ "WHERE USERS.USERNAME = ? AND USERS.USER_ID = REIMBURSE_REQUEST.USER_ID";
 		PreparedStatement ps = null;
 		List<Reimbursement> reim = new ArrayList<>();
-		try(Connection con = ConnectionUtil.getConnectionFromFile(this.filename)) {
+		try (Connection con = ConnectionUtil.getConnectionFromFile(this.filename)) {
 			ps = con.prepareStatement(sql);
 			ps.setString(1, username);
 			ResultSet rs = ps.executeQuery();
@@ -249,7 +319,27 @@ public class ReimburseOracle implements ReimburseDAO {
 	}
 
 	public List<Reimbursement> viewAllRequests() {
-		return null;
+		String sql = "SELECT * FROM REIMBURSE_REQUEST";
+		PreparedStatement ps = null;
+		List<Reimbursement> reim = new ArrayList<>();
+		try (Connection con = ConnectionUtil.getConnectionFromFile(this.filename)) {
+			ps = con.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				int rr_id = rs.getInt("REIMBURSE_REQUEST_ID");
+				int uid = rs.getInt("USER_ID");
+				double amount = rs.getDouble("amount");
+				int rs_id = rs.getInt("REIMBURSE_STATUS_ID");
+				String notes = rs.getString("NOTES");
+				int resolved_by = rs.getInt("RESOLVED_BY");
+				reim.add(new Reimbursement(rr_id, rs_id, uid, amount, notes, resolved_by));
+
+			}
+		} catch (SQLException | IOException e) {
+			e.printStackTrace();
+		}
+
+		return reim;
 	}
 
 }
