@@ -244,18 +244,17 @@ public class ReimbDaoImpl implements ReimbDao {
 		return reimbs;
 	}
 
-	public void approve(Manager mgr, Reimb r) {
+	public void approve(Manager mgr, int reimbId) {
 		CallableStatement cstmt = null;
 		
 		try (Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
-			String sql = "{CALL UPDATE_REIMB(?, ?, ?)}";
+			String sql = "{CALL UPDATE_REIMB(?, ?, ?, ?)}";
 			
 			cstmt = con.prepareCall(sql);
-			cstmt.setInt(1, r.getReimbId());
+			cstmt.setInt(1, reimbId);
 			cstmt.setDouble(2, mgr.getMgrId());
-			r.setMgrId(mgr.getMgrId());
 			cstmt.setInt(3, 1);
-			r.setStatus(1);
+			cstmt.setDate(4, new Date(System.currentTimeMillis()));
 			cstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -264,18 +263,17 @@ public class ReimbDaoImpl implements ReimbDao {
 		}
 	}
 
-	public void deny(Manager mgr, Reimb r) {
+	public void deny(Manager mgr, int reimbId) {
 		CallableStatement cstmt = null;
 		
 		try (Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
-			String sql = "{CALL UPDATE_REIMB(?, ?, ?)}";
+			String sql = "{CALL UPDATE_REIMB(?, ?, ?, ?)}";
 			
 			cstmt = con.prepareCall(sql);
-			cstmt.setInt(1, r.getReimbId());
+			cstmt.setInt(1, reimbId);
 			cstmt.setDouble(2, mgr.getMgrId());
-			r.setMgrId(mgr.getMgrId());
 			cstmt.setInt(3, 2);
-			r.setStatus(2);
+			cstmt.setDate(4, new Date(System.currentTimeMillis()));
 			cstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

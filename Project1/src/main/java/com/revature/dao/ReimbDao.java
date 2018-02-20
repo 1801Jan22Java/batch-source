@@ -15,7 +15,7 @@ public interface ReimbDao {
 	public List<Reimb> getAllReqFromEmp(Employee emp);
 	public List<Reimb> getAllPendingReqFromEmp(Employee emp);
 	public List<Reimb> getAllResolvedReqFromEmp(Employee emp);
-	public void approve(Manager mgr, Reimb r);
-	public void deny(Manager mgr, Reimb r);
+	public void approve(Manager mgr, int reimbId);
+	public void deny(Manager mgr, int reimbId);
 	
 }

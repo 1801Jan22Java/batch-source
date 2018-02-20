@@ -125,15 +125,15 @@ public class ManagerDaoImpl implements ManagerDao {
 	}
 
 	@Override
-	public void approve(Manager mgr, Reimb r) {
+	public void approve(Manager mgr, int reimbId) {
 		ReimbDao rdi = new ReimbDaoImpl();
-		rdi.approve(mgr, r);
+		rdi.approve(mgr, reimbId);
 	}
 
 	@Override
-	public void deny(Manager mgr, Reimb r) {
+	public void deny(Manager mgr, int reimbId) {
 		ReimbDao rdi = new ReimbDaoImpl();
-		rdi.deny(mgr, r);
+		rdi.deny(mgr, reimbId);
 	}
 
 	@Override

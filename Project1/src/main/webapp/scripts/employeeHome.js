@@ -46,7 +46,7 @@ function generateRequests(xhr) {
         var dofad = document.createElement("td");
 		id.innerHTML = r.reimbId;
 		sts.innerHTML = r.status;
-		amnt.innerHTML = r.amount;
+		amnt.innerHTML = "$" + r.amount;
 		dofc.innerHTML = r.doc;
 		dofad.innerHTML = r.doad;
 		tr.appendChild(id);

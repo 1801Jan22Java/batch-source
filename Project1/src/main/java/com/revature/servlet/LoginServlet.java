@@ -1,10 +1,6 @@
 package com.revature.servlet;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -13,9 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.google.gson.Gson;
 import com.revature.beans.*;
 import com.revature.dao.*;
+import com.revature.io.FileWriter;
 import com.revature.util.IncorrectCredentialsException;
 
 /**
@@ -38,67 +34,50 @@ public class LoginServlet extends HttpServlet {
 		HttpSession session = req.getSession();
 		resp.setContentType("text/html");
 		String username = req.getParameter("username");
+		session.setAttribute("username", username);
 		String password = req.getParameter("password");
 		String job = req.getParameter("job");
+		String initString = this.getServletContext().getRealPath("/");
 		if (job.equals("emp")) {
 			Employee emp = this.checkEmployeeCredentials(username, password);
 			if (emp == null) {
-				session.setAttribute("problem", "Incorrect password");
-				resp.sendRedirect("login");
+				resp.sendRedirect("WrongUsernameOrPassword.html");
 			} else {
-				PrintWriter pw = new PrintWriter(this.getServletContext().getRealPath("/") + "empInfo.txt", "UTF-8");
-				pw.println(emp.toString());
-				pw.close();
+				FileWriter.writeSingleEmployee(initString + "empInfo.txt", emp);
+				
 				ReimbDao rdi = new ReimbDaoImpl();
 				List<Reimb> allReimbs = rdi.getAllReqFromEmp(emp);
 				List<Reimb> pendingReimbs = rdi.getAllPendingReqFromEmp(emp);
 				List<Reimb> resolvedReimbs = rdi.getAllResolvedReqFromEmp(emp);
-				pw = new PrintWriter(this.getServletContext().getRealPath("/") + "allRequests.txt", "UTF-8");
-				String str = "{ \"allReimbs\" : [ ";
-				for (int i = 0; i < allReimbs.size(); i++) {
-					if (i == allReimbs.size() - 1) {
-						str = str + allReimbs.get(i).toString();
-					} else {
-						str = str + allReimbs.get(i).toString() + ", ";
-					}
-				}
-				str += "] }";
-				pw.println(str);
-				pw.close();
-				pw = new PrintWriter(this.getServletContext().getRealPath("/") + "allPendingRequests.txt", "UTF-8");
-				str = "{ \"allReimbs\" : [ ";
-				for (int i = 0; i < pendingReimbs.size(); i++) {
-					if (i == pendingReimbs.size() - 1) {
-						str = str + pendingReimbs.get(i).toString();
-					} else {
-						str = str + pendingReimbs.get(i).toString() + ", ";
-					}
-				}
-				str += "] }";
-				pw.println(str);
-				pw.close();
-				pw = new PrintWriter(this.getServletContext().getRealPath("/") + "allResolvedRequests.txt", "UTF-8");
-				str = "{ \"allReimbs\" : [ ";
-				for (int i = 0; i < resolvedReimbs.size(); i++) {
-					if (i == resolvedReimbs.size() - 1) {
-						str = str + resolvedReimbs.get(i).toString();
-					} else {
-						str = str + resolvedReimbs.get(i).toString() + ", ";
-					}
-				}
-				str += "] }";
-				pw.println(str);
-				pw.close();
-				session.setAttribute("username", username);
+				FileWriter.writeFiles(initString + "allRequests.txt", allReimbs);
+				FileWriter.writeFiles(initString + "allPendingRequests.txt", pendingReimbs);
+				FileWriter.writeFiles(initString + "allResolvedRequests.txt", resolvedReimbs);
+				
 				resp.sendRedirect("employeeHome");
 			}
 		} else if (job.equals("mgr")) {
 			Manager mgr = this.checkManagerCredentials(username, password);
 			if (mgr == null) {
-				session.setAttribute("problem", "Incorrect password");
-				resp.sendRedirect("login");
+				resp.sendRedirect("WrongUsernameOrPassword.html");
 			} else {
-				session.setAttribute("username", username);
+				FileWriter.writeSingleManager(initString + "mgrInfo.txt", mgr);
+				
+				ManagerDao mdi = new ManagerDaoImpl();
+				List<Reimb> allReimbs = mdi.getAllReimbs();
+				List<Reimb> pendingReimbs = mdi.getPendingReimbs();
+				List<Reimb> resolvedReimbs = mdi.getResolvedReimbs();
+				FileWriter.writeFiles(initString + "allRequests.txt", allReimbs);
+				FileWriter.writeFiles(initString + "allPendingRequests.txt", pendingReimbs);
+				FileWriter.writeFiles(initString + "allResolvedRequests.txt", resolvedReimbs);
+				for (Reimb r : allReimbs) {
+					byte[] bytes = r.getImage();
+					int id = r.getReimbId();
+					FileWriter.imageWriter(initString + id + ".jpg", bytes);
+				}
+				
+				List<Employee> allEmps = mdi.getAllEmployees();
+				FileWriter.writeEmployees(initString + "allEmployees.txt", allEmps);
+				
 				resp.sendRedirect("managerHome");
 			}
 		}

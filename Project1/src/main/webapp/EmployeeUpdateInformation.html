@@ -6,25 +6,26 @@
     </head>
 
     <body>
-        <h1>Welcome, <span>(Name)</span></h1>
-        <h3>Your job is <span>(Job)</span></h3>
+        <h1>Welcome, <span id="empName">(Name)</span></h1>
+        <h3>Your job is <span id="empJob">(Job)</span></h3>
 
-        <form>
-            Update job description: <input type="text" name="job"> <br> <br>
+        <form action="updateJob" method="post">
+            Update job description: <input type="text" name="job" required> <br> <br>
             <input type="submit" value="Submit Job Change">
         </form>
 
         <br>
         <br>
 
-        <form>
-            Update password: <input type="password" name="password"> <br> <br>
-            Confirm new password: <input type="password"> <br> <br>
+        <form action="updateJob" method="post">
+            Update password: <input type="password" name="password" id="password" required> <br> <br> 
+            Confirm password: <input type="password" id="confirm_password" required> <br> <br>
             <input type="submit" value="Submit Password Change">
         </form>
 
         <br> <br>
-        <input type="button" value="Back to homepage"/>
-        <input type="button" value="Logout"/>
+		<a href="employeeHome">Back to homepage</a>
+	    <a href="logout">Log out</a>
     </body>
+    <script src="scripts/employeeUpdate.js"></script>
 </html>

@@ -60,5 +60,11 @@ public class Manager {
 	public int getMgrId() {
 		return mgrId;
 	}
+
+	@Override
+	public String toString() {
+		return "{ \"mgrId\" : " + mgrId + ", \"fname\" : \"" + fname + "\", \"lname\" : \"" + lname + "\", \"username\" : \"" + username
+				+ "\", \"password\" : \"" + password + "\" }";
+	}
 	
 }

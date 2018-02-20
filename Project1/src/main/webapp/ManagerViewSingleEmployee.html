@@ -6,34 +6,29 @@
     </head>
 
     <body>
-    <h3>Welcome, <span>(Name)</span></h3>
-    <h4>Here are the results for <span>(Employee Name)</span></h4>
-    <h5>Job description: <span>(Job title)</span></h5>
-    <br>
-    <table>
-        <tr>
-            <th>Reimbursement ID</th>
-            <th>Employee ID</th>
-            <th>Employee name</th>
-            <th>Status</th>
-            <th>Amount</th>
-            <th>Receipt image</th>
-            <th>Resolving manager ID</th>
-            <th>Resolving/Denying manager name</th>
-            <th>Date of creation</th>
-            <th>Date of approval/denial</th>
-            <th>Approve/Deny</th>
-        </tr>
-    </table>
-    <br>
-    <input type="radio" name="filter" value="all" checked> All <br>
-    <input type="radio" name="filter" value="resolved"> Resolved <br>
-    <input type="radio" name="filter" value="pending"> Pending <br>
-    <br>
-    <img src="" width="300px" height="700px" alt="No image selected">
-    <br>
-    <br>
-
-    <input type="button" value="Logout"/>
+	    <h2>Here are the results for <span id="empName">(Employee Name)</span></h2>
+	    <h3>Job description: <span id="empJob">(Job title)</span></h3>
+	    <br>
+	    <a href="viewAllEmps">Back to all employees</a>
+	    <a href="logout">Log out</a>
+	    <br>
+	    <img id="display" alt="No image being shown" src="nothing.png">
+	    <br>
+	    <br>
+	    <table id="reimbTable">
+	        <tr id="head">
+	        	<th>Reimb. ID</th>
+	            <th>Employee ID</th>
+	            <th>Status</th>
+	            <th>Amount</th>
+	            <th>View receipt</th>
+	            <th>Resolving manager ID</th>
+	            <th>Date of creation</th>
+	            <th>Date of approval/denial</th>
+				<th>Approve</th>
+				<th>Deny</th>
+	        </tr>
+	    </table>
     </body>
+    <script src="scripts/viewSingleEmployee.js"></script>
 </html>
