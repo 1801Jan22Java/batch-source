@@ -54,16 +54,17 @@ public class ViewRequestServlet extends HttpServlet {
 		+"<th>Description</th>"+
 		"<th>Receipt</th>"+
 		"<th>Pending?</th>"+
-		"<th>Approved?</th>");
+		"<th>Approved?</th>"+
+		"<th>Deciding manager</th>");
 		String fileStr="";
 		if(rrdi.getReimbursementRequestsByEmployee(currentUser).size()>0) {
 		for (ReimbursementRequest rr : rrdi.getReimbursementRequestsByEmployee(currentUser)){
 		if(rr.getExtent()!=null) {
 			String fullStr= rr.getExtent();
 			int lastSlash = fullStr.lastIndexOf("\\");
-			System.out.println(lastSlash);
+			//System.out.println(lastSlash);
 			 fileStr = fullStr.substring(lastSlash+1);
-			 System.out.println(fileStr);	
+			// System.out.println(fileStr);	
 		}
 		else {
 			fileStr="nope.gif";
@@ -74,9 +75,8 @@ public class ViewRequestServlet extends HttpServlet {
 		+"</td><td>"+rr.getDescription()
 		/*+"</td><td><a href='file:///"+rr.getExtent()+"'>view receipt</a>"*/
 		+"</td><td><a href=\"images/"+fileStr+"\">view receipt</a>"
-		+"</td><td>"+(rr.getPending()==1?"Pending":" Decided")
-		+"</td><td>"+(rr.getApproved()==1?"Approved":"Not approved")
-		+"</td>"+"</tr>");
+		+"</td><td>"+(rr.getPending()==1?"Pending":"Resolved")
+		+"</td><td>"+(rr.getApproved()==1?"Approved":"Not approved")+"</td><td>"+rr.getEmployee().getManager().getFirstName()+" "+rr.getEmployee().getManager().getLastName()+"</td></tr>");
 			//res.getWriter().write(rr.toString());
 			
 		}
@@ -86,62 +86,6 @@ public class ViewRequestServlet extends HttpServlet {
 			pw.println("<p>There are no requests for " +currentUser.getFirstName() + " " +currentUser.getLastName()+"</p>");
 		}
 		pw.close();
-		//response.sendRedirect("views/status_page.html");
-	}
-
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		/*
-		 * RequestDispatcher rd = request.getRequestDispatcher("views/status_page.html");
-		String empStr = request.getParameter("employeeid");
-		//String empData =req.getParameter("employeeData");
-		int empID=Integer.parseInt(empStr);
-		EmployeeDao ed = new EmployeeDaoImpl();
-		//Employee emp =ed.getEmployeeById(empID);
-		//String loginStr=request.getParameter("username");
-		//String passwordStr=request.getParameter("password");
-		
-		HttpSession session = request.getSession();
-		String name =session.getAttribute("username").toString();
-		String password= session.getAttribute("password").toString();
-		System.out.println("username entered: " + name + " "+ "password entered: "+password);
-		Employee currentUser =ed.getEmployeeByCredentials(name,password);
-		//res.getWriter().append("Served at: ").append(req.getContextPath());
-		PrintWriter pw = response.getWriter();
-		response.setContentType("text/html");
-		ReimbursementRequestDao rrdi = new ReimbursementRequestDaoImpl();
-		rd.include(request,response);
-		pw.println("<div id=\"results\">");
-		if(rrdi.getReimbursementRequestsByEmployee(currentUser).size()>0) {
-		for (ReimbursementRequest rr : rrdi.getReimbursementRequestsByEmployee(currentUser)){
-	
-		//<tr><th>Employee</th>
-		//<th>Amount Requested for Reimbursement</th>
-		//<th>Description</th>
-		//<th>Receipt</th>
-		//<th>Pending?</th>
-		//<th>Approved?</th>
-			pw.println("<tr style=\"background-color:powderblue; width:450px;margin-left:auto;margin-right:auto;\"><td>"
-		+ rr.getEmployee().getFirstName()
-		+"</td><td>"+rr.getAmount()
-		+"</td><td>Some description"
-		+"</td><td>No receit available"
-		+"</td><td>"+rr.getPending()
-		+"</td><td>"+rr.getApproved()
-		+"</td>"+"</tr>");
-			//res.getWriter().write(rr.toString());
-			
-		}
-		pw.println("</div>");
-		}
-		else {
-			pw.println("<p>There are no requests for " +currentUser.getFirstName() + " " +currentUser.getLastName()+"</p>");
-		}
-		*/
 		//response.sendRedirect("views/status_page.html");
 	}
 

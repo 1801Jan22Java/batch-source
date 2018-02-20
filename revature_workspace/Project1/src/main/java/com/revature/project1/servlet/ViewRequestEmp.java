@@ -70,7 +70,7 @@ public class ViewRequestEmp extends HttpServlet {
 		+"</td><td>"+rr.getDescription()
 		/*+"</td><td><a href='file:///"+rr.getExtent()+"'>view receipt</a>"*/
 		+"</td><td><a href=\"images/"+fileStr+"\">view receipt</a>"
-		+"</td><td>"+(rr.getPending()==1?"Pending":"Decided")
+		+"</td><td>"+(rr.getPending()==1?"Pending":"Resolved")
 		+"</td><td>"+(rr.getApproved()==1?"Approved":"Not Approved")
 		+"</td>"+"</tr>");
 			//res.getWriter().write(rr.toString());

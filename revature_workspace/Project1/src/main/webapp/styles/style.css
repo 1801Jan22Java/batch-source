@@ -22,13 +22,13 @@ body{
 	text-align:center;
 	background-image: url('../hSHmeL.jpg'); /*  no-repeat center center fixed;*/
     background-size: cover;
-	background-color: rose;
+	background-color: white;
 	}
 	
 #inputform
 {
-	background-color:pink;
-	color:"white";
+	background-color:#cdfefc;
+	color:"black";
 	text-align:center;
 	width: 300px;
 	margin-left:auto;

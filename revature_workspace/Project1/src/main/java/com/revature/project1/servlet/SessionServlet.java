@@ -22,14 +22,17 @@ public class SessionServlet extends HttpServlet {
     }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, 
+	 * HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest req, HttpServletResponse res) 
+			throws ServletException, IOException {
 		HttpSession session = req.getSession(false);
 		if (session != null) {
 			res.setContentType("application/json");
-			res.getWriter().write("{\"username\":\"" + session.getAttribute("username") + "\"}");
-			System.out.println("You are logged in");
+			res.getWriter().write("{\"username\":\"" + 
+			session.getAttribute("username") + "\"}");
+			//System.out.println("You are logged in");
 		} else {
 			res.setContentType("application/json");
 			res.getWriter().write("{\"username\":null}");
@@ -37,9 +40,11 @@ public class SessionServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request,
+	 *  HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
 	}

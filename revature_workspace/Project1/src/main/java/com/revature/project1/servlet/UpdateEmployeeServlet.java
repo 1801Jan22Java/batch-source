@@ -44,6 +44,7 @@ public class UpdateEmployeeServlet extends HttpServlet {
 		if(!fName.equals("")) {
 			System.out.println("Value entered");
 			ed.updateFirstName(emp, fName);
+			showPage(response);
 			
 		}
 		else {
@@ -52,6 +53,7 @@ public class UpdateEmployeeServlet extends HttpServlet {
 		if(!lName.equals("")) {
 			System.out.println("Value entered");
 			ed.updateLastName(emp, lName);
+			showPage(response);
 		}
 		else {
 			System.out.println("Blank");
@@ -59,6 +61,7 @@ public class UpdateEmployeeServlet extends HttpServlet {
 		if(!email.equals("")) {
 			System.out.println("Value entered");
 			ed.updateEmail(emp, email);
+			showPage(response);
 		}
 		else {
 			System.out.println("Blank");
@@ -66,12 +69,23 @@ public class UpdateEmployeeServlet extends HttpServlet {
 		System.out.println(fName);
 		System.out.println(lName);
 		System.out.println(email);
-		PrintWriter pw = response.getWriter();
-		pw.println(
-				"<html><body style=\"background-color:black; color:white; width:450px;margin-left:auto;margin-right:auto;\">");
-		pw.println("Update successful!");
-		pw.println("<a style=\"color:white\" href=\"EmployeeInfoServlet\">Back to your information.</a>");
-		pw.write("</div></body></html>");
+	
+	}
+	
+	private void showPage(HttpServletResponse res) {
+		PrintWriter pw;
+		try {
+			pw = res.getWriter();
+			pw.println(
+					"<html><body style=\"background-color:black; color:white; width:450px;margin-left:auto;margin-right:auto;\">");
+			pw.println("Update successful!");
+			pw.println("<a style=\"color:white\" href=\"EmployeeServlet\">Back to your information.</a>");
+			pw.write("</div></body></html>");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
 	}
 
 }

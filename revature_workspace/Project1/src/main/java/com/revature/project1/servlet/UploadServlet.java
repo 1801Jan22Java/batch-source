@@ -113,7 +113,13 @@ public class UploadServlet extends HttpServlet {
 			else {
 			ReimbursementRequestDaoImpl rrdi = new ReimbursementRequestDaoImpl();
 			rrdi.addReimbursementRequest(emp, file, amount, desc, file.getAbsolutePath());
-			System.out.println("Request added");
+			pw.println(
+					"<html><body style=\"background-color:black; color:white; width:450px;margin-left:auto;margin-right:auto;\">");
+			pw.println("Receipt addition successful!");
+			pw.println("<a style=\"color:white\" href=\"EmployeeServlet\">Back to upload page.</a>");
+			pw.write("</div></body></html>");
+			//System.out.println("Request added");
+			//response.sendRedirect("EmployeeServlet");
 			}
 
 		}
@@ -130,7 +136,7 @@ public class UploadServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 
-	//	response.sendRedirect("UploadServlet");
+		
 	}
 
 }

@@ -30,7 +30,7 @@ public class AnswerServlet extends HttpServlet {
 		
 		while(atts.hasMoreElements()) {
 			String s= atts.nextElement();
-			System.out.println(s+ "\t:\t"+req.getAttribute(s));
+		//	System.out.println(s+ "\t:\t"+req.getAttribute(s));
 			
 		}
 		//display answer with PrintWriter
