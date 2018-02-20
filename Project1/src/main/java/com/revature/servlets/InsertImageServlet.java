@@ -11,6 +11,7 @@ import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -29,16 +30,17 @@ import com.revature.dao.ReimbursementDao;
 import com.revature.dao.ReimbursementDaoSQL;
 import com.revature.util.ConnectionUtil;
 
+@MultipartConfig()
 public class InsertImageServlet extends HttpServlet {
 
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		HttpSession session = req.getSession();
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
 		ReimbursementDao rd = new ReimbursementDaoSQL();
 		Reimbursement gotReimbursement = rd.getReimbursementByID(1003);
 		byte [] byteArr = gotReimbursement.getImage();
 		if (gotReimbursement != null) {
-			OutputStream out = resp.getOutputStream();
+			OutputStream out = response.getOutputStream();
 			out.write(byteArr);
 			out.close();
             
@@ -47,12 +49,15 @@ public class InsertImageServlet extends HttpServlet {
 	}
 	
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		HttpSession session = req.getSession();
-		ServletInputStream in = req.getInputStream();
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		ServletInputStream in = request.getInputStream();
 		ByteArrayOutputStream bao = new ByteArrayOutputStream();
 		
 		ReimbursementDao rd = new ReimbursementDaoSQL();
+		System.out.println(in.available());
+		System.out.println("i am in post");
+
 		if (in.available() > 0) {
 			int c = 0;
 			int count = 0;
@@ -61,8 +66,9 @@ public class InsertImageServlet extends HttpServlet {
 				count += 1;
 			}
 			byte [] byteArr = bao.toByteArray();
-			rd.submitReimbursement(1000, 123.5, byteArr);
+			rd.submitReimbursement((int)session.getAttribute("id"), (Double)request.getAttribute("reimbursement_val"), byteArr);
 		}
 		
 	}
+
 }

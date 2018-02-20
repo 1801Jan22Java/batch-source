@@ -7,22 +7,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-
-public class SessionServlet extends HttpServlet {
-
+/**
+ * Servlet implementation class ManagerGetSingleEmployeeServlet
+ */
+public class ManagerGetSingleEmployeeServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+ 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
 		if (session != null && session.getAttribute("username") != null) {
-			response.setContentType("application/json");
-			response.getWriter().write("{\"id\":\"" + session.getAttribute("id") + "\"}");
+			request.getRequestDispatcher("views/ManagerGetSingleEmployee.html").forward(request, response);
 		} else {
-			response.setContentType("application/json");
-			response.getWriter().write("{\"id\":null}");
-		}
+			response.sendRedirect("managerlogin");
+		}	
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+		doPost(request,response);
 	}
 
 }

@@ -12,9 +12,9 @@ import javax.servlet.http.HttpSession;
  */
 public class EmployeeLogoutServlet extends HttpServlet {
 
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.getRequestDispatcher("views/logout.html").include(req,resp);
-		HttpSession session = req.getSession(false);
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.getRequestDispatcher("views/logout.html").include(request,response);
+		HttpSession session = request.getSession(false);
 		if(session != null){
 			System.out.println("session is not null so it is invalid");
 			session.invalidate();

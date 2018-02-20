@@ -47,13 +47,13 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>viewinfo</display-name>
-    <servlet-name>viewinfo</servlet-name>
-    <servlet-class>com.revature.servlets.ViewInformationServlet</servlet-class>
+    <display-name>employeeviewinfo</display-name>
+    <servlet-name>employeeviewinfo</servlet-name>
+    <servlet-class>com.revature.servlets.EmployeeViewInformationServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>viewinfo</servlet-name>
-    <url-pattern>/viewinfo</url-pattern>
+    <servlet-name>employeeviewinfo</servlet-name>
+    <url-pattern>/employeeviewinfo</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
@@ -72,5 +72,132 @@
   <servlet-mapping>
     <servlet-name>updateinfo</servlet-name>
     <url-pattern>/updateinfo</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>submitreimbursement</display-name>
+    <servlet-name>submitreimbursement</servlet-name>
+    <servlet-class>com.revature.servlets.SubmitReimbursementServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>submitreimbursement</servlet-name>
+    <url-pattern>/submitreimbursement</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>employeeviewinformation</servlet-name>
+    <servlet-class>com.revature.servlets.EmployeeViewInformationServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>employeeviewinformation</servlet-name>
+    <url-pattern>/employeeviewinformation</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <display-name>employeegetpending</display-name>
+    <servlet-name>employeegetpending</servlet-name>
+    <servlet-class>com.revature.servlets.EmployeeGetPendingServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>employeegetpending</servlet-name>
+    <url-pattern>/employeegetpending</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>employeegetresolved</display-name>
+    <servlet-name>employeegetresolved</servlet-name>
+    <servlet-class>com.revature.servlets.EmployeeGetResolvedServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>employeegetresolved</servlet-name>
+    <url-pattern>/employeegetresolved</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>employeegetreimbursement</display-name>
+    <servlet-name>employeegetreimbursement</servlet-name>
+    <servlet-class>com.revature.servlets.EmployeeGetReimbursementServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>employeegetreimbursement</servlet-name>
+    <url-pattern>/employeegetreimbursement</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>managerlogin</display-name>
+    <servlet-name>managerlogin</servlet-name>
+    <servlet-class>com.revature.servlets.ManagerLoginServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>managerlogin</servlet-name>
+    <url-pattern>/managerlogin</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>managerhomepage</display-name>
+    <servlet-name>managerhomepage</servlet-name>
+    <servlet-class>com.revature.servlets.ManagerHomepageServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>managerhomepage</servlet-name>
+    <url-pattern>/managerhomepage</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>managerlogout</display-name>
+    <servlet-name>managerlogout</servlet-name>
+    <servlet-class>com.revature.servlets.ManagerLogoutServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>managerlogout</servlet-name>
+    <url-pattern>/managerlogout</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>managergetreimbursement</display-name>
+    <servlet-name>managergetreimbursement</servlet-name>
+    <servlet-class>com.revature.servlets.ManagerGetReimbursementServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>managergetreimbursement</servlet-name>
+    <url-pattern>/managergetreimbursement</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>managergetpending</display-name>
+    <servlet-name>managergetpending</servlet-name>
+    <servlet-class>com.revature.servlets.ManagerGetPendingServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>managergetpending</servlet-name>
+    <url-pattern>/managergetpending</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>managergetresolved</display-name>
+    <servlet-name>managergetresolved</servlet-name>
+    <servlet-class>com.revature.servlets.ManagerGetResolvedServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>managergetresolved</servlet-name>
+    <url-pattern>/managergetresolved</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>managergetemployee</display-name>
+    <servlet-name>managergetemployee</servlet-name>
+    <servlet-class>com.revature.servlets.ManagerGetEmployeeServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>managergetemployee</servlet-name>
+    <url-pattern>/managergetemployee</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>managergetsingleemployee</display-name>
+    <servlet-name>managergetsingleemployee</servlet-name>
+    <servlet-class>com.revature.servlets.ManagerGetSingleEmployeeServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>managergetsingleemployee</servlet-name>
+    <url-pattern>/managergetsingleemployee</url-pattern>
   </servlet-mapping>
 </web-app>

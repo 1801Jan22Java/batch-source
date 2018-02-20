@@ -7,17 +7,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-
-public class SessionServlet extends HttpServlet {
+/**
+ * Servlet implementation class ManagerGetResolved
+ */
+public class ManagerGetResolvedServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
-		if (session != null && session.getAttribute("username") != null) {
-			response.setContentType("application/json");
-			response.getWriter().write("{\"id\":\"" + session.getAttribute("id") + "\"}");
-		} else {
-			response.setContentType("application/json");
-			response.getWriter().write("{\"id\":null}");
+		if( session != null && session.getAttribute("username") != null){
+			request.getRequestDispatcher("views/ManagerGetResolved.html").forward(request, response);
+		} 
+		else {
+			response.sendRedirect("managerlogin");
 		}
 	}
 

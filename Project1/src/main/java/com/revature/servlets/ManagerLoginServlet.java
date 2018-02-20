@@ -7,17 +7,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.revature.beans.*;
-import com.revature.dao.*;
+import com.revature.beans.Employee;
+import com.revature.beans.Manager;
+import com.revature.dao.EmployeeDao;
+import com.revature.dao.EmployeeDaoSQL;
+import com.revature.dao.ManagerDao;
+import com.revature.dao.ManagerDaoSQL;
 
-
-public class EmployeeLoginServlet extends HttpServlet {
-
+/**
+ * Servlet implementation class ManagerLoginServlet
+ */
+public class ManagerLoginServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("employee get???");
-		request.getRequestDispatcher("views/employeelogin.html").forward(request,response);
+		request.getRequestDispatcher("views/ManagerLogin.html").forward(request,response);
 	}
-
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
@@ -29,19 +34,19 @@ public class EmployeeLoginServlet extends HttpServlet {
 		
 		// call the check credentials function to make sure the employees credentials
 		// are a part of the database
-		EmployeeDao ed = new EmployeeDaoSQL();
-		Employee resultEmployee = ed.getEmployeeByCredentials(username, password);
+		ManagerDao md = new ManagerDaoSQL();
+		Manager resultManager = md.getManagerByCredentials(username, password);
 		
-		if (resultEmployee != null) {
+		if (resultManager != null) {
 			System.out.println("correct user");
 			// set the session attributes so the username will be remembered
 			session.setAttribute("username", username);
-			session.setAttribute("id", resultEmployee.getEmployeeId());
+			session.setAttribute("id", resultManager.getManagerId());
 			session.setAttribute("problem", null);
-			request.getRequestDispatcher("employeehomepage").forward(request,response);
+			request.getRequestDispatcher("managerhomepage").forward(request,response);
 		} else {
 			session.setAttribute("problem", "incorrect credentials");
-			response.sendRedirect("employeelogin");
+			response.sendRedirect("managerlogin");
 		}
 		
 	}

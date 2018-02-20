@@ -13,19 +13,19 @@ import javax.servlet.http.HttpSession;
 public class EmployeeHomepageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		HttpSession session = req.getSession(false);
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession(false);
 		if( session != null && session.getAttribute("username") != null){
 			System.out.println(session.getAttribute("username"));
-			req.getRequestDispatcher("views/employeehomepage.html").include(req, resp);
+			request.getRequestDispatcher("views/employeehomepage.html").include(request, response);
 		} else {
 			System.out.println("redirect");
-			resp.sendRedirect("employeelogin");
+			response.sendRedirect("employeelogin");
 		}
 	}
 
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		doGet(req, resp);
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
 	}
 
 }
