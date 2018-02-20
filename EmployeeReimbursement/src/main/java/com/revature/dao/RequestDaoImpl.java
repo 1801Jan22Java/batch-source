@@ -16,7 +16,7 @@ public class RequestDaoImpl implements RequestDao {
 
 	
 	@Override
-	public boolean createRequest(int empID, Date dateSubmitted, String description, double amount) {
+	public int createRequest(int empID, Date dateSubmitted, String description, double amount) {
 
 		
 		try(Connection conn = ConnectionUtil.getConnectionFromFile("connection.properties")) {
@@ -31,7 +31,18 @@ public class RequestDaoImpl implements RequestDao {
 			pstmt.setDouble(5, amount);
 			pstmt.executeUpdate();
 			
-			return true;
+			
+			pstmt = conn.prepareStatement("SELECT MAX(REQUEST_ID) FROM REQUEST WHERE EMPLOYEE_ID=?");
+
+			pstmt.setInt(1, empID);
+			ResultSet rs = pstmt.executeQuery();
+			int insertedRequestID = -1;
+			
+			if(rs.next()) {
+				insertedRequestID = rs.getInt(1);
+			}
+			
+			return insertedRequestID;
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -41,7 +52,7 @@ public class RequestDaoImpl implements RequestDao {
 			e.printStackTrace();
 		}
 		
-		return false;
+		return -1;
 	}
 
 	
@@ -123,6 +134,36 @@ public class RequestDaoImpl implements RequestDao {
 			pstmt.setInt(1, empID);
 			pstmt.setInt(2, 2);			//STATUS is 2 or 3 when request is completed
 			pstmt.setInt(3, 3);
+			rs = pstmt.executeQuery();
+			
+			Request currReq = null;
+			while(rs.next()) {
+				currReq = new Request(rs.getInt("REQUEST_ID"), rs.getInt("EMPLOYEE_ID"), 
+									rs.getDate("DATE_SUBMITTED"), rs.getInt("STATUS_ID"), 
+									rs.getString("DESCRIPTION"), rs.getDouble("AMOUNT"));
+				requestArrList.add(currReq);
+			}
+			
+			return requestArrList;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		return requestArrList;
+	}
+	
+	public ArrayList<Request> readAllRequests(int empID){
+		ArrayList<Request> requestArrList = new ArrayList<Request>();
+		
+		try(Connection conn = ConnectionUtil.getConnectionFromFile("connection.properties")) {
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			pstmt = conn.prepareStatement("SELECT * FROM REQUEST WHERE EMPLOYEE_ID=?");
+			pstmt.setInt(1, empID);
 			rs = pstmt.executeQuery();
 			
 			Request currReq = null;

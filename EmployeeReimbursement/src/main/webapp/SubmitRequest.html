@@ -5,7 +5,7 @@
 		<title>Submit a Reimbursement Request</title>
 	</head>
 	<body>
-		<form action="submitrequest" method="post">
+		<form action="submitrequest" method="post" enctype="multipart/form-data">
 			<br>
 			<fieldset>
 				<legend>Amount: </legend>
@@ -17,6 +17,10 @@
 				<input name="description" type="text">
 			</fieldset>
 			<br>
+			<fieldset>
+				<legend>Upload Screenshot: </legend>
+				<input name="screenshot" id="screenshot" type="file">
+			</fieldset>
 			<input type="reset" value="Reset">
 			<input type="submit" value="Submit">
 		</form>

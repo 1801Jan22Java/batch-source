@@ -16,7 +16,7 @@ function postAjax(url, func){
 }
 
 function fillEmployeeTable(xhr){
-	res = JSON.parse(xhr.responseText);
+	let res = JSON.parse(xhr.responseText);
 	//console.log(xhr.responseText);
 	
 	var col = [];
@@ -35,11 +35,13 @@ function fillEmployeeTable(xhr){
 	
 	let tr = table.insertRow(0);
 	let passwordIndex;
+	let empIDIndex;
 	for(let i = 0; i < col.length; i++){
 		if(col[i] != "password") {
 			let th = document.createElement("th")	//Table header
 			switch (col[i]){
 			case "id":
+				empIdIndex = i;
 				th.innerHTML = "Employee ID";
 				break;
 			case "firstName":
@@ -59,14 +61,28 @@ function fillEmployeeTable(xhr){
 			passwordIndex = i;
 		}
 	}
+	
+	let th = document.createElement("th");
+	th.innerHTML = "View Requests";
+	tr.appendChild(th);
+	
+	
 	thead.appendChild(tr);
 	
 	for(let i = 0; i < res.length; i++){
 		tr = table.insertRow(-1);
-		for(let j = 0; j < col.length; j++){
-			if(j != passwordIndex){
+		let currEmpID;
+		for(let j = 0; j < col.length+1; j++){
+			if(j === empIdIndex){
+				currEmpID = res[i][col[j]];
+			}
+			if(j != passwordIndex && j != col.length){
 				let cell = tr.insertCell(-1);
 				cell.innerHTML = res[i][col[j]];
+			}
+			else if(j != passwordIndex){
+				let cell = tr.insertCell(-1);
+				cell.innerHTML = `<input type=\"radio\" name=\"allemployeerequests\" value=\"${currEmpID}\">`;
 			}
 		}
 	}
@@ -76,6 +92,7 @@ function fillEmployeeTable(xhr){
 	newTable.appendChild(table);
 	
 }
+		
 
 window.onload = function() {
 		postAjax('http://localhost:8084/EmployeeReimbursement/employeetable', fillEmployeeTable);

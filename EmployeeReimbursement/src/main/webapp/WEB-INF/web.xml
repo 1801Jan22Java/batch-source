@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
   <display-name>EmployeeReimbursement</display-name>
   <servlet>
     <servlet-name>admin</servlet-name>
@@ -208,5 +208,21 @@
   <servlet-mapping>
     <servlet-name>searchemployee</servlet-name>
     <url-pattern>/searchemployee</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>viewemployeerequests</servlet-name>
+    <servlet-class>com.revature.servlets.ViewEmployeeRequestsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>viewemployeerequests</servlet-name>
+    <url-pattern>/viewemployeerequests</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>allemployeerequests</servlet-name>
+    <servlet-class>com.revature.servlets.AllEmployeeRequestsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>allemployeerequests</servlet-name>
+    <url-pattern>/allemployeerequests</url-pattern>
   </servlet-mapping>
 </web-app>

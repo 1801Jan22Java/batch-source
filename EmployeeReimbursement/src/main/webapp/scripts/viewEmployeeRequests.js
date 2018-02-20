@@ -1,11 +1,8 @@
-
-
-
-function getAjax(url, func){
+function postAjax(url, func){
 	let xhr = new XMLHttpRequest() || new ActiveXObject("Microsoft.HTTPRequest");
 
 	xhr.onreadystatechange = function(){
-		if(this.readyState === 4){
+		if(this.readyState == 4){
 			func(this);
 		}
 	};
@@ -15,10 +12,10 @@ function getAjax(url, func){
 	return xhr;
 }
 
-function fillTablePending(xhr){
+
+function fillRequestTable(xhr){
+	let res = JSON.parse(xhr.responseText);
 	
-	res = JSON.parse(xhr.responseText);
-	//console.log(xhr.responseText);
 	
 	var col = [];
 	for (let i = 0; i < res.length; i++){
@@ -36,20 +33,26 @@ function fillTablePending(xhr){
 	
 	let tr = table.insertRow(0);
 	let amountIndex;
+	let statusIndex;
+	let requestIndex;
+	let employeeIndex;
 	for(let i = 0; i < col.length; i++){
 		let th = document.createElement("th")	//Table header
 		switch (col[i]){
 		case "requestID":
 			th.innerHTML = "Request ID";
+			requestIndex = i;
 			break;
 		case "employeeID":
 			th.innerHTML = "Employee ID";
+			employeeIndex = i;
 			break;
 		case "dateSubmitted":
 			th.innerHTML = "Date Submitted";
 			break;
 		case "statusID":
 			th.innerHTML = "Status";
+			statusIndex = i;
 			break;
 		case "description":
 			th.innerHTML = "Description";
@@ -73,25 +76,23 @@ function fillTablePending(xhr){
 	tr.appendChild(th);
 	*/
 	
-	th = document.createElement("th");
-	th.innerHTML = "Select";
-	tr.appendChild(th);
-	
 	thead.appendChild(tr);
 	
 	for(let i = 0; i < res.length; i++){
 		tr = table.insertRow(-1);
+		
 		let currReqID;
+		let currEmpID;
 		for(let j = 0; j < col.length; j++){
 			let cell = tr.insertCell(-1);
 			if(j === amountIndex){
 				cell.innerHTML = "$"+res[i][col[j]];
 			}
-			else if(j === 0){	//the request ID
+			else if(j === requestIndex){	//the request ID
 				currReqID = res[i][col[j]];
 				cell.innerHTML = res[i][col[j]];
 			}
-			else if(j === 3){	//statusID
+			else if(j === statusIndex){	//statusID
 				switch(res[i][col[j]]){
 				case 1:
 					cell.innerHTML = "Pending";
@@ -108,32 +109,12 @@ function fillTablePending(xhr){
 				cell.innerHTML = res[i][col[j]];
 			}
 		}
-		
-		th = document.createElement("th");
-		th.innerHTML = `<input type=\"checkbox\" name=\"selected\" value=\"${currReqID}\">`;
-		tr.appendChild(th);
-		
-		/*
-		//Approval buttons
-		th = document.createElement("th");
-		th.innerHTML = "<input type=\"submit\" name=\"approve\" value=\"Approve\">";
-		tr.appendChild(th);
-		
-		//Rejection buttons
-		th = document.createElement("th");
-		th.innerHTML = "<input type=\"submit\" name=\"decline\" value=\"Decline\">";
-		tr.appendChild(th);
-		
-		*/
 	}
-	let newTable = document.getElementById("requestTable");
+	let newTable = document.getElementById("employeeRequestTable");
 	newTable.innerHTML = "";
 	newTable.appendChild(table);
-	
 }
 
-//window.onload = function(xhr) {
-	getAjax('http://localhost:8084/EmployeeReimbursement/viewallpending', fillTablePending);
-	
-	
-//}
+window.onload = function() {
+	postAjax('http://localhost:8084/EmployeeReimbursement/viewemployeerequests', fillRequestTable);
+};

@@ -31,7 +31,6 @@ public class LoginServlet extends HttpServlet {
 		HttpSession session = req.getSession();
 		PrintWriter pw = resp.getWriter();		//We get our writer from the response
 
-		System.out.println("This works til here");
 		resp.setContentType("text/html");
 		String email = req.getParameter("email");
 		String password = req.getParameter("password");
@@ -45,7 +44,6 @@ public class LoginServlet extends HttpServlet {
 			//Doesn't exist yet
 			resp.sendRedirect("index");	//Redirect to Profile.html if successful login.
 		} else {
-			System.out.println("This works til here 2");
 			//pw.println("nope");
 			//pw.println("<a href=\"Index.html\">Go back</a>");
 			session.setAttribute("problem", "Incorrect password");
