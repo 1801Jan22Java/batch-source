@@ -17,11 +17,11 @@ import java.sql.Statement;
 import com.revature.util.*;
 
 public class Driver {
-	
+
 	public static void main(String [] args) {
-		
+
 		FileInputStream fis = null;
-		
+
 		try(Connection con = ConnectionUtil.getConnectionFromFile()) {
 			con.setAutoCommit(false);
 			String sql2 = "select image from reimbursement where reimbursement_id = 1003";
@@ -36,15 +36,13 @@ public class Driver {
 				while((c=in.read()) != -1) {
 					out.write(c);
 				}
-				
+
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
-		} finally {
-			System.out.println("welp");
-		}
+		} 
 	}
 
 }

@@ -1,17 +1,15 @@
 /**
- * 
+ *
  */
 
 function sendAjaxPost(url, func) {
 	var xhr = new XMLHttpRequest()
 			|| new ActiveXObject("Microsoft.HTTPRequest");
 	xhr.onreadystatechange = function() {
-		console.log("ajaxpost");
 		if (this.readyState == 4 && this.status == 200) {
 			document.getElementById("status").innerHTML = "";
 			func(this);
 		} else {
-			console.log("james is poop");
 			document.getElementById("status").innerHTML = "Fetching results. Please be patient";
 		}
 	};
@@ -22,7 +20,6 @@ function sendAjaxPost(url, func) {
 function populateInformation(xhr) {
 	if (xhr.responseText) {
 		var res = JSON.parse(xhr.responseText);
-		console.log(res);
 		if (res.length) {
 			var table = document.getElementById("table");
 			for (var r in res) {
@@ -42,7 +39,7 @@ function populateInformation(xhr) {
 				user.innerHTML  = obj.username;
 				var pass  = document.createElement("td");
 				pass.innerHTML  = obj.password;
-				
+
 				newRow.appendChild(fname);
 				newRow.appendChild(lname);
 				newRow.appendChild(empId);
@@ -51,13 +48,13 @@ function populateInformation(xhr) {
 				newRow.appendChild(user);
 				newRow.appendChild(pass);
 				table.appendChild(newRow);
-				
-			} 
-		
+
+			}
+
 		} else {
 			document.getElementById("status").innerHTML = "No reimbursements to show";
 		}
-		
+
 	} else {
 		window.location = "http://localhost:8084/Project1/managerlogin";
 	}

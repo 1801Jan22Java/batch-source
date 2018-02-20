@@ -19,7 +19,7 @@ import com.revature.dao.ManagerDaoSQL;
  */
 public class ManagerLoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.getRequestDispatcher("views/ManagerLogin.html").forward(request,response);
 	}
@@ -31,14 +31,13 @@ public class ManagerLoginServlet extends HttpServlet {
 		// from the form that was submitted
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
-		
+
 		// call the check credentials function to make sure the employees credentials
 		// are a part of the database
 		ManagerDao md = new ManagerDaoSQL();
 		Manager resultManager = md.getManagerByCredentials(username, password);
-		
+
 		if (resultManager != null) {
-			System.out.println("correct user");
 			// set the session attributes so the username will be remembered
 			session.setAttribute("username", username);
 			session.setAttribute("id", resultManager.getManagerId());
@@ -48,7 +47,7 @@ public class ManagerLoginServlet extends HttpServlet {
 			session.setAttribute("problem", "incorrect credentials");
 			response.sendRedirect("managerlogin");
 		}
-		
+
 	}
 
 }

@@ -16,10 +16,8 @@ public class EmployeeHomepageServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
 		if( session != null && session.getAttribute("username") != null){
-			System.out.println(session.getAttribute("username"));
 			request.getRequestDispatcher("views/employeehomepage.html").include(request, response);
 		} else {
-			System.out.println("redirect");
 			response.sendRedirect("employeelogin");
 		}
 	}

@@ -43,21 +43,18 @@ public class InsertImageServlet extends HttpServlet {
 			OutputStream out = response.getOutputStream();
 			out.write(byteArr);
 			out.close();
-            
+
 		}
-		
+
 	}
-	
+
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		ServletInputStream in = request.getInputStream();
 		ByteArrayOutputStream bao = new ByteArrayOutputStream();
-		
-		ReimbursementDao rd = new ReimbursementDaoSQL();
-		System.out.println(in.available());
-		System.out.println("i am in post");
 
+		ReimbursementDao rd = new ReimbursementDaoSQL();
 		if (in.available() > 0) {
 			int c = 0;
 			int count = 0;
@@ -68,7 +65,7 @@ public class InsertImageServlet extends HttpServlet {
 			byte [] byteArr = bao.toByteArray();
 			rd.submitReimbursement((int)session.getAttribute("id"), (Double)request.getAttribute("reimbursement_val"), byteArr);
 		}
-		
+
 	}
 
 }

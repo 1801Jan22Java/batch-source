@@ -9,7 +9,7 @@ import com.revature.beans.Employee;
 import junit.framework.TestCase;
 
 public class EmployeeDaoTest extends TestCase {
-	
+
 	@Test
 	public void testGetListEmployees() {
 		EmployeeDaoSQL eds = new EmployeeDaoSQL();
@@ -22,11 +22,10 @@ public class EmployeeDaoTest extends TestCase {
 			assertEquals(em.getUsername(),employeeById.getUsername());
 			assertEquals(em.getPassword(),employeeById.getPassword());
 			assertEquals(em.getEmployeeInformationId(),employeeById.getEmployeeInformationId());
-			System.out.println(em.toString());
 		}
-		
+
 	}
-	
+
 	@Test
 	public void testGetEmployeeById() {
 		EmployeeDaoSQL eds = new EmployeeDaoSQL();
@@ -37,7 +36,7 @@ public class EmployeeDaoTest extends TestCase {
 		assertEquals(employeeById.getPassword(), "p");
 		assertEquals(employeeById.getEmployeeInformationId(),1000);
 	}
-	
+
 	@Test
 	public void testGetEmployeeByCredentials() {
 		EmployeeDaoSQL eds = new EmployeeDaoSQL();
@@ -47,9 +46,9 @@ public class EmployeeDaoTest extends TestCase {
 		assertEquals(employeeByCredentials.getUsername(), "f");
 		assertEquals(employeeByCredentials.getPassword(), "p");
 		assertEquals(employeeByCredentials.getEmployeeInformationId(),1000);
-		
+
 	}
-	
+
 	@Test
 	public void testAddEmployee() {
 		EmployeeDaoSQL eds = new EmployeeDaoSQL();
@@ -61,5 +60,5 @@ public class EmployeeDaoTest extends TestCase {
 		assertEquals(newEmployee.getPassword(), "new_password");
 		assertEquals(newEmployee.getEmployeeInformationId(),1001);
 	}
-	
+
 }

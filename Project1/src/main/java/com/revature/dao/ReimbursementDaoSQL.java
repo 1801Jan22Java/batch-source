@@ -27,7 +27,7 @@ public class ReimbursementDaoSQL implements ReimbursementDao {
 	public List<Reimbursement> getReimbursement() {
 		List<Reimbursement> listReimbursement = new ArrayList<Reimbursement>();
 		try(Connection con = ConnectionUtil.getConnectionFromFile()) {
-			
+
 			// result is a placeholder variable for creating employees to insert into the list
 			Reimbursement result;
 			String sql = "SELECT * FROM Reimbursement";
@@ -52,7 +52,7 @@ public class ReimbursementDaoSQL implements ReimbursementDao {
 				result = new Reimbursement(reimbursementId,employeeId,managerId,status,reimbursementValue,byteArr);
 				listReimbursement.add(result);
 			}
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -60,13 +60,13 @@ public class ReimbursementDaoSQL implements ReimbursementDao {
 		}
 		return listReimbursement;
 	}
-	
-	@Override 
+
+	@Override
 	public List<Reimbursement> getReimbursementByEmployeeId(int requestedEmployeeId) {
-		
+
 		List<Reimbursement> listReimbursement = new ArrayList<Reimbursement>();
 		try(Connection con = ConnectionUtil.getConnectionFromFile()) {
-			
+
 			// result is a placeholder variable for creating employees to insert into the list
 			Reimbursement result;
 			String sql = "SELECT * FROM Reimbursement WHERE EMPLOYEE_ID = ?";
@@ -92,7 +92,7 @@ public class ReimbursementDaoSQL implements ReimbursementDao {
 				result = new Reimbursement(reimbursementId,employeeId,managerId,status,reimbursementValue,byteArr);
 				listReimbursement.add(result);
 			}
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -105,7 +105,7 @@ public class ReimbursementDaoSQL implements ReimbursementDao {
 	public Reimbursement getReimbursementByID(int requestedReimbursementId) {
 		Reimbursement reimbursementResult = null;
 		try(Connection con = ConnectionUtil.getConnectionFromFile()) {
-			
+
 			String sql = "SELECT * FROM REIMBURSEMENT WHERE REIMBURSEMENT_ID = ?";
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setInt(1, requestedReimbursementId);
@@ -128,7 +128,7 @@ public class ReimbursementDaoSQL implements ReimbursementDao {
 				byte [] byteArr = bao.toByteArray();
 				reimbursementResult = new Reimbursement(reimbursementId,employeeId,managerId,status,reimbursementValue,byteArr);
 			}
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -142,13 +142,11 @@ public class ReimbursementDaoSQL implements ReimbursementDao {
 		int reimbursementId = -1;
 		try(Connection con = ConnectionUtil.getConnectionFromFile()) {
 			Blob blob = con.createBlob();
-			System.out.println("not null");
 			ReimbursementDao rd = new ReimbursementDaoSQL();
 			OutputStream out = blob.setBinaryStream(1);
 
 			out.write(byteArr);
 			out.close();
-			System.out.println(blob.length());
 			con.setAutoCommit(false);
 			String sql = "{call ADD_REIMBURSEMENT(?,?,?,?)}";
 			CallableStatement cs = con.prepareCall(sql);
@@ -177,7 +175,7 @@ public class ReimbursementDaoSQL implements ReimbursementDao {
 			cs.setInt(2, managerId);
 			cs.setInt(3, statusId);
 
-			
+
 			cs.execute();
 
 		} catch (SQLException e) {

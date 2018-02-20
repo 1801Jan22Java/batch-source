@@ -16,7 +16,6 @@ public class EmployeeLogoutServlet extends HttpServlet {
 		request.getRequestDispatcher("views/logout.html").include(request,response);
 		HttpSession session = request.getSession(false);
 		if(session != null){
-			System.out.println("session is not null so it is invalid");
 			session.invalidate();
 		}
 

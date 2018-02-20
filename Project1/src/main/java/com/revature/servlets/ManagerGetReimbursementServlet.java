@@ -27,8 +27,8 @@ import com.revature.dao.StatusDaoSQL;
  */
 public class ManagerGetReimbursementServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-   
+
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
 		if (session != null && session.getAttribute("username") != null) {
@@ -66,9 +66,8 @@ public class ManagerGetReimbursementServlet extends HttpServlet {
 				}
 			}
 			JSONlist += "]";
-			System.out.println(JSONlist);
 			response.getWriter().write(JSONlist);
-		
+
 		}
 		else {
 			response.sendRedirect("managerlogin");

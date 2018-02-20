@@ -1,12 +1,11 @@
 /**
- * 
+ *
  */
 
 function sendAjaxPost(url, func) {
 	var xhr = new XMLHttpRequest()
 			|| new ActiveXObject("Microsoft.HTTPRequest");
 	xhr.onreadystatechange = function() {
-		console.log("ajaxpost");
 		if (this.readyState == 4 && this.status == 200) {
 			func(this);
 		}
@@ -18,7 +17,6 @@ function sendAjaxPost(url, func) {
 function populateInformation(xhr) {
 	if (xhr.responseText) {
 		var res = JSON.parse(xhr.responseText);
-		console.log(res);
 		var table = document.getElementById("table");
 		var fname = document.createElement("tr");
 		fname.innerHTML = "First Name: " + res.fname;
@@ -32,7 +30,7 @@ function populateInformation(xhr) {
 		table.appendChild(lname);
 		table.appendChild(email);
 		table.appendChild(addrs);
-		
+
 	} else {
 		window.location = "http://localhost:8084/Project1/employeelogin";
 	}

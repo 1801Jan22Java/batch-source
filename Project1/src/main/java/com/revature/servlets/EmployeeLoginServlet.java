@@ -14,7 +14,6 @@ import com.revature.dao.*;
 public class EmployeeLoginServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("employee get???");
 		request.getRequestDispatcher("views/employeelogin.html").forward(request,response);
 	}
 
@@ -26,14 +25,13 @@ public class EmployeeLoginServlet extends HttpServlet {
 		// from the form that was submitted
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
-		
+
 		// call the check credentials function to make sure the employees credentials
 		// are a part of the database
 		EmployeeDao ed = new EmployeeDaoSQL();
 		Employee resultEmployee = ed.getEmployeeByCredentials(username, password);
-		
+
 		if (resultEmployee != null) {
-			System.out.println("correct user");
 			// set the session attributes so the username will be remembered
 			session.setAttribute("username", username);
 			session.setAttribute("id", resultEmployee.getEmployeeId());
@@ -43,7 +41,7 @@ public class EmployeeLoginServlet extends HttpServlet {
 			session.setAttribute("problem", "incorrect credentials");
 			response.sendRedirect("employeelogin");
 		}
-		
+
 	}
 
 }

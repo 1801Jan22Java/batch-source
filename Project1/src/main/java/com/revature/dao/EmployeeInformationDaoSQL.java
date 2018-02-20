@@ -18,12 +18,12 @@ public class EmployeeInformationDaoSQL implements EmployeeInformationDao{
 	// returns a list of every employeeinformation in the database
 	// if there is no employeeinformation in the DB then the list is empty
 	public List<EmployeeInformation> getEmployeeInformation() {
-		
+
 		// initializes a list to return, if the list is empty it is not for the
 		// Dao object to decide
 		List<EmployeeInformation> listEmployeeInformation = new ArrayList<EmployeeInformation>();
 		try(Connection con = ConnectionUtil.getConnectionFromFile()) {
-			
+
 			// result is a placeholder variable for creating employees to insert into the list
 			EmployeeInformation result;
 			String sql = "SELECT * FROM EmployeeInfo";
@@ -38,7 +38,7 @@ public class EmployeeInformationDaoSQL implements EmployeeInformationDao{
 				result = new EmployeeInformation(employeeInformationId,email,firstname,lastname,address);
 				listEmployeeInformation.add(result);
 			}
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -46,21 +46,19 @@ public class EmployeeInformationDaoSQL implements EmployeeInformationDao{
 		}
 		return listEmployeeInformation;
 	}
-	
 
-	// get an employeeInformation from the database using the Id 
+
+	// get an employeeInformation from the database using the Id
 	// to be used predominately by the application no the user
 	public EmployeeInformation getEmployeeInformationByID(int requestedEmployeeInformationId) {
 		// if employeeInformationResult is null then you could not find the requested Id
 		// not for this function to decide what to do with that information
 		EmployeeInformation employeeInformationResult = null;
 		try(Connection con = ConnectionUtil.getConnectionFromFile()) {
-			System.out.println(requestedEmployeeInformationId);
 			String sql = "SELECT * FROM EMPLOYEEINFO WHERE EMPLOYEE_INFO_ID = ?";
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setInt(1, requestedEmployeeInformationId);
 			ResultSet rs = ps.executeQuery();
-			System.out.println();
 			while(rs.next()) {
 				int employeeInformationId = rs.getInt("EMPLOYEE_INFO_ID");
 				String email = rs.getString("EMAIL");
@@ -68,9 +66,9 @@ public class EmployeeInformationDaoSQL implements EmployeeInformationDao{
 				String lastname = rs.getString("LASTNAME");
 				String address = rs.getString("ADDRESS");
 				employeeInformationResult = new EmployeeInformation(employeeInformationId,email,firstname,lastname,address);
-				
+
 			}
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -91,7 +89,7 @@ public class EmployeeInformationDaoSQL implements EmployeeInformationDao{
 			cs.setString(3, fname);
 			cs.setString(4, lname);
 			cs.setString(5, address);
-			
+
 			cs.execute();
 
 		} catch (SQLException e) {

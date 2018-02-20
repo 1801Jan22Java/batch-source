@@ -20,12 +20,12 @@ public class UpdateInformationServlet extends HttpServlet {
 		else {
 			response.sendRedirect("employeelogin");
 		}
-		
+
 	}
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
 		HttpSession session = request.getSession(false);
 		if (session != null && session.getAttribute("username") != null) {
 			String fname = request.getParameter("fname");
@@ -33,10 +33,8 @@ public class UpdateInformationServlet extends HttpServlet {
 			String email = request.getParameter("email");
 			String addrs = request.getParameter("address");
 			EmployeeInformationDao ed = new EmployeeInformationDaoSQL();
-			System.out.println("id is " + (int)session.getAttribute("id"));
 			EmployeeInformation employeeInformation = ed.getEmployeeInformationByID((int)session.getAttribute("id"));
 			if (employeeInformation != null) {
-				System.out.println("not null");
 				ed.updateInformation(employeeInformation.getEmployeeInformationId(), email, fname, lname, addrs);
 				request.getRequestDispatcher("employeehomepage").forward(request,response);
 			}

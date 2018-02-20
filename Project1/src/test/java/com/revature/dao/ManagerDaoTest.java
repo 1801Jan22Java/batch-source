@@ -11,7 +11,7 @@ import com.revature.beans.Manager;
 import junit.framework.TestCase;
 
 public class ManagerDaoTest extends TestCase{
-	
+
 	@Test
 	public void testAddManager() {
 		ManagerDaoSQL mds = new ManagerDaoSQL();
@@ -35,11 +35,10 @@ public class ManagerDaoTest extends TestCase{
 			assertEquals(man.getUsername(),managerById.getUsername());
 			assertEquals(man.getPassword(),managerById.getPassword());
 			assertEquals(man.getManagerInformationId(),managerById.getManagerInformationId());
-			System.out.println(man.toString());
 		}
-		
+
 	}
-	
+
 	@Test
 	public void testGetManagerById() {
 		ManagerDaoSQL mds = new ManagerDaoSQL();
@@ -50,7 +49,7 @@ public class ManagerDaoTest extends TestCase{
 		assertEquals(managerById.getPassword(), "new_manager_password");
 		assertEquals(managerById.getManagerInformationId(),1000);
 	}
-	
+
 	@Test
 	public void testGetManagerByCredentials() {
 		ManagerDaoSQL mds = new ManagerDaoSQL();
@@ -60,9 +59,9 @@ public class ManagerDaoTest extends TestCase{
 		assertEquals(managerByCredentials.getUsername(), "new_manager");
 		assertEquals(managerByCredentials.getPassword(), "new_manager_password");
 		assertEquals(managerByCredentials.getManagerInformationId(),1000);
-		
+
 	}
-	
+
 
 
 }

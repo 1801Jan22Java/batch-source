@@ -25,7 +25,7 @@ public class EmployeeViewInformationServlet extends HttpServlet {
 		else {
 			response.sendRedirect("employeelogin");
 		}
-		
+
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -37,14 +37,13 @@ public class EmployeeViewInformationServlet extends HttpServlet {
 			EmployeeInformation requestedEmployeeInformation = eid.getEmployeeInformationByID(id);
 			if (requestedEmployeeInformation != null) {
 				String JSONobj = "";
-				
+
 				JSONobj += "{\"fname\" : \"" + requestedEmployeeInformation.getFname() + "\"," ;
 				JSONobj +=  "\"lname\" : \"" + requestedEmployeeInformation.getLname() + "\"," ;
 				JSONobj +=  "\"email\" : \"" + requestedEmployeeInformation.getEmail() + "\"," ;
 				JSONobj +=  "\"address\" : \"" + requestedEmployeeInformation.getAddress()  + "\"," ;
 				JSONobj+=  "\"id\" : \"" + requestedEmployeeInformation.getEmployeeInformationId() + "\"}" ;
-				
-				System.out.println(JSONobj);
+
 				response.getWriter().write(JSONobj);
 			}
 		}
