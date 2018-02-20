@@ -5,7 +5,7 @@ import java.util.List;
 import com.revature.beans.ReimbursementRequest;
 
 public interface ReimbursementRequestDAO {
-	public ReimbursementRequest createReimbursementRequest(
+	public void createReimbursementRequest(
 			ReimbursementRequest req);
 
 	public ReimbursementRequest getReimbursementRequestById(int id);
@@ -14,17 +14,10 @@ public interface ReimbursementRequestDAO {
 
 	public List<ReimbursementRequest> getReimbursementRequests();
 
-	public List<ReimbursementRequest> getPendingReimbursementRequests(int emplId);
+	public List<ReimbursementRequest> getReimbursementRequestsByEmplId(
+			int emplId);
 
-	public List<ReimbursementRequest> getProcessedReimbursementRequests(int emplId);
-
-	public ReimbursementRequest updatePendingReimbursementRequest(
-			ReimbursementRequest req);
-
-	public ReimbursementRequest updateProcessedReimbursementRequest(
-			ReimbursementRequest req);
-
-	public ReimbursementRequest processReimbursementRequest(
+	public ReimbursementRequest updateReimbursementRequest(
 			ReimbursementRequest req);
 
 }
