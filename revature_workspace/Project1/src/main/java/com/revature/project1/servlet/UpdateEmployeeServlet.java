@@ -38,37 +38,37 @@ public class UpdateEmployeeServlet extends HttpServlet {
 		String email = request.getParameter("emailChange");
 		HttpSession sess = request.getSession();
 		String username =sess.getAttribute("username").toString();
-		System.out.println(username);
+		//System.out.println(username);
 		EmployeeDao ed = new EmployeeDaoImpl();
 		Employee emp = ed.getEmployeeByUsername(username);
 		if(!fName.equals("")) {
-			System.out.println("Value entered");
+			//System.out.println("Value entered");
 			ed.updateFirstName(emp, fName);
 			showPage(response);
 			
 		}
 		else {
-			System.out.println("Blank");
+			//System.out.println("Blank");
 		}
 		if(!lName.equals("")) {
-			System.out.println("Value entered");
+			//System.out.println("Value entered");
 			ed.updateLastName(emp, lName);
 			showPage(response);
 		}
 		else {
-			System.out.println("Blank");
+			//System.out.println("Blank");
 		}
 		if(!email.equals("")) {
-			System.out.println("Value entered");
+			//System.out.println("Value entered");
 			ed.updateEmail(emp, email);
 			showPage(response);
 		}
 		else {
-			System.out.println("Blank");
+			//System.out.println("Blank");
 		}
-		System.out.println(fName);
-		System.out.println(lName);
-		System.out.println(email);
+		//System.out.println(fName);
+		//System.out.println(lName);
+		//System.out.println(email);
 	
 	}
 	
@@ -79,11 +79,11 @@ public class UpdateEmployeeServlet extends HttpServlet {
 			pw.println(
 					"<html><body style=\"background-color:black; color:white; width:450px;margin-left:auto;margin-right:auto;\">");
 			pw.println("Update successful!");
-			pw.println("<a style=\"color:white\" href=\"EmployeeServlet\">Back to your information.</a>");
+			pw.println("<a style=\"color:white\" href=\"EmployeeInfoServlet\">Back to your information.</a>");
 			pw.write("</div></body></html>");
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
+			System.out.println("Error occurred while attempting to show update confirmation page");
 		}
 	
 	}

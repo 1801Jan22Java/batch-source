@@ -22,8 +22,6 @@ import com.revature.project1.dao.ReimbursementRequestDaoImpl;
  * Servlet implementation class ApprovalServlet
  */
 public class ApprovalServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -48,23 +46,21 @@ public class ApprovalServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		String empStr = req.getParameter("employeeid");
-		// String empData =req.getParameter("employeeData");
 		int empID = Integer.parseInt(empStr);
 		EmployeeDao ed = new EmployeeDaoImpl();
 		Employee emp = ed.getEmployeeById(empID);
-		// res.getWriter().append("Served at: ").append(req.getContextPath());
 		PrintWriter pw = res.getWriter();
 		res.setContentType("text/html");
 		RequestDispatcher rd = null;
 		rd = req.getRequestDispatcher("views/approvalpage.html");
 		ReimbursementRequestDao rrdi = new ReimbursementRequestDaoImpl();
 		rd.include(req, res);
+		String fileStr="";
 		pw.println("<div id=\"results\">");
 		HttpSession session = req.getSession();
 		String name = session.getAttribute("username").toString();
 		String password = session.getAttribute("password").toString();
 		Employee currentUser = ed.getEmployeeByCredentials(name, password);
-		System.out.println(name + "  is currently logged in");
 		if (!emp.getManager().getUserName().equals(currentUser.getUserName())) {
 			pw.println(
 					"<p style=\"background-color:powderblue; width:450px;margin-left:auto;margin-right:auto;\">You are not authorized to approve these requests</p>");
@@ -77,11 +73,18 @@ public class ApprovalServlet extends HttpServlet {
 					+ "<th>Approve?</th><th>Deny?</th><th>Approving manager</th>");
 			ServletConfig config = getServletConfig();
 			for (ReimbursementRequest rr : rrdi.getReimbursementRequestsByEmployee(emp)) {
+				if(rr.getExtent()!=null) {
+					String fullStr= rr.getExtent();
+					int lastSlash = fullStr.lastIndexOf("\\");
+					 fileStr = fullStr.substring(lastSlash+1);
+				}
+				else {
+					fileStr="nope.gif";
+				}
 				pw.println(
 						"<tr style=\"background-color:powderblue; width:450px;margin-left:auto;margin-right:auto;\"><td>"
 								+ rr.getEmployee().getFirstName() + " " + rr.getEmployee().getLastName() + "</td><td>"
-								+ rr.getAmount() + "</td><td>" + rr.getDescription() + "</td><td><a href="
-								+ rr.getExtent() + ">View receipt</a></td><td>"
+								+ rr.getAmount() + "</td><td>" + rr.getDescription() + "</td><td><a href=\"images/"+fileStr+"\">view receipt</a></td><td>"
 								+ (rr.getPending() == 1 ? "Pending" : "Decided") + "</td><td>"
 								+ (rr.getApproved() == 1 ? "Approved" : "Not approved") + "</td>"
 								+ "<td><a href='/Project1/confirm?id=" + rr.getRequestID() + "'>Approve</a></td>"
@@ -90,13 +93,6 @@ public class ApprovalServlet extends HttpServlet {
 								+ rr.getEmployee().getManager().getLastName() + "</td></tr>");
 			}
 			pw.println("</table></div>");
-
-			// System.out.println(req.getParameter("approverequest"));
-
 		}
-
-		// System.out.println(getServletInfo());
-		// System.out.println(req.getParameter("approverequest"));
-
 	}
 }

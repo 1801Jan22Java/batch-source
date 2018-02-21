@@ -95,10 +95,15 @@ table,td,th{
 	background-color: white;
 	color:white;
 }
-
+#updateEmpDiv{
+	text-align:center;
+	
+	
+}
 #updateEmpButton{
 	color:white;
 	background-color:powderblue;
 	margin-left:auto;
 	margin-right:auto;
+	text-align: center;
 }

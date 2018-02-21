@@ -39,7 +39,7 @@ public class EmployeeInfoServlet extends HttpServlet {
 		RequestDispatcher rd = request.getRequestDispatcher("views/employeeinfo.html");
 
 		rd.include(request, response);
-		pw.println("<div id=\"results\">");
+		pw.println("<div>");
 
 		pw.println("<table class=\"requestTable\"><tr><th>Employee First Name</th><th>" + "Employee Last Name</th>"
 				+ "<th>Employee Username</th>" + "<th>Employee Email</th>" + "<th>Employee ID</th>"
