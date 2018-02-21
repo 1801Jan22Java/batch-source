@@ -1,6 +1,14 @@
 @charset "ISO-8859-1";
 
 
+
+
+#sayHi {
+	background-color: white;
+	outline: none !important;
+	border: none;
+}
+
 #displayHello {
 	font-size: 50px;
 	font-family: "Arial", Helvetica, sans-serif;

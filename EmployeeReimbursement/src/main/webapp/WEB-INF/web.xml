@@ -225,4 +225,12 @@
     <servlet-name>allemployeerequests</servlet-name>
     <url-pattern>/allemployeerequests</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>downloadimage</servlet-name>
+    <servlet-class>com.revature.servlets.DownloadImageServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>downloadimage</servlet-name>
+    <url-pattern>/downloadimage/*</url-pattern>
+  </servlet-mapping>
 </web-app>

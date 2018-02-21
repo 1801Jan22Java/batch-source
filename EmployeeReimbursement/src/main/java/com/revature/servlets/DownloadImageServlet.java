@@ -1,12 +1,15 @@
 package com.revature.servlets;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +21,6 @@ import com.revature.dao.StoredFileDaoImpl;
 /**
  * Servlet implementation class DownloadImageServlet
  */
-@WebServlet("/DownloadImageServlet")
 public class DownloadImageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -26,43 +28,40 @@ public class DownloadImageServlet extends HttpServlet {
 
 
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+		StoredFileDaoImpl sfdi = new StoredFileDaoImpl();
+		
+		//Pass in request ID as a parameter with the request
+		String uri = req.getRequestURI();
+		String shortened = uri.substring(uri.indexOf("downloadimage")+14);
+		int requestID = Integer.valueOf(shortened);
+		StoredFile file = sfdi.readStoredFile(requestID);
+		
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//		
+//		int bytesRead = -1;
+//		byte[] buffer = new byte[1028];
+//		
+//		//LOOK AT THIS
+//		while((bytesRead = file.getFileInStream().read(buffer)) != -1) {
+//			baos.write(buffer, 0, bytesRead);
+//		}
+		
+		ServletOutputStream sos = resp.getOutputStream();
+		
+//		byte [] byteArray = baos.toByteArray();
+		resp.setContentLength(file.getImageBytes().length);
+		sos.write(file.getImageBytes());
+		
+		sos.close();
 	}
 
 	
 	
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		StoredFileDaoImpl sfdi = new StoredFileDaoImpl();
-		
-		//Pass in request ID as a parameter with the request
-		int requestID = Integer.valueOf(req.getAttribute("requestID").toString());
-		StoredFile file = sfdi.readStoredFile(requestID);
-//		
-//		ServletContext context = getServletContext();
-//		
-//		String mimeType = context.getMimeType("E:\\Work\\Revature\\Training\\Project 1\\test.jpg");
-//		if(mimeType == null)
-//			mimeType = "application/octet-stream";
-//		
-//		resp.setContentType(mimeType);
-//		resp.setContentLength((int) downloadFile.length());
-		
-//		resp.setHeader("Content-Disposition",String.format("attachment; filename=\"%s\"", file.getFileName()));
-		OutputStream os = new FileOutputStream("E:\\Work\\Revature\\Training\\Project 1\\test.jpg");
-		
-		int bytesRead = -1;
-		byte[] buffer = new byte[4096];
-		while((bytesRead = file.getFileInStream().read(buffer)) != -1) {
-			os.write(buffer, 0, bytesRead);
-		}
-		
-		file.getFileInStream().close();
-		os.close();
-		
-		
-		
+
 	}
 
 }

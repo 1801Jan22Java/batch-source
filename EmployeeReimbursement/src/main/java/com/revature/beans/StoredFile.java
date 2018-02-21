@@ -1,6 +1,5 @@
 package com.revature.beans;
 
-import java.io.InputStream;
 
 public class StoredFile {
 	
@@ -8,7 +7,7 @@ public class StoredFile {
 	private int fileID;
 	private String fileName;
 	private int requestID;
-	private InputStream fileInStream;
+	private byte[] imageBytes;
 
 	
 	public StoredFile() {}
@@ -42,12 +41,11 @@ public class StoredFile {
 	public void setRequestID(int requestID) {
 		this.requestID = requestID;
 	}
-	
-	public InputStream getFileInStream() {
-		return fileInStream;
+	public byte[] getImageBytes() {
+		return imageBytes;
 	}
-	public void setFileInStream(InputStream fileInStream) {
-		this.fileInStream = fileInStream;
+	public void setImageBytes(byte[] imageBytes) {
+		this.imageBytes = imageBytes;
 	}
 	
 	

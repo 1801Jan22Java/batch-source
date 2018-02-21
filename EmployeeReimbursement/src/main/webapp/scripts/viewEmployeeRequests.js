@@ -66,11 +66,11 @@ function fillRequestTable(xhr){
 		tr.appendChild(th);
 //		tr.insertCell(i).outerHTML = th.outerHTML;
 	}
-	/*
-	let th = document.createElement("th");
-	th.innerHTML = "Approve";
-	tr.appendChild(th);
 	
+	let th = document.createElement("th");
+	th.innerHTML = "Receipt";
+	tr.appendChild(th);
+	/*
 	th = document.createElement("th");
 	th.innerHTML = "Decline";
 	tr.appendChild(th);
@@ -83,7 +83,7 @@ function fillRequestTable(xhr){
 		
 		let currReqID;
 		let currEmpID;
-		for(let j = 0; j < col.length; j++){
+		for(let j = 0; j < col.length+1; j++){
 			let cell = tr.insertCell(-1);
 			if(j === amountIndex){
 				cell.innerHTML = "$"+res[i][col[j]];
@@ -105,8 +105,15 @@ function fillRequestTable(xhr){
 					break;
 				}
 			}
-			else{
+			else if (j<col.length){
 				cell.innerHTML = res[i][col[j]];
+			}
+			else{
+				//var urlCreator = window.URL || window.webkitURL; 
+				//var imageUrl = urlCreator.createObjectURL(blob); 
+				console.log("I am here.");
+				cell.innerHTML = `<button onclick="postAjax('http://localhost:8084/EmployeeReimbursement/downloadimage/${currReqID}', downloadImage)">View</button>`;
+
 			}
 		}
 	}
@@ -114,6 +121,16 @@ function fillRequestTable(xhr){
 	newTable.innerHTML = "";
 	newTable.appendChild(table);
 }
+
+function downloadImage(xhr){
+	window.URL = window.URL || window.webkitURL;
+	let blob = new Blob([xhr.response], {type: 'image/png'});
+	if(xhr.response){
+		let imageURL = window.URL.createObjectURL(blob);
+		document.getElementById("screenshot").src = imageURL;
+	}
+}
+	
 
 window.onload = function() {
 	postAjax('http://localhost:8084/EmployeeReimbursement/viewemployeerequests', fillRequestTable);
