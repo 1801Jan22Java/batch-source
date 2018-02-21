@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+	<session-factory>
+		<property name="hibernate.connection.username">hibernate</property>
+		<property name="hibernate.connection.password">hibernate</property>
+		<property name="hibernate.connection.url">jdbc:oracle:thin:@hibernate.crokjrgwcsld.us-east-1.rds.amazonaws.com:1521:ORCL</property>
+		<property name="hibernate.connection.driver_class">oracle.jdbc.driver.OracleDriver</property>
+
+		<!-- this can be noisy in console -->
+
+		<property name="hibernate.show_sql">true</property>
+
+		<!-- choose whether to create db or update existing db -->
+		<!-- Create-mode will drop any table mentioned and create new ones -->
+		<property name="hibernate.hbm2ddl.auto">create</property>
+
+		<!-- map domain object classes -->
+		<mapping class ="com.revature.domain.Flashcard"></mapping>
+		<mapping class ="com.revature.domain.Category"></mapping>
+	</session-factory>
+</hibernate-configuration>
