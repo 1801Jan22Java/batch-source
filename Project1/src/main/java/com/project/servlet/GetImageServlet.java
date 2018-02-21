@@ -57,11 +57,15 @@ public class GetImageServlet extends HttpServlet {
 		ReimburseUtil ru = new ReimburseUtil();
 
 		if (session != null) {
-			
+
 		} else {
 			response.sendRedirect("login");
 		}
-		
+
+		/*
+		 * Turn the BAOS into a byte array Send byte array into response via
+		 * ServletOutputStream.
+		 */
 		ByteArrayOutputStream image_blob = ru.viewImage(Integer.parseInt(request.getParameter("request_id")));
 
 		byte[] buf = image_blob.toByteArray();
@@ -69,12 +73,11 @@ public class GetImageServlet extends HttpServlet {
 		ServletOutputStream sos = response.getOutputStream();
 		sos.write(buf);
 		sos.close();
-		
-//		if(image_blob==null) {
-//		} else {
-////			response.get
-//		}
 
+		// if(image_blob==null) {
+		// } else {
+		//// response.get
+		// }
 
 	}
 
