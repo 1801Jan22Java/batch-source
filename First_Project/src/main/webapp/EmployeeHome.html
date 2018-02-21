@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Transparent Login Form</title>
+<!--link rel="stylesheet" href="Styles/Employee_Home.css"-->
+</head>
+<body>
+	<!-- div class="wrapper">
+		<nav>
+			<div class="logo">Logo</div>
+			<ul>
+				<li><a href="#">Update Profile</a></li>
+				<li><a href="#">Submit Reinbursment Request</a></li>
+				<li><a href="#">View Pending Requests</a></li>
+				<li><a class="active" href="#">Log Out</a></li>
+			</ul>
+		</nav -->
+
+	<form action="UpdateProfileTransfer" method="Get">
+		<input type="submit">Update Profile
+	</form>
+	<br>
+
+	<button type="button" onclick="findJSONEmployeeCompleted()" >Get Completed Requests</button>
+	<section class="content">
+		<table id="Completed_Table_body" style="width: 50%"></table>
+	</section>
+	<br>
+	<br> Get Pending Requests:
+	<button type="button" onclick="findJSONEmployee()">Request</button>
+
+	<section class="content">
+		<table id="Table_body" style="width: 50%"></table>
+	</section>
+
+	<br>
+
+
+	<section class="content">
+		<form action="newRequest" method="post">
+			Description: <input type="text" name="description" /> Request
+			Amount: <input type="text" name="requestAmount" /> <input
+				type="submit" name="submit" />
+		</form>
+	</section>
+	<br>
+
+	<form action="download" method="post" enctype="multipart/form-data">
+		Input any images:<input type="file" name="file"> <input
+			type="submit" />
+	</form>
+	<br>
+	<form action="logout" method="get">
+		<input type="submit" />
+	</form>
+</body>
+<script src="Scripts/Sessions.js"> </script>
+<script src="Scripts/GetPendingEmployee.js"></script>
+<script src="Scripts/CompletedInfo.js"></script>
+</html>
