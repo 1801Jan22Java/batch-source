@@ -27,8 +27,8 @@ public class EmployeeDaoPLSQLImpl implements EmployeeDAO {
 			stmt.setInt(1, id);
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
-				String firstName = rs.getString("FIRST_NAME");
-				String lastName = rs.getString("LAST_NAME");
+				String firstName = rs.getString("FIRSTNAME");
+				String lastName = rs.getString("LASTNAME");
 				String username = rs.getString("USERNAME");
 				String password = rs.getString("PASSWORD");
 				String title = rs.getString("EMPL_TYPE");
@@ -94,8 +94,8 @@ public class EmployeeDaoPLSQLImpl implements EmployeeDAO {
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
 				int emplId = rs.getInt("EMPL_ID");
-				String firstName = rs.getString("FIRST_NAME");
-				String lastName = rs.getString("LAST_NAME");
+				String firstName = rs.getString("FIRSTNAME");
+				String lastName = rs.getString("LASTNAME");
 				String username = rs.getString("USERNAME");
 				String password = rs.getString("PASSWORD");
 				String title = rs.getString("EMPL_TYPE");
@@ -188,8 +188,8 @@ public class EmployeeDaoPLSQLImpl implements EmployeeDAO {
 			
 			while (rs.next()) {
 				int id = rs.getInt("EMPL_ID");
-				String firstName = rs.getString("FIRST_NAME");
-				String lastName = rs.getString("LAST_NAME");
+				String firstName = rs.getString("FIRSTNAME");
+				String lastName = rs.getString("LASTNAME");
 				username = rs.getString("USERNAME");
 				password = rs.getString("PASSWORD");
 				String title = rs.getString("EMPL_TYPE");
@@ -214,7 +214,7 @@ public class EmployeeDaoPLSQLImpl implements EmployeeDAO {
 			e.printStackTrace();
 		}
 		
-		return null;
+		return empl;
 	}
 
 	@Override
@@ -230,8 +230,8 @@ public class EmployeeDaoPLSQLImpl implements EmployeeDAO {
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
 				int id = rs.getInt("EMPL_ID");
-				String firstName = rs.getString("FIRST_NAME");
-				String lastName = rs.getString("LAST_NAME");
+				String firstName = rs.getString("FIRSTNAME");
+				String lastName = rs.getString("LASTNAME");
 				username = rs.getString("USERNAME");
 				String password = rs.getString("PASSWORD");
 				String title = rs.getString("EMPL_TYPE");

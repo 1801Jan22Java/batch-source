@@ -4,16 +4,9 @@ import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.revature.beans.Employee;
+
 public class RequestHelper {
 	
-	public static String process(HttpServletRequest req) throws IOException {
-		switch(req.getParameter("destination")) {
-		case "bears":
-			return "bear";
-		case "caves":
-			return "cave";
-		default:
-			return "error";
-		}
-	}
+	
 }

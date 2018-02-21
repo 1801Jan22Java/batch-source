@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Employee Portal</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<link
+	href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"
+	rel="stylesheet">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript"
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<a class="navbar-brand" id="navbarBrand"></a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent" aria-expanded="false"
+			aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item active"><a class="nav-link" id="home"
+					href="">Home <span class="sr-only">(current)</span>
+				</a></li>
+
+				<li class="nav-item"><a class="nav-link" href="" id="pReq">Pending
+						Requests</a></li>
+				<li class="nav-item"><a class="nav-link" href="" id="proReq">Processed
+						Requests</a></li>
+			</ul>
+		</div>
+	</nav>
+	<h2>Welcome to the Boiler Plate Reimbursement Application</h2>
+	<div id="employeeInfo">
+		<ul>
+			<li><strong>First Name: </strong><span id="FirstName"></span></li>
+			<li><strong>Last Name: </strong><span id="LastName"></span></li>
+			<li><strong>Username: </strong><span id="username"></span></li>
+			<li><strong>Email: </strong><span id="email"></span></li>
+			<li><strong>Position: </strong><span id="pos"></span></li>
+		</ul>
+	</div>
+	<div>
+		<h3 class="centered">Update info</h3>
+		<div>
+			<div class="container">
+				<div class="row">
+					<div class="col-md-offset-5 col-md-3">
+						<div class="form-login">
+							<input type="text" id="updateFirst"
+								class="form-control input-sm chat-input"
+								placeholder="First Name" /> <input type="text"
+								id="updateLast" class="form-control input-sm chat-input"
+								placeholder="Last Name" /> 
+							<input type="text" id="updatePassword"
+								class="form-control input-sm chat-input" placeholder="password" />
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		<button id="updateUser">Update Info</button>
+		</div>
+	</div>
+	<div id="tableContainer">
+		<table class="table">
+			<thead>
+				<tr>
+					<th scope="col">ID</th>
+					<th scope="col">Name</th>
+					<th scope="col">Username</th>
+					<th scope="col">Email</th>
+				</tr>
+			</thead>
+			<tbody id="tableBody">
+
+			</tbody>
+		</table>
+		<h3 class="centered">Register Employee here</h3>
+		<div>
+			<div class="container">
+				<div class="row">
+					<div class="col-md-offset-5 col-md-3">
+						<div class="form-login">
+							<input type="text" id="emplFirstName"
+								class="form-control input-sm chat-input"
+								placeholder="First Name" /> <input type="text"
+								id="emplLastName" class="form-control input-sm chat-input"
+								placeholder="Last Name" /> <input type="text" id="emplUsername"
+								class="form-control input-sm chat-input" placeholder="username" />
+							<input type="text" id="emplPassword"
+								class="form-control input-sm chat-input" placeholder="password" />
+							<input type="text" id="emplEmail"
+								class="form-control input-sm chat-input" placeholder="email" />
+						</div>
+					</div>
+				</div>
+			</div>
+			<span id="formReq"></span><br>
+			<button id="createUser">Create Employee</button>
+		</div>
+		<div>
+			<div class="container">
+				<div class="row">
+					<div class="col-md-offset-5 col-md-3">
+						<div class="form-login">
+							<input type="text" id="deleteId"
+								class="form-control input-sm chat-input"
+								placeholder="Employee Id" /> 
+						</div>
+					</div>
+				</div>
+			</div>
+			<button id="deleteUser">Delete Employee</button>
+		</div>
+	</div>
+</body>
+<script src="scripts/employee.js"></script>
+</html>
