@@ -29,6 +29,8 @@ function populateInformation(xhr,status) {
 			for(var r in res) {
 				var obj = res[r];
 				var newRow = document.createElement("tr");
+				var remId = document.createElement("td");
+				remId.innerHTML = obj.remId;
 				var fname = document.createElement("td");
 				fname.innerHTML = obj.fname;
 				var lname = document.createElement("td");
@@ -39,11 +41,17 @@ function populateInformation(xhr,status) {
 				status.innerHTML = obj.status;
 				var value = document.createElement("td");
 				value.innerHTML = obj.reimbursementVal;
+				var reimbursementInfo = document.createElement("td");
+				console.log(obj.remId);
+				reimbursementInfo.innerHTML = "<a href =\"http://localhost:8084/Project1/employeeviewreimbursement?val=" + obj.remId + "\">Click to view more info</a>";
+				console.log(reimbursementInfo.innerHTML);
+				newRow.appendChild(remId);
 				newRow.appendChild(fname);
 				newRow.appendChild(lname);
 				newRow.appendChild(empId);
 				newRow.appendChild(status);
 				newRow.appendChild(value);
+				newRow.appendChild(reimbursementInfo);
 				table.appendChild(newRow);
 			}
 		} else {

@@ -7,26 +7,29 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.revature.dao.ReimbursementDao;
+import com.revature.dao.ReimbursementDaoSQL;
 
-public class SessionServlet extends HttpServlet {
-
+/**
+ * Servlet implementation class ManagerApproveDenyServlet
+ */
+public class ManagerApproveDenyServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-	// servlet is used mainly for the view/html pages. they call this to check if the id is null, if it is, then
-	// the user has somehow gotten access to the page and will be redirected to the index page
+ 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
 		if (session != null && session.getAttribute("username") != null) {
-			response.setContentType("application/json");
-			response.getWriter().write("{\"id\":\"" + session.getAttribute("id") + "\"}");
-			response.getWriter().write("{\"type\":\"" + session.getAttribute("type") + "\"}");
-		} else {
-			response.setContentType("application/json");
-			response.getWriter().write("{\"id\":null}");
+			ReimbursementDao rd = new ReimbursementDaoSQL();
+			int id = Integer.parseInt(request.getQueryString().split("&")[0].split("=")[1]);
+			int status = Integer.parseInt(request.getQueryString().split("&")[1].split("=")[1]);
+			rd.updateStatus(id, (int)session.getAttribute("id"), status);
+			response.sendRedirect("managerviewreimbursement?val=" + id);
+		}
+		else {
+			response.sendRedirect("managerhomepage");
 		}
 	}
-	
-	// if a post is called on this servlet then call a get instead.
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}

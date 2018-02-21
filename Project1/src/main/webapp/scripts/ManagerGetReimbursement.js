@@ -5,6 +5,7 @@ function sendAjaxGet(url, func) {
 
 	var status = document.getElementsByTagName("table")[0].id;
 	var new_url = url + "?val=" + status;
+	console.log(new_url);
 	xhr.onreadystatechange = function() {
 		console.log("readyState: " + xhr.readyState);
 		console.log("status: " + xhr.status);
@@ -31,6 +32,8 @@ function populateInformation(xhr,status) {
 			for(var r in res) {
 				var obj = res[r];
 				var newRow = document.createElement("tr");
+				var reimbursementId = document.createElement("td");
+				reimbursementId.innerHTML = obj.remId;
 				var fname = document.createElement("td");
 				fname.innerHTML = obj.fname;
 				var lname = document.createElement("td");
@@ -41,11 +44,15 @@ function populateInformation(xhr,status) {
 				status.innerHTML = obj.status;
 				var value = document.createElement("td");
 				value.innerHTML = obj.reimbursementVal;
+				var reimbursementInfo= document.createElement("td");
+				reimbursementInfo.innerHTML = "<a href =\"http://localhost:8084/Project1/managerviewreimbursement?val=" + obj.remId + "\">Click to view more info</a>";
+				newRow.appendChild(reimbursementId);
 				newRow.appendChild(fname);
 				newRow.appendChild(lname);
 				newRow.appendChild(empId);
 				newRow.appendChild(status);
 				newRow.appendChild(value);
+				newRow.appendChild(reimbursementInfo);
 				table.appendChild(newRow);
 			}
 		} else {

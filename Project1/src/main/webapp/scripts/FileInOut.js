@@ -5,7 +5,8 @@
 window.URL = window.URL || window.webkitURL;
 
 function setImage(xhr) {
-	var blob = new Blob([xhr.response], {type: 'image/png'});
+	var blob = new Blob([xhr.response]);
+	console.log(blob.size);
 	if (blob) {
 		document.getElementById("output").src = window.URL.createObjectURL(blob);
 	}

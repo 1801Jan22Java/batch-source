@@ -37,5 +37,6 @@ function populateInformation(xhr) {
 }
 
 window.onload = function() {
+	
 	sendAjaxPost("http://localhost:8084/Project1/employeeviewinformation", populateInformation);
 }

@@ -14,7 +14,7 @@ public class ManagerLogoutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("views/logout.html").include(request,response);
+		request.getRequestDispatcher("views/Logout.html").include(request,response);
 		HttpSession session = request.getSession(false);
 		if(session != null){
 			session.invalidate();

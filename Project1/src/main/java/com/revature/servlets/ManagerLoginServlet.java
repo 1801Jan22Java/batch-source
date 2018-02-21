@@ -40,6 +40,7 @@ public class ManagerLoginServlet extends HttpServlet {
 		if (resultManager != null) {
 			// set the session attributes so the username will be remembered
 			session.setAttribute("username", username);
+			session.setAttribute("type", "manager");
 			session.setAttribute("id", resultManager.getManagerId());
 			session.setAttribute("problem", null);
 			request.getRequestDispatcher("managerhomepage").forward(request,response);

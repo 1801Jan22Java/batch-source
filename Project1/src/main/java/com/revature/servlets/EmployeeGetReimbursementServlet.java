@@ -26,17 +26,22 @@ import com.revature.dao.StatusDaoSQL;
 public class EmployeeGetReimbursementServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	// if a get request is called, then send back information regarding the type of reimburement queried
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		HttpSession session = request.getSession(false);
-		if (session != null && session.getAttribute("username") != null) {
+		// ensure a valid employee is only allowed to access this page
+		if (session != null && session.getAttribute("username") != null && session.getAttribute("type") == "employee") {
 			ReimbursementDao rd = new ReimbursementDaoSQL();
 			EmployeeDao ed = new EmployeeDaoSQL();
 			StatusDao sd = new StatusDaoSQL();
 			EmployeeInformationDao eid = new EmployeeInformationDaoSQL();
+			
+			// get the id of the employee querying the reimbursements and show only those that are under his/her EmployeeId
 			int id = (int)session.getAttribute("id");
 			List<Reimbursement> listReimbursement= rd.getReimbursementByEmployeeId(id);
 			String status = request.getQueryString().split("=")[1];
+			// define a predicate to show either resolved or pending reimbursement statuses
 			Predicate<Integer> checkStatus = i -> {return i > 0;};
 			switch (status) {
 				case "resolved":
@@ -46,33 +51,44 @@ public class EmployeeGetReimbursementServlet extends HttpServlet {
 					checkStatus = i -> { return i == 0;};
 					break;
 			}
+			// set the content type and build a JSON Object that returns the first name, last name,
+			// employeeid, status, and reimbursement value for the queried type of reimbursements
+			response.setContentType("application/json");
 			String JSONlist = "[";
-			int i = 0;
+			int count = 0;
 			for(Reimbursement r : listReimbursement) {
-				i += 1;
+				
+				// depending on the queried status, the resulting reimbursements will change
 				if(checkStatus.test(r.getStatus())) {
+					if (count > 0) {
+						JSONlist += ",";
+					}
 					int employeeId = r.getEmployeeId();
 					Employee requestedEmployee = ed.getEmployeeByID(employeeId);
 					EmployeeInformation requestedEmployeeInformation = eid.getEmployeeInformationByID(employeeId);
-					JSONlist += "{\"fname\" : \"" + requestedEmployeeInformation.getFname() + "\"," ;
+					JSONlist += "{\"remId\" : \"" + r.getReimbursementId()  + "\",";
+					JSONlist += "\"fname\" : \"" + requestedEmployeeInformation.getFname() + "\"," ;
 					JSONlist += "\"lname\" : \"" + requestedEmployeeInformation.getLname() + "\"," ;
 					JSONlist += "\"empId\" : \"" + requestedEmployee.getEmployeeId() + "\"," ;
 					JSONlist += "\"status\" : \"" + sd.getStatusById(r.getStatus())  + "\"," ;
 					JSONlist += "\"reimbursementVal\" : \"" + r.getReimbursementValue() + "\"}";
-					if (i < listReimbursement.size()) {
-						JSONlist += ",";
-					}
+					count += 1;
+					
 				}
+				
 			}
 			JSONlist += "]";
+			System.out.println(JSONlist);
 			response.getWriter().write(JSONlist);
 
 		}
+		// if the user is not a valid employee then redirect the user to the employee login page
 		else {
 			response.sendRedirect("employeelogin");
 		}
 	}
 
+	// if a post request is called, then send a response for a get request instead
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}

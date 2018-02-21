@@ -43,7 +43,6 @@ public class InsertImageServlet extends HttpServlet {
 			OutputStream out = response.getOutputStream();
 			out.write(byteArr);
 			out.close();
-
 		}
 
 	}

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
   <display-name>Project1</display-name>
+  <display-name>Project1</display-name>
   <welcome-file-list>
     <welcome-file>views/index.html</welcome-file>
   </welcome-file-list>
@@ -199,5 +200,45 @@
   <servlet-mapping>
     <servlet-name>managergetsingleemployee</servlet-name>
     <url-pattern>/managergetsingleemployee</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>managerviewreimbursement</display-name>
+    <servlet-name>managerviewreimbursement</servlet-name>
+    <servlet-class>com.revature.servlets.ManagerViewReimbursementServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>managerviewreimbursement</servlet-name>
+    <url-pattern>/managerviewreimbursement</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>managerapprovedeny</display-name>
+    <servlet-name>managerapprovedeny</servlet-name>
+    <servlet-class>com.revature.servlets.ManagerApproveDenyServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>managerapprovedeny</servlet-name>
+    <url-pattern>/managerapprovedeny</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>imagefetcher</display-name>
+    <servlet-name>imagefetcher</servlet-name>
+    <servlet-class>com.revature.servlets.ImageFetcherServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>imagefetcher</servlet-name>
+    <url-pattern>/imagefetcher</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>employeeviewreimbursement</display-name>
+    <servlet-name>employeeviewreimbursement</servlet-name>
+    <servlet-class>com.revature.servlets.EmployeeViewReimbursementServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>employeeviewreimbursement</servlet-name>
+    <url-pattern>/employeeviewreimbursement</url-pattern>
   </servlet-mapping>
 </web-app>

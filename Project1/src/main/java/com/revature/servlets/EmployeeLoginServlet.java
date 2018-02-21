@@ -13,11 +13,14 @@ import com.revature.dao.*;
 
 public class EmployeeLoginServlet extends HttpServlet {
 
+	private static final long serialVersionUID = 1L;
+
+	// if a get request is called on this servlet, forward the request to the login page!
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("views/employeelogin.html").forward(request,response);
+		request.getRequestDispatcher("views/EmployeeLogin.html").forward(request,response);
 	}
 
-
+	// if a post request is called, take information and check the users credentials
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		// set the correct content type
@@ -31,12 +34,14 @@ public class EmployeeLoginServlet extends HttpServlet {
 		EmployeeDao ed = new EmployeeDaoSQL();
 		Employee resultEmployee = ed.getEmployeeByCredentials(username, password);
 
+		// if the resulting employee is null, then the credentials do not exist within the DB so redirect them back to the login page
 		if (resultEmployee != null) {
 			// set the session attributes so the username will be remembered
 			session.setAttribute("username", username);
+			session.setAttribute("type", "employee");
 			session.setAttribute("id", resultEmployee.getEmployeeId());
 			session.setAttribute("problem", null);
-			request.getRequestDispatcher("employeehomepage").forward(request,response);
+			response.sendRedirect("employeehomepage");
 		} else {
 			session.setAttribute("problem", "incorrect credentials");
 			response.sendRedirect("employeelogin");

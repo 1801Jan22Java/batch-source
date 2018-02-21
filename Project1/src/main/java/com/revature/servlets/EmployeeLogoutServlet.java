@@ -12,17 +12,19 @@ import javax.servlet.http.HttpSession;
  */
 public class EmployeeLogoutServlet extends HttpServlet {
 
+	// log the user out of the system by invalidating the session that carried his/her data
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("views/logout.html").include(request,response);
+		request.getRequestDispatcher("views/Logout.html").include(request,response);
 		HttpSession session = request.getSession(false);
+		// if the session is not null, then invalidate the session available
 		if(session != null){
 			session.invalidate();
 		}
 
 	}
 
+	// if a post request is called, then send a get response instead
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 		doGet(request, response);
 	}
 

@@ -14,13 +14,15 @@ import javax.servlet.http.HttpSession;
 import com.revature.dao.ReimbursementDao;
 import com.revature.dao.ReimbursementDaoSQL;
 
-@MultipartConfig
+//TODO: double check and make sure the post request should be here
+
 public class SubmitReimbursementServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	// if a get request is called, then ensure that a valid employee is getting access to the html page
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
-		if (session != null && session.getAttribute("username") != null) {
+		if (session != null && session.getAttribute("username") != null && session.getAttribute("type") == "employee") {
 			request.getRequestDispatcher("views/submitreimbursement.html").forward(request, response);
 		}
 		else {
@@ -29,15 +31,22 @@ public class SubmitReimbursementServlet extends HttpServlet {
 		
 	}
 
+	// if a post request is called, then ensure that a valid employee is getting access to information that is about to be
+	// sent. 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		HttpSession session = request.getSession(false);
-		if (session != null && session.getAttribute("username") != null) {
+		if (session != null && session.getAttribute("username") != null && session.getAttribute("type") == "employee") {
+			
+			// get the image from the request inputstream and write the information into a ByteArrayOutputStream
 			ServletInputStream in = request.getInputStream();
 			ByteArrayOutputStream bao = new ByteArrayOutputStream();
 			String query = request.getQueryString();
+			
+			// pass the reimbursement value through the URL as a query string
 			Double reimbursementValue = Double.parseDouble(query.split("=")[1]);
 			ReimbursementDao rd = new ReimbursementDaoSQL();
+			// ensure the inputstream even has information to load
 			if (in.available() > 0) {
 				int c = 0;
 				int count = 0;
@@ -45,6 +54,7 @@ public class SubmitReimbursementServlet extends HttpServlet {
 					bao.write(c);
 					count += 1;
 				}
+				// convert the ByteArrayOutputStream into a byte arr which is used to convert to a blob that is stored in the DB
 				byte [] byteArr = bao.toByteArray();
 				rd.submitReimbursement((int)session.getAttribute("id"), reimbursementValue,byteArr);
 			}

@@ -10,24 +10,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.revature.beans.Employee;
-import com.revature.beans.EmployeeInformation;
-import com.revature.beans.Reimbursement;
-import com.revature.dao.EmployeeDao;
-import com.revature.dao.EmployeeDaoSQL;
-import com.revature.dao.EmployeeInformationDao;
-import com.revature.dao.EmployeeInformationDaoSQL;
-import com.revature.dao.ReimbursementDao;
-import com.revature.dao.ReimbursementDaoSQL;
-import com.revature.dao.StatusDao;
-import com.revature.dao.StatusDaoSQL;
+import com.revature.beans.*;
+import com.revature.dao.*;
 
 /**
- * Servlet implementation class ManagerViewAllReimbursementServlet
+ * Servlet implementation class ManagerGetReimbursementServlet
  */
 public class ManagerGetReimbursementServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
@@ -48,24 +38,27 @@ public class ManagerGetReimbursementServlet extends HttpServlet {
 					break;
 			}
 			String JSONlist = "[";
-			int i = 0;
+			int count = 0;
 			for(Reimbursement r : re) {
-				i += 1;
+				
 				if(checkStatus.test(r.getStatus())) {
+					if (count > 0){
+						JSONlist += ",";
+					}
 					int employeeId = r.getEmployeeId();
 					Employee requestedEmployee = ed.getEmployeeByID(employeeId);
 					EmployeeInformation requestedEmployeeInformation = eid.getEmployeeInformationByID(employeeId);
-					JSONlist += "{\"fname\" : \"" + requestedEmployeeInformation.getFname() + "\"," ;
+					JSONlist += "{\"remId\" : \"" + r.getReimbursementId()  + "\",";
+					JSONlist += "\"fname\" : \"" + requestedEmployeeInformation.getFname() + "\"," ;
 					JSONlist += "\"lname\" : \"" + requestedEmployeeInformation.getLname() + "\"," ;
 					JSONlist += "\"empId\" : \"" + requestedEmployee.getEmployeeId() + "\"," ;
 					JSONlist += "\"status\" : \"" + sd.getStatusById(r.getStatus())  + "\"," ;
 					JSONlist += "\"reimbursementVal\" : \"" + r.getReimbursementValue() + "\"}";
-					if (i < re.size()) {
-						JSONlist += ",";
-					}
+					count += 1;
 				}
 			}
 			JSONlist += "]";
+			System.out.println(JSONlist);
 			response.getWriter().write(JSONlist);
 
 		}
