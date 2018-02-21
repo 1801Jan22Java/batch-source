@@ -10,8 +10,10 @@ import java.sql.Blob;
 import java.sql.SQLException;
 
 import beans.Employee;
+import beans.Manager;
 import dao.DocumentDAOImpl;
 import dao.EmployeeDAOImpl;
+import dao.ManagerDAOImpl;
 import dao.RequestDAOImpl;
 import dao.StatusDAOImpl;
 
@@ -21,8 +23,10 @@ public class ServerManager
 	public EmployeeDAOImpl empDao = new EmployeeDAOImpl();
 	public RequestDAOImpl reqDao = new RequestDAOImpl();
 	public StatusDAOImpl statDao = new StatusDAOImpl();
+	public ManagerDAOImpl manDao = new ManagerDAOImpl();
 	
 	public Employee currentEmployee;
+	public Manager currentManager;
 	
 	public int login(String username, String password)
 	{
@@ -36,11 +40,41 @@ public class ServerManager
 		}
 		return -1;
 	}
+	public int managerLogin(String username, String password)
+	{
+		for(Manager m: manDao.getManagers())
+		{
+			if(m.getUserName().equals(username) && m.getPassWord().equals(password))
+			{
+				this.currentManager = m;
+				return 1;
+			}
+		}
+		return -1;
+	}
 	public void changePic( int empId)
 	{
 		byte[] pic = empDao.getEmployee(empId).getProfilePic();
 		System.out.println(pic.toString());
 		File file = new File("C:/Users/panda/Documents/GitRepos/1801-jan22-java/batch-source/Project1Reimbersments/src/main/resources/pics/temp.jpg");
+		OutputStream out=null;
+		try {
+			out = new FileOutputStream(file);
+			out.write(pic);
+			out.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	public void managerChangePic( int manId)
+	{
+		byte[] pic = manDao.getManagerById(manId).getProfilePicture();
+		System.out.println(pic.toString());
+		File file = new File("C:/Users/panda/Documents/GitRepos/1801-jan22-java/batch-source/Project1Reimbersments/src/main/resources/pics/manager.jpg");
 		OutputStream out=null;
 		try {
 			out = new FileOutputStream(file);

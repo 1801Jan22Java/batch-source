@@ -3,18 +3,21 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Upload Request</title>
+<link rel="stylesheet" href="styles/ProfileStyle.css">
 </head>
 <body>
 	<div id="div">
 	<h1>Please Upload Your Document For Review By Your Manager</h1>
 			<fieldset>
 				<legend> filename: </legend>
-				<input type="file" name="file" id="image" accept="image/*"/>
+				<input type="file" name="file" id="image" accept="image/*"class="button"/>
+				<legend> Request Id: </legend>
+				<input type="text" name="requestId" class="button"/>
 			</fieldset>
-			<input type ="submit" id="submit_btn" value = "submit">
+			<input type ="submit" id="submit_btn" value = "submit" class="button">
 
 		
 	</div>
 </body>
-<script src = "../scripts/Request.js"></script>
+<script src = "scripts/Request.js"></script>
 </html>

@@ -18,7 +18,7 @@ import main.ServerManager;
  */
 public class loginPageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    private ServerManager serverManager = new ServerManager(); 
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -38,11 +38,14 @@ public class loginPageServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	    ServerManager serverManager = new ServerManager(); 
 		HttpSession session = request.getSession();
 		response.setContentType("application/json");
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
-		
+		session.setAttribute("username", username);
+		session.setAttribute("password", password);
+		serverManager.login((String)username, (String)password);
 		if(serverManager.login(username,password)==1){
 			serverManager.changePic(serverManager.currentEmployee.getEmployeeId());
 			session.setAttribute("employeeId", serverManager.currentEmployee.getEmployeeId());
@@ -53,15 +56,18 @@ public class loginPageServlet extends HttpServlet {
 			ArrayList<Request> reqs = serverManager.reqDao.getRequests(serverManager.currentEmployee.getEmployeeId());
 			if(!reqs.isEmpty())
 			{
+				session.setAttribute("request", reqs.toArray().toString());
 				session.setAttribute("requestId", reqs.get(0).getRequestId());
 				session.setAttribute("requestStatus", reqs.get(0).getStatus());
 				session.setAttribute("requestAmount", reqs.get(0).getAmountRequested());
 				session.setAttribute("requestDocument", serverManager.docDao.downloadDocuments(reqs.get(0).getRequestId()));
+				//ArrayList<Request> reqs = serverManager.reqDao.getRequests(serverManager.currentEmployee.getEmployeeId());
+				session.setAttribute("requests", reqs);
 			}
 			response.sendRedirect("EmployeeProfile");
 		} else {
 			session.setAttribute("problem", "incorrect password");
-			response.sendRedirect("login");
+			response.sendRedirect("loginPage");
 		}
 	}
 

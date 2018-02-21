@@ -20,7 +20,7 @@ public class StatusDAOImpl implements StatusDAO
 		ArrayList<Status> stats = new ArrayList<Status>();
 		try(Connection con = ConnectionUtil.getConnectionFromFile())
 		{
-			String sql = "SELECT * FROM DOCUMENT";
+			String sql = "SELECT * FROM STATUS";
 			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery(sql);
 			System.out.println(stmt);
@@ -28,10 +28,11 @@ public class StatusDAOImpl implements StatusDAO
 			while (rs.next())
 			{
 				int statId = rs.getInt("STATUS_ID");
-				String name = rs.getString("STATUS_NAME");
+				String name = rs.getString("STAUS_NAME");
 				Status s = new Status(name, statId);
 				stats.add(s);
 			}	
+			return stats;
 		}
 		catch (SQLException e)
 		{
@@ -98,5 +99,8 @@ public class StatusDAOImpl implements StatusDAO
 		}
 		return false;
 	}
-
+	public static void main(String[] args) {
+		StatusDAOImpl statDao = new StatusDAOImpl();
+		System.out.println(statDao.getStatuses());
+	}
 }

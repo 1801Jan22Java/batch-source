@@ -1,4 +1,5 @@
 package dao;
+import java.io.ByteArrayOutputStream;
 //Fin
 import java.io.File;
 import java.io.FileOutputStream;
@@ -39,23 +40,26 @@ public class ManagerDAOImpl implements ManagerDAO
 				String userName = rs.getString("USER_NAME");
 				String passWord = rs.getString("PASS_WORD");
 				int managerId = rs.getInt("MANAGER_ID");
-				File pic = null;
-				if(rs.getBlob("PROFILE_PIC")!= null)
-				{	
-					Blob blob = rs.getBlob("PROFILE_PIC");
-					InputStream in = blob.getBinaryStream();
-					OutputStream out = new FileOutputStream(pic);
-					byte[] buff = new byte[4096];  // how much of the blob to read/write at a time
-					int len = 0;
-					while ((len = in.read(buff)) != -1) 
-					{
-						out.write(buff, 0, len);
-					}
-					System.out.println("here");
-					out.close();
+				Blob pic = null;
+				ByteArrayOutputStream bao = null;
+				pic = rs.getBlob("PROFILE_PIC");
+				if(pic != null)
+				{InputStream in = pic.getBinaryStream();
+				bao = new ByteArrayOutputStream();
+				int i = 0;
+				while((i=in.read())!=-1)
+				{
+					bao.write(i);
 				}
-				Manager m = new Manager(managerId, manager, employeeId, firstName, lastName, email,userName,passWord, null);
+				Manager m = new Manager(employeeId, manager,managerId, firstName, lastName, email, userName, passWord,  bao.toByteArray());
 				mans.add(m);
+				}
+				else {
+					Manager m = new Manager(employeeId, manager,managerId, firstName, lastName, email, userName, passWord,  null);
+					mans.add(m);
+				}
+				
+				
 			}
 			con.close();
 			return mans;
@@ -129,6 +133,9 @@ public class ManagerDAOImpl implements ManagerDAO
 		}
 		return null;
 	}
-
+	public static void main(String[] args) {
+		ManagerDAOImpl man = new ManagerDAOImpl();
+		System.out.println(man.getManagers());
+	}
 
 }

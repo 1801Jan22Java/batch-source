@@ -5,7 +5,7 @@ import java.io.File;
 public class Manager 
 {
 	public Manager(int managerId, int manager, int employeeId, String firstName, String lastName, String email,
-			String userName, String passWord, File profilePicture) {
+			String userName, String passWord, byte[] profilePicture) {
 		super();
 		this.managerId = managerId;
 		this.manager = manager;
@@ -25,7 +25,7 @@ public class Manager
 	private String email;
 	private String userName;
 	private String passWord;
-	private File profilePicture;
+	private byte[] profilePicture;
 	public int getManagerId() {
 		return managerId;
 	}
@@ -74,10 +74,14 @@ public class Manager
 	public void setPassWord(String passWord) {
 		this.passWord = passWord;
 	}
-	public File getProfilePicture() {
+	public byte[] getProfilePicture() {
 		return profilePicture;
 	}
-	public void setProfilePicture(File profilePicture) {
+	public void setProfilePicture(byte[] profilePicture) {
 		this.profilePicture = profilePicture;
+	}
+	public String toString()
+	{
+		return this.firstName +" "+this.lastName;
 	}
 }

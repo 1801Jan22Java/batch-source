@@ -21,4 +21,8 @@ public class Status
 	public void setStatusId(int statusId) {
 		this.statusId = statusId;
 	}
+	public String toString()
+	{
+		return this.name+" "+this.statusId;
+	}
 }

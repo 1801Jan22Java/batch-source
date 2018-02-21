@@ -1,4 +1,4 @@
-function sendAjaxGet(url, func) {
+/*function sendAjaxGet(url, func) {
 	var xhr = new XMLHttpRequest()
 			|| new ActiveXObject("Microsoft.HTTPRequest");
 	xhr.onreadystatechange = function() {
@@ -13,19 +13,10 @@ function sendAjaxGet(url, func) {
 
 function populateUser(xhr) {
 	if (xhr.responseText) {
-		//document.getElementById("Id").innerHTML = xhr.responseText;
-		//cosole.log(xhr.responseText);
 		var res = JSON.parse(xhr.responseText);
-		if (res.employeeId) {
-			//document.getElementById("Id").innerHTML = xhr.responseText;
-			//document.getElementById("Id").innerHTML = "you are logged in as employee number: "+ res.employeeId;
-			document.getElementById("Name").innerHTML = "Welcome "+ res.firstName;
-			document.getElementById("email").innerHTML = res.email;
-			document.getElementsByTagName("title")[0].innerHTML = res.firstName+" "+ res.lastName;	
-			//var reqTable = document.getElementById("Requests");
-		}
-			
-			
+		document.getElementById("testParagraph").innerHTML = res;
+		cosole.log(res.requests	);
+		var res = JSON.parse(xhr.responseText);
 	} else {
 		window.location = "http://localhost:8084/Project1Reimbersments/loginPage";
 	}
@@ -48,4 +39,8 @@ function readURL(input) {
 	});
 window.onload = function() {
 	sendAjaxGet("http://localhost:8084/Project1Reimbersments/Session", populateUser);
+}
+*/
+window.onload = function(){
+	
 }

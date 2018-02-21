@@ -13,7 +13,7 @@ public interface RequestDAO
 	public ArrayList<Document> getRequestDocuments(int requestId);
 	public float getAmount(int requestId);
 	public int getStatus(int requestId);
-	public boolean addRequest(int employeeId, float amountRequested);
+	public boolean addRequest(int employeeId, float amountRequested, String details);
 	public float updateAmountRequested(int requestId, float newAmount);
 	public boolean changeStaus(int requestId, int newStatus);
 }

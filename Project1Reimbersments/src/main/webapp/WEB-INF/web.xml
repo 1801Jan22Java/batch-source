@@ -67,4 +67,54 @@
     <servlet-name>RequestDocumentServlet</servlet-name>
     <url-pattern>/RequestDocumentServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ViewRequestsServlet</display-name>
+    <servlet-name>ViewRequestsServlet</servlet-name>
+    <servlet-class>servlets.ViewRequestsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ViewRequestsServlet</servlet-name>
+    <url-pattern>/ViewRequestsServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ViewResolvedRequests</display-name>
+    <servlet-name>ViewResolvedRequests</servlet-name>
+    <servlet-class>servlets.ViewResolvedRequests</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ViewResolvedRequests</servlet-name>
+    <url-pattern>/ViewResolvedRequests</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>HomePageServlet</display-name>
+    <servlet-name>HomePageServlet</servlet-name>
+    <servlet-class>servlets.HomePageServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>HomePageServlet</servlet-name>
+    <url-pattern>/HomePage</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>NewRequest</display-name>
+    <servlet-name>NewRequest</servlet-name>
+    <servlet-class>servlets.NewRequest</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>NewRequest</servlet-name>
+    <url-pattern>/NewRequest</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ManagerLogin</display-name>
+    <servlet-name>ManagerLogin</servlet-name>
+    <servlet-class>servlets.ManagerLogin</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ManagerLogin</servlet-name>
+    <url-pattern>/ManagerLogin</url-pattern>
+  </servlet-mapping>
 </web-app>

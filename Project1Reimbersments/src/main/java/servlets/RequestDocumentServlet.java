@@ -20,11 +20,12 @@ import main.ServerManager;
  */
 public class RequestDocumentServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    public ServerManager serverManager = new ServerManager();   
+    
 	
-    public void doGet(HttpServletRequest request,HttpServletResponse response) throws IOException  
+    public void doGet(HttpServletRequest request,HttpServletResponse response) throws IOException, ServletException  
     {  
-    response.setContentType("image/jpeg");  
+    	request.getRequestDispatcher("views/Request.html").include(request,response);
+    /*response.setContentType("image/jpeg");  
     ServletOutputStream out;  
     out = response.getOutputStream();  
     FileInputStream fin = new FileInputStream("C:\\Users\\panda\\Documents\\GitRepos\\1801-jan22-java\\batch-source\\Project1Reimbersments\\src\\main\\resources\\pics\\tempRequest.jpg");  
@@ -40,17 +41,16 @@ public class RequestDocumentServlet extends HttpServlet {
     	bin.close();  
     	fin.close();  
     	bout.close();  
-    	out.close();  
+    	out.close();  */
     }  
 	 public void doPost(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException
 	 {
-		 HttpSession session = request.getSession();
+		 ServerManager serverManager = new ServerManager();   
 		 ServletInputStream in = request.getInputStream();
 		 ByteArrayOutputStream bao = new ByteArrayOutputStream();
 		 System.out.println(in.available());
 		 if(in.available()!=-1)
 		 {
-			 System.out.println("poop here please");
 			 int i = 0;
 			 int count = 0;
 			 while((i=in.read())!=-1)
@@ -60,7 +60,8 @@ public class RequestDocumentServlet extends HttpServlet {
 			 }
 			 System.out.println(count);
 			 byte[] byteArr = bao.toByteArray();
-			 serverManager.docDao.uploadDocument(1001, byteArr);
+			 int requestId = Integer.parseInt(request.getParameter("requestId"));
+			 serverManager.docDao.uploadDocument(serverManager.currentEmployee.getEmployeeId(), byteArr);
 		 }
 		 
 	 }

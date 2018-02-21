@@ -81,14 +81,16 @@ public class RequestDAOImpl implements RequestDAO
 	}
 
 	@Override
-	public boolean addRequest(int employeeId, float requestAmount) {
+	public boolean addRequest(int employeeId, float requestAmount, String details) {
 		PreparedStatement pstmt = null;
 		try (Connection con = ConnectionUtil.getConnectionFromFile())
 		{
-			String sql = "INSERT INTO REQUEST(EMPLOYEE_ID, AMOUNT_REQUEST) VALUES(?,?)";
+			String sql = "INSERT INTO REQUEST(EMPLOYEE_ID, AMOUNT_REQUEST, REQUEST_DETAILS, STATUS) VALUES(?,?,?,?)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setFloat(2, requestAmount); 
 			pstmt.setInt(1, employeeId);  // set the PK value
+			pstmt.setString(3, details);
+			pstmt.setInt(4, 101);
 			pstmt.executeUpdate();
 			pstmt.close();
 			return true;
