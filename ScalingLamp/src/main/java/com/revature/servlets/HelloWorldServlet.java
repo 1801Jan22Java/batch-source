@@ -13,8 +13,6 @@ public class HelloWorldServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
      
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
-		
 		resp.getWriter().write("Hello World!");
 	}
 

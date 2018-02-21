@@ -21,5 +21,5 @@ function sayHi(xhr){
 }
 
 	document.getElementById("sayHi").addEventListener('click', function(){
-		sendAjaxGet("http://localhost:8084/ScalingLamp/helloworld", sayHi);
+		sendAjaxGet("helloworld", sayHi);
 	});
