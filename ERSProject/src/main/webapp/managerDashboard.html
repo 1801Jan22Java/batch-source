@@ -1,0 +1,137 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+<head>
+
+    <meta charset="utf-8" />
+    <title>Manager Dashboard</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="./res/style.css">
+</head>
+
+<body class="bodyClass">
+
+    <nav class="navbar navbar-inverse" data-spy="affix" data-offset-top="197">
+
+        <div class="btn-group">
+            <a href="./EmployeeDashboard.html" class="btn btn-primary buttonSpace">Dashboard</a>
+            <a href="./account.html" class="btn btn-primary buttonSpace">Account</a>
+
+        </div>
+
+
+        <form class="form-horizontal logOutButon" action="logout" method="get">
+        	<p id="user" style="color:white"> User </p>
+			<button type="submit" class="btn btn-danger buttonSpace" id="submitButton">Logout</button>
+		</form>
+
+    </nav>
+
+    <div class="centerContent">
+        <div class="lightDiv centerDiv">
+
+            <h1> Expense Reimbursement </h1>
+            <h5> Manager Dashboard </h5>
+        </div>
+
+        <div class="lightDiv centerDiv">
+            <h5> Manage </h5>
+
+
+            <ul class="nav nav-tabs">
+                <li class="active"><a data-toggle="tab" href="#openReqs">Open Requests</a></li>
+                <li><a data-toggle="tab" href="#closedReqs">Closed Requests</a></li>
+                <li><a data-toggle="tab" href="#employees">Employees</a></li>
+            </ul>
+
+            <div class="tab-content">
+                <div id="openReqs" class="tab-pane fade in active">
+                    <h5>Open Requests</h5>
+
+                    <table class="table" id="requestTableOpen">
+                        <thead>
+                            <tr>
+                            	<th style="padding:0px">ID</th>
+                                <th>Email</th>
+                                <th>Title</th>
+                                <th>Amount</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                    </table>
+
+                </div>
+                <div id="closedReqs" class="tab-pane fade in">
+                    <h5>Closed Requests</h5>
+
+                    <table class="table" id="requestTableClosed">
+                        <thead>
+                            <tr>
+                            	<th>ID</th>
+                                <th>Email</th>
+                                <th>Title</th>
+                                <th>Amount</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                                <th>Manager</th>
+                            </tr>
+
+                        </thead>
+                    </table>
+
+                </div>
+
+                <div id="employees" class="tab-pane fade in">
+                    <h5>Employees</h5>
+
+                    <table class="table" id="empTable">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Email</th>
+                                <th> Find 
+                                <button type="button" class="btn btn-primary" id="findAll">All</button>
+                                </th>
+
+                            </tr>
+                        </thead>
+                    </table>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content centerDiv">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title" id="recieptModalHeader">No receipt available! Enjoy this instead!</h4>
+      </div>
+      <div class="modal-body">
+        <img src="res/doge.jpg" class="img-rounded" alt="no reciept available!" id="recieptModalImage">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</body>
+
+<script src="./scripts/manager.js"> </script>
+
+</html>

@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+<head>
+
+    <meta charset="utf-8" />
+    <title>Register</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./res/style.css">
+</head>
+
+<body class="bodyClass">
+
+    <div class="centerContent">
+        <div class="lightDiv centerDiv">
+
+            <h1> Expense Reimbursement </h1>
+
+            <h5> Register account </h5>
+            <br />
+
+            <form class="form-horizontal" action="RegisterEmployee" method="post">
+                <div class="form-group">
+
+                    <label for="email" class="labelSpace">
+                        Email address:
+                    </label> <input type="email" class="form-control" maxlength="25" id="email" name="email">
+
+                </div>
+                <div class="form-group">
+
+                    <label for="pwd" class="labelSpace">Password:</label>
+                    <input type="password" class="form-control" maxlength="25" id="pwd" name="password1">
+                    <label for="cpwd" class="labelSpace">Confirm Password:</label>
+                    <input type="password" class="form-control" maxlength="25" id="cpwd" name="password2">
+
+                </div>
+
+                <button type="submit" class="btn btn-primary buttonSpace" id="submitButton">Submit</button>
+
+                <div>
+                    <a class="anchorSpace" href="./home.html"> Home        </a>
+                    <a class="anchorSpace" href="./forgotPassword.html"> Forgot Password?</a>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+</body>
+
+</html>

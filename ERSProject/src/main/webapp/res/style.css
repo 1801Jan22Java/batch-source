@@ -1,0 +1,51 @@
+.bgClass {
+    height: 1280px;
+    width: 720px;
+    background-size: cover;
+    background-repeat: repeat;
+    background-color: #ebac00;
+}
+
+.bodyClass {
+}
+
+.centerContent {
+    max-width: 1080px;
+    margin: auto;
+}
+
+.labelSpace {
+    margin: 5px;
+}
+
+.buttonSpace {
+    margin: 5px;
+    width: 150px;
+}
+
+.anchorSpace{
+    margin: 75px;
+    max-width: 150px;
+    width: 150px;
+}
+
+.lightDiv {
+    border: solid 2px;
+    border-color: #ffc72b;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+    background-color: #ffc72b;
+}
+
+.centerDiv{
+    text-align:center;
+}
+
+.chooseFile{
+    width: 250px;
+}
+
+.logOutButon{
+    float:right;
+}

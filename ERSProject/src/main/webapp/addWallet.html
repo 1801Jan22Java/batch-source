@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+<head>
+
+    <meta charset="utf-8" />
+    <title>Create Wallet</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="./res/style.css">
+</head>
+
+<body class="bodyClass">
+
+    <nav class="navbar navbar-inverse" data-spy="affix" data-offset-top="197">
+
+        <div class="btn-group">
+            <a href="./EmployeeDashboard.html" class="btn btn-primary buttonSpace">Dashboard</a>
+            <a href="./account.html" class="btn btn-primary buttonSpace">Account</a>
+
+        </div>
+
+        <form class="form-horizontal logOutButon" action="logout" method="get">
+			<button type="submit" class="btn btn-danger buttonSpace" id="submitButton">Logout</button>
+		</form>
+
+    </nav>
+
+    <div class="centerContent">
+        <div class="lightDiv centerDiv">
+
+            <h1> Expense Reimbursement </h1>
+            <h5> New Wallet </h5>
+            <br />
+
+            <form class="form-horizontal" action="createWallet" method="post">
+                <div class="form-group">
+
+                    <label for="rTitle" class="labelSpace"> Wallet Name: </label>
+                    <input type="text" class="form-control" maxlength="25" id="rTitle" name="name">
+
+                </div>
+                <div class="form-group">
+
+                    <label for="rAddress" class="labelSpace"> Wallet Address: </label>
+                    <input type="text" class="form-control" id="rAddress" name="walletAddress">
+
+                </div>
+
+                    <div>
+                        <div class="form-group">
+                            <label for="wals">Wallet Currency:</label>
+                            <select class="form-control" id="wals">
+                                <option>Dogecoin</option>
+                            </select>
+                        </div>
+                        <br>
+                    </div>
+
+
+                <div class="btn-group">
+                    <button type="submit" class="btn btn-primary buttonSpace" id="submitButton">Create Wallet</button>
+                    <a href="./account.html" class="btn btn-danger buttonSpace">Cancel</a>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+</body>
+
+<script src="./scripts/checks.js"> </script>
+
+</html>

@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+<head>
+
+    <meta charset="utf-8" />
+    <title>Home</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./res/style.css">
+</head>
+
+<body class="bodyClass">
+
+    <div class="centerContent">
+        <div class="lightDiv centerDiv">
+
+            <h1> Expense Reimbursement </h1>
+            <h5> Login </h5>
+            <br />
+
+            <form class="form-horizontal" action="login" method="post">
+                <div class="form-group">
+
+                    <label for="email" class="labelSpace">
+                        Email address:
+                    </label> <input type="email" class="form-control" maxlength="25" id="email" name="email">
+
+                </div>
+                <div class="form-group">
+
+                    <label for="pwd" class="labelSpace">Password:</label>
+                    <input type="password" class="form-control" maxlength="25" id="pwd" name="password">
+
+                </div>
+
+                <button type="submit" class="btn btn-primary buttonSpace" id="submitButton">Submit</button>
+
+                <div>
+                    <a class="anchorSpace" href="./register.html"> Register        </a>
+                    <a class="anchorSpace" href="./forgotPassword.html"> Forgot Password?</a>
+                </div>
+
+            </form>
+            
+        </div>
+    </div>
+</body>
+
+</html>

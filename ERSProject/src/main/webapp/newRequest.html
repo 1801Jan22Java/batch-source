@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+<head>
+
+    <meta charset="utf-8" />
+    <title>Create Request</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="./res/style.css">
+</head>
+
+<body class="bodyClass">
+
+    <nav class="navbar navbar-inverse" data-spy="affix" data-offset-top="197">
+
+        <div class="btn-group">
+            <a href="./EmployeeDashboard.html" class="btn btn-primary buttonSpace">Dashboard</a>
+            <a href="./account.html" class="btn btn-primary buttonSpace">Account</a>
+
+        </div>
+
+        <form class="form-horizontal logOutButon" action="logout" method="get">
+        	<p id="user" style="color:white"> User </p>
+			<button type="submit" class="btn btn-danger buttonSpace" id="submitButton">Logout</button>
+		</form>
+
+    </nav>
+
+    <div class="centerContent">
+        <div class="lightDiv centerDiv">
+
+            <h1> Expense Reimbursement </h1>
+            <h5> New Request </h5>
+            <br />
+
+			<div id="addWalletsDiv" style="visibility:collapse">
+			<h3>You do not have a wallet! How do you expect to be reimbursed?</h3>
+				<a href="./addWallet.html" class="btn btn-primary buttonSpace">Add Wallet</a>
+			</div>
+			
+            <form class="form-horizontal" action="registerRequest" method="post" id="requestForm" style="visibility:collapse"  enctype="multipart/form-data">
+                <div class="form-group">
+
+                    <label for="rTitle" class="labelSpace"> Expense Title: </label>
+                    <input type="text" class="form-control" maxlength="25" id="rTitle" name="title">
+
+					<label for="rAmount" class="labelSpace"> Amount: </label>
+                    <input type="number" class="form-control" maxlength="25" id="rAmount" name="amount">
+                    
+                </div>
+                <div class="form-group">
+
+                    <label for="rDesc" class="labelSpace">Expense Description:</label>
+                    <textarea class="form-control" maxlength="255" id="rDesc" rows="7" name="desc"></textarea>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="rReceipt" class="labelSpace"> Expense Receipt: </label>
+                    <input type="file" class="form-control chooseFile" id="rReceipt" name="img">
+
+                </div>
+
+
+                    <div>
+                        <div class="form-group">
+                            <label for="wals">Reimbursement Method:</label>
+                            <select class="form-control" id="wals" name="selection">
+                            </select>
+                        </div>
+                    </div>
+
+
+                <div class="btn-group">
+                    <button type="submit" class="btn btn-primary buttonSpace" id="submitButton">Create Request</button>
+                    <a href="./EmployeeDashboard.html" class="btn btn-danger buttonSpace">Cancel</a>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+</body>
+
+<script src="./scripts/loadWalletsOptions.js"> </script>
+
+</html>
