@@ -16,7 +16,7 @@ function sendAjaxGet(url, func){
 
 function sayHi(xhr){
 	if(xhr.response){
-		document.getElementById("displayHello").innerHTML = xhr.responseText;
+		document.getElementById("displayHello").innerHTML = "<p>"+xhr.responseText+"</p>";
 	}
 }
 
