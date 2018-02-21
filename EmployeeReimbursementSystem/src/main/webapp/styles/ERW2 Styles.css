@@ -1,0 +1,59 @@
+body{
+	background-color: #62cdf7;
+}
+
+h1{
+	display: block;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.spacing{
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.row{
+	font-size: 20px;
+	
+}
+
+#employeeInfo{
+	font-size: 20px;
+	font-weight: bolder;
+}
+
+#employeeNames{
+	font-size: 20px;
+	font-weight: bolder;
+}	
+	
+#employeeStuff1{
+	font-size: 20px;
+	font-weight: normal;
+}	
+
+#employeeStuff2{
+	font-size: 20px;
+	font-weight: normal;
+}	
+
+#editBut{
+	background-color: #f44242;
+	width: 100px;
+	margin: auto;
+}
+
+#newReqHeader{
+	font-size: 20px;
+	font-weight: normal;
+}
+
+.table{
+	background-color: #fcfa88;
+	}
+
+.success{
+	background-color: #bdf97c;
+}

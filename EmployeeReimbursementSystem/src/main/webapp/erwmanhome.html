@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Manager Login Page</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="styles/ERW2 Styles.css" >
+</head>
+<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">Reimbursements Grinch</a>
+			</div>
+			<ul class="nav navbar-nav">
+				<li class="active"><a href="erwmanhome.html">Home</a></li>
+				<li><a href="erwmanemps.html">View Employees</a></li>
+				<li><a href="erwmanrequests.html">View Requests</a></li>
+				<li><a href="erwemplogin.html">Logout</a></li>
+			</ul>
+		</div>
+	</nav>
+<body>
+	<h1>Welcome Johnathon to the Grinch Manager!</h1>
+	<br><br>
+	<div>
+		<p id="employeeStuff2" >Pending Reimbursement Requests:</p>
+	</div>
+	<br><br>
+	<div class="container" id = "concon">
+		<table class="table table-bordered " id = "tabtab">
+		<!--  
+				<tr class="warning" id="employeeInfo">
+					<th>Request ID</th>
+					<th>Employee ID</th>
+					<th>Request Amount</th>
+				</tr>
+				<tr class="success" id="employeeStuff1">
+					<td  id="reqID">1337</td>
+					<td id="empID">1337</td>
+					<td id = "reqAmount">$531.97</td>
+				</tr>   
+				<tr class="warning" id="employeeNames">
+					<td>Category</td>
+					<td>Submit Date</td>
+					<td>Description</td>
+				</tr>
+				<tr class="success" id="employeeStuff2">
+					<td  id="reqType">Food</td>
+					<td  id="reqSubDate">16-JUL-2017</td>
+					<td  id="reqDesc">Of all the turkeys in Russia.
+					This one tastes the best by far.  Give me money. NOW!
+					</td>
+				</tr>      
+				<tr class="warning" id="employeeNames">
+					<td>Manager ID</td>
+					<td>Status Date</td>
+					<td>Current Status</td>
+				</tr>
+				<tr class="success" id="employeeStuff2">
+					<td  id="manID">1337</td>
+					<td id="reqStatDate">19-JUL-2017</td>
+					<td  id="reqStatus">Accepted</td>
+				</tr>      
+				-->
+		</table>
+	</div>
+	<br><br>
+	<form>
+	<div class="row">
+		<div class="col-md-4">
+		Please select a status for this Reimbursement Request:
+		</div>	
+		<div class="col-md-4">
+			<select name="statChange" id="statChange">
+				<option value="declined">Declined</option>
+				<option value="approved">Approved</option>
+				<option value="pending">Pending</option>
+				<option value="moreInfo">More Info Required</option>
+			</select>
+		</div>	
+		<div class="col-md-4">
+			Then submit to finalize the response:  
+			<input type="submit" value = "Edit" class="btn btn-primary btn-lg" id="editBut"/>
+		</div>
+	</div>
+	</form>
+</body>
+<script src="js/manhomelogic.js"></script>
+	 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</html>

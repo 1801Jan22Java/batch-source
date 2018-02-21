@@ -1,0 +1,2 @@
+C:\GitRepos\batch-source\typescript bank\tyepscriptbank\tyepscriptbank\obj\Debug\tyepscriptbank.njsproj.CoreCompileInputs.cache
+C:\GitRepos\batch-source\typescript bank\tyepscriptbank\tyepscriptbank\bin\Microsoft.NodejsTools.WebRole.dll

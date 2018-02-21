@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Make Request Page</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="styles/ERW3 Styles.css" >
+</head>
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">Reimbursements Grinch</a>
+			</div>
+			<ul class="nav navbar-nav">
+			<li class="active"><a href="erwemphome.html">Home</a></li>
+				<li><a href="erwmakerequest.html">Submit Request</a></li>
+				<li><a href="erwviewrequest.html">View Requests</a></li>
+				<li><a href="erwemplogin.html">Logout</a></li>
+			</ul>
+		</div>
+	</nav>
+<body>
+	<h1>Submit a Reimbursement Request</h1>
+	<!-- enctype="multipart/form-data" -->
+	<form action="SubmitServlet" method="post" enctype="multipart/form-data">
+		Amount:
+		<br><br>
+		<input type="number" step=".01" name="amount" id="amount" size = "40">
+		<br><br>
+		<select name="subReason" id="subReason">
+				<option value="business">Business</option>
+				<option value="travel">Travel</option>
+				<option value="housing">Housing</option>
+				<option value="education">Education</option>
+				<option value="hiring">Hiring</option>
+				<option value="inventory">Inventory</option>
+				<option value="food">Food</option>
+				<option value="personal">Personal</option>
+				<option value="insurance">Insurance</option>
+				<option value="entertainment">Entertainment</option>
+				<option value="misc">Miscellaneous</option>
+			</select>
+		<br><br>
+		Description: (Minimum 10 characters, Maximum 160 characters)
+		<br><br>
+		<textarea name="descript" id="descript" rows="4" cols="50">
+		</textarea>
+		<br><br>
+		Optional: (Add a file below)
+		<input type="file" name="myFile" id="myFile">
+		<br><br>
+		<input type="submit" type="button" id="submit" value="request" >
+	</form>
+</body>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</html>

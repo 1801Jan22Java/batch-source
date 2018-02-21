@@ -1,0 +1,11 @@
+body{
+	background-color: #62cdf7;
+	margin-left: 25px;
+	font-size: 20px;
+	font-weight: normal;
+}
+
+.subReason{
+	width: 50px;
+	height: 300px;
+}

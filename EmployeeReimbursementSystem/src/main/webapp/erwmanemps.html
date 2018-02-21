@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>View Employees</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="styles/ERW2 Styles.css" >
+</head>
+<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">Reimbursements Grinch</a>
+			</div>
+			<ul class="nav navbar-nav">
+				<li class="active"><a href="erwmanhome.html">Home</a></li>
+				<li><a href="erwmanemps.html">View Employees</a></li>
+				<li><a href="erwmanrequests.html">View Requests</a></li>
+				<li><a href="erwemplogin.html">Logout</a></li>
+			</ul>
+		</div>
+	</nav>
+<body>
+
+<h1>All Employees</h1>
+<br><br>
+	<!-- 
+	<div class="container">
+		<table class="table table-bordered">
+				<tr class="warning" id="employeeInfo">
+					<th>ID</th>
+					<th>Account</th>
+					<th>Password</th>
+				</tr>
+				<tr class="success" id="employeeStuff1">
+					<td name="empID" id="empID">1028</td>
+					<td name="empAccount" id="empAccount">TheLoneStar1849</td>
+					<td name="empPassword" id = "empPassword">**************</td>
+				</tr>   
+				<tr class="warning" id="employeeNames">
+					<td>First Name</td>
+					<td>Last Name</td>
+					<td>E-mail</td>
+				</tr>
+				<tr class="success" id="employeeStuff2">
+					<td name="empFirstName" id="empFirstName">Johnathon</td>
+					<td name="empLastName" id="empLastName">Blondestar</td>
+					<td name="empEmail" id="empEmail">thebigbangatemyhomework@hotmail.com</td>
+				</tr>      
+		</table>
+	</div>
+<br><br>  -->
+<h2> Employee Manager</h2>
+<br><br>
+	<div>
+	Choose an Employee Number and then press the View button to view them.
+	<br><br>
+	<form action="EmpMasterServlet" method="Post">
+			Employee Identification:
+			<br><br>
+			<input type="text" name="empIdent" id="empIdent" size = "40">
+			<br><br>
+			<input type="submit" type="button" id="submit" value="View" > 
+	</form>
+	</div>
+</body>
+<script src="js/manempslogic.js"></script>
+	 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</html>

@@ -1,0 +1,11 @@
+
+<h1> {{name}}</h1> <!--{{}} is Interpolation -->
+
+<ul>
+  <li>Age: {{age}}</li>
+  <li>Email: {{email}}</li>
+  <li>{{address.street}}{{address.city}},{{address.state}}</li>
+</ul>
+
+<h1>Hobbies</h1>
+<ul><li *ngFor="let hobby of hobbies">{{hobby}}</li></ul>

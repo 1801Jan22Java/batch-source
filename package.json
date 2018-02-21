@@ -1,0 +1,20 @@
+{
+  "name": "batch-source",
+  "version": "1.0.0",
+  "description": "Batch repository for code examples and assignment submissions.",
+  "main": "JSHWPart1.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/1801Jan22Java/batch-source.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/1801Jan22Java/batch-source/issues"
+  },
+  "homepage": "https://github.com/1801Jan22Java/batch-source#readme"
+}

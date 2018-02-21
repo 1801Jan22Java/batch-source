@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Employee Login Page</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="styles/ERW2 Styles.css" >
+</head>
+<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">Reimbursements Grinch</a>
+			</div>
+			<ul class="nav navbar-nav">
+				<li class="active"><a href="erwemphome.html">Home</a></li>
+				<li><a href="erwmakerequest.html">Submit Request</a></li>
+				<li><a href="erwviewrequest.html">View Requests</a></li>
+				<li><a href="erwemplogin.html">Logout</a></li>
+			</ul>
+		</div>
+	</nav>
+<body>
+	<h1>Welcome Johnathon to Grinch Reimbursements!</h1>
+	<br><br>
+	<div class="container">
+		<table class="table table-bordered">
+				<tr class="warning" id="employeeInfo">
+					<th>ID</th>
+					<th>Account</th>
+					<th>Password</th>
+				</tr>
+				<tr class="success" id="employeeStuff1">
+					<td id="empID"></td>
+					<td id="empAccount"></td>
+					<td id = "empPassword"></td>
+				</tr>   
+				<tr class="warning" id="employeeNames">
+					<td>First Name</td>
+					<td>Last Name</td>
+					<td>E-mail</td>
+				</tr>
+				<tr class="success" id="employeeStuff2">
+					<td id="empFirstName"></td>
+					<td id="empLastName"></td>
+					<td id="empEmail"></td>
+				</tr>      
+		</table>
+	</div>
+	<br><br>
+	<form>
+	<div class="row">
+		<div class="col-md-4">
+		If you would like to modify your information choose an option to edit:
+		</div>	
+		<div class="col-md-4">
+			<select name="empChange" id="empChange">
+				<option value="passwordchange">Password</option>
+				<option value="emailchange">E-mail</option>
+				<option value="firstnamechange">First Name</option>
+				<option value="lastnamechange">Last Name</option>
+			</select>
+			  Then add the desired info for the field  
+		</div>	
+		<div class="col-md-4">
+			New info:
+			<input type="text" id="useredittext" size = "40">
+		</div>
+	</div>
+	<br><br>
+	<div class="row">	
+		<div class="col-md-4">	
+		</div>
+		<div class="col-md-4 text-center">
+			<input type="button" value = "Edit" class="btn btn-primary btn-lg" id="editBut"/>	
+		</div>
+		<div class="col-md-4">
+		</div>
+	</div>
+	</form>
+</body>
+	<script src="js/emphomelogic.js"></script>
+	 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</html>

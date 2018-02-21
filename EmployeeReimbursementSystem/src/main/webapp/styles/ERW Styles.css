@@ -1,0 +1,39 @@
+body{
+font-size: 32px;
+font-family: verdana,arial, sans-serif;
+background-color: #62cdf7;
+
+}
+
+.align{
+	display: block;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.login1{
+	text-shadow:-1px 0 black, 0 2px black, 2px 0 black, 0 -1px black;
+}
+	
+#username{
+	height: 40px;
+	font-size: 32px;
+}
+
+#password{
+	height: 40px;
+	font-size: 32px;
+}
+
+#submit{
+	padding: 30px 120px;
+	display: inline-block;
+    font-size: 32px;
+	background: linear-gradient(#ffbc00 5%, #ffdd7f 100%);
+	text: Login;
+}
+
+#manTime{
+	
+}

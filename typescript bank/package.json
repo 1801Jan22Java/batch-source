@@ -1,0 +1,12 @@
+{
+  "name": "tyepscriptbank",
+  "version": "0.0.0",
+  "description": "tyepscriptbank",
+  "main": "app.js",
+  "author": {
+    "name": "James"
+  },
+  "devDependencies": {
+    "@types/node": "^6.0.101"
+  }
+}
