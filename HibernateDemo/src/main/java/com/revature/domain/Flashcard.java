@@ -15,10 +15,11 @@ public class Flashcard  implements Serializable {
 		this.answer = answer;
 	}
 	
-	public Flashcard(String question, String answer) {
+	public Flashcard(String question, String answer, Category category) {
 		this();
 		this.question = question;
 		this.answer = answer;
+		this.category = category;
 	}
 	
 	public Flashcard(){
@@ -35,7 +36,10 @@ public class Flashcard  implements Serializable {
 	@Column(name="ANSWER")
 	private String answer;
 	
-
+	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	@JoinColumn(name="CATEGORY_ID")
+	private Category category;
+	
 	public int getId() {
 		return id;
 	}
@@ -54,10 +58,10 @@ public class Flashcard  implements Serializable {
 	public void setAnswer(String answer) {
 		this.answer = answer;
 	}
+
 	@Override
 	public String toString() {
-		return "Flashcard [id=" + id + ", question=" + question + ", answer=" + answer + "]";
+		return "Flashcard [id=" + id + ", question=" + question + ", answer=" + answer + ", category=" + category + "]";
 	}
 	
-
 }
