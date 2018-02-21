@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        form {
+            border: 8px solid #f1f1f1;
+        }
+        input[type=text],
+        input[type=password] {
+            width: 40%;
+            padding: 12px 20px;
+            margin: 4px 0;
+            display: inline-block;
+            border: 2px solid #ccc;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 30%;
+        }
+        button:hover {
+            opacity: 0.8;
+        }
+        .container {
+            padding: 16px;
+        }
+        span.psw {
+            float: right;
+            padding-top: 16px;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="w3-container w3-teal" align="center">
+        <h1>Location Page</h1>
+    </header>
+
+    <h2 align="center" width=80%>Login</h2>
+
+    <form action="login">
+
+        <div class="container" align="center" width=40%>
+            <label for="username">
+                <b>Username</b>
+            </label>
+            <input type="text" placeholder="Enter Username" id="username" name="username" required>
+            <br>
+
+            <label for="password">
+                <b>Password</b>
+            </label>
+            <input type="password" id="password" placeholder="Enter Password" name="password" required>
+            <br>
+            <br>
+
+            <button onclick="validate()">Login</button>
+        </div>
+
+    </form>
+
+</body>
+<script src="formValidate.js"></script>
+
+</html>

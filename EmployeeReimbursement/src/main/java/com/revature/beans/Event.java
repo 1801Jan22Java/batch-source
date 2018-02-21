@@ -4,6 +4,14 @@ import java.time.LocalDate;
 
 public class Event {
 
+	public Event(int requestID, int employeeID, int managerID, String message) {
+		super();
+		this.requestID = requestID;
+		this.employeeID = employeeID;
+		this.managerID = managerID;
+		this.message = message;
+	}
+
 	public Event(int eventID, int requestID, int employeeID, int managerID, String message, LocalDate dayTime) {
 		super();
 		this.eventID = eventID;

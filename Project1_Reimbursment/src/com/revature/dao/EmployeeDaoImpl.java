@@ -13,7 +13,7 @@ import com.revature.util.ConnectionUtil;
 
 public class EmployeeDaoImpl implements EmployeeDao {
 
-	public static final String filename = "connection.properties";
+	public static final String filename = "./connection.properties";
 
 	public void addEmployee(Employee emp) {
 		try {
@@ -141,12 +141,12 @@ public class EmployeeDaoImpl implements EmployeeDao {
 				}
 			
 			con.close();
+			return employees;
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
 		return null;
 	}
 

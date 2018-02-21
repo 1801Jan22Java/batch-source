@@ -2,42 +2,45 @@ package com.revature.servlet;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-/**
- * Servlet implementation class MasterServlet
- */
-@WebServlet("/MasterServlet")
 public class MasterServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public MasterServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * 
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("views/Index.html");
-		
+	private static final long serialVersionUID = 7137510907868382469L;
+
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// note - login page doesn't have an option for logging in as manager;
+		// if credentials match a manager, they get the manager homepage
+		// if credentials match an employee, they get the employee homepage 
+		// if credentials don't match anything, they get redirected back to login
+		HttpSession session = req.getSession();
+		boolean manager = (boolean) session.getAttribute("is_manager");
+		if(manager) {
+			req.getRequestDispatcher("manager_home").forward(req, resp);
+		} else {
+			req.getRequestDispatcher("employee_home").forward(req, resp);
+		}
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		HttpSession session = req.getSession();
+		boolean manager = (boolean) session.getAttribute("is_manager");
+		if(manager) {
+			
+		} else {
+			
+		}
 	}
+
+	
 
 }

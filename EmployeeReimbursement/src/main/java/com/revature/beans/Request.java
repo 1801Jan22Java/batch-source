@@ -1,10 +1,18 @@
 package com.revature.beans;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class Request {
 
-	public Request(int requestID, int employeeID, int managerID, Double amount, String description, String reply,
+	public Request(int employeeID, Integer amount, String description, String status) {
+		super();
+		this.employeeID = employeeID;
+		this.amount = amount;
+		this.description = description;
+		this.status = status;
+	}
+	public Request(int requestID, int employeeID, int managerID, Integer amount, String description, String reply,
 			String status, LocalDate date) {
 		super();
 		RequestID = requestID;
@@ -19,11 +27,12 @@ public class Request {
 	private int RequestID;
 	private int employeeID; // in DB, requestID or "Request-er ID"
 	private int managerID; // in DB, resolveID or "Resolver ID"
-	private Double amount;
+	private Integer amount;
 	private String description;
 	private String reply;
 	private String status;
 	private LocalDate date;
+	
 	public int getRequestID() {
 		return RequestID;
 	}
@@ -33,7 +42,7 @@ public class Request {
 	public int getManagerID() {
 		return managerID;
 	}
-	public Double getAmount() {
+	public Integer getAmount() {
 		return amount;
 	}
 	public String getDescription() {

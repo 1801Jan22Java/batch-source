@@ -6,16 +6,18 @@ import com.revature.beans.Event;
 import com.revature.beans.Request;
 
 public interface EventDao {
+	
+	public void addEvent(Event e);
 
-	public ArrayList<Request> getAllRequests();
+	public ArrayList<Event> getAllEvents();
 
-	public ArrayList<Request> getAllApproved();
+	public ArrayList<Event> getAllApproved();
 
-	public ArrayList<Request> getAllDenied();
+	public ArrayList<Event> getAllDenied();
 
-	public ArrayList<Request> getAllPending();
+	public ArrayList<Event> getAllPending();
 
-	public ArrayList<Request> getEventsByRequest(int rid);
+	public ArrayList<Event> getEventsByRequest(int rid);
 
 	public Event getEventById(int eid);
 

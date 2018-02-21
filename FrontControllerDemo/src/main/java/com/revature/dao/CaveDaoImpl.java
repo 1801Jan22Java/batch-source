@@ -12,22 +12,20 @@ import java.util.List;
 import com.revature.beans.Cave;
 import com.revature.util.ConnectionUtil;
 
-public class CaveDaoImpl implements CaveDao{
+public class CaveDaoImpl implements CaveDao {
 
 
-	
-	@Override
 	public List<Cave> getCaves() {
-		List<Cave> cl = new ArrayList<Cave>();
-		
-		try(Connection con = ConnectionUtil.getConnectionFromFile()){
-			// using a statement - beware SQL injection
+		List<Cave> cl = new ArrayList<>();
+
+		try (Connection con = ConnectionUtil.getConnectionFromFile()) {
+			// using a Statement - beware SQL injection
 			String sql = "SELECT * FROM CAVE";
-			Statement stat = con.createStatement();
-			ResultSet rs = stat.executeQuery(sql);
-			while(rs.next()) {
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery(sql);
+			while (rs.next()) {
 				int id = rs.getInt("CAVE_ID");
-				String name = rs.getString("Cave_Name");
+				String name = rs.getString("CAVE_NAME");
 				int maxBears = rs.getInt("MAX_BEARS");
 				cl.add(new Cave(id, name, maxBears));
 			}
@@ -37,28 +35,40 @@ public class CaveDaoImpl implements CaveDao{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		
+
 		return cl;
 	}
 
 	@Override
-	public Cave getCaveByID(int id) {
-		Cave lechugilla = null;
-		try(Connection con = ConnectionUtil.getConnectionFromFile()){
-			PreparedStatement psmt = con.prepareStatement("SELECT * FROM CAVE WHERE ID = ?");
-			psmt.setInt(1, id);
-			ResultSet rs = psmt.executeQuery();
-			int cid = rs.getInt("CAVE_ID");
-			String cname = rs.getString("CAVE_NAME");
-			int max = rs.getInt("MAX_BEARS");
-			lechugilla = new Cave (cid, cname, max);
-		} catch (SQLException | IOException e) {
+	public Cave getCaveById(int id) {
+		PreparedStatement pstmt = null;
+		Cave cave = null;
+		try (Connection con = ConnectionUtil.getConnectionFromFile()) {
+			String sql = "SELECT * FROM CAVE WHERE CAVE_ID = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, id);
+			ResultSet rs = pstmt.executeQuery();
+			/*
+			while (rs.next()) {
+				System.out.println("in the while loop");
+				String name = rs.getString("CAVE_NAME");
+				int maxB = rs.getInt("MAX_BEARS");
+				cave = new Cave(id, name, maxB);
+			}
+			*/
+			//alternate approach
+			if(rs.next()){
+				String name = rs.getString("CAVE_NAME");
+				int maxB = rs.getInt("MAX_BEARS");
+				cave = new Cave(id, name, maxB);
+			}
+			con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return lechugilla;
+		return cave;
 	}
-	
-	
 
 }

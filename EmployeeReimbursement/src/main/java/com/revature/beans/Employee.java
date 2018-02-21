@@ -1,5 +1,7 @@
 package com.revature.beans;
 
+import java.util.ArrayList;
+
 public class Employee {
 
 	public Employee(String firstName, String lastName, String email, String password, int reportsTo, String phone,
@@ -40,6 +42,16 @@ public class Employee {
 	private boolean isManager;
 	private int active;
 	
+	public ArrayList<String> getTableValues(){
+		ArrayList<String> info = new ArrayList<String>();
+		info.add(""+EmployeeID);
+		info.add(FirstName);
+		info.add(LastName);
+		info.add(email);
+		info.add(phone);
+		info.add(jobTitle);
+		return info;
+	}
 	
 	public int getEmployeeID() {
 		return EmployeeID;

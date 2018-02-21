@@ -1,6 +1,12 @@
 package com.revature.beans;
 
 public class Cave {
+	
+	public Cave(String name, int maxBears) {
+		super();
+		this.name = name;
+		this.maxBears = maxBears;
+	}
 	public Cave(int id, String name, int maxBears) {
 		super();
 		this.id = id;
@@ -8,7 +14,7 @@ public class Cave {
 		this.maxBears = maxBears;
 	}
 	public Cave() {
-		
+		super();
 	}
 	private int id;
 	private String name;
@@ -31,4 +37,9 @@ public class Cave {
 	public void setMaxBears(int maxBears) {
 		this.maxBears = maxBears;
 	}
+	@Override
+	public String toString() {
+		return "Cave [id=" + id + ", name=" + name + ", maxBears=" + maxBears + "]";
+	}
+
 }
