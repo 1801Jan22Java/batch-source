@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>EmployeeHome</title>
+	<link rel="stylesheet" href="styles/customStyles.css">
+	<link rel="stylesheet"
+		href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+
+	<div>
+		<h2>Welcome to the eCorp Employee Reimbursement Application</h1>
+	</div>
+
+	<form class="box" action="employeeinformation" method="post">
+        <input type="submit" name = "employeeinfo" value="View Employee Information" >
+    </form>
+     
+	<form class="box" action="submitnewrequest" method="post">
+        <input type="submit" name = "employeesubmitrequest" value="Submit New Reimbursement Request" >
+    </form>
+    
+    <form class="box" action="viewpendingrequests" method="post">
+        <input type="submit" name = "employeependingrequests" value="View Pending Reimbursement Requests" >
+    </form> 
+    
+    <form class="box" action="viewresolvedrequests" method="post">
+        <input type="submit" name = "employeeresolvedrequests" value="View Resolved Reimbursement Requests" >
+    </form>           
+    
+</body>
+</html>
