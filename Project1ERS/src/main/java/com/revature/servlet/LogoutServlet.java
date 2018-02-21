@@ -26,7 +26,11 @@ public class LogoutServlet extends HttpServlet {
 		if(session != null){
 			session.invalidate();
 		}
-		response.sendRedirect("login?action=logout");
+		if (request.getParameter("action") == "login") {
+			response.sendRedirect("login?action=login");
+		} else {
+			response.sendRedirect("login?action=logout");
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

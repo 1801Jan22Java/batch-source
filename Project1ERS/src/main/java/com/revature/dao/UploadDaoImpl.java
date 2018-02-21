@@ -19,9 +19,7 @@ public class UploadDaoImpl implements UploadDao{
 	// Make new Dao to check display name limit to validate file user wants to upload
 	
 	// Make VARCHAR2 as big as possible, define smaller restriction in servlet parameter
-	
-	// Largest VARCHAR2 = 255 characters!!!!!!!!
-	private static final int FILENAME_LENGTH = 255;
+	private static final int FILENAME_LENGTH = 10;
 
 	@Override
 	public boolean getUploads(Request thisRequest) {
@@ -93,6 +91,7 @@ public class UploadDaoImpl implements UploadDao{
 		try{
 			Connection con = ConnectionUtil.getConnectionFromFile();
 			String sql = "{ call add_upload(?, ?, ?, ?, ?, ?, ?, ?, ?) }";
+			System.out.println("{ call add_upload("+displayName+", "+extension+", "+thisRequest.getRequestId()+", "+thisEmployee.getEmployeeId()+", ?, ?, ?, ?, ?) }");
 			cs = con.prepareCall(sql);
 			cs.setString(1, displayName);
 			cs.setString(2, extension);

@@ -1,3 +1,7 @@
+//As soon as DOM is built
+document.getElementById("json-no-script").style.display = "none";
+document.getElementById("json-loading").style.display = "block";
+
 // global variable for internal checking
 var isManager = false;
 
@@ -40,6 +44,7 @@ function getJson(xhr) {
 				if (request.currentStatus == "Pending") {
 					total++;
 					var tr = document.createElement("tr");
+					tr.title = request.description;
 					var tdDate = document.createElement("td");
 					tdDate.innerHTML = months[request.creationDate.monthValue] + " " + request.creationDate.dayOfMonth + ", " + request.creationDate.year;
 					tr.appendChild(tdDate);
@@ -53,7 +58,7 @@ function getJson(xhr) {
 					tr.appendChild(tdType);
 					
 					var tdAmount = document.createElement("td");
-					tdAmount.innerHTML = "$" + request.amount.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");;
+					tdAmount.innerHTML = "$" + request.amount.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 					tr.appendChild(tdAmount);
 					
 					var tdStatus = document.createElement("td");
@@ -61,7 +66,7 @@ function getJson(xhr) {
 					tr.appendChild(tdStatus);
 					
 					var tdDetails = document.createElement("td");
-					tdDetails.innerHTML = "<a href=\"request-deatils.html\">Details</a>";
+					tdDetails.innerHTML = "<a href=\"../request?id=" + request.requestId + "\">Details</a>";
 					tr.appendChild(tdDetails);
 					tb.appendChild(tr);
 				}
@@ -86,6 +91,7 @@ function getJson(xhr) {
 				if (request.currentStatus != "Pending") {
 					total++;
 					var tr = document.createElement("tr");
+					tr.title = request.description;
 					var tdDate = document.createElement("td");
 					tdDate.innerHTML = months[request.creationDate.monthValue] + " " + request.creationDate.dayOfMonth + ", " + request.creationDate.year;
 					tr.appendChild(tdDate);
@@ -107,11 +113,13 @@ function getJson(xhr) {
 					tr.appendChild(tdStatus);
 					
 					var tdManager = document.createElement("td");
-					tdManager.innerHTML = request.currentManager.firstname + " " + request.currentManager.lastname;
+					if (request.currentManager) {
+						tdManager.innerHTML = request.currentManager.firstname + " " + request.currentManager.lastname;
+					}
 					tr.appendChild(tdManager);
 					
 					var tdDetails = document.createElement("td");
-					tdDetails.innerHTML = "<a href=\"request-deatils.html\">Details</a>";
+					tdDetails.innerHTML = "<a href=\"../request?id=" + request.requestId + "\">Details</a>";
 					tr.appendChild(tdDetails);
 					tb.appendChild(tr);
 				}
@@ -144,6 +152,7 @@ function getJson(xhr) {
 			if (request.currentStatus == "Pending") {
 				total++;
 				var tr = document.createElement("tr");
+				tr.title = request.description;
 				var tdDate = document.createElement("td");
 				tdDate.innerHTML = months[request.creationDate.monthValue] + " " + request.creationDate.dayOfMonth + ", " + request.creationDate.year;
 				tr.appendChild(tdDate);
@@ -161,7 +170,7 @@ function getJson(xhr) {
 				tr.appendChild(tdStatus);
 				
 				var tdDetails = document.createElement("td");
-				tdDetails.innerHTML = "<a href=\"request-deatils.html\">Details</a>";
+				tdDetails.innerHTML = "<a href=\"../request?id=" + request.requestId + "\">Details</a>";
 				tr.appendChild(tdDetails);
 				tb.appendChild(tr);
 			}
@@ -183,6 +192,7 @@ function getJson(xhr) {
 			if (request.currentStatus != "Pending") {
 				total++;
 				var tr = document.createElement("tr");
+				tr.title = request.description;
 				var tdDate = document.createElement("td");
 				tdDate.innerHTML = months[request.creationDate.monthValue] + " " + request.creationDate.dayOfMonth + ", " + request.creationDate.year;
 				tr.appendChild(tdDate);
@@ -200,11 +210,13 @@ function getJson(xhr) {
 				tr.appendChild(tdStatus);
 				
 				var tdManager = document.createElement("td");
-				tdManager.innerHTML = request.currentManager.firstname + " " + request.currentManager.lastname;
+				if (request.currentManager) {
+					tdManager.innerHTML = request.currentManager.firstname + " " + request.currentManager.lastname;
+				}
 				tr.appendChild(tdManager);
 				
 				var tdDetails = document.createElement("td");
-				tdDetails.innerHTML = "<a href=\"request-deatils.html\">Details</a>";
+				tdDetails.innerHTML = "<a href=\"../request?id=" + request.requestId + "\">Details</a>";
 				tr.appendChild(tdDetails);
 				tb.appendChild(tr);
 			}
@@ -255,6 +267,9 @@ function showOpen() {
 }
 
 window.onload = function () {
+	document.getElementById("json-no-script").style.display = "none";
+	document.getElementById("json-loading").style.display = "block";
+	
 	var openLinks = document.getElementsByClassName("view-open-link");
 	for (var i = 0; i < openLinks.length; i++) {
 		openLinks[i].onclick = function() { showOpen(); };
@@ -264,7 +279,22 @@ window.onload = function () {
 		closedLinks[i].onclick = function() { showClosed(); };
 	}
 	
-	document.getElementById("json-no-script").style.display = "none";
-	document.getElementById("json-loading").style.display = "block";
+	var action = "";
+	var parameters = window.location.search.substring(1).split("&");
+	parameters.forEach(function(parameter) { 
+		var keyValue = parameter.split("=");
+		if (keyValue[0] == "action"){
+			action = keyValue[1];
+		}
+	});
+	if (action == "success") {
+		document.getElementById("message").innerHTML = "Request Was Added";
+	} else if (action == "fail") {
+		document.getElementById("message").innerHTML = "Request Was Not Added";
+	} else if (action == "not-found") {
+		document.getElementById("message").innerHTML = "Page Not Found";
+	}
+	
+	
 	sendAjaxGet("../util/requests", getJson);
 }

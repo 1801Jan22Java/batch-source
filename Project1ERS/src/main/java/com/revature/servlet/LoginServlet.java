@@ -2,6 +2,8 @@ package com.revature.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -31,11 +33,14 @@ public class LoginServlet extends HttpServlet {
 			EmployeeDao emd = new EmployeeDaoImpl();
 			Employee thisEmployee = emd.getEmployee(employeeId);
 			if (thisEmployee != null) {
-				response.sendRedirect("requests");
+				String query = "";
+				if (request.getParameter("action") != null) {
+					query = "?action=" + request.getParameter("action");
+				}
+				response.sendRedirect("requests" + query);
 			}
 		} else {
 			String message = "";
-			System.out.println("getParameter = " + request.getParameter("action"));
 			String inputAction = request.getParameter("action");
 			if (inputAction != null) {
 				switch (inputAction) {
@@ -45,11 +50,20 @@ public class LoginServlet extends HttpServlet {
 				case "login":
 					message = "Please Login";
 					break;
-				case "email":
+				case "bad-email":
 					message = "Email Not Found";
 					break;
-				case "password":
+				case "bad-password":
 					message = "Incorrect Password";
+					break;
+				case "missing-info":
+					message = "Information is Missing";
+					break;
+				case "missing-email":
+					message = "Email is Missing";
+					break;
+				case "missing-password":
+					message = "Password is Missing";
 					break;
 				}
 			}
@@ -68,25 +82,68 @@ public class LoginServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		EmployeeDao emd = new EmployeeDaoImpl();
-		String inputEmail = request.getParameter("inputEmail");
-		if (emd.isAvailable(inputEmail)) {
-			response.sendRedirect("logout?action=email");
-		} else {
-			String inputPassword = request.getParameter("inputPassword");
-			Employee thisEmployee = emd.login(inputEmail, inputPassword);
-			if (thisEmployee == null) {
-				response.sendRedirect("login?action=password");
+		String action = "";
+		if (request.getParameter("inputEmail") != null) {
+			String inputEmail = request.getParameter("inputEmail");
+			if (request.getParameter("inputPassword") != null) {
+				String inputPassword = request.getParameter("inputPassword");
+				
+				if (inputEmail.length()  < 1 && inputPassword.length() < 1) {
+					action = "missing-info";
+				} else {
+					if (inputEmail.length() > 0) {
+						if (!emd.isAvailable(inputEmail)) {
+							if (inputPassword.length() > 0) {
+								inputPassword = getHash(inputPassword);
+								Employee thisEmployee = emd.login(inputEmail, inputPassword);
+								if (thisEmployee != null) {
+									HttpSession session = request.getSession(true);
+									session.setAttribute("employeeId", thisEmployee.getEmployeeId());
+									action = "requests";
+								} else {
+									action = "bad-password";
+								}
+							} else {
+								action = "missing-password";
+							}
+						} else {
+							action = "bad-email";
+						}
+					} else {
+						action = "missing-email";
+					}
+				}
 			} else {
-				HttpSession session = request.getSession(true);
-				session.setAttribute("employeeId", thisEmployee.getEmployeeId());
-				response.sendRedirect("requests");
+				action = "missing-password";
 			}
-			
+		} else {
+			action = "missing-email";
 		}
-		
-		
-		
-		
+		if (action != "requests" ) {
+			action = "login?action=" + action;
+		}
+		response.sendRedirect(action);
 	}
-
+	
+	private static String getHash(String originalString) {
+		String newString = "";
+		try {
+			MessageDigest digest = MessageDigest.getInstance("SHA-256");
+			byte[] encodedhash = digest.digest(originalString.getBytes(StandardCharsets.UTF_8));
+			newString = bytesToHex(encodedhash);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return newString;
+	}
+	
+	private static String bytesToHex(byte[] hash) {
+	    StringBuffer hexString = new StringBuffer();
+	    for (int i = 0; i < hash.length; i++) {
+	    String hex = Integer.toHexString(0xff & hash[i]);
+	    if(hex.length() == 1) hexString.append('0');
+	        hexString.append(hex);
+	    }
+	    return hexString.toString();
+	}
 }

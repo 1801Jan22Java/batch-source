@@ -70,6 +70,8 @@ public class EmployeeDaoImpl implements EmployeeDao{
 		return thisEmployee;
 	}
 	
+	
+	
 	@Override
 	public boolean isManager(Employee thisManager) {
 		PreparedStatement pstmt = null;

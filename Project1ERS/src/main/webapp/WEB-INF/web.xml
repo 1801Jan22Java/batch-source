@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+         xmlns="http://java.sun.com/xml/ns/javaee" 
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee 
+         http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
   <display-name>Project1ERS</display-name>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
@@ -44,6 +48,78 @@
   <servlet-mapping>
     <servlet-name>util-requests</servlet-name>
     <url-pattern>/util/requests</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>util-employees</servlet-name>
+    <servlet-class>com.revature.servlet.RosterServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>util-employees</servlet-name>
+    <url-pattern>/util/employees</url-pattern>
+  </servlet-mapping>
+  
+   <servlet>
+    <servlet-name>util-profile</servlet-name>
+    <servlet-class>com.revature.servlet.ProfileServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>util-profile</servlet-name>
+    <url-pattern>/util/profile</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>util-update</servlet-name>
+    <servlet-class>com.revature.servlet.UpdateServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>util-update</servlet-name>
+    <url-pattern>/util/update</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>util-request-types</servlet-name>
+    <servlet-class>com.revature.servlet.RequestTypesServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>util-request-types</servlet-name>
+    <url-pattern>/util/request-types</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>util-request-statuses</servlet-name>
+    <servlet-class>com.revature.servlet.RequestStatusesServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>util-request-statuses</servlet-name>
+    <url-pattern>/util/request-statuses</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>util-new-request</servlet-name>
+    <servlet-class>com.revature.servlet.NewRequestServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>util-new-request</servlet-name>
+    <url-pattern>/util/new-request</url-pattern>
+  </servlet-mapping>
+  
+   <servlet>
+    <servlet-name>util-request</servlet-name>
+    <servlet-class>com.revature.servlet.RequestDetailServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>util-request</servlet-name>
+    <url-pattern>/util/request</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>util-update-request</servlet-name>
+    <servlet-class>com.revature.servlet.UpdateRequestServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>util-update-request</servlet-name>
+    <url-pattern>/util/update-request</url-pattern>
   </servlet-mapping>
   
 </web-app>

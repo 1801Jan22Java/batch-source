@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="ISO-8859-1">
+    <title>Company | Request Details</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../styles/main.css">
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      
+      <a class="navbar-brand col-sm-6 col-md-6 mr-0" href="../login" title="Home">Company Expense Reimbursement System</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+	    <span class="navbar-toggler-icon"></span>
+	  </button>
+	  
+	  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+	  <ul class="navbar-nav ml-auto px-3" id="json-nav-links" style="display:none;">
+        <li class="nav-item text-nowrap">
+          <a class="nav-link" href="../new/request">New Request</a>
+        </li>
+        <li class="nav-item text-nowrap">
+          <a class="nav-link" href="../profile">Profile</a>
+        </li>
+        <li class="nav-item text-nowrap">
+          <a class="nav-link" href="../logout">Sign out</a>
+        </li>
+      </ul>
+      </div>
+    </nav>
+    
+    <br>
+    
+    <div class="container" id="json-no-script">
+      <div class="py-5 text-center">
+        <h1>Something Should Be Happening</h1>
+        <h2>Your JavaScript May Not Be Working</h2>
+      </div>
+    </div>
+    
+    <div class="container" id="json-loading" style="display:none;">
+      <div class="py-5 text-center">
+        <img src="../images/loading-large.gif" width="300px">
+      </div>
+    </div>
+    
+    <div class="container" id="json-body" style="display:none;">
+      <div class="py-5 text-center">
+      <h1 class="h5 mb-3 font-weight-normal text-danger" id="message"></h1>
+        <h2 id="json-full-name">Bob</h2>
+        <p class="lead" id="json-job-title">CEO</p>
+      </div>
+      
+      
+      <h2>Request Details</h2>
+      <br>
+      <div class="row">
+        <div class="col-md-2 mb-1">
+          <p>Original Date:</p>
+        </div>
+        <div class="col-md-7 mb-1">
+          <p id="json-date"></p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-2 mb-1">
+          <p>Request Type:</p>
+        </div>
+        <div class="col-md-7 mb-1">
+          <p id="json-type"></p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-2 mb-1">
+          <p>Amount:</p>
+        </div>
+        <div class="col-md-7 mb-1">
+          <p id="json-amount"></p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-2 mb-1">
+          <p>Status:</p>
+        </div>
+        <div class="col-md-7 mb-1">
+          <p id="json-status"></p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-2 mb-1">
+          <p>Description:</p>
+        </div>
+        <div class="col-md-7 mb-1">
+          <p id="json-description"></p>
+        </div>
+      </div>
+
+      <h2>History</h2>
+      <div class="table-responsive">
+        <table class="table table-striped table-sm" id="json-history-table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Author</th>
+              <th>Status</th>
+              <th>Message</th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+      
+      <h2>Files</h2>
+      <div class="table-responsive">
+        <table class="table table-striped table-sm" id="json-file-table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Author</th>
+              <th>Filename</th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+      
+      <div class="row" id="json-update-form">
+
+        <div class="col-md-12 order-md-1">
+          <h2 class="mb-3">Update Request</h2>
+          <form class="needs-validation" novalidate method="post" action="../util/update-request" enctype="multipart/form-data">
+
+            <div class="row">
+              <div class="col-md-5 mb-3">
+                <label for="request-status">Request Status</label>
+                <select class="custom-select d-block w-100" id="request-status" name="request-status">
+                  <option value="0">No Change...</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="message">Comment:</label>
+              <textarea class="form-control" rows="5" id="message" name="message"></textarea>
+            </div>
+            <span class="btn btn-default btn-file">
+              Browse <input type="file" name="uploads" multiple>
+            </span>
+            <hr class="mb-4">
+            <input type="hidden" id="request-id" name="request-id">
+                <button class="btn btn-primary btn-lg btn-block" type="submit" id="json-submit-button">Update Request</button>
+          </form>
+        </div>
+      </div>
+      <br>
+      <div class="row text-center">
+	        <div class="col-md-12 mb-1" id="json-links"></div>
+	      </div>
+    </div>
+    
+    <br><br><br><br>
+
+    <script src="../scripts/request.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+</html>

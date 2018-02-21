@@ -4,13 +4,24 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.*;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.revature.beans.*;
-import com.revature.dao.*;
+import com.revature.beans.Employee;
+import com.revature.beans.Request;
+import com.revature.dao.EmployeeDao;
+import com.revature.dao.EmployeeDaoImpl;
+import com.revature.dao.EventDao;
+import com.revature.dao.EventDaoImpl;
+import com.revature.dao.RequestDao;
+import com.revature.dao.RequestDaoImpl;
+import com.revature.dao.UploadDao;
+import com.revature.dao.UploadDaoImpl;
 
-public class RequestServlet extends HttpServlet {
+public class RosterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -28,30 +39,12 @@ public class RequestServlet extends HttpServlet {
 				// Check to see if this employee is a manager
 				if (emd.isManager(thisEmployee)) {
 					// If this employee is a manager provide a list of all employees to this object
-					if (emd.getAllEmployees(thisEmployee)) {
-						for(Employee e : thisEmployee.getEmployees()) {
-							if (rd.getRequests(e)) {
-								//success
-								//for(Request r : e.getRequests()) {
-								//	System.out.println(e.getFirstname() + " - " + r.toString());
-								//}
-							} else {
-								//fail
-								//System.out.println("No Requests found for " + e.getFirstname());
-							}
-						}
+					if (!emd.getAllEmployees(thisEmployee)) {
+						System.out.println("No Employees could be found");
 					}
 				} else {
 					// This employee is not a manager
-					if (rd.getRequests(thisEmployee)) {
-						//success
-						//for(Request r : thisEmployee.getRequests()) {
-						//	System.out.println(thisEmployee.getFirstname() + " - " + r.toString());
-						//}
-					} else {
-						//fail
-						//System.out.println("No Requests found for " + thisEmployee.getFirstname());
-					}
+					loggedIn = false;
 				}
 			} else {
 				// This employeeId could not be found
