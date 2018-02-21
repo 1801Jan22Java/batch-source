@@ -12,7 +12,8 @@
 		<property name="hibernate.show_sql">true</property>
 		<!-- choose whether to create db or update existing db -->
 		<property name="hibernate.hbm2ddl.auto">create</property>
-		
+		<!-- map domain object classes -->
+		<mapping class="com.revature.domain.Flashcard"/>
 	</session-factory>
 </hibernate-configuration>
 	
