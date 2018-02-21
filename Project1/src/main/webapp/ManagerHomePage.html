@@ -3,31 +3,34 @@
     <head>
         <meta charset="UTF-8"/>
         <Title>Manager Homepage</Title>
+        <link rel="stylesheet" href="styles/style.css">
     </head>
 
     <body>
 	    <h1>Manager homepage</h1>
 	    <h3>Welcome, <span id="mgrName">(Name)</span></h3>
 	    <br>
-	    <a href="viewAllEmps">View all employees</a>
-	    <a href="logout">Log out</a>
-	    <br>
-	    <input type="radio" name="filter" value="all" checked> All <br>
-	    <input type="radio" name="filter" value="resolved"> Resolved <br>
-	    <input type="radio" name="filter" value="pending"> Pending <br>
-	    <br>
-	    <br>
-	    <img id="display" alt="No image being shown" src="nothing.png">
+	    <a class="norm" href="viewAllEmps">View all employees</a>
+	    <a class="logout" href="logout">Log out</a>
+	    <br> <br>
+	    <div class="specDiv2">
+		    <input type="radio" name="filter" value="all" checked> All <br>
+		    <input type="radio" name="filter" value="resolved"> Resolved <br>
+		    <input type="radio" name="filter" value="pending"> Pending <br>
+	    </div>
+	    <div class="container">
+	    	<img id="display" alt="No image being shown" src="nothing.png">
+	    </div>
 	    <br>
 	    <br>
 	    <table id="reimbTable">
 	        <tr id="head">
 	            <th>Reimb. ID</th>
-	            <th>Employee ID</th>
+	            <th>Empl. ID</th>
 	            <th>Status</th>
 	            <th>Amount</th>
 	            <th>View receipt</th>
-	            <th>Resolving manager ID</th>
+	            <th>Manager ID</th>
 	            <th>Date of creation</th>
 	            <th>Date of approval/denial</th>
 				<th>Approve</th>

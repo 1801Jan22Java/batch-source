@@ -3,12 +3,23 @@
     <head>
         <meta charset="UTF-8"/>
         <Title>Employee Homepage</Title>
+        <link rel="stylesheet" href="styles/style.css">
     </head>
 
     <body>
-        <h1>Employee homepage</h1>
+        <h1>Employee Homepage</h1>
         <h3>Welcome, <span id=empName>(Name)</span></h3>
         <br>
+	    <a class="norm" href="newRequest">Submit new request</a>
+	    <a class="norm" href="updateInfo">Update Information</a>
+	    <a class="logout" href="logout">Log out</a>
+	    <br>
+	    <br>
+	    <input type="radio" name="filter" value="all" checked> All <br>
+	    <input type="radio" name="filter" value="resolved"> Resolved <br>
+	    <input type="radio" name="filter" value="pending"> Pending <br>
+	    <br>
+	    <br>
         <table id="reimbTable">
             <tr id="head">
                 <th>Reimbursement ID</th>
@@ -18,14 +29,6 @@
                 <th>Date of approval/denial</th>
             </tr>
         </table>
-	    <br>
-	    <input type="radio" name="filter" value="all" checked> All <br>
-	    <input type="radio" name="filter" value="resolved"> Resolved <br>
-	    <input type="radio" name="filter" value="pending"> Pending <br>
-	    <br>
-	    <a href="newRequest">Submit new request</a>
-	    <a href="updateInfo">Update Information</a>
-	    <a href="logout">Log out</a>
     </body>
     <script src="scripts/employeeHome.js"></script>
 </html>

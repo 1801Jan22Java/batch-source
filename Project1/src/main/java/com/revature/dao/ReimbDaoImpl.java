@@ -49,7 +49,7 @@ public class ReimbDaoImpl implements ReimbDao {
 		
 		try (Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
 			reimbs = new ArrayList<Reimb>();
-			String sql = "SELECT * FROM REIMB";
+			String sql = "SELECT * FROM REIMB ORDER BY DOC DESC";
 			pstmt = con.prepareStatement(sql);
 			ResultSet rs = pstmt.executeQuery();
 			
@@ -82,7 +82,7 @@ public class ReimbDaoImpl implements ReimbDao {
 		
 		try (Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
 			reimbs = new ArrayList<Reimb>();
-			String sql = "SELECT * FROM REIMB WHERE STATUS=0";
+			String sql = "SELECT * FROM REIMB WHERE STATUS=0 ORDER BY DOC DESC";
 			pstmt = con.prepareStatement(sql);
 			ResultSet rs = pstmt.executeQuery();
 			
@@ -115,7 +115,7 @@ public class ReimbDaoImpl implements ReimbDao {
 		
 		try (Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
 			reimbs = new ArrayList<Reimb>();
-			String sql = "SELECT * FROM REIMB WHERE STATUS=1";
+			String sql = "SELECT * FROM REIMB WHERE STATUS=1 ORDER BY DOC DESC";
 			pstmt = con.prepareStatement(sql);
 			ResultSet rs = pstmt.executeQuery();
 			
@@ -148,7 +148,7 @@ public class ReimbDaoImpl implements ReimbDao {
 		
 		try (Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
 			reimbs = new ArrayList<Reimb>();
-			String sql = "SELECT * FROM REIMB WHERE EMPLOYEE_ID=?";
+			String sql = "SELECT * FROM REIMB WHERE EMPLOYEE_ID=? ORDER BY DOC DESC";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, emp.getEmpId());
 			ResultSet rs = pstmt.executeQuery();
@@ -182,7 +182,7 @@ public class ReimbDaoImpl implements ReimbDao {
 		
 		try (Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
 			reimbs = new ArrayList<Reimb>();
-			String sql = "SELECT * FROM REIMB WHERE EMPLOYEE_ID=? AND STATUS=0";
+			String sql = "SELECT * FROM REIMB WHERE EMPLOYEE_ID=? AND STATUS=0 ORDER BY DOC DESC";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, emp.getEmpId());
 			ResultSet rs = pstmt.executeQuery();
@@ -216,7 +216,7 @@ public class ReimbDaoImpl implements ReimbDao {
 		
 		try (Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
 			reimbs = new ArrayList<Reimb>();
-			String sql = "SELECT * FROM REIMB WHERE EMPLOYEE_ID=? AND STATUS=1";
+			String sql = "SELECT * FROM REIMB WHERE EMPLOYEE_ID=? AND STATUS=1 ORDER BY DOC DESC";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, emp.getEmpId());
 			ResultSet rs = pstmt.executeQuery();

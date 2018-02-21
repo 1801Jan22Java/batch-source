@@ -3,26 +3,29 @@
     <head>
         <meta charset="UTF-8"/>
         <Title>Manager Homepage</Title>
+        <link rel="stylesheet" href="styles/style.css">
     </head>
 
     <body>
 	    <h2>Here are the results for <span id="empName">(Employee Name)</span></h2>
 	    <h3>Job description: <span id="empJob">(Job title)</span></h3>
 	    <br>
-	    <a href="viewAllEmps">Back to all employees</a>
-	    <a href="logout">Log out</a>
+	    <a class="norm" href="viewAllEmps">Back to all employees</a>
+	    <a class="logout" href="logout">Log out</a>
 	    <br>
-	    <img id="display" alt="No image being shown" src="nothing.png">
+	    <div class="container">
+	    	<img id="display" alt="No image being shown" src="nothing.png">
+	    </div>
 	    <br>
 	    <br>
 	    <table id="reimbTable">
 	        <tr id="head">
 	        	<th>Reimb. ID</th>
-	            <th>Employee ID</th>
+	            <th>Empl. ID</th>
 	            <th>Status</th>
 	            <th>Amount</th>
 	            <th>View receipt</th>
-	            <th>Resolving manager ID</th>
+	            <th>Manager ID</th>
 	            <th>Date of creation</th>
 	            <th>Date of approval/denial</th>
 				<th>Approve</th>

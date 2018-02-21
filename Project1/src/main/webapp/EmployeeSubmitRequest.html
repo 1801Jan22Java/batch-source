@@ -3,18 +3,19 @@
     <head>
         <meta charset="UTF-8"/>
         <Title>Submit Employee Reimbursement Request</Title>
+        <link rel="stylesheet" href="styles/style.css">
     </head>
 
     <body>
         <h3>Please fill in the following information:</h3>
         <br>
         <form action="submitRequest" enctype="multipart/form-data" method="post">
-            Amount: $<input name="amt" type="number" step="0.01" required> <br>
-            Upload desired picture: <input type="file" name="pic" accept="image/*" required> <br>
+            Amount: $<input name="amt" type="number" step="0.01" required> <br> <br>
+            Upload desired picture: <input type="file" name="pic" accept="image/*" required> <br> <br>
             <input type="submit" value="Submit">
         </form>
         <br>
-        <a href=employeeHome>Back to home page</a>
-	    <a href="logout">Log out</a>
+        <a class="norm" href=employeeHome>Back to home page</a>
+	    <a class="logout" href="logout">Log out</a>
     </body>
 </html>

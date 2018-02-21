@@ -3,29 +3,34 @@
     <head>
         <meta charset="UTF-8"/>
         <Title>Update Employee Information</Title>
+        <link rel="stylesheet" href="styles/style.css">
     </head>
 
     <body>
         <h1>Welcome, <span id="empName">(Name)</span></h1>
         <h3>Your job is <span id="empJob">(Job)</span></h3>
 
-        <form action="updateJob" method="post">
-            Update job description: <input type="text" name="job" required> <br> <br>
-            <input type="submit" value="Submit Job Change">
-        </form>
+		<div class="specForm">
+			<form action="updateJob" method="post">
+	            Update job description: <input type="text" name="job" required> <br> <br>
+	            <input type="submit" value="Submit Job Change">
+	        </form>
+		</div>
 
         <br>
         <br>
-
-        <form action="updateJob" method="post">
-            Update password: <input type="password" name="password" id="password" required> <br> <br> 
-            Confirm password: <input type="password" id="confirm_password" required> <br> <br>
-            <input type="submit" value="Submit Password Change">
-        </form>
+        
+        <div class="specForm">
+	        <form action="updateJob" method="post">
+	            Update password: <input type="password" name="password" id="password" required> <br> <br> 
+	            Confirm password: <input type="password" id="confirm_password" required> <br> <br>
+	            <input type="submit" value="Submit Password Change">
+	        </form>
+        </div>
 
         <br> <br>
-		<a href="employeeHome">Back to homepage</a>
-	    <a href="logout">Log out</a>
+		<a class="norm" href="employeeHome">Back to homepage</a>
+	    <a class="logout" href="logout">Log out</a>
     </body>
     <script src="scripts/employeeUpdate.js"></script>
 </html>

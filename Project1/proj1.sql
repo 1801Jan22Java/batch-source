@@ -122,20 +122,31 @@ END;
 /
 
 INSERT INTO EMPLOYEE(FIRST_NAME, LAST_NAME, JOB_TITLE, USERNAME, PASS_WORD)
-VALUES('Chuck', 'Norris', 'Fitness Trainer', 'username', 'password');
+VALUES('Dorothy', 'Gale', 'Cashier', 'employee5', 'password5');
 
 INSERT INTO EMPLOYEE(FIRST_NAME, LAST_NAME, JOB_TITLE, USERNAME, PASS_WORD)
-VALUES('Chuck', 'Morris', 'Professional Badass', 'username4', 'password4');
-  
-INSERT INTO MANAGER(FIRST_NAME, LAST_NAME, USERNAME, PASS_WORD)
-VALUES('Pierrepont', 'Finch', 'username2', 'password2');
+VALUES('Chuck', 'Horace', 'Accountant', 'employee4', 'password4');
+
+INSERT INTO EMPLOYEE(FIRST_NAME, LAST_NAME, JOB_TITLE, USERNAME, PASS_WORD)
+VALUES('Chuck', 'Boris', 'Human resources', 'employee3', 'password3');
+
+INSERT INTO EMPLOYEE(FIRST_NAME, LAST_NAME, JOB_TITLE, USERNAME, PASS_WORD)
+VALUES('Chuck', 'Morris', 'Cafeteria manager', 'employee2', 'password2');
+
+INSERT INTO EMPLOYEE(FIRST_NAME, LAST_NAME, JOB_TITLE, USERNAME, PASS_WORD)
+VALUES('Chuck', 'Norris', 'Fitness Trainer', 'employee1', 'password1');
 
 INSERT INTO MANAGER(FIRST_NAME, LAST_NAME, USERNAME, PASS_WORD)
-VALUES('Roz', 'Monster', 'username3', 'password3');
+VALUES('Glynda', 'Goodwitch', 'manager3', 'password3');
+
+INSERT INTO MANAGER(FIRST_NAME, LAST_NAME, USERNAME, PASS_WORD)
+VALUES('Pierrepont', 'Finch', 'manager2', 'password2');
+
+INSERT INTO MANAGER(FIRST_NAME, LAST_NAME, USERNAME, PASS_WORD)
+VALUES('Roz', 'Monster', 'manager1', 'password1');
 
 SELECT * FROM EMPLOYEE;
 SELECT * FROM MANAGER;
-truncate TABLE REIMB;
-SELECT * FROM REIMB;
+SELECT * FROM REIMB ORDER BY DOC DESC;
 
 SELECT * FROM EMPLOYEE WHERE USERNAME='username' AND PASS_WORD='password';

@@ -3,16 +3,20 @@
     <head>
         <meta charset="UTF-8"/>
         <Title>Login page</Title>
+        <link rel="stylesheet" href="styles/style.css">
     </head>
 
     <body>
-        <form action="login" method="post">
+    	<h2>Welcome to the receipt reimbursement page!</h2>
+    	<h3>Please login using your username and password</h3>
+        <form class="loginForm" action="login" method="post">
             Username: <br>
-            <input type="text" name="username"/> <br>
+            <input type="text" name="username"/> <br> <br> <br>
             Password: <br>
-            <input type="password" name="password"/> <br>
+            <input type="password" name="password"/> <br> <br>
             <input type="radio" name="job" value="emp" checked/> Employee
             <input type="radio" name="job" value="mgr"/> Manager
+            <br> <br>
             <input type="submit" value="Login">
         </form>
     </body>

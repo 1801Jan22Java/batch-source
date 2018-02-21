@@ -41,13 +41,13 @@ public class ApproveDenyServlet extends HttpServlet {
 			mdi.deny(mgr, reimbId);
 		}
 		String initString = this.getServletContext().getRealPath("/");
+		List<Reimb> allReimbs = mdi.getAllReimbs();
+		List<Reimb> pendingReimbs = mdi.getPendingReimbs();
+		List<Reimb> resolvedReimbs = mdi.getResolvedReimbs();
+		FileWriter.writeFiles(initString + "allRequests.txt", allReimbs);
+		FileWriter.writeFiles(initString + "allPendingRequests.txt", pendingReimbs);
+		FileWriter.writeFiles(initString + "allResolvedRequests.txt", resolvedReimbs);
 		if (req.getParameter("reload").equals("all")) {
-			List<Reimb> allReimbs = mdi.getAllReimbs();
-			List<Reimb> pendingReimbs = mdi.getPendingReimbs();
-			List<Reimb> resolvedReimbs = mdi.getResolvedReimbs();
-			FileWriter.writeFiles(initString + "allRequests.txt", allReimbs);
-			FileWriter.writeFiles(initString + "allPendingRequests.txt", pendingReimbs);
-			FileWriter.writeFiles(initString + "allResolvedRequests.txt", resolvedReimbs);
 			resp.sendRedirect("managerHome");
 		} else {
 			Employee emp = new EmployeeDaoImpl().getEmployeeById((Integer) session.getAttribute("empId"));
