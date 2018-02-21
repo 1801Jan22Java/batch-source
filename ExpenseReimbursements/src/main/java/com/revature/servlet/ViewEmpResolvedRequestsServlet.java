@@ -8,15 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class AllEmployeesServlet extends HttpServlet{
-
+public class ViewEmpResolvedRequestsServlet extends HttpServlet{
+	
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession(false);
 		if(session != null && session.getAttribute("currentUser") != null) {
-			req.getRequestDispatcher("views/allEmployees.html").forward(req, resp);
+			req.getRequestDispatcher("views/viewEmpResolvedRequests.html").forward(req, resp);
 		} else {
 			resp.sendRedirect("login");
 		}
 	}
+
 }

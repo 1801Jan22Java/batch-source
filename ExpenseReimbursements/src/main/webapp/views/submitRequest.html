@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<a href="/ExpenseReimbursements/logout">Logout</a>
+	<a href="/ExpenseReimbursements/redirectHome"><button>Take me back to the homepage!</button></a>
+	<form action="processRequest"method="POST" enctype="multipart/form-data">
+		Enter the amount you are requesting <input id="amount" type="number" name="amount">
+		<br><br><br><br>
+		Select the image you want to upload <input name="uploadFile" type="file" id="uploadFile">
+		<br>
+		<button id="submit">Submit the form</button>
+	</form>
+</body>
+</html>

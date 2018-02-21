@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
   <display-name>ExpenseReimbursements</display-name>
   <servlet>
   	<servlet-name>login</servlet-name>
@@ -17,6 +17,32 @@
     <servlet-name>session</servlet-name>
     <url-pattern>/session</url-pattern>
   </servlet-mapping>
+  <servlet>
+  	<servlet-name>error</servlet-name>
+  	<servlet-class>com.revature.servlet.ErrorServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>error</servlet-name>
+  	<url-pattern>/error</url-pattern>
+  </servlet-mapping>
+  <servlet>
+  	<servlet-name>logout</servlet-name>
+  	<servlet-class>com.revature.servlet.LogoutServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>logout</servlet-name>
+  	<url-pattern>/logout</url-pattern>
+  </servlet-mapping>
+  <servlet>
+  	<servlet-name>redirectHome</servlet-name>
+  	<servlet-class>com.revature.servlet.RedirectHomeServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>redirectHome</servlet-name>
+  	<url-pattern>/redirectHome</url-pattern>
+  </servlet-mapping>
+  
+  <!-- Manager Actions -->
   <servlet>
   	<servlet-name>managerHome</servlet-name>
   	<servlet-class>com.revature.servlet.ManagerHomeServlet</servlet-class>
@@ -40,14 +66,6 @@
   <servlet-mapping>
   	<servlet-name>viewAllEmployees</servlet-name>
   	<url-pattern>/viewAllEmployees</url-pattern>
-  </servlet-mapping>
-  <servlet>
-  	<servlet-name>allEmployees</servlet-name>
-  	<servlet-class>com.revature.servlet.AllEmployeesServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-  	<servlet-name>allEmployees</servlet-name>
-  	<url-pattern>/allEmployees</url-pattern>
   </servlet-mapping>
   <servlet>
   	<servlet-name>viewAllPendingRequests</servlet-name>
@@ -80,5 +98,127 @@
   <servlet-mapping>
   	<servlet-name>declineReimbursement</servlet-name>
   	<url-pattern>/declineReimbursement/*</url-pattern>
+  </servlet-mapping>
+  <servlet>
+  	<servlet-name>employeeDetails</servlet-name>
+  	<servlet-class>com.revature.servlet.EmployeeDetailsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>employeeDetails</servlet-name>
+  	<url-pattern>/employeeDetails/*</url-pattern>
+  </servlet-mapping>
+  <servlet>
+  	<servlet-name>employeeInformation</servlet-name>
+  	<servlet-class>com.revature.servlet.EmployeeInformationServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>employeeInformation</servlet-name>
+  	<url-pattern>/employeeInformation/*</url-pattern>
+  </servlet-mapping>
+  <servlet>
+  	<servlet-name>employeeInformationPage</servlet-name>
+  	<servlet-class>com.revature.servlet.EmployeeInformationPageServlet</servlet-class>
+  </servlet>
+    <servlet-mapping>
+  	<servlet-name>employeeInformationPage</servlet-name>
+  	<url-pattern>/employeeInformationPage/*</url-pattern>
+  </servlet-mapping>
+  <servlet>
+  	<servlet-name>getImage</servlet-name>
+  	<servlet-class>com.revature.servlet.GetImageServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>getImage</servlet-name>
+  	<url-pattern>/getImage</url-pattern>
+  </servlet-mapping>
+  
+  <!-- Normal Employee Actions -->
+  <servlet>
+  	<servlet-name>update</servlet-name>
+  	<servlet-class>com.revature.servlet.UpdateServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>update</servlet-name>
+  	<url-pattern>/update</url-pattern>
+  </servlet-mapping>
+  <servlet>
+  	<servlet-name>employeeHome</servlet-name>
+  	<servlet-class>com.revature.servlet.EmployeeHomeServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>employeeHome</servlet-name>
+  	<url-pattern>/employeeHome</url-pattern>
+  </servlet-mapping>
+  <servlet>
+  	<servlet-name>employeeAction</servlet-name>
+  	<servlet-class>com.revature.servlet.EmployeeActionServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>employeeAction</servlet-name>
+  	<url-pattern>/employeeAction</url-pattern>
+  </servlet-mapping>
+  <servlet>
+  	<servlet-name>submitRequest</servlet-name>
+  	<servlet-class>com.revature.servlet.SubmitRequestServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>submitRequest</servlet-name>
+  	<url-pattern>/submitRequest</url-pattern>
+  </servlet-mapping>
+  <servlet>
+  	<servlet-name>viewEmpPendingRequests</servlet-name>
+  	<servlet-class>com.revature.servlet.ViewEmpPendingRequestsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>viewEmpPendingRequests</servlet-name>
+  	<url-pattern>/viewEmpPendingRequests</url-pattern>
+  </servlet-mapping>
+  <servlet>
+  	<servlet-name>viewEmpPending</servlet-name>
+  	<servlet-class>com.revature.servlet.ViewEmpPendingServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>viewEmpPending</servlet-name>
+  	<url-pattern>/viewEmpPending</url-pattern>
+  </servlet-mapping>
+  <servlet>
+  	<servlet-name>viewEmpResolvedRequests</servlet-name>
+  	<servlet-class>com.revature.servlet.ViewEmpResolvedRequestsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>viewEmpResolvedRequests</servlet-name>
+  	<url-pattern>/viewEmpResolvedRequests</url-pattern>
+  </servlet-mapping>
+  <servlet>
+  	<servlet-name>viewEmpResolved</servlet-name>
+  	<servlet-class>com.revature.servlet.ViewEmpResolvedServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>viewEmpResolved</servlet-name>
+  	<url-pattern>/viewEmpResolved</url-pattern>
+  </servlet-mapping>
+  <servlet>
+  	<servlet-name>viewEmpInfo</servlet-name>
+  	<servlet-class>com.revature.servlet.ViewEmpInfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>viewEmpInfo</servlet-name>
+  	<url-pattern>/viewEmpInfo</url-pattern>
+  </servlet-mapping>
+  <servlet>
+  	<servlet-name>userInfo</servlet-name>
+  	<servlet-class>com.revature.servlet.UserInfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>userInfo</servlet-name>
+  	<url-pattern>/userInfo</url-pattern>
+  </servlet-mapping>
+  <servlet>
+  	<servlet-name>processRequest</servlet-name>
+  	<servlet-class>com.revature.servlet.ProcessRequestServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>processRequest</servlet-name>
+  	<url-pattern>/processRequest</url-pattern>
   </servlet-mapping>
 </web-app>

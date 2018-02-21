@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Employee Information</title>
+</head>
+<body>
+	<a href="/ExpenseReimbursements/logout">Logout</a>
+	<a href="/ExpenseReimbursements/redirectHome"><button>Take me back to the homepage!</button></a>
+	<h1>Here is your information</h1>
+		<table id="empInfo">
+			<tr>
+				<th>User Id</th>
+				<th>First Name</th>
+				<th>Last Name</th>
+				<th>Email</th>
+				<th>Username</th>
+				<th>Password</th>
+			</tr>
+		</table>
+	
+	<!-- Add a button to take them to update their information -->
+	<h3>Update Information</h3>
+	<form action="/ExpenseReimbursements/update" method="POST">
+		First Name: <input type="text" name="firstName">
+		<br>
+		Last Name: <input type="text" name="lastName">
+		<br>
+		Email: <input type="email" name="email">
+		<br>
+		Username: <input type="text" name="username">
+		<br>
+		Password: <input type="password" name="password">
+		<br>
+		<input type="submit" value="Update Information">
+	</form>
+
+</body>
+<script src="scripts/userInfo.js"></script>
+</html>

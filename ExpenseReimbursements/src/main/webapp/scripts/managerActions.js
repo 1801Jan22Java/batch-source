@@ -16,11 +16,11 @@ function sendAjaxGet(url, func){
 function grabUsername(xhr){
 	if(xhr.responseText){
 		var res = JSON.parse(xhr.responseText);
-		if(res.firstname != null){
-			document.getElementById("currentUser").innerHTML = "Welcome, " + res.firstname;
+		if(res.firstName != null){
+			document.getElementById("currentUser").innerHTML = "Welcome to the Manager Homepage, Mr. " + res.lastName;
 		}
 	} else {
-		window.location = "http://localhost:8084/Reimbursements/login";
+		window.location = "http://localhost:8084/ExpenseReimbursements/login";
 	}
 }
 
@@ -47,7 +47,7 @@ function viewAllUsers(xhr){
 			row.insertCell(1).innerHTML = res[i].lastName;
 			row.insertCell(2).innerHTML = res[i].email;
 			row.insertCell(3).innerHTML = res[i].userName;
-			row.insertCell(4).innerHTML = "<a href=\"/Reimbursements/login\">Need To Change to actual link" + res[i].userId + "</a>";
+			row.insertCell(4).innerHTML = "<a href=\"http://localhost:8084/ExpenseReimbursements/employeeInformation/"+res[i].userId+"\">Click for More Information</button>";
 		}
 	}
 }
@@ -70,8 +70,8 @@ function viewAllPendingRequests(xhr){
 		headRow.insertCell(3).innerHTML = "<b>Amount Requested</b>";
 		headRow.insertCell(4).innerHTML = "<b>Date Submitted</b>";
 		headRow.insertCell(5).innerHTML = "<b>Manager Action</b>";
-		var url = "http://localhost:8084/Reimbursements/approveReimbursement/";
-		var url2 = "http://localhost:8084/Reimbursements/declineReimbursement/";
+		var url = "http://localhost:8084/ExpenseReimbursements/approveReimbursement/";
+		var url2 = "http://localhost:8084/ExpenseReimbursements/declineReimbursement/";
 		for(var i = 0; i < res.length; i++){
 			var row = header.insertRow(i+1);
 			row.insertCell(0).innerHTML = res[i].reimburseId;
@@ -118,21 +118,20 @@ function viewAllRevolvedRequests(xhr){
 }
 
 window.onload = function(){
-	sendAjaxGet("http://localhost:8084/Reimbursements/session", grabUsername);
-	document.getElementById("button").addEventListener('click', function(){
-		var selection = document.getElementsByTagName("select")[0].value;
+	sendAjaxGet("http://localhost:8084/ExpenseReimbursements/session", grabUsername);
+	document.getElementById("manager").addEventListener('click', function(){
+		var selection = document.getElementsByTagName("select")[1].value;
 		switch(selection){
 		case "allEmployees":
-			sendAjaxGet("http://localhost:8084/Reimbursements/viewAllEmployees", viewAllUsers);
+			sendAjaxGet("http://localhost:8084/ExpenseReimbursements/viewAllEmployees", viewAllUsers);
 			break;
 		case "viewAllPendingRequests":
-			sendAjaxGet("http://localhost:8084/Reimbursements/viewAllPendingRequests", viewAllPendingRequests);
+			sendAjaxGet("http://localhost:8084/ExpenseReimbursements/viewAllPendingRequests", viewAllPendingRequests);
 			break;
 		case "viewAllResolvedRequests":
-			sendAjaxGet("http://localhost:8084/Reimbursements/viewAllResolvedRequests", viewAllRevolvedRequests);
+			sendAjaxGet("http://localhost:8084/ExpenseReimbursements/viewAllResolvedRequests", viewAllRevolvedRequests);
 		default:
 			break;
-			
 		}
 	}, false);
 }

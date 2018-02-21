@@ -58,12 +58,14 @@ public class UserDAOImpl implements UserDAO{
 				String email = results.getString("EMAIL");
 				int position_id = results.getInt("POSITION");
 				String username = results.getString("USERNAME");
+				String password = results.getString("PASSWORD");
 				foundUser.setEmail(email);
 				foundUser.setFirstName(firstName);
 				foundUser.setLastName(lastName);
 				foundUser.setPosition_id(position_id);
 				foundUser.setUserName(username);
 				foundUser.setUserId(id);
+				foundUser.setPassword(password);
 			}
 			conn.close();
 		} catch (SQLException e) {
@@ -87,6 +89,7 @@ public class UserDAOImpl implements UserDAO{
 				String firstName = results.getString("FIRST_NAME");
 				String lastName = results.getString("LAST_NAME");
 				String email = results.getString("EMAIL");
+				String password = results.getString("PASSWORD");
 				int position_id = results.getInt("POSITION");
 				int user_id = results.getInt("USER_ID");
 				foundUser.setEmail(email);
@@ -95,6 +98,7 @@ public class UserDAOImpl implements UserDAO{
 				foundUser.setPosition_id(position_id);
 				foundUser.setUserId(user_id);
 				foundUser.setUserName(username);
+				foundUser.setPassword(password);
 			}
 			conn.close();
 		} catch (SQLException e) {
@@ -135,27 +139,15 @@ public class UserDAOImpl implements UserDAO{
 	}
 
 	@Override
-	public void updatePersonalInfo(User employee, String column, String value) {
+	public void updatePersonalInfo(User employee, String firstName, String lastName, String email, String username, String password) {
 		try(Connection conn = ConnectionUtil.getConnectionFromFile()){
-			PreparedStatement pstmt = null;
-			switch(column) {
-			case "firstname":
-				pstmt = conn.prepareStatement("UPDATE USERS SET FIRST_NAME = ? WHERE USER_ID = ?");
-				break;
-			case "lastname":
-				pstmt = conn.prepareStatement("UPDATE USERS SET LAST_NAME = ? WHERE USER_ID = ?");
-				break;
-			case "email":
-				pstmt = conn.prepareStatement("UPDATE USERS SET EMAIL = ? WHERE USER_ID = ?");
-				break;
-			case "password":
-				pstmt = conn.prepareStatement("UPDATE USERS SET PASSWORD = ? WHERE USER_ID = ?");
-				break;
-			default:
-				break;
-			}
-			pstmt.setString(1, value);
-			pstmt.setInt(2, employee.getUserId());
+			PreparedStatement pstmt = conn.prepareStatement("UPDATE USERS SET FIRST_NAME = ?, LAST_NAME = ?, EMAIL = ?, USERNAME = ?, PASSWORD = ? WHERE USER_ID = ?");
+			pstmt.setString(1, firstName);
+			pstmt.setString(2, lastName);
+			pstmt.setString(3, email);
+			pstmt.setString(4, username);
+			pstmt.setString(5, password);
+			pstmt.setInt(6, employee.getUserId());
 			pstmt.executeUpdate();
 			conn.close();
 			

@@ -8,15 +8,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class ManagerHomeServlet extends HttpServlet{
+import com.revature.beans.User;
+
+public class RedirectHomeServlet extends HttpServlet{
 	
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
 		HttpSession session = req.getSession(false);
 		if(session != null && session.getAttribute("currentUser") != null) {
-			req.getRequestDispatcher("views/managerHome.html").forward(req, resp);
-		} else {
-			resp.sendRedirect("/ExpenseReimbursements/login");
+			User currentUser = (User) session.getAttribute("currentUser");
+			if(currentUser.getPosition_id() == 1) {
+				resp.sendRedirect("employeeHome");
+			} else {
+				resp.sendRedirect("managerHome");
+			}
 		}
 	}
+
 }

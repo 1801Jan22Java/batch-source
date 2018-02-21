@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Employee Home Page</title>
+</head>
+<body>
+<a href="/ExpenseReimbursements/logout">Logout</a>
+	<h3 id="currentUser"></h3>
+	<p>What would you like to do today?</p>
+	<form action="employeeAction" method="POST">
+		<select name="destination">
+			<option value="submitRequest">Submit a reimbursement request</option>
+			<option value="viewEmpPendingRequests">View Your Pending Requests</option>
+			<option value="viewEmpResolvedRequests">View Your Resolved Requests</option>
+			<option value="viewEmpInfo">Personal Information</option>
+		</select>
+		<input type="submit" id="button" value="Take Me There!">
+	</form>
+
+</body>
+<script src="scripts/checkUser.js"></script>
+</html>

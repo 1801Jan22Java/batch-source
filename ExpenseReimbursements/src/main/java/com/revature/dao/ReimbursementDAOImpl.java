@@ -1,7 +1,11 @@
 package com.revature.dao;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.sql.Blob;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,10 +20,29 @@ import com.revature.util.ConnectionUtil;
 
 public class ReimbursementDAOImpl implements ReimbursementDAO{
 	
-	//BE SURE TO USE THE CALLABLE STATEMENT FOR SUBMITTING REIMBURSEMENTS
 	@Override
-	public void submitReimbursement(User employee) {
-		// TODO Auto-generated method stub
+	public void submitReimbursement(User employee, InputStream fileName, double amount) {
+		try {
+			System.out.println(fileName.available());
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		try(Connection conn = ConnectionUtil.getConnectionFromFile()){
+			String sql = "{call ADDREIMBURSEMENT(?, ?, ?)}";
+			CallableStatement cstmt = conn.prepareCall(sql);
+			cstmt.setBlob(1, fileName);
+			cstmt.setDouble(2, amount);
+			cstmt.setInt(3, employee.getUserId());
+			cstmt.execute();
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 
@@ -38,8 +61,7 @@ public class ReimbursementDAOImpl implements ReimbursementDAO{
 				int statusId = results.getInt("STATUS");
 				double amount = results.getDouble("AMOUNT");
 				StatusDAO status = new StatusDAOImpl();
-				Blob fileType = results.getBlob("FILE_TYPE");
-				empPending.add(new Reimbursement(reimburseId, emp, null, amount, status.getStatusById(statusId), fileType, dateSubmit));
+				empPending.add(new Reimbursement(reimburseId, emp, null, amount, status.getStatusById(statusId), dateSubmit));
 			}
 			conn.close();
 		} catch (SQLException e) {
@@ -67,10 +89,10 @@ public class ReimbursementDAOImpl implements ReimbursementDAO{
 				double amount = results.getDouble("AMOUNT");
 				int statusId = results.getInt("STATUS");
 				StatusDAO status = new StatusDAOImpl();
-				Blob fileType = results.getBlob("FILE_TYPE");
 				UserDAO manager = new UserDAOImpl();
 				int managerId = results.getInt("MANAGER_ID");
-				empResolved.add(new Reimbursement(reimburseId, emp, manager.getUserById(managerId), amount, status.getStatusById(statusId), fileType, dateSubmit));
+				//TODO MAKING FILETYPE NULL FOR NOW
+				empResolved.add(new Reimbursement(reimburseId, emp, manager.getUserById(managerId), amount, status.getStatusById(statusId), dateSubmit));
 			}
 			conn.close();
 		} catch (SQLException e) {
@@ -123,11 +145,10 @@ public class ReimbursementDAOImpl implements ReimbursementDAO{
 				String dateString = dateSubmitted.toString();
 				int statusId = results.getInt("STATUS");
 				double amount = results.getDouble("AMOUNT");
-				StatusDAO status = new StatusDAOImpl();
-				Blob fileType = results.getBlob("FILE_TYPE");
+				StatusDAO status = new StatusDAOImpl();	
 				UserDAO employee = new UserDAOImpl();
 				int empId = results.getInt("EMPLOYEE_ID");
-				allPending.add(new Reimbursement(reimburseId, employee.getUserById(empId), null, amount,status.getStatusById(statusId), fileType, dateString));
+				allPending.add(new Reimbursement(reimburseId, employee.getUserById(empId), null, amount,status.getStatusById(statusId), dateString));
 			}
 			conn.close();
 		} catch (SQLException e) {
@@ -154,11 +175,10 @@ public class ReimbursementDAOImpl implements ReimbursementDAO{
 				int statusId = results.getInt("STATUS");
 				double amount = results.getDouble("AMOUNT");
 				StatusDAO status = new StatusDAOImpl();
-				Blob fileType = results.getBlob("FILE_TYPE");
 				UserDAO user = new UserDAOImpl();
 				int employeeId = results.getInt("EMPLOYEE_ID");
 				int managerResolvedId = results.getInt("MANAGER_ID");
-				allResolved.add(new Reimbursement(reimburseId, user.getUserById(employeeId), user.getUserById(managerResolvedId), amount, status.getStatusById(statusId), fileType, dateSubmit));
+				allResolved.add(new Reimbursement(reimburseId, user.getUserById(employeeId), user.getUserById(managerResolvedId), amount, status.getStatusById(statusId), dateSubmit));
 			}
 			conn.close();
 		} catch (SQLException e) {
@@ -186,14 +206,13 @@ public class ReimbursementDAOImpl implements ReimbursementDAO{
 				int statusId = results.getInt("STATUS");
 				double amount = results.getDouble("AMOUNT");
 				StatusDAO status = new StatusDAOImpl();
-				Blob fileType = results.getBlob("FILE_TYPE");
 				UserDAO user = new UserDAOImpl();
 				int managerId = results.getInt("MANAGER_ID");
 				// MAY POTENTIALLY BREAK CODE AND NEED TO DEBUG WHEN MANAGER_ID IS NULL
 				if(managerId == 0) {
-					empRequests.add(new Reimbursement(reimburseId, user.getUserById(empId), null, amount, status.getStatusById(statusId), fileType, dateSubmit));
+					empRequests.add(new Reimbursement(reimburseId, user.getUserById(empId), null, amount, status.getStatusById(statusId), dateSubmit));
 				} else {
-					empRequests.add(new Reimbursement(reimburseId, user.getUserById(empId), user.getUserById(managerId), amount, status.getStatusById(statusId), fileType, dateSubmit));
+					empRequests.add(new Reimbursement(reimburseId, user.getUserById(empId), user.getUserById(managerId), amount, status.getStatusById(statusId), dateSubmit));
 				}
 								
 			}
@@ -206,6 +225,33 @@ public class ReimbursementDAOImpl implements ReimbursementDAO{
 			e.printStackTrace();
 		}
 		return empRequests;
+	}
+
+	@Override
+	public ByteArrayOutputStream getRequestImage(int reimburseId) {
+		ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+		try(Connection conn = ConnectionUtil.getConnectionFromFile()){
+			PreparedStatement pstmt = conn.prepareStatement("SELECT FILE_TYPE FROM REIMBURSEMENTS WHERE REIMBURSEMENT_ID = ?");
+			pstmt.setInt(1, reimburseId);
+			ResultSet results = pstmt.executeQuery();
+			while(results.next()) {
+				Blob fileType = results.getBlob("FILE_TYPE");
+				InputStream inStream = fileType.getBinaryStream();
+				int nRead;
+				byte[] data = new byte [100000];
+				
+				while((nRead = inStream.read(data, 0 ,data.length)) != -1) {
+					buffer.write(data, 0, nRead);
+				}
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return buffer;
 	}
 
 }

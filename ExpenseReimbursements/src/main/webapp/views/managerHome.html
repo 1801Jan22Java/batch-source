@@ -5,23 +5,33 @@
 <title>Insert title here</title>
 </head>
 <body>
+<a href="/ExpenseReimbursements/logout">Logout</a>
 	<div>
 		<h3 id="currentUser"></h3>
+		<p>Employee-Like Actions</p>
+		<form action="employeeAction" method="POST">
+			<select name="destination">
+				<option value="submitRequest">Submit a reimbursement request</option>
+				<option value="viewEmpPendingRequests">View Your Pending Requests</option>
+				<option value="viewEmpResolvedRequests">View Your Resolved Requests</option>
+				<option value="viewEmpInfo">Personal Information</option>
+			</select>
+			<input type="submit" id="button" value="Take Me There!">
+		</form>
+		
 		<form action="managerAction" method="post">
-			<p>What would you like to do today?</p>
+			<p>What Manager-like Actions would you like to do today?</p>
 			<select name="destination">
 				<option value="allEmployees">View All Employees</option>
 				<option value="viewAllPendingRequests">View All Pending Requests</option>
 				<option value="viewAllResolvedRequests">View All Resolved Requests</option>
 			</select>
-			<input type="button" id="button" value="Show me the information!">
+			<input type="button" id="manager" value="Show me the information!">
 		</form>
-		
 	</div>
 	<div id="tables">
 	</div>
 	
 </body>
-<script src="scripts/checkUser.js"></script>
-<script src="scripts/allUsers.js"></script>
+<script src="scripts/managerActions.js"></script>
 </html>

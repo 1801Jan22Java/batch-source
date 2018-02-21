@@ -12,10 +12,32 @@ public class RequestHelper {
 			return "allEmployees";
 		case "viewAllPendingRequests":
 			return "viewAllPendingRequests";
-		//Still need to map the ones below
 		case "viewAllResolvedRequests":
 			return "viewAllResolvedRequests";
+		case "submitRequest":
+			return "submitRequest";
+		case "viewEmpPendingRequests":
+			return "viewEmpPendingRequests";
+		case "viewEmpResolvedRequests":
+			return "viewEmpResolvedRequests";
+		case "viewEmpInfo":
+			return "viewEmpInfo";
 		default:
+			return "error";
+		}
+	}
+	
+	public static String employeeProcess(HttpServletRequest req) throws IOException{
+		switch(req.getParameter("destination")) {
+		case "submitRequest":
+			return "submitRequest";
+		case "viewEmpPendingRequests":
+			return "viewEmpPendingRequests";
+		case "viewEmpResolvedRequests":
+			return "viewEmpResolvedRequests";
+		case "viewEmpInfo":
+			return "viewEmpInfo";
+		default: 
 			return "error";
 		}
 	}

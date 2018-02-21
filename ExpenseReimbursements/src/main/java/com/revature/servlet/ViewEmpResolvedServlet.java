@@ -15,19 +15,21 @@ import com.revature.beans.User;
 import com.revature.dao.ReimbursementDAO;
 import com.revature.dao.ReimbursementDAOImpl;
 
-public class ApproveReimbursementServlet extends HttpServlet{
+public class ViewEmpResolvedServlet extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession(false);
-		User checkUser = (User) session.getAttribute("currentUser");
-		if(session.getAttribute("currentUser") != null && checkUser.getPosition_id() == 2) {
-			String uri = req.getPathInfo().substring(1);
-			ReimbursementDAO reimburse = new ReimbursementDAOImpl();
-			reimburse.resolveReimbursement(checkUser, Integer.parseInt(uri), "approved");
-			resp.sendRedirect("/ExpenseReimbursements/viewAllPendingRequests");
+		User currentUser = (User) session.getAttribute("currentUser");
+		if(session.getAttribute("currentUser") != null && currentUser.getPosition_id() == 1) {
+			ReimbursementDAO pending = new ReimbursementDAOImpl();
+			List<Reimbursement> pendingList = pending.empViewRevolvedReimbursement(currentUser);
+			resp.setContentType("application/json");
+			ObjectMapper om = new ObjectMapper();
+			String pendingString = om.writeValueAsString(pendingList);
+			resp.getWriter().write(pendingString);
 		} else {
-			resp.sendRedirect("/ExpenseReimbursements/login");
+			resp.sendRedirect("login");
 		}
 	}
 

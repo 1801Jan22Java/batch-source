@@ -18,7 +18,9 @@ public class SessionServlet extends HttpServlet{
 		if(session != null) {
 			User currUser = (User) session.getAttribute("currentUser");
 			resp.setContentType("application/json");
-			resp.getWriter().write("{\"firstname\": \"" + currUser.getFirstName() + "\"}");
+			resp.getWriter().write("{\"firstName\": \"" + currUser.getFirstName() + "\", "
+									+ "\"lastName\": \"" + currUser.getLastName() + "\", "
+									+ "\"userId\": \"" + currUser.getUserId() + "\"}");
 		} else {
 			resp.setContentType("application/json");
 			resp.getWriter().write("{\"firstname\":null\"}");

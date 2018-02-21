@@ -27,7 +27,6 @@ public class ViewAllPendingRequestsServlet extends HttpServlet{
 			ObjectMapper om = new ObjectMapper();
 			String userString = om.writeValueAsString(reimbursementList);
 			resp.getWriter().write(userString);
-			//Use this servlet for the javascript. Have another servlet to get the page.
 			
 		} else {
 			resp.sendRedirect("login");

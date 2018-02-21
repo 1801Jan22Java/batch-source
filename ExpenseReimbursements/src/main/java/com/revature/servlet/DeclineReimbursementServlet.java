@@ -22,7 +22,7 @@ public class DeclineReimbursementServlet extends HttpServlet{
 			String uri = req.getPathInfo().substring(1);
 			ReimbursementDAO reimburse = new ReimbursementDAOImpl();
 			reimburse.resolveReimbursement(checkUser, Integer.parseInt(uri), "declined");
-			resp.sendRedirect("/Reimbursements/managerHome");
+			resp.sendRedirect("/ExpenseReimbursements/managerHome");
 		} else {
 			resp.sendRedirect("login");
 		}

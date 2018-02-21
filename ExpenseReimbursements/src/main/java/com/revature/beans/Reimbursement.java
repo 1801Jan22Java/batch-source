@@ -1,6 +1,5 @@
 package com.revature.beans;
 
-import java.sql.Blob;
 import java.util.Date;
 
 public class Reimbursement {
@@ -8,14 +7,13 @@ public class Reimbursement {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Reimbursement(int reimburseId, User employee, User manager, double amount, Status status, Blob fileType, String dateSubmitted) {
+	public Reimbursement(int reimburseId, User employee, User manager, double amount, Status status, String dateSubmitted) {
 		super();
 		this.reimburseId = reimburseId;
 		this.employee = employee;
 		this.manager = manager;
 		this.amount = amount;
 		this.status = status;
-		this.fileType = fileType;
 		this.dateSubmitted = dateSubmitted;
 	}
 	
@@ -24,7 +22,6 @@ public class Reimbursement {
 	private User manager;
 	private double amount;
 	private Status status;
-	private Blob fileType;
 	private String dateSubmitted;
 	
 	public int getReimburseId() {
@@ -44,12 +41,6 @@ public class Reimbursement {
 	}
 	public void setManager(User manager) {
 		this.manager = manager;
-	}
-	public Blob getFileType() {
-		return fileType;
-	}
-	public void setFileType(Blob fileType) {
-		this.fileType = fileType;
 	}
 	public double getAmount() {
 		return amount;
@@ -72,8 +63,7 @@ public class Reimbursement {
 	@Override
 	public String toString() {
 		
-		return "Reimbursement [employee=" + employee + ", manager=" + manager + ", status=" + status + ", fileType="
-				+ fileType + ", dateSubmitted=" + dateSubmitted + "]";
+		return "Reimbursement [employee=" + employee + ", manager=" + manager + ", status=" + status + ", dateSubmitted=" + dateSubmitted + "]";
 	}
 
 }

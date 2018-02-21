@@ -9,5 +9,5 @@ public interface UserDAO {
 	public User getUserById(int id);
 	public User getUserByUsername(String username);
 	public List<User> viewAllUsers();
-	public void updatePersonalInfo(User employee, String column, String value);
+	public void updatePersonalInfo(User employee, String firstName, String lastName, String email, String username, String password);
 }

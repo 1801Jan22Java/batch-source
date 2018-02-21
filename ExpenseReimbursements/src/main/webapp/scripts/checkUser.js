@@ -16,14 +16,14 @@ function sendAjaxGet(url, func){
 function grabUsername(xhr){
 	if(xhr.responseText){
 		var res = JSON.parse(xhr.responseText);
-		if(res.firstname != null){
-			document.getElementById("currentUser").innerHTML = "Welcome, " + res.firstname;
+		if(res.firstName != null){
+			document.getElementById("currentUser").innerHTML = "Welcome to Expense Reimbursements, Mr. " + res.firstName;
 		}
 	} else {
-		window.location = "http://localhost:8084/Reimbursements/login";
+		window.location = "http://localhost:8084/ExpenseReimbursements/login";
 	}
 }
 
 window.onload = function(){
-	sendAjaxGet("http://localhost:8084/Reimbursements/session", grabUsername);
+	sendAjaxGet("http://localhost:8084/ExpenseReimbursements/session", grabUsername);
 }
