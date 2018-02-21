@@ -84,6 +84,7 @@ public class EmployeeServlet extends HttpServlet {
 				j.get("email").asText(), null);
 		EmployeeDAO d = new EmployeeDaoPLSQLImpl();
 		d.createEmployee(empl);
+		response.getWriter().write("Added Employee");
 	}
 
 	@Override
@@ -115,6 +116,7 @@ public class EmployeeServlet extends HttpServlet {
 			e = e.setPassword(password);
 		}
 		d.updateEmployee(e);
+	
 	}
 
 }

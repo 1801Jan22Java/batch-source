@@ -64,7 +64,7 @@ function deleteUser() {
 	
 	if (empl.id) {
 		sendAjaxDelete("http://localhost:8084/Project_1/employee", function(){
-			window.refresh();
+			myRefresh();
 		}, empl);
 	} 
 }
@@ -84,7 +84,7 @@ function updateUser() {
 		empl.password = "";
 	}
 	sendAjaxPut("http://localhost:8084/Project_1/employee", function(resp){
-		window.refresh();
+		myRefresh()
 	}, empl);
 }
 
@@ -98,7 +98,7 @@ function createUser() {
 	
 	if (empl.firstName && empl.lastName && empl.userName && empl.password && empl.email) {
 		sendAjaxPost("http://localhost:8084/Project_1/employee", function(resp){
-			window.refresh();
+			myRefresh()
 		}, empl);
 	} else {
 		
@@ -122,11 +122,19 @@ function toProReq() {
 	});
 };
 
-function refresh() {
-	sendAjaxGet("http://localhost:8084/Project_1/employee", whenLoad);
+function myRefresh() {
+	sendAjaxGet("http://localhost:8084/Project_1/employee?load=true", whenLoad);
+}
+
+function clearTable() {
+	var myNode = document.getElementById("tableBody");
+	while (myNode.firstChild) {
+	    myNode.removeChild(myNode.firstChild);
+	}
 }
 
 function whenLoad(resp) {
+	clearTable();
 	var j =  JSON.parse(resp.response);
 	var empl;
 	if (j.length) {
@@ -168,7 +176,7 @@ function whenLoad(resp) {
 
 window.onload = function(){
 	sendAjaxGet("http://localhost:8084/Project_1/employee?load=true", whenLoad);
-	document.getElementById("home").addEventListener("click", refresh);
+	document.getElementById("home").addEventListener("click", myRefresh);
 	document.getElementById("pReq").addEventListener("click", toPendReq);
 	document.getElementById("proReq").addEventListener("click", toProReq);
 	document.getElementById("createUser").addEventListener("click", createUser);

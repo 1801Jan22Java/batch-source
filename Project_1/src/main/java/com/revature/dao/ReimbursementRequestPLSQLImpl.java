@@ -16,10 +16,9 @@ import com.revature.util.ConnectionUtil;
 public class ReimbursementRequestPLSQLImpl implements ReimbursementRequestDAO {
 
 	@Override
-	public void createReimbursementRequest(
-			ReimbursementRequest req) {
+	public void createReimbursementRequest(ReimbursementRequest req) {
 		PreparedStatement stmt = null;
-		
+
 		try (Connection con = ConnectionUtil.getConnectionFromFile()) {
 			String sql = "INSERT INTO REIMBURSEMENT_REQUEST (AMOUNT, REQ_DATE, EMPL_ID, RECEIPT, DESCRIPTION) "
 					+ "VALUES (?, ?, ?, ?, ?)";
@@ -38,27 +37,28 @@ public class ReimbursementRequestPLSQLImpl implements ReimbursementRequestDAO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 	}
 
 	@Override
 	public ReimbursementRequest getReimbursementRequestById(int id) {
 		PreparedStatement stmt = null;
 		ReimbursementRequest req = null;
-		
+
 		try (Connection con = ConnectionUtil.getConnectionFromFile()) {
 			String sql = "SELECT * FROM REIMBURSEMENT_REQUEST WHERE REQ_ID = ?";
 			stmt = con.prepareStatement(sql);
 			stmt.setInt(1, id);
 			ResultSet rs = stmt.executeQuery();
-			
+
 			while (rs.next()) {
 				String description = rs.getString("DESCRIPTION");
 				Blob b = rs.getBlob("RECEIPT");
-				double amt= rs.getDouble("AMOUNT");
+				double amt = rs.getDouble("AMOUNT");
 				Date d = rs.getDate("REQ_DATE");
 				int emplId = rs.getInt("EMPL_ID");
-				req = new ReimbursementRequest(id, amt, d.toLocalDate(), emplId, b, description);
+				req = new ReimbursementRequest(id, amt, d.toLocalDate(), emplId,
+						b, description);
 			}
 			con.close();
 		} catch (SQLException e) {
@@ -74,7 +74,7 @@ public class ReimbursementRequestPLSQLImpl implements ReimbursementRequestDAO {
 	@Override
 	public void deleteReimbursementRequest(ReimbursementRequest req) {
 		PreparedStatement stmt = null;
-		
+
 		try (Connection con = ConnectionUtil.getConnectionFromFile()) {
 			String sql = "DELETE FROM REIMBURSEMENT_REQUEST WHERE REQ_ID = ?";
 			stmt = con.prepareStatement(sql);
@@ -95,20 +95,21 @@ public class ReimbursementRequestPLSQLImpl implements ReimbursementRequestDAO {
 	public List<ReimbursementRequest> getReimbursementRequests() {
 		PreparedStatement stmt = null;
 		List<ReimbursementRequest> reqs = new ArrayList<>();
-		
+
 		try (Connection con = ConnectionUtil.getConnectionFromFile()) {
-			String sql = "SELECT * FROM REIMBURSEMENT_REQUEST";
+			String sql = "SELECT * FROM REIMBURSEMENT_REQUEST WHERE REQ_ID NOT IN (SELECT REQ_ID FROM PROCESSED_REQUESTS)";
 			stmt = con.prepareStatement(sql);
 			ResultSet rs = stmt.executeQuery();
-			
+
 			while (rs.next()) {
 				int id = rs.getInt("REQ_ID");
 				String description = rs.getString("DESCRIPTION");
 				Blob b = rs.getBlob("RECEIPT");
-				double amt= rs.getDouble("AMOUNT");
+				double amt = rs.getDouble("AMOUNT");
 				Date d = rs.getDate("REQ_DATE");
 				int emplId = rs.getInt("EMPL_ID");
-				reqs.add(new ReimbursementRequest(id, amt, d.toLocalDate(), emplId, b, description));
+				reqs.add(new ReimbursementRequest(id, amt, d.toLocalDate(),
+						emplId, b, description));
 			}
 			con.close();
 		} catch (SQLException e) {
@@ -126,21 +127,22 @@ public class ReimbursementRequestPLSQLImpl implements ReimbursementRequestDAO {
 			int emplId) {
 		PreparedStatement stmt = null;
 		List<ReimbursementRequest> reqs = new ArrayList<>();
-		
+
 		try (Connection con = ConnectionUtil.getConnectionFromFile()) {
-			String sql = "SELECT * FROM REIMBURSEMENT_REQUEST WHERE EMPL_ID = ?";
+			String sql = "SELECT * FROM REIMBURSEMENT_REQUEST WHERE EMPL_ID = ? AND REQ_ID NOT IN (SELECT REQ_ID FROM PROCESSED_REQUESTS)";
 			stmt = con.prepareStatement(sql);
 			stmt.setInt(1, emplId);
 			ResultSet rs = stmt.executeQuery();
-			
+
 			while (rs.next()) {
 				int id = rs.getInt("REQ_ID");
 				String description = rs.getString("DESCRIPTION");
 				Blob b = rs.getBlob("RECEIPT");
-				double amt= rs.getDouble("AMOUNT");
+				double amt = rs.getDouble("AMOUNT");
 				Date d = rs.getDate("REQ_DATE");
 				emplId = rs.getInt("EMPL_ID");
-				reqs.add(new ReimbursementRequest(id, amt, d.toLocalDate(), emplId, b, description));
+				reqs.add(new ReimbursementRequest(id, amt, d.toLocalDate(),
+						emplId, b, description));
 			}
 			con.close();
 		} catch (SQLException e) {
@@ -156,9 +158,9 @@ public class ReimbursementRequestPLSQLImpl implements ReimbursementRequestDAO {
 	@Override
 	public ReimbursementRequest updateReimbursementRequest(
 			ReimbursementRequest req) {
-		
+
 		PreparedStatement stmt = null;
-		
+
 		try (Connection con = ConnectionUtil.getConnectionFromFile()) {
 			String sql = "UPDATE REIMBURSEMENT_REQUEST SET AMOUNT = ?, RECEIPT = ?, DESCRIPTION = ? "
 					+ "WHERE REQ_ID = ?";
@@ -175,14 +177,8 @@ public class ReimbursementRequestPLSQLImpl implements ReimbursementRequestDAO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		return getReimbursementRequestById(req.getEmplId());
 	}
-
-	
-
-	
-
-	
 
 }
