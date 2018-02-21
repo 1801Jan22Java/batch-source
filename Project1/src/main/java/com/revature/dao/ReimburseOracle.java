@@ -34,9 +34,9 @@ public class ReimburseOracle implements ReimburseDAO {
 	public List<Reimbursement> viewPendingRequests(int user_id) {
 		String sql = "";
 		if (user_id == 0) {
-			sql = "SELECT * FROM REIMBURSE_REQUEST WHERE REIMBURSE_STATUS_ID = 1";
+			sql = "SELECT * FROM REIMBURSE_REQUEST WHERE REIMBURSE_STATUS_ID = 1 ORDER BY REIMBURSE_REQUEST_ID ASC";
 		} else {
-			sql = "SELECT * FROM REIMBURSE_REQUEST WHERE USER_ID = ? AND REIMBURSE_STATUS_ID = 1";
+			sql = "SELECT * FROM REIMBURSE_REQUEST WHERE USER_ID = ? AND REIMBURSE_STATUS_ID = 1 REIMBURSE_REQUEST_ID ASC";
 		}
 		List<Reimbursement> reim = new ArrayList<>();
 		try (Connection con = ConnectionUtil.getConnectionFromFile(this.filename)) {
@@ -68,7 +68,7 @@ public class ReimburseOracle implements ReimburseDAO {
 		String sql = "";
 
 		sql = "SELECT * " + "FROM REIMBURSE_REQUEST, USERS "
-				+ "WHERE USERS.USERNAME = ? AND REIMBURSE_STATUS_ID = 1 AND USERS.USER_ID = REIMBURSE_REQUEST.USER_ID ORDER BY REIMBURSE_REQUEST DESC";
+				+ "WHERE USERS.USERNAME = ? AND REIMBURSE_STATUS_ID = 1 AND USERS.USER_ID = REIMBURSE_REQUEST.USER_ID ORDER BY REIMBURSE_REQUEST ASC";
 		List<Reimbursement> reim = new ArrayList<>();
 		try (Connection con = ConnectionUtil.getConnectionFromFile(this.filename)) {
 
@@ -96,9 +96,9 @@ public class ReimburseOracle implements ReimburseDAO {
 	public List<Reimbursement> viewResolvedRequests(int user_id) {
 		String sql = "";
 		if (user_id == 0) {
-			sql = "SELECT * FROM REIMBURSE_REQUEST WHERE REIMBURSE_STATUS_ID > 1 ORDER BY REIMBURSE_REQUEST DESC";
+			sql = "SELECT * FROM REIMBURSE_REQUEST WHERE REIMBURSE_STATUS_ID > 1 ORDER BY REIMBURSE_REQUEST ASC";
 		} else {
-			sql = "SELECT * FROM REIMBURSE_REQUEST WHERE USER_ID = ? AND REIMBURSE_STATUS_ID > 1 ORDER BY REIMBURSE_REQUEST DESC";
+			sql = "SELECT * FROM REIMBURSE_REQUEST WHERE USER_ID = ? AND REIMBURSE_STATUS_ID > 1 ORDER BY REIMBURSE_REQUEST ASC";
 		}
 
 		List<Reimbursement> reim = new ArrayList<>();
@@ -294,7 +294,8 @@ public class ReimburseOracle implements ReimburseDAO {
 	@Override
 	public List<Reimbursement> viewAllRequestsEmp(String username) {
 		String sql = "SELECT * " + "FROM REIMBURSE_REQUEST, USERS "
-				+ "WHERE USERS.USERNAME = ? AND USERS.USER_ID = REIMBURSE_REQUEST.USER_ID";
+				+ "WHERE USERS.USERNAME = ? AND USERS.USER_ID = REIMBURSE_REQUEST.USER_ID "
+				+ "ORDER BY REIMBURSE_REQUEST_ID ASC";
 		PreparedStatement ps = null;
 		List<Reimbursement> reim = new ArrayList<>();
 		try (Connection con = ConnectionUtil.getConnectionFromFile(this.filename)) {
@@ -319,7 +320,7 @@ public class ReimburseOracle implements ReimburseDAO {
 	}
 
 	public List<Reimbursement> viewAllRequests() {
-		String sql = "SELECT * FROM REIMBURSE_REQUEST";
+		String sql = "SELECT * FROM REIMBURSE_REQUEST ORDER BY REIMBURSE_REQUEST_ID ASC";
 		PreparedStatement ps = null;
 		List<Reimbursement> reim = new ArrayList<>();
 		try (Connection con = ConnectionUtil.getConnectionFromFile(this.filename)) {

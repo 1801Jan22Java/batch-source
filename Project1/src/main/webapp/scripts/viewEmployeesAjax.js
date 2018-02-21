@@ -21,7 +21,7 @@ function sendAjaxGet(url, func,event) {
 function displayUsers(xhr) {
 	var users = JSON.parse(xhr.responseText);
 	for(u in users){
-		document.getElementById("outputDiv").innerHTML+= `<button id="`+users[u].user_id+`" class="btn border text-left btn-primary col-sm-12" role = "button"
+		document.getElementById("outputDiv").innerHTML+= `<button id="`+users[u].user_id+`" class="btn border text-left btn-warning col-sm-12" role = "button"
 		onclick="sendAjax(event);" type="button">Username: `+users[u].username+` First: `+users[u].firstname+` Last: `+users[u].lastname+` </button>`;
 		
 	}
@@ -103,8 +103,6 @@ function showImage(event){
 	var raw_id = row.id;
 	var int_id = raw_id.replace("r","");
 	
-
-	var xhttp = new XMLHttpRequest() || new AciveXObject("Microsoft.HTTPRequest");
 
 	//
 	// Handle image

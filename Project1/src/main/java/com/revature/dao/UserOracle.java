@@ -70,7 +70,7 @@ public class UserOracle implements UserDAO {
 
 	@Override
 	public List<User> getAllEmployees() {
-		String sql = "SELECT * FROM USERS";
+		String sql = "SELECT * FROM USERS ORDER BY USER_ID DESC";
 		List<User> users = new ArrayList<>();
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);

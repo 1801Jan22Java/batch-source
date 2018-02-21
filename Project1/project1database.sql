@@ -177,7 +177,7 @@ insert into users (
     password,
     position_id
 ) values (
-    'asdf',
+    'z',
     'asdf',
     'asdf',
     'asdf',
