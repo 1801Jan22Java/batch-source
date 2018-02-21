@@ -21,7 +21,6 @@ public class MasterServlet extends HttpServlet {
      */
     public MasterServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**

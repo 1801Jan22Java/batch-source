@@ -17,18 +17,20 @@ public class ReimbReqDAOImpl implements ReimbReqDAO {
 	 * (non-Javadoc)
 	 * @see com.revature.dao.ReimbReqDAO#addNewReimbReq(int, java.lang.String, java.lang.String)
 	 * To add new reimbursement request using Id, 'pending', 'receipt'
+	 * ReqId NOT NULL, ReqName NOT NULL, Amount NOT NULL, EmployeeId NOT NULL, ReqStatus, Receipt, ModByManagerId
 	 */
 	@Override
-	public int addNewReimbReq(String reqName, int employeeId, String reqStatus) {
+	public int addNewReimbReq(String reqName, double amount, int employeeId, String reqStatus, String receipt) {
 		int reimbReqCreated = 0;
 		PreparedStatement pstmt = null;
 		try(Connection con = ConnectionUtil.getConnectionFromFile()) {
-			String sql = "INSERT INTO ReimbReq (ReqName, EmployeeId, ReqStatus) VALUES (?, ?, ?)";
+			String sql = "INSERT INTO ReimbReq (ReqName, Amount, EmployeeId, ReqStatus, Receipt) VALUES (?, ?, ?, ?, ?)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, reqName);
-			pstmt.setInt(2, employeeId);
-			pstmt.setString(3, reqStatus);
-//			pstmt.setString(3, receipt); 
+			pstmt.setDouble(2, amount);
+			pstmt.setInt(3, employeeId);
+			pstmt.setString(4, reqStatus);
+			pstmt.setString(5, receipt);
 			reimbReqCreated = pstmt.executeUpdate();
 		} catch (SQLException e){
 			e.printStackTrace();
@@ -40,6 +42,7 @@ public class ReimbReqDAOImpl implements ReimbReqDAO {
 	
 	/* 
 	 * Get ALL PENDING request
+	 * ReqId NOT NULL, ReqName NOT NULL, Amount NOT NULL, EmployeeId NOT NULL, ReqStatus, Receipt, ModByManagerId
 	 */
 	@Override
 	public List<ReimbReq> getAllPendingReq() {
@@ -52,11 +55,12 @@ public class ReimbReqDAOImpl implements ReimbReqDAO {
 			while(rs.next()) {
 				int reqId = rs.getInt("ReqId");
 				String reqName = rs.getString("ReqName");
+				double amount = rs.getDouble("Amount");
 				int employeeId = rs.getInt("EmployeeId");
-				int modByManagerId = rs.getInt("ModByManagerId");
 				String reqStatus = rs.getString("ReqStatus");
-				String receipt = "receipt"; // rs.getString("Receipt");
-				allPendingReq.add(new ReimbReq(reqId, reqName, employeeId, modByManagerId, reqStatus, receipt));
+				String receipt = rs.getString("Receipt");
+				int modByManagerId = rs.getInt("ModByManagerId");
+				allPendingReq.add(new ReimbReq(reqId, reqName, amount, employeeId, reqStatus, receipt, modByManagerId));
 			}
 			con.close();
 		} catch (SQLException e) {
@@ -85,10 +89,11 @@ public class ReimbReqDAOImpl implements ReimbReqDAO {
 			while(rs.next()) {
 				int reqId = rs.getInt("ReqId");
 				String reqName = rs.getString("ReqName");
-				int modByManagerId = rs.getInt("ModByManagerId");
+				double amount = rs.getDouble("Amount");
 				String reqStatus = rs.getString("ReqStatus");
-				String receipt = "receipt";  //rs.getString("Receipt");
-				pendingReq.add(new ReimbReq(reqId, reqName, employeeId, modByManagerId, reqStatus, receipt));
+				String receipt = rs.getString("Receipt");
+				int modByManagerId = rs.getInt("ModByManagerId");
+				pendingReq.add(new ReimbReq(reqId, reqName, amount, employeeId, reqStatus, receipt, modByManagerId));
 			}
 			con.close();
 		} catch (SQLException e) {
@@ -112,11 +117,12 @@ public class ReimbReqDAOImpl implements ReimbReqDAO {
 			while(rs.next()) {
 				int reqId = rs.getInt("ReqId");
 				String reqName = rs.getString("ReqName");
+				double amount = rs.getDouble("Amount");
 				int employeeId = rs.getInt("EmployeeId");
-				int modByManagerId = rs.getInt("ModByManagerId");
 				String reqStatus = rs.getString("ReqStatus");
-				String receipt = "receipt"; //rs.getString("Receipt");
-				allResolvedReq.add(new ReimbReq(reqId, reqName, employeeId, modByManagerId, reqStatus, receipt));
+				String receipt = rs.getString("Receipt");
+				int modByManagerId = rs.getInt("ModByManagerId");
+				allResolvedReq.add(new ReimbReq(reqId, reqName, amount, employeeId, reqStatus, receipt, modByManagerId));
 			}
 			con.close();
 		} catch (SQLException e) {
@@ -128,7 +134,7 @@ public class ReimbReqDAOImpl implements ReimbReqDAO {
 		return allResolvedReq;
 	}
 
-	// Get "resolved" reimbursement request by employeeId
+	// Get an employee's "resolved" reimbursement request by employeeId
 	@Override
 	public List<ReimbReq> getResolvedReimb(int employeeId) {
 		List<ReimbReq> resolvedReq = new ArrayList<>();
@@ -141,10 +147,11 @@ public class ReimbReqDAOImpl implements ReimbReqDAO {
 			while(rs.next()) {
 				int reqId = rs.getInt("ReqId");
 				String reqName = rs.getString("ReqName");
-				int modByManagerId = rs.getInt("ModByManagerId");
+				double amount = rs.getDouble("Amount");
 				String reqStatus = rs.getString("ReqStatus");
-				String receipt = "receipt";  //rs.getString("Receipt");
-				resolvedReq.add(new ReimbReq(reqId, reqName, employeeId, modByManagerId, reqStatus, receipt));
+				String receipt = rs.getString("Receipt");
+				int modByManagerId = rs.getInt("ModByManagerId");
+				resolvedReq.add(new ReimbReq(reqId, reqName, amount, employeeId, reqStatus, receipt, modByManagerId));
 			}
 			con.close();
 		} catch (SQLException e) {

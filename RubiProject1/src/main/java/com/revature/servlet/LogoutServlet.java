@@ -22,13 +22,12 @@ public class LogoutServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		resp.setContentType("text/html");
 		PrintWriter pw = resp.getWriter();
-		req.getRequestDispatcher("Base.html").include(req, resp);
+		req.getRequestDispatcher("views/loggedout.html").include(req, resp);
 		HttpSession session = req.getSession(false);
 		if(session != null) {
 			session.invalidate();
 		}
 		pw.println("you are successfully logged out");
-		pw.println("<a href=\"index.html\">Go back</a>");
         pw.write("</div></body></html>");
 	} // end doGet()
 

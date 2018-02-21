@@ -13,12 +13,139 @@
 </head>
 
 <body>
-	<h1>You're in the manager home page</h1>
-	<div class="box">
-		<p id="user"></p>
+	<!-- Navbar -->
+	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+	  <a class="navbar-brand" href="#">Reimburse</a>
+	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+	    <span class="navbar-toggler-icon"></span>
+	  </button>
+
+	  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+	    <ul class="navbar-nav mr-auto">
+	      <li class="nav-item">
+	      </li>
+	       <li class="nav-item">
+	      </li>
+	    </ul>
+
+	    <form class="form-inline my-2 my-lg-0" id="logoutForm" action="logout" method="get">
+	      <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Log Out</button>
+	    </form>
+	  </div>
+	</nav>
+	<!-- end Navbar -->
+
+	<div class="container">
+		<!-- Tabs -->
+		<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+		  <li class="nav-item">
+		    <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Home</a>
+		  </li>
+		  <li class="nav-item">
+		    <a class="nav-link" id="pills-allPending-tab" data-toggle="pill" href="#pills-allPending" role="tab" aria-controls="pills-allPending" aria-selected="false">All Pending Request</a>
+		  </li>
+		  <li class="nav-item">
+		    <a class="nav-link" id="pills-allResolved-tab" data-toggle="pill" href="#pills-allResolved" role="tab" aria-controls="pills-allResolved" aria-selected="false">All Resolved Request</a>
+		  </li>
+		  <li class="nav-item">
+		    <a class="nav-link" id="pills-allEmployee-tab" data-toggle="pill" href="#pills-allEmployee" role="tab" aria-controls="pills-allEmployee" aria-selected="false">View All Employees</a>
+		  </li>
+		  <li class="nav-item">
+		    <a class="nav-link" id="pills-changeInfo-tab" data-toggle="pill" href="#pills-changeInfo" role="tab" aria-controls="pills-changeInfo" aria-selected="false">Update MyInfo</a>
+		  </li>
+		</ul>
+
+		<div class="tab-content" id="pills-tabContent">
+
+		  	<div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+				<div class="col-6">
+				    <div class="uk-card uk-card-default uk-card-body uk-margin-left uk-margin-right uk-margin-top uk-animation-scale-up">
+				        <h2>Welcome <span id="profileName"></span>!</h2>
+						<div class="box">
+							<p>Employee ID: <span id="profileEmpId"></span></p>
+							<p>Email: <span id="profileEmail"></span></p>
+							<p>Username: <span id="profileUsername"></span></p>
+						</div>
+				    </div>
+				</div>
+				
+			    <div class="uk-card uk-card-default uk-card-body uk-margin-left uk-margin-right uk-margin-top uk-animation-scale-up">
+					<form id="newReqForm" action="newreq" method="post" enctype="multipart/form-data">
+					    <fieldset class="uk-fieldset">
+					        <legend class="uk-legend">Create a new reimbursement request</legend>
+
+							<div class="row">
+							    <div class="col-7">
+							    	<label for="req-name">Description</label>
+							    	<input type="text" class="form-control" id="req-name" name="reqName" placeholder="Request Name" required/>
+							    </div>
+							    <div class="col">
+							    	<label for="how-much">Amount</label>
+							    	<input type="number" class="form-control" id="how-much" name="amount"  min="0.01" step="0.01" placeholder="7.77">
+							    </div>
+							</div>
+
+							<div class="js-upload uk-placeholder uk-text-center">
+							    <span uk-icon="icon: cloud-upload"></span>
+							    <span class="uk-text-middle">Attach binaries by dropping them here or</span>
+							    <div uk-form-custom>
+							        <input type="file" name="receipt" multiple>
+							        <span class="uk-link">selecting one</span>
+							    </div>
+							</div>
+
+							<progress id="js-progressbar" class="uk-progress" value="0" max="100" hidden></progress>
+
+							<button type="submit" class="btn btn-primary">Submit</button>
+					    </fieldset>
+					</form>
+			    </div>
+			</div> <!-- End of Home div -->
+
+			<div class="tab-pane fade" id="pills-allPending" role="tabpanel" aria-labelledby="pills-allPending-tab">
+		  		<h2 id="noPending">All Pending Reimbursement Request</h2>
+		  		<div id="allPending-req"></div>
+		  	</div>
+		  	
+		  	<div class="tab-pane fade" id="pills-allResolved" role="tabpanel" aria-labelledby="pills-allResolved-tab">
+		  		<h2 id="noResolved">All Resolved Reimbursement Request</h2>
+		  		<div id="allResolved-req"></div>
+		  	</div>
+		  	<div class="tab-pane fade" id="pills-allEmployee" role="tabpanel" aria-labelledby="pills-allEmployee-tab">
+		  		<h2 id="noEmployee">All Employees</h2>
+		  		<div id="allEmployee-req"></div>
+		  	</div>
+
+		  	<div class="tab-pane fade" id="pills-changeInfo" role="tabpanel" aria-labelledby="pills-changeInfo-tab">
+		  		<h2>Update My Information</h2>
+		  		<!-- String lastName, String firstName, String email, String password, String username, int employeeId -->
+		  		<div class="uk-card uk-card-default uk-card-body uk-margin-left uk-margin-right uk-margin-top uk-animation-scale-up">
+					<form id="update-info" action="updateinfo" method="post">
+						<div class="form-row">
+						    <div class="form-group col-md-6">
+								<input type="text" class="form-control" id="first-name" name="firstName" placeholder="First Name" required/>
+						    </div>
+						    <div class="form-group col-md-6">
+								<input type="text" class="form-control" id="last-name" name="lastName" placeholder="Last Name" required/>
+						    </div>
+						</div>
+						<div class="form-row">
+						    <div class="form-group col-md-4">
+								<input type="email" class="form-control" id="e-mail" name="email" placeholder="Email" required/>
+						    </div>
+						    <div class="form-group col-md-4">
+								<input type="text" class="form-control" id="pass-word" name="password" placeholder="Password" required/>
+						    </div>
+						    <div class="form-group col-md-4">
+								<input type="text" class="form-control" id="user-name" name="username" placeholder="Username" required/>
+						    </div>
+						</div>
+						<button type="submit" class="btn btn-primary">Submit</button>
+					</form>
+				</div>
+		  	</div>
+		</div>
 	</div>
-	
-	<a href="index.html">go back</a>
 </body>
 <!-- Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -28,5 +155,5 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.40/js/uikit.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.40/js/uikit-icons.min.js"></script>
 <!-- In house JS -->
-<script src="scripts/check.js"></script>
+<script type="scripts/manager.js"></script>
 </html>

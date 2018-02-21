@@ -42,11 +42,12 @@ commit;
 CREATE TABLE ReimbReq
 (
     ReqId NUMBER NOT NULL,
-    ReqName VARCHAR2(20),
+    ReqName VARCHAR2(20) NOT NULL,
+    Amount NUMBER NOT NULL,
     EmployeeId NUMBER NOT NULL,
-    ModByManagerId NUMBER,
     ReqStatus VARCHAR2(20),
-    Receipt BLOB,
+    Receipt VARCHAR(100),
+    ModByManagerId NUMBER,
     CONSTRAINT PK_ReimbReq PRIMARY KEY (ReqId)
 );
 
@@ -75,6 +76,8 @@ END;
 --DROP TRIGGER ReimbReqTable_ReqId;
 --COMMIT;
 
-INSERT INTO ReimbReq (EmployeeId, ReqName, ReqStatus)
-    VALUES (2, 'Gas', 'pending');
+--ReqId NUMBER NOT NULL, ReqName VARCHAR2(20) NOT NULL, Amount NUMBER NOT NULL, EmployeeId NUMBER NOT NULL, ReqStatus VARCHAR2(20),
+--Receipt VARCHAR(100), ModByManagerId NUMBER
+INSERT INTO ReimbReq (ReqName, Amount, EmployeeId, ReqStatus)
+    VALUES ('Gas', 10.56, 2, 'pending');
 commit;

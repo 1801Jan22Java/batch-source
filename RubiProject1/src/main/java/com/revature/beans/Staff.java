@@ -9,12 +9,25 @@ public class Staff {
 	private String password;
 	private String username;
 	private int isManager;
+	private String strManager;
 	private int reportsTo;
 	
 	public Staff() {
 		super();
 	}
 
+	public Staff(int id, String lastName, String firstName, String email, String username,
+			int isManager, int reportsTo) {
+		super();
+		this.employeeId = id;
+		this.lastName = lastName;
+		this.firstName = firstName;
+		this.email = email;
+		this.username = username;
+		this.isManager = isManager;
+		this.reportsTo = reportsTo;
+	}
+	
 	public Staff(int id, String lastName, String firstName, String email, String password, String username,
 			int isManager, int reportsTo) {
 		super();
@@ -25,6 +38,17 @@ public class Staff {
 		this.password = password;
 		this.username = username;
 		this.isManager = isManager;
+		this.reportsTo = reportsTo;
+	}
+	
+	public Staff(int id, String lastName, String firstName, String email, String username, String strManager, int reportsTo) {
+		super();
+		this.employeeId = id;
+		this.lastName = lastName;
+		this.firstName = firstName;
+		this.email = email;
+		this.username = username;
+		this.setStrManager(strManager);
 		this.reportsTo = reportsTo;
 	}
 
@@ -90,6 +114,14 @@ public class Staff {
 
 	public void setReportsTo(int reportsTo) {
 		this.reportsTo = reportsTo;
+	}
+
+	public String getStrManager() {
+		return strManager;
+	}
+
+	public void setStrManager(String strManager) {
+		this.strManager = strManager;
 	}
 
 	@Override

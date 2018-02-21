@@ -59,6 +59,7 @@ public class StaffDAOImpl implements StaffDAO {
 	 * (non-Javadoc)
 	 * @see com.revature.dao.StaffDAO#getAllStaff()
 	 * Returns an ArrayList of the Staff table.
+	 * int id, String lastName, String firstName, String email, String username, String strManager, int reportsTo
 	 */
 	@Override
 	public List<Staff> getAllStaff() {
@@ -73,12 +74,16 @@ public class StaffDAOImpl implements StaffDAO {
 				String lastName = rs.getString("LastName");
 				String firstName = rs.getString("FirstName");
 				String email = rs.getString("Email");
-				String password = rs.getString("Pass");
 				String username = rs.getString("Username");
 				int isManager = rs.getInt("IsManager");
+				String strManager;
+				if(isManager == 1) {
+					strManager = "yes";
+				} else {
+					strManager = "no";
+				}
 				int reportsTo = rs.getShort("ReportsTo");
-				listStaff.add(new Staff(employeeId, lastName, firstName, email, password, username, 
-						isManager, reportsTo));
+				listStaff.add(new Staff(employeeId, lastName, firstName, email, username, strManager, reportsTo));
 			}
 			con.close();
 		} catch (SQLException e) {
@@ -123,5 +128,28 @@ public class StaffDAOImpl implements StaffDAO {
 		
 		return currStaff;
 	}
-
+	
+	/** Updates staff information given employeeId **/
+	@Override
+	public int updateInfo(String lastName, String firstName, String email, String password, String username, int employeeId) {
+		int updatedStaff = 0;
+		PreparedStatement pstmt = null;
+		try(Connection con = ConnectionUtil.getConnectionFromFile()) {
+			String sql = "UPDATE Staff SET LastName=?, FirstName=?, Email=?, Pass=?, Username=? WHERE EmployeeId = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, lastName);
+			pstmt.setString(2, firstName);
+			pstmt.setString(3, email);
+			pstmt.setString(4, password);
+			pstmt.setString(5, username);
+			pstmt.setInt(6, employeeId);
+			updatedStaff = pstmt.executeUpdate();
+			con.close();
+		} catch (SQLException e){
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return updatedStaff;
+	}
 }

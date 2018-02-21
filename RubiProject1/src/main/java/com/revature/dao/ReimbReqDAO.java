@@ -6,20 +6,12 @@ import com.revature.beans.ReimbReq;
 
 public interface ReimbReqDAO {
 
-	/* 
-	 * ReqId NUMBER NOT NULL,
-	 * ReqName VARCHAR2(20),
-	 * EmployeeId NUMBER NOT NULL,
-	 * ModByManagerId NUMBER NOT NULL, 
-	 * ReqStatus VARCHAR2(20), 
-	 * Receipt BLOB, 
-	 * CONSTRAINT PK_ReimbReq PRIMARY KEY (ReqId)
-	 */
+
 	
 	/*
 	 * Adds new request
 	 */
-	public int addNewReimbReq(String reqName, int employeeId, String reqStatus);
+	public int addNewReimbReq(String reqName, double amount, int employeeId, String reqStatus, String receipt);
 	
 	/*
 	 * ALL PENDING

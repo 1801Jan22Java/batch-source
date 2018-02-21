@@ -1,14 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
   <display-name>RubiProject1</display-name>
-  <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
-    <welcome-file>index.htm</welcome-file>
-    <welcome-file>index.jsp</welcome-file>
-    <welcome-file>default.html</welcome-file>
-    <welcome-file>default.htm</welcome-file>
-    <welcome-file>default.jsp</welcome-file>
-  </welcome-file-list>
   <servlet>
     <servlet-name>login</servlet-name>
     <servlet-class>com.revature.servlet.LoginServlet</servlet-class>
@@ -48,5 +40,61 @@
   <servlet-mapping>
     <servlet-name>logout</servlet-name>
     <url-pattern>/logout</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>getmypending</servlet-name>
+    <servlet-class>com.revature.servlet.GetUserPendingServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>getmypending</servlet-name>
+    <url-pattern>/getmypending</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>getmyresolved</servlet-name>
+    <servlet-class>com.revature.servlet.GetUserResolvedServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>getmyresolved</servlet-name>
+    <url-pattern>/getmyresolved</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>newreq</servlet-name>
+    <servlet-class>com.revature.servlet.NewReqServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>newreq</servlet-name>
+    <url-pattern>/newreq</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>updateinfo</servlet-name>
+    <servlet-class>com.revature.servlet.UpdateInfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>updateinfo</servlet-name>
+    <url-pattern>/updateinfo</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>getallpending</servlet-name>
+    <servlet-class>com.revature.servlet.GetAllPendingServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>getallpending</servlet-name>
+    <url-pattern>/getallpending</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>getallresolved</servlet-name>
+    <servlet-class>com.revature.servlet.GetAllResolvedServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>getallresolved</servlet-name>
+    <url-pattern>/getallresolved</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>getallemployees</servlet-name>
+    <servlet-class>com.revature.servlet.GetAllEmployeesServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>getallemployees</servlet-name>
+    <url-pattern>/getallemployees</url-pattern>
   </servlet-mapping>
 </web-app>

@@ -2,37 +2,40 @@ package com.revature.beans;
 
 public class ReimbReq {
 	
-	private int reimbId;
-	private String reqName;
-	private int employeeId;
-	private int modByManagerId;
 	/*
 	 * reqStatus: "pending" when created by employee, "approved"/"denied" only by managers
 	 * Managers may approve or deny in the frontend, updating this status
 	 */
-	private String reqStatus;
-	private String receipt;
+    private int reqId;
+    private String reqName;
+    private double amount;
+    private int employeeId;
+    private String reqStatus;
+    private String receipt;
+    private int modByManagerId;
 	
 	public ReimbReq() {
 		super();
 	}
 
-	public ReimbReq(int reimbId, String reqName, int employeeId, int modByManagerId, String reqStatus, String receipt) {
+	public ReimbReq(int reqId, String reqName, double amount, int employeeId, String reqStatus, String receipt,
+			int modByManagerId) {
 		super();
-		this.reimbId = reimbId;
+		this.reqId = reqId;
 		this.reqName = reqName;
+		this.amount = amount;
 		this.employeeId = employeeId;
-		this.modByManagerId = modByManagerId;
 		this.reqStatus = reqStatus;
 		this.receipt = receipt;
+		this.modByManagerId = modByManagerId;
 	}
 
-	public int getReimbId() {
-		return reimbId;
+	public int getReqId() {
+		return reqId;
 	}
 
-	public void setReimbId(int reimbId) {
-		this.reimbId = reimbId;
+	public void setReqId(int reqId) {
+		this.reqId = reqId;
 	}
 
 	public String getReqName() {
@@ -43,20 +46,20 @@ public class ReimbReq {
 		this.reqName = reqName;
 	}
 
+	public double getAmount() {
+		return amount;
+	}
+
+	public void setAmount(double amount) {
+		this.amount = amount;
+	}
+
 	public int getEmployeeId() {
 		return employeeId;
 	}
 
 	public void setEmployeeId(int employeeId) {
 		this.employeeId = employeeId;
-	}
-
-	public int getModByManagerId() {
-		return modByManagerId;
-	}
-
-	public void setModByManagerId(int modByManagerId) {
-		this.modByManagerId = modByManagerId;
 	}
 
 	public String getReqStatus() {
@@ -75,10 +78,18 @@ public class ReimbReq {
 		this.receipt = receipt;
 	}
 
+	public int getModByManagerId() {
+		return modByManagerId;
+	}
+
+	public void setModByManagerId(int modByManagerId) {
+		this.modByManagerId = modByManagerId;
+	}
+
 	@Override
 	public String toString() {
-		return "ReimbReq [reimbId=" + reimbId + ", employeeId=" + employeeId + ", ModByManagerId=" + modByManagerId + ", reqStatus="
-				+ reqStatus + "]";
+		return "ReimbReq [reqId=" + reqId + ", reqName=" + reqName + ", amount=" + amount + ", employeeId=" + employeeId
+				+ ", reqStatus=" + reqStatus + ", receipt=" + receipt + ", modByManagerId=" + modByManagerId + "]";
 	}
 
 }

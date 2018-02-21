@@ -26,5 +26,6 @@ public interface StaffDAO {
 	public Staff getStaff(String email);
 	
 	// Updates staff member information
+	public int updateInfo(String lastName, String firstName, String email, String password, String username, int employeeId);
 
 }
