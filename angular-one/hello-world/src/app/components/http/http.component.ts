@@ -14,7 +14,7 @@ export class HttpComponent implements OnInit {
   //injecting the service
   constructor(private bearService: BearService) { }
 
-  public bear: Bear = new Bear(10,'');
+  public bear: Bear = new Bear(45,'');
 
   getBearInformation(): void {
     this.bearService.fetchBearInformation(this.bear.id)

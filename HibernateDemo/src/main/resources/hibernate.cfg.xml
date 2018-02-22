@@ -11,7 +11,7 @@
 		<!-- this can be noisy in the console -->
 		<property name="hibernate.show_sql">true</property>
 		<!-- choose whether to create db or update existing db -->
-		<property name="hibernate.hbm2ddl.auto">create</property>
+		<property name="hibernate.hbm2ddl.auto">update</property>
 		<!-- map domain object classes -->
 		<mapping class="com.revature.domain.Flashcard"/>
 		<mapping class="com.revature.domain.Category"/>

@@ -15,12 +15,12 @@ export class BearService {
 
     public fetchBearInformation(id: number): Observable<Bear> {
         return this.http
-                .get(`https://pokeapi.co/api/v2/pokemon/${id}`)
+                .get('http://localhost:8084/FrontControllerDemo/bear?id='+id)
                 .catch(this.handleError);
     }
 
     public fetchFullResponse(){
-        
+
     }
 
     private handleError(error: Response) {

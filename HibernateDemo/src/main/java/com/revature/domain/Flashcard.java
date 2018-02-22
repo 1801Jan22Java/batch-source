@@ -36,7 +36,7 @@ public class Flashcard  implements Serializable {
 	@Column(name="ANSWER")
 	private String answer;
 	
-	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="CATEGORY_ID")
 	private Category category;
 	
@@ -57,6 +57,10 @@ public class Flashcard  implements Serializable {
 	}
 	public void setAnswer(String answer) {
 		this.answer = answer;
+	}
+	
+	public Category getCategory(){
+		return this.category;
 	}
 
 	@Override
