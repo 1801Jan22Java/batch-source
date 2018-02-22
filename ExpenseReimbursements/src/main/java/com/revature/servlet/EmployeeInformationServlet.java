@@ -15,7 +15,6 @@ public class EmployeeInformationServlet extends HttpServlet {
 		HttpSession session = req.getSession(false);
 		if(session != null && session.getAttribute("currentUser") != null) {
 			String uri = req.getPathInfo().substring(1);
-
 			resp.sendRedirect("/ExpenseReimbursements/employeeInformationPage/"+uri);
 		} else {
 			resp.sendRedirect("/ExpenseReimbursements/login");

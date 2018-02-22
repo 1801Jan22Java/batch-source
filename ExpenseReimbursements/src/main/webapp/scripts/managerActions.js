@@ -42,6 +42,7 @@ function viewAllUsers(xhr){
 		if(document.getElementById("allEmps") != null){
 			document.getElementById("allEmps").remove();
 		}
+		document.getElementById("downloadImg").src = "";
 		var tab = document.createElement("table");
 		tab.setAttribute("id", "allEmps");
 		tab.setAttribute("class", "table table-hover");
@@ -71,6 +72,8 @@ function viewAllPendingRequests(xhr){
 		if(document.getElementById("allEmps") != null){
 			document.getElementById("allEmps").remove();
 		}
+		
+		document.getElementById("downloadImg").src = "";
 		var tab = document.createElement("table");
 		tab.setAttribute("id", "allEmps");
 		tab.setAttribute("class", "table");
@@ -78,22 +81,19 @@ function viewAllPendingRequests(xhr){
 		var table = document.getElementById("allEmps");
 		var header = table.createTHead();
 		var headRow = header.insertRow(0);
-		headRow.insertCell(0).innerHTML = "<b>Reimbursement ID</b>";
-		headRow.insertCell(1).innerHTML = "<b>Employee ID</b>";
-		headRow.insertCell(2).innerHTML = "<b>Employee Name</b>";
-		headRow.insertCell(3).innerHTML = "<b>Amount Requested</b>";
-		headRow.insertCell(4).innerHTML = "<b>Date Submitted</b>";
-		headRow.insertCell(5).innerHTML = "<b>Manager Action</b>";
+		headRow.insertCell(0).innerHTML = "<b>Employee Name</b>";
+		headRow.insertCell(1).innerHTML = "<b>Amount Requested</b>";
+		headRow.insertCell(2).innerHTML = "<b>Date Submitted</b>";
+		headRow.insertCell(3).innerHTML = "<b>Manager Action</b>";
 		var url = "http://localhost:8084/ExpenseReimbursements/approveReimbursement/";
 		var url2 = "http://localhost:8084/ExpenseReimbursements/declineReimbursement/";
 		for(var i = 0; i < res.length; i++){
 			var row = header.insertRow(i+1);
-			row.insertCell(0).innerHTML = res[i].reimburseId;
-			row.insertCell(1).innerHTML = res[i].employee.userId;
-			row.insertCell(2).innerHTML = res[i].employee.firstName + " " + res[i].employee.lastName;
-			row.insertCell(3).innerHTML = res[i].amount;
-			row.insertCell(4).innerHTML = res[i].dateSubmitted;
-			row.insertCell(5).innerHTML = "<a href="+url+res[i].reimburseId+"><button class=\"btn btn-outline-success\">Approve</button><a href="+url2+res[i].reimburseId+"><button class=\"btn btn-outline-danger\">Decline</button>"
+			row.setAttribute("id", res[i].reimburseId);
+			row.insertCell(0).innerHTML = res[i].employee.firstName + " " + res[i].employee.lastName;
+			row.insertCell(1).innerHTML = res[i].amount;
+			row.insertCell(2).innerHTML = res[i].dateSubmitted;
+			row.insertCell(3).innerHTML = "<a href="+url+res[i].reimburseId+"><button class=\"btn btn-outline-success\">Approve</button><a href="+url2+res[i].reimburseId+"><button class=\"btn btn-outline-danger\">Decline</button>"
 			for(var j = 0; j < row.childNodes.length - 1; j++){
 				row.childNodes[j].setAttribute("onclick", "displayImage()");
 			}
@@ -114,31 +114,29 @@ function viewAllRevolvedRequests(xhr){
 		var table = document.getElementById("allEmps");
 		var header = table.createTHead();
 		var headRow = header.insertRow(0);
-		headRow.insertCell(0).innerHTML = "<b>Reimbursement ID</b>";
-		headRow.insertCell(1).innerHTML = "<b>Employee ID</b>";
-		headRow.insertCell(2).innerHTML = "<b>Employee Name</b>";
-		headRow.insertCell(3).innerHTML = "<b>Amount Requested</b>";
-		headRow.insertCell(4).innerHTML = "<b>Date Submitted</b>";
-		headRow.insertCell(5).innerHTML = "<b>Status</b>";
-		headRow.insertCell(6).innerHTML = "<b>Resolved By</b>";
+		headRow.insertCell(0).innerHTML = "<b>Employee Name</b>";
+		headRow.insertCell(1).innerHTML = "<b>Amount Requested</b>";
+		headRow.insertCell(2).innerHTML = "<b>Date Submitted</b>";
+		headRow.insertCell(3).innerHTML = "<b>Status</b>";
+		headRow.insertCell(4).innerHTML = "<b>Resolved By</b>";
+		
+		document.getElementById("downloadImg").src = "";
 
 		for(var i = 0; i < res.length; i++){
 			var row = header.insertRow(i+1);
 			row.setAttribute("onClick", "displayImage()");
-			row.insertCell(0).innerHTML = res[i].reimburseId;
-			row.insertCell(1).innerHTML = res[i].employee.userId;
-			row.insertCell(2).innerHTML = res[i].employee.firstName + " " + res[i].employee.lastName;
-			row.insertCell(3).innerHTML = res[i].amount;
-			row.insertCell(4).innerHTML = res[i].dateSubmitted;
-			row.insertCell(5).innerHTML = res[i].status.statusCode;
-			row.insertCell(6).innerHTML = res[i].manager.firstName + " " + res[i].manager.lastName;
+			row.setAttribute("id", res[i].reimburseId);
+			row.insertCell(0).innerHTML = res[i].employee.firstName + " " + res[i].employee.lastName;
+			row.insertCell(1).innerHTML = res[i].amount;
+			row.insertCell(2).innerHTML = res[i].dateSubmitted;
+			row.insertCell(3).innerHTML = res[i].status.statusCode;
+			row.insertCell(4).innerHTML = res[i].manager.firstName + " " + res[i].manager.lastName;
 		}
 	}
 }
 
 function displayImage(){
-	console.log(event.target.parentNode.firstChild);
-	sendAjaxGetImage("/ExpenseReimbursements/getImage?reimburseId="+ event.target.parentNode.firstChild.innerHTML, getReimburseImg);
+	sendAjaxGetImage("/ExpenseReimbursements/getImage?reimburseId="+ event.target.parentNode.getAttribute("id"), getReimburseImg);
 }
 
 function getReimburseImg(xhr){

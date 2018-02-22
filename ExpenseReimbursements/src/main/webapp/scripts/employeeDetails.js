@@ -42,33 +42,27 @@ function grabEmpDetails(xhr){
 		var table = document.getElementById("allEmps");
 		var header = table.createTHead();
 		var headRow = header.insertRow(0);
-		headRow.insertCell(0).innerHTML = "<b>Reimbursement ID</b>";
-		headRow.insertCell(1).innerHTML = "<b>Employee ID</b>";
-		headRow.insertCell(2).innerHTML = "<b>Amount Requested</b>";
-		headRow.insertCell(3).innerHTML = "<b>Date Submitted</b>";
-		headRow.insertCell(4).innerHTML = "<b>Status</b>";
-		headRow.insertCell(5).innerHTML = "<b>Resolved By</b>";
+		headRow.insertCell(0).innerHTML = "<b>Amount Requested</b>";
+		headRow.insertCell(1).innerHTML = "<b>Date Submitted</b>";
+		headRow.insertCell(2).innerHTML = "<b>Status</b>";
+		headRow.insertCell(3).innerHTML = "<b>Resolved By</b>";
 		var url = "/ExpenseReimbursements/getImage/";
 		for(var i = 0; i < res.resolved.length; i++){
 			var row = header.insertRow(i+1);
 			url += res.resolved[i].reimburseId;
-			console.log(url);
 			row.setAttribute("onClick", "displayImage()");
-			row.insertCell(0).innerHTML = res.resolved[i].reimburseId;
-			row.insertCell(1).innerHTML = res.resolved[i].employee.userId;
-			row.insertCell(2).innerHTML = res.resolved[i].amount;
-			row.insertCell(3).innerHTML = res.resolved[i].dateSubmitted;
-			row.insertCell(4).innerHTML = res.resolved[i].status.statusCode;
-			row.insertCell(5).innerHTML = res.resolved[i].manager.firstName + " " + res.resolved[i].manager.lastName;
+			row.setAttribute("id", res.resolved[i].reimburseId);
+			row.insertCell(0).innerHTML = res.resolved[i].amount;
+			row.insertCell(1).innerHTML = res.resolved[i].dateSubmitted;
+			row.insertCell(2).innerHTML = res.resolved[i].status.statusCode;
+			row.insertCell(3).innerHTML = res.resolved[i].manager.firstName + " " + res.resolved[i].manager.lastName;
 		}
 		for(var i = 0; i < res.pending.length; i++){
 			var row = header.insertRow();
 			row.setAttribute("onClick", "displayImage()");
-			row.insertCell(0).innerHTML = res.pending[i].reimburseId;
-			row.insertCell(1).innerHTML = res.pending[i].employee.userId;
-			row.insertCell(2).innerHTML = res.pending[i].amount;
-			row.insertCell(3).innerHTML = res.pending[i].dateSubmitted;
-			row.insertCell(4).innerHTML = res.pending[i].status.statusCode;
+			row.insertCell(0).innerHTML = res.pending[i].amount;
+			row.insertCell(1).innerHTML = res.pending[i].dateSubmitted;
+			row.insertCell(2).innerHTML = res.pending[i].status.statusCode;
 		}
 	} else {
 		window.location = "http://localhost:8084/ExpenseReimbursements/login";
@@ -76,7 +70,7 @@ function grabEmpDetails(xhr){
 }
 
 function displayImage(){
-	sendAjaxGetImage("/ExpenseReimbursements/getImage?reimburseId="+ event.target.parentNode.firstChild.innerHTML, getReimburseImg);
+	sendAjaxGetImage("/ExpenseReimbursements/getImage?reimburseId="+ event.target.parentNode.getAttribute("id"), getReimburseImg);
 }
 
 function getReimburseImg(xhr){

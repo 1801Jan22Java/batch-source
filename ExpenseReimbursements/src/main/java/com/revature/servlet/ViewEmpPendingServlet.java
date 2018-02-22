@@ -21,7 +21,7 @@ public class ViewEmpPendingServlet extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession(false);
 		User currentUser = (User) session.getAttribute("currentUser");
-		if(session.getAttribute("currentUser") != null && currentUser.getPosition_id() == 1) {
+		if(session.getAttribute("currentUser") != null) {
 			ReimbursementDAO pending = new ReimbursementDAOImpl();
 			List<Reimbursement> pendingList = pending.empViewPendingReimbursementById(currentUser);
 			resp.setContentType("application/json");
