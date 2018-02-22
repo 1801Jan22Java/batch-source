@@ -1,35 +1,40 @@
-<DOCTYPE! html>
+<DOCTYPE ! html>
 
 
 <html>
 <head>
-
+<link rel="stylesheet" href="Styles/Employee_Home.css">
 </head>
 
 <body>
-<form action ="UpdateProfileInfo" method ="Post" >
 
-<button type ="button" id = "UpdateUsername">Update Username </button>
-<input type="hidden" id ="UpdateUsernameForm" name ="UpdateUsernameForm"/>
-<div id = "CurrentUsername"></div>
-<br>
-<br>
-<button type ="button" id ="UpdatePassword"> Update password </button>
-<input type="hidden"  id ="UpdatePasswordForm" name ="UpdatePasswordForm"/>
-<div id = "CurrentPassword"></div>
-<br>
-<br>
-<button type ="button" id ="UpdateEmail"> Update email </button>
-<input type="hidden" id ="UpdateEmailForm"  name ="UpdateEmailForm"/>
-<div id = "CurrentEmail"></div>
+	<div id="Overlay">
+		<div id="container">
 
-<input type ="hidden" id ="FormSubmit">
-</form>
+			<form action="UpdateProfileInfo" method="Post">
 
-<form action="UpdateProfileInfo" method ="Get">
-<br>
-<input type= "submit" name ="Back"/>
-</form>
+
+				<button type="button" id="UpdateUsername">Update Username</button>
+				<input type="hidden" id="UpdateUsernameForm"
+					name="UpdateUsernameForm" />
+				<div id="CurrentUsername"></div>
+				<br> <br>
+				<button type="button" id="UpdatePassword">Update password</button>
+				<input type="hidden" id="UpdatePasswordForm"
+					name="UpdatePasswordForm" />
+				<div id="CurrentPassword"></div>
+				<br> <br>
+				<button type="button" id="UpdateEmail">Update email</button>
+				<input type="hidden" id="UpdateEmailForm" name="UpdateEmailForm" />
+				<div id="CurrentEmail"></div>
+
+				<input type="hidden" id="FormSubmit">
+			</form>
+		</div>
+	</div>
+	<form action="UpdateProfileInfo" method="Get">
+		<br> <input type="submit" name="Back" />
+	</form>
 </body>
 <script src="Scripts/UpdateProfile.js"></script>
 

@@ -15,7 +15,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 
-public class RequestDaoImpl {
+public class RequestDaoImpl implements RequestDao {
 	private static String filename = "Connection.properties";
 	Employee emp = new Employee();
 	private static int request_Id;

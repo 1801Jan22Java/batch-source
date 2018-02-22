@@ -9,7 +9,7 @@ import java.sql.SQLException;
 
 import com.revature.util.ConnectionUtil;
 
-public class EmployeeDaoImpl {
+public class EmployeeDaoImpl implements EmployeeDao {
 	private String filename = "Connection.properties";
 	public static int Employee_ID;
 	public static String Email;

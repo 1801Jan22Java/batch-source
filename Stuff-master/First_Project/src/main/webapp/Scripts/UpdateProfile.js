@@ -28,7 +28,6 @@ function submit_button() {
 document.getElementById("UpdateUsername").addEventListener("click", function(e) {
 	document.getElementById("UpdateUsernameForm").setAttribute("type", "text");
 	submit_button();
-	sendAjaxGet("/First_Project/UpdateProfileTransfer", getInfo);
 	
 
 }, false)
