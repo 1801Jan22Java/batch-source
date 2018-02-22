@@ -1,0 +1,114 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Page for Entering employee information">
+    <meta name="author" content="Leonard Blumberg">
+
+    <title>Update User Information</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="../styles/form-validation.css" rel="stylesheet">
+    <style>
+        body{
+    		background-image: url(../background2.jpg);	
+    	}
+    	
+    	
+        .container {
+        	align:"center";
+       		padding:15px;
+       		max-width:70%;
+		   	background-color: #225ea8;
+			border: solid;
+			border-radius: 25px;
+			border-color: #081d58;
+			border-width: 5px;
+        }
+        
+        h1 {
+        	color:white;
+        }
+        
+    </style>
+  </head>
+
+  <body class="bg-light">
+	<br><br><br>
+    <div class="container">
+
+      <div class="row">
+        <div class="col-md-12">
+          
+          <form style="color:white" method="post">
+          <h4 class="mb-3">Reimbursement Request Submission</h4>
+            <div class="row">
+              <div class="col-md-4 mb-3">
+                <label for="r_amount">Amount in Garlicoins (Required)</label>
+                <input type="number" step="any" min="0" class="form-control" 
+                name="r_amount" placeholder="" value="" required autofocus>
+                <div class="invalid-feedback">
+                  Valid amount of Garlicoins Required
+                </div>
+              </div>
+              <div class="col-md-8 mb-3">
+                <label for="req_image">Image(s) (Optional)</label>
+                <input type="file" class="form-control" name="req_image">
+              </div>
+            </div>
+
+
+            <div class="mb-12">
+              <label for="phone">Request Description  (Required)</label>
+              <input type="text" class="form-control" name="message" required>
+              <div class="invalid-feedback">
+                Please enter description
+              </div>
+            </div>
+
+            <hr class="mb-4">
+            <button class="btn btn-primary btn-lg btn-block" type="submit">Request Garlicoins</button>
+          </form>
+        </div>
+      </div>
+    </div>
+	<div class="container" align="center">
+		<a class="btn btn-primary btn-lg" href="../manager_home">Go Back</a>
+	</div>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../bs_assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+    <script src="../bs_assets/js/vendor/popper.min.js"></script>
+    <script src="../dist/js/bootstrap.min.js"></script>
+    <script src="../bs_assets/js/vendor/holder.min.js"></script>
+    <script>
+      // Example starter JavaScript for disabling form submissions if there are invalid fields
+      (function() {
+        'use strict';
+
+        window.addEventListener('load', function() {
+          // Fetch all the forms we want to apply custom Bootstrap validation styles to
+          var forms = document.getElementsByClassName('needs-validation');
+
+          // Loop over them and prevent submission
+          var validation = Array.prototype.filter.call(forms, function(form) {
+            form.addEventListener('submit', function(event) {
+              if (form.checkValidity() === false) {
+                event.preventDefault();
+                event.stopPropagation();
+              }
+              form.classList.add('was-validated');
+            }, false);
+          });
+        }, false);
+      })();
+    </script>
+  </body>
+</html>

@@ -1,3 +1,7 @@
+/**
+ * 
+ */
+
 function sendAjaxGet(url, func) {
 	var xhr = new XMLHttpRequest()
 			|| new ActiveXObject("Microsoft.HTTPRequest");
@@ -10,18 +14,11 @@ function sendAjaxGet(url, func) {
 	xhr.send();
 };
 
-function seeOneInfo(){
-    if (xhr.responseText) {
+function populateUser(xhr) {
+	if (xhr.responseText) {
 		var res = JSON.parse(xhr.responseText);
-		if (res) {
-            var table = document.getElementById("empTableBody");
-            res.forEach(element => {
-                table.appendChild(element);
-            });
-		}
+		
 	} else {
-	
+		//window.location = "http://localhost:8084/ServletLoginApp/login";
 	}
-};
-
-window.onload(sendAjaxGet())
+}

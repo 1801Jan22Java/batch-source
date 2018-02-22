@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+  <display-name>ProjectNo1</display-name>
+  <servlet>
+  	<servlet-name>EmployeeHome</servlet-name>
+  	<servlet-class>com.revature.servlet.EmployeeHomeServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>EmployeeHome</servlet-name>
+  	<url-pattern>/employee_home</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>ManagerHome</servlet-name>
+  	<servlet-class>com.revature.servlet.ManagerHomeServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>ManagerHome</servlet-name>
+  	<url-pattern>/manager_home</url-pattern>
+  </servlet-mapping>	
+  
+  <servlet>
+  	<servlet-name>Login</servlet-name>
+  	<servlet-class>com.revature.servlet.LoginServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>Login</servlet-name>
+  	<url-pattern>/login</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>Logout</servlet-name>
+  	<servlet-class>com.revature.servlet.LogoutServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>Logout</servlet-name>
+  	<url-pattern>/logout</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>RequestsServlet</servlet-name>
+  	<servlet-class>com.revature.servlet.ViewRequestsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>RequestsServlet</servlet-name>
+  	<url-pattern>/employee_requests</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>RequestsServlet</servlet-name>
+  	<url-pattern>/manager_requests</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>InfoServlet</servlet-name>
+  	<servlet-class>com.revature.servlet.UpdateInfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>InfoServlet</servlet-name>
+  	<url-pattern>/employee_info</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>InfoServlet</servlet-name>
+  	<url-pattern>/manager_info</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>NewRequestServlet</servlet-name>
+  	<servlet-class>com.revature.servlet.SubmitRequestServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>NewRequestServlet</servlet-name>
+  	<url-pattern>/new_request</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>NewRequestServlet</servlet-name>
+  	<url-pattern>/submit_manager_request</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>ResolveRequestServlet</servlet-name>
+  	<servlet-class>com.revature.servlet.ResolveRequestServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>ResolveRequestServlet</servlet-name>
+  	<url-pattern>/resolve_request</url-pattern>
+  </servlet-mapping>
+  
+</web-app>
