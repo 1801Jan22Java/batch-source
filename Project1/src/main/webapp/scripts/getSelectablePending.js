@@ -40,13 +40,17 @@ function displayProfile(xhr) {
 		var txtc = document.createTextNode(pending[p].user_id);
 		var tdc = document.createElement("td");
 		
-		var txtd = document.createTextNode("Pending");
+		var txtd = document.createTextNode(pending[p].notes);
 		var tdd = document.createElement("td");
 
+		var txte = document.createTextNode("Pending");
+		var tde = document.createElement("td");
+		
 		tda.appendChild(txta);
 		tdb.appendChild(txtb);
 		tdc.appendChild(txtc);
 		tdd.appendChild(txtd);
+		tde.appendChild(txte);
 		
 		var tr = document.createElement("tr");
 		tr.setAttribute("onclick", "select(event)");
@@ -55,6 +59,7 @@ function displayProfile(xhr) {
 		tr.appendChild(tdb);
 		tr.appendChild(tdc);
 		tr.appendChild(tdd);
+		tr.appendChild(tde);
 		ptable.appendChild(tr);
 	}
 
