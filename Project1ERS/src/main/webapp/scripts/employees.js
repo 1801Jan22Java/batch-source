@@ -78,19 +78,22 @@ function getJson(xhr) {
 		}
 		document.getElementById("json-employee-roster-table").appendChild(tb);
 
+		// Hide the loading screen and show the nav links and main content
 		document.getElementById("json-no-script").style.display = "none";
 		document.getElementById("json-loading").style.display = "none";
 		document.getElementById("json-nav-links").style.display = "flex";
 		document.getElementById("json-body").style.display = "block";
 		
 	} else {
+		// if they are not a manager send them home with a page not found message
 		isManager = false;
-		window.location = "../error";
+		window.location = "../requests?action=not-found";
 	}
 	
 }
 
 window.onload = function () {
+	// Use javascript to hide the static warning about enabling javascript in the user's browser and show the loading screen
 	document.getElementById("json-no-script").style.display = "none";
 	document.getElementById("json-loading").style.display = "block";
 	

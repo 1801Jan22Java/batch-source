@@ -45,6 +45,7 @@ public class RosterServlet extends HttpServlet {
 					}
 				} else {
 					// This employee is not a manager
+					// Future implementation = change to action = "not-found"
 					loggedIn = false;
 				}
 			} else {

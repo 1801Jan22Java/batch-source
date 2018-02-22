@@ -47,7 +47,7 @@ function checkManager(xhr) {
 		isManager = false
 	}
 	
-	
+	// Obtain the GET parameters of the URL to populate any possible warnings
 	var requestId = -1;
 	var action = "";
 	var parameters = window.location.search.substring(1).split("&");
@@ -70,6 +70,7 @@ function checkManager(xhr) {
 		addToQuery = "?id=" + requestId;
 	}
 	
+	// Sencond servlet... keep loading screen
 	// Can only call getJson after the sessionId is known
 	sendAjaxGet("../util/request" + addToQuery, getJson);
 }
@@ -194,7 +195,7 @@ function getJson(xhr) {
 	
 	document.getElementById("request-id").value = response.requests[0].requestId;
 	
-	
+	// Third servlet... keep loading screen
 	// Can only call getRequestStatuses after the requestAuthorId is known
 	sendAjaxGet("../util/request-statuses", getRequestStatuses)
 	
@@ -225,8 +226,11 @@ function getRequestStatuses(xhr) {
 		}
 	});
 	
+	// When new status is chosen, update the text of the submit button to reflect change
 	statusList.onchange = function() { updateSubmitButton(this); };
 	
+	// Last loading screen... hide loading screen
+	// Hide the loading screen and show the nav links and main content
 	document.getElementById("json-no-script").style.display = "none";
 	document.getElementById("json-loading").style.display = "none";
 	document.getElementById("json-nav-links").style.display = "flex";
@@ -253,8 +257,10 @@ function updateSubmitButton(list) {
 }
 
 window.onload = function () {
+	// Use javascript to hide the static warning about enabling javascript in the user's browser and show the loading screen
 	document.getElementById("json-no-script").style.display = "none";
 	document.getElementById("json-loading").style.display = "block";
 	
+	// First servlet.. keep loading screen
 	sendAjaxGet("../util/requests", checkManager);
 }

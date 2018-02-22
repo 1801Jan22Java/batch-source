@@ -29,6 +29,7 @@ function getJson(xhr) {
 	
 	var months = ["NULL", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 	
+	// If the user is a manager, populate both tables responsible for showing all open/closed requests
 	if (response.employees.length > 0) {
 		isManager = true;
 		document.getElementById("json-employee-open").style.display = "none";
@@ -36,7 +37,7 @@ function getJson(xhr) {
 		document.getElementById("json-admin-open").style.display = "none";
 		document.getElementById("json-admin-closed").style.display = "none";
 		
-		// Get all open requests for the open request table
+		// Get all open requests for the admin open request table
 		var total = 0;
 		var tb = document.createElement("tbody");
 		response.employees.forEach(function(employee) { 
@@ -135,8 +136,9 @@ function getJson(xhr) {
 			tb.appendChild(tr);
 		}
 		document.getElementById("json-admin-closed-table").appendChild(tb);
-		// Only show open requests on load
+		// Show only OPEN requests on load
 		document.getElementById("json-admin-open").style.display = "block";
+	// If the user is not a manager, populate both tables responsible for showing just the users open/closed requests
 	} else {
 		isManager = false;
 		document.getElementById("json-employee-open").style.display = "none";
@@ -231,9 +233,10 @@ function getJson(xhr) {
 		}
 		document.getElementById("json-employee-closed-table").appendChild(tb);
 		
-		// Only show open requests on load
+		// Show ONLY open requests on load
 		document.getElementById("json-employee-open").style.display = "block";
 	}
+	// Hide the loading screen and show the nav links and main content
 	document.getElementById("json-no-script").style.display = "none";
 	document.getElementById("json-loading").style.display = "none";
 	document.getElementById("json-nav-links").style.display = "flex";
@@ -279,6 +282,7 @@ function showOpen() {
 }
 
 window.onload = function () {
+	// Use javascript to hide the static warning about enabling javascript in the user's browser and show the loading screen
 	document.getElementById("json-no-script").style.display = "none";
 	document.getElementById("json-loading").style.display = "block";
 	
@@ -291,6 +295,7 @@ window.onload = function () {
 		closedLinks[i].onclick = function() { showClosed(); };
 	}
 	
+	// Obtain the GET parameters of the URL to populate any possible warnings
 	var action = "";
 	var parameters = window.location.search.substring(1).split("&");
 	parameters.forEach(function(parameter) { 
@@ -307,6 +312,6 @@ window.onload = function () {
 		document.getElementById("message").innerHTML = "Page Not Found";
 	}
 	
-	
+	// Only servlet... loading screen hides at end of function
 	sendAjaxGet("../util/requests", getJson);
 }
