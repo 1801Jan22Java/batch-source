@@ -84,7 +84,7 @@ public class EmployeeDaoImpl implements EmployeeDao{
 	}
 
 	private Employee createEmployeeObject(){
-		Employee user = null;
+		Employee employee = null;
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Please enter user firstname");
 		String name = sc.nextLine();
@@ -94,8 +94,7 @@ public class EmployeeDaoImpl implements EmployeeDao{
 		String username=sc.nextLine();
 		System.out.println("Please enter user password");
 		String pw = sc.nextLine();
-		//user =new Employee(username,pw,name,lname,ssn);
-		return user;
+		return employee;
 	}
 
 	/*

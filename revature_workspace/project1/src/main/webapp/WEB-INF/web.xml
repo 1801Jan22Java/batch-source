@@ -141,4 +141,14 @@
     <servlet-name>ViewRequestEmp</servlet-name>
     <url-pattern>/ViewRequestEmp</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>create</display-name>
+    <servlet-name>create</servlet-name>
+    <servlet-class>com.revature.project1.servlet.NewEmployeeServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>create</servlet-name>
+    <url-pattern>/create</url-pattern>
+  </servlet-mapping>
 </web-app>

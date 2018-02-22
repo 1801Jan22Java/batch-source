@@ -78,7 +78,7 @@ public class ReimbursementRequestDaoImpl implements ReimbursementRequestDao {
 					int pending = rs.getInt("PENDING");
 					float amount = rs.getFloat("AMOUNT");
 					String description=rs.getString("DESCRIPTION");
-					String extension = rs.getString("EXTENSION");
+					String extension = rs.getString("FILENAME");
 					
 					/*if(!(rs.getBlob("RECEIPT")==null))	{
 					Blob blob = rs.getBlob("RECEIPT");

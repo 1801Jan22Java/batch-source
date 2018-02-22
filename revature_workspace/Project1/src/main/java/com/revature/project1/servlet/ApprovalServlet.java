@@ -71,7 +71,7 @@ public class ApprovalServlet extends HttpServlet {
 					+ "Amount Requested for Reimbursement</th>" + "<th>Description</th>" + "<th>Receipt</th>"
 					+ "<th>Pending Status</th>" + "<th>Approval Status</th>"
 					+ "<th>Approve?</th><th>Deny?</th><th>Approving manager</th>");
-			ServletConfig config = getServletConfig();
+
 			for (ReimbursementRequest rr : rrdi.getReimbursementRequestsByEmployee(emp)) {
 				if(rr.getExtent()!=null) {
 					String fullStr= rr.getExtent();

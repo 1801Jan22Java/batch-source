@@ -86,11 +86,11 @@ public class UploadServlet extends HttpServlet {
 					extent = item.getName().substring(period + 1);
 					item.write(new File("C:\\Users\\user\\Desktop\\Cornu Sinistra\\gitrepos\\batch-source\\revature_workspace\\Project1\\src\\main\\webapp\\images\\" + dateStr + empStr + "." + extent));
 					file = new File("C:\\Users\\user\\Desktop\\Cornu Sinistra\\gitrepos\\batch-source\\revature_workspace\\Project1\\src\\main\\webapp\\images\\" + dateStr + empStr + "." + extent);
-					System.out.println(file.getAbsolutePath());
+				//	System.out.println(file.getAbsolutePath());
 					String filename = file.getName();
-					System.out.println("File uploaded");
+				//	System.out.println("File uploaded");
 					
-					System.out.println(empStr + " " + amountStr + " " + desc);
+				//	System.out.println(empStr + " " + amountStr + " " + desc);
 				}
 				
 			
@@ -99,41 +99,33 @@ public class UploadServlet extends HttpServlet {
 			int empInt = Integer.parseInt(empStr);
 			float amount = Float.parseFloat(amountStr);
 			Employee emp = edi.getEmployeeById(empInt);
+			RequestDispatcher rd = request.getRequestDispatcher("views/main_employee.html");
+			rd.include(request, response);
 			if(!loggedInEmp.getUserName().equals(emp.getUserName())) {
 				
-				RequestDispatcher rd = request.getRequestDispatcher("views/main.html");
-				rd.include(request, response);
-				response.setContentType("text/html");
-				pw.println("<div><p style=\"background-color:yellow; width:450px;margin-left:auto;margin-right:auto;\">You may only add reimbursement requests for yourself");
+			
 				
-				pw.println("<br>Request not added</p></div>");
+				response.setContentType("text/html");
+				pw.println("<script>alert(\"You may only add requests for yourself.  Request not added.\");</script>");
 				//response.sendRedirect("MasterServlet");
 			
 			}
 			else {
 			ReimbursementRequestDaoImpl rrdi = new ReimbursementRequestDaoImpl();
 			rrdi.addReimbursementRequest(emp, file, amount, desc, file.getAbsolutePath());
-			pw.println(
-					"<html><body style=\"background-color:black; color:white; width:450px;margin-left:auto;margin-right:auto;\">");
-			pw.println("Receipt addition successful!");
-			pw.println("<a style=\"color:white\" href=\"EmployeeServlet\">Back to upload page.</a>");
-			pw.write("</div></body></html>");
-			//System.out.println("Request added");
-			//response.sendRedirect("EmployeeServlet");
+			pw.println("<script>alert(\"Request added!\");</script>");
+		
 			}
 
 		}
 		catch(NumberFormatException e) {
-			pw.println(
-					"<html><body style=\"background-color:black; color:white; width:450px;margin-left:auto;margin-right:auto;\">");
-			pw.println("No information entered!");
-			pw.println("<a style=\"color:white\" href=\"EmployeeServlet\">Back to upload page.</a>");
-			pw.write("</div></body></html>");
+			pw.println("<script>alert(\"Amount to be reimbursed not entered!\");</script>");
+			response.sendRedirect("EmployeeServlet");
 			
 		}
 		 catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+				pw.println("<script>alert(\"Something went wrong!\");</script>");
+				response.sendRedirect("EmployeeServlet");
 		}
 
 		
