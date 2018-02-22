@@ -54,6 +54,9 @@ function display(xhr,event) {
 		Status
 		</th>
 		<th>
+		Notes
+		</th>
+		<th>
 		Resolved By
 		</th>
 	</tr>`;
@@ -74,13 +77,16 @@ function display(xhr,event) {
 		var tdb = document.createElement("td");
 		var txtc = document.createTextNode(status);
 		var tdc = document.createElement("td");
-		var txtd = document.createTextNode(reim[r].resolved_by);
+		var txtd = document.createTextNode(reim[r].notes);
 		var tdd = document.createElement("td");
+		var txte = document.createTextNode(reim[r].resolved_by);
+		var tde = document.createElement("td");
 
 		tda.appendChild(txta);
 		tdb.appendChild(txtb);
 		tdc.appendChild(txtc);
 		tdd.appendChild(txtd)
+		tde.appendChild(txte)
 		var tr = document.createElement("tr");
 		// Set ID to r1, r2, etc.
 		tr.setAttribute("id", reim[r].reimburse_id+"r");
@@ -92,6 +98,7 @@ function display(xhr,event) {
 		tr.appendChild(tdb);
 		tr.appendChild(tdc);
 		tr.appendChild(tdd);
+		tr.appendChild(tde);
 		dtable.appendChild(tr);
 	}
 }

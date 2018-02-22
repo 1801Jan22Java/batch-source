@@ -61,42 +61,46 @@ public class SubmitRequestServlet extends HttpServlet {
 			id = user.getUser_id();
 
 			List<FileItem> items = null;
-			
+
 			// Create a factory for disk-based file items
 			DiskFileItemFactory factory = new DiskFileItemFactory();
 
 			// Create a new file upload handler
 			ServletFileUpload upload = new ServletFileUpload(factory);
 
-
 			// Parse the request
 			try {
-			 items = upload.parseRequest(new ServletRequestContext(request));
+				items = upload.parseRequest(new ServletRequestContext(request));
 			} catch (FileUploadException e) {
 				e.printStackTrace();
 			}
 
-
-			InputStream is=null;
+			InputStream is = null;
 			int request_id = 0;
 			Double amount = 0.0;
+			String notes = "";
 			// Process the uploaded items
 			Iterator<FileItem> iter = items.iterator();
 			while (iter.hasNext()) {
-			    FileItem item = iter.next();
-			    
-			    if (item.isFormField()) {
-			    	if(item.getString().equals("")) {
-			    		amount = 0.0;
-			    	}else {
-				    	amount = Double.parseDouble(item.getString());
-			    	}
-			    } else {
-			    	is = item.getInputStream();
-			    }
+				FileItem item = iter.next();
+
+				if (item.isFormField()) {
+					if (item.getFieldName().equals("amount")) {
+						if (item.getString().equals("")) {
+							amount = 0.0;
+						} else {
+							amount = Double.parseDouble(item.getString());
+						}
+					}
+					if (item.getFieldName().equals("notes")) {
+						notes = item.getString();
+					}
+				} else {
+					is = item.getInputStream();
+				}
 			}
-			
-			ru.submitRequest(id, amount);
+
+			ru.submitRequestNotes(id, amount, notes);
 			ru.uploadImage(request_id, is);
 			is.close();
 			if (user.getPosition_id() == 1) {
