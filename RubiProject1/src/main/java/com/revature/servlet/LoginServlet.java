@@ -42,6 +42,7 @@ public class LoginServlet extends HttpServlet {
 		if(password.equals(currStaff.getPassword())) {
 			session.setAttribute("email", email);
 			session.setAttribute("firstName", currStaff.getFirstName());
+			session.setAttribute("currEmpId", currStaff.getEmployeeId());
 			session.setAttribute("problem", null);
 			if(currStaff.getIsManager() == 1) {
 				resp.sendRedirect("managerHome");

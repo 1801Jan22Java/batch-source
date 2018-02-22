@@ -33,6 +33,10 @@ INSERT INTO Staff (LastName, FirstName, Email, Pass, IsManager, ReportsTo)
     VALUES ('Boo', 'John', 'jaja@gmail.com', 'jaja1', 1, 0);
 INSERT INTO Staff (LastName, FirstName, Email, Pass, IsManager, ReportsTo)
     VALUES ('Doe', 'Jane', 'jaja2@gmail.com', 'jaja3', 0, 1);
+INSERT INTO Staff (LastName, FirstName, Email, Pass, IsManager, ReportsTo)
+    VALUES ('Revolver', 'Ocelot', 'caliber38@gmail.com', 'caliber1', 1, 0);
+INSERT INTO Staff (LastName, FirstName, Email, Pass, IsManager, ReportsTo)
+    VALUES ('Code', 'Boss', 'iAreBoss@gmail.com', 'boss1', 0, 3);
 --UPDATE Staff SET ReportsTo = 1 WHERE EmployeeId = 2;
 commit;
 --DROP TABLE STAFF;

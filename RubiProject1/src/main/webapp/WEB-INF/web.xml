@@ -97,4 +97,13 @@
     <servlet-name>getallemployees</servlet-name>
     <url-pattern>/getallemployees</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>approveordeny</servlet-name>
+    <servlet-class>com.revature.servlet.ApproveDenyServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>approveordeny</servlet-name>
+    <url-pattern>/approveordeny</url-pattern>
+  </servlet-mapping>
+
 </web-app>

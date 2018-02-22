@@ -163,11 +163,25 @@ public class ReimbReqDAOImpl implements ReimbReqDAO {
 		return resolvedReq;
 	}
 
+	// ReqId ReqStatus ModByManagerId
 	@Override
-	public int updateStatus(String reqStatus) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int aprvDeny(int reqId, String status, int managerId) {
+		int updateAprvDny = 0;
+		PreparedStatement pstmt = null;
+		try(Connection con = ConnectionUtil.getConnectionFromFile()) {
+			String sql = "UPDATE ReimbReq SET ReqStatus=?, ModByManagerId=? WHERE ReqId = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, status);
+			pstmt.setInt(2, managerId);
+			pstmt.setInt(3, reqId);
+			updateAprvDny = pstmt.executeUpdate();
+			con.close();
+		} catch (SQLException e){
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return updateAprvDny;
 	}
-
-
+	
 }

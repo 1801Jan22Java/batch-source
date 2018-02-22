@@ -115,6 +115,7 @@ function populateAllPending(xhr) {
 	    heading[4] = 'Request Status';
 	    heading[5] = 'Receipt';
 	    heading[6] = 'Checked By Manager ID';
+	    heading[7] = 'Approve/Deny';
 
 	    let stock = new Array();
 	    for(let i = 0; i < listAllPending.length; i++) {
@@ -126,7 +127,7 @@ function populateAllPending(xhr) {
 	    tableBody.appendChild(tr);
 	    for (i = 0; i < heading.length; i++) {
 	        let th = document.createElement('th')
-	        th.width = '75';
+	        th.width = '100';
 	        th.appendChild(document.createTextNode(heading[i]));
 	        tr.appendChild(th);
 	    }
@@ -134,11 +135,58 @@ function populateAllPending(xhr) {
 	    //TABLE ROWS
 	    for (i = 0; i < stock.length; i++) {
 	        let tr = document.createElement('tr');
+	        /*tr.setAttribute('data-toggle', 'modal');
+	        tr.setAttribute('data-id', stock[i][0]);
+	        tr.setAttribute('data-target', '#orderModal');*/
+	        
 	        for (j = 0; j < stock[i].length; j++) {
 	            let td = document.createElement('td');
 	            td.appendChild(document.createTextNode(stock[i][j]));
 	            tr.appendChild(td);
 	        }
+
+	        let btnstd = document.createElement('td');
+
+	        let form1 = document.createElement('form');
+	        form1.setAttribute('name', 'approveForm');
+	        form1.setAttribute('action', 'approveordeny');
+	        form1.setAttribute('method', 'post');
+
+	        let input1 = document.createElement('input');
+	        input1.setAttribute('type', 'hidden');
+	        input1.setAttribute('name', 'approved');
+	        input1.setAttribute('value', stock[i][0]);
+
+	        let approveBtn = document.createElement('button');
+	        approveBtn.innerHTML = "Approve";
+	        approveBtn.setAttribute('class', 'btn btn-outline-success btn-sm');
+	        approveBtn.setAttribute('type', 'submit');
+	   		
+
+	        let form2 = document.createElement('form');
+	        form2.setAttribute('name', 'denyForm');
+	        form2.setAttribute('action', 'approveordeny');
+	        form2.setAttribute('method', 'post');
+
+	    	let input2 = document.createElement('input');
+	        input2.setAttribute('type', 'hidden');
+	        input2.setAttribute('name', 'denied');
+	        input2.setAttribute('value', stock[i][0]);
+
+	        let denyBtn = document.createElement('button');
+	        denyBtn.innerHTML = "Deny";
+	        denyBtn.setAttribute('class', 'btn btn-outline-danger btn-sm');
+	        denyBtn.setAttribute('type', 'submit');
+
+	        form1.appendChild(input1);
+	        form1.appendChild(approveBtn);
+
+	        form2.appendChild(input2);
+	        form2.appendChild(denyBtn);
+
+	        btnstd.appendChild(form1);
+	        btnstd.appendChild(form2);
+	        tr.appendChild(btnstd);
 
 	        tableBody.appendChild(tr);
 	    }

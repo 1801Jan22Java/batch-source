@@ -29,8 +29,7 @@ public interface ReimbReqDAO {
 	// Get "resolved" reimbursement request by employeeId
 	public List<ReimbReq> getResolvedReimb(int employeeId);
 	
-	//Update reimbursement status
-	public int updateStatus(String reqStatus);
-	
+	// Approve or deny
+	public int aprvDeny(int reqId, String status, int managerId);
 	
 }
