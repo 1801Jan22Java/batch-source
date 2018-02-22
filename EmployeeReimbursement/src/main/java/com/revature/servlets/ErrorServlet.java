@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/*
+ * Forward the user to the error page when a 404 status code is received.
+ */
 
 public class ErrorServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

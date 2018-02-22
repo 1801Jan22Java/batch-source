@@ -9,7 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class ResolvedRequestsServlet
+ * Forwards the user to the page that displays all completed requests
+ * if the user is a Manager.
  */
 public class ResolvedRequestsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

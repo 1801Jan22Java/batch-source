@@ -12,7 +12,8 @@ import javax.servlet.http.HttpSession;
 import com.revature.util.RequestHelper;
 
 /**
- * Servlet implementation class MasterServlet
+ * An attempt at implementing the Front Controller.
+ * Currently not in use.
  */
 public class MasterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

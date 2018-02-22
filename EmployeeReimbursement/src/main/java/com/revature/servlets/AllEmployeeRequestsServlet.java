@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class AllEmployeeRequestsServlet
+ * When a manager wishes to view all requests belonging to a single employee,
+ * whether they're pending or completed.
+ * 
  */
 public class AllEmployeeRequestsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

@@ -14,7 +14,8 @@ import com.revature.dao.RequestDaoImpl;
 import com.revature.dao.RequestLogDaoImpl;
 
 /**
- * Servlet implementation class RespondServlet
+ * Servlet that handles the Manager's response when a Manager chooses to
+ * approve or deny a reimbursement request.
  */
 public class RespondServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

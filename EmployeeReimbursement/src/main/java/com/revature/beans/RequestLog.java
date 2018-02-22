@@ -1,13 +1,19 @@
 package com.revature.beans;
 
+
+/*
+ * Contains all additional information that is added to a request
+ * as it is approved or denied by a manager.
+ */
+
 public class RequestLog {
 	
 	private int logID;
 	private int requestID;
-	private String response;
-	private int managerID;
-	private int statusID;
-	private double dispensed;
+	private String response;	//The manager's rationale.
+	private int managerID;		//The ID of the manager who approved or denied the request.
+	private int statusID;		//2=Approved, 3=Declined
+	private double dispensed;	//The amount of money dispensed.
 	
 	private int employeeID;
 	private String description;

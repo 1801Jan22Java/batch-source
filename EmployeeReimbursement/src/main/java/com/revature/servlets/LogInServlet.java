@@ -12,6 +12,11 @@ import javax.servlet.http.HttpSession;
 import com.revature.beans.*;
 import com.revature.dao.*;
 
+
+/*
+ * Forwards the user to the login page.
+ */
+
 public class LogInServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 3955358416341714606L;

@@ -9,6 +9,9 @@ import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 
+/*
+ * Servlet used for retrieving current session attributes.
+ */
 
 public class SessionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

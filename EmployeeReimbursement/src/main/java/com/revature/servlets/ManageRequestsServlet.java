@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class ManageRequestsServlet
+ * Forwards the user to the request management page if they're a Manager
  */
 public class ManageRequestsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

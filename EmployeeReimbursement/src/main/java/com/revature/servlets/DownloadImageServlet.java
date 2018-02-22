@@ -19,7 +19,9 @@ import com.revature.beans.StoredFile;
 import com.revature.dao.StoredFileDaoImpl;
 
 /**
- * Servlet implementation class DownloadImageServlet
+ * Servlet used for downloading the image.
+ * As of right now, not completely working.
+ * Current band-aid fix: download to a path on this machine in a DAO method.
  */
 public class DownloadImageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

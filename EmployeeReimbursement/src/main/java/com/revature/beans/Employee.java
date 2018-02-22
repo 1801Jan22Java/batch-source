@@ -1,5 +1,11 @@
 package com.revature.beans;
 
+
+/*
+ * The Employee class that holds all information that identifies an Employee and
+ * allows them to log in.
+ */
+
 public class Employee {
 
 	private int id;

@@ -16,7 +16,9 @@ import com.revature.dao.ManagerDaoImpl;
 import com.revature.util.RequestHelper;
 
 /**
- * Servlet implementation class CheckLoginServlet
+ * The servlet that checks login credentials.
+ * Also sets the session attribute that check and specifies whether or not
+ * the user is a Manager.
  */
 public class CheckLoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

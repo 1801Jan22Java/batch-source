@@ -12,7 +12,8 @@ import javax.servlet.http.HttpSession;
 import com.revature.dao.EmployeeDaoImpl;
 
 /**
- * Servlet implementation class ModifyProfileServlet
+ * Servlet that updates the employee's information if they entered anything
+ * into the corresponding fields.
  */
 public class ModifyProfileServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

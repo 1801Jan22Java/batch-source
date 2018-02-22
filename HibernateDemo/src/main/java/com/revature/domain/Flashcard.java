@@ -4,12 +4,19 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
+//We can have multiple NamedQueries in each entity
+@NamedQueries({ @NamedQuery(name="findCardByCategory",
+	query="from Flashcard where category = :categoryVar")})
+
 
 @Entity		//javax.persistence.*
 @Table(name="FLASHCARD")
 public class Flashcard implements Serializable{
 	
 	
+	private static final long serialVersionUID = -1923111444811160415L;
+
+
 	public Flashcard() {
 		super();
 	}

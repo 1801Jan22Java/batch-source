@@ -12,7 +12,8 @@ import javax.servlet.http.HttpSession;
 import com.revature.util.RequestHelper;
 
 /**
- * Servlet implementation class HomeServlet
+ * Servlet that determine which homepage to send the user to,
+ * depending on whether or not they're a Manager
  */
 public class HomeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

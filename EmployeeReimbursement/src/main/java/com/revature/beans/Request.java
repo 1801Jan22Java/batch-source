@@ -2,14 +2,19 @@ package com.revature.beans;
 
 import java.sql.Date;
 
+
+/*
+ * Holds all information related to a reimbursement request.
+ */
+
 public class Request {
 
 	private int requestID;
 	private int employeeID;
 	private Date dateSubmitted;
-	private int statusID;
+	private int statusID;		//1=Pending, 2=Approved, 3=Declined
 	private double amount;
-	private String description;
+	private String description;	//500 character string containing the reasoning behind the request.
 	
 	
 	public Request() {}

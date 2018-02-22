@@ -16,7 +16,7 @@ import com.revature.dao.EmployeeDaoImpl;
 import com.revature.dao.RequestDaoImpl;
 
 /**
- * Servlet implementation class SearchEmployeeServlet
+ * A servlet used for retrieving all records submitted by a specified Employee.
  */
 public class SearchEmployeeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -24,7 +24,7 @@ public class SearchEmployeeServlet extends HttpServlet {
 
     
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		//Get this employee's information
+		
 		HttpSession session = req.getSession(false);
 
 		
@@ -43,7 +43,7 @@ public class SearchEmployeeServlet extends HttpServlet {
 		
 		resp.setContentType("application/json");
 		resp.setCharacterEncoding("ISO-8859-1");
-//		System.out.println(parsedLogs);
+
 		resp.getWriter().write(parsedLogs); 
 	}
 

@@ -1,5 +1,11 @@
 package com.revature.beans;
 
+
+/*
+ * An extension of the Employee class that determines whether an Employee
+ * is also a Manager. Managers have more available functionalities.
+ */
+
 public class Manager extends Employee{
 	
 	private int managerID;

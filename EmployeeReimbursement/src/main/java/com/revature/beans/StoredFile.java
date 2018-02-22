@@ -1,13 +1,18 @@
 package com.revature.beans;
 
 
+/*
+ * A class that holds information regarding any images
+ * that are submitted with a reimbursement request.
+ */
+
 public class StoredFile {
 	
 	
-	private int fileID;
-	private String fileName;
-	private int requestID;
-	private byte[] imageBytes;
+	private int fileID;			
+	private String fileName;	
+	private int requestID;		//The ID of the request that this image is attached to.
+	private byte[] imageBytes;	//Used to pass the image data to the servlet from the database.
 
 	
 	public StoredFile() {}

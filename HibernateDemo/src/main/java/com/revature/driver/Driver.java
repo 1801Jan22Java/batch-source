@@ -1,5 +1,9 @@
 package com.revature.driver;
 
+import java.util.Iterator;
+import java.util.List;
+
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -7,6 +11,7 @@ import com.revature.dao.*;
 import com.revature.domain.Category;
 import com.revature.domain.Flashcard;
 import com.revature.util.HibernateUtil;
+
 
 public class Driver {
 
@@ -21,10 +26,15 @@ public class Driver {
 		//if it is not in a transaction.
 		//saveAndPersist(fd);
 		
-		updateAndMerge(fd);
+		//updateAndMerge(fd);
+		
+		//Category c1 = new Category(3, "Coding");
+		//funWithNamedQueries(c1);
+		
+		funWithCache();
 	}
 		
-	public void getVsLoad() {
+	static  void getVsLoad() {
 		
 		//Get vs Load
 		FlashcardDao fd = new FlashcardDaoImpl();
@@ -114,9 +124,53 @@ public class Driver {
 		s.saveOrUpdate(f3);
 		
 		tx.commit();
-		s.close();
-		
-		
+		s.close();		
 	}
 
+	static void funWithNamedQueries(Category c) {
+		
+		//Trying to find Flashcards by Category in some kind of list
+		Session s = HibernateUtil.getSession();
+		Query q = s.getNamedQuery("findCardByCategory");	//org.hibernate
+		q.setInteger("categoryVar",  c.getId());
+		
+		List<Flashcard> cards = q.list();	//It's annoyed because we aren't casting
+		System.out.println(cards.size());
+		
+		Iterator<Flashcard> itr = cards.iterator();
+		while(itr.hasNext()) {
+			System.out.println(itr.next());
+		}
+		
+		s.close();
+		//Note: no transaction because nothing was changed
+	}
+	
+	static void funWithCriteria() {
+		Session s = HibernateUtil.getSession();
+		//We'll add Restrictions with .light
+		//We'll do Criterion with Bears, SO STAY TUNED
+		
+		
+		
+		s.close();
+	}
+	
+	static void funWithCache() {
+		Session s = HibernateUtil.getSession();
+		
+		Flashcard f = (Flashcard) s.load(Flashcard.class, 7);
+		System.out.println(f.getQuestion());
+		//We're within a session, so we're fine here
+		
+		s.evict(f);
+		
+		//prints the Java object we made, not checking the cache.
+		System.out.println(f.getQuestion());
+		
+		//Does not work, since f was removed from the cache
+		System.out.println(s.contains(f));
+		
+		s.close();
+	}
 }

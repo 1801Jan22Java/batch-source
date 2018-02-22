@@ -7,6 +7,11 @@ import com.revature.dao.ManagerDaoImpl;
 import com.revature.dao.RequestDaoImpl;
 import com.revature.dao.RequestLogDaoImpl;
 
+/*
+ * Class that holds data from both Request and RequestLog
+ * Used for filling rows in the table that displays approved and denied requests.
+ */
+
 public class CompletedRequest {
 	
 	

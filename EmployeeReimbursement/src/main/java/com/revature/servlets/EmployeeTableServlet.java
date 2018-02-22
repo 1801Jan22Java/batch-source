@@ -18,7 +18,8 @@ import com.revature.dao.EmployeeDaoImpl;
 import com.revature.dao.RequestDaoImpl;
 
 /**
- * Servlet implementation class EmployeeTableServlet
+ * Retrieves a list of all Employees stored in SQL.
+ * Sends them as a JSON string to fill the table of Employees
  */
 public class EmployeeTableServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
