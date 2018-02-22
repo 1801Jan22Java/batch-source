@@ -34,7 +34,8 @@ public class RequestDAOImpl implements RequestDAO
 				float amountRequested = rs.getFloat("AMOUNT_REQUEST");
 				int statusId = rs.getInt("STATUS");
 				int reqId = rs.getInt("REQUEST_ID");
-				Request r = new Request(reqId, employeeId, amountRequested, statusId);
+				String description = rs.getString("REQUEST_DETAILS");
+				Request r = new Request(reqId, employeeId, amountRequested, statusId, description);
 				reqs.add(r);
 			}	
 		}
@@ -129,7 +130,7 @@ public class RequestDAOImpl implements RequestDAO
 	public boolean changeStaus(int requestId, int newStatus) {
 		try(Connection con = ConnectionUtil.getConnectionFromFile())
 		{
-			String sql = "UPDATE STATUS = ? FROM REQUESTs WHERE REQUEST_ID = ?";
+			String sql = "UPDATE REQUEST SET STATUS= ? WHERE REQUEST_ID = ?";
 			PreparedStatement pstmt = null;
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, newStatus);
@@ -162,5 +163,14 @@ public class RequestDAOImpl implements RequestDAO
 	{
 		RequestDAOImpl imp = new RequestDAOImpl();
 		System.out.println(imp.getRequests(1012));
+	}
+	public ArrayList<Integer> getRequestIds()
+	{
+		ArrayList<Integer> reqIds = new ArrayList<Integer>();
+		for(Request r: this.getRequest())
+		{
+			reqIds.add(r.getRequestId());
+		}
+		return reqIds;
 	}
 }

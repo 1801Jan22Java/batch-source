@@ -2,6 +2,7 @@ package dao;
 import java.io.ByteArrayOutputStream;
 //Fin
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -106,7 +107,7 @@ public class ManagerDAOImpl implements ManagerDAO
 		try(Connection con = ConnectionUtil.getConnectionFromFile())
 		{
 			String sql = "DELETE FROM MANAGER WHERE EMPLOYEE_ID = ?";
-			PreparedStatement pstmt = null;;
+			PreparedStatement pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, id);
 			return pstmt.execute();
 		}
@@ -133,9 +134,54 @@ public class ManagerDAOImpl implements ManagerDAO
 		}
 		return null;
 	}
+	public boolean insertImage(Blob pic, int empId) throws SQLException
+	{
+		
+		try(Connection con = ConnectionUtil.getConnectionFromFile())
+		{
+		FileInputStream input = null;
+		
+		String sql = "UDATE MANAGER PROFILE_PIC = ? WHERE EMPLOYEE_ID =?";
+		PreparedStatement pstmt = con.prepareStatement(sql);
+		pstmt.setBlob(1, pic);
+		pstmt.setInt(2, empId);
+		return pstmt.execute();
+		}
+		catch (SQLException e1)
+		{
+			e1.printStackTrace();
+		} 
+		catch (IOException e2) 
+		{
+			e2.printStackTrace();
+		}
+		return false;
+	}
 	public static void main(String[] args) {
 		ManagerDAOImpl man = new ManagerDAOImpl();
 		System.out.println(man.getManagers());
 	}
-
+	public void uploadFromFile(String filePath, int empId) {
+		try(Connection con = ConnectionUtil.getConnectionFromFile())
+		{
+		FileInputStream input = null;
+		
+		String sql = "UPDATE MANAGER SET PROFILE_PIC = ? WHERE EMPLOYEE_ID =?";
+		PreparedStatement pstmt = con.prepareStatement(sql);
+		File file = new File(filePath);
+		input = new FileInputStream(file);
+		
+		pstmt.setBinaryStream(1, input);
+		pstmt.setInt(2, empId);
+		pstmt.execute();
+		}
+		catch (SQLException e1)
+		{
+			e1.printStackTrace();
+		} 
+		catch (IOException e2) 
+		{
+			e2.printStackTrace();
+		}
+	}
 }

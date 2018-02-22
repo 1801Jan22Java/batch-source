@@ -1,8 +1,6 @@
 package servlets;
 
-import java.awt.List;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -11,19 +9,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import beans.Employee;
 import beans.Request;
 import main.ServerManager;
 
 /**
- * Servlet implementation class ViewRequestsServlet
+ * Servlet implementation class ViewAllEmployees
  */
-public class ViewRequestsServlet extends HttpServlet {
+public class ViewAllEmployees extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ViewRequestsServlet() {
+    public ViewAllEmployees() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,7 +30,7 @@ public class ViewRequestsServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ServerManager serverManager = new ServerManager();
 		HttpSession session = request.getSession();
 		serverManager.login((String)session.getAttribute("username"), (String)session.getAttribute("password"));
@@ -40,16 +39,6 @@ public class ViewRequestsServlet extends HttpServlet {
 		System.out.println(serverManager.currentEmployee +""+ serverManager.currentManager);
 		//System.out.println((String)session.getAttribute("username")+(String)session.getAttribute("password"));
 		ArrayList<Request> reqs = null;
-		if(serverManager.currentEmployee!=null)
-		{
-			reqs = serverManager.reqDao.getRequests(serverManager.currentEmployee.getEmployeeId());
-		}
-		else
-		{
-			reqs = serverManager.reqDao.getRequests(serverManager.currentManager.getEmployeeId());
-		}
-		if(serverManager.currentEmployee.getEmployeeId()!=-1)
-		{	
 			System.out.println("emp1");
 			String html = "<!DOCTYPE html>\r\n" + 
 					"<html>\r\n" + 
@@ -62,25 +51,26 @@ public class ViewRequestsServlet extends HttpServlet {
 							"<table id=\"Requests\" class=\"table table-dark\">\r\n" + 
 							"<thead>\r\n" + 
 							"<tr>\r\n" + 
-							"<th scope=\"col\">Request ID</th>\r\n" + 
-							"<th scope=\"col\">Description</th>\r\n" +
-							"<th scope=\"col\">Request Status</th>\r\n" +  
-							"<th scope=\"col\">Amount Requested</th>"+"</tr>\r\n" + 
+							"<th scope=\"col\">Emploee ID</th>\r\n" + 
+							"<th scope=\"col\">First Name</th>\r\n" +
+							"<th scope=\"col\">Last Name</th>\r\n" + 
+							"<th scope=\"col\">Email</th>\r\n" + 
+							"<th scope=\"col\">User Name</th>\r\n" + 
+							"<th scope=\"col\">Manager Id</th>\r\n" +
+							"</tr>\r\n" + 
 							" 			</thead>";
 			int c =0;
-			for(Request r: reqs)
+			for(Employee e: serverManager.empDao.getEmployees())
 			{
-				if(r.getStatus()<102)
-				{
-					html+= "<tr><td>"+r.getRequestId()+"</td><td>"+r.getDescription()+"</td> <td>"+serverManager.statDao.getStatusName(r.getStatus())+"</td> <td>"+r.getAmountRequested()+"</td></tr>";
-				}
+					html+= "<tr><td>"+e.getEmployeeId()+"</td><td>"+e.getFirstName()+"</td> <td>"+e.getLastName()+"</td> <td>"+e.getEmail()+"</td><td>"+e.getUserName()+"</td><td>"+e.getManagerId()+"</td></tr>";
+
 			}
 			html+="</table>\r\n" + "</center>"+
 					"</body>\r\n" + 
 					"<script src = \"scripts/ViewRequests.js\"></script>\r\n" + 
 					"</html>";
 			response.getWriter().write(html);
-		}
+		
 		//response.sendRedirect("views/ViewRequests.html");
 	}
 
@@ -88,6 +78,8 @@ public class ViewRequestsServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		// TODO Auto-generated method stub
+		doGet(request, response);
 	}
+
 }

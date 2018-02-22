@@ -8,14 +8,14 @@
 <body>
 	<div id="div">
 	<h1>Please Upload Your Document For Review By Your Manager</h1>
+	<form action="http://localhost:8084/Project1Reimbersments/RequestDocumentServlet" method="post">
 			<fieldset>
 				<legend> filename: </legend>
 				<input type="file" name="file" id="image" accept="image/*"class="button"/>
-				<legend> Request Id: </legend>
-				<input type="text" name="requestId" class="button"/>
+				<input type ="submit" id="submit_btn" value = "submit" class="button">
 			</fieldset>
-			<input type ="submit" id="submit_btn" value = "submit" class="button">
-
+			
+	</form>
 		
 	</div>
 </body>

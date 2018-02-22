@@ -5,6 +5,8 @@ import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.URLDecoder;
+
 import javax.servlet.ServletException;
 import javax.servlet.ServletInputStream;
 import javax.servlet.ServletOutputStream;
@@ -24,14 +26,19 @@ public class RequestDocumentServlet extends HttpServlet {
 	
     public void doGet(HttpServletRequest request,HttpServletResponse response) throws IOException, ServletException  
     {  
-    	request.getRequestDispatcher("views/Request.html").include(request,response);
+    	 String url = request.getQueryString();
+    	 System.out.println(url);
+    	 HttpSession session = request.getSession();
+    	 session.setAttribute("requestId", url.substring(url.length()-4));
+    	request.getRequestDispatcher("views/Request.html?requestId=" +url).include(request,response);
+    	
     /*response.setContentType("image/jpeg");  
     ServletOutputStream out;  
     out = response.getOutputStream();  
     FileInputStream fin = new FileInputStream("C:\\Users\\panda\\Documents\\GitRepos\\1801-jan22-java\\batch-source\\Project1Reimbersments\\src\\main\\resources\\pics\\tempRequest.jpg");  
       
     BufferedInputStream bin = new BufferedInputStream(fin);  
-    BufferedOutputStream bout = new BufferedOutputStream(out);  
+    BufferedOutputStream bout = new BufferedOutputStream(ou.include(request,response);t);  
     int ch =0; ;  
     while((ch=bin.read())!=-1)  
     {  
@@ -45,7 +52,10 @@ public class RequestDocumentServlet extends HttpServlet {
     }  
 	 public void doPost(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException
 	 {
-		 ServerManager serverManager = new ServerManager();   
+		 HttpSession session = request.getSession();
+		 System.out.println(session);
+		 ServerManager serverManager = new ServerManager();
+		 System.out.println(serverManager.login((String)session.getAttribute("username"), (String)session.getAttribute("password")));   
 		 ServletInputStream in = request.getInputStream();
 		 ByteArrayOutputStream bao = new ByteArrayOutputStream();
 		 System.out.println(in.available());
@@ -58,10 +68,24 @@ public class RequestDocumentServlet extends HttpServlet {
 				 bao.write(i);
 				 count+=1;
 			 }
-			 System.out.println(count);
+			 //System.out.println(count);
 			 byte[] byteArr = bao.toByteArray();
-			 int requestId = Integer.parseInt(request.getParameter("requestId"));
-			 serverManager.docDao.uploadDocument(serverManager.currentEmployee.getEmployeeId(), byteArr);
+			 String url = request.getQueryString();
+			 //String result = java.net.URLDecoder.decode(url, "UTF-8");
+			 URLDecoder dec = new URLDecoder();
+			 //String url2 = dec.decode(url,"UTF-8");
+			 System.out.println(url);
+			 //String requestId = result.substring(result.length()-5);
+			 StringBuffer requestId2 = request.getRequestURL();
+			 //System.out.println(dec.decode((requestId2.toString()), "UTF-8"));
+			  System.out.println(requestId2);
+			  String rId= (String)session.getAttribute("requestId");
+			  System.out.println(rId);
+			 //System.out.println(request.getParameterNames().nextElement());
+			 int requestId = Integer.parseInt(rId);
+			 
+			 
+			 serverManager.docDao.uploadDocument(requestId, byteArr);
 		 }
 		 
 	 }

@@ -26,7 +26,7 @@ public class ManagerLogin extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("views/login.html").forward(request, response);
+		request.getRequestDispatcher("views/managerLogin.html").forward(request, response);
 	}
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -39,9 +39,10 @@ public class ManagerLogin extends HttpServlet {
 		String password = request.getParameter("password");
 		session.setAttribute("username", username);
 		session.setAttribute("password", password);
-		serverManager.managerLogin((String)username, (String)password);
+		System.out.println(username+password);
 		if(serverManager.managerLogin(username,password)==1){
-			serverManager.changePic(serverManager.currentEmployee.getEmployeeId());
+			//serverManager.changePic(serverManager.currentEmployee.getEmployeeId());
+			serverManager.managerChangePic(serverManager.currentManager.getEmployeeId());
 			session.setAttribute("managerId", serverManager.currentManager.getManagerId());
 			session.setAttribute("employeeId", serverManager.currentManager.getEmployeeId());
 			session.setAttribute("email", serverManager.currentManager.getEmail());
@@ -50,7 +51,7 @@ public class ManagerLogin extends HttpServlet {
 			response.sendRedirect("ManagerProfile");
 		} else {
 			session.setAttribute("problem", "incorrect password");
-			response.sendRedirect("loginPage");
+			response.sendRedirect("ManagerLogin");
 		}
 	}
 

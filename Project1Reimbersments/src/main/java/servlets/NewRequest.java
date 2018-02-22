@@ -36,10 +36,16 @@ public class NewRequest extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ServerManager serverManager = new ServerManager(); 
 		HttpSession session = request.getSession();
-		serverManager.login((String)session.getAttribute("username"), (String)session.getAttribute("password"));
 		Float requestAmount = Float.parseFloat(request.getParameter("requestAmount"));
 		String description = request.getParameter("description");
-		serverManager.reqDao.addRequest(serverManager.currentEmployee.getEmployeeId(), requestAmount, description);
+		if(serverManager.login((String)session.getAttribute("username"), (String)session.getAttribute("password"))==1)
+		{
+			serverManager.reqDao.addRequest(serverManager.currentEmployee.getEmployeeId(), requestAmount, description);
+		}
+		else if(serverManager.managerLogin((String)session.getAttribute("username"), (String)session.getAttribute("password"))==1)
+		{
+			serverManager.reqDao.addRequest(serverManager.currentManager.getEmployeeId(), requestAmount, description);
+		}
 		response.sendRedirect("EmployeeProfile");
 	}
 

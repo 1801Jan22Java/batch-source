@@ -1,8 +1,6 @@
 package servlets;
 
-import java.awt.List;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -15,15 +13,15 @@ import beans.Request;
 import main.ServerManager;
 
 /**
- * Servlet implementation class ViewRequestsServlet
+ * Servlet implementation class ViewUnresolvedRequests
  */
-public class ViewRequestsServlet extends HttpServlet {
+public class ViewUnresolvedRequests extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ViewRequestsServlet() {
+    public ViewUnresolvedRequests() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,25 +29,17 @@ public class ViewRequestsServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ServerManager serverManager = new ServerManager();
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	
+    	ServerManager serverManager = new ServerManager();
 		HttpSession session = request.getSession();
 		serverManager.login((String)session.getAttribute("username"), (String)session.getAttribute("password"));
-		serverManager.login((String)session.getAttribute("username"), (String)session.getAttribute("password"));
+		serverManager.managerLogin((String)session.getAttribute("username"), (String)session.getAttribute("password"));
 		response.setContentType("text/html");
-		System.out.println(serverManager.currentEmployee +""+ serverManager.currentManager);
-		//System.out.println((String)session.getAttribute("username")+(String)session.getAttribute("password"));
+		System.out.println((String)session.getAttribute("username")+(String)session.getAttribute("password"));
 		ArrayList<Request> reqs = null;
-		if(serverManager.currentEmployee!=null)
-		{
-			reqs = serverManager.reqDao.getRequests(serverManager.currentEmployee.getEmployeeId());
-		}
-		else
-		{
-			reqs = serverManager.reqDao.getRequests(serverManager.currentManager.getEmployeeId());
-		}
-		if(serverManager.currentEmployee.getEmployeeId()!=-1)
-		{	
+		reqs = serverManager.reqDao.getRequest();
+		
 			System.out.println("emp1");
 			String html = "<!DOCTYPE html>\r\n" + 
 					"<html>\r\n" + 
@@ -58,21 +48,22 @@ public class ViewRequestsServlet extends HttpServlet {
 					"<link rel=\"stylesheet\" href=\"styles/DunderTableStyle.css\">"+
 					"<title>View Requests</title>\r\n" + 
 					"</head>\r\n" + 
-					"<body>"+"<h1> Current Reimbursement Requests</h1>\r\n" + 
+					"<body>"+"<h1> Pending Reimbursement Requests</h1>\r\n" + 
 							"<table id=\"Requests\" class=\"table table-dark\">\r\n" + 
 							"<thead>\r\n" + 
 							"<tr>\r\n" + 
 							"<th scope=\"col\">Request ID</th>\r\n" + 
+							"<th scope=\"col\">Manager</th>\r\n" +
 							"<th scope=\"col\">Description</th>\r\n" +
 							"<th scope=\"col\">Request Status</th>\r\n" +  
-							"<th scope=\"col\">Amount Requested</th>"+"</tr>\r\n" + 
-							" 			</thead>";
+							"<th scope=\"col\">Amount Requested</th>"+
+							"</tr>\r\n" + "</thead>";
 			int c =0;
 			for(Request r: reqs)
 			{
 				if(r.getStatus()<102)
 				{
-					html+= "<tr><td>"+r.getRequestId()+"</td><td>"+r.getDescription()+"</td> <td>"+serverManager.statDao.getStatusName(r.getStatus())+"</td> <td>"+r.getAmountRequested()+"</td></tr>";
+					html+= "<tr><td>"+r.getRequestId()+"</td><td>"+serverManager.manDao.getManagerById(r.getEmployeeId())+"</td><td>"+r.getDescription()+"</td> <td>"+serverManager.statDao.getStatusName(r.getStatus())+"</td> <td>"+r.getAmountRequested()+"</td></tr>";
 				}
 			}
 			html+="</table>\r\n" + "</center>"+
@@ -80,14 +71,15 @@ public class ViewRequestsServlet extends HttpServlet {
 					"<script src = \"scripts/ViewRequests.js\"></script>\r\n" + 
 					"</html>";
 			response.getWriter().write(html);
+			request.getRequestDispatcher("views/UpdateRequest.html").include(request,response);
 		}
-		//response.sendRedirect("views/ViewRequests.html");
-	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		// TODO Auto-generated method stub
+		doGet(request, response);
 	}
+
 }

@@ -1,13 +1,18 @@
 package main;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.sql.Blob;
 import java.sql.SQLException;
+
+import javax.sql.rowset.serial.SerialException;
 
 import beans.Employee;
 import beans.Manager;
@@ -77,6 +82,8 @@ public class ServerManager
 		File file = new File("C:/Users/panda/Documents/GitRepos/1801-jan22-java/batch-source/Project1Reimbersments/src/main/resources/pics/manager.jpg");
 		OutputStream out=null;
 		try {
+			FileInputStream input = null;
+			
 			out = new FileOutputStream(file);
 			out.write(pic);
 			out.close();
@@ -91,5 +98,33 @@ public class ServerManager
 	public void changeRequestDocument( int requestId, byte[] pic)
 	{
 		docDao.uploadDocument(requestId, pic);
+	}
+	public static void main(String[] args) throws IOException, SerialException, SQLException {
+		ServerManager serverManager = new ServerManager();
+		serverManager.managerChangePic(1005);
+		//ManagerDAOImpl manDao = new ManagerDAOImpl();
+		//manDao.uploadFromFile("C:/Users/panda/Documents/GitRepos/1801-jan22-java/batch-source/Project1Reimbersments/src/main/resources/pics/darryl.jgp.jpg",1007);
+	}
+	public static byte[] convertFileContentToBlob(String filePath) throws IOException {
+		File file = new File(filePath);
+		//init array with file length
+		byte[] bytesArray = new byte[(int) file.length()];
+
+		FileInputStream fis = new FileInputStream(file);
+		fis.read(bytesArray); //read file into bytes[]
+		fis.close();
+
+		return bytesArray;
+	}
+	public static boolean updateStatus(int requestId, int decision)
+	{
+		RequestDAOImpl reqDao = new RequestDAOImpl();
+		StatusDAOImpl statDao = new StatusDAOImpl();
+		if(reqDao.getRequestIds().contains(requestId))
+		{
+			reqDao.changeStaus(requestId, decision);
+		}
+		return false;
+		
 	}
 }

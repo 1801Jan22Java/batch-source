@@ -16,28 +16,24 @@ public class SessionServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		HttpSession session = req.getSession(false);
-		System.out.println(session);
+		HttpSession session = req.getSession();
 		ServerManager serverManager = new ServerManager();
-		ArrayList<Request> reqs = serverManager.reqDao.getRequests(serverManager.currentEmployee.getEmployeeId());
-		if (session != null) {
-			resp.setContentType("application/json");
+		serverManager.login((String)session.getAttribute("username"), (String)session.getAttribute("password"));
+		System.out.println(session);
+		resp.setContentType("application/json");
+		if (session != null) 
+		{
 			resp.getWriter().write("{\"employeeId\":\"" + session.getAttribute("employeeId")+"\"");
-			resp.getWriter().write(",\"size\":\"" + reqs.size()+"\"");
-			int c =0;
-			for(Request r: reqs)
-			{
-				resp.getWriter().write(",\"status"+c+"\":\"" + r.getStatus()+"\"");
-				resp.getWriter().write(",\"requestId"+c+"\":\"" + r.getRequestId()+"\"");
-				resp.getWriter().write(",\"requestAmount"+c+"\":\"" + r.getAmountRequested()+"\"");
-				c++;
-			}
 			resp.getWriter().write(",\"email\":\"" + session.getAttribute("email")+"\"");
 			resp.getWriter().write(",\"firstName\":\"" + session.getAttribute("firstName")+"\"");
+			resp.getWriter().write(",\"password\":\"" + session.getAttribute("password")+"\"");
+			resp.getWriter().write(",\"username\":\"" + session.getAttribute("username")+"\"");
+			resp.getWriter().write(",\"username\":\"" + session.getAttribute("requestId")+"\"");
 			resp.getWriter().write(",\"lastName\":\"" + session.getAttribute("lastName") + "\"}");
-		} else {
-			resp.setContentType("application/json");
-			resp.getWriter().write("{\"username\":null}");
+		} 
+		else 
+		{
+			resp.getWriter().write("{\"employeeId\":null}");
 		}
 	}
 }
