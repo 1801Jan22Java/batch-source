@@ -10,6 +10,8 @@ import javax.servlet.http.HttpSession;
 
 public class EmployeeInformationPageServlet extends HttpServlet {
 
+	
+	// Servlet for redirecting the manager to page with all the information on a specific user
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
 		HttpSession session = req.getSession(false);

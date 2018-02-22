@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 public class EmployeeHomeServlet extends HttpServlet{
 	
+	//If the user has logged in this will display the correct UI menu.
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession(false);

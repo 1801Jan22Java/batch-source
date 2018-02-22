@@ -27,10 +27,8 @@ public class StatusDAOImpl implements StatusDAO{
 			};
 			conn.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return statusTitle;
@@ -49,10 +47,8 @@ public class StatusDAOImpl implements StatusDAO{
 			};
 			conn.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return allStatus;

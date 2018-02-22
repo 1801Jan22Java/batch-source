@@ -3,7 +3,6 @@ package com.revature.beans;
 public class Status {
 	public Status() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	public Status(int statusId, String statusCode) {
 		super();

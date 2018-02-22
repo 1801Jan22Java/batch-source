@@ -25,6 +25,9 @@ public class EmployeeDetailsServlet extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession(false);
 		User currentUser = (User) session.getAttribute("currentUser");
+		// Checks if the manager is currently logged in
+		// In order to obtain all the information that the Employee has. Personal information and request information.
+		// This is where all the JSON data lies for the AJAX call
 		if(session.getAttribute("currentUser") != null && currentUser.getPosition_id() == 2) {
 			UserDAO userDao = new UserDAOImpl();
 			String uri = req.getPathInfo().substring(1);

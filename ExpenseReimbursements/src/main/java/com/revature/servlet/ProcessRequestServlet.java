@@ -19,28 +19,17 @@ import com.revature.dao.ReimbursementDAOImpl;
 @MultipartConfig
 public class ProcessRequestServlet extends HttpServlet {
 	
+	// Saving the uploaded image to the database
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession(false);
 		if(session != null && session.getAttribute("currentUser") != null) {
 			User currentUser = (User) session.getAttribute("currentUser");
 			Part fileImage = req.getPart("uploadFile");
-			String fileName = Paths.get(getSubmittedFileName(fileImage)).getFileName().toString();
 			ReimbursementDAO addReimbursement = new ReimbursementDAOImpl();
 			addReimbursement.submitReimbursement(currentUser, fileImage.getInputStream(), Double.parseDouble(req.getParameter("amount")));
 			resp.sendRedirect("/ExpenseReimbursements/submitRequest");
 		}
 		
 	}
-	
-	private static String getSubmittedFileName(Part part) {
-        for (String cd : part.getHeader("content-disposition").split(";")) {
-            if (cd.trim().startsWith("filename")) {
-                String fileName = cd.substring(cd.indexOf('=') + 1).trim().replace("\"", "");
-                return fileName.substring(fileName.lastIndexOf('/') + 1).substring(fileName.lastIndexOf('\\') + 1); // MSIE fix.
-            }
-        }
-        return null;
-    }
-
 }

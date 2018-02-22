@@ -5,7 +5,6 @@ import java.util.Date;
 public class Reimbursement {
 	public Reimbursement() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	public Reimbursement(int reimburseId, User employee, User manager, double amount, Status status, String dateSubmitted) {
 		super();

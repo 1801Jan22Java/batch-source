@@ -18,6 +18,7 @@ public class EmployeeActionServlet extends HttpServlet{
 		rd.forward(req, resp);
 	}
 	
+	// From the Employee Home, the form submits a POST request which gets mapped to this servlet.
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String employeeAction = RequestHelper.employeeProcess(req);

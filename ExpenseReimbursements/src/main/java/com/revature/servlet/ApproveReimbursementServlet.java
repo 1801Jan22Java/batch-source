@@ -17,10 +17,14 @@ import com.revature.dao.ReimbursementDAOImpl;
 
 public class ApproveReimbursementServlet extends HttpServlet{
 	
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession(false);
 		User checkUser = (User) session.getAttribute("currentUser");
+		// To approve an reimbursement, the user that is logged in must be a manager, which is returned by the positionId
+		// The reimbursement ID is stored the URL as the URI so that the servlet is able to know which reimbursement the manager is approving
+		// In addition, have to check if the current manager is the one who submitted the request. He can not approve it if he is.
 		if(session.getAttribute("currentUser") != null && checkUser.getPosition_id() == 2) {
 			String uri = req.getPathInfo().substring(1);
 			ReimbursementDAO reimburse = new ReimbursementDAOImpl();

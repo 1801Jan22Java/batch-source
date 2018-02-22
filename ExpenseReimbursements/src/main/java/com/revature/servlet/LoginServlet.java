@@ -15,15 +15,18 @@ import com.revature.dao.UserDAOImpl;
 
 public class LoginServlet extends HttpServlet{
 	
+	//Displays the login page for any redirects that happen when a User is not logged in
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
 		req.getRequestDispatcher("views/index.html").forward(req, resp);
 	}
 	
+	
+	//Checks if the form information matches the corresponding database information and will redirect them to the Employee or Manager homepage
+	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
 		HttpSession session = req.getSession();
 		
-		//Potentially will change out of text/html
 		resp.setContentType("text/html");
 		String username = req.getParameter("username");
 		String password = req.getParameter("password");

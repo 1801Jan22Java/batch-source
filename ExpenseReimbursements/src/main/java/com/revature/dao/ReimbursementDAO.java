@@ -8,7 +8,7 @@ import com.revature.beans.Reimbursement;
 import com.revature.beans.User;
 
 public interface ReimbursementDAO {
-	//Potentially need to add a file type
+	
 	public void submitReimbursement(User employee, InputStream fileName, double amount);
 	public List<Reimbursement> empViewPendingReimbursementById(User emp);
 	public List<Reimbursement> empViewRevolvedReimbursement(User emp);

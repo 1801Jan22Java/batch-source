@@ -18,6 +18,7 @@ import com.revature.dao.ReimbursementDAOImpl;
 
 public class GetImageServlet extends HttpServlet{
 
+	// Servlet for handling AJAX request for grabbing image data out of the database
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String reimburseIdStr = req.getQueryString().split("=")[1];

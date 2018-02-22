@@ -39,7 +39,6 @@ public class UserDAOImpl implements UserDAO{
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return currentUser;
@@ -69,10 +68,8 @@ public class UserDAOImpl implements UserDAO{
 			}
 			conn.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return foundUser;
@@ -102,10 +99,8 @@ public class UserDAOImpl implements UserDAO{
 			}
 			conn.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return foundUser;
@@ -129,10 +124,8 @@ public class UserDAOImpl implements UserDAO{
 			}
 			conn.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return allUsers;
@@ -152,10 +145,8 @@ public class UserDAOImpl implements UserDAO{
 			conn.close();
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

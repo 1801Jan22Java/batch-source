@@ -7,6 +7,7 @@ import java.io.OutputStream;
 import java.sql.Blob;
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.util.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -31,10 +32,8 @@ public class ReimbursementDAOImpl implements ReimbursementDAO{
 			cstmt.execute();
 			conn.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -49,7 +48,6 @@ public class ReimbursementDAOImpl implements ReimbursementDAO{
 			ResultSet results = pstmt.executeQuery();
 			while(results.next()) {
 				int reimburseId = results.getInt("REIMBURSEMENT_ID");
-				// May need to change/convert dates
 				Timestamp dateSubmitted = results.getTimestamp("DATE_SUBMITTED");
 				String dateSubmit = dateSubmitted.toString();
 				int statusId = results.getInt("STATUS");
@@ -59,10 +57,8 @@ public class ReimbursementDAOImpl implements ReimbursementDAO{
 			}
 			conn.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return empPending;
@@ -77,7 +73,6 @@ public class ReimbursementDAOImpl implements ReimbursementDAO{
 			ResultSet results = pstmt.executeQuery();
 			while(results.next()) {
 				int reimburseId = results.getInt("REIMBURSEMENT_ID");
-				// May need to change/convert dates
 				Timestamp dateSubmitted = results.getTimestamp("DATE_SUBMITTED");
 				String dateSubmit = dateSubmitted.toString();
 				double amount = results.getDouble("AMOUNT");
@@ -89,10 +84,8 @@ public class ReimbursementDAOImpl implements ReimbursementDAO{
 			}
 			conn.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return empResolved;
@@ -117,10 +110,8 @@ public class ReimbursementDAOImpl implements ReimbursementDAO{
 			pstmt.executeUpdate();
 			conn.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -133,7 +124,6 @@ public class ReimbursementDAOImpl implements ReimbursementDAO{
 			ResultSet results = pstmt.executeQuery();
 			while(results.next()) {
 				int reimburseId = results.getInt("REIMBURSEMENT_ID");
-				// May need to change/convert dates
 				Timestamp dateSubmitted = results.getTimestamp("DATE_SUBMITTED");
 				String dateString = dateSubmitted.toString();
 				int statusId = results.getInt("STATUS");
@@ -145,10 +135,8 @@ public class ReimbursementDAOImpl implements ReimbursementDAO{
 			}
 			conn.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return allPending;
@@ -162,7 +150,6 @@ public class ReimbursementDAOImpl implements ReimbursementDAO{
 			ResultSet results = pstmt.executeQuery();
 			while(results.next()) {
 				int reimburseId = results.getInt("REIMBURSEMENT_ID");
-				// May need to change/convert dates
 				Timestamp dateSubmitted = results.getTimestamp("DATE_SUBMITTED");
 				String dateSubmit = dateSubmitted.toString();
 				int statusId = results.getInt("STATUS");
@@ -175,10 +162,8 @@ public class ReimbursementDAOImpl implements ReimbursementDAO{
 			}
 			conn.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return allResolved;
@@ -193,7 +178,6 @@ public class ReimbursementDAOImpl implements ReimbursementDAO{
 			ResultSet results = pstmt.executeQuery();
 			while(results.next()) {
 				int reimburseId = results.getInt("REIMBURSEMENT_ID");
-				// May need to change/convert dates
 				Timestamp dateSubmitted = results.getTimestamp("DATE_SUBMITTED");
 				String dateSubmit = dateSubmitted.toString();
 				int statusId = results.getInt("STATUS");
@@ -201,7 +185,6 @@ public class ReimbursementDAOImpl implements ReimbursementDAO{
 				StatusDAO status = new StatusDAOImpl();
 				UserDAO user = new UserDAOImpl();
 				int managerId = results.getInt("MANAGER_ID");
-				// MAY POTENTIALLY BREAK CODE AND NEED TO DEBUG WHEN MANAGER_ID IS NULL
 				if(managerId == 0) {
 					empRequests.add(new Reimbursement(reimburseId, user.getUserById(empId), null, amount, status.getStatusById(statusId), dateSubmit));
 				} else {
@@ -211,10 +194,8 @@ public class ReimbursementDAOImpl implements ReimbursementDAO{
 			}
 			conn.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return empRequests;
@@ -238,10 +219,8 @@ public class ReimbursementDAOImpl implements ReimbursementDAO{
 				}
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return buffer;
@@ -259,10 +238,8 @@ public class ReimbursementDAOImpl implements ReimbursementDAO{
 			}
 			conn.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
