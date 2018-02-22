@@ -6,12 +6,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import com.revature.dao.EmployeeDaoImpl;
 
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		HttpSession session = req.getSession();
+		session.invalidate();
 		req.getRequestDispatcher("login.html").forward(req, resp);
 	}
 
@@ -29,13 +32,12 @@ public class LoginServlet extends HttpServlet {
 			resp.sendRedirect("login");
 		} else {
 			HttpSession session = req.getSession(true);
-			session.setAttribute("empID", loginVar[0]);
+			session.setAttribute("employeeID", loginVar[0]);
 			session.setAttribute("isManager", loginVar[1]);
 			if (loginVar[1] == 1) {
-				req.getRequestDispatcher("ManagerPage.html").forward(req, resp);
+				resp.sendRedirect("ManagerPage.html");
 			} else {
-				System.out.println(session.toString());
-				req.getRequestDispatcher("employee").forward(req, resp);
+				resp.sendRedirect("EmployeePage.html");
 			}
 		}
 	}

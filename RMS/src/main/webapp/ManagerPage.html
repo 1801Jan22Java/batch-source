@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Employee Reimbursement Portal</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+</head>
+<body>
+	<div class="container" id="options"><br>
+		<h1>Request Management System Management Portal</h1>
+		<button id="request" class="btn btn-primary">Approve/Deny
+			Request</button>
+		<button id="pending" class="btn btn-primary">View pending
+			requests</button>
+		<button id="resolved" class="btn btn-primary">View resolved
+			requests</button>
+		<button id="view" class="btn btn-primary">View personnel
+			information</button>
+		<input type="button" class="btn btn-secondary"
+			onclick="location.href='http://localhost:8080/RMS/login';"
+			value="Logout" />
+		<button id="update" style="display: none">Requests by
+			Employee</button>
+	</div><br>
+	<div id="forms" class="container" style="border-radius: 5px; width: 50%; margin: 0px auto; float: none;">
+		<form id="requestForm" class="form-group" action="manager"
+			method="post" style="display: none">
+			<fieldset>
+				<legend>Request ID:</legend>
+				<input name="requestID" type="number">
+			</fieldset>
+			<fieldset>
+				<legend>"Approved" OR "Denied":</legend>
+				<input name="status">
+			</fieldset>
+			<br> <input type="submit" class="btn btn-primary" name="request"
+				value="Submit request">
+		</form>
+		<form id="upForm" class="form-group" style="display: none">
+			<fieldset>
+				<legend>Employee ID:</legend>
+				<input id="empID" name="username">
+			</fieldset>
+			<br>
+			<button id="empRequest" class="btn btn-primary">Submit
+				request</button>
+		</form>
+	</div>
+	<div id="results" class="container" style="display: none">
+		<table id="resultsTable" class="table" style="border-radius: 5px; width: 50%; margin: 0px auto; float: none;"></table>
+	</div>
+</body>
+<script src="scripts/ModifyPage.js"></script>
+</html>

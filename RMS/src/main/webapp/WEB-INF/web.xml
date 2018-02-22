@@ -21,6 +21,24 @@
   	<description>Servlet for Manager Page</description>
   	<servlet-class>com.revature.servlets.ManagerServlet</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>viewInfo</servlet-name>
+  	<display-name>viewInfo</display-name>
+  	<description></description>
+  	<servlet-class>com.revature.servlets.viewInfo</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>Pending</servlet-name>
+  	<display-name>Pending</display-name>
+  	<description></description>
+  	<servlet-class>com.revature.servlets.Pending</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>Resolved</servlet-name>
+  	<display-name>Resolved</display-name>
+  	<description></description>
+  	<servlet-class>com.revature.servlets.Resolved</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>EmployeeServlet</servlet-name>
   	<url-pattern>/employee</url-pattern>
@@ -33,4 +51,17 @@
   	<servlet-name>ManagerServlet</servlet-name>
   	<url-pattern>/manager</url-pattern>
   </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>viewInfo</servlet-name>
+  	<url-pattern>/viewInfo</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>Pending</servlet-name>
+  	<url-pattern>/getPending</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>Resolved</servlet-name>
+  	<url-pattern>/getResolved</url-pattern>
+  </servlet-mapping>
 </web-app>
+

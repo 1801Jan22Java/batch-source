@@ -1,10 +1,13 @@
 package com.revature.servlets;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import com.revature.dao.RequestDaoImpl;
 
 /**
  * Servlet implementation class ManagerServlet
@@ -12,28 +15,28 @@ import javax.servlet.http.HttpServletResponse;
 public class ManagerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ManagerServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: Manager").append(request.getContextPath());
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		HttpSession session = req.getSession();
+		if(session.getAttribute("empID") != null && (int)session.getAttribute("isManager") == 1) {
+			req.getRequestDispatcher("ManagerPage.html").forward(req, resp);
+		} else {
+			resp.sendRedirect("login");
+		}
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Called do POST").append(request.getContextPath());
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		HttpSession session = req.getSession();
+		if (req.getParameter("request") != null) {
+			RequestDaoImpl rdi = new RequestDaoImpl();
+			int requestID = Integer.parseInt(req.getParameter("requestID"));
+			String status = req.getParameter("status");
+			try {
+				rdi.update(requestID, status, (int)session.getAttribute("employeeID"));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		req.getRequestDispatcher("ManagerPage.html").forward(req, resp);
 	}
 
 }

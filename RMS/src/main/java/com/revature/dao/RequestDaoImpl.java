@@ -50,7 +50,7 @@ public class RequestDaoImpl implements RequestDao {
 		Connection conn = ConnectionUtil.getConnection();
 		ArrayList<Request> list = new ArrayList<Request>();
 		if(isManager == 0) {
-			sql = "SELECT * FROM Request WHERE EmployeeID = ? AND Status IN ('Pending', 'Denied')";
+			sql = "SELECT * FROM Request WHERE EmployeeID = ? AND Status IN ('Approved', 'Denied')";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, empID);
 		} else {
@@ -73,6 +73,7 @@ public class RequestDaoImpl implements RequestDao {
 		pstmt.setString(1, status);
 		pstmt.setInt(2, managerID);
 		pstmt.setInt(3, requestID);
+		pstmt.executeUpdate();
 	}
 
 }
