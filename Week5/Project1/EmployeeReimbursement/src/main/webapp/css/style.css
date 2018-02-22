@@ -1,0 +1,265 @@
+.spacing{
+	height: 50px;
+}
+/****** navbar *****/
+
+#home-body {
+    min-height: 75rem;
+    overflow-x: hidden;
+    color: blac;
+}
+
+#spacer {
+    height: 100px;
+}
+
+
+/****** profile ****/
+
+#profile-details {
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-columns: 100px 40% auto 100px;
+    grid-template-areas: "header header header header" "empName empName . edit" "email emailValue . ." "manager managerValue . .";
+    margin: 0px 5% 20px 5%;
+}
+
+.profile-details {
+    grid-area: header;
+}
+
+.edit-button {
+    grid-area: edit;
+}
+
+#profile-employee-text {
+    grid-area: empName;
+}
+
+.profile-email {
+    grid-area: email;
+}
+
+#profile-email-text {
+    grid-area: emailValue;
+}
+
+.profile-manager {
+    grid-area: manager;
+}
+
+#profile-manager-text {
+    grid-area: managerValue;
+}
+
+
+/****** reimbursement request section *****/
+
+.request-container {
+    margin: 0px 5%;
+}
+
+.table-header{
+	margin-bottom: 10px;
+}
+
+.popup-button {
+    cursor: pointer;
+    width: 150px;
+    -webkit-user-select: none;
+    /* Chrome/Safari */
+    -moz-user-select: none;
+    /* Firefox */
+    -ms-user-select: none;
+    /* IE10+ */
+    width: 200px;
+    height: 40px;
+    padding-top: 2px;
+    line-height: 30px;
+    background: white;
+    color: #212529;
+    font-weight: 500;
+    text-align: center;
+    cursor: pointer;
+    border: 2px solid #005b96;
+    margin-bottom: 10px;
+}
+
+.popup-button:hover {
+    background: #f4f5f7;
+    color: teal;
+}
+
+.popup-button:active {
+    background: #c6ccd2;
+}
+
+.someForm {
+    display: none;
+    border: 6px solid #005b96;
+    padding: .9em;
+    margin-top: 30px;
+    width: 400px;
+    height:auto;
+    text-align: center;
+    background: #fff;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+}
+
+.someForm h1 {
+    font-size: 22px;
+    margin: 0px 5px 5px 5px;
+}
+
+#edit-request-textarea{
+	width: 90%;
+	height: 80px;
+}
+.someForm p {
+    font-size: 12px;
+    margin: 0px 5px 8px 5px;
+}
+
+#request-form input,
+#request-form textarea, .edit-form input,
+#edit-request-form input,
+#edit-request-form textarea{
+    margin: .6em auto;
+    font-family: inherit;
+    text-transform: inherit;
+    font-size: inherit;
+    display: block;
+    width: 90%;
+    height: auto;
+    padding: .5em;
+}
+
+#request-form textarea {
+    height: 80px;
+    resize: none;
+}
+
+.formBtn{
+    width: 138px;
+    display: inline-block;
+    background: teal;
+    color: #fff;
+    font-weight: 100;
+    font-size: 1.2em;
+    border: none;
+    height: 45px;
+    padding: 2px 12px;
+    margin-top: 0px;
+}
+
+
+/****** reimbursement table *****/
+
+.reimbursement-section {
+    margin: 20px;
+}
+
+h4{
+	margin-bottom:5px;
+}
+
+.table thead th{
+	vertical-align: top;
+}
+
+.table{
+	max-height: 500px;
+	overflow-y: auto;
+}
+
+/****** footer *****/
+
+.loginFooter {
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    color: black;
+    text-align: center;
+    display: inline-block;
+    line-height: 30px;
+    padding: 10px 15px;
+    background-color: #d3d3d3;
+}
+
+.loginFooter a {
+    padding: 0px 1%;
+}
+
+.loginFooter div {
+    text-align: center;
+}
+
+#login-copyright {
+    margin: 20px;
+}
+
+.form-signin p {
+    color: lightcyan;
+}
+
+@media (max-width: 215px) {
+    #spacer {
+        height: 100px;
+    }
+    #reimbursementForm{
+        margin-top:50px !important;
+    }
+}
+
+@media(max-width: 420px) {
+    #reimbursementForm, #editForm {
+        width: 100%;
+        height: auto;
+        margin: .9em auto;
+        margin-top: 25px;
+        padding: 10px;
+    }
+    #reimbursementForm h1, #editForm h1 {
+        font-size: 5vw;
+        margin: 0px 5px 10px 5px;
+    }
+    #reimbursementForm p {
+        display: none;
+        font-size: 3vw;
+        margin: 0px 5px 8px 5px;
+    }
+    #request-form input,
+    #request-form textarea,
+    #editForm input
+    {
+        width: 100%;
+        margin: 10px auto;
+    }
+    
+    #editRequestForm{
+    	width: 100%;
+    }
+}
+
+@media (max-width: 679px) {
+    #spacer {
+        height: 125px;
+    }
+    #profile-details {
+        grid-template-columns: 100px auto 100px;
+        grid-template-areas: "header . edit" "empName empName empName" "email email email" "emailValue emailValue emailValue" "manager manager manager" " managerValue managerValue managerValue";
+    }
+}
+
+@media (min-width: 680px) {
+    #spacer {
+        height: 125px;
+    }
+    #profile-details {
+        grid-template-areas: "header header header edit" "empName empName empName empName" "email emailValue emailvalue ." "manager managerValue managerValue .";
+    }
+}
