@@ -6,13 +6,13 @@ function populateInformation(xhr) {
 		var table = document.getElementById("table");
 		
 		var remId = document.createElement("tr");
-		remId.innerHTML = "Reimbursement Id: " + res.remId;
+		remId.innerHTML = "<td>Reimbursement Id: </td><td>" + res.remId + "</td>";
 		var status = document.createElement("tr");
-		status.innerHTML = "Status: " + res.status;
+		status.innerHTML = "<td>Status: </td><td>" + res.status+ "</td>";
 		var manId = document.createElement("tr");
-		manId.innerHTML = "Manager Id: " + res.manId;
+		manId.innerHTML = "<td>Manager Id: </td><td>" + res.manId + "</td>";
 		var value = document.createElement("tr");
-		value.innerHTML = "Reimbursement Amount: " + res.value;
+		value.innerHTML = "<td>Reimbursement Amount: </td><td>" + res.value + "</td>";
 		
 		table.appendChild(remId);
 		table.appendChild(status);
@@ -52,9 +52,14 @@ function sendAjaxGet(url,status) {
 };
 
 function populateImage(xhr) {
+	console.log("setting blob")
 	var blob = new Blob([xhr.response], {type: 'image/png'});
+	console.log(blob);
 	if (blob) {
+		console.log("que?")
+		console.log(document.getElementById("image").src);
 		document.getElementById("image").src = window.URL.createObjectURL(blob);
+		console.log(document.getElementById("image").src);
 	}
 }
 
@@ -63,6 +68,7 @@ function sendAjaxImg(url,func) {
 	xhr.responseType = 'blob';
 	xhr.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
+			console.log("blob is bueno")
 			func(this);
 		}
 	};

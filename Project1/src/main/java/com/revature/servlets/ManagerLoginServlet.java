@@ -48,6 +48,7 @@ public class ManagerLoginServlet extends HttpServlet {
 			// set the session attributes so the username will be remembered
 			session.setAttribute("username", username);
 			session.setAttribute("type", "manager");
+			session.setAttribute("id", resultManager.getManagerId());
 			session.setAttribute("problem", null);
 			response.sendRedirect("managerhomepage");
 		} else {

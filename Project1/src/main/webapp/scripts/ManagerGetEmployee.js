@@ -40,7 +40,7 @@ function populateInformation(xhr) {
 				var pass  = document.createElement("td");
 				pass.innerHTML  = obj.password;
 				var employee = document.createElement("td");
-				employee.innerHTML = "<a href =\"http://localhost:8084/Project1/managergetsingleemployee?val=" + obj.empId + "\">Click to view more info</a>";
+				employee.innerHTML = "<a href =\"http://localhost:8084/Project1/managergetsingleemployee?val=" + obj.empId + "\">click for more info</a>";
 
 				newRow.appendChild(fname);
 				newRow.appendChild(lname);

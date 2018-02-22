@@ -3,23 +3,41 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>View Resolved Reimbursements</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+<link rel="stylesheet" href="styles/loginStyles.css"/>
 </head>
 <body>
-	<h3>View Resolved Reimbursements</h3>
-	<table id="resolved">
-		<tr>
-			<td>Reimbursement Id</td>
-			<td>First Name</td>
-			<td>Last Name</td>
-			<td>Employee Id</td>
-			<td>Request Status</td>
-			<td>Reimbursement Amount</td>
-			<td>Reimbursement Information</td>
-		</tr>
-	</table>
-	
-	<p id="status"></p>
-	<a href="employeehomepage">Back to Home Page</a>
+
+<div class="container d-flex h-100">
+    	
+    		<div class="row align-self-center w-100">
+    		<div class="row align-self-center w-100"><p>"\n"</p></div>
+        		<div class="col-12 mx-auto">
+      			
+      					<div class=jumbotron>
+      						<div class="text-left">
+							<h3>View Resolved Reimbursements</h3>
+							<table class="table" id="resolved">
+								<tr>
+									<td>Reimbursement Id</td>
+									<td>First Name</td>
+									<td>Last Name</td>
+									<td>Employee Id</td>
+									<td>Request Status</td>
+									<td>Reimbursement Amount</td>
+									<td>Reimbursement Information</td>
+								</tr>
+							</table>
+							
+							<p id="status"></p>
+							<a href="employeehomepage">Back to Home Page</a>
+						</div>   
+            	
+        		</div>
+    		</div>
+		</div>
+		</div>
+
 </body>
 <script src="scripts/EmployeeGetReimbursement.js"></script>
 </html>

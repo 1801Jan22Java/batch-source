@@ -3,23 +3,40 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Submit Reimbursement</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+<link rel="stylesheet" href="styles/loginStyles.css"/>
 </head>
 <body>
-<h1>Submit Reimbursement</h1>
 
-		<fieldset>
-				<legend>*Reimbursement Amount: </legend>
-				<input id="value" name="reimbursement_val" type="number" required>
-		</fieldset>
-		<fieldset>
-				<legend>Image of Receipt: </legend>
-				<input id="image" name="image" type="file" >
-		</fieldset>
-		<br>
-		<input id="submitbutton" type="submit" value="Sumbit Reimbursement">
-	<p>*required</p>
 
-	<a href="employeehomepage">Back to Homepage</a>
+    	<div class="container d-flex h-100">
+    	
+    		<div class="row align-self-center w-100">
+    			<div class="row align-self-center w-100"><p>"\n"</p></div>
+        		<div class="col-6 mx-auto">
+      				
+
+						<div>
+							<div class=jumbotron>
+							<h2>Submit Reimbursement</h2>
+								<input name="value" type="number" id="value" class="form-control" placeholder="Reimbursement Amount" required>
+								<br>
+								<input name="image" type="file" id="image" class="form-control" placeholder="Image of reciept" required>
+								<br>
+								<p>*required</p>
+								<input id="submitbutton" type="submit" value="Sumbit Reimbursement">
+ 							<br>
+ 							<br>
+							<a href="employeehomepage">Back to Homepage</a>
+							</div>
+						</div>	
+							
+						   
+            	
+        		</div>
+    		</div>
+		</div>
+
 	
 
 </body>

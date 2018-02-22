@@ -2,33 +2,45 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Update Information</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+<link rel="stylesheet" href="styles/loginStyles.css"/>
 </head>
 <body>
-<h1>Update Information</h1>
 
-	<form action="updateinfo" method="post">
-		<fieldset>
-				<legend>*First Name: </legend>
-				<input name="fname" type="text" required>
-		</fieldset>
-		<fieldset>
-				<legend>*Last Name: </legend>
-				<input name="lname" type="text" required>
-		</fieldset>
-		<fieldset>
-				<legend>*Email: </legend>
-				<input name="email" type="text" required>
-		</fieldset>
-		<fieldset>
-				<legend>Address: </legend>
-				<input name="address" type="text">
-		</fieldset>
-		<br>
-		<input type="submit" value="Update Information">
-	</form>
-	<p>*required</p>
+    	
+    	<div class="container d-flex h-100">
+    	
+    		<div class="row align-self-center w-100">
+    			<div class="row align-self-center w-100"><p>"\n"</p></div>
+        		<div class="col-6 mx-auto">
+      				
+
+							<form action="updateinfo" method="post">
+							<div class=jumbotron>
+							<h2>Update Information</h2>
+								<input name="fname" type="text" id="fname" class="form-control" placeholder="*First Name" required>
+								<br>
+								<input name="lname" type="text" id="lname" class="form-control" placeholder="*Last Name" required>
+								<br>
+								<input name="email" type="text" id="email" class="form-control" placeholder="*Email" required>
+								<br>
+								<input name="address" type="text" id="address" class="form-control" placeholder="Address" required>
+								<p>*required</p>
+								<input type="submit" value="Update Information">
+ 							<br>
+ 							<br>
+							<a href="employeehomepage">Back to Homepage</a>
+							</div>
+							</form>
+							
+						   
+            	
+        		</div>
+    		</div>
+		</div>
+
+
 	<br>
-	<a href="employeehomepage">Back to Homepage</a>
 </body>
 </html>

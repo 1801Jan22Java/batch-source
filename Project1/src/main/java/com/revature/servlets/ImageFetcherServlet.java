@@ -19,12 +19,12 @@ import com.revature.dao.ReimbursementDaoSQL;
 public class ImageFetcherServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-	// if a get request is sent to this servlet, it checks to make sure the user is a valid employee, or else it redirects
-	// back to the index page. if the user is a valid employee then the servlet will obtain the byte array stored in the dao
+	// if a get request is sent to this servlet, it checks to make sure the user is a valid user, or else it redirects
+	// back to the index page. if the user is a valid user then the servlet will obtain the byte array stored in the dao
 	// for the reimbursement based upon the id given from the query string in the URL and pass the byte array to the requester
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		if (session != null && session.getAttribute("username") != null && session.getAttribute("type") == "employee") {
+		if (session != null && session.getAttribute("username") != null && session.getAttribute("type") != null) {
 			ReimbursementDao rd = new ReimbursementDaoSQL();
 			int id = Integer.parseInt(request.getQueryString().split("=")[1]);
 			System.out.println(id);

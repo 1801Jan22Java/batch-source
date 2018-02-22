@@ -3,31 +3,53 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Single Employee's Information</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+<link rel="stylesheet" href="styles/loginStyles.css"/>
 </head>
 <body>
-	<h3>Single Employee's Information</h3>
 
-	<div>
-		<table id="information">
-		</table>
-	</div>
-	<br>
-	<div>
-		<table id="reimbursement">
-			<tr>
-				<td>Reimbursement Id</td>
-				<td>Manager Id</td>
-				<td>Status</td>
-				<td>Reimbursement Amount</td>
-				<td>Reimbursement Information<td>
-			</tr>
-		</table>
-	</div>
-	<br>
-	<p id="status"></p>
-	<br>
-	<br>
-	<a href="managerhomepage">Go back to homepage</a>
+
+
+<div class="container d-flex h-100">
+    	
+    		<div class="row align-self-center w-100">
+    			<div class="row align-self-center w-100"><p>"\n"</p></div>
+        		<div class="col-12 mx-auto">
+      				
+
+						<div>
+							<div class=jumbotron>
+							<h2>Single Employee's Information</h2>
+							
+							<div>
+								<table class="table" id="information">
+								</table>
+							</div>
+							<br>
+							<div>
+								<table class="table" id="reimbursement">
+									<tr>
+										<td>Reimbursement Id</td>
+										<td>Manager Id</td>
+										<td>Status</td>
+										<td>Reimbursement Amount</td>
+										<td>Reimbursement Information<td>
+									</tr>
+								</table>
+							</div>
+							<p id="status"></p>
+							<br>
+							<a href="managerhomepage">Go to Home Page</a>
+
+							</div>
+						</div>	
+							
+						   
+            	
+        		</div>
+    		</div>
+		</div>
+
 </body>
 <script src="scripts/ManagerGetSingleEmployee.js"></script>
 </html>

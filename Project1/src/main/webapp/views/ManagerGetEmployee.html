@@ -3,25 +3,46 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>View All Employees</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+<link rel="stylesheet" href="styles/loginStyles.css"/>
 </head>
 <body>
-	<h3>View All Employees</h3>
-	<table id="table">
-		<tr>
-			<td>First Name</td>
-			<td>Last Name</td>
-			<td>Employee Id</td>
-			<td>Email</td>
-			<td>Address</td>
-			<td>Username</td>
-			<td>Password</td>
-			<td>View Employee</td>
-			
-		</tr>
-	</table>
-	<p id="status"></p>
-	<br>
-	<a href="managerhomepage">Go to Home Page</a>
-</body>
+
+<div class="container d-flex h-100">
+    	
+    		<div class="row align-self-center w-100">
+    			<div class="row align-self-center w-100"><p>"\n"</p></div>
+        		<div class="col-12 mx-auto">
+      				
+
+						<div>
+							<div class=jumbotron>
+							<h2>View All Employees</h2>
+								<table class="table" id="table">
+									<tr>
+										<td>First Name</td>
+										<td>Last Name</td>
+										<td>Employee Id</td>
+										<td>Email</td>
+										<td>Address</td>
+										<td>Username</td>
+										<td>Password</td>
+										<td>View Employee</td>
+										
+									</tr>
+								</table>
+								<p id="status"></p>
+								<br>
+								<a href="managerhomepage">Go to Home Page</a>
+
+							</div>
+						</div>	
+							
+						   
+            	
+        		</div>
+    		</div>
+		</div>
+	
 <script src="scripts/ManagerGetEmployee.js"></script>
 </html>

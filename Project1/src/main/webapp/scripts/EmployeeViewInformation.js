@@ -20,13 +20,13 @@ function populateInformation(xhr) {
 		var res = JSON.parse(xhr.responseText);
 		var table = document.getElementById("table");
 		var fname = document.createElement("tr");
-		fname.innerHTML = "First Name: " + res.fname;
+		fname.innerHTML = "<td>First Name: </td><td>" + res.fname + "</td>";
 		var lname = document.createElement("tr");
-		lname.innerHTML = "Last Name: " + res.lname;
+		lname.innerHTML = "<td>Last Name: </td><td>" + res.lname + "</td>";
 		var email = document.createElement("tr");
-		email.innerHTML = "Email: " + res.email;
+		email.innerHTML = "<td>Email: </td><td>" + res.email + "</td>";
 		var addrs = document.createElement("tr");
-		addrs.innerHTML = "Address: " + res.address;
+		addrs.innerHTML = "<td>Address: </td><td>" + res.addrs+ "</td>";
 		table.appendChild(fname);
 		table.appendChild(lname);
 		table.appendChild(email);

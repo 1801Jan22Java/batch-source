@@ -6,13 +6,13 @@ function populateInformation(xhr) {
 		var table = document.getElementById("table");
 		
 		var remId = document.createElement("tr");
-		remId.innerHTML = "Reimbursement Id: " + res.remId;
+		remId.innerHTML = "<td>Reimbursement Id: </td><td>" + res.remId + "</td>";
 		var status = document.createElement("tr");
-		status.innerHTML = "Status: " + res.status;
+		status.innerHTML = "<td>Status: </td><td>" + res.status + "</td>";
 		var manId = document.createElement("tr");
-		manId.innerHTML = "Manager Id: " + res.manId;
+		manId.innerHTML = "<td>Manager Id: </td><td>" + res.manId + "</td>";
 		var value = document.createElement("tr");
-		value.innerHTML = "Reimbursement Amount: " + res.value;
+		value.innerHTML = "<td>Reimbursement Amount: </td><td>" + res.value + "</td>";
 		
 		table.appendChild(remId);
 		table.appendChild(status);

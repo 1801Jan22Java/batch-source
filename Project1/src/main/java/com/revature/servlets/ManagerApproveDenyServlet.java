@@ -23,6 +23,7 @@ public class ManagerApproveDenyServlet extends HttpServlet {
 		HttpSession session = request.getSession(false);
 		if (session != null && session.getAttribute("username") != null && session.getAttribute("type") == "manager") {
 			ReimbursementDao rd = new ReimbursementDaoSQL();
+			System.out.println(request.getQueryString());
 			int id = Integer.parseInt(request.getQueryString().split("&")[0].split("=")[1]);
 			int status = Integer.parseInt(request.getQueryString().split("&")[1].split("=")[1]);
 			rd.updateStatus(id, (int)session.getAttribute("id"), status);
