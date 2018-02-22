@@ -92,7 +92,7 @@ public class ProcessedRequestServlet extends HttpServlet {
 		JsonNode j = mapper.readTree(request.getInputStream());
 		int emplId = (int) session.getAttribute("emplId");
 		RequestStatus s;
-		if (j.get("status").asText().equals(RequestStatus.APPROVED)) {
+		if (j.get("status").asText().equals(RequestStatus.APPROVED.toString())) {
 			s = RequestStatus.APPROVED;
 		} else {
 			s = RequestStatus.DENIED;

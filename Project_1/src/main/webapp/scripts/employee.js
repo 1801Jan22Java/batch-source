@@ -108,8 +108,9 @@ function createUser() {
 
 function logout() {
 	sendAjaxGet("http://localhost:8084/Project_1/logout", function(){
+		window.location.href = resp.responseUrl;
 	});
-}
+};
 
 function toPendReq() {
 	sendAjaxGet("http://localhost:8084/Project_1/pendingRequest", function(resp){
@@ -140,6 +141,12 @@ function clearTable() {
 
 function whenLoad(resp) {
 	clearTable();
+	console.log(resp);
+	if (resp.responseURL != "http://localhost:8084/Project_1/employee" &&
+			resp.responseURL != "http://localhost:8084/Project_1/employee?load=true") {
+		window.location.href = resp.responseURL;
+		
+	}
 	var j =  JSON.parse(resp.response);
 	var empl;
 	if (j.length) {

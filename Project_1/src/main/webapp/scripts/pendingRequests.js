@@ -71,6 +71,7 @@ function processRequest() {
 	procRequest.id = document.getElementById("procReqId").value;
 	var e = document.getElementById("statusSelect");
 	procRequest.status = e.options[e.selectedIndex].text;
+	console.log(procRequest.status);
 	sendAjaxPost("http://localhost:8084/Project_1/processedRequests", function(resp) {
 		toProReq();
 	}, procRequest);
@@ -97,6 +98,12 @@ function createRequest() {
 
 }
 
+function logout() {
+	sendAjaxGet("http://localhost:8084/Project_1/logout", function(){
+		window.location.href = resp.responseUrl;
+	});
+}
+
 function clearTable() {
 	var myNode = document.getElementById("tableBody");
 	while (myNode.firstChild) {
@@ -105,11 +112,16 @@ function clearTable() {
 }
 
 function whenLoad(resp) {
+	if (resp.responseURL != "http://localhost:8084/Project_1/pendingRequest" &&
+			resp.responseURL != "http://localhost:8084/Project_1/pendingRequest?load=true") {
+		window.location.href = resp.responseURL;
+		
+	}
 	clearTable();
 	var j = JSON.parse(resp.response);
 	var t = document.getElementById("tableHead");
 	if (j[0]) {
-		if (j[0].id === -1) {
+		if (j[0].emplId == -1) {
 			t.removeChild(document.getElementById("idCol"));
 			var e = document.getElementById("procRequest");
 			e.removeChild(e.firstElementChild);
@@ -136,7 +148,7 @@ function whenLoad(resp) {
 				+ "-" + j[i].dateReq.dayOfMonth;
 		col5.innerText = j[i].description;
 		row.appendChild(col1);
-		if (j[i].id !== -1) {
+		if (j[0].emplId !== -1) {
 			row.appendChild(col2);
 		}
 		row.appendChild(col3);
@@ -163,4 +175,5 @@ window.onload = function() {
 			deleteRequest);
 	document.getElementById("processRequest").addEventListener("click",
 			processRequest);
+	document.getElementById("logOut").addEventListener("click", logout);
 };

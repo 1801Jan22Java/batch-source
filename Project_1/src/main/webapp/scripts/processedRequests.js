@@ -36,6 +36,12 @@ function refresh() {
 	sendAjaxGet("http://localhost:8084/Project_1/processedRequests", whenLoad);
 }
 
+function logout() {
+	sendAjaxGet("http://localhost:8084/Project_1/logout", function(){
+		window.location.href = resp.responseUrl;
+	});
+};
+
 function clearTable() {
 	var myNode = document.getElementById("tableBody");
 	while (myNode.firstChild) {
@@ -44,6 +50,11 @@ function clearTable() {
 }
 
 function whenLoad(resp) {
+	if (resp.responseURL != "http://localhost:8084/Project_1/processedRequests" &&
+			resp.responseURL != "http://localhost:8084/Project_1/processedRequests?load=true") {
+		window.location.href = resp.responseURL;
+		
+	}
 	clearTable();
 	var j = JSON.parse(resp.response);
 	var t = document.getElementById("tableHead");
@@ -78,4 +89,5 @@ window.onload = function(){
 	document.getElementById("home").addEventListener("click", toEmpl);
 	document.getElementById("pReq").addEventListener("click", toPendReq);
 	document.getElementById("proReq").addEventListener("click", refresh);
+	document.getElementById("logOut").addEventListener("click", logout);
 }
