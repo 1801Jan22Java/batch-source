@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8">
+
+<title>Transparent Login Form</title>
+
+<link rel="stylesheet" href="Styles/Employee_Home.css">
+
+</head>
+
+<body>
+    <div id="logo">
+    </div>
+	<div id ="container">
+        <div id = "SidePannel">
+
+		<button class = "sideButtons" class ="ContainsText" type="button" onclick="getAllResolvedRequests()">Get Completed Requests</button>
+        <button  class = "sideButtons" class ="ContainsText" type="button" onclick="getAllPendingRequests()">Get Pending Requests</button>
+        <button  class = "sideButtons" class ="ContainsText" type="button" onclick="getAllEmployees()">Get All Employees</button>
+        <button  class = "sideButtons" class ="ContainsText" type="button" id ="SearchById">Get Requests by Id</button>        
+        <button  class = "sideButtons"class ="ContainsText"  type="button" id ="SearchById">Approve/Deny Request</button>
+        <form  action="logout" method="get">
+			<input id = "logout" type="submit" value="Logout" />
+		</form>
+        
+        </div>
+        
+		<section class="content">
+			<table id="All_Resolved" style="width: 50%"></table>
+		</section>
+
+
+		
+		<section class="content">
+			<table id="All_Pending" style="width: 50%"></table>
+		</section>
+
+
+		
+
+		<section class="content">
+			<table id="All_Employees" style="width: 50%"></table>
+		</section>
+
+		<form class ="content">
+		<input type="hidden" id ="SearchByIdForm" name ="SearchById"/>
+        <!--input type ="submit"/-->
+        </form>
+		
+		<section class="content">
+			<table id="All_ById" style="width: 50%"></table>
+		</section>
+
+
+	</div>
+
+</body>
+<script src="Scripts/GetAllResolvedRequests.js"></script>
+<script src="Scripts/GetAllPendingRequests.js"></script>
+
+<script src="Scripts/AllEmployees.js"></script>
+
+</html>

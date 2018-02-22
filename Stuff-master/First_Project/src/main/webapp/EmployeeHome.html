@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Transparent Login Form</title>
+<link rel="stylesheet" href="Styles/Employee_Home.css">
+</head>
+<body>
+
+<div id ="Overlay">
+	<div id = "container">
+        <div id = "SidePannel">
+            <form action="UpdateProfileTransfer" method="Get">
+                <input id ="updateProfile" type="submit" value ="Update Profile"/>
+            </form>
+
+            <button class ="sideButtons" type="button" onclick="findJSONEmployeeCompleted()">Get
+                Completed Requests</button>
+                
+            <button class ="sideButtons" id = "newRequest">New Request</button>
+            <button class ="sideButtons">Upload a file</button>
+            <button class ="sideButtons" type="button" onclick="getPending()">Pending Request</button>
+
+            <form action="logout" method="get" >
+                <input id ="logout" id ="logout"  type="submit" value ="Logout" />
+            </form>
+
+        </div>
+        
+		<section class="content">
+			<table id="Completed_Table_body" style="width: 50%"></table>
+		</section>
+		
+
+		<section class="content">
+			<table id="Table_body" style="width: 50%"></table>
+		</section>
+
+
+		<section class="content">
+			<form action="newRequest" method="post">
+				 <input type = "hidden" type="text" id ="description" name="description" /> 
+				<input type ="hidden" type="text" id ="requestAmount" name="requestAmount" /> 
+				<input type="hidden" id ="submit" name="submit" />
+			</form>
+		</section>
+		
+
+		<!--  form action="download" method="post" enctype="multipart/form-data" class="content">
+			<input type="file" name="file"/> 
+            <input type="submit" value ="Download" />
+		</form-->
+		
+        <div>
+<div>
+</body>
+<!-- script src="Scripts/Sessions.js"> </script-->
+<script src="Scripts/GetAllPending.js"></script>
+<script src="Scripts/CompletedInfo.js"></script>
+</html>
