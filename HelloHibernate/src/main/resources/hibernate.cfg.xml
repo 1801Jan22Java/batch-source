@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-configuration PUBLIC
-        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
-        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+		"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
 	<session-factory>
-		<property name="hibernate.connection.username">AhmedAwwad</property>
-		<property name="hibernate.connection.password">23232RevaDB</property>
-		<property name="hibernate.connection.url">jdbc:oracle:thin:@ahmed-rev-db-demo.ceduno256cgh.us-east-1.rds.amazonaws.com:1521:ORCL</property>
+		<property name="hibernate.connection.username">Admin</property>
+		<property name="hibernate.connection.password">p4ssw0rd</property>
+		<property name="hibernate.connection.url">jdbc:oracle:thin:@jan22java-hibernate.cwt1ckcfzdar.us-west-2.rds.amazonaws.com:1521:ORCL</property>
 		<property name="hibernate.connection.driver_class">oracle.jdbc.driver.OracleDriver</property>
-		<!-- This can be noisy in the console -->
+		<!-- this can be noisy in the console -->
 		<property name="hibernate.show_sql">true</property>
-		<!-- Choose whether to create db or update existing database -->
-		<property name="hibernate.hbm2ddl.auto">create</property>
-		<!--  Map domain object classes -->
+		<!-- choose whether to create db or update existing db -->
+		<property name="hibernate.hbm2ddl.auto">update</property>
+		<!-- map domain object classes -->
 		<mapping class="com.revature.domain.Flashcard"/>
 		<mapping class="com.revature.domain.Category"/>
 	</session-factory>

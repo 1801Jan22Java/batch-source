@@ -24,6 +24,7 @@ public class FileWriter {
 		pw.close();
 	}
 
+	// Writes given list of reimbursements to given filename
 	public static void writeFiles(String filename, List<Reimb> reimbs) throws FileNotFoundException, UnsupportedEncodingException {
 		
 		PrintWriter pw = new PrintWriter(filename, "UTF-8");

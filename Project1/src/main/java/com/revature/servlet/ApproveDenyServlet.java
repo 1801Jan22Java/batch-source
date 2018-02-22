@@ -41,6 +41,7 @@ public class ApproveDenyServlet extends HttpServlet {
 			mdi.deny(mgr, reimbId);
 		}
 		String initString = this.getServletContext().getRealPath("/");
+		// Rewrite everything
 		List<Reimb> allReimbs = mdi.getAllReimbs();
 		List<Reimb> pendingReimbs = mdi.getPendingReimbs();
 		List<Reimb> resolvedReimbs = mdi.getResolvedReimbs();

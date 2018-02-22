@@ -43,6 +43,7 @@ public class LoginServlet extends HttpServlet {
 			if (emp == null) {
 				resp.sendRedirect("WrongUsernameOrPassword.html");
 			} else {
+				// Write all files needed by employee
 				FileWriter.writeSingleEmployee(initString + "empInfo.txt", emp);
 				
 				ReimbDao rdi = new ReimbDaoImpl();
@@ -60,6 +61,7 @@ public class LoginServlet extends HttpServlet {
 			if (mgr == null) {
 				resp.sendRedirect("WrongUsernameOrPassword.html");
 			} else {
+				// Write all files needed by manager
 				FileWriter.writeSingleManager(initString + "mgrInfo.txt", mgr);
 				
 				ManagerDao mdi = new ManagerDaoImpl();
