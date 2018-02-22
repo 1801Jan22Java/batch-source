@@ -21,7 +21,7 @@ public class ViewResolvedRequests extends HttpServlet {
 		ServerManager serverManager = new ServerManager();
 		HttpSession session = request.getSession();
 		serverManager.login((String)session.getAttribute("username"), (String)session.getAttribute("password"));
-		serverManager.login((String)session.getAttribute("username"), (String)session.getAttribute("password"));
+		serverManager.managerLogin((String)session.getAttribute("username"), (String)session.getAttribute("password"));
 		response.setContentType("text/html");
 		//System.out.println((String)session.getAttribute("username")+(String)session.getAttribute("password"));
 		ArrayList<Request> reqs = null;
@@ -33,8 +33,7 @@ public class ViewResolvedRequests extends HttpServlet {
 		{
 			reqs = serverManager.reqDao.getRequests(serverManager.currentManager.getEmployeeId());
 		}
-		if(serverManager.currentEmployee.getEmployeeId()!=-1)
-		{	
+		
 			System.out.println("emp1");
 			String html = "<!DOCTYPE html>\r\n" + 
 					"<html>\r\n" + 
@@ -67,7 +66,7 @@ public class ViewResolvedRequests extends HttpServlet {
 			response.getWriter().write(html);
 		}
 		//response.sendRedirect("views/ViewRequests.html");
-	}
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

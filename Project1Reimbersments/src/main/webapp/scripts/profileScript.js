@@ -19,7 +19,7 @@ function populateUser(xhr) {
 		if (res.employeeId) {
 			//document.getElementById("Id").innerHTML = xhr.responseText;
 			//document.getElementById("Id").innerHTML = "you are logged in as employee number: "+ res.employeeId;
-			document.getElementById("Name").innerHTML = "Welcome "+ res.firstName;
+			document.getElementById("Name").innerHTML = "Welcome "+ res.firstName+"!";
 			document.getElementById("email").innerHTML = res.email;
 			document.getElementsByTagName("title")[0].innerHTML = res.firstName+" "+ res.lastName;	
 			//var reqTable = document.getElementById("Requests");

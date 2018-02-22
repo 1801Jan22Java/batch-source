@@ -34,8 +34,9 @@ public class ViewRequestsServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ServerManager serverManager = new ServerManager();
 		HttpSession session = request.getSession();
+		int id = 0;
 		serverManager.login((String)session.getAttribute("username"), (String)session.getAttribute("password"));
-		serverManager.login((String)session.getAttribute("username"), (String)session.getAttribute("password"));
+		serverManager.managerLogin((String)session.getAttribute("username"), (String)session.getAttribute("password"));
 		response.setContentType("text/html");
 		System.out.println(serverManager.currentEmployee +""+ serverManager.currentManager);
 		//System.out.println((String)session.getAttribute("username")+(String)session.getAttribute("password"));
@@ -43,13 +44,14 @@ public class ViewRequestsServlet extends HttpServlet {
 		if(serverManager.currentEmployee!=null)
 		{
 			reqs = serverManager.reqDao.getRequests(serverManager.currentEmployee.getEmployeeId());
+			id = serverManager.currentEmployee.getEmployeeId();
 		}
 		else
 		{
 			reqs = serverManager.reqDao.getRequests(serverManager.currentManager.getEmployeeId());
+			id = serverManager.currentManager.getEmployeeId();
 		}
-		if(serverManager.currentEmployee.getEmployeeId()!=-1)
-		{	
+		
 			System.out.println("emp1");
 			String html = "<!DOCTYPE html>\r\n" + 
 					"<html>\r\n" + 
@@ -70,7 +72,7 @@ public class ViewRequestsServlet extends HttpServlet {
 			int c =0;
 			for(Request r: reqs)
 			{
-				if(r.getStatus()<102)
+				if(r.getStatus()<102 && r.getEmployeeId()==id)
 				{
 					html+= "<tr><td>"+r.getRequestId()+"</td><td>"+r.getDescription()+"</td> <td>"+serverManager.statDao.getStatusName(r.getStatus())+"</td> <td>"+r.getAmountRequested()+"</td></tr>";
 				}
@@ -82,7 +84,7 @@ public class ViewRequestsServlet extends HttpServlet {
 			response.getWriter().write(html);
 		}
 		//response.sendRedirect("views/ViewRequests.html");
-	}
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

@@ -67,6 +67,8 @@ public class loginPageServlet extends HttpServlet {
 			response.sendRedirect("EmployeeProfile");
 		} else {
 			session.setAttribute("problem", "incorrect password");
+			PrintWriter pw = response.getWriter();
+			pw.println("<center>Incorrect Username/Password</center>");
 			response.sendRedirect("loginPage");
 		}
 	}

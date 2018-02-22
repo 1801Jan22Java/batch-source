@@ -75,6 +75,6 @@ public class Employee
 	}
 	public String toString()
 	{
-		return this.getFirstName()+" "+this.getLastName()+" "+this.getProfilePic();
+		return this.getFirstName()+" "+this.getLastName();
 	}
 }

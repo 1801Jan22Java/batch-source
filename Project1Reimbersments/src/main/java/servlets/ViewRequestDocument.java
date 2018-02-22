@@ -13,15 +13,15 @@ import beans.Request;
 import main.ServerManager;
 
 /**
- * Servlet implementation class ViewUnresolvedRequests
+ * Servlet implementation class ViewRequestDocument
  */
-public class ViewUnresolvedRequests extends HttpServlet {
+public class ViewRequestDocument extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ViewUnresolvedRequests() {
+    public ViewRequestDocument() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,8 +30,7 @@ public class ViewUnresolvedRequests extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	
-    	ServerManager serverManager = new ServerManager();
+		ServerManager serverManager = new ServerManager();
 		HttpSession session = request.getSession();
 		serverManager.login((String)session.getAttribute("username"), (String)session.getAttribute("password"));
 		serverManager.managerLogin((String)session.getAttribute("username"), (String)session.getAttribute("password"));
@@ -50,13 +49,13 @@ public class ViewUnresolvedRequests extends HttpServlet {
 					"</head>\r\n" + 
 					"<body>"+"<h1> Pending Reimbursement Requests</h1>\r\n" + 
 					"<input type=\"text\" id=\"myInput\" onkeyup=\"myFunction()\" placeholder=\"Search for employee..\">"+
-					"<table id=\"Requests\" class=\"table table-dark\">\r\n" +  
+					"<table id=\"Requests\" class=\"table table-dark\">\r\n" + 
 							"<thead>\r\n" + 
 							"<tr>\r\n" + 
-							"<th scope=\"col\">Empolyee ID</th>\r\n" +
+							"<th scope=\"col\">Employee ID</th>\r\n" + 
 							"<th scope=\"col\">Request ID</th>\r\n" + 
-							"<th scope=\"col\">Employee</th>\r\n" +
-							"<th scope=\"col\">Manager</th>\r\n" +
+							"<th scope=\"col\">Employee\r\n" +
+							"<th scope=\"col\">Manager\r\n" +
 							"<th scope=\"col\">Description</th>\r\n" +
 							"<th scope=\"col\">Request Status</th>\r\n" +  
 							"<th scope=\"col\">Amount Requested</th>"+
@@ -66,7 +65,7 @@ public class ViewUnresolvedRequests extends HttpServlet {
 			{
 				if(r.getStatus()<102)
 				{
-					html+= "<tr><td>"+r.getEmployeeId()+"</td><td>"+r.getRequestId()+"</td><td>"+serverManager.empDao.getEmployee(r.getEmployeeId())+"</td><td>"+serverManager.manDao.getManagerById(serverManager.empDao.getEmployee(r.getEmployeeId()).getManagerId())+"</td><td>"+r.getDescription()+"</td> <td>"+serverManager.statDao.getStatusName(r.getStatus())+"</td> <td>"+r.getAmountRequested()+"</td></tr>";
+					html+= "<tr>"+"<td>"+r.getEmployeeId()+"</td><td>"+r.getRequestId()+"</td>"+"<td>"+serverManager.empDao.getEmployee(r.getEmployeeId())+"</td><td>"+serverManager.manDao.getManagerById(serverManager.empDao.getEmployee(r.getEmployeeId()).getManagerId())+"</td><td>"+r.getDescription()+"</td> <td>"+serverManager.statDao.getStatusName(r.getStatus())+"</td> <td>"+r.getAmountRequested()+"</td></tr>";
 				}
 			}
 			html+="</table>\r\n" + "</center>"+
@@ -92,15 +91,19 @@ public class ViewUnresolvedRequests extends HttpServlet {
 					"		  }}</script>"+
 					"</html>";
 			response.getWriter().write(html);
-			request.getRequestDispatcher("views/UpdateRequest.html").include(request,response);
-		}
+		request.getRequestDispatcher("views/ViewRequestDocument.html").include(request,response);
+		
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		String requestId = request.getParameter("requestId");
+		System.out.println(requestId);
+		ServerManager serverManager = new ServerManager();
+		serverManager.documentChangePic(Integer.parseInt(requestId));
+		response.sendRedirect("http://localhost:8084/Project1Reimbersments/DisplayReimbersmentDoc");
 	}
 
 }

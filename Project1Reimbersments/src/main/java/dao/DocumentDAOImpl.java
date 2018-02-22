@@ -29,14 +29,14 @@ public class DocumentDAOImpl implements DocumentDAO
 		ArrayList<Document> docs = new ArrayList<Document>();
 		try(Connection con = ConnectionUtil.getConnectionFromFile())
 		{
-			String sql = "SELECT * FROM DOCUMENT";
+			String sql = "SELECT * FROM DOCUMENTS";
 			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery(sql);
 			System.out.println(stmt);
 			
 			while (rs.next())
 			{
-				int docId = rs.getInt("DOCUMENT_ID");
+				int docId = rs.getInt("DOC_ID");
 				int reqId = rs.getInt("REQUEST_ID");
 				Blob pic = rs.getBlob("DOC");
 				InputStream in = pic.getBinaryStream();
@@ -49,6 +49,7 @@ public class DocumentDAOImpl implements DocumentDAO
 				Document d = new Document(reqId, bao.toByteArray(), docId);
 				docs.add(d);
 			}	
+			return docs;
 		}
 		catch (SQLException e)
 		{
@@ -196,4 +197,20 @@ public class DocumentDAOImpl implements DocumentDAO
 		return false;
 	}
 
+	@Override
+	public byte[] getDocument(int rid) {
+		DocumentDAOImpl docDao = new DocumentDAOImpl();
+		for(Document d: docDao.getDocuments())
+		{
+			if(d.getRequestId()==rid)
+			{
+				return d.getDoc();
+			}
+		}
+		return null;
+	}
+	public static void main(String[] args) {
+		DocumentDAOImpl docDao = new DocumentDAOImpl();
+		System.out.println(docDao.getDocuments());
+	}
 }

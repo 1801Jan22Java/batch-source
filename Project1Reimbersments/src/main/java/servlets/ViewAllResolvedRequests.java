@@ -42,12 +42,14 @@ public class ViewAllResolvedRequests extends HttpServlet {
 			System.out.println("emp1");
 			String html = "<!DOCTYPE html>\r\n" + 
 					"<html>\r\n" + 
+					"<script src = \"scripts/ViewRequests.js\"></script>\r\n" +
 					"<head>\r\n" + "<center>"+
 					"<meta charset=\"ISO-8859-1\">\r\n" + 
 					"<link rel=\"stylesheet\" href=\"styles/DunderTableStyle.css\">"+
 					"<title>View Requests</title>\r\n" + 
 					"</head>\r\n" + 
 					"<body>"+"<h1> Resolved Reimbursement Requests</h1>\r\n" + 
+							"<input type=\"text\" id=\"myInput\" onkeyup=\"myFunction()\" placeholder=\"Search for employee..\">"+
 							"<table id=\"Requests\" class=\"table table-dark\">\r\n" + 
 							"<thead>\r\n" + 
 							"<tr>\r\n" + 
@@ -66,8 +68,26 @@ public class ViewAllResolvedRequests extends HttpServlet {
 				}
 			}
 			html+="</table>\r\n" + "</center>"+
-					"</body>\r\n" + 
-					"<script src = \"scripts/ViewRequests.js\"></script>\r\n" + 
+					"</body>\r\n" +
+					"<script>function myFunction() {\r\n" + 
+					"		  // Declare variables \r\n" + 
+					"		  var input, filter, table, tr, td, i;\r\n" + 
+					"		  input = document.getElementById(\"myInput\");\r\n" + 
+					"		  filter = input.value.toUpperCase();\r\n" + 
+					"		  table = document.getElementById(\"Requests\");\r\n" + 
+					"		  tr = table.getElementsByTagName(\"tr\");\r\n" + 
+					"\r\n" + 
+					"		  // Loop through all table rows, and hide those who don't match the search query\r\n" + 
+					"		  for (i = 0; i < tr.length; i++) {\r\n" + 
+					"		    td = tr[i].getElementsByTagName(\"td\")[0];\r\n" + 
+					"		    if (td) {\r\n" + 
+					"		      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {\r\n" + 
+					"		        tr[i].style.display = \"\";\r\n" + 
+					"		      } else {\r\n" + 
+					"		        tr[i].style.display = \"none\";\r\n" + 
+					"		      }\r\n" + 
+					"		    } \r\n" + 
+					"		  }}</script>"+
 					"</html>";
 			response.getWriter().write(html);
 		}

@@ -48,7 +48,7 @@ public class UpdateRequest extends HttpServlet {
 		{
 			serverManager.updateStatus(Integer.parseInt(requestId), 104);
 		}
-		request.getRequestDispatcher("ManagerProfile").include(request,response);
+		request.getRequestDispatcher("ViewUnresolvedRequests").include(request,response);
 	}
 
 }

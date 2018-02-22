@@ -86,6 +86,7 @@ public class RequestDocumentServlet extends HttpServlet {
 			 
 			 
 			 serverManager.docDao.uploadDocument(requestId, byteArr);
+			 request.getRequestDispatcher("EmployeeProfile").include(request,response);
 		 }
 		 
 	 }

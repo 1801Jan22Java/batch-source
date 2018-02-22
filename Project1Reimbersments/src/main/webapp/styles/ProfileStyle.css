@@ -1,3 +1,11 @@
+header, footer {
+    padding: 1em;
+    color: white;
+    background-color: black;
+    clear: left;
+    text-align: center;
+    font-size:40px;
+}
 body {
     height: 100%;
     padding-left: 0;
@@ -19,17 +27,17 @@ h1{
 	background-color: black; 
 	border: none;
 	color: white;
-	padding: 15px 32px;
+	padding: 15px 30px;
 	text-align: center;
 	text-decoration: none;
 	display: inline-block;
-	font-size: 16px;
-	border-radius: 10px;
-	
+	font-size: 15px;
+	border-radius: 7px;
+	margin: 5px;
 }
 
 .bodyTextClass {
 	color:black;
 	font-family: Courier;
-	font-size: 20px;
+	font-size: 30px;
 }

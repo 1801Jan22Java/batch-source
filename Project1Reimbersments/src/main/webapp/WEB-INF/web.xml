@@ -187,4 +187,24 @@
     <servlet-name>RequestIdServlet</servlet-name>
     <url-pattern>/RequestIdServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ViewRequestDocument</display-name>
+    <servlet-name>ViewRequestDocument</servlet-name>
+    <servlet-class>servlets.ViewRequestDocument</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ViewRequestDocument</servlet-name>
+    <url-pattern>/ViewRequestDocument</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DisplayReimbersmentDoc</display-name>
+    <servlet-name>DisplayReimbersmentDoc</servlet-name>
+    <servlet-class>servlets.DisplayReimbersmentDoc</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DisplayReimbersmentDoc</servlet-name>
+    <url-pattern>/DisplayReimbersmentDoc</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -2,32 +2,47 @@
 <html>
 <head>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<!-- <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script> -->
 <link rel="stylesheet" href="styles/ProfileStyle.css">
 <meta charset="ISO-8859-1">
 <title>Profile</title>
 </head>
+<header>Dunder Mifflin</header>
+    
 <body class = "bodyTextClass">
+
 	<div class="box">
 	<div class="page-header">
-  <div id="header"  >
-    <h1 style = "color:white">Dunder Mifflin</h1> 
-    </div>
+  
   </div >
   <center>
-		<h4 id="Name"></h4>
+		<h4 id="Name" style = "font-size: 32"></h4>
+		<br>
 		<img src="http://localhost:8084/Project1Reimbersments/DisplayManagerProfilePicture" width = "200px" height = "200px">
+		<br>
+	<br>
 		<p id="email"></p>
-		<div>
-		</div>
+		<div class="w3-container">
 		<a href ="ViewRequestsServlet" class ="button">View Your Current Requests</a>
+
 		<a href ="ViewResolvedRequests" class ="button">View Your Resolved Requests</a>
 		<a href ="ViewAllEmployees" class ="button">View Employees</a>
-		<a href ="ViewUnresolvedRequests" class ="button">View Unresolved Requests</a>
-		<a href ="ViewAllResolvedRequests" class ="button">View Resolved Requests</a>
+		<a href ="ViewUnresolvedRequests" class ="button">View Employee Unresolved Requests</a>
+		<a href ="ViewAllResolvedRequests" class ="button">View Employee Resolved Requests</a>
+		<a href ="ViewRequestDocument" class ="button">View Request Documents</a>
 		<a href="Logout" class ="button">Logout</a>
+	</div>
 	</center>
 	</div>
+	<br>
+	<br>
+
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<footer style ="font-size:15px">customerservice@dundermifflin.com</footer>
 </body>
 <script src = "scripts/profileScript.js"></script>
 </html>

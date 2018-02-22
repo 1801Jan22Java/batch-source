@@ -12,6 +12,7 @@ public interface DocumentDAO
 	public ArrayList<Document> getDocuments(int requestId);
 	public boolean uploadDocument(int rid, byte[] pic);
 	public ArrayList<Blob> downloadDocuments(int rid);
+	public byte[] getDocument(int rid);
 	public boolean removeDocuments(int rid);
 	public boolean updateDocument(int id,byte[] pic);
 }

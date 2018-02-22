@@ -47,7 +47,7 @@ public class ViewAllEmployees extends HttpServlet {
 					"<link rel=\"stylesheet\" href=\"styles/DunderTableStyle.css\">"+
 					"<title>View Requests</title>\r\n" + 
 					"</head>\r\n" + 
-					"<body>"+"<h1> Current Reimbursement Requests</h1>\r\n" + 
+					"<body>"+"<h1> Employees' of Dunder Mifflin</h1>\r\n" + 
 							"<table id=\"Requests\" class=\"table table-dark\">\r\n" + 
 							"<thead>\r\n" + 
 							"<tr>\r\n" + 

@@ -5,11 +5,11 @@ public class Document
 	public Document(int requestId, byte[] doc, int documentId) {
 		super();
 		this.requestId = requestId;
-		this.docs = doc;
+		this.doc = doc;
 		this.documentId = documentId;
 	}
 	private int requestId;
-	private byte[] docs;
+	private byte[] doc;
 	private int documentId;
 	public int getRequestId() {
 		return requestId;
@@ -18,10 +18,10 @@ public class Document
 		this.requestId = requestId;
 	}
 	public byte[] getDoc() {
-		return docs;
+		return doc;
 	}
 	public void setDocs(byte[] docs) {
-		this.docs = docs;
+		this.doc = docs;
 	}
 	public int getDocumentId() {
 		return documentId;
@@ -31,6 +31,6 @@ public class Document
 	}
 	public String toString()
 	{
-		return this.requestId+"";
+		return this.requestId+""+this.doc;
 	}
 }

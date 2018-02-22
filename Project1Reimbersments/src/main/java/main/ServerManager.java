@@ -95,6 +95,30 @@ public class ServerManager
 			e.printStackTrace();
 		}
 	}
+	public void documentChangePic( int rId)
+	{
+		byte[] pic = docDao.getDocument(rId);
+		//System.out.println(pic.toString());
+		if(pic != null)
+		{
+			File file = new File("C:/Users/panda/Documents/GitRepos/1801-jan22-java/batch-source/Project1Reimbersments/src/main/resources/pics/reimbersment.jpg");
+			OutputStream out=null;
+			try {
+				FileInputStream input = null;
+				
+				out = new FileOutputStream(file);
+				out.write(pic);
+				out.close();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+	}
 	public void changeRequestDocument( int requestId, byte[] pic)
 	{
 		docDao.uploadDocument(requestId, pic);
