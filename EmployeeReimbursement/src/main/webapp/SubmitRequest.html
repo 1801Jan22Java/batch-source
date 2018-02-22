@@ -3,29 +3,47 @@
 	<head>
 		<meta charset="ISO-8859-1">
 		<title>Submit a Reimbursement Request</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		<link rel="stylesheet" href="styles/myCoolStyles.css">
+		<link rel="stylesheet" href="styles/tableMain.css">
+		<link rel="stylesheet" href="styles/tableUtil.css">
 	</head>
 	<body>
+		<div class="banner container">
+			<div class="row"  id="bannerName">
+				<p class="col">Employee Reimbursement System</p>
+			</div>
+		</div>
 		<form action="submitrequest" method="post" enctype="multipart/form-data">
-			<br>
-			<fieldset>
-				<legend>Amount: </legend>
-				<input name="amount" type="number">
-			</fieldset>
-			<br>
-			<fieldset>
-				<legend>Description (500 character limit): </legend>
-				<input name="description" type="text">
-			</fieldset>
-			<br>
-			<fieldset>
-				<legend>Upload Screenshot: </legend>
-				<input name="screenshot" id="screenshot" type="file">
-			</fieldset>
-			<input type="reset" value="Reset">
-			<input type="submit" value="Submit">
+			<div class="container p-t-110">
+				<div class="row">
+					<div class="col-md-2"></div>
+						<span class="loginText col-md-4">Amount: </span>
+						<input class="inputBox col-md-4" name="amount" type="text">
+					<div class="col-md-2"></div>
+				</div>
+				<div class="row">
+					<div class="col-md-2"></div>
+					<span class="loginText col-md-4">Description (500 character limit): </span>
+					<input class="inputBox col-md-4" name="description" type="text">
+					<div class="col-md-2"></div>
+				</div>
+				<div class="row">
+					<div class="col-md-2"></div>
+					<span class="loginText col-md-4">Upload Screenshot: </span>
+					<input class="inputBox col-md-4" name="screenshot" id="screenshot" type="file">
+					<div class="col-md-2"></div>
+				</div>
+				<div class="row p-t-50">
+					<div class="col-md-2"></div>
+					<input class="myButton col-md-4" type="reset" value="Reset">
+					<input class="myButton col-md-4" type="submit" value="Submit">
+					<div class="col-md-2"></div>
+				</div>
+			</div>
 		</form>
-		<form action="home" method="post">
-			<input id="backButton" type="submit" value="Back">
+		<form class="p-t-50" action="home" method="post">
+			<input class="myButton" id="backButton" type="submit" value="Back">
 		</form>
 	</body>
 	<script src="scripts/redirector.js"></script>

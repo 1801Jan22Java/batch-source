@@ -45,7 +45,6 @@ public class ViewResolvedServlet extends HttpServlet {
 		//Parse the information into JSON format
 		Gson gson = new Gson();
 		String parsedLogs = gson.toJson(requests);
-		System.out.println(parsedLogs);
 		
 		resp.setContentType("application/json");
 		resp.setCharacterEncoding("ISO-8859-1");

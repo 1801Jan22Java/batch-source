@@ -30,7 +30,7 @@ function fillTablePending(xhr){
 	}
 
 	let table = document.createElement("table");
-	table.setAttribute("class", "table");
+	table.setAttribute("data-vertable", "ver6");
 	let thead = document.createElement("thead");
 	table.appendChild(thead);
 	
@@ -60,6 +60,9 @@ function fillTablePending(xhr){
 			break;
 		}
 //		th.innerHTML = col[i];
+		th.setAttribute("class", "column100 column"+(i+1));
+		th.setAttribute("data-column", "column"+(i+1));
+		tr.setAttribute("class", "row100 head");
 		tr.appendChild(th);
 //		tr.insertCell(i).outerHTML = th.outerHTML;
 	}
@@ -75,12 +78,15 @@ function fillTablePending(xhr){
 	
 	th = document.createElement("th");
 	th.innerHTML = "Select";
+	th.setAttribute("class", "column100 column"+(col.length+1));
+	th.setAttribute("data-column", "column"+(col.length+1));
 	tr.appendChild(th);
 	
 	thead.appendChild(tr);
 	
 	for(let i = 0; i < res.length; i++){
 		tr = table.insertRow(-1);
+		tr.setAttribute("class", "row100");
 		let currReqID;
 		for(let j = 0; j < col.length; j++){
 			let cell = tr.insertCell(-1);
@@ -107,11 +113,15 @@ function fillTablePending(xhr){
 			else{
 				cell.innerHTML = res[i][col[j]];
 			}
+			cell.setAttribute("class", "column100 column"+(j+1));
+			cell.setAttribute("data-column", "column"+(j+1));
+			
 		}
 		
-		th = document.createElement("th");
-		th.innerHTML = `<input type=\"checkbox\" name=\"selected\" value=\"${currReqID}\">`;
-		tr.appendChild(th);
+		let cell = tr.insertCell(-1);
+		cell.innerHTML = `<input type=\"checkbox\" name=\"selected\" value=\"${currReqID}\">`;
+		cell.setAttribute("class", "column100 column"+(col.length+1));
+		cell.setAttribute("data-column", "column"+(col.length+1));
 		
 		/*
 		//Approval buttons

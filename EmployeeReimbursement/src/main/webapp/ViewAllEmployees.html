@@ -2,18 +2,35 @@
 <html>
 	<head>
 		<meta charset="ISO-8859-1">
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+ 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		<link rel="stylesheet" href="styles/myCoolStyles.css">
+		<link rel="stylesheet" href="styles/tableMain.css">
+		<link rel="stylesheet" href="styles/tableUtil.css">
 		<title>View Employees</title>
 	</head>
 	<body>
-		<form action="allemployeerequests" method="post">
-			<div id="requestTable">
-				<p>Loading...standby!</p>
+		<div class="banner container">
+			<div class="row"  id="bannerName">
+				<p class="col">Employee Reimbursement System</p>
 			</div>
-			<input type="submit" name="allemployeerequests" id="submitbutton" value="View Requests"></button>
+		</div>
+		<form action="allemployeerequests" method="post">
+			<div class="container m-t-110">
+				<div class="row">
+					<div class="col-md table100 ver6 m-b-75" id="requestTable">
+						<p>Loading...standby!</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md viewButtons">
+						<input class="myButton" type="submit" name="allemployeerequests" id="submitbutton" value="View Requests"></button>
+					</div>
+				</div>
+			</div>
+			
 		</form>
 		<form action="home" method="post">
-			<input type="submit" value="Back">
+			<input class="myButton m-t-50" type="submit" value="Back">
 		</form>
 		<div id="employeeRequestTable">
 		

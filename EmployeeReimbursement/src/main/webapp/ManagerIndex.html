@@ -2,29 +2,40 @@
 <html>
 	<head>
 		<meta charset="ISO-8859-1">
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+ 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		<link rel="stylesheet" href="styles/myCoolStyles.css">
+		<link rel="stylesheet" href="styles/tableMain.css">
+		<link rel="stylesheet" href="styles/tableUtil.css">
 		<title>Manager Homepage</title>
 	</head>
 	<body>
-		<form action="profile" method="post">
-			<input type="submit" name="profile" value="Profile"/>
-		</form>
-		<form action="managerequests" method="post">
-			<input type="submit" name="viewPage" value="Manage Requests"/>
-		</form>
-		<form action="resolvedrequests" method="post">
-			<input type="submit" name="resolvedrequests" value="View Completed Requests"/>
-		</form>
-		<form action="submitredirect" method="post">
-			<input type="submit" name="submitredirect" value="Submit a Request"/>
-		</form>
-		<form action="viewallemployees" method="post">
-			<input type="submit" name="viewallemployees" value="View All Employees"/>
-		</form>
-		<form action="logout" method="post">
-			<input type="submit" name="logout" value="Logout"/>
-		</form>
-		<p id="user"></p>
+		<div class="banner container">
+			<div class="row"  id="bannerName">
+				<p class="col">Employee Reimbursement System</p>
+			</div>
+		</div>
+		<div class="container">
+			<p class="loginText p-t-40" id="user"></p>
+			<form class="p-t-40" action="profile" method="post">
+				<input class="myButton" type="submit" name="profile" value="Profile"/>
+			</form>
+			<form class="p-t-40" action="managerequests" method="post">
+				<input class="myButton" type="submit" name="viewPage" value="Manage Requests"/>
+			</form>
+			<form class="p-t-40" action="resolvedrequests" method="post">
+				<input class="myButton" type="submit" name="resolvedrequests" value="View Completed Requests"/>
+			</form>
+			<form class="p-t-40" action="submitredirect" method="post">
+				<input class="myButton" type="submit" name="submitredirect" value="Submit a Request"/>
+			</form>
+			<form class="p-t-40" action="viewallemployees" method="post">
+				<input class="myButton" type="submit" name="viewallemployees" value="View All Employees"/>
+			</form>
+			<form class="p-t-40" action="logout" method="post">
+				<input class="myButton" type="submit" name="logout" value="Logout"/>
+			</form>
+		
+		</div>
 	</body>
 	<script src="scripts/checkManager.js"></script>
 </html>

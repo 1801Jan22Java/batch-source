@@ -28,16 +28,20 @@ function fillRequestTable(xhr){
 
 	let table = document.createElement("table");
 	table.setAttribute("class", "table");
+	table.setAttribute("data-vertable", "ver6")
 	let thead = document.createElement("thead");
 	table.appendChild(thead);
 	
 	let tr = table.insertRow(0);
+	tr.setAttribute("class", "row100 head");
 	let amountIndex;
 	let statusIndex;
 	let requestIndex;
 	let employeeIndex;
 	for(let i = 0; i < col.length; i++){
 		let th = document.createElement("th")	//Table header
+		th.setAttribute("class", "column100 column"+(i+1));
+		th.setAttribute("data-column", "column"+(i+1));
 		switch (col[i]){
 		case "requestID":
 			th.innerHTML = "Request ID";
@@ -80,11 +84,12 @@ function fillRequestTable(xhr){
 	
 	for(let i = 0; i < res.length; i++){
 		tr = table.insertRow(-1);
-		
+		tr.setAttribute("class", "row100");
 		let currReqID;
 		let currEmpID;
 		for(let j = 0; j < col.length+1; j++){
 			let cell = tr.insertCell(-1);
+			cell.setAttribute("class", "column100 column"+(j+1));
 			if(j === amountIndex){
 				cell.innerHTML = "$"+res[i][col[j]];
 			}
@@ -111,8 +116,7 @@ function fillRequestTable(xhr){
 			else{
 				//var urlCreator = window.URL || window.webkitURL; 
 				//var imageUrl = urlCreator.createObjectURL(blob); 
-				console.log("I am here.");
-				cell.innerHTML = `<button onclick="postAjax('http://localhost:8084/EmployeeReimbursement/downloadimage/${currReqID}', downloadImage)">View</button>`;
+				cell.innerHTML = `<button onclick="postAjax('http://localhost:8084/EmployeeReimbursement/downloadimage/${currReqID}', downloadImage)">Download</button>`;
 
 			}
 		}

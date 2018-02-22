@@ -3,22 +3,45 @@
 	<head>
 		<meta charset="ISO-8859-1">
  		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-	
+		<link rel="stylesheet" href="styles/myCoolStyles.css">
+		<link rel="stylesheet" href="styles/tableMain.css">
+		<link rel="stylesheet" href="styles/tableUtil.css">
 		<title>View Requests</title>
 	</head>
-	<body>
-	
-		
-		<button id="viewpending">View Pending Requests</button>
-		<br>
-		<button id="viewresolved">View Resolved Requests</button>
-		
-		<form action="home" method="post">
-			<input id="backButton" type="submit" value="Back">
-		</form>
-		
-		<div id="requestTable">
-		
+	<body class="centerColumns">
+		<div class="banner container">
+			<div class="row"  id="bannerName">
+				<p class="col">Employee Reimbursement System</p>
+			</div>
+		</div>
+		<div class="container">
+			<div class="row m-t-110">
+				<div class="col-md-2"></div>
+				<div class="col-md-3">
+					<div class="viewButtons">
+						<button id="viewpending" class="myButton">View Pending Requests</button>
+					</div>
+				</div>
+				<div class="col-md-2">
+					<form action="home" method="post">
+						<input id="backButton" class="myButton" type="submit" value="Back">
+					</form></div>
+				<div class="col-md-3">
+					<div class="viewButtons">
+						<button id="viewresolved" class="myButton">View Resolved Requests</button>
+					</div>
+				</div>
+				<div class="col-md-2"></div>
+			</div>
+			<div class="row">
+				<div class="col-md-4"></div>
+				<div class="col-md-4"></div>
+				<div class="col-md-4"></div>
+			</div>
+			
+			<div class="row">
+				<div id="requestTable" class="table100 ver6 m-t-110"></div>
+			</div>
 		</div>
 	</body>
  	<script src="scripts/viewPending.js"></script>

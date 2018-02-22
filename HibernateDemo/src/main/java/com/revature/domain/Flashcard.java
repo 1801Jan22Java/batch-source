@@ -13,24 +13,26 @@ public class Flashcard implements Serializable{
 	public Flashcard() {
 		super();
 	}
-	public Flashcard(int id, String question, String answer) {
+	public Flashcard(int id, String question, String answer, Category category) {
 		this();
 		this.id = id;
 		this.question = question;
 		this.answer = answer;
+		this.category = category;
 	}
 	
 	//We need a constructor without setting id, so the sequence can set it automatically
-	public Flashcard(String question, String answer) {
+	public Flashcard(String question, String answer, Category category) {
 		super();
 		this.question = question;
 		this.answer = answer;
+		this.category = category;
 	}
 	
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="flashcardSequence")
-	@SequenceGenerator(allocationSize=1,name="flashcardSequence",sequenceName="SQ_FLASHCARD_PK")	//sequenceName - how it shows up on sequence side
+	@SequenceGenerator(allocationSize=1,name="flashcardSequence",sequenceName="SQ_FLASHCARD_PK")	//sequenceName - how it shows up on SQL side
 	@Column(name="FLASHCARD_ID")
 	private int id;
 	
@@ -40,6 +42,9 @@ public class Flashcard implements Serializable{
 	@Column(name="ANSWER")
 	private String answer;
 	
+	@ManyToOne (fetch=FetchType.EAGER /*, cascade=CascadeType.ALL*/)
+	@JoinColumn(name="CATEGORY_ID")
+	private Category category;
 	
 	
 	public int getId() {
@@ -60,12 +65,17 @@ public class Flashcard implements Serializable{
 	public void setAnswer(String answer) {
 		this.answer = answer;
 	}
+	public Category getCategory() {
+		return category;
+	}
+	public void setCategory(Category category) {
+		this.category = category;
+	}
 	
 	
 	@Override
 	public String toString() {
-		return "Flashcard [id=" + id + ", question=" + question + ", answer=" + answer + "]";
+		return "Flashcard [id=" + id + ", question=" + question + ", answer=" + answer + ", category=" + category + "]";
 	}
-	
 	
 }

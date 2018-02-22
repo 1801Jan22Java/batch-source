@@ -1,0 +1,129 @@
+@charset "ISO-8859-1";
+
+.banner{
+	height:120px;
+	margin-left:0px;
+	background-color: Transparent;
+}
+
+#bannerName {
+	color:#AA3600;
+	margin-top:40px;
+	margin-bottom:40px;
+	margin-left: 40px;
+	font-size:40px;
+	font-family: Verdana, Geneva, sans-serif;
+	background-color:Transparent;
+}
+
+body {
+	background-color:#111111;
+	background-image:url("../images/background-final.png");
+	background-repeat:no-repeat;
+}
+
+.centerColumns {
+	background-color:#111111;
+}
+
+.loginText {
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	color:white;
+	font-family: Montserrat-Regular;
+	font-size:20px;
+	margin-top:50px;
+}
+
+.textNoMargin {
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	color:white;
+	font-family: Montserrat-Regular;
+	font-size:20px;
+}
+
+#loginButton {
+	margin-top: 100px;
+}
+
+#checkedLoginButton {
+	margin-top: 60px;
+}
+
+form {
+	display:flex;
+	align-items:center;
+	justify-content:center;
+}
+
+.inputBox{
+	color: white;
+	background-color: Transparent;
+	font-family: Montserrat-Regular;
+  	font-size: 20px;
+  	margin-top: 50px;
+	display:flex;
+	align-items:center;
+	justify-content:center;
+}
+
+.inputBoxNoMargins{
+	color: white;
+	background-color: Transparent;
+	font-family: Montserrat-Regular;
+  	font-size: 20px;
+	display:flex;
+	align-items:center;
+	justify-content:center;
+}
+
+.profileChangeText{
+	color: white;
+	background-color: black;
+	font-family: Montserrat-Regular;
+  	font-size: 20px;
+  	height:40px;
+	display:flex;
+	align-items:center;
+	justify-content:center;
+}
+
+.viewButtons{
+	display:flex;
+	align-items:center;
+	justify-content:center;
+}
+
+.myButton {
+	outline: none !important;
+	border: none;
+	background-color:Transparent;
+	display:inline-block;
+	cursor:pointer;
+	padding:16px 31px;
+	-moz-border-radius:16px;
+	-webkit-border-radius:16px;
+    border-radius: 16px;
+    overflow: hidden;
+    background: #7918f2;
+	background: -webkit-linear-gradient(-68deg , #AA3600, #111111);
+	background: -o-linear-gradient(-68deg , #AA3600, #111111);
+	background: -moz-linear-gradient(-68deg , #AA3600, #111111);
+	background: linear-gradient(-68deg , #AA3600, #111111);
+	font-family: Montserrat-Regular;
+  	font-size: 20px;
+  	color: #fff;
+  	line-height: 1.4;
+	position:relative;
+	align-items:center;
+}
+.myButton:hover {
+    background-color: rgba(255,255,255,0.2);
+}
+.myButton:active {
+	position:relative;
+	top:1px;
+}

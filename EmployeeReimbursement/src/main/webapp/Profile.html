@@ -3,46 +3,67 @@
 	<head>
 		<meta charset="ISO-8859-1">
 		<title>Your Profile</title>
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+ 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		<link rel="stylesheet" href="styles/myCoolStyles.css">
+		<link rel="stylesheet" href="styles/tableMain.css">
+		<link rel="stylesheet" href="styles/tableUtil.css">
 	</head>
 	<body>
 		<div>
-			<br>
-			<form action="modifyprofile" method="post">
-				<table>
-					<tr>
-						<th>First Name</th>
-						<td id="empFirstName"></td>
-						<td><input type="text" name="modifyFirstName"></td>
-						<td><input type="submit" value="Save">
-					</tr>
-				</table>
-				<table>
-					<tr>
-						<th>Last Name</th>
-						<td id="empLastName"></td>
-						<td><input type="text" name="modifyLastName"></td>
-						<td><input type="submit" value="Save">
-					</tr>
-				</table>
-				<table>
-					<tr>
-						<th>E-mail</th>
-						<td id="empEmail"></td>
-						<td><input type="text" name="modifyEmail"></td>
-						<td><input type="submit" value="Save">
-					</tr>
-				</table>
-				<table>
-					<tr>
-						<th>Your Employee ID: </th>
-						<td id="empID"></td>
-					</tr>
-				</table>
+			<div class="banner container">
+				<div class="row"  id="bannerName">
+					<p class="col">Employee Reimbursement System</p>
+				</div>
+			</div>
+			<form class="m-t-110" action="modifyprofile" method="post">
+				<div class="container">
+					<div class="row table100 ver6 m-b-80">
+						<table data-vertable="ver6">
+							<tr class="row100 head">
+								<th class="column100 column1" data-column="column1">First Name</th>
+								<td class="column100 column2" data-column="column2" id="empFirstName"></td>
+								<td class="column100 column3" data-column="column3"><input class="profileChangeText" type="text" name="modifyFirstName"></td>
+								<td class="column100 column4" data-column="column4"><input type="submit" class="myButton" value="Save">
+							</tr>
+						</table>
+					</div>
+					<div class="row table100 ver6 m-b-80">
+						<table data-vertable="ver6">
+							<tr class="row100 head">
+								<th class="column100 column1" data-column="column1">Last Name</th>
+								<td class="column100 column2" data-column="column2" id="empLastName"></td>
+								<td class="column100 column3" data-column="column3"><input class="profileChangeText" type="text" name="modifyLastName"></td>
+								<td class="column100 column4" data-column="column4"><input type="submit" class="myButton" value="Save">
+							</tr>
+						</table>
+					</div>
+	
+					<div class="row table100 ver6 m-b-80">
+						<table data-vertable="ver6">
+							<tr class="row100 head">
+								<th class="column100 column1" data-column="column1">E-mail</th>
+								<td class="column100 column2" data-column="column2" id="empEmail"></td>
+								<td class="column100 column3" data-column="column3"><input class="profileChangeText" type="text" name="modifyEmail"></td>
+								<td class="column100 column4" data-column="column4"><input type="submit" class="myButton" value="Save">
+							</tr>
+						</table>
+					</div>
+	
+					<div class="row table100 ver6 m-b-80">
+						<table data-vertable="ver6">
+							<tr class="row100 head">
+								<th class="column100 column1" data-column="column1">Your Employee ID: </th>
+								<td class="column100 column2" data-column="column2" id="empID"></td>
+							</tr>
+						</table>
+					</div>
+				</div>
+
+
 			</form>
 			
 			<form action="home" method="post">
-				<input id="backButton" type="submit" value="Back">
+				<input id="backButton" class="myButton m-b-80" type="submit" value="Back">
 			</form>
 		</div>
 		

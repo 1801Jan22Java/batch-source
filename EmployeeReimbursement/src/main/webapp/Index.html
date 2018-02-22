@@ -3,23 +3,35 @@
 	<head>
 		<meta charset="ISO-8859-1">
 		<title>Home</title>
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+ 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		<link rel="stylesheet" href="styles/myCoolStyles.css">
+		<link rel="stylesheet" href="styles/tableMain.css">
+		<link rel="stylesheet" href="styles/tableUtil.css">
 		
 	</head>
 	<body>
-		<form action="profile" method="post">
-			<input type="submit" name="profile" value="Profile"/>
-		</form>
-		<form action="viewpage" method="post">
-			<input type="submit" name="viewPage" value="View Requests"/>
-		</form>
-		<form action="submitredirect" method="post">
-			<input type="submit" name="submitredirect" value="Submit a Request"/>
-		</form>
-		<form action="logout" method="post">
-			<input type="submit" name="logout" value="Logout"/>
-		</form>
-		<p id="user"></p>
+		<div class="banner container">
+			<div class="row"  id="bannerName">
+				<p class="col">Employee Reimbursement System</p>
+			</div>
+		</div>
+		<div class="container">
+			<div class="row p-t-40">
+				<p class="loginText col" id="user"></p>
+			</div>
+			<form class="row p-t-40" action="profile" method="post">
+				<input class="myButton col" type="submit" name="profile" value="Profile"/>
+			</form>
+			<form class="row p-t-40" action="viewpage" method="post">
+				<input class="myButton col" type="submit" name="viewPage" value="View Requests"/>
+			</form>
+			<form class="row p-t-40" action="submitredirect" method="post">
+				<input class="myButton col" type="submit" name="submitredirect" value="Submit a Request"/>
+			</form>
+			<form class="row p-t-40" action="logout" method="post">
+				<input class="myButton col" type="submit" name="logout" value="Logout"/>
+			</form>
+		</div>
 	</body>
 	<script src="scripts/check.js"></script>
 </html>

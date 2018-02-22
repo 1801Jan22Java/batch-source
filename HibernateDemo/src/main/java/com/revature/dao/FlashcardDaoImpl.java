@@ -2,7 +2,7 @@ package com.revature.dao;
 
 import java.util.List;
 
-import org.hibernate.Session;
+import org.hibernate.*;
 
 import com.revature.domain.Flashcard;
 import com.revature.util.HibernateUtil;
@@ -31,8 +31,19 @@ public class FlashcardDaoImpl implements FlashcardDao{
 
 	@Override
 	public int addFlashcard(Flashcard f) {
-		// TODO Auto-generated method stub
-		return 0;
+		Session s = HibernateUtil.getSession();
+		
+		//org.hibernate
+		Transaction tx = s.beginTransaction();
+
+		//We'll be using our save() method
+		//save() returns the generated ID
+		int result = (int)s.save(f);
+		
+		tx.commit();
+		s.close();
+		
+		return result;
 	}
 
 	@Override

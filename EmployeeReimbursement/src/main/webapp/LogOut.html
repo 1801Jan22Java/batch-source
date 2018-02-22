@@ -2,14 +2,22 @@
 <html>
 	<head>
 		<meta charset="ISO-8859-1">
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+ 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		<link rel="stylesheet" href="styles/myCoolStyles.css">
+		<link rel="stylesheet" href="styles/tableMain.css">
+		<link rel="stylesheet" href="styles/tableUtil.css">
 		
 		<title>Logout</title>
 	</head>
 	<body>
-		<p>You have been successfully logged out!</p>
-		<form action="login" method="post">
-			<input type="submit" value="Return to Login">
+		<div class="banner container">
+			<div class="row"  id="bannerName">
+				<p class="col">Employee Reimbursement System</p>
+			</div>
+		</div>
+		<p class="p-t-110 loginText">You have been successfully logged out!</p>
+		<form class="p-t-110" action="login" method="post">
+			<input class="myButton" type="submit" value="Return to Login">
 		</form>
 	</body>
 </html>

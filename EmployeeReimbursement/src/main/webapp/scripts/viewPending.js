@@ -31,10 +31,13 @@ function fillTablePending(xhr){
 
 	let table = document.createElement("table");
 	table.setAttribute("class", "table");
+	table.setAttribute("data-vertable", "ver6");
 	let thead = document.createElement("thead");
 	table.appendChild(thead);
 	
 	let tr = table.insertRow(0);
+	tr.setAttribute("class", "row100 head");
+	let amountIndex;
 	for(let i = 0; i < col.length; i++){
 		let th = document.createElement("th")	//Table header
 		switch (col[i]){
@@ -55,8 +58,11 @@ function fillTablePending(xhr){
 			break;
 		case "amount":
 			th.innerHTML = "Amount";
+			amountIndex = i;
 			break;
 		}
+		th.setAttribute("class", "column100 column"+(i+1));
+		th.setAttribute("data-column", "column"+(i+1));
 //		th.innerHTML = col[i];
 		tr.appendChild(th);
 //		tr.insertCell(i).outerHTML = th.outerHTML;
@@ -65,9 +71,10 @@ function fillTablePending(xhr){
 	
 	for(let i = 0; i < res.length; i++){
 		tr = table.insertRow(-1);
+		tr.setAttribute("class","row100");
 		for(let j = 0; j < col.length; j++){
 			let cell = tr.insertCell(-1);
-			if(j === col.length-1){
+			if(j === amountIndex){
 				cell.innerHTML = "$"+res[i][col[j]];
 			}
 			else if(j === 3){
@@ -86,9 +93,10 @@ function fillTablePending(xhr){
 			else{
 				cell.innerHTML = res[i][col[j]];
 			}
+			cell.setAttribute("class", "column100 column"+(j+1));
+			cell.setAttribute("data-column","column"+(j+1));
 		}
 	}
-	
 	let newTable = document.getElementById("requestTable");
 	newTable.innerHTML = "";
 	newTable.appendChild(table);
