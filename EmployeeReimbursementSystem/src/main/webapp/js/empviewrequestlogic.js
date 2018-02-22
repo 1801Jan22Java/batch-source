@@ -14,84 +14,21 @@ xhttp.send();
 
 function reqFunction(xhttp){
     var jsonResponse = JSON.parse(xhttp.responseText);
-    //var monthsOfYear = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL",
-    //	"AUG", "SEP", "OCT", "NOV", "DEC"];
-    console.log(jsonResponse);
-    console.log(jsonResponse[0].requestID)
-    /*
-    if (jsonResponse.length>0){
-    	for (var i = 0; i < jsonResponse.length; i++){
-    		var cont = document.createElement("div");
-    		cont.classList.add("container");
-    		var tabl1 = document.createElement("table");
-    		tabl1.classList.add("table", "table-bordered");
-    		var tr1 = document.createElement("tr");
-    		tr1.classList.add("warning", "boldtext");
-    		tr1.setAttribute("id", "employeeInfo");
-    		var th1 = document.createElement("th")
-    		th1.innerHTML = "ID";
-    		var th2 = document.createElement("th")
-    		th2.innerHTML = "Account";
-    		var th3 = document.createElement("th")
-    		th3.innerHTML = "Password";
-    		var tr2 = document.createElement("tr");
-    		tr2.classList.add("success", "gentletext");
-    		tr2.setAttribute("id", "employeeStuff1")
-    		var td1 = document.createElement("td");
-    		td1.innerHTML = jsonResponse[i].employeeID;
-    		var td2 = document.createElement("td");
-    		td2.innerHTML = jsonResponse[i].account;
-    		var td3 = document.createElement("td");
-    		td3.innerHTML = jsonResponse[i].password;
-    		var tr3 = document.createElement("tr");
-    		tr3.classList.add("warning", "boldtext");
-    		tr3.setAttribute("id", "employeeInfo");
-    		var th4 = document.createElement("th");
-    		th4.innerHTML = "First Name";
-    		var th5 = document.createElement("th");
-    		th5.innerHTML = "Last Name";
-    		var th6 = document.createElement("th");
-    		th6.innerHTML = "E-mail";
-    		var tr4 = document.createElement("tr");
-    		tr4.classList.add("success", "gentletext");
-    		tr4.setAttribute("id", "employeeStuff2");
-    		var td4 = document.createElement("td");
-    		td4.innerHTML = "$" + jsonResponse[i].fName;
-    		var td5 = document.createElement("td");
-    		td5.innerHTML = jsonResponse[i].lName;;
-    		var td6 = document.createElement("td");
-    		td6.innerHTML = jsonResponse[i].email;
-    		tr1.appendChild(th1);
-    		tr1.appendChild(th2);
-    		tr1.appendChild(th3);
-    		tr2.appendChild(td1);
-    		tr2.appendChild(td2);
-    		tr2.appendChild(td3);
-    		tr3.appendChild(th4);
-    		tr3.appendChild(th5);
-    		tr3.appendChild(th6);
-    		tr4.appendChild(td4);
-    		tr4.appendChild(td5);
-    		tr4.appendChild(td6);
-    		tabl1.appendChild(tr1);
-    		tabl1.appendChild(tr2);
-    		tabl1.appendChild(tr3);
-    		tabl1.appendChild(tr4);
-    		cont.appendChild(tabl1);
-    		document.body.appendChild(cont);
-    		console.log("awesome");
-    		
-    		}
-    }
-    */
+ 
+    //console.log(jsonResponse);
+    //console.log(jsonResponse[0].requestID)
+   
     
     var jsonResponse = JSON.parse(xhttp.responseText);
-    console.log(jsonResponse);
+    
+    //Looking for all Requests
     if (jsonResponse.length>0){
     	for (var i = 0; i < jsonResponse.length; i++){
+    		//We will put incomplete requests in this table
     		if (jsonResponse[i].statusID < 4){
         		var cont = document.getElementById("unfinishedreqs");
         		var tabl1 = document.getElementById("tabneed");
+        	//Else we will put complete requests in this table
     	} else
     		{
     			var cont = document.getElementById("completedreqs");
@@ -101,7 +38,7 @@ function reqFunction(xhttp){
     		tr1.classList.add("warning", "boldtext");
     		tr1.setAttribute("id", "employeeInfo");
     		var th1 = document.createElement("th")
-    		th1.innerHTML = "Request ID";
+    		th1.innerHTML = i + 1 + ". Request ID";
     		var th2 = document.createElement("th")
     		th2.innerHTML = "Employee ID";
     		var th3 = document.createElement("th")
@@ -230,6 +167,7 @@ document.getElementById("allReq").addEventListener("click",viewTables);
 document.getElementById("pendReq").addEventListener("click",viewTables);
 document.getElementById("compReq").addEventListener("click",viewTables);
 
+//Showing all requests, incomplete requests only, or complete requests only based on what the user decides to press
 function viewTables(){
 	var allReqs = document.getElementById("allReq");
 	var pendReqs = document.getElementById("pendReq");
@@ -256,3 +194,71 @@ function viewTables(){
 	}
 }
 
+//Scrapped work that I don't want to get rid of in case I want to improve this later on for funsies
+
+/*
+if (jsonResponse.length>0){
+	for (var i = 0; i < jsonResponse.length; i++){
+		var cont = document.createElement("div");
+		cont.classList.add("container");
+		var tabl1 = document.createElement("table");
+		tabl1.classList.add("table", "table-bordered");
+		var tr1 = document.createElement("tr");
+		tr1.classList.add("warning", "boldtext");
+		tr1.setAttribute("id", "employeeInfo");
+		var th1 = document.createElement("th")
+		th1.innerHTML = "ID";
+		var th2 = document.createElement("th")
+		th2.innerHTML = "Account";
+		var th3 = document.createElement("th")
+		th3.innerHTML = "Password";
+		var tr2 = document.createElement("tr");
+		tr2.classList.add("success", "gentletext");
+		tr2.setAttribute("id", "employeeStuff1")
+		var td1 = document.createElement("td");
+		td1.innerHTML = jsonResponse[i].employeeID;
+		var td2 = document.createElement("td");
+		td2.innerHTML = jsonResponse[i].account;
+		var td3 = document.createElement("td");
+		td3.innerHTML = jsonResponse[i].password;
+		var tr3 = document.createElement("tr");
+		tr3.classList.add("warning", "boldtext");
+		tr3.setAttribute("id", "employeeInfo");
+		var th4 = document.createElement("th");
+		th4.innerHTML = "First Name";
+		var th5 = document.createElement("th");
+		th5.innerHTML = "Last Name";
+		var th6 = document.createElement("th");
+		th6.innerHTML = "E-mail";
+		var tr4 = document.createElement("tr");
+		tr4.classList.add("success", "gentletext");
+		tr4.setAttribute("id", "employeeStuff2");
+		var td4 = document.createElement("td");
+		td4.innerHTML = "$" + jsonResponse[i].fName;
+		var td5 = document.createElement("td");
+		td5.innerHTML = jsonResponse[i].lName;;
+		var td6 = document.createElement("td");
+		td6.innerHTML = jsonResponse[i].email;
+		tr1.appendChild(th1);
+		tr1.appendChild(th2);
+		tr1.appendChild(th3);
+		tr2.appendChild(td1);
+		tr2.appendChild(td2);
+		tr2.appendChild(td3);
+		tr3.appendChild(th4);
+		tr3.appendChild(th5);
+		tr3.appendChild(th6);
+		tr4.appendChild(td4);
+		tr4.appendChild(td5);
+		tr4.appendChild(td6);
+		tabl1.appendChild(tr1);
+		tabl1.appendChild(tr2);
+		tabl1.appendChild(tr3);
+		tabl1.appendChild(tr4);
+		cont.appendChild(tabl1);
+		document.body.appendChild(cont);
+		console.log("awesome");
+		
+		}
+}
+*/

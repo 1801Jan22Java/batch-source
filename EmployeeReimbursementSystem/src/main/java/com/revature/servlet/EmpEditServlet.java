@@ -7,15 +7,11 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.beans.Employee;
-import com.revature.beans.Request;
 import com.revature.dao.EmployeeDao;
 import com.revature.dao.EmployeeDaoImpl;
-import com.revature.dao.RequestDao;
-import com.revature.dao.RequestDaoImpl;
 
 /**
  * Servlet implementation class EmpEditServlet
@@ -34,11 +30,13 @@ public class EmpEditServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
+    //Changing the employee database entry based on the field chosen
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter pw = response.getWriter();
 		EmployeeDao ed = new EmployeeDaoImpl();
-		HttpSession session = request.getSession(false);
+		//HttpSession session = request.getSession(false);
 		String paramChange = request.getParameter("statChange");
+		//Checking which field is being modified
 		if (paramChange.equals("passwordchange"))
 			paramChange = "EMPLOYEE_PASSWORD";
 		else if (paramChange.equals("emailchange"))

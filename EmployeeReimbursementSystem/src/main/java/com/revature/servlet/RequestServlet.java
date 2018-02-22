@@ -11,10 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.revature.beans.Employee;
 import com.revature.beans.Request;
-import com.revature.dao.EmployeeDao;
-import com.revature.dao.EmployeeDaoImpl;
 import com.revature.dao.RequestDao;
 import com.revature.dao.RequestDaoImpl;
 
@@ -35,6 +32,7 @@ public class RequestServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
+    //Grabs all user requests from the database
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter pw = response.getWriter();
 		RequestDao rd = new RequestDaoImpl();

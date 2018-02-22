@@ -34,6 +34,28 @@ background-color: #62cdf7;
 	text: Login;
 }
 
-#manTime{
-	
+#smiles{
+	display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+#listening{
+	display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 25%;
+}
+
+button, input[type="button"], input[type="submit"]{
+	background: linear-gradient(#ffbc00 5%, #ffdd7f 100%);
+	padding: 30px 120px;
+	display: inline-block;
+    font-size: 32px;
+}
+h1{
+	font-family: verdana,arial, sans-serif;
+	text-align: center;
+	text-shadow:-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }

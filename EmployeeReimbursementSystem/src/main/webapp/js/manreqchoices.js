@@ -2,6 +2,7 @@
  * 
  */
 
+//We first see all requests
 window.onload = getAjax("AllRequestsServlet", manFunction);
 
 document.getElementById("aok").addEventListener("click",determineReq);
@@ -39,6 +40,7 @@ xhttp.send();
     	xhttp.send();
     }
 
+    //When the manager determines the fate of a request this is called and processes the request
     function determineReq(){
     	console.log("nice");
     	if (reqID == -1)
@@ -60,6 +62,7 @@ xhttp.send();
         //console.log(jsonResponse);
     }
     
+    //Used to create the table with all the request data
     function tableParse(){
     	reqID = -1;
         if (jsonResponse.length>0){
@@ -73,7 +76,7 @@ xhttp.send();
         		tr1.classList.add("warning", "boldtext");
         		tr1.setAttribute("id", "employeeInfo");
         		var th1 = document.createElement("th")
-        		th1.innerHTML = "Request ID";
+        		th1.innerHTML = i + 1 + ". Request ID";
         		var th2 = document.createElement("th")
         		th2.innerHTML = "Employee ID";
         		var th3 = document.createElement("th")

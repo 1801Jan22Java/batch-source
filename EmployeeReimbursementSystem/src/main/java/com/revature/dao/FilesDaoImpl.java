@@ -14,6 +14,7 @@ public class FilesDaoImpl implements FilesDao {
 	
 	private static String filename = "connection.properties";
 
+	//Creates a File Object based off a database File
 	public int createFile(int fileID, String fname, int reqID, String fileURL) {
 		int fileVal = 0;
 		Connection con = null;
@@ -36,6 +37,7 @@ public class FilesDaoImpl implements FilesDao {
 		return fileVal;
 	}
 
+	//Retrieves a File by ID
 	public Files getFileByID(int fileID) {
 		PreparedStatement pstmt = null;
 		Files files = null;

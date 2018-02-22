@@ -14,6 +14,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	
 	private static String filename = "connection.properties";
 	
+	//Create an Employee Object
 	public int createEmployee(int empID, String empFName, String empLName, String empEmail, String empAcc,
 			String empPass, int isMan) {
 		
@@ -43,6 +44,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	
 	}
 
+	//Finds an Employee by ID
 	public Employee getEmpByID(int empID) {
 		PreparedStatement pstmt = null;
 		Employee employee = null;
@@ -73,6 +75,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		
 	}
 
+	//Modifies an Employee column based on the column name provided (e.g. password, lastname, etc.)
 	public Employee modifyEmployeeField(String empfield, String fieldVal, Employee empUser) {
 		Connection con = null;
 		try {
@@ -92,6 +95,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	
 	}
 
+	//Grabs and returns all Employees
 	public ArrayList<Employee> getAllEmployees() {
 		Connection con = null;
 		ArrayList<Employee> allEmps = new ArrayList<Employee>();
@@ -120,6 +124,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		return allEmps;
 	}
 
+	//Finds an Employee by Account Name
 	public Employee getEmpByAcc(String empAcc) {
 		PreparedStatement pstmt = null;
 		Employee employee = null;

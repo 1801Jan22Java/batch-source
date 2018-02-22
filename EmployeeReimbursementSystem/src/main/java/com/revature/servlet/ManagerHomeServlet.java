@@ -8,13 +8,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.revature.beans.Employee;
 import com.revature.beans.Request;
-import com.revature.dao.EmployeeDao;
-import com.revature.dao.EmployeeDaoImpl;
 import com.revature.dao.RequestDao;
 import com.revature.dao.RequestDaoImpl;
 
@@ -35,10 +31,11 @@ public class ManagerHomeServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
+    //Show's the manager incomplete requests
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter pw = response.getWriter();
 		RequestDao rd = new RequestDaoImpl();
-		HttpSession session = request.getSession(false);
+		//HttpSession session = request.getSession(false);
 		ArrayList<Request>	requests = rd.getIncompleteRequests();
 			
 			response.setContentType("application/json");

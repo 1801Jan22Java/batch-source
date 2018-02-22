@@ -1,5 +1,6 @@
 body{
 	background-color: #62cdf7;
+		margin-left: 25px;
 }
 
 h1{
@@ -56,4 +57,49 @@ h1{
 
 .success{
 	background-color: #bdf97c;
+}
+.noob{
+	background-color: #fcfa88;
+}
+
+.oldy{
+	background-color: #bdf97c;
+}
+
+#a{
+	background-color: #fcfa88;
+}
+
+#b{
+	background-color: #bdf97c;
+}
+
+#empID{
+	background-color: #bdf97c;
+}
+
+#empAccount{
+	background-color: #bdf97c;
+}
+
+#empPassword{
+	background-color: #bdf97c;
+}
+
+#empFirstName{
+	background-color: #bdf97c;
+}
+
+#empLastName{
+	background-color: #bdf97c;
+}
+
+#empEmail{
+	background-color: #bdf97c;
+}
+
+h1{
+	font-family: verdana,arial, sans-serif;
+	text-align: center;
+	text-shadow:-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }

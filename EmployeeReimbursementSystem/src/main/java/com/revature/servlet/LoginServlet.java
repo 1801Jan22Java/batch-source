@@ -1,7 +1,6 @@
 package com.revature.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -37,10 +36,11 @@ public class LoginServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
+	//Save the user's employee ID for the session
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		HttpSession session = request.getSession();
-		PrintWriter pw = response.getWriter();
+		//PrintWriter pw = response.getWriter();
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		EmployeeDao ed = new EmployeeDaoImpl();

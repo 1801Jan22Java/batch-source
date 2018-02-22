@@ -17,7 +17,8 @@ if (this.readyState == 4 && this.status == 200) {
 xhttp.open("GET", url, true);
 xhttp.send();
 }
-    
+   
+    //If a manager they can go into the manager features, otherwise they are stuck
     function manFunction(xhttp){
     	var jsonResponse = JSON.parse(xhttp.responseText);
     	console.log(jsonResponse);

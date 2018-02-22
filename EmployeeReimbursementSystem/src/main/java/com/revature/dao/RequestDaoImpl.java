@@ -15,6 +15,7 @@ public class RequestDaoImpl implements RequestDao{
 	
 	private static String filename = "connection.properties";
 
+	//Creates a Request Object
 	public int createRequest(int requestID, int empID, int typeID, int statusID, String description, double amount, LocalDate statusDate,
 				LocalDate submitDate, int manID) {
 		int reqVal = 0;
@@ -43,6 +44,7 @@ public class RequestDaoImpl implements RequestDao{
 
 	}
 
+	//Retrieves a Request by ID
 	public Request getReqByID(int reqID) {
 		PreparedStatement pstmt = null;
 		Request request = null;
@@ -74,6 +76,7 @@ public class RequestDaoImpl implements RequestDao{
 		return request;
 	}
 
+	//Changes the request status of a Request
 	public Request modifyReqStatus(int statID, Request req) {
 		Connection con = null;
 		try {
@@ -92,6 +95,7 @@ public class RequestDaoImpl implements RequestDao{
 		return req;
 	}
 
+	//Returns all Requests that are not yet processed 
 	public ArrayList<Request> getIncompleteRequests() {
 		Connection con = null;
 		ArrayList<Request> pendReqs = new ArrayList<Request>();
@@ -122,6 +126,7 @@ public class RequestDaoImpl implements RequestDao{
 		return pendReqs;
 	}
 
+	//Returns all Requests that are completed
 	public ArrayList<Request> getCompleteRequests() {
 		Connection con = null;
 		ArrayList<Request> finReqs = new ArrayList<Request>();
@@ -152,6 +157,7 @@ public class RequestDaoImpl implements RequestDao{
 		return finReqs;
 	}
 
+	//Retrieves all Requests made by a single Employee
 	public ArrayList<Request> getRequestsByEmployee(int empID) {
 		PreparedStatement pstmt = null;
 		ArrayList<Request> empReqs = new ArrayList<Request>();

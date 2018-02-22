@@ -2,8 +2,10 @@
  * 
  */
 
+//We populate right away!
 window.onload = getAjax("EmployeesServlet", empFunction);
 
+//Calls on the edit button click to repopulate the data
 document.getElementById("editBut").addEventListener("click",determineReq);
 empstatID = document.getElementById("empChange");
 statChange = "passwordchange";
@@ -22,6 +24,7 @@ xhttp.open("GET", url, true);
 xhttp.send();
 }
 
+    //Function for Ajax to populate our Employee Information for the Employee that logged in
 function empFunction(xhttp){
     jsonResponse = JSON.parse(xhttp.responseText);
     console.log(jsonResponse);
@@ -48,6 +51,7 @@ function secondAjax(url, myFunc){
 	xhttp.send();
 }
 
+//Our button click function
 function determineReq(){
 	statVal = document.getElementById("useredittext").value;
 	statChange = empstatID.value;
@@ -58,7 +62,7 @@ function determineReq(){
 }
 
 function decideFunction(xhttp){
-	console.log("wow");
+	//console.log("wow");
 	empFunction(xhttp);
     //jsonResponse = JSON.parse(xhttp.responseText);
     //console.log(jsonResponse);

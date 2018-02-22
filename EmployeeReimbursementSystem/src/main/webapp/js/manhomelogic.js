@@ -18,15 +18,20 @@ xhttp.send();
 function manFunction(xhttp){
     var jsonResponse = JSON.parse(xhttp.responseText);
     console.log(jsonResponse);
+    //First we check if there is a request that has not been processed
     if (jsonResponse.length>0){
+    	//If so we will check all results
     	for (var i = 0; i < jsonResponse.length; i++){
+    		//Then filter results until we get one that is not complete and show it
+    		//We alternatively could change Dao Implementation to do the filtering for us
+    		if (jsonResponse[i].statusID < 4){ 
     		var cont = document.getElementById("concon");
     		var tabl1 = document.getElementById("tabtab");
     		var tr1 = document.createElement("tr");
     		tr1.classList.add("warning", "boldtext");
     		tr1.setAttribute("id", "employeeInfo");
     		var th1 = document.createElement("th")
-    		th1.innerHTML = "Request ID";
+    		th1.innerHTML = i+1 +". Request ID";
     		var th2 = document.createElement("th")
     		th2.innerHTML = "Employee ID";
     		var th3 = document.createElement("th")
@@ -147,6 +152,8 @@ function manFunction(xhttp){
     		cont.appendChild(tabl1);
     		//document.body.appendChild(cont);
     		console.log("wootwoot");
+    		return;
+    		}
     	}
     }
 }

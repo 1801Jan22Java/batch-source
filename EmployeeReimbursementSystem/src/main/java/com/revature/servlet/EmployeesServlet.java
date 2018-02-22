@@ -2,23 +2,16 @@ package com.revature.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.beans.Employee;
-import com.revature.beans.Notes;
 import com.revature.dao.EmployeeDao;
 import com.revature.dao.EmployeeDaoImpl;
-import com.revature.dao.NotesDao;
-import com.revature.dao.NotesDaoImpl;
+
 
 /**
  * Servlet implementation class EmployeesServlet
@@ -37,6 +30,7 @@ public class EmployeesServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
+    //Grabs an employee by ID
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		

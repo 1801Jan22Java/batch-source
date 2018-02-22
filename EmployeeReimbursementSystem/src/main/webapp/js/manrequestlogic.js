@@ -16,6 +16,7 @@ xhttp.open("GET", url, true);
 xhttp.send();
 }
     
+    //Gathers all the request data and puts unfinished and finished requests in separate tables using similar logic to manhomelogic.js
     function manFunction(xhttp){
         var jsonResponse = JSON.parse(xhttp.responseText);
         console.log(jsonResponse);
@@ -33,7 +34,7 @@ xhttp.send();
         		tr1.classList.add("warning", "boldtext");
         		tr1.setAttribute("id", "employeeInfo");
         		var th1 = document.createElement("th")
-        		th1.innerHTML = "Request ID";
+        		th1.innerHTML = i + 1 + ". Request ID";
         		var th2 = document.createElement("th")
         		th2.innerHTML = "Employee ID";
         		var th3 = document.createElement("th")
@@ -162,6 +163,7 @@ xhttp.send();
     document.getElementById("pendReq").addEventListener("click",viewTables);
     document.getElementById("compReq").addEventListener("click",viewTables);
 
+  //Showing all requests, incomplete requests only, or complete requests only based on what the user decides to press
     function viewTables(){
     	var allReqs = document.getElementById("allReq");
     	var pendReqs = document.getElementById("pendReq");

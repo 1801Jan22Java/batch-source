@@ -2,7 +2,6 @@ package com.revature.servlet;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -18,9 +17,6 @@ import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
-import com.revature.beans.Employee;
-import com.revature.dao.EmployeeDao;
-import com.revature.dao.EmployeeDaoImpl;
 import com.revature.dao.RequestDao;
 import com.revature.dao.RequestDaoImpl;
 
@@ -49,24 +45,17 @@ public class SubmitServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
+	//Grabs a persons requests and stores in the database as well as store their file if added
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
-		PrintWriter pw = response.getWriter();
-		/*
-		String reimAmount = request.getParameter("amount");
-		String reimReason = request.getParameter("subReason");
-		String reimDesc = request.getParameter("dsecript");
-		String reimURL = request.getParameter("url");
-		System.out.println(reimAmount);
-		System.out.println(reimReason);
-		System.out.println(reimDesc);
-		System.out.println(reimURL);
-		*/
+		//PrintWriter pw = response.getWriter();
 		
 	    // upload settings
+		/*
 	    final int MEMORY_THRESHOLD   = 1024 * 1024 * 3;  // 3MB
 	    final int MAX_FILE_SIZE      = 1024 * 1024 * 40; // 40MB
 	    final int MAX_REQUEST_SIZE   = 1024 * 1024 * 50; // 50MB
+	    */
 		DiskFileItemFactory factory = new DiskFileItemFactory();
 		
 		// Configure a repository (to ensure a secure temp location is used)
@@ -78,6 +67,7 @@ public class SubmitServlet extends HttpServlet {
         // this path is relative to application's directory
         String uploadPath = getServletContext().getRealPath("")
                 + File.separator /*+ "upload"*/;
+      
 
         //System.out.println(uploadPath);
         

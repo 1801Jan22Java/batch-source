@@ -15,6 +15,7 @@ public class NotesDaoImpl implements NotesDao{
 
 	private static String filename = "connection.properties";
 
+	//Creates a Note Object
 	public int createNote(int noteID, int reqID, LocalDate noteDate, String noteMess, int notetakerID) {
 		int noteVal = 0;
 		Connection con = null;
@@ -37,6 +38,7 @@ public class NotesDaoImpl implements NotesDao{
 		return noteVal;
 	}
 
+	//Grabs a note by ID
 	public Notes getNoteByID(int noteID) {
 		PreparedStatement pstmt = null;
 		Notes notes = null;

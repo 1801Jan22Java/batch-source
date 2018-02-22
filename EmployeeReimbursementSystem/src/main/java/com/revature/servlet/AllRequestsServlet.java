@@ -8,7 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.beans.Request;
@@ -32,10 +32,11 @@ public class AllRequestsServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
+  //Grabs all Employees from database and sends them in JSON
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter pw = response.getWriter();
 		RequestDao rd = new RequestDaoImpl();
-		HttpSession session = request.getSession(false);		
+		//HttpSession session = request.getSession(false);		
 			ArrayList<Request> requests = rd.getCompleteRequests();
 			ArrayList<Request> incReqs = rd.getIncompleteRequests();
 			requests.addAll(incReqs);

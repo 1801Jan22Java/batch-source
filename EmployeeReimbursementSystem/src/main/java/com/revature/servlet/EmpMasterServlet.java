@@ -39,6 +39,7 @@ public class EmpMasterServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
+	//Used for grabbing the information of an individual employee and going to a new web page with that data
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
 		PrintWriter pw = response.getWriter();
@@ -46,7 +47,7 @@ public class EmpMasterServlet extends HttpServlet {
 		System.out.println("started");
 		if (employeeID != null)
 		{
-			System.out.println("somewhere");
+			//System.out.println("somewhere");
 			int eID = Integer.parseInt(employeeID);
 			EmployeeDao ed = new EmployeeDaoImpl();
 			Employee employee = ed.getEmpByID(eID);

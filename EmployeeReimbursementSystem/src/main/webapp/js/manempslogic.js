@@ -19,9 +19,7 @@ xhttp.send();
 function allEmpsFunction(xhttp){
     var jsonResponse = JSON.parse(xhttp.responseText);
   
-
-    console.log(jsonResponse);
-    console.log(jsonResponse[0].requestID)
+    //Grabbing all employees and putting them into a table
     if (jsonResponse.length>0){
     	for (var i = 0; i < jsonResponse.length; i++){
     		var cont = document.createElement("div");
@@ -32,7 +30,7 @@ function allEmpsFunction(xhttp){
     		tr1.classList.add("warning", "boldtext");
     		tr1.setAttribute("id", "employeeInfo");
     		var th1 = document.createElement("th")
-    		th1.innerHTML = "ID";
+    		th1.innerHTML = i+1+". ID";
     		var th2 = document.createElement("th")
     		th2.innerHTML = "Account";
     		var th3 = document.createElement("th")

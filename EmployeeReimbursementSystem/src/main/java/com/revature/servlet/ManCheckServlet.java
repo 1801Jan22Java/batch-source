@@ -13,8 +13,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.beans.Employee;
 import com.revature.dao.EmployeeDao;
 import com.revature.dao.EmployeeDaoImpl;
-import com.revature.dao.RequestDao;
-import com.revature.dao.RequestDaoImpl;
 
 /**
  * Servlet implementation class ManCheckServlet
@@ -33,6 +31,7 @@ public class ManCheckServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
+    //Grabs the user ID so we can check if they are a manager or not
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter pw = response.getWriter();
 		EmployeeDao ed = new EmployeeDaoImpl();
