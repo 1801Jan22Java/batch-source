@@ -29,8 +29,13 @@ function displayProfile(xhr) {
 
 	// Create 2 tables
 	var ptable = document.getElementById("pending");
+	var pnotes = "";
 	for (p in pending) {
-
+		if(pending[p].notes == undefined){
+			pnotes = "";
+		} else{
+			pnotes = pending[p].notes;
+		}
 		var txta = document.createTextNode(pending[p].amount);
 		var tda = document.createElement("td");
 		
@@ -40,7 +45,7 @@ function displayProfile(xhr) {
 		var txtc = document.createTextNode(pending[p].user_id);
 		var tdc = document.createElement("td");
 		
-		var txtd = document.createTextNode(pending[p].notes);
+		var txtd = document.createTextNode(pnotes);
 		var tdd = document.createElement("td");
 
 		var txte = document.createTextNode("Pending");

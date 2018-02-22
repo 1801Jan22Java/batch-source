@@ -60,9 +60,13 @@ function display(xhr,event) {
 		Resolved By
 		</th>
 	</tr>`;
-	
+	var rnotes = "";
 	for (r in reim) {
-		
+		if(reim[r].notes == undefined){
+			rnotes = "";
+		} else{
+			rnotes = reim[r].notes;
+		}
 		var status;
 		if (reim[r].reimburse_status_id == "2") {
 			status = "Rejected";
@@ -77,7 +81,7 @@ function display(xhr,event) {
 		var tdb = document.createElement("td");
 		var txtc = document.createTextNode(status);
 		var tdc = document.createElement("td");
-		var txtd = document.createTextNode(reim[r].notes);
+		var txtd = document.createTextNode(rnotes);
 		var tdd = document.createElement("td");
 		var txte = document.createTextNode(reim[r].resolved_by);
 		var tde = document.createElement("td");
@@ -93,6 +97,7 @@ function display(xhr,event) {
 		
 		// Give an onclick event to show images
 		tr.setAttribute("onclick", "showImage(event);");
+		tr.setAttribute("class", "pcursor");
 		
 		tr.appendChild(tda);
 		tr.appendChild(tdb);

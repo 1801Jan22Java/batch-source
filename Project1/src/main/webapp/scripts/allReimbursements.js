@@ -32,13 +32,18 @@ function displayProfile(xhr) {
 
 	// Create 2 tables
 	var ptable = document.getElementById("pending");
+	var pnotes = "";
 	for (p in pending) {
-
+		if(pending[p].notes == undefined){
+			pnotes = "";
+		} else{
+			pnotes = pending[p].notes;
+		}
 		var txta = document.createTextNode(pending[p].amount);
 		var tda = document.createElement("td");
 		var txtb = document.createTextNode(pending[p].reimburse_id);
 		var tdb = document.createElement("td");
-		var txtc = document.createTextNode(pending[p].notes);
+		var txtc = document.createTextNode(pnotes);
 		var tdc = document.createElement("td");
 		var txtd = document.createTextNode("Pending");
 		var tdd = document.createElement("td");
@@ -55,7 +60,13 @@ function displayProfile(xhr) {
 		ptable.appendChild(tr);
 	}
 	var rtable = document.getElementById("resolved");
+	var rnotes="";
 	for (r in resolved) {
+		if(resolved[r].notes == undefined){
+			rnotes = "";
+		} else{
+			rnotes = resolved[r].notes;
+		}
 		var status;
 		if (resolved[r].reimburse_status_id == 2) {
 			status = "Rejected";
@@ -67,7 +78,7 @@ function displayProfile(xhr) {
 		var tda = document.createElement("td");
 		var txtb = document.createTextNode(resolved[r].reimburse_id);
 		var tdb = document.createElement("td");
-		var txtc = document.createTextNode(resolved[r].notes);
+		var txtc = document.createTextNode(rnotes);
 		var tdc = document.createElement("td");
 		var txtd = document.createTextNode(status);
 		var tdd = document.createElement("td");
