@@ -28,7 +28,7 @@ public class ResolvedRequestDaoImpl implements ResolvedRequestDao {
 		RequestStatusDaoImpl rsdi = new RequestStatusDaoImpl();
 		
 		try (Connection con = ConnectionUtil.getConnectionFromFile()) {
-			String sql = "SELECT * FROM RESOLVED_REQUEST";
+			String sql = "SELECT * FROM RESOLVED_REQUEST ORDER BY EMPLOYEE_ID";
 			pstmt = con.prepareStatement(sql);
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {

@@ -23,7 +23,7 @@ public class RequestDaoImpl implements RequestDao {
 		RequestStatusDaoImpl rsdi = new RequestStatusDaoImpl();
 		
 		try (Connection con = ConnectionUtil.getConnectionFromFile()) {
-			String sql = "SELECT * FROM REQUEST WHERE REQUEST_STATUS_ID = 1";
+			String sql = "SELECT * FROM REQUEST WHERE REQUEST_STATUS_ID = 1 ORDER BY REQUEST_ID";
 			pstmt = con.prepareStatement(sql);
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
@@ -105,7 +105,7 @@ public class RequestDaoImpl implements RequestDao {
 		RequestStatusDaoImpl rsdi = new RequestStatusDaoImpl();
 		
 		try (Connection con = ConnectionUtil.getConnectionFromFile()) {
-			String sql = "SELECT * FROM REQUEST";
+			String sql = "SELECT * FROM REQUEST ORDER BY EMPLOYEE_ID";
 			pstmt = con.prepareStatement(sql);
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {

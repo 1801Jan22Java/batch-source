@@ -51,7 +51,7 @@ public class ManagerDaoImpl implements ManagerDao {
 		PreparedStatement pstmt = null;
 		Manager manager = null;
 		try (Connection con = ConnectionUtil.getConnectionFromFile()) {
-			String sql = "SELECT * FROM MANAGER WHERE EMPLOYEE_ID = ?";
+			String sql = "SELECT * FROM MANAGER WHERE MANAGER_ID = ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, managerId);
 			ResultSet rs = pstmt.executeQuery();

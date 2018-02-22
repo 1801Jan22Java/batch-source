@@ -10,9 +10,13 @@ function getAllResolvedRequests(xhr) {
 		var cell1 = row.insertCell(0);
 		var cell2 = row.insertCell(1);
 		var cell3 = row.insertCell(2);
-		cell1.innerHTML = "$"+res[i].requestAmount;	
-		cell2.innerHTML = res[i].requestComment;	
-		cell3.innerHTML = res[i].requestStatus.requestStatusName;	
+		var cell4 = row.insertCell(3);
+		var cell5 = row.insertCell(4);
+		cell1.innerHTML = res[i].employee.firstName + " " + res[i].employee.lastName;
+		cell2.innerHTML = "$"+res[i].requestAmount;	
+		cell3.innerHTML = res[i].requestComment;	
+		cell4.innerHTML = res[i].requestStatus.requestStatusName;	
+		cell5.innerHTML = res[i].manager.firstName + " " + res[i].manager.lastName;	
 	}
 };
 
