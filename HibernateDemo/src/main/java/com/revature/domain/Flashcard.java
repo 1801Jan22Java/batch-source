@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
+@NamedQueries({ @NamedQuery(name="findCardByCategory", query="from Flashcard where category = :categoryVar")})
+
 @Entity
 @Table(name="FLASHCARD")
 public class Flashcard  implements Serializable {

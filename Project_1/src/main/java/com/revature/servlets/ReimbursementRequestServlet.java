@@ -51,11 +51,13 @@ public class ReimbursementRequestServlet extends HttpServlet {
 		ReimbursementRequestDAO rrd = new ReimbursementRequestPLSQLImpl();
 		List<ReimbursementRequest> rrList;
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		//Seesion check
 		if (session != null && session.getAttribute("emplId") != null) {
 			String param = request.getParameter("load");
 			if (param != null) {
 				emplId = (int) session.getAttribute("emplId");
 				empl = d.getEmployeeById(emplId);
+				//If the user is a manger
 				if (empl.getTitle() == EmployeeTitle.MANAGER) {
 					rrList = rrd.getReimbursementRequests();
 				} else {
@@ -84,6 +86,7 @@ public class ReimbursementRequestServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+		//creates a reimbursement request from the dat provided in the request
 		HttpSession session = request.getSession();
 		ObjectMapper mapper = new ObjectMapper();
 		ReimbursementRequestDAO rrd = new ReimbursementRequestPLSQLImpl();
@@ -98,6 +101,7 @@ public class ReimbursementRequestServlet extends HttpServlet {
 	@Override
 	protected void doDelete(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
+		//deletes a reimbursement request
 		ObjectMapper mapper = new ObjectMapper();
 		ReimbursementRequestDAO rrd = new ReimbursementRequestPLSQLImpl();
 		JsonNode j = mapper.readTree(req.getInputStream());

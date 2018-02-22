@@ -23,63 +23,80 @@ import com.revature.dao.EmployeeDaoPLSQLImpl;
  */
 public class EmployeeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public EmployeeServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public EmployeeServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
 		int emplId;
+		// Need to see of the session is null or there is no one signed in
 		if (session != null && session.getAttribute("emplId") != null) {
 			String param = request.getParameter("load");
+			// Checking to see if this a data retrieval get call or a redirct
 			if (param != null) {
 				emplId = (int) session.getAttribute("emplId");
 				EmployeeDAO d = new EmployeeDaoPLSQLImpl();
-				Employee empl =  d.getEmployeeById(emplId);
+				Employee empl = d.getEmployeeById(emplId);
 				empl = empl.setPassword(null);
 				ObjectMapper map = new ObjectMapper();
 				String json;
+				// If the employee is a manager need to return a list of all the
+				// employees
 				if (empl.getTitle() == EmployeeTitle.MANAGER) {
 					List<Employee> empls = d.getEmployees();
 					for (int i = 0; i < empls.size(); i++) {
+						// Need to set the manage id to -1 to mark not to load
+						// him onto the list
 						if (empls.get(i).getId() == emplId) {
 							empls.set(i, empls.get(i).setId(-1));
 							break;
 						}
 					}
+					// Writes the list as a json string
 					ByteArrayOutputStream out = new ByteArrayOutputStream();
 					map.writeValue(out, empls);
 					json = new String(out.toByteArray());
-				}else {
+				} else {
+					// Writes the employee as a json string
 					json = map.writeValueAsString(empl);
 				}
+				// puts the employee(s) info into the body of the response
 				response.getWriter().write(json);
-			}else {
-				RequestDispatcher view = request.getRequestDispatcher("views/Employee.html");
+			} else {
+				RequestDispatcher view = request
+						.getRequestDispatcher("views/Employee.html");
 				view.forward(request, response);
 			}
 		} else {
 			response.sendRedirect("login");
 		}
-		
+
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		// Gets the employee information out of the request and makes a new
+		// employee
 		ObjectMapper mapper = new ObjectMapper();
 		JsonNode j = mapper.readTree(request.getInputStream());
-		Employee empl = new Employee(j.get("firstName").asText(), j.get("lastName").asText(), 
-				j.get("userName").asText(), j.get("password").asText(), EmployeeTitle.EMPLOYEE, 
+		Employee empl = new Employee(j.get("firstName").asText(),
+				j.get("lastName").asText(), j.get("userName").asText(),
+				j.get("password").asText(), EmployeeTitle.EMPLOYEE,
 				j.get("email").asText(), null);
 		EmployeeDAO d = new EmployeeDaoPLSQLImpl();
 		d.createEmployee(empl);
@@ -89,18 +106,21 @@ public class EmployeeServlet extends HttpServlet {
 	@Override
 	protected void doDelete(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
+		// Gets the id of the employee from the request and deletes the employee
 		ObjectMapper mapper = new ObjectMapper();
 		JsonNode j = mapper.readTree(req.getInputStream());
 		int id = j.get("id").asInt();
 		EmployeeDAO d = new EmployeeDaoPLSQLImpl();
 		Employee e = d.getEmployeeById(id);
 		d.deleteEmployee(e);
-		
+
 	}
 
 	@Override
 	protected void doPut(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
+		// Grabs the employee info from the request and then updates the
+		// employee based on the data
 		ObjectMapper mapper = new ObjectMapper();
 		JsonNode j = mapper.readTree(req.getInputStream());
 		String firstName = j.get("firstName").asText();

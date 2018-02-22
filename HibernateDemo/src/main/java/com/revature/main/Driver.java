@@ -15,13 +15,13 @@ public class Driver {
 
 		// init();
 
-		//FlashcardDao fd = new FlashcardDaoImpl();
+		// FlashcardDao fd = new FlashcardDaoImpl();
 
 		// saveAndPersist(fd);
 
 		// fd.getFlashcards();
-		
-		updateAndMerge();
+
+		// updateAndMerge();
 
 	}
 
@@ -34,9 +34,12 @@ public class Driver {
 		Category c2 = new Category("jokes");
 
 		// create some flashcards to save
-		Flashcard f1 = new Flashcard("What is Java?", "The coolest language.", c1);
+		Flashcard f1 = new Flashcard("What is Java?", "The coolest language.",
+				c1);
 		Flashcard f2 = new Flashcard("Where are the bears?", "Hibernating", c2);
-		Flashcard f3 = new Flashcard("What did the DBA tell his inebriated friend?", "You had one-to-many.", c2);
+		Flashcard f3 = new Flashcard(
+				"What did the DBA tell his inebriated friend?",
+				"You had one-to-many.", c2);
 
 		s.save(f1);
 		s.save(f2);
@@ -49,7 +52,8 @@ public class Driver {
 
 	static void saveAndPersist(FlashcardDAO fd) {
 		System.out.println(
-				fd.addFlashCard(new Flashcard("What version of Java do we use?", "Java 8", new Category(1, ""))));
+				fd.addFlashCard(new Flashcard("What version of Java do we use?",
+						"Java 8", new Category(1, ""))));
 	}
 
 	void getVsLoad(FlashcardDAO fd) {
@@ -68,35 +72,40 @@ public class Driver {
 	}
 
 	static void updateAndMerge() {
-		
-		Flashcard f = new Flashcard("Where you stand if you're cold?", "In the corner, it's 90 degrees.",
-				new Category(2, "")); // transient
-		
+
+		Flashcard f = new Flashcard("Where you stand if you're cold?",
+				"In the corner, it's 90 degrees.", new Category(2, "")); // transient
+
 		Session s1 = HibernateUtil.getSession();
 		Transaction tx1 = s1.beginTransaction();
 		int genId = (int) s1.save(f);
 		tx1.commit();
 		s1.close();
-		
-		//f is detached
+
+		// f is detached
 		Session s2 = HibernateUtil.getSession();
 		Transaction tx2 = s2.beginTransaction();
 		try {
-			
+
 			Flashcard f2 = (Flashcard) s2.get(Flashcard.class, genId);
-			//f2 is persistent and has same persistence identity (same id) as 
-			//detached object f
-			f.setAnswer("The corner, it's 90 degrees"); //f is still detached
-			//s2.update(f); 
-			//throws NonUniqueObjectException because update attempts to reattach f to s2 
-			
-			s2.merge(f); //this is fine 
-			
+			// f2 is persistent and has same persistence identity (same id) as
+			// detached object f
+			f.setAnswer("The corner, it's 90 degrees"); // f is still detached
+			// s2.update(f);
+			// throws NonUniqueObjectException because update attempts to
+			// reattach f to s2
+
+			s2.merge(f); // this is fine
+
 			tx2.commit();
-		} catch (Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 			tx2.rollback();
 		}
 		s2.close();
+	}
+
+	static void funWithNamedQueries() {
+
 	}
 }

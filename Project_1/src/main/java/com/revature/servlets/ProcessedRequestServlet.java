@@ -55,11 +55,14 @@ public class ProcessedRequestServlet extends HttpServlet {
 		ProcessedRequestDAO prd = new ProcessedRequestDAOPLSQLImpl();
 		List<ProcessedRequest> prs = new ArrayList<>();
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		//Session check
 		if (session != null && session.getAttribute("emplId") != null) {
 			String param = request.getParameter("load");
+			//If we are loading data
 			if (param != null) {
 				emplId = (int) session.getAttribute("emplId");
 				empl = d.getEmployeeById(emplId);
+				//Different behavior managers and employees
 				if (empl.getTitle() == EmployeeTitle.MANAGER) {
 					prs = prd.getProcessedRequests();
 				}else {
@@ -86,6 +89,7 @@ public class ProcessedRequestServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+		//Creates a Processed request
 		HttpSession session = request.getSession();
 		ObjectMapper mapper = new ObjectMapper();
 		ProcessedRequestDAO prd = new ProcessedRequestDAOPLSQLImpl();

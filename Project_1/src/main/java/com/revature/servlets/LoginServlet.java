@@ -37,7 +37,7 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		//Forward any get to the html file that contains the login page
 		RequestDispatcher view = request.getRequestDispatcher("views/Login.html");
 		view.forward(request, response);
 	}
@@ -51,28 +51,21 @@ public class LoginServlet extends HttpServlet {
 		String line = null;
 		ObjectMapper map = new ObjectMapper();
 		BufferedReader rdr = request.getReader();
+		//Parse the body of the post request
 		while ((line = rdr.readLine()) != null) {
 			b.append(line);
 		}
 		JsonNode j = map.readTree(b.toString());
 		
+		//Send the user name and password to the dao to sign in
 		Employee empl = ed.signIn(j.get("username").textValue(), j.get("password").textValue());
 		
+		//see if the employee successfully logged in
 		if (empl != null) {
 			HttpSession session = request.getSession(true);
 			session.setAttribute("emplId", empl.getId());
 			response.sendRedirect("employee");	
 		}
 	}
-
-	@Override
-	protected void doDelete(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
-		HttpSession session = req.getSession(false);
-		session.invalidate();
-		resp.sendRedirect("login");	
-	}
-
-	
 	
 }
