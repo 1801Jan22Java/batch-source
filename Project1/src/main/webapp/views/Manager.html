@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Manager Portal</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="styles/Project1.css">
+</head>
+
+<body class="bg-inverse text-white">
+    <nav class="navbar navbar-light bg-faded">
+        <a class="btn btn-warning" href="logout">logout</a>
+    </nav>
+    <div class="col-md-12 text-center">
+        <h1>
+            <strong>Manager Reim-Burst</strong>
+        </h1>
+    </div>
+    <ul class="nav nav-tabs" id="myTab2" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="approval-tab" data-toggle="tab" href="#approval" role="tab" aria-controls="approval" aria-selected="true">Approve/Deny</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="all-pending-tab" data-toggle="tab" href="#AllPending" role="tab" aria-controls="allpending" aria-selected="false">All Pending Reqs</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="all-resolved-tab" data-toggle="tab" href="#AllResolved" role="tab" aria-controls="allresolved" aria-selected="false">All Resolved Reqs</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="all-employees-tab" data-toggle="tab" href="#employees" role="tab" aria-controls="allemployees" aria-selected="false">All Employees</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="employee-view-tab" data-toggle="tab" href="#employeeview" role="tab" aria-controls="employeeview"
+                aria-selected="false">Employee View</a>
+        </li>
+    </ul>
+    <div class="tab-content" id="myTabContent2">
+        <div class="tab-pane fade show active" id="approval" role="tabpanel" aria-labelledby="approval-tab">
+            <div class="container">
+                <form class="px-4 py-3" action="approvedeny" method="post">
+                    <div class="form-group">
+                        <label for="requestId">Request ID: </label>
+                        <input class="form-control" name="requestId" placeholder="valid request ID">
+                        <label for="status">Approve/Deny</label>
+                        <input class="form-control" name="status" placeholder="1 to approve, 2 to deny">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit Judgement</button>
+                </form>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="allpending" role="tabpanel" aria-labelledby="all-pending-tab">
+            <div id="all-pending-requests">
+
+            </div>
+        </div>
+        <div class="tab-pane fade" id="allresolved" role="tabpanel" aria-labelledby="all-resolved-tab">
+            <div id="all-resolved-requests">
+
+            </div>
+        </div>
+        <div class="tab-pane fade" id="allemployees" role="tabpanel" aria-labelledby="all-employees-tab">
+            <div id="info-view-all">
+
+            </div>
+        </div>
+        <div class="tab-pane fade" id="employeeview" role="tabpanel" aria-labelledby="employee-view-tab">
+                <div class="container">
+                        <form class="px-4 py-3" action="allrequests" method="get">
+                            <div class="form-group">
+                                <label for="requestId">Employee ID: </label>
+                                <input class="form-control" name="empId" placeholder="valid Employee ID">
+                            </div>
+                            <button type="submit" class="btn btn-primary">View Requests</button>
+                        </form>
+                    </div>
+            <div id="all-emp-requests">
+
+            </div>
+        </div>
+    </div>
+
+</body>
+<script src="scripts/manager.js"></script>
+
+</html>

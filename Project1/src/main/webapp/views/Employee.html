@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Employee Portal</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="styles/Project1.css">
+</head>
+
+<body class="bg-inverse text-white">
+    <nav class="navbar navbar-light bg-faded">
+        <a class="btn btn-warning" href="logout">logout</a>
+    </nav>
+    <div class="col-md-12 text-center">
+        <h1>
+            <strong>Employee Reim-Burst</strong>
+        </h1>
+        <h4>
+            <strong>PLEASE NOTE: As of 2/12/18, due to server space issues we are requesting that all employees post receipt images
+                to Google Photos and only submit the link. We apologize for any inconvenience!</strong>
+        </h4>
+    </div>
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="submit-tab" data-toggle="tab" href="#submit" role="tab" aria-controls="submit" aria-selected="true">Submit Req</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="pending-tab" data-toggle="tab" href="#pending" role="tab" aria-controls="pending" aria-selected="false">Pending Reqs</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="resolved-tab" data-toggle="tab" href="#resolved" role="tab" aria-controls="resolved" aria-selected="false">Resolved Reqs</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="info-tab" data-toggle="tab" href="#info" role="tab" aria-controls="info" aria-selected="false">My Info</a>
+        </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="submit" role="tabpanel" aria-labelledby="submit-tab">
+            <div class="container">
+                <form class="px-4 py-3" action="rmbrequest" method="post">
+                    <div class="form-group">
+                        <label for="receiptURL">Receipt URL: </label>
+                        <input class="form-control" name="receiptURL" placeholder="e.g. your-receipt.jpg">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit request</button>
+                </form>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="pending" role="tabpanel" aria-labelledby="pending-tab">
+            <div id="pending-requests">
+
+            </div>
+        </div>
+        <div class="tab-pane fade" id="resolved" role="tabpanel" aria-labelledby="resolved-tab">
+            <div id="resolved-requests">
+
+            </div>
+        </div>
+        <div class="tab-pane fade" id="info" role="tabpanel" aria-labelledby="info-tab">
+            <div id="info-view">
+
+            </div>
+
+            <form class="px-4 py-3" action="updatefirstname" method="post">
+                <div class="form-group">
+                    <label for="newFirstname">Update Firstname: </label>
+                    <input class="form-control" name="newFirstname" placeholder="new first name">
+                </div>
+                <button type="submit" class="btn btn-primary">Update Firstname</button>
+            </form>
+
+            <form class="px-4 py-3" action="updatelastname" method="post">
+                    <div class="form-group">
+                        <label for="newLastname">Update Lastname: </label>
+                        <input class="form-control" name="newLastname" placeholder="new last name">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Update Lastname</button>
+                </form>
+
+            <form class="px-4 py-3" action="updateusername" method="post">
+                <div class="form-group">
+                    <label for="newUsername">Update Username: </label>
+                    <input class="form-control" name="newUsername" placeholder="new username">
+                </div>
+                <button type="submit" class="btn btn-primary">Update Username</button>
+            </form>
+
+            <form class="px-4 py-3" action="updatepassword" method="post">
+                    <div class="form-group">
+                        <label for="newPassword">Update Password: </label>
+                        <input class="form-control" name="newPassword" placeholder="new password">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Update Password</button>
+                </form>
+
+        </div>
+    </div>
+
+</body>
+<script src="scripts/employee.js"></script>
+
+</html>
