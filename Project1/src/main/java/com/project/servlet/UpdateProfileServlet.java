@@ -58,6 +58,7 @@ public class UpdateProfileServlet extends HttpServlet {
 				
 				response.sendRedirect("profile");
 			} else if(user.getPosition_id()==2) {
+				uu.updateUser(id, firstname, lastname, password);
 				response.sendRedirect("mprofile");
 			}
 		} else {

@@ -42,7 +42,6 @@ public class GetProfileServlet extends HttpServlet {
 			response.sendRedirect("login");
 		}
 		
-//		System.out.println(username);
 
 		response.setContentType("text/json");
 		PrintWriter pw = response.getWriter();
