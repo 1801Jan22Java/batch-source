@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="icon" href="../../../../favicon.ico">
+
+<title>Kaizen | Home</title>
+<!-- Bootstrap core CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.css" />
+<!-- Custom styles for this template -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body id="home-body">
+
+	<!-- the navbar -->
+	<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark" id="#page-top">
+		<a class="navbar-brand page-scroll scroll-to-top" href="#">Kaizen Inc.</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarCollapse" aria-controls="navbarCollapse"
+			aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarCollapse">
+			<ul class="navbar-nav mr-auto" id="home-nav">
+				<li class="nav-item active">
+					<a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
+				</li>
+				<li class="nav-item active">
+					<a class="nav-link" href="#your-r">My Requests</span></a>
+				</li>
+				<!--
+                <li class="nav-item">
+                    <a class="nav-link" href="#all-emps">Employees</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#all-emp-reimbs">All Requests</a>
+                </li>
+                -->
+			</ul>
+			<form class="form-inline mt-2 mt-md-0">
+				<!--
+                <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-info my-2 my-sm-0" id="btn-logout" type="submit">
+                    <i class="fa fa-search"></i>
+                </button>
+            	-->
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item"><a class="nav-link" href="logout"
+						id="logoutLink">Logout</a></li>
+				</ul>
+			</form>
+		</div>
+	</nav>
+	<!-- spacer to allow for correct display when clicking links. -->
+	<div id="spacer"></div>
+	<!-- The information of the currently signed in employee -->
+	<div id="profile-details">
+		<a href="#" class="edit-button" id="edit-profile-btn">Edit Profile</a>
+		<div class="profile-details">Profile Details</div>
+		<h1 id="profile-employee-text"></h1>
+		<label class="profile-email">Email: </label>
+		<p id="profile-email-text"></p>
+		<label class=" profile-manager ">Manager: </label>
+		<p id="profile-manager-text"></p>
+	</div>
+
+	<!-- Form for editing the information of the currently signed in user.
+		 hidden until clicked. -->
+	<div id="editForm" class="animated someForm">
+		<h1>Edit Profile</h1>
+		<form action="editProfile" id="edit-form" class="edit-form" method="post">
+			<input placeholder="Username" name="username" type="text" id="form-username" /> 
+				<input placeholder="Password" name="password" type="text" id="form-password" /> 
+				<input class="formBtn cancelBtn" type="button" value="Cancel" /> 
+				<input class="formBtn" type="submit" value="Save All" id="edit-submitBtn" />
+		</form>
+	</div>
+	
+	<!-- Section for the employeees reimbursement requests.
+		the form for creating reimbursements is hidden until the
+		corresponding button is clicked. -->
+	<div class="request-container">
+		<h2 id="imb-req-title">Reimbursement Requests</h2>
+		<div id="reimbursement-request" class="popup-button">Create New
+			Request</div>
+		<div id="reimbursementForm" class="animated someForm">
+			<h1>Reimbursement Request Form</h1>
+			<p>Please provide your work email, purpose for your request, reimbursement amount, and upload any proof of expense*</p>
+			<form action="reimbursement" id="request-form" method="post" enctype="multipart/form-data">
+				<input placeholder="Purpose" name="purpose" type="text" id="form-purpose" required /> 
+				<input placeholder="Amount" name="amount" type="number" step=.01 id="form-amount" required />
+				<textarea placeholder="Comments" name="notes"></textarea>
+				<input class="formBtn" id="upload-btn" name="uploads" type="file" required/> 
+				<input class="formBtn" type="reset" id="resetBtn" /> 
+				<input class="formBtn cancelBtn" type="button" value="Cancel" /> 
+				<input class="formBtn" type="submit" id="request-submitBtn" />
+			</form>
+		</div>
+	</div>
+	<!-- spacer to allow for correct display when clicking links. -->
+	<div id="your-r" class="spacing"></div>
+	<!-- Table displaying the reimbursements of the currently signed in employee -->
+	<div id="your-reimbursement-section" class="table-responsive-lg reimbursement-section">
+		<h4 class="table-header" id="your-table-header">Your Reimbursements</h4>
+		<table class="table table-hover" id="your-reimbursement-table">
+			<thead>
+				<tr>
+					<th scope="col">Reimbursement ID</th>
+					<th scope="col">Status</th>
+					<th scope="col">Purpose</th>
+					<th scope="col">Requester Comments</th>
+					<th scope="col">Total Amount</th>
+					<th scope="col">Receipt</th>
+					<th scope="col">Created Date</th>
+				</tr>
+			</thead>
+		</table>
+	</div>
+	<!-- spacer to allow for correct display when clicking links. -->
+	<div id="all-emps" class="spacing"></div>
+	<!-- Table displaying all the employees -->
+	<div id="manager-reimbursements-section" class="table-responsive-lg reimbursement-section">
+		<h4 class="table-header">Employees</h4>
+		<table class="table table-hover" id="employees-table">
+			<thead>
+				<tr>
+					<th scope="col">Employee ID</th>
+					<th scope="col">Name</th>
+					<th scope="col">Email</th>
+					<th scope="col">Manager ID</th>
+				</tr>
+			</thead>
+		</table>
+	</div>
+	<!-- spacer to allow for correct display when clicking links. -->
+	<div id="all-emp-reimbs" class="spacing"></div>
+	<!-- Table displaying all the employees' reimbursements -->
+	<div id="employees-reimbursements-section" class="table-responsive-lg reimbursement-section">
+		<h4 class="table-header">Employees' Reimbursements</h4>
+		<table class="table table-hover" id="employees-reimbursement-table">
+			<thead>
+				<tr>
+					<th scope="col">Reimbursement ID</th>
+					<th scope="col">Status</th>
+					<th scope="col">Purpose</th>
+					<th scope="col">Requester Notes</th>
+					<th scope="col">Total Amount</th>
+					<th scope="col">Receipt</th>
+					<th scope="col">Created Date</th>
+					<th scope="col">Resolved By</th>
+					<th scope="col">Manager Notes</th>
+				</tr>
+			</thead>
+		</table>
+	</div>
+	<!-- spacer to allow for correct display when clicking links. -->
+	<div id="one-emp-reimbs" class="spacing"></div>
+	<!-- If a manager wants to see an employee, they click on that employee's ID, which is located in the above table
+		 for approving/denying requests. hidden until the employee's id is clicked. -->
+	<div id="employee-reimbursements-section" class="table-responsive-lg reimbursement-section">
+		<h4 class="table-header" id="queriedEmployee"></h4>
+		<div id="edit-request-btn" class="popup-button">Approve/Deny Request</div>
+		<table class="table table-hover" id="employee-reimbursement-table">
+			<thead>
+				<tr>
+					<th scope="col">Reimbursement ID</th>
+					<th scope="col">Status</th>
+					<th scope="col">Purpose</th>
+					<th scope="col">Requester Notes</th>
+					<th scope="col">Total Amount</th>
+					<th scope="col">Receipt</th>
+					<th scope="col">Created Date</th>
+					<th scope="col">Resolved By</th>
+					<th scope="col">Manager Notes</th>
+				</tr>
+			</thead>
+		</table>
+	</div>
+	<!-- manager form for approving/denying requests. hidden until the button is clicked. -->
+	<div id="editRequestForm" class="animated someForm">
+		<h1>Edit Request Form</h1>
+		<form action="approveDeny" id="edit-request-form" method="post">
+			<input placeholder="Reimbursement Id" name="id" type="number" step=1 id="form-reimId" required />
+			<input placeholder="Enter Approved or Declined" name="status" id="form-status" required />
+			<textarea placeholder="Comments" name="notes" id="edit-request-textarea"></textarea>
+			<input class="formBtn" type="reset"/> 
+			<input class="formBtn cancelBtn" type="button" value="Cancel" /> 
+			<input class="formBtn" type="submit" id="editRequest-submitBtn" />
+		</form>
+	</div>
+	<div id="bottom-spacer"></div>
+	<footer class="loginFooter container-fluid">
+		<div>Copyright 2018-2019 &copy; Kaizen, Inc. All rights reserved.</div>
+		<a href="#">Privacy Statement</a> <a href="#">Security Statement</a> 
+		<a href="#">Terms of Use</a>
+	</footer>
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
+	<script>
+        window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')
+    </script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<script src="/EmployeeReimbursement/js/script.js"></script>
+</body>
+
+</html>
