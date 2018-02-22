@@ -1,15 +1,12 @@
 package com.revature.servlets;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
 
 import com.revature.beans.*;
 import com.revature.dao.*;
@@ -17,6 +14,7 @@ import com.revature.dao.*;
 //TODO: double check and make sure the post request should be here
 
 public class EmployeeViewInformationServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
 
 	// if a get request is called on this servlet, check the users credentials through the session
 	// if the user is not an employee with a valid username, then send the user back to the login page
@@ -32,7 +30,10 @@ public class EmployeeViewInformationServlet extends HttpServlet {
 
 	}
 
-	// if a post request is called, then make sure the user who is trying to access information is a valid employee
+	// if a post request is called, then make sure the user who is trying to access information is a valid employee. if
+	// the user is not a valid employee then send a redirect back to the login page. if the user is a valid employee, then 
+	// obtain the users information from the dao using the session attribute "id" which stores the user's employeeid. it then
+	// obtains the inforamtion from the dao and packages the information in JSON formating
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		HttpSession session = request.getSession(false);

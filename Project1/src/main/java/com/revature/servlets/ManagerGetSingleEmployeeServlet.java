@@ -2,7 +2,6 @@ package com.revature.servlets;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.function.Predicate;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -10,37 +9,32 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.revature.beans.Employee;
-import com.revature.beans.EmployeeInformation;
-import com.revature.beans.Reimbursement;
-import com.revature.dao.EmployeeDao;
-import com.revature.dao.EmployeeDaoSQL;
-import com.revature.dao.EmployeeInformationDao;
-import com.revature.dao.EmployeeInformationDaoSQL;
-import com.revature.dao.ReimbursementDao;
-import com.revature.dao.ReimbursementDaoSQL;
-import com.revature.dao.StatusDao;
-import com.revature.dao.StatusDaoSQL;
-
+import com.revature.beans.*;
+import com.revature.dao.*;
 /**
  * Servlet implementation class ManagerGetSingleEmployeeServlet
  */
 public class ManagerGetSingleEmployeeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
  
+	// if a get request is called make sure the user is a valid manager. if the user is not a valid manager, then redirect the
+	// manager to the manager login. if the user is a valid manager, forward the user to the requested html page
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
-		if (session != null && session.getAttribute("username") != null) {
+		if (session != null && session.getAttribute("username") != null && session.getAttribute("type") == "manager") {
 			request.getRequestDispatcher("views/ManagerGetSingleEmployee.html?" + request.getQueryString()).forward(request, response);
 		} else {
 			response.sendRedirect("managerlogin");
 		}	
 	}
 
+	// if a get request is called make sure the user is a valid manager. if the user is not a valid manager, then redirect the
+	// manager to the manager login. if the user is a valid manager, obtain information from the query string to find 
+	// information on the single employee from the daos. the information is the packaged in JSON format.
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
 		System.out.println("in post");
-		if (session != null && session.getAttribute("username") != null) {
+		if (session != null && session.getAttribute("username") != null && session.getAttribute("type") == "manager") {
 			
 			response.setContentType("application/json");
 			int id = Integer.parseInt(request.getQueryString().split("=")[1]);
@@ -64,9 +58,10 @@ public class ManagerGetSingleEmployeeServlet extends HttpServlet {
 			int i = 0;
 			for(Reimbursement r : listReimbursement) {
 				i += 1;
+				int status = r.getStatus();
 				JSONlist += "{\"remId\" : \"" + r.getReimbursementId() + "\"," ;
 				JSONlist +=  "\"manId\" : \"" + r.getManagerId() + "\"," ;
-				JSONlist += "\"status\" : \"" + sd.getStatusById(r.getStatus())  + "\"," ;
+				JSONlist += "\"status\" : \"" + sd.getStatusById(status)  + "\"," ;
 				JSONlist += "\"reimbursementVal\" : \"" + r.getReimbursementValue() + "\"}";
 				if (i < listReimbursement.size()) {
 					JSONlist += ",";

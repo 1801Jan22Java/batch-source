@@ -8,7 +8,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 
-import javax.sql.rowset.serial.SerialBlob;
 import com.revature.beans.Employee;
 import com.revature.util.ConnectionUtil;
 

@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.sql.*;
 import java.util.*;
 
-import com.revature.beans.Employee;
 import com.revature.beans.Manager;
 import com.revature.util.ConnectionUtil;
 

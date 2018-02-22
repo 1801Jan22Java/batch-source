@@ -13,10 +13,11 @@ import javax.servlet.http.HttpSession;
 public class ManagerGetPendingServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
- 
+	// if a get request is called make sure the user is a valid manager. if the user is not a valid manager, then redirect the
+	// manager to the manager login. if the user is a valid manager, forward the user to the requested html page
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
-		if( session != null && session.getAttribute("username") != null){
+		if( session != null && session.getAttribute("username") != null && session.getAttribute("type") == "manager"){
 			request.getRequestDispatcher("views/ManagerGetPending.html").forward(request, response);
 		} 
 		else {
@@ -24,6 +25,7 @@ public class ManagerGetPendingServlet extends HttpServlet {
 		}
 	}
 
+	// if a post is called then just respond with get behavior
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}

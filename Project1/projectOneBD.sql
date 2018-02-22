@@ -323,10 +323,22 @@ END;
 INSERT INTO STATUS VALUES(0,'PENDING');
 INSERT INTO STATUS VALUES(1,'APPROVED');
 INSERT INTO STATUS VALUES(2,'CANCELED');
+
+
 insert into employeeinfo values(0,'email','first','second',null);
 insert into employee values(0,'f','p',1000);
-select * from employee where (username = 'f') and (password = 'p');
-select * from employeeinfo where employee_info_id = 1000;
-select * from employeeinfo;
-select * from employee;
+insert into employeeinfo values(0,'email@email','first2','second2','other addr');
+insert into employee values(0,'f1','p',1001);
+insert into employeeinfo values(0,'email@comcast.net','last','first','i like cows street');
+insert into employee values(0,'f2','p',1002);
+insert into employeeinfo values(0,'email@email@email.com','first3','second4','my address');
+insert into employee values(0,'f3','p',1003);
+
+
+insert into managerinfo values(0,'man@email','man1','last','123 cool address');
+insert into manager values(0,'m','p',1000);
+insert into managerinfo values(0,'man2@email','man2','last3','456 almost as cool address');
+insert into manager values(0,'m1','p',1001);
+
+
 commit;

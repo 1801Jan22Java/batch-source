@@ -2,24 +2,35 @@
 <html>
 	<head>
 		<meta charset="ISO-8859-1">
-		<title>Manager Login</title>
-	</head>
-	<body>
-		<h3>Manager Login </h3>
-		<form action="managerlogin" method="post">
-			<fieldset>
-				<legend>username: </legend>
-				<input name="username" type="text">
-			</fieldset>
-			<fieldset>
-				<legend>password: </legend>
-				<input name="password" type="password">
-			</fieldset>
-			<br>
-			<a href="employeelogin">Go Employee Login Instead</a>
-			<br>
-			<br>
-			<input type="submit" value="Login">
-		</form>
-	</body>
+		<title>Employee Login</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="styles/loginStyles.css"/>
+</head>
+<body>
+    	
+    	<div class="container d-flex h-100">
+    	
+    		<div class="row align-self-center w-100">
+    		<div class="row align-self-center w-100"><p>"\n"</p></div>
+        		<div class="col-18 mx-auto">
+      			<form class="form-signin" action="managerlogin" method="post">
+      				<div class=jumbotron>
+
+						<div class="text-center">
+							<h3>Manager Login </h3>
+						</div>
+						<br>
+        					<input name="username" type="text" id="username" class="form-control" placeholder="Username" required autofocus>
+        					<input name="password" type="password" id="password" class="form-control" placeholder="Password" required>
+							<a href="employeelogin">Go Employee Login Instead</a>
+						<br>
+						<input type="submit" value="Log In" >
+					</div>   
+      			</form>
+            	
+        		</div>
+    		</div>
+		</div>
+	
+</body>
 </html>

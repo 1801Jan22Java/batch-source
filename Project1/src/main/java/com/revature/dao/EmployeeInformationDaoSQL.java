@@ -9,7 +9,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.revature.beans.Employee;
 import com.revature.beans.EmployeeInformation;
 import com.revature.util.ConnectionUtil;
 

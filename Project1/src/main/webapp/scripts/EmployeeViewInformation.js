@@ -10,6 +10,7 @@ function sendAjaxPost(url, func) {
 			func(this);
 		}
 	};
+	console.log(url);
 	xhr.open("POST", url, true);
 	xhr.send();
 };
@@ -37,6 +38,6 @@ function populateInformation(xhr) {
 }
 
 window.onload = function() {
-	
-	sendAjaxPost("http://localhost:8084/Project1/employeeviewinformation", populateInformation);
+	console.log("preston sucks");
+	sendAjaxPost("http://localhost:8084/Project1/employeeviewinfo", populateInformation);
 }

@@ -1,11 +1,9 @@
 package com.revature.servlets;
 
 import java.io.ByteArrayOutputStream;
-import java.io.FileInputStream;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.ServletInputStream;
-import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -49,15 +47,15 @@ public class SubmitReimbursementServlet extends HttpServlet {
 			// ensure the inputstream even has information to load
 			if (in.available() > 0) {
 				int c = 0;
-				int count = 0;
 				while((c=in.read()) != -1) {
 					bao.write(c);
-					count += 1;
 				}
 				// convert the ByteArrayOutputStream into a byte arr which is used to convert to a blob that is stored in the DB
 				byte [] byteArr = bao.toByteArray();
 				rd.submitReimbursement((int)session.getAttribute("id"), reimbursementValue,byteArr);
+				
 			}
+			response.sendRedirect("submitreimbursement");
 		}
 		else {
 			response.sendRedirect("employeelogin");

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
  * Servlet implementation class EmployeeLogoutServlet
  */
 public class EmployeeLogoutServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
 
 	// log the user out of the system by invalidating the session that carried his/her data
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

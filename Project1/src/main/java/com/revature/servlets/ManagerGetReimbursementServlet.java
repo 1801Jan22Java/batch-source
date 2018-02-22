@@ -19,9 +19,13 @@ import com.revature.dao.*;
 public class ManagerGetReimbursementServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	// if a get request is called, make sure the user is a valid manager. if the user is not a valid manager then redirect the
+	// user to the manager login. if the user is a valid manager, then obtain the information pertaining to the reimbursement
+	// using the query string from the URL. depending on the status, a predicate (lambda function) is created to either check
+	// for status codes above zero or equal to zero. the information is then gathered from the daos and packaged in JSON format
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
-		if (session != null && session.getAttribute("username") != null) {
+		if (session != null && session.getAttribute("username") != null && session.getAttribute("type") == "manager") {
 			ReimbursementDao rd = new ReimbursementDaoSQL();
 			EmployeeDao ed = new EmployeeDaoSQL();
 			StatusDao sd = new StatusDaoSQL();
@@ -58,7 +62,6 @@ public class ManagerGetReimbursementServlet extends HttpServlet {
 				}
 			}
 			JSONlist += "]";
-			System.out.println(JSONlist);
 			response.getWriter().write(JSONlist);
 
 		}
@@ -67,6 +70,7 @@ public class ManagerGetReimbursementServlet extends HttpServlet {
 		}
 	}
 
+	// if a post is called, call the get method to respond with get behavior.
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}

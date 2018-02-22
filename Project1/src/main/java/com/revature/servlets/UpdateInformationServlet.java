@@ -43,11 +43,9 @@ public class UpdateInformationServlet extends HttpServlet {
 			EmployeeInformation employeeInformation = ed.getEmployeeInformationByID((int)session.getAttribute("id"));
 			if (employeeInformation != null) {
 				ed.updateInformation(employeeInformation.getEmployeeInformationId(), email, fname, lname, addrs);
-				request.getRequestDispatcher("employeehomepage").forward(request,response);
-			}
-			else {
 				response.sendRedirect("updateinfo");
 			}
+
 		}
 		else {
 			response.sendRedirect("employeelogin");

@@ -10,10 +10,7 @@ function sendAjaxPost(url) {
 
 	xhr.onreadystatechange = function() {
 	    if(xhr.readyState == 4 && xhr.status == 200) {
-	    	alert("Reimbursement successfully submitted");
-	    }
-	    else if (xhr.status != 200){
-	    	alert("Something went wrong, please try again");
+	    	console.log("Reimbursement successfully submitted");
 	    }
 	    location.reload(true);
 	}

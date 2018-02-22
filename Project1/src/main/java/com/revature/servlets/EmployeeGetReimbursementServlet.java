@@ -26,7 +26,11 @@ import com.revature.dao.StatusDaoSQL;
 public class EmployeeGetReimbursementServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	// if a get request is called, then send back information regarding the type of reimburement queried
+	// if a get request is called check if the user is a valid employee. if the user is not a valid employee, redirect
+	// the user back  to the employee login page. if the user is a valid employee, return reimbursement informaiton 
+	// from the dao based upon the parameter passed in the queryString stored in the URL. based on what is passed,
+	// a predicate (lambda function) is used to decide which values to check for (equivalent to zero or greater than zero)
+	// and returns the information in JSON format
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		HttpSession session = request.getSession(false);
