@@ -38,16 +38,20 @@ function displayProfile(xhr) {
 		var tda = document.createElement("td");
 		var txtb = document.createTextNode(pending[p].reimburse_id);
 		var tdb = document.createElement("td");
-		var txtc = document.createTextNode("Pending");
+		var txtc = document.createTextNode(pending[p].notes);
 		var tdc = document.createElement("td");
+		var txtd = document.createTextNode("Pending");
+		var tdd = document.createElement("td");
 
 		tda.appendChild(txta);
 		tdb.appendChild(txtb);
 		tdc.appendChild(txtc);
+		tdd.appendChild(txtd);
 		var tr = document.createElement("tr");
 		tr.appendChild(tda);
 		tr.appendChild(tdb);
 		tr.appendChild(tdc);
+		tr.appendChild(tdd);
 		ptable.appendChild(tr);
 	}
 	var rtable = document.getElementById("resolved");
@@ -63,16 +67,20 @@ function displayProfile(xhr) {
 		var tda = document.createElement("td");
 		var txtb = document.createTextNode(resolved[r].reimburse_id);
 		var tdb = document.createElement("td");
-		var txtc = document.createTextNode(status);
+		var txtc = document.createTextNode(resolved[r].notes);
 		var tdc = document.createElement("td");
+		var txtd = document.createTextNode(status);
+		var tdd = document.createElement("td");
 
 		tda.appendChild(txta);
 		tdb.appendChild(txtb);
 		tdc.appendChild(txtc);
+		tdd.appendChild(txtd);
 		var tr = document.createElement("tr");
 		tr.appendChild(tda);
 		tr.appendChild(tdb);
 		tr.appendChild(tdc);
+		tr.appendChild(tdd);
 		rtable.appendChild(tr);
 	}
 
