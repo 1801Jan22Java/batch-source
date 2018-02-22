@@ -1,18 +1,19 @@
 /**
  * 
  */
-function getEmployeeInfo(xhr) {
+function getThisEmployeesRequests(xhr) {
 	var res = JSON.parse(xhr.response);
-	var table = document.getElementById("myTable");
-
-	table.rows[1].cells[1].innerHTML = res.email;
-	table.rows[2].cells[1].innerHTML = res.firstName;
-	table.rows[3].cells[1].innerHTML = res.lastName;
-	table.rows[4].cells[1].innerHTML = res.address;
-	table.rows[5].cells[1].innerHTML = res.city;
-	table.rows[6].cells[1].innerHTML = res.state;
-	table.rows[7].cells[1].innerHTML = res.phoneNumber;
 	
+	var table = document.getElementById("myTable");
+	for (var i = 0; i < res.length; i++) {
+		var row = table.insertRow(i + 1);
+		var cell1 = row.insertCell(0);
+		var cell2 = row.insertCell(1);
+		var cell3 = row.insertCell(2);
+		cell1.innerHTML = "$"+res[i].requestAmount;	
+		cell2.innerHTML = res[i].requestComment;	
+		cell3.innerHTML = res[i].requestStatus.requestStatusName;	
+	}
 };
 
 
@@ -33,5 +34,5 @@ function sendAjaxGet(url, func) {
 };
 
 window.onload = function() {
-	sendAjaxGet('getemployeeinfo', getEmployeeInfo);
+	sendAjaxGet('getthisemployeesrequests', getThisEmployeesRequests);
 };

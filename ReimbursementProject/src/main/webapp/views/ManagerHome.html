@@ -3,31 +3,37 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>ManagerHome</title>
-	<link rel="stylesheet" href="styles/customStyles.css">
-	<link rel="stylesheet"
-		href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="styles/customStyles.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 </head>
 <body>
 
 	<div>
 		<h2>Welcome to the eCorp Employee Reimbursement Application</h2>
 	</div>
+	<form action="logout" method="post">
+		<input type="submit" name="logoutbutton" value="Logout">
+	</form>
 
 	<form class="box" action="reviewpendingnav" method="post">
-        <input type="submit" name = "reviewpending" value="View and Resolve Pending Reimbursement Requests" >
-    </form>
-     
+		<input type="submit" name="reviewpending"
+			value="View and Resolve Pending Reimbursement Requests">
+	</form>
+
 	<form class="box" action="reviewresolvednav" method="post">
-        <input type="submit" name = "reviewresolved" value="View Resolved Reimbursement Requests" >
-    </form>
-    
-    <form class="box" action="viewemployeesnav" method="post">
-        <input type="submit" name = "reviewemployees" value="View Employees" >
-    </form> 
-    
-    <form class="box" action="viewrequestsbyemplnav" method="post">
-        <input type="submit" name = "reviewemployee" value="View Reimbursement Requests By Employee" >
-    </form>        
+		<input type="submit" name="reviewresolved"
+			value="View Resolved Reimbursement Requests">
+	</form>
+
+	<form class="box" action="viewemployeesnav" method="post">
+		<input type="submit" name="reviewemployees" value="View Employees">
+	</form>
+
+	<form class="box" action="viewrequestsbyemplnav" method="post">
+		<input type="submit" name="reviewemployee"
+			value="View Reimbursement Requests By Employee">
+	</form>
 
 </body>
 </html>

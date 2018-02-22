@@ -3,17 +3,27 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>ManagerViewRequestsByEmpl</title>
+<link rel="stylesheet" href="styles/customStyles.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 </head>
 <body>
-	<form class="box" action="selectemployee" method="post">
-		<p>Update Information:</p>
-		<select name="updateselection" id="myselect">
-			<option value="address">Street Address</option>
-			<option value="city">City</option>
-			<option value="state">State</option>
-			<option value="phonenumber">Phone Number</option>
-		</select> <input name="updatevalue" type="text"> <input type="submit"
-			value="Update">
+
+	<div>
+		<br> <a href="managerhome">Home</a> <br> <br> <br>
+	</div>
+
+	<form class="box" action="selectemployeenav" method="post">
+		<p>Select Employee:</p>
+		<select name="employeeselection" id="myselect">
+			<option value="61">Miss Valencia</option>
+			<option value="62">Bob Jones</option>
+			<option value="63">Tim Jefferson</option>
+			<option value="64">Joe Sanders</option>
+			<option value="65">Jim Peters</option>
+			<option value="66">Jessica Peterson</option>
+		</select> <input type="submit" value="See Reimbursement Requests">
 	</form>
+
 </body>
 </html>
