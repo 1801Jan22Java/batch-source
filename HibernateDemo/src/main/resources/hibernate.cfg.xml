@@ -13,7 +13,7 @@
 		<!-- Don't turn on create mode if you're worried about dropping existing tables -->
 		<!-- Create mode takes tables you mention, drops them and recreates them -->
 		<!-- Choose whether to create a DB or update existing DB -->
-		<property name="hibernate.hbm2ddl.auto">create</property>
+		<property name="hibernate.hbm2ddl.auto">update</property>
 		<!-- Map our domain object classes  -->
 		<mapping class="com.revature.domain.Flashcard"/>
 		<mapping class="com.revature.domain.Category"/>

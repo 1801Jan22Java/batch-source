@@ -25,8 +25,11 @@ public class FlashcardDaoImpl implements FlashcardDao{
 
 	@Override
 	public Flashcard getFlashcardById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		Session s = HibernateUtil.getSession();
+		Flashcard f = (Flashcard) s.get(Flashcard.class, id);
+		
+		s.close();
+		return f;
 	}
 
 	@Override
@@ -39,6 +42,8 @@ public class FlashcardDaoImpl implements FlashcardDao{
 		//We'll be using our save() method
 		//save() returns the generated ID
 		int result = (int)s.save(f);
+		
+		s.persist(f);
 		
 		tx.commit();
 		s.close();

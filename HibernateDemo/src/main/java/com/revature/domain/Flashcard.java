@@ -42,7 +42,7 @@ public class Flashcard implements Serializable{
 	@Column(name="ANSWER")
 	private String answer;
 	
-	@ManyToOne (fetch=FetchType.EAGER /*, cascade=CascadeType.ALL*/)
+	@ManyToOne (fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="CATEGORY_ID")
 	private Category category;
 	
