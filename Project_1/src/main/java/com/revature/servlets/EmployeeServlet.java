@@ -36,9 +36,8 @@ public class EmployeeServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
+		HttpSession session = request.getSession(false);
 		int emplId;
-		
 		if (session != null && session.getAttribute("emplId") != null) {
 			String param = request.getParameter("load");
 			if (param != null) {
@@ -96,6 +95,7 @@ public class EmployeeServlet extends HttpServlet {
 		EmployeeDAO d = new EmployeeDaoPLSQLImpl();
 		Employee e = d.getEmployeeById(id);
 		d.deleteEmployee(e);
+		
 	}
 
 	@Override
@@ -116,7 +116,6 @@ public class EmployeeServlet extends HttpServlet {
 			e = e.setPassword(password);
 		}
 		d.updateEmployee(e);
-	
 	}
 
 }

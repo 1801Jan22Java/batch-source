@@ -109,6 +109,43 @@ public class ProcessedRequestDAOPLSQLImpl implements ProcessedRequestDAO {
 
 		return prs;
 	}
+	
+	@Override
+	public List<ProcessedRequest> getProcessedRequests(int emplId) {
+		PreparedStatement stmt = null;
+		List<ProcessedRequest> prs = new ArrayList<>();
+
+		try (Connection con = ConnectionUtil.getConnectionFromFile()) {
+			String sql = "SELECT * FROM PROCESSED_REQUESTS WHERE REQ_ID IN (SELECT REQ_ID FROM REIMBURSEMENT_REQUEST WHERE EMPL_ID = ?)";
+			stmt = con.prepareStatement(sql);
+			stmt.setInt(1, emplId);
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				int id = rs.getInt("PR_ID");
+				int reqId = rs.getInt("REQ_ID");
+				int mId = rs.getInt("MANAGER_ID");
+				Date d = rs.getDate("PROCESSED_ON");
+				String status = rs.getString("STATUS");
+				RequestStatus s;
+				if (status.equals("APPROVED")) {
+					s = RequestStatus.APPROVED;
+				} else {
+					s = RequestStatus.DENIED;
+				}
+				prs.add(new ProcessedRequest(id, reqId, s, mId,
+						d.toLocalDate()));
+			}
+			con.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return prs;
+	}
 
 	@Override
 	public ProcessedRequest updateProcessedRequest(ProcessedRequest pr) {

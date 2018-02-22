@@ -61,11 +61,18 @@ public class LoginServlet extends HttpServlet {
 		if (empl != null) {
 			HttpSession session = request.getSession(true);
 			session.setAttribute("emplId", empl.getId());
-			response.sendRedirect("employee");
-			
+			response.sendRedirect("employee");	
 		}
-		
-		
 	}
 
+	@Override
+	protected void doDelete(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		HttpSession session = req.getSession(false);
+		session.invalidate();
+		resp.sendRedirect("login");	
+	}
+
+	
+	
 }

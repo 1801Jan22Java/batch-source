@@ -14,4 +14,6 @@ public interface ProcessedRequestDAO {
 	public ProcessedRequest updateProcessedRequest(ProcessedRequest pr);
 
 	public void deleteProcessedRequest(ProcessedRequest pr);
+
+	List<ProcessedRequest> getProcessedRequests(int emplId);
 }

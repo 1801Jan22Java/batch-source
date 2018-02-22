@@ -53,6 +53,70 @@
 				</tbody>
 			</table>
 		</div>
+
+	</div>
+
+	<div>
+		<h3 class="centered">Request Creation</h3>
+		<div>
+			<div class="container">
+				<div class="row">
+					<div class="col-md-offset-5 col-md-3">
+						<div class="form-login">
+							<input type="text" id="amount"
+								class="form-control input-sm chat-input" placeholder="Amount" />
+							<input type="text" id="description"
+								class="form-control input-sm chat-input"
+								placeholder="Description" />
+							<!-- <input type="image"
+								id="receipt" class="form-control input-sm chat-input"
+								placeholder="Image" /> -->
+
+						</div>
+					</div>
+				</div>
+				<button class="btn-primary" id="createRequest">Create Request</button>
+			</div>
+		</div>
+	</div>
+	<br>
+	<div>
+		<div>
+			<div class="container">
+				<div class="row">
+					<div class="col-md-offset-5 col-md-3">
+						<div class="form-login">
+							<input type="text" id="deleteId"
+								class="form-control input-sm chat-input"
+								placeholder="Request Id" />
+						</div>
+					</div>
+				</div>
+				<button class="btn-primary" id="deleteRequest">Delete Request</button>
+			</div>
+
+		</div>
+	</div>
+	<div id="procRequest">
+		<div>
+			<h3 class="centered">Request Fullfillment</h3>
+			<div class="container">
+				<div class="row">
+					<div class="col-md-offset-5 col-md-3">
+						<div class="form-login">
+							<input type="text" id="procReqId"
+								class="form-control input-sm chat-input"
+								placeholder="Request Id" /> 
+							<select id="statusSelect">
+								<option value="APPROVED">APPROVED</option>
+								<option value="DENIED">DENIED</option>
+							</select>
+						</div>
+					</div>
+				</div>
+				<button class="btn-primary" id="processRequest">Process Request</button>
+			</div>
+		</div>
 	</div>
 </body>
 <script src="scripts/pendingRequests.js"></script>

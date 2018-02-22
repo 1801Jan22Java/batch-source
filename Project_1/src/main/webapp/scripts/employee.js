@@ -106,6 +106,11 @@ function createUser() {
 	}
 };
 
+function logout() {
+	sendAjaxGet("http://localhost:8084/Project_1/logout", function(){
+	});
+}
+
 function toPendReq() {
 	sendAjaxGet("http://localhost:8084/Project_1/pendingRequest", function(resp){
 		if (resp.responseURL) {
@@ -182,5 +187,6 @@ window.onload = function(){
 	document.getElementById("createUser").addEventListener("click", createUser);
 	document.getElementById("updateUser").addEventListener("click", updateUser);
 	document.getElementById("deleteUser").addEventListener("click", deleteUser);
+	document.getElementById("logOut").addEventListener("click", logout);
 	
 }

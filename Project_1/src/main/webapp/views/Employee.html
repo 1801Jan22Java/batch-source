@@ -33,6 +33,9 @@
 						Requests</a></li>
 				<li class="nav-item"><a class="nav-link" href="" id="proReq">Processed
 						Requests</a></li>
+				
+				<li class="nav-item"><a class="nav-link" href="" id="logOut">Log Out</a></li>
+				
 			</ul>
 		</div>
 	</nav>
@@ -60,11 +63,12 @@
 								placeholder="Last Name" /> 
 							<input type="text" id="updatePassword"
 								class="form-control input-sm chat-input" placeholder="password" />
+								
 							
 						</div>
 					</div>
 				</div>
-				<button id="updateUser">Update Info</button>
+				<button class="btn-primary" id="updateUser">Update Info</button>
 			</div>
 		
 		</div>
@@ -91,9 +95,11 @@
 						<div class="form-login">
 							<input type="text" id="emplFirstName"
 								class="form-control input-sm chat-input"
-								placeholder="First Name" /> <input type="text"
+								placeholder="First Name" />
+						 	<input type="text"
 								id="emplLastName" class="form-control input-sm chat-input"
-								placeholder="Last Name" /> <input type="text" id="emplUsername"
+								placeholder="Last Name" /> 
+							<input type="text" id="emplUsername"
 								class="form-control input-sm chat-input" placeholder="username" />
 							<input type="text" id="emplPassword"
 								class="form-control input-sm chat-input" placeholder="password" />
@@ -101,11 +107,13 @@
 								class="form-control input-sm chat-input" placeholder="email" />
 						</div>
 					</div>
+					
 				</div>
+				<span id="formReq"></span><br>
+				<button class="btn-primary" id="createUser">Create Employee</button>
 			</div>
-			<span id="formReq"></span><br>
-			<button id="createUser">Create Employee</button>
 		</div>
+		<br>
 		<div>
 			<div class="container">
 				<div class="row">
@@ -117,8 +125,8 @@
 						</div>
 					</div>
 				</div>
+				<button class="btn-primary" id="deleteUser">Delete Employee</button>
 			</div>
-			<button id="deleteUser">Delete Employee</button>
 		</div>
 	</div>
 </body>
