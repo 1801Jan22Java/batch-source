@@ -4,49 +4,42 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
-
 @Entity
 @Table(name="FLASHCARD")
-public class Flashcard implements Serializable {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -7740007669339530100L;
+public class Flashcard  implements Serializable {
 	
-	
-	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="flashcardSequence")
-	@SequenceGenerator(allocationSize=1, name="flashcardSequence", sequenceName="SQ_FLASHCARD_PK")
-	@Column(name="FLASH_CARD_ID")
-	private int id;
-	
-	@Column(name="QUESTION")
-	private String question;
-	
-	@Column(name="ANSWER")
-	private String answer;
-	
-	@ManyToOne(fetch=FetchType.EAGER,  cascade=CascadeType.ALL)
-	@JoinColumn(name="CATEGORY_ID")
-	private Category category;
-	
-	
-	public Flashcard() {
-		super();
-	}
-	public Flashcard(String question, String answer, Category category) {
-		super();
+	public Flashcard(int id, String question, String answer) {
+		this();
+		this.id = id;
 		this.question = question;
 		this.answer = answer;
 	}
-	public Flashcard(int id, String question, String answer, Category category) {
-		super();
-		this.id = id;
+	
+	public Flashcard(String question, String answer, Category category) {
+		this();
 		this.question = question;
 		this.answer = answer;
 		this.category = category;
 	}
+	
+	public Flashcard(){
+		super();
+	}
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="flashcardSequence")
+	@SequenceGenerator(allocationSize=1,name="flashcardSequence",sequenceName="SQ_FLASHCARD_PK")
+	@Column(name="FLASHCARD_ID")
+	private int id;
+	@Column(name="QUESTION")
+	private String question;
+	@Column(name="ANSWER")
+	private String answer;
+	
+	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	@JoinColumn(name="CATEGORY_ID")
+	private Category category;
+	
 	public int getId() {
 		return id;
 	}
@@ -65,21 +58,10 @@ public class Flashcard implements Serializable {
 	public void setAnswer(String answer) {
 		this.answer = answer;
 	}
-	
-	public Category getCategory() {
-		return category;
-	}
-	public void setCategory(Category category) {
-		this.category = category;
-	}
+
 	@Override
 	public String toString() {
-		return "Flashcard [id=" + id + ", question=" + question + ", answer="
-				+ answer + ", category=" + category + "]";
+		return "Flashcard [id=" + id + ", question=" + question + ", answer=" + answer + ", category=" + category + "]";
 	}
 	
-	
-	
-	
-
 }

@@ -2,20 +2,17 @@ package com.revature.domain;
 
 import java.io.Serializable;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 @Entity
-@Table
-public class Category implements Serializable{
-	
-	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="flashcardSequence")
-	@SequenceGenerator(allocationSize=1, name="categorySequence", sequenceName="SQ_CATEGORY_PK")
-	@Column(name="CATEGORY_ID")
-	private int id;
-	
-	@Column(name="CATEGORY_NAME")
-	private String name;
+@Table(name = "CATEGORY")
+public class Category implements Serializable {
 
 	public Category(int id, String name) {
 		super();
@@ -31,6 +28,14 @@ public class Category implements Serializable{
 	public Category() {
 		super();
 	}
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "categorySequence")
+	@SequenceGenerator(allocationSize = 1, name = "categorySequence", sequenceName = "SQ_CATEGORY_PK")
+	@Column(name = "CATEGORY_ID")
+	private int id;
+	@Column(name = "CATEGORY_NAME")
+	private String name;
 
 	public int getId() {
 		return id;
@@ -52,8 +57,5 @@ public class Category implements Serializable{
 	public String toString() {
 		return "Category [id=" + id + ", name=" + name + "]";
 	}
-	
-	
-	
 
 }
