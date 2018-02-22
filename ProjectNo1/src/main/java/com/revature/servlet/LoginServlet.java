@@ -40,11 +40,11 @@ public class LoginServlet extends HttpServlet {
 		HttpSession session = req.getSession();
 		
 		ArrayList<Employee> employees = edi.getAllEmployees();
-		
+		/*
 		for(Employee e: employees) {
 			System.out.println(e.toString());
 		}
-		
+		*/
 		for(Employee e: employees) {
 			if(e.getEmail().equals(username)) {
 				if(e.getPassword().equals(password)) {
@@ -62,7 +62,7 @@ public class LoginServlet extends HttpServlet {
 				}
 				else {
 					session.setAttribute("problem", "invalid credentials");
-					resp.sendRedirect("./login.html");
+					req.getRequestDispatcher("views/login.html").forward(req, resp);
 				}
 			}
 		}

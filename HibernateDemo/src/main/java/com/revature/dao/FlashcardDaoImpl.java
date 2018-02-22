@@ -27,6 +27,10 @@ public class FlashcardDaoImpl implements FlashcardDao {
 
 	@Override
 	public Flashcard getFlashcardById(int id) {
+		Session s = HibernateUtil.getSession();
+		Flashcard f = (Flashcard) s.get(Flashcard.class, id);
+		s.close();
+		return f;
 		
 	}
 

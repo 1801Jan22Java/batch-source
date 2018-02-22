@@ -7,7 +7,7 @@
     <meta name="description" content="Page for Entering employee information">
     <meta name="author" content="Leonard Blumberg">
 
-    <title>Update User Information</title>
+    <title>Submit Request - Employee</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../dist/css/bootstrap.min.css" rel="stylesheet">
@@ -33,15 +33,15 @@
         </div>
         <div class="col-md-12">
           
-          <form method="post" class="needs-validation" novalidate>
+          <form method="post" class="needs-validation" novalidate action="../new_request">
           <h4 class="mb-3">Reimbursement Request Submission</h4>
             <div class="row">
               <div class="col-md-4 mb-3">
-                <label for="r_amount">Amount in Garlicoins <span class="text-muted"> (Required)</span></label>
+                <label for="r_amount">Amount in Garlicoin <span class="text-muted"> (Required)</span></label>
                 <input type="number" step="any" min="0" class="form-control" 
                 name="r_amount" placeholder="" value="" required autofocus>
                 <div class="invalid-feedback">
-                  Valid amount of Garlic Required
+                  Valid amount of Garlicoin Required
                 </div>
               </div>
               <div class="col-md-8 mb-3">
@@ -49,8 +49,6 @@
                 <input type="file" class="form-control" name="req_image">
               </div>
             </div>
-
-
             <div class="mb-12">
               <label for="phone">Request Description<span class="text-muted"> (Required)</span></label>
               <input type="text" class="form-control" name="message" required>
@@ -60,7 +58,7 @@
             </div>
 
             <hr class="mb-4">
-            <button class="btn btn-primary btn-lg btn-block" type="submit">Request Garlicoins</button>
+            <button class="btn btn-primary btn-lg btn-block" type="submit">Request Garlicoin</button>
           </form>
         </div>
       </div>

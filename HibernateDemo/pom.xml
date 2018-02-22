@@ -11,10 +11,10 @@
   
   <dependencies>
   	<dependency>
-	    <groupId>com.oracle</groupId>
-	    <artifactId>ojdbc8</artifactId>
-	    <version>12.1.0.1</version>
-	</dependency>
+         <groupId>com.oracle.ojdbc</groupId>
+         <artifactId>ojdbc</artifactId>
+         <version>12.1.0.1</version>
+     </dependency>
   	<dependency>
   		<groupId>org.hibernate</groupId>
   		<artifactId>hibernate-core</artifactId>

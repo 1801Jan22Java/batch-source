@@ -4,6 +4,15 @@ import java.util.ArrayList;
 
 public class Employee {
 
+	public Employee(int employeeID, String firstName, String lastName, String email, String phone, String jobTitle) {
+		super();
+		EmployeeID = employeeID;
+		FirstName = firstName;
+		LastName = lastName;
+		this.email = email;
+		this.phone = phone;
+		this.jobTitle = jobTitle;
+	}
 	public Employee(String firstName, String lastName, String email, String password, int reportsTo, String phone,
 			String jobTitle, boolean isManager, int active) {
 		super();

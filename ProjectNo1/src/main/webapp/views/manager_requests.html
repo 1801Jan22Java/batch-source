@@ -39,16 +39,15 @@
 		<br>
 		<div>
 			<div class="bd-example">
-				<table class="table table-hover" id="empReqTable">
+				<table class="table table-hover" id="empReqTable" style="color:white">
 				  <thead>
 				    <tr style="color:white;">
-							<th>Request ID</th>
-				      <th>Employee Name</th>
-				      <th>Request Date</th>
+				      <th>Request ID</th>	
+				      <th>Employee ID</th>
 				      <th>Amount</th>
 				      <th>Message</th>
-							<th>Status</th>
-							<th>Image</th>
+					  <th>Status</th>
+					  <th>Reply</th>
 				    </tr>
 				  </thead>
 				  <tbody id="empReqTableBody">
@@ -58,18 +57,18 @@
 			</div>
 		</div>
 	</div> <br>
-	<div class="container" style="color:white">
+	<div class="container" style="color:white" max-width:50%>
 		<h3>Resolve Request</h3>
-		<form method="POST">
+		<form method="POST" action="../manager_requests">
 			<div class="form-group" >
 				<label for="reqID">Request ID:</label>
-				<input type="number" min="0" class="form-control" id="reqID" name="requestID">
+				<input type="number" min="0" class="form-control" id="reqID" name="requestID" required>
 				<br>
 				<div class="radio">
-				<label><input type="radio" name="optradio">Approve</label>
+				<label><input type="radio" name="ResolveRadio" value="APPROVED">Approve Request</label>
 				</div>
 				<div class="radio">
-					<label><input type="radio" name="optradio">Deny</label>
+					<label><input type="radio" name="ResolveRadio" value="REJECTED">Deny Request</label>
 				</div>
 				<br>
 				<label for="response">Reply:</label>

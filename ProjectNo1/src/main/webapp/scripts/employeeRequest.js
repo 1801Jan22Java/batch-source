@@ -16,14 +16,33 @@ function seeOneReq(xhr){
 		console.log(res);
 		if (res) {
             var table = document.getElementById("empReqTableBody");
-            var row = document.createElement("tr");
-            res.tableValues.forEach(function(element) {
+            
+            res.forEach(function(element) {
+            	var row = document.createElement("tr");
+            	var employee = document.createElement("td");
+            	var amount = document.createElement("td");
+            	var description = document.createElement("td");
+            	var status = document.createElement("td");
+            	var reply = document.createElement("td");
             	
-            	var col = document.createElement("td");
-            	col.innerHTML=element;
-            	row.appendChild(col);
+            	employee.innerHTML=element.employeeID;
+            	row.appendChild(employee);
+            	
+            	amount.innerHTML=element.amount;
+            	row.appendChild(amount);
+            	
+            	description.innerHTML=element.description;
+            	row.appendChild(description);
+            	
+            	status.innerHTML=element.status;
+            	row.appendChild(status);
+            	
+            	reply.innerHTML=element.reply;
+            	row.appendChild(reply);
+            	
+            	table.appendChild(row);
             });
-            table.appendChild(row);
+            
 		}
 		console.log(table);
 	} else {

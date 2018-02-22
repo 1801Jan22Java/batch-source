@@ -14,5 +14,6 @@
 		<property name="hibernate.hbm2ddl.auto">create</property>
 		<!--  Going to map our domain object classes -->
 		<mapping class="com.revature.domain.Flashcard"/>
+		<mapping class="com.revature.domain.Category"/>
 	</session-factory>
 </hibernate-configuration>

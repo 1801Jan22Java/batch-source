@@ -23,7 +23,7 @@ public class RequestDaoImpl implements RequestDao {
 
 		try {
 			Connection con = ConnectionUtil.getConnectionFromFile(filename);
-			String sql = "INSERT INTO REQUEST (EmpID, Amount, " + "Status, Message) VALUES (?,?,?,?)";
+			String sql = "INSERT INTO REQUEST (EmpID, Amount, Status, Message) VALUES (?,?,?,?)";
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setInt(1, req.getEmployeeID());
 			ps.setDouble(2, req.getAmount());

@@ -5,6 +5,13 @@ import java.util.ArrayList;
 
 public class Request {
 
+	public Request(int requestID, int managerID,  String reply, String status) {
+		super();
+		this.RequestID = requestID;
+		this.managerID = managerID;
+		this.reply = reply;
+		this.status = status;
+	}
 	public Request(int employeeID, Double amount, String description, String status) {
 		super();
 		this.employeeID = employeeID;

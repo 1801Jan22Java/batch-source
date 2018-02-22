@@ -14,7 +14,7 @@ import com.revature.util.ConnectionUtil;
 
 public class EventDaoImpl implements EventDao {
 
-	public static final String filename = "connection.properties";
+	public static final String filename = "C:\\Users\\Leonard\\GitRepos\\batch-source\\Project1_Reimbursment\\connection.properties";
 
 	public ArrayList<Event> getAllEvents() {
 		ArrayList<Event> requests = new ArrayList<Event>();
@@ -154,7 +154,7 @@ public class EventDaoImpl implements EventDao {
 		try {
 			Connection con = ConnectionUtil.getConnectionFromFile(filename);
 			String sql = "INSERT INTO EVENT (RID, EmpID, ResolveID, Message) "
-					+ " VALUES (?,?,?,?);";
+					+ " VALUES (?,?,?,?)";
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setInt(1, eve.getRequestID());
 			ps.setInt(2, eve.getEmployeeID());

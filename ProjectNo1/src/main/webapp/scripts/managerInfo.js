@@ -15,8 +15,8 @@ function seeOneInfo(xhr){
 		var emps = JSON.parse(xhr.responseText);
 		console.log(emps);
 		if(emps){
-			emps.forEach(function(res) {
 			var table = document.getElementById("empTableBody");
+			emps.forEach(function(res) {
 			 {
 	            var row = document.createElement("tr");
 	            res.tableValues.forEach(function(element) {
@@ -28,7 +28,7 @@ function seeOneInfo(xhr){
 	            });
 	            table.appendChild(row);
 			}});
-		} console.log(table);
+		}
 	} else {
 		window.location = "http://localhost:8080:ProjectNo1/manager_info.html";
 	}

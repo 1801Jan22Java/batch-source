@@ -28,36 +28,26 @@ public class SubmitRequestServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession();
-		boolean manager = (Boolean)session.getAttribute("is_manager");
+		boolean manager = ((String)session.getAttribute("is_manager") == "true");
 		if(manager) {
-			PrintWriter pw = resp.getWriter();
-			RequestDao rdi = new RequestDaoImpl();
-			ArrayList<Request> requests = rdi.getAllRequests();
-			ObjectMapper om = new ObjectMapper();
-			String jsonValue = om.writeValueAsString(requests);
-			pw.write(jsonValue);
+			req.getRequestDispatcher("./new_request");
 		}else {
-			int id  = (Integer)session.getAttribute("EmployeeID");
-			PrintWriter pw = resp.getWriter();
-			RequestDao rdi = new RequestDaoImpl();
-			ArrayList<Request> requests = rdi.getAllRequests();
-			requests = rdi.getEmployeeRequests(id);
-			// get list of all requests, then refine list by employee ID
-			ObjectMapper om = new ObjectMapper();
-			String jsonValue = om.writeValueAsString(requests);
-			pw.write(jsonValue);
+			req.getRequestDispatcher("./submit_manager_request").forward(req, resp);
 		}
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		HttpSession session = req.getSession();
 		Integer amount = Integer.parseInt(req.getParameter("r_amount"));
 		String message = req.getParameter("message");
 		RequestDaoImpl rdi = new RequestDaoImpl();
-		System.out.println("Added new request, amount = " + amount);
-		rdi.addRequest(new Request((Integer) session.getAttribute("employeeID"), amount.doubleValue(), message, "PENDING"));
-			
+		
+		rdi.addRequest(new Request(((Integer) req.getSession().getAttribute("employeeID")), amount.doubleValue(), message, "PENDING"));
+		if(((String)req.getSession().getAttribute("is_manager") == "true")) {
+			resp.sendRedirect("./manager_home");
+		}
+		else
+			resp.sendRedirect("./employee_home");
 	}
 
 	

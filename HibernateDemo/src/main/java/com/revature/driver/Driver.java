@@ -24,13 +24,16 @@ public class Driver {
 		fd.getFlashcards();
 		
 		Category c1 = new Category("coding");
+		Category c2 = new Category("jokes");
+		
+		int newCategory2 = (int) s.save(c2);
 		
 		s.save(c1);
 		
 		
 		// create some flashcards to save
 		Flashcard f1 = new Flashcard("What is Java?", "The coolest language", c1);
-		Flashcard f2 = new Flashcard("Where are the bears?", "Hibernating", c1);
+		Flashcard f2 = new Flashcard("Where are the bears?", "Hibernating", new Category(newCategory2, "jokes"));
 		
 		fd.addFlashcard(f1);
 		fd.addFlashcard(f2);

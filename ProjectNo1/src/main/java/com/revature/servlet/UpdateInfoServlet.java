@@ -1,7 +1,6 @@
 package com.revature.servlet;
 
-
-import java.io.IOException; 
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
@@ -13,7 +12,6 @@ import javax.servlet.http.HttpSession;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.beans.Employee;
 import com.revature.dao.EmployeeDaoImpl;
-import com.revature.util.RequestHelper;
 
 public class UpdateInfoServlet extends HttpServlet {
 
@@ -22,13 +20,12 @@ public class UpdateInfoServlet extends HttpServlet {
 	 */
 	private static final long serialVersionUID = 3402941689741785285L;
 
-
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession();
-		boolean manager = ((String)session.getAttribute("is_manager")=="true");
-		if(manager) {
-			
+		boolean manager = ((String) session.getAttribute("is_manager") == "true");
+		if (manager) {
+
 			PrintWriter pw = resp.getWriter();
 			EmployeeDaoImpl edi = new EmployeeDaoImpl();
 			ArrayList<Employee> drones = edi.getAllEmployees();
@@ -38,8 +35,7 @@ public class UpdateInfoServlet extends HttpServlet {
 		} else {
 			PrintWriter pw = resp.getWriter();
 			EmployeeDaoImpl edi = new EmployeeDaoImpl();
-			System.out.println(session.getAttribute("employeeID"));
-			Employee john = edi.getEmployeeById((Integer)session.getAttribute("employeeID"));
+			Employee john = edi.getEmployeeById((Integer) session.getAttribute("employeeID"));
 			ObjectMapper om = new ObjectMapper();
 			String jsonValue = om.writeValueAsString(john);
 			resp.setContentType("application/json");
@@ -50,32 +46,103 @@ public class UpdateInfoServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession();
-		boolean manager = ((String)session.getAttribute("is_manager")=="true");
-		if(manager) {
+		boolean manager = ((String) session.getAttribute("is_manager") == "true");
+		// general idea - pre-fill local variables with values from extant employee object
+		// go through form fields, replace the local variables with non-null form field values
+		// set the employee's fields to the local variables. 
+		// That way, user doesn't have to update every field 
+		if (manager) {
 			// if user is a manager -> update the employee with the given ID
 			EmployeeDaoImpl edi = new EmployeeDaoImpl();
-			int eid = (Integer) req.getAttribute("Emp_id");
+			int eid = Integer.parseInt(req.getParameter("Emp_id"));
 			Employee emp = edi.getEmployeeById(eid);
-			String firstname = (String) req.getAttribute("firstName");
-			String lastname = (String) req.getAttribute("lastName");
-			String email = (String) req.getAttribute("email");
-			String phone = (String) req.getAttribute("phone");
-			String jobTitle = (String) req.getAttribute("jobTitle");
-			edi.updateEmployee(new Employee(eid, firstname, lastname, 
-					email, emp.getPassword(), emp.getReportsTo(), phone, jobTitle, false, 1));
+
+			String firstname = emp.getFirstName();
+			System.out.println(firstname + " Before temp");
+			String temp = req.getParameter("firstName");
+			if (temp != "") {
+				firstname = req.getParameter("firstName");
+				System.out.println(firstname + " After temp");
+			}
+
+			String lastname = emp.getLastName();
+			temp = req.getParameter("lastName");
+			if (temp != "") {
+				lastname = req.getParameter("lastName");
+
+			}
+
+			String email = emp.getEmail();
+			temp = req.getParameter("email");
+			if (temp != "")  {
+				email = req.getParameter("email");
+			}
+
+			String phone = emp.getPhone();
+			temp = req.getParameter("phone");
+			if (temp != "")  {
+				phone = req.getParameter("phone");
+			}
+
+			String jobTitle = emp.getJobTitle();
+			temp = req.getParameter("jobTitle");
+			if (temp != "")  {
+				jobTitle = req.getParameter("jobTitle");
+			}
 			
+			emp.setFirstName(firstname);
+			emp.setLastName(lastname);
+			emp.setEmail(email);
+			emp.setPhone(phone);
+			emp.setJobTitle(jobTitle);
+			
+			edi.updateEmployee(emp);
+			resp.sendRedirect("./manager_home");
+
 		} else {
 			// if user is not a manager, update the currently logged in user
 			EmployeeDaoImpl edi = new EmployeeDaoImpl();
-			Employee emp = edi.getEmployeeById((Integer)session.getAttribute("employeeID"));
-			String firstname = (String) req.getAttribute("firstName");
-			String lastname = (String) req.getAttribute("lastName");
-			String email = (String) req.getAttribute("email");
-			String phone = (String) req.getAttribute("phone");
-			String jobTitle = (String) req.getAttribute("jobTitle");
-			
-			edi.updateEmployee(new Employee(emp.getEmployeeID(), firstname, lastname, 
-					email, emp.getPassword(), emp.getReportsTo(), phone, jobTitle, false, 1));
+			int eid = Integer.parseInt(req.getParameter("Emp_id"));
+			Employee emp = edi.getEmployeeById(eid);
+
+			String firstname = emp.getFirstName();
+			String temp = req.getParameter("firstName");
+			if (temp != "")  {
+				firstname = req.getParameter("firstName");
+			}
+
+			String lastname = emp.getLastName();
+			temp = req.getParameter("lastName");
+			if (temp != "")  {
+				lastname = req.getParameter("lastName");
+
+			}
+
+			String email = emp.getEmail();
+			temp = req.getParameter("email");
+			if (temp != "")  {
+				email = req.getParameter("email");
+			}
+
+			String phone = emp.getPhone();
+			temp = req.getParameter("phone");
+			if (temp != "")  {
+				phone = req.getParameter("phone");
+			}
+
+			String jobTitle = emp.getJobTitle();
+			temp = req.getParameter("jobTitle");
+			if (temp != "")  {
+				jobTitle = req.getParameter("jobTitle");
+			}
+
+			emp.setFirstName(firstname);
+			emp.setLastName(lastname);
+			emp.setEmail(email);
+			emp.setPhone(phone);
+			emp.setJobTitle(jobTitle);
+			edi.updateEmployee(emp);
+			resp.sendRedirect("./employee_home");
 		}
 	}
 
