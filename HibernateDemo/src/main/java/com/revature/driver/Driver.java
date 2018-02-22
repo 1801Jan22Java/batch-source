@@ -1,5 +1,9 @@
 package com.revature.driver;
 
+import java.util.Iterator;
+import java.util.List;
+
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -21,7 +25,12 @@ public class Driver {
 
 		// fd.getFlashcards();
 		
-		updateAndMerge();
+		// updateAndMerge();
+		
+		//Category c1 = new Category (1, "coding");
+		//funWithNamedQueries(c1);
+		
+		funWithCache();
 
 	}
 
@@ -52,7 +61,7 @@ public class Driver {
 				fd.addFlashcard(new Flashcard("What version of Java do we use?", "Java 8", new Category(1, ""))));
 	}
 
-	void getVsLoad(FlashcardDao fd) {
+	static void getVsLoad(FlashcardDao fd) {
 		Flashcard f4 = fd.getFlashcardById(4);
 
 		// get vs load
@@ -99,4 +108,40 @@ public class Driver {
 		}
 		s2.close();
 	}
+
+	static void funWithNamedQueries(Category c){
+		
+		Session s = HibernateUtil.getSession();
+		Query q = s.getNamedQuery("findCardByCategory");
+		q.setInteger("categoryVar",c.getId());
+		List<Flashcard> cards = q.list();
+		System.out.println(cards.size());
+		Iterator<Flashcard> itr = cards.iterator();
+		while(itr.hasNext()){
+			System.out.println(itr.next());
+		}
+		s.close();
+		
+	}
+
+	static void funWithCriteria(){
+		Session s = HibernateUtil.getSession();
+		//STAY TUNED FOR BEARS
+		s.close();
+		
+	}
+
+	static void funWithCache(){
+		Session s = HibernateUtil.getSession();
+		
+		Flashcard f = (Flashcard) s.load(Flashcard.class, 23);
+		System.out.println(f.getQuestion());
+		
+		//s.evict(f); s.clear() also works for all cached data
+		
+		System.out.println(s.contains(f));
+		
+		s.close();
+	}
+
 }
