@@ -58,7 +58,6 @@ function getJson(xhr) {
 					tr.appendChild(tdType);
 					
 					var tdAmount = document.createElement("td");
-					tdAmount.classList.add("text-right");
 					tdAmount.innerHTML = "$" + request.amount.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 					tr.appendChild(tdAmount);
 					
@@ -106,7 +105,6 @@ function getJson(xhr) {
 					tr.appendChild(tdType);
 					
 					var tdAmount = document.createElement("td");
-					tdAmount.classList.add("text-right");
 					tdAmount.innerHTML = "$" + request.amount.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");;
 					tr.appendChild(tdAmount);
 
@@ -164,7 +162,6 @@ function getJson(xhr) {
 				tr.appendChild(tdType);
 				
 				var tdAmount = document.createElement("td");
-				tdAmount.classList.add("text-right");
 				tdAmount.innerHTML = "$" + request.amount.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");;
 				tr.appendChild(tdAmount);
 				
@@ -205,7 +202,6 @@ function getJson(xhr) {
 				tr.appendChild(tdType);
 				
 				var tdAmount = document.createElement("td");
-				tdAmount.classList.add("text-right");
 				tdAmount.innerHTML = "$" + request.amount.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");;
 				tr.appendChild(tdAmount);
 				
@@ -250,11 +246,17 @@ function showClosed() {
 	document.getElementById("json-admin-open").style.display = "none";
 	document.getElementById("json-admin-closed").style.display = "none";
 	
-	if (isManager) {
-		document.getElementById("json-admin-closed").style.display = "block";
-	} else {
-		document.getElementById("json-employee-closed").style.display = "block";
-	}
+	document.getElementById("json-body").style.display = "none";
+	document.getElementById("json-loading").style.display = "block";
+	setTimeout(function() {
+		document.getElementById("json-loading").style.display = "none";
+		document.getElementById("json-body").style.display = "block";
+		if (isManager) {
+			document.getElementById("json-admin-closed").style.display = "block";
+		} else {
+			document.getElementById("json-employee-closed").style.display = "block";
+		}
+	}, 1000);
 }
 
 function showOpen() {
@@ -263,11 +265,17 @@ function showOpen() {
 	document.getElementById("json-admin-open").style.display = "none";
 	document.getElementById("json-admin-closed").style.display = "none";
 	
-	if (isManager) {
-		document.getElementById("json-admin-open").style.display = "block";
-	} else {
-		document.getElementById("json-employee-open").style.display = "block";
-	}
+	document.getElementById("json-body").style.display = "none";
+	document.getElementById("json-loading").style.display = "block";
+	setTimeout(function() {
+		document.getElementById("json-loading").style.display = "none";
+		document.getElementById("json-body").style.display = "block";
+		if (isManager) {
+			document.getElementById("json-admin-open").style.display = "block";
+		} else {
+			document.getElementById("json-employee-open").style.display = "block";
+		}
+	}, 1000);
 }
 
 window.onload = function () {

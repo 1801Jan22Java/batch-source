@@ -80,7 +80,9 @@ public class UpdateServlet extends HttpServlet {
 				String password = "";
 				if (request.getParameter("password") != null) {
 					password = request.getParameter("password");
-					password = getHash(password);
+					if (!password.equals("")) {
+						password = getHash(password);
+					}
 				}
 				String jobTitle = "";
 				if (request.getParameter("job-title") != null) {
@@ -90,7 +92,7 @@ public class UpdateServlet extends HttpServlet {
 						jobTitle = "";
 					}
 				}
-				if (firstname == "" && lastname == "" && email == "" && password == "" && jobTitle == "") {
+				if (firstname.equals("") && lastname.equals("") && email.equals("") && password.equals("") && jobTitle.equals("") ) {
 					action = "fail";
 				} else {
 					if (emd.updateProfile(firstname, lastname, email, password, jobTitle, thisEmployee)) {

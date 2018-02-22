@@ -51,7 +51,6 @@ function getJson(xhr) {
 		tr.appendChild(tdType);
 		
 		var tdAmount = document.createElement("td");
-		tdAmount.classList.add("text-right");
 		tdAmount.innerHTML = "$" + request.amount.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");;
 		tr.appendChild(tdAmount);
 

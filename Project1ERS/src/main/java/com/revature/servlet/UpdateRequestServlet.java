@@ -107,17 +107,27 @@ public class UpdateRequestServlet extends HttpServlet {
 				    if (request.getParameter("message") != null) {
 				    	message = request.getParameter("message");
 				    }
-				    if (message.equals("")) {
-				    	message = "No Comment";
-				    }
+				    
 				    if (displayNames.size() > 0) {
 					    for (String s : displayNames) {
 					    	message = message + "\n - " + s + " was uploaded.";
 					    }
 				    }
 				    
-				    if (evd.addEvent(requestStatusId, message, thisRequest, thisEmployee)) {
-				    	action = "success";
+				    if (displayNames.size() > 0 || !message.equals("") || requestStatusId > 0) {
+				    	if (message.equals("")) {
+					    	message = "No Comment";
+					    }
+				    
+					    if (evd.addEvent(requestStatusId, message, thisRequest, thisEmployee)) {
+					    	action = "success";
+					    } else {
+					    	// Event could not be added
+					    	action = "fail";
+					    }
+				    } else {
+				    	// No information was submitted
+				    	action = "fail";
 				    }
 					
 					
