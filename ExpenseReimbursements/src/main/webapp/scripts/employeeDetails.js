@@ -52,7 +52,7 @@ function grabEmpDetails(xhr){
 			url += res.resolved[i].reimburseId;
 			row.setAttribute("onClick", "displayImage()");
 			row.setAttribute("id", res.resolved[i].reimburseId);
-			row.insertCell(0).innerHTML = res.resolved[i].amount;
+			row.insertCell(0).innerHTML = "$" +res.resolved[i].amount;
 			row.insertCell(1).innerHTML = res.resolved[i].dateSubmitted;
 			row.insertCell(2).innerHTML = res.resolved[i].status.statusCode;
 			row.insertCell(3).innerHTML = res.resolved[i].manager.firstName + " " + res.resolved[i].manager.lastName;
@@ -60,9 +60,11 @@ function grabEmpDetails(xhr){
 		for(var i = 0; i < res.pending.length; i++){
 			var row = header.insertRow();
 			row.setAttribute("onClick", "displayImage()");
-			row.insertCell(0).innerHTML = res.pending[i].amount;
+			row.setAttribute("id", res.pending[i].reimburseId);
+			row.insertCell(0).innerHTML = "$" +res.pending[i].amount;
 			row.insertCell(1).innerHTML = res.pending[i].dateSubmitted;
 			row.insertCell(2).innerHTML = res.pending[i].status.statusCode;
+			row.insertCell(3).innerHTML = "";
 		}
 	} else {
 		window.location = "http://localhost:8084/ExpenseReimbursements/login";

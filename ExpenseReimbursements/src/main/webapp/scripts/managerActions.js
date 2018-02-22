@@ -91,7 +91,7 @@ function viewAllPendingRequests(xhr){
 			var row = header.insertRow(i+1);
 			row.setAttribute("id", res[i].reimburseId);
 			row.insertCell(0).innerHTML = res[i].employee.firstName + " " + res[i].employee.lastName;
-			row.insertCell(1).innerHTML = res[i].amount;
+			row.insertCell(1).innerHTML = "$" + res[i].amount;
 			row.insertCell(2).innerHTML = res[i].dateSubmitted;
 			row.insertCell(3).innerHTML = "<a href="+url+res[i].reimburseId+"><button class=\"btn btn-outline-success\">Approve</button><a href="+url2+res[i].reimburseId+"><button class=\"btn btn-outline-danger\">Decline</button>"
 			for(var j = 0; j < row.childNodes.length - 1; j++){
@@ -127,7 +127,7 @@ function viewAllRevolvedRequests(xhr){
 			row.setAttribute("onClick", "displayImage()");
 			row.setAttribute("id", res[i].reimburseId);
 			row.insertCell(0).innerHTML = res[i].employee.firstName + " " + res[i].employee.lastName;
-			row.insertCell(1).innerHTML = res[i].amount;
+			row.insertCell(1).innerHTML = "$" + res[i].amount;
 			row.insertCell(2).innerHTML = res[i].dateSubmitted;
 			row.insertCell(3).innerHTML = res[i].status.statusCode;
 			row.insertCell(4).innerHTML = res[i].manager.firstName + " " + res[i].manager.lastName;
