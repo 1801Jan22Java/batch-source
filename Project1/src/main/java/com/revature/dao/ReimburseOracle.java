@@ -192,7 +192,7 @@ public class ReimburseOracle implements ReimburseDAO {
 				ByteArrayOutputStream out = new ByteArrayOutputStream();
 
 				int length = (int) blob.length();
-//				System.out.println(length); 
+
 				int bufferSize = 1024;
 				byte[] buffer = new byte[bufferSize];
 				
@@ -200,8 +200,6 @@ public class ReimburseOracle implements ReimburseDAO {
 					out.write(buffer, 0, length);
 				}
 				return out;
-				
-
 			}
 
 			return null;
