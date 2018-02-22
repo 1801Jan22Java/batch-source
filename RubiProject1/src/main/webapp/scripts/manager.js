@@ -159,7 +159,7 @@ function populateAllPending(xhr) {
 
 	        let approveBtn = document.createElement('button');
 	        approveBtn.innerHTML = "Approve";
-	        approveBtn.setAttribute('class', 'btn btn-outline-success btn-sm');
+	        approveBtn.setAttribute('class', 'btn btn-outline-success btn-sm btn-block');
 	        approveBtn.setAttribute('type', 'submit');
 	   		
 
@@ -175,7 +175,7 @@ function populateAllPending(xhr) {
 
 	        let denyBtn = document.createElement('button');
 	        denyBtn.innerHTML = "Deny";
-	        denyBtn.setAttribute('class', 'btn btn-outline-danger btn-sm');
+	        denyBtn.setAttribute('class', 'btn btn-outline-danger btn-sm btn-block');
 	        denyBtn.setAttribute('type', 'submit');
 
 	        form1.appendChild(input1);
