@@ -54,7 +54,7 @@ public class RequestDaoImpl implements RequestDao {
 		RequestStatusDaoImpl rsdi = new RequestStatusDaoImpl();
 		
 		try (Connection con = ConnectionUtil.getConnectionFromFile()) {
-			String sql = "SELECT * FROM REQUEST WHERE EMPLOYEE_ID = ? AND REQUEST_STATUS_ID = 1";
+			String sql = "SELECT * FROM REQUEST WHERE EMPLOYEE_ID = ? AND REQUEST_STATUS_ID = 1 ORDER BY REQUEST_ID";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, employeeId);
 			ResultSet rs = pstmt.executeQuery();
