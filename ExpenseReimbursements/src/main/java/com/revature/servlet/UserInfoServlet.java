@@ -19,7 +19,7 @@ public class UserInfoServlet extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession(false);
 		User currentUser = (User) session.getAttribute("currentUser");
-		if(session.getAttribute("currentUser") != null && currentUser.getPosition_id() == 1) {
+		if(session.getAttribute("currentUser") != null) {
 			UserDAO user = new UserDAOImpl();
 			User userInfo = user.getUserById(currentUser.getUserId());
 			resp.setContentType("application/json");

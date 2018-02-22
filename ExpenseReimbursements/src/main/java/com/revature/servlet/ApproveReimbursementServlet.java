@@ -24,8 +24,11 @@ public class ApproveReimbursementServlet extends HttpServlet{
 		if(session.getAttribute("currentUser") != null && checkUser.getPosition_id() == 2) {
 			String uri = req.getPathInfo().substring(1);
 			ReimbursementDAO reimburse = new ReimbursementDAOImpl();
-			reimburse.resolveReimbursement(checkUser, Integer.parseInt(uri), "approved");
-			resp.sendRedirect("/ExpenseReimbursements/viewAllPendingRequests");
+			int submitUserId = reimburse.getSubmitUser(Integer.parseInt(uri));
+			if(checkUser.getUserId() != submitUserId) {
+				reimburse.resolveReimbursement(checkUser, Integer.parseInt(uri), "approved");
+			}
+			resp.sendRedirect("/ExpenseReimbursements/managerHome");
 		} else {
 			resp.sendRedirect("/ExpenseReimbursements/login");
 		}

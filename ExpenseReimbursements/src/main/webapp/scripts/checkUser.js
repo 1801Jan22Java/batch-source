@@ -17,7 +17,7 @@ function grabUsername(xhr){
 	if(xhr.responseText){
 		var res = JSON.parse(xhr.responseText);
 		if(res.firstName != null){
-			document.getElementById("currentUser").innerHTML = "Welcome to Expense Reimbursements, Mr. " + res.firstName;
+			document.getElementById("currentUser").innerHTML = "Welcome to Expense Reimbursements, " + res.firstName;
 		}
 	} else {
 		window.location = "http://localhost:8084/ExpenseReimbursements/login";

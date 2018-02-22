@@ -27,7 +27,6 @@ public class GetImageServlet extends HttpServlet{
 		resp.setContentLength(bao.size());
 		ServletOutputStream out = resp.getOutputStream();
 		byte[] baoImage = bao.toByteArray();
-		System.out.println("baoImage length is: "+baoImage.length);
 		out.write(baoImage);
 		out.close();
 	}

@@ -2,36 +2,62 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Manager Homepage</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
 </head>
 <body>
-<a href="/ExpenseReimbursements/logout">Logout</a>
-	<div>
+	<div class="container">
+		<div class="btn-group btn-group-justified">
+	 		<a href="/ExpenseReimbursements/logout" class="btn btn-outline-secondary">Logout</a>
+		</div>
 		<h3 id="currentUser"></h3>
-		<p>Employee-Like Actions</p>
-		<form action="employeeAction" method="POST">
-			<select name="destination">
-				<option value="submitRequest">Submit a reimbursement request</option>
-				<option value="viewEmpPendingRequests">View Your Pending Requests</option>
-				<option value="viewEmpResolvedRequests">View Your Resolved Requests</option>
-				<option value="viewEmpInfo">Personal Information</option>
-			</select>
-			<input type="submit" id="button" value="Take Me There!">
-		</form>
+		<br><br>
+		<div class="row">
+			<div class="col-sm-5">
+				<h4>Employee-Like Actions</h4>
+				<form action="employeeAction" method="POST">
+					<div class="form-group">
+						<select name="destination" class="custom-select">
+							<option value="submitRequest">Submit a reimbursement request</option>
+							<option value="viewEmpPendingRequests">View Your Pending Requests</option>
+							<option value="viewEmpResolvedRequests">View Your Resolved Requests</option>
+							<option value="viewEmpInfo">Personal Information</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<button type="submit" id="button" class="btn btn-outline-primary">Take Me There!</button>
+					</div>
+					
+				</form>		
+			</div>
+			<div class="col-sm-5">
+				<form action="managerAction" method="post">
+					<h4>Manager-like Actions</h4>
+					<div class="form-group">
+						<select name="destination" class="custom-select">
+							<option value="allEmployees">View All Employees</option>
+							<option value="viewAllPendingRequests">View All Pending Requests</option>
+							<option value="viewAllResolvedRequests">View All Resolved Requests</option>
+						</select>
+					</div>
+					<div class="Form-group">
+						<button type="button" id="manager" class="btn btn-outline-primary">Show me the information!</button>
+					</div>
+					
+				</form>
+			</div>
+		</div>
 		
-		<form action="managerAction" method="post">
-			<p>What Manager-like Actions would you like to do today?</p>
-			<select name="destination">
-				<option value="allEmployees">View All Employees</option>
-				<option value="viewAllPendingRequests">View All Pending Requests</option>
-				<option value="viewAllResolvedRequests">View All Resolved Requests</option>
-			</select>
-			<input type="button" id="manager" value="Show me the information!">
-		</form>
+		<br><br>
+	
+		<div id="tables"></div>
+		
+		<img id="downloadImg"/>
+	
 	</div>
-	<div id="tables">
-	</div>
+
 	
 </body>
 <script src="scripts/managerActions.js"></script>
+
 </html>

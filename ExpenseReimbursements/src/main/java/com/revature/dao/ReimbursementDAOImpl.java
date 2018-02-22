@@ -22,12 +22,6 @@ public class ReimbursementDAOImpl implements ReimbursementDAO{
 	
 	@Override
 	public void submitReimbursement(User employee, InputStream fileName, double amount) {
-		try {
-			System.out.println(fileName.available());
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
 		try(Connection conn = ConnectionUtil.getConnectionFromFile()){
 			String sql = "{call ADDREIMBURSEMENT(?, ?, ?)}";
 			CallableStatement cstmt = conn.prepareCall(sql);
@@ -91,7 +85,6 @@ public class ReimbursementDAOImpl implements ReimbursementDAO{
 				StatusDAO status = new StatusDAOImpl();
 				UserDAO manager = new UserDAOImpl();
 				int managerId = results.getInt("MANAGER_ID");
-				//TODO MAKING FILETYPE NULL FOR NOW
 				empResolved.add(new Reimbursement(reimburseId, emp, manager.getUserById(managerId), amount, status.getStatusById(statusId), dateSubmit));
 			}
 			conn.close();
@@ -252,6 +245,28 @@ public class ReimbursementDAOImpl implements ReimbursementDAO{
 			e.printStackTrace();
 		}
 		return buffer;
+	}
+
+	@Override
+	public int getSubmitUser(int reimburseId) {
+		int userId = -1;
+		try(Connection conn = ConnectionUtil.getConnectionFromFile()){
+			PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM REIMBURSEMENTS WHERE REIMBURSEMENT_ID = ?");
+			pstmt.setInt(1, reimburseId);
+			ResultSet results = pstmt.executeQuery();
+			while(results.next()) {
+				userId = results.getInt("EMPLOYEE_ID");
+			}
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return userId;
 	}
 
 }

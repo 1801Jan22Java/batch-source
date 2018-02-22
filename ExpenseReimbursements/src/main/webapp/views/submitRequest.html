@@ -2,17 +2,32 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Submit Reimbursement</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
 </head>
 <body>
-	<a href="/ExpenseReimbursements/logout">Logout</a>
-	<a href="/ExpenseReimbursements/redirectHome"><button>Take me back to the homepage!</button></a>
-	<form action="processRequest"method="POST" enctype="multipart/form-data">
-		Enter the amount you are requesting <input id="amount" type="number" name="amount">
-		<br><br><br><br>
-		Select the image you want to upload <input name="uploadFile" type="file" id="uploadFile">
-		<br>
-		<button id="submit">Submit the form</button>
-	</form>
+	<div class="container">
+		<div class="btn-group btn-group-justified">
+	  		<a href="/ExpenseReimbursements/redirectHome" class="btn btn-outline-secondary">Home</a>
+	 		<a href="/ExpenseReimbursements/logout" class="btn btn-outline-secondary">Logout</a>
+		</div>
+		<h3>Submit a Expense Reimbursement Request</h3>
+		<form action="processRequest"method="POST" enctype="multipart/form-data">
+			<div class="form-group">
+				<label for="amount">Enter the amount you are requesting</label>
+				<input id="amount" type="number" name="amount">
+			</div>
+			<div class="form-group">
+				<label for="upload">Select the image you want to upload</label>
+				<input name="uploadFile" type="file" id="uploadFile">
+			</div>
+			<button id="submit" class="btn">Submit the form</button>
+		</form>
+	
+	</div>
+	
 </body>
 </html>

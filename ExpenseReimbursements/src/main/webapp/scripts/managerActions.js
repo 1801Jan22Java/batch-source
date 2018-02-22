@@ -13,11 +13,23 @@ function sendAjaxGet(url, func){
 	xhr.send();
 }
 
+function sendAjaxGetImage(url, func){
+	var xhr = new XMLHttpRequest() || new ActiveXObject("Microsoft.HttpRequest");
+	xhr.responseType = 'blob';
+	xhr.onreadystatechange = function(){
+		if(this.readyState == 4 && this.status == 200){
+			func(this);
+		}
+	}
+	xhr.open("GET", url, true);
+	xhr.send();
+}
+
 function grabUsername(xhr){
 	if(xhr.responseText){
 		var res = JSON.parse(xhr.responseText);
 		if(res.firstName != null){
-			document.getElementById("currentUser").innerHTML = "Welcome to the Manager Homepage, Mr. " + res.lastName;
+			document.getElementById("currentUser").innerHTML = "Welcome to the Manager Homepage, " + res.firstName;
 		}
 	} else {
 		window.location = "http://localhost:8084/ExpenseReimbursements/login";
@@ -32,6 +44,7 @@ function viewAllUsers(xhr){
 		}
 		var tab = document.createElement("table");
 		tab.setAttribute("id", "allEmps");
+		tab.setAttribute("class", "table table-hover");
 		document.getElementById("tables").append(tab);
 		var table = document.getElementById("allEmps");
 		var header = table.createTHead();
@@ -60,6 +73,7 @@ function viewAllPendingRequests(xhr){
 		}
 		var tab = document.createElement("table");
 		tab.setAttribute("id", "allEmps");
+		tab.setAttribute("class", "table");
 		document.getElementById("tables").append(tab);
 		var table = document.getElementById("allEmps");
 		var header = table.createTHead();
@@ -79,7 +93,10 @@ function viewAllPendingRequests(xhr){
 			row.insertCell(2).innerHTML = res[i].employee.firstName + " " + res[i].employee.lastName;
 			row.insertCell(3).innerHTML = res[i].amount;
 			row.insertCell(4).innerHTML = res[i].dateSubmitted;
-			row.insertCell(5).innerHTML = "<a href="+url+res[i].reimburseId+"><button>Approve</button><a href="+url2+res[i].reimburseId+"><button>Decline</button>"
+			row.insertCell(5).innerHTML = "<a href="+url+res[i].reimburseId+"><button class=\"btn btn-outline-success\">Approve</button><a href="+url2+res[i].reimburseId+"><button class=\"btn btn-outline-danger\">Decline</button>"
+			for(var j = 0; j < row.childNodes.length - 1; j++){
+				row.childNodes[j].setAttribute("onclick", "displayImage()");
+			}
 		}
 	}
 }
@@ -92,6 +109,7 @@ function viewAllRevolvedRequests(xhr){
 		}
 		var tab = document.createElement("table");
 		tab.setAttribute("id", "allEmps");
+		tab.setAttribute("class", "table");
 		document.getElementById("tables").append(tab);
 		var table = document.getElementById("allEmps");
 		var header = table.createTHead();
@@ -106,6 +124,7 @@ function viewAllRevolvedRequests(xhr){
 
 		for(var i = 0; i < res.length; i++){
 			var row = header.insertRow(i+1);
+			row.setAttribute("onClick", "displayImage()");
 			row.insertCell(0).innerHTML = res[i].reimburseId;
 			row.insertCell(1).innerHTML = res[i].employee.userId;
 			row.insertCell(2).innerHTML = res[i].employee.firstName + " " + res[i].employee.lastName;
@@ -115,6 +134,18 @@ function viewAllRevolvedRequests(xhr){
 			row.insertCell(6).innerHTML = res[i].manager.firstName + " " + res[i].manager.lastName;
 		}
 	}
+}
+
+function displayImage(){
+	console.log(event.target.parentNode.firstChild);
+	sendAjaxGetImage("/ExpenseReimbursements/getImage?reimburseId="+ event.target.parentNode.firstChild.innerHTML, getReimburseImg);
+}
+
+function getReimburseImg(xhr){
+	 var blob = new Blob([xhr.response], {type: 'image/jpg'});
+	    if (blob) {
+	        document.getElementById("downloadImg").src = window.URL.createObjectURL(blob);
+	    }
 }
 
 window.onload = function(){

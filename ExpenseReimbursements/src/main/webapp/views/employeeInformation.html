@@ -2,34 +2,42 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Employee Reimbursements</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 </head>
 <body>
-	<a href="/ExpenseReimbursements/logout">Logout</a>
-	<a href="/ExpenseReimbursements/redirectHome"><button>Take me back to the homepage!</button></a>
-	<h1>This is <span name="fullName"></span>'s information</h1>
+	<div class="container">
+		<div class="btn-group btn-group-justified">
+	  		<a href="/ExpenseReimbursements/redirectHome" class="btn btn-default">Home</a>
+	 		<a href="/ExpenseReimbursements/logout" class="btn btn-default">Logout</a>
+		</div>
+		<h1>This is <span name="fullName"></span>'s information</h1>
 	
-	<table>
-		<tr>
-			<th>First Name:</th>
-			<td name="firstName"></td>
-		</tr>
-		<tr>
-			<th>Last Name:</th>
-			<td name="lastName"></td>
-		</tr>
-		<tr>
-			<th>Username:</th>
-			<td name="username"></td>
-		</tr>
-		<tr>
-			<th>Email:</th>
-			<td name="email"></td>
-		</tr>
-	</table>
-	<div id="tables"></div>
+		<table class="table table-hover">
+			<tr>
+				<th>First Name:</th>
+				<td name="firstName"></td>
+			</tr>
+			<tr>
+				<th>Last Name:</th>
+				<td name="lastName"></td>
+			</tr>
+			<tr>
+				<th>Username:</th>
+				<td name="username"></td>
+			</tr>
+			<tr>
+				<th>Email:</th>
+				<td name="email"></td>
+			</tr>
+		</table>
+		<div id="tables"></div>
+		
+		<img id="downloadImg"/>
+		
+	</div>
+
 	
-	<img id="downloadImg"/>
 	
 </body>
 <script src="../scripts/employeeDetails.js"></script>

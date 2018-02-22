@@ -26,8 +26,6 @@ public class ProcessRequestServlet extends HttpServlet {
 			User currentUser = (User) session.getAttribute("currentUser");
 			Part fileImage = req.getPart("uploadFile");
 			String fileName = Paths.get(getSubmittedFileName(fileImage)).getFileName().toString();
-			System.out.println(fileName);
-			System.out.println(req.getParameter("amount"));
 			ReimbursementDAO addReimbursement = new ReimbursementDAOImpl();
 			addReimbursement.submitReimbursement(currentUser, fileImage.getInputStream(), Double.parseDouble(req.getParameter("amount")));
 			resp.sendRedirect("/ExpenseReimbursements/submitRequest");

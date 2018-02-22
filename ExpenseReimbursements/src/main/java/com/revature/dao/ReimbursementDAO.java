@@ -16,5 +16,6 @@ public interface ReimbursementDAO {
 	public List<Reimbursement> viewAllPendingRequests(User manager);
 	public List<Reimbursement> viewAllResolvedRequests(User manager);
 	public List<Reimbursement> viewEmpRequests(User manager, int empId);
-	public ByteArrayOutputStream getRequestImage(int reimburseId);	
+	public ByteArrayOutputStream getRequestImage(int reimburseId);
+	public int getSubmitUser(int reimburseId);
 }

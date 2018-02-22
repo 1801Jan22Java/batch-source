@@ -2,22 +2,28 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Resolved Requests</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 </head>
 <body>
-	<a href="/ExpenseReimbursements/logout">Logout</a>
-	<a href="/ExpenseReimbursements/redirectHome"><button>Take me back to the homepage!</button></a>
-	<h1>Here is your pending request information</h1>
-	<table id="pendingRequests">
-		<tr>
-			<th>Reimbursement Id</th>
-			<th>Amount Requested</th>
-			<th>Date Submitted</th>
-			<th>Resolved By Manager</th>
-			<th>Status</th>
-		</tr>
-	</table>
+	<div class="container">
+		<div class="btn-group btn-group-justified">
+	  		<a href="/ExpenseReimbursements/redirectHome" class="btn btn-outline-secondary">Home</a>
+	 		<a href="/ExpenseReimbursements/logout" class="btn btn-outline-secondary">Logout</a>
+		</div>
+		<h1>Here is your pending request information</h1>
+		<table id="pendingRequests" class="table table-hover">
+			<tr>
+				<th>Reimbursement Id</th>
+				<th>Amount Requested</th>
+				<th>Date Submitted</th>
+				<th>Resolved By Manager</th>
+				<th>Status</th>
+			</tr>
+		</table>
+	</div>
 
 </body>
 <script src="scripts/empResolved.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"></script>
 </html>

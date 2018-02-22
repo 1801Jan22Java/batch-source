@@ -3,21 +3,36 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Employee Home Page</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 </head>
 <body>
-<a href="/ExpenseReimbursements/logout">Logout</a>
-	<h3 id="currentUser"></h3>
-	<p>What would you like to do today?</p>
-	<form action="employeeAction" method="POST">
-		<select name="destination">
-			<option value="submitRequest">Submit a reimbursement request</option>
-			<option value="viewEmpPendingRequests">View Your Pending Requests</option>
-			<option value="viewEmpResolvedRequests">View Your Resolved Requests</option>
-			<option value="viewEmpInfo">Personal Information</option>
-		</select>
-		<input type="submit" id="button" value="Take Me There!">
-	</form>
+	<div class="container">
+		<div class="btn-group btn-group-justified">
+	 		<a href="/ExpenseReimbursements/logout" class="btn btn-outline-secondary">Logout</a>
+		</div>
+		<h3 id="currentUser"></h3>
+		<br><br>
+		
+		<div class="col">
+		<h4>What would you like to do today</h4>
+			<form action="employeeAction" method="POST">
+				<div class="form-group">
+					<select name="destination" class="custom-select">
+						<option value="submitRequest">Submit a reimbursement request</option>
+						<option value="viewEmpPendingRequests">View Your Pending Requests</option>
+						<option value="viewEmpResolvedRequests">View Your Resolved Requests</option>
+						<option value="viewEmpInfo">Personal Information</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<button type="submit" id="button" class="btn btn-outline-primary">Take Me There!</button>
+				</div>
+					
+			</form>		
+		</div>
+	</div>
 
 </body>
 <script src="scripts/checkUser.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"></script>
 </html>

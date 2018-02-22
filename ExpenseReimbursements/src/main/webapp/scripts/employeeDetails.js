@@ -37,6 +37,7 @@ function grabEmpDetails(xhr){
 		document.querySelector("[name='email']").innerHTML = res.employee.email;
 		var tab = document.createElement("table");
 		tab.setAttribute("id", "allEmps");
+		tab.setAttribute("class","table");
 		document.getElementById("tables").append(tab);
 		var table = document.getElementById("allEmps");
 		var header = table.createTHead();
@@ -75,13 +76,11 @@ function grabEmpDetails(xhr){
 }
 
 function displayImage(){
-	console.log(event.target.parentNode.firstChild);
 	sendAjaxGetImage("/ExpenseReimbursements/getImage?reimburseId="+ event.target.parentNode.firstChild.innerHTML, getReimburseImg);
 }
 
 function getReimburseImg(xhr){
 	 var blob = new Blob([xhr.response], {type: 'image/jpg'});
-	 console.log(blob);
 	    if (blob) {
 	        document.getElementById("downloadImg").src = window.URL.createObjectURL(blob);
 	    }

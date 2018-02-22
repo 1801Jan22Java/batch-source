@@ -1,6 +1,8 @@
 DROP TABLE USERS CASCADE CONSTRAINTS;
 DROP TABLE REIMBURSEMENTS CASCADE CONSTRAINTS;
 
+TRUNCATE TABLE REIMBURSEMENTS;
+
 /***************************************************************************************
 *                                   CREATE TABLES                                      *
 ****************************************************************************************/
@@ -99,6 +101,8 @@ EXECUTE ADDEMPLOYEE('Wilson', 'Yan', 'yanman23', 'password', 'yanman23@gmail.com
 EXECUTE ADDEMPLOYEE('Allison', 'Hyatt', 'ahyatt', 'password', 'ahyatt@gmail.com');
 
 INSERT INTO REIMBURSEMENTS(REIMBURSEMENT_ID, EMPLOYEE_ID, DATE_SUBMITTED, STATUS, AMOUNT) VALUES (REIMBURSEMENT_ID_SEQ.NEXTVAL, 1023, SYSDATE, 1, 100000000);
+
+UPDATE USERS SET FIRST_NAME = 'woohoo', LAST_NAME = 'snow', EMAIL = 'jsnow@gmail.com', USERNAME = 'jsnow', PASSWORD = 'password' WHERE USER_ID = 1021;
 
 UPDATE REIMBURSEMENTS SET MANAGER_ID = 1003 AND STATUS = 2 WHERE REIMBURSEMENT_ID = 1006;
 UPDATE STATUS SET STATUS_CODE = 'DECLINED' WHERE STATUS_ID = 3;
