@@ -55,6 +55,7 @@ public class EmployeeViewInformationServlet extends HttpServlet {
 				JSONobj +=  "\"address\" : \"" + requestedEmployeeInformation.getAddress()  + "\"," ;
 				JSONobj+=  "\"id\" : \"" + requestedEmployeeInformation.getEmployeeInformationId() + "\"}" ;
 				response.getWriter().write(JSONobj);
+				System.out.println(JSONobj);
 			}
 		}
 		else {

@@ -26,7 +26,11 @@ function populateInformation(xhr) {
 		var email = document.createElement("tr");
 		email.innerHTML = "<td>Email: </td><td>" + res.email + "</td>";
 		var addrs = document.createElement("tr");
-		addrs.innerHTML = "<td>Address: </td><td>" + res.addrs+ "</td>";
+		if (res.address) {
+			addrs.innerHTML = "<td>Address: </td><td>" + res.address + "</td>";
+		} else {
+			addrs.innerHTML = "<td>Address: </td><td> N/A </td>";
+		}
 		table.appendChild(fname);
 		table.appendChild(lname);
 		table.appendChild(email);
@@ -38,6 +42,5 @@ function populateInformation(xhr) {
 }
 
 window.onload = function() {
-	console.log("preston sucks");
 	sendAjaxPost("http://localhost:8084/Project1/employeeviewinfo", populateInformation);
 }

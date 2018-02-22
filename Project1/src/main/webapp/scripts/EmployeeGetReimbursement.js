@@ -63,6 +63,33 @@ function populateInformation(xhr,status) {
 	}
 }
 
+
+function sendSessionCheck(url) {
+	var xhr = new XMLHttpRequest() || new ActiveXObject("Microsoft.HTTPRequest");
+
+	xhr.onreadystatechange = function() {
+
+		if (this.readyState == 4 && this.status == 200) {
+			checkValid(this);
+		}
+	};
+	xhr.open("GET", new_url, true);
+	xhr.send();	
+	
+}
+
+function checkValid() {
+	if (xhr.responseText) {
+		var res = JSON.parse(xhr.responseText);
+		if (res.username == "null") {
+			window.location = "http://localhost:8084/Project1/employeelogin";
+		}
+	} else {
+		window.location = "http://localhost:8084/Project1/employeelogin";
+	}
+	
+}
 window.onload = function() {
+	sendSessionCheck("http://localhost:8084/Project1/session");
 	sendAjaxGet("http://localhost:8084/Project1/employeegetreimbursement", populateInformation);
 }
