@@ -37,11 +37,13 @@ public class CreateWalletServlet extends HttpServlet {
 				EmployeeDao dao = new EmployeeDaoImpl();
 				Employee emp = dao.getEmployee(email);
 				
+				//Ensure we have a valid employee
 				if(emp != null) {
 					System.out.println("Creating wallet in the database...");
 					String name = request.getParameter("name");
 					String address = request.getParameter("walletAddress");
 				
+					//Add a wallet for this employee
 					WalletDao walletDao = new WalletDaoImpl();
 					walletDao.addWallet(new Wallet(0, emp.getId(), name, address, 0));
 					
