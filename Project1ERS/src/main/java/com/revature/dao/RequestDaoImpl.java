@@ -21,6 +21,7 @@ public class RequestDaoImpl implements RequestDao{
 	public boolean getRequests(Employee thisEmployee) {
 		thisEmployee.getRequests().clear();
 		PreparedStatement pstmt = null;
+		boolean success = false;
 		try(Connection con = ConnectionUtil.getConnectionFromFile()){
 			String sql = "SELECT r.request_id, ca.ref_value AS request_type, cb.ref_value AS current_status, r.amount, r.description, r.creation_date, " +
 					"e.employee_id, e.firstname, e.lastname, e.email, e.job_title, e.creation_date AS emp_creation_date " + 
@@ -34,6 +35,7 @@ public class RequestDaoImpl implements RequestDao{
 			pstmt.setInt(1, thisEmployee.getEmployeeId());
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()){
+				success = true;
 				int requestId = rs.getInt("request_id");
 				String requestType = rs.getString("request_type");
 				String currentStatus = rs.getString("current_status");
@@ -57,11 +59,10 @@ public class RequestDaoImpl implements RequestDao{
 			con.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return false;
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
-		return true;
+		return success;
 	}
 	 
 	@Override

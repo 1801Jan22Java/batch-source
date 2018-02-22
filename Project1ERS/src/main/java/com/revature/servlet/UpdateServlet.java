@@ -29,6 +29,7 @@ public class UpdateServlet extends HttpServlet {
 		
 	}
 	
+	// Update profile information
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
 		EmployeeDao emd = new EmployeeDaoImpl();
@@ -40,6 +41,7 @@ public class UpdateServlet extends HttpServlet {
 			int employeeId = (int) session.getAttribute("employeeId");
 			thisEmployee = emd.getEmployee(employeeId);
 			if (thisEmployee != null) {
+				// If user is a manager allow allow changes to apply to different person
 				if (request.getParameter("employee-id") != null && emd.isManager(thisEmployee)) {
 					thisEmployeeId = (int) Integer.valueOf(request.getParameter("employee-id"));
 					thisEmployee = emd.getEmployee(thisEmployeeId);
@@ -47,7 +49,8 @@ public class UpdateServlet extends HttpServlet {
 				String email = "";
 				if (request.getParameter("email") != null) {
 					email = request.getParameter("email");
-					if (email.equals(thisEmployee.getEmail())) {
+					// Email field is limited to 40 characters in database
+					if (email.equals(thisEmployee.getEmail()) || email.length() > 40) {
 						email = "";
 					} else {
 						if (!emd.isAvailable(email)) {
@@ -60,14 +63,16 @@ public class UpdateServlet extends HttpServlet {
 				String firstname = "";
 				if (request.getParameter("firstname") != null) {
 					firstname = request.getParameter("firstname");
-					if (firstname.equals(thisEmployee.getFirstname())) {
+					// Firstname field is limited to 40 characters in database
+					if (firstname.equals(thisEmployee.getFirstname()) || firstname.length() > 40) {
 						firstname = "";
 					}
 				}
 				String lastname = "";
 				if (request.getParameter("lastname") != null) {
 					lastname = request.getParameter("lastname");
-					if (lastname.equals(thisEmployee.getLastname())) {
+					// Lastname field is limited to 40 characters in database
+					if (lastname.equals(thisEmployee.getLastname()) || lastname.length() > 40) {
 						lastname = "";
 					}
 				}
@@ -80,7 +85,8 @@ public class UpdateServlet extends HttpServlet {
 				String jobTitle = "";
 				if (request.getParameter("job-title") != null) {
 					jobTitle = request.getParameter("job-title");
-					if (jobTitle.equals(thisEmployee.getJobTitle())) {
+					// Job Title field is limited to 60 characters in database
+					if (jobTitle.equals(thisEmployee.getJobTitle()) || jobTitle.length() > 60) {
 						jobTitle = "";
 					}
 				}

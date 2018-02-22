@@ -95,45 +95,48 @@ public class EmployeeDaoImpl implements EmployeeDao{
 	
 	@Override
 	public boolean getAllEmployees(Employee thisManager) {
+		EmployeeDao emd = new EmployeeDaoImpl();
 		thisManager.getEmployees().clear();
 		PreparedStatement pstmt = null;
 		boolean success = false;
-		try(Connection con = ConnectionUtil.getConnectionFromFile()){
-			String sql = "SELECT emp.employee_id, emp.firstname, emp.lastname, emp.email, emp.job_title, emp.creation_date, " + 
-					"man.employee_id AS man_employee_id, man.firstname AS man_firstname, man.lastname AS man_lastname, " +
-					"man.email AS man_email, man.job_title AS man_job_title, man.creation_date AS man_creation_date " +
-					"FROM employee emp " +
-					"LEFT JOIN employee man ON man.employee_id = emp.reports_to " +
-					"ORDER BY emp.lastname ASC";
-			pstmt = con.prepareStatement(sql);
-			ResultSet rs = pstmt.executeQuery();
-			while (rs.next()){
-				success = true;
-				int employeeId = rs.getInt("employee_id");
-				String firstname = rs.getString("firstname");
-				String lastname = rs.getString("lastname");
-				String email = rs.getString("email");
-				String jobTitle = rs.getString("job_title");
-				LocalDate creationDate = rs.getDate("creation_date").toLocalDate();
-				// If the request has not been finalized by a manager set the manager to null
-				Employee empManager = null;
-				if (rs.getInt("man_employee_id") > 0) {
-					int manEmployeeId = rs.getInt("man_employee_id");
-					String manFirstname = rs.getString("man_firstname");
-					String manLastname = rs.getString("man_lastname");
-					String manEmail = rs.getString("man_email");
-					String manJobTitle = rs.getString("man_job_title");
-					LocalDate manCreationDate = rs.getDate("man_creation_date").toLocalDate();
-					empManager = new Employee(manEmployeeId, manFirstname, manLastname, manEmail, manJobTitle, manCreationDate);
+		if (emd.isManager(thisManager)) {
+			try(Connection con = ConnectionUtil.getConnectionFromFile()){
+				String sql = "SELECT emp.employee_id, emp.firstname, emp.lastname, emp.email, emp.job_title, emp.creation_date, " + 
+						"man.employee_id AS man_employee_id, man.firstname AS man_firstname, man.lastname AS man_lastname, " +
+						"man.email AS man_email, man.job_title AS man_job_title, man.creation_date AS man_creation_date " +
+						"FROM employee emp " +
+						"LEFT JOIN employee man ON man.employee_id = emp.reports_to " +
+						"ORDER BY emp.lastname ASC";
+				pstmt = con.prepareStatement(sql);
+				ResultSet rs = pstmt.executeQuery();
+				while (rs.next()){
+					success = true;
+					int employeeId = rs.getInt("employee_id");
+					String firstname = rs.getString("firstname");
+					String lastname = rs.getString("lastname");
+					String email = rs.getString("email");
+					String jobTitle = rs.getString("job_title");
+					LocalDate creationDate = rs.getDate("creation_date").toLocalDate();
+					// If the request has not been finalized by a manager set the manager to null
+					Employee empManager = null;
+					if (rs.getInt("man_employee_id") > 0) {
+						int manEmployeeId = rs.getInt("man_employee_id");
+						String manFirstname = rs.getString("man_firstname");
+						String manLastname = rs.getString("man_lastname");
+						String manEmail = rs.getString("man_email");
+						String manJobTitle = rs.getString("man_job_title");
+						LocalDate manCreationDate = rs.getDate("man_creation_date").toLocalDate();
+						empManager = new Employee(manEmployeeId, manFirstname, manLastname, manEmail, manJobTitle, manCreationDate);
+					}
+					
+					thisManager.getEmployees().add(new Employee(employeeId, firstname, lastname, email, jobTitle, creationDate, empManager));
 				}
-				
-				thisManager.getEmployees().add(new Employee(employeeId, firstname, lastname, email, jobTitle, creationDate, empManager));
+				con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} catch (IOException e1) {
+				e1.printStackTrace();
 			}
-			con.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (IOException e1) {
-			e1.printStackTrace();
 		}
 		return success;
 	}
@@ -141,34 +144,39 @@ public class EmployeeDaoImpl implements EmployeeDao{
 	@Override
 	public boolean updateProfile(String firstname, String lastname, String email, String password,
 			String jobTitle, Employee thisEmployee) {
+		EmployeeDao emd = new EmployeeDaoImpl();
 		CallableStatement cs = null;
 		boolean success = false;
-		try{
-			Connection con = ConnectionUtil.getConnectionFromFile();
-			String sql = "{ call update_employee(?, ?, ?, ?, ?, ?, ?) }";
-			cs = con.prepareCall(sql);
-			cs.setInt(1, thisEmployee.getEmployeeId());
-			cs.setString(2, firstname);
-			cs.setString(3, lastname);
-			cs.setString(4, email);
-			cs.setString(5, password);
-			cs.setString(6, jobTitle);
-			cs.registerOutParameter(7, Types.INTEGER);
-			// Returns 1 if there is an OUT parameter, and 0 for no OUT parameter
-			cs.executeUpdate();
-			int response =  cs.getInt(7);
-			if (response > 0) {
-				success = true;
-				thisEmployee.setFirstname(firstname);
-				thisEmployee.setLastname(lastname);
-				thisEmployee.setEmail(email);
-				thisEmployee.setJobTitle(jobTitle);
+		Employee testEmployee = null;
+		testEmployee = emd.getEmployee(thisEmployee.getEmployeeId());
+		if (testEmployee != null) {
+			try{
+				Connection con = ConnectionUtil.getConnectionFromFile();
+				String sql = "{ call update_employee(?, ?, ?, ?, ?, ?, ?) }";
+				cs = con.prepareCall(sql);
+				cs.setInt(1, thisEmployee.getEmployeeId());
+				cs.setString(2, firstname);
+				cs.setString(3, lastname);
+				cs.setString(4, email);
+				cs.setString(5, password);
+				cs.setString(6, jobTitle);
+				cs.registerOutParameter(7, Types.INTEGER);
+				// Returns 1 if there is an OUT parameter, and 0 for no OUT parameter
+				cs.executeUpdate();
+				int response =  cs.getInt(7);
+				if (response > 0) {
+					success = true;
+					thisEmployee.setFirstname(firstname);
+					thisEmployee.setLastname(lastname);
+					thisEmployee.setEmail(email);
+					thisEmployee.setJobTitle(jobTitle);
+				}
+				con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} catch (IOException e1) {
+				e1.printStackTrace();
 			}
-			con.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (IOException e1) {
-			e1.printStackTrace();
 		}
 		return success;
 	}

@@ -13,6 +13,7 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  
   <!--  nothing goes to master yet, /requests/index.html uses ajax to call util/requests -->
   <servlet>
     <servlet-name>master-servlet</servlet-name>

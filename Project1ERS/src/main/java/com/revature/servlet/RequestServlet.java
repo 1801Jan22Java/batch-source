@@ -13,6 +13,7 @@ import com.revature.dao.*;
 public class RequestServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	// Return list of user requests or all requests
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
 		EmployeeDao emd = new EmployeeDaoImpl();
@@ -31,12 +32,12 @@ public class RequestServlet extends HttpServlet {
 					if (emd.getAllEmployees(thisEmployee)) {
 						for(Employee e : thisEmployee.getEmployees()) {
 							if (rd.getRequests(e)) {
-								//success
+								//success outputs
 								//for(Request r : e.getRequests()) {
 								//	System.out.println(e.getFirstname() + " - " + r.toString());
 								//}
 							} else {
-								//fail
+								//fail output
 								//System.out.println("No Requests found for " + e.getFirstname());
 							}
 						}
@@ -44,12 +45,12 @@ public class RequestServlet extends HttpServlet {
 				} else {
 					// This employee is not a manager
 					if (rd.getRequests(thisEmployee)) {
-						//success
+						//success outputs
 						//for(Request r : thisEmployee.getRequests()) {
 						//	System.out.println(thisEmployee.getFirstname() + " - " + r.toString());
 						//}
 					} else {
-						//fail
+						//fail output
 						//System.out.println("No Requests found for " + thisEmployee.getFirstname());
 					}
 				}

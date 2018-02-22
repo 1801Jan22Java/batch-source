@@ -24,6 +24,7 @@ import com.revature.dao.UploadDaoImpl;
 public class ProfileServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	// Get profile of Employee
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
 		EmployeeDao emd = new EmployeeDaoImpl();
@@ -41,6 +42,7 @@ public class ProfileServlet extends HttpServlet {
 			thisEmployee = emd.getEmployee(employeeId);
 			if (thisEmployee != null) {
 				action = "success";
+				// If the user is a manager allow them to access someone else's profile
 				if (request.getParameter("id") != null && emd.isManager(thisEmployee)) {
 					int thisEmployeeId = (int) Integer.valueOf(request.getParameter("id"));
 					thisEmployee = emd.getEmployee(thisEmployeeId);

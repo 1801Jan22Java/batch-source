@@ -65,18 +65,21 @@ public class NewRequestServlet extends HttpServlet {
 							String description = request.getParameter("description");
 							if (rd.addRequest(requestTypeId, amount, description, thisEmployee)) {
 								Request thisRequest = thisEmployee.getRequests().get(thisEmployee.getRequests().size()-1);
-								System.out.println(thisRequest.toString());
 								// ...
 							    List<Part> fileParts = request.getParts().stream().filter(part -> "uploads".equals(part.getName())).collect(Collectors.toList()); // Retrieves <input type="file" name="file" multiple="true">
-							    System.out.println("fileparts = " + fileParts.toString());
 							    action = "success";
 							    for (Part filePart : fileParts) {
 							        String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
-							        System.out.println("filename = " + fileName);
 							        if (!fileName.equals("") && fileName != null) {
+							        	if (fileName.length() > 100) {
+							        		String splitDisplayName[]= fileName.split("\\.");
+							        		String extension = "." + splitDisplayName[splitDisplayName.length - 1];
+							        		// Database limits display names to 100 characters
+							        		fileName = "Filename Too Long" + extension;
+							        	}
 								        if (ud.addUpload(fileName, thisRequest, thisEmployee)) {
-								        	System.out.println(thisRequest.getUploads().get(thisRequest.getUploads().size()-1).toString());
 								        	String newFileName = thisRequest.getUploads().get(thisRequest.getUploads().size()-1).getFilename();
+								        	// Save uploaded file to File Server outside of tomcat war
 								        	String filePath = "C:\\xampp\\htdocs\\uploads\\" + newFileName;
 								        	OutputStream saveContent = new FileOutputStream(filePath);
 								        	
@@ -95,6 +98,7 @@ public class NewRequestServlet extends HttpServlet {
 							    }
 								
 							} else {
+								// Add request Dao failed
 								action = "fail";
 							}
 						} else {

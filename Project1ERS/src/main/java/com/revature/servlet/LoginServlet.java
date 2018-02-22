@@ -69,6 +69,7 @@ public class LoginServlet extends HttpServlet {
 			}
 			if (message != "") {
 				response.setContentType("text/html");
+				// I could have also redirected to index.html?action=<inputAction> and used javascript to read the GET parameters like in other pages
 				String javaScript = "<script>window.onload = function () { document.getElementById(\"message\").innerHTML = \"" + message + "\"; }</script>";
 				PrintWriter pw = response.getWriter();
 				request.getRequestDispatcher("index.html").include(request, response);;

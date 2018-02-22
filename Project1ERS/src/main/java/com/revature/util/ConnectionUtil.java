@@ -34,6 +34,7 @@ public class ConnectionUtil {
 		final String filename = "connection.properties";
 		try {
 			// Use Reflection to view resource forcing resource to be loaded into memory, available for Other resources in memory 
+			// Maven dependencies only maps available resources, but doesn't load them automatically
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 		} catch (ClassNotFoundException e) {
 			//oracle.jdbc.driver.OracleDriver could not be loaded into memory.

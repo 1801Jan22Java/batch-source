@@ -39,6 +39,7 @@ public class UpdateRequestServlet extends HttpServlet {
 		
 	}
 	
+	// Update a request
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
 		EmployeeDao emd = new EmployeeDaoImpl();
@@ -60,9 +61,9 @@ public class UpdateRequestServlet extends HttpServlet {
 					requestId = Integer.parseInt(request.getParameter("request-id"));
 					Employee requestAuthor = rd.getRequestAuthor(requestId);
 					Request thisRequest = requestAuthor.getRequests().get(0);
-					System.out.println(requestAuthor.getRequests().get(0).toString());
 					
 					int requestStatusId = 0;
+					// If no change to request id, procedure will use current status of request
 					if (request.getParameter("request-status") != null) {
 						requestStatusId = Integer.parseInt(request.getParameter("request-status"));
 					}
@@ -71,16 +72,20 @@ public class UpdateRequestServlet extends HttpServlet {
 					
 					// ...
 				    List<Part> fileParts = request.getParts().stream().filter(part -> "uploads".equals(part.getName())).collect(Collectors.toList()); // Retrieves <input type="file" name="file" multiple="true">
-				    System.out.println("fileparts = " + fileParts.toString());
 				    action = "success";
 				    for (Part filePart : fileParts) {
 				        String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
-				        System.out.println("filename = " + fileName);
 				        if (!fileName.equals("") && fileName != null) {
+				        	if (fileName.length() > 100) {
+				        		String splitDisplayName[]= fileName.split("\\.");
+				        		String extension = "." + splitDisplayName[splitDisplayName.length - 1];
+				        		// Database limits display names to 100 characters
+				        		fileName = "Filename Too Long" + extension;
+				        	}
 					        displayNames.add(fileName);
 					        if (ud.addUpload(fileName, thisRequest, thisEmployee)) {
-					        	System.out.println(thisRequest.getUploads().get(thisRequest.getUploads().size()-1).toString());
 					        	String newFileName = thisRequest.getUploads().get(thisRequest.getUploads().size()-1).getFilename();
+					        	// Save uploaded file to File Server outside of tomcat war
 					        	String filePath = "C:\\xampp\\htdocs\\uploads\\" + newFileName;
 					        	OutputStream saveContent = new FileOutputStream(filePath);
 					        	
@@ -117,6 +122,7 @@ public class UpdateRequestServlet extends HttpServlet {
 					
 					
 				} else {
+					// The request id was not provided
 					action = "fail";
 				}
 					

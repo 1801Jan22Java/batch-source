@@ -13,6 +13,7 @@ import com.revature.dao.*;
 public class RequestTypesServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	// Return a list a request types as a json
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDao rd = new RequestDaoImpl();
 		ArrayList<RequestType> requestTypes = rd.getRequestTypes();

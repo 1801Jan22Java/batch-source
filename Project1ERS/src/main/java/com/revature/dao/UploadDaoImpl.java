@@ -25,6 +25,7 @@ public class UploadDaoImpl implements UploadDao{
 	public boolean getUploads(Request thisRequest) {
 		thisRequest.getUploads().clear();
 		PreparedStatement pstmt = null;
+		boolean success = false;
 		try(Connection con = ConnectionUtil.getConnectionFromFile()){
 			String sql = "SELECT u.upload_id, u.display_name, u.creation_date, u.filename, " + 
 					"e.employee_id, e.firstname, e.lastname, e.email, e.job_title, e.creation_date AS emp_creation_date " +
@@ -36,7 +37,7 @@ public class UploadDaoImpl implements UploadDao{
 			pstmt.setInt(1, thisRequest.getRequestId());
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()){
-				
+				success = true;
 				int employeeId = rs.getInt("employee_id");
 				String firstname = rs.getString("firstname");
 				String lastname = rs.getString("lastname");
@@ -54,11 +55,10 @@ public class UploadDaoImpl implements UploadDao{
 			con.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return false;
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
-		return true;
+		return success;
 	}
 	
 	@Override

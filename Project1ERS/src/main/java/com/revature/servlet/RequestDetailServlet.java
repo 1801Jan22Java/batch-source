@@ -16,6 +16,7 @@ import com.revature.dao.*;
 public class RequestDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	// Get details of request
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
 		EmployeeDao emd = new EmployeeDaoImpl();
@@ -38,26 +39,32 @@ public class RequestDetailServlet extends HttpServlet {
 								if (ud.getUploads(thisEmployee.getRequests().get(0))) {
 									action = "success";
 								} else {
+									// The Uploads Dao failed
 									action = "not-found";
 								}
 							} else {
+								// The Events Dao failed
 								action = "not-found";
 							}
 						} else {
+							// The Employee was not found
 							action = "not-found";
 						}
 					} else {
 						// This employee is not a manager
 						if (rd.getRequests(thisEmployee)) {
+							// Loop through requests and remove requests that don't match query
 							for(int i = thisEmployee.getRequests().size()-1; i >= 0 ; i--) {
 								if (thisEmployee.getRequests().get(i).getRequestId() == requestId) {
 									if (evd.getEvents(thisEmployee.getRequests().get(i))) {
 										if (ud.getUploads(thisEmployee.getRequests().get(i))) {
 											
 										} else {
+											// The Uploads Dao Failed
 											action = "not-found";
 										}
 									} else {
+										// The Event Dao Failed
 										action = "not-found";
 									}
 								} else {
@@ -70,6 +77,7 @@ public class RequestDetailServlet extends HttpServlet {
 								action = "not-found";
 							}
 						} else {
+							// Requests could not be found for this user
 							action = "not-found";
 						}
 					}

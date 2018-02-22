@@ -17,6 +17,7 @@ import com.revature.dao.RequestDaoImpl;
 public class RequestStatusesServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	// Return list of possible request statuses as json
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDao rd = new RequestDaoImpl();
 		ArrayList<RequestStatus> requestStatuses = rd.getRequestStatuses();
