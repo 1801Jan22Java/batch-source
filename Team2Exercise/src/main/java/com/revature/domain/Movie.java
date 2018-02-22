@@ -1,0 +1,57 @@
+package com.revature.domain;
+import java.io.Serializable;
+import java.util.*;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "MOVIE")
+public class Movie  implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "movieSequence")
+	@SequenceGenerator(allocationSize = 1, name = "movieSequence", sequenceName = "SQ_MOVIE_PK")
+	@Column(name = "MOVIE_ID")
+	private int id;
+	
+	@Column(name = "MOVIE_NAME")
+	private String name;
+	
+	
+	@ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(
+        name = "MOVIE_GENRE", 
+        joinColumns = { @JoinColumn(name = "MOVIE_ID") }, 
+        inverseJoinColumns = { @JoinColumn(name = "GENRE_ID") }
+    )
+	List <Genre> genres = new ArrayList<>();
+	
+	@ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(
+        name = "MOVIE_ACTOR", 
+        joinColumns = { @JoinColumn(name = "MOVIE_ID") }, 
+        inverseJoinColumns = { @JoinColumn(name = "ACTOR_ID") }
+    )
+	List <Actor> actors = new ArrayList<>();
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+}
