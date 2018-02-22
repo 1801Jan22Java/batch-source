@@ -8,20 +8,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.google.gson.Gson;
-import com.revature.beans.Employee;
-import com.revature.dao.EmployeeDaoImpl;
+import com.revature.dao.ManagerDaoImpl;
+import com.revature.dao.ResolvedRequestDaoImpl;
 
 /**
- * Servlet implementation class EmployeeInformationServlet
+ * Servlet implementation class ManagerReviewPendingResolveServlet
  */
-public class EmployeeInformationServlet extends HttpServlet {
+public class ManagerReviewPendingResolveServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public EmployeeInformationServlet() {
+    public ManagerReviewPendingResolveServlet() {
         super();
     }
 
@@ -30,19 +29,32 @@ public class EmployeeInformationServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
-		
-		if (session != null && session.getAttribute("username") != null) {
-			response.setContentType("text/json");
-			EmployeeDaoImpl edi = new EmployeeDaoImpl();
-			Employee employee = null;
-			
-			int employeeId = Integer.parseInt((String) session.getAttribute("employeeid"));
-			employee = edi.getEmployeeById(employeeId);
 
-			if (employee != null) {
-				Gson gson = new Gson();
-				response.getWriter().println(gson.toJson(employee));
+		if (session != null && session.getAttribute("username") != null) {
+			ResolvedRequestDaoImpl rrdi = new ResolvedRequestDaoImpl();
+			
+			ManagerDaoImpl mdi = new ManagerDaoImpl();
+			int managerId = Integer.parseInt((String) session.getAttribute("managerid"));
+
+			String selection = request.getParameter("selection");
+			int requestId = Integer.parseInt(request.getParameter("requestnumber"));
+
+			System.out.println(managerId);
+			System.out.println(selection);
+			System.out.println(requestId);
+
+			switch (selection) {
+			case "approve":
+				rrdi.approvePendingRequest(requestId, managerId);
+				break;
+			case "deny":
+				rrdi.denyPendingRequest(requestId, managerId);;
+				break;
+			default:
+				break;
 			}
+			
+			response.sendRedirect("managerhome");
 
 		} else {
 			response.sendRedirect("login");

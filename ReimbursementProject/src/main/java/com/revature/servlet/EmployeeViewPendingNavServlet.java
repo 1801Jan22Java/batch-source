@@ -34,7 +34,7 @@ public class EmployeeViewPendingNavServlet extends HttpServlet {
 		if( session != null && session.getAttribute("username") != null){
 			request.getRequestDispatcher("/views/EmployeeViewPendingRequests.html").forward(request, response);
 		} else {
-			response.sendRedirect("/views/Login.html");
+			response.sendRedirect("login");
 		}		
 	}
 

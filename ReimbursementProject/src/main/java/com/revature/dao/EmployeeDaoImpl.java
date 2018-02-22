@@ -19,7 +19,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		List<Employee> employeeList = new ArrayList<>();
 
 		PreparedStatement pstmt = null;
-		
+
 		try (Connection con = ConnectionUtil.getConnectionFromFile()) {
 			String sql = "SELECT * FROM EMPLOYEE";
 			pstmt = con.prepareStatement(sql);
@@ -34,8 +34,8 @@ public class EmployeeDaoImpl implements EmployeeDao {
 				String phoneNumber = rs.getString("PHONE_NUMBER");
 				String email = rs.getString("EMAIL");
 				String password = rs.getString("E_PASSWORD");
-				employeeList.add(new Employee(employeeId, firstName, lastName, address, city, state,
-						phoneNumber, email, password));
+				employeeList.add(new Employee(employeeId, firstName, lastName, address, city, state, phoneNumber, email,
+						password));
 			}
 			con.close();
 		} catch (SQLException e) {
@@ -56,7 +56,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 			pstmt.setInt(1, employeeId);
 			ResultSet rs = pstmt.executeQuery();
 
-			if(rs.next()){
+			if (rs.next()) {
 				String firstName = rs.getString("FIRST_NAME");
 				String lastName = rs.getString("LAST_NAME");
 				String address = rs.getString("ADDRESS");
@@ -65,8 +65,8 @@ public class EmployeeDaoImpl implements EmployeeDao {
 				String phoneNumber = rs.getString("PHONE_NUMBER");
 				String email = rs.getString("EMAIL");
 				String password = rs.getString("E_PASSWORD");
-				employee = new Employee(employeeId, firstName, lastName, address, city, state,
-						phoneNumber, email, password);
+				employee = new Employee(employeeId, firstName, lastName, address, city, state, phoneNumber, email,
+						password);
 			}
 			con.close();
 		} catch (SQLException e) {
@@ -77,12 +77,47 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		return employee;
 	}
 
-	// TODO: To use these methods, must find out how to save employeeId from the logged in Employee
+	@Override
+	public void updateFirstName(int employeeId, String firstName) {
+		PreparedStatement pstmt = null;
+		try (Connection con = ConnectionUtil.getConnectionFromFile()) {
+			String sql = "UPDATE EMPLOYEE SET FIRST_NAME = ? WHERE EMPLOYEE_ID = ?";
+
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, firstName);
+			pstmt.setInt(2, employeeId);
+			pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+	}
+
+	@Override
+	public void updateLastName(int employeeId, String lastName) {
+		PreparedStatement pstmt = null;
+		try (Connection con = ConnectionUtil.getConnectionFromFile()){
+			String sql = "UPDATE EMPLOYEE SET LAST_NAME = ? WHERE EMPLOYEE_ID = ?";
+
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, lastName);
+			pstmt.setInt(2, employeeId);
+			pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+	}
+
 	@Override
 	public void updateAddress(int employeeId, String address) {
 		PreparedStatement pstmt = null;
-		try (Connection con = ConnectionUtil.getConnectionFromFile()){
-			String sql = "UPDATE EMPLOYEE SET ADDRESS = '?' WHERE EMPLOYEE_ID = ?";
+		try (Connection con = ConnectionUtil.getConnectionFromFile()) {
+			String sql = "UPDATE EMPLOYEE SET ADDRESS = ? WHERE EMPLOYEE_ID = ?";
 
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, address);
@@ -99,8 +134,8 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	@Override
 	public void updateCity(int employeeId, String city) {
 		PreparedStatement pstmt = null;
-		try (Connection con = ConnectionUtil.getConnectionFromFile()){
-			String sql = "UPDATE EMPLOYEE SET CITY = '?' WHERE EMPLOYEE_ID = ?";
+		try (Connection con = ConnectionUtil.getConnectionFromFile()) {
+			String sql = "UPDATE EMPLOYEE SET CITY = ? WHERE EMPLOYEE_ID = ?";
 
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, city);
@@ -117,8 +152,8 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	@Override
 	public void updateState(int employeeId, String state) {
 		PreparedStatement pstmt = null;
-		try (Connection con = ConnectionUtil.getConnectionFromFile()){
-			String sql = "UPDATE EMPLOYEE SET STATE = '?' WHERE EMPLOYEE_ID = ?";
+		try (Connection con = ConnectionUtil.getConnectionFromFile()) {
+			String sql = "UPDATE EMPLOYEE SET STATE = ? WHERE EMPLOYEE_ID = ?";
 
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, state);
@@ -135,8 +170,8 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	@Override
 	public void updatePhoneNumber(int employeeId, String phoneNumber) {
 		PreparedStatement pstmt = null;
-		try (Connection con = ConnectionUtil.getConnectionFromFile()){
-			String sql = "UPDATE EMPLOYEE SET PHONE_NUMBER = '?' WHERE EMPLOYEE_ID = ?";
+		try (Connection con = ConnectionUtil.getConnectionFromFile()) {
+			String sql = "UPDATE EMPLOYEE SET PHONE_NUMBER = ? WHERE EMPLOYEE_ID = ?";
 
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, phoneNumber);
@@ -153,8 +188,8 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	@Override
 	public void updateEmail(int employeeId, String email) {
 		PreparedStatement pstmt = null;
-		try (Connection con = ConnectionUtil.getConnectionFromFile()){
-			String sql = "UPDATE EMPLOYEE SET EMAIL = '?' WHERE EMPLOYEE_ID = ?";
+		try (Connection con = ConnectionUtil.getConnectionFromFile()) {
+			String sql = "UPDATE EMPLOYEE SET EMAIL = ? WHERE EMPLOYEE_ID = ?";
 
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, email);
@@ -167,12 +202,12 @@ public class EmployeeDaoImpl implements EmployeeDao {
 			e1.printStackTrace();
 		}
 	}
-	
+
 	@Override
 	public void updatePassword(int employeeId, String password) {
 		PreparedStatement pstmt = null;
-		try (Connection con = ConnectionUtil.getConnectionFromFile()){
-			String sql = "UPDATE EMPLOYEE SET E_PASSWORD = '?' WHERE EMPLOYEE_ID = ?";
+		try (Connection con = ConnectionUtil.getConnectionFromFile()) {
+			String sql = "UPDATE EMPLOYEE SET E_PASSWORD = ? WHERE EMPLOYEE_ID = ?";
 
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, password);

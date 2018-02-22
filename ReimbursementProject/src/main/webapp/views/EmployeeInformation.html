@@ -3,18 +3,52 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>EmployeeInformation</title>
-	<link rel="stylesheet" href="styles/customStyles.css">
-	<link rel="stylesheet"
-		href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="styles/customStyles.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 </head>
 <body>
+
 	<div>
-		<br>
-		<a href="employeehome">Employee Home</a>
-		<br>
+		<br> <a href="employeehome">Home</a> <br> <br> <br>
 	</div>
 
-	<p>View Employee Information</p>
-	
+	<form class="box" action="employeeinfoupdate" method="post">
+		<p>Update Information:</p>
+		<select name="updateselection" id="myselect">
+			<option value="address">Street Address</option>
+			<option value="city">City</option>
+			<option value="state">State</option>
+			<option value="phonenumber">Phone Number</option>
+		</select>
+		<input name="updatevalue" type = "text">
+		<input type="submit" value="Update">
+	</form>
+
+
+	<table id="myTable" style="width: 100%">
+		<tr>
+			<th></th>
+			<th></th>
+		</tr>
+		<tr>
+			<td>Street Address</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>City</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>State</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>Phone Number</td>
+			<td></td>
+		</tr>
+	</table>
+
 </body>
+<script src="scripts/ajaxEmployeeInfo.js"></script>
 </html>

@@ -18,6 +18,8 @@ public interface EmployeeDao {
 	
 	// TODO: To use these methods, must find out how to save employeeId from the logged in Employee
 	// updateInformation;
+	public void updateFirstName(int employeeId, String firstName);
+	public void updateLastName(int employeeId, String lastName);
 	public void updateAddress(int employeeId, String address);
 	public void updateCity(int employeeId, String city);
 	public void updateState(int employeeId, String state);

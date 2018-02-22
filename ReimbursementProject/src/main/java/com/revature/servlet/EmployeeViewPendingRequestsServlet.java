@@ -19,46 +19,46 @@ import com.revature.dao.RequestDaoImpl;
  */
 public class EmployeeViewPendingRequestsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public EmployeeViewPendingRequestsServlet() {
-        super();
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession(false);
-		if( session != null && session.getAttribute("username") != null){
-			//request.getRequestDispatcher("/views/EmployeeViewPendingRequests.html").forward(request, response);
-			
-		response.setContentType("text/json");
-		RequestDaoImpl rdi = new RequestDaoImpl();
-		List<Request> requestList = rdi.getAllRequests();
-		//Employee employee = (Employee)session.getAttribute("employee");
-		//System.out.println(employee);
-		//requestList = rdi.getPendingRequestsByEmployeeId(employee.getEmployeeId());
-		
-		int employeeid = Integer.parseInt((String)session.getAttribute("employeeid"));
-		requestList = rdi.getPendingRequestsByEmployeeId(employeeid);
-		
-		Gson gson = new Gson();
-		//String jsonRequests = gson.toJson(requestList);
-		response.getWriter().println(gson.toJson(requestList));
-		
-		} else {
-			response.sendRedirect("/views/Login.html");
-		}		
+	public EmployeeViewPendingRequestsServlet() {
+		super();
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		HttpSession session = request.getSession(false);
+		
+		if (session != null && session.getAttribute("username") != null) {
+			response.setContentType("text/json");
+			RequestDaoImpl rdi = new RequestDaoImpl();
+			List<Request> requestList = null;
+
+			int employeeId = Integer.parseInt((String) session.getAttribute("employeeid"));
+			requestList = rdi.getPendingRequestsByEmployeeId(employeeId);
+
+			if (requestList != null) {
+				Gson gson = new Gson();
+				response.getWriter().println(gson.toJson(requestList));
+			}
+
+		} else {
+			response.sendRedirect("login");
+		}
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		doGet(request, response);
 	}
 

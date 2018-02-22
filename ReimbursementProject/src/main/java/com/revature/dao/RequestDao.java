@@ -11,7 +11,7 @@ public interface RequestDao {
 	
 	public List<Request> getPendingRequestsByEmployeeId(int employeeId);	// all requests belonging to this employee
 																// request status is 1, pending
-
+	
 	// TODO: figure out how to retrieve the info entered into the fields to call this method
 	// the request status of this new request will be set to 1, pending
 	public void submitNewRequest(int employeeId, double requestAmount, String requestComment);	

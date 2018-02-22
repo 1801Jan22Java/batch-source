@@ -28,7 +28,7 @@ public class EmployeeHomeServlet extends HttpServlet {
 		if( session != null && session.getAttribute("username") != null){
 			request.getRequestDispatcher("/views/EmployeeHome.html").forward(request, response);
 		} else {
-			response.sendRedirect("/views/Login.html");
+			response.sendRedirect("login");
 		}		
 	}
 
@@ -36,7 +36,6 @@ public class EmployeeHomeServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

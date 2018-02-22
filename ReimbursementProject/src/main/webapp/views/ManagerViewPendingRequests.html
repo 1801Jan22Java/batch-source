@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>ManagerViewPendingRequests</title>
+<link rel="stylesheet" href="styles/customStyles.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+
+	<div>
+		<br> <a href="managerhome">Home</a>
+	</div>
+
+	<form class="box" action="resolverequest" method="post">
+		<p>Select Request By Id:</p>
+		<select name="selection" id="myselect">
+			<option value="approve">Approve</option>
+			<option value="deny">Deny</option>
+		</select> <input name="requestnumber" type="number"> <input
+			type="submit" value="Submit">
+	</form>
+
+	<table id="myTable" style="width: 100%">
+		<tr>
+			<th>Request Id</th>
+			<th>Amount</th>
+			<th>Description</th>
+			<th>Status</th>
+		</tr>
+	</table>
+</body>
+<script src="scripts/ajaxAllPending.js"></script>
+</html>

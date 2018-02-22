@@ -14,24 +14,22 @@ import com.revature.beans.ResolvedRequest;
 import com.revature.dao.ResolvedRequestDaoImpl;
 
 /**
- * Servlet implementation class EmployeeViewResolvedRequestsServlet
+ * Servlet implementation class ManagerReviewResolvedServlet
  */
-public class EmployeeViewResolvedRequestsServlet extends HttpServlet {
+public class ManagerReviewResolvedServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public ManagerReviewResolvedServlet() {
+        super();
+    }
 
 	/**
-	 * @see HttpServlet#HttpServlet()
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	public EmployeeViewResolvedRequestsServlet() {
-		super();
-	}
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
 		
 		if (session != null && session.getAttribute("username") != null) {
@@ -39,8 +37,7 @@ public class EmployeeViewResolvedRequestsServlet extends HttpServlet {
 			ResolvedRequestDaoImpl rrdi = new ResolvedRequestDaoImpl();
 			List<ResolvedRequest> resolvedRequestList = null;
 
-			int employeeid = Integer.parseInt((String) session.getAttribute("employeeid"));
-			resolvedRequestList = rrdi.getResolvedRequestsByEmployeeId(employeeid);
+			resolvedRequestList = rrdi.getAllResolvedRequests();
 
 			if (resolvedRequestList != null) {
 				Gson gson = new Gson();
@@ -53,11 +50,10 @@ public class EmployeeViewResolvedRequestsServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

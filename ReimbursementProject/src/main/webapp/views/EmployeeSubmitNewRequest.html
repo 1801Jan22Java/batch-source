@@ -3,13 +3,29 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>EmployeeSubmitNewRequest</title>
-<link rel="stylesheet" href="styles/customStyles.css">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="styles/customStyles.css">
+	<link rel="stylesheet"
+		href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
 </head>
 <body>
 
-	
+	<div>
+		<br> <a href="employeehome">Employee Home</a> <br>
+	</div>
+
+	<form class="box" action="submitnewrequest" method="post">
+		<fieldset>
+			<legend>Amount: </legend>
+			<input name="amount" type="number" step="0.01">
+		</fieldset>
+		<fieldset>
+			<legend>Comment: </legend>
+			<input name="comment" type="text">
+		</fieldset>
+		<br> <input type="submit"
+			value="Submit Reimbursement Request">
+	</form>
 
 </body>
 </html>
