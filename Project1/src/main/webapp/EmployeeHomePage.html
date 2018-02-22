@@ -3,6 +3,7 @@
     <head>
         <meta charset="UTF-8"/>
         <Title>Employee Homepage</Title>
+  		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <link rel="stylesheet" href="styles/style.css">
     </head>
 
@@ -20,15 +21,19 @@
 	    <input type="radio" name="filter" value="pending"> Pending <br>
 	    <br>
 	    <br>
-        <table id="reimbTable">
-            <tr id="head">
-                <th>Reimbursement ID</th>
-                <th>Status</th>
-                <th>Amount</th>
-                <th>Date of creation</th>
-                <th>Date of approval/denial</th>
-            </tr>
-        </table>
+	    <div class="table-responsive">
+	        <table class="table" id="reimbTable">
+	            <tr id="head">
+	                <th>Reimbursement ID</th>
+	                <th>Status</th>
+	                <th>Amount</th>
+	                <th>Date of creation</th>
+	                <th>Date of approval/denial</th>
+	            </tr>
+	        </table>
+        </div>
     </body>
     <script src="scripts/employeeHome.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </html>
