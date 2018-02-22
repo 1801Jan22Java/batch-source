@@ -1,6 +1,10 @@
 package com.revature.dao;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -27,7 +31,17 @@ public class RequestDaoImpl implements RequestDao{
 			statement.setInt(1, id);
 			ResultSet rs = statement.executeQuery();
 			while(rs.next()) {
-				requests.add(new Request(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getFloat(4), rs.getString(5), rs.getTimestamp(6), rs.getBlob(7), rs.getInt(8), rs.getInt(9), rs.getInt(10)));
+				
+				Blob blob = rs.getBlob(7);
+				File file = null;
+				if(blob != null && blob.length() > 0) {
+				    byte [] array = blob.getBytes( 1, ( int ) blob.length() );
+				    file = File.createTempFile("something-", ".binary", new File("."));
+				    FileOutputStream out = new FileOutputStream( file );
+				    out.write( array );
+				    out.close();
+				}
+				requests.add(new Request(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getFloat(4), rs.getString(5), rs.getTimestamp(6), file, rs.getInt(8), rs.getInt(9), rs.getInt(10)));
 			}
 			
 		} catch (IOException e) {
@@ -54,7 +68,8 @@ public class RequestDaoImpl implements RequestDao{
 			statement.setString(2, request.getTitle());
 			statement.setFloat(3, request.getAmount());
 			statement.setString(4, request.getDescription());
-			statement.setBlob(5, request.getReciept());
+			FileInputStream   fis = new FileInputStream(request.getReciept());
+			statement.setBinaryStream(5, fis, request.getReciept().length());
 			statement.setInt(6, request.getWalletID());
 			statement.executeQuery();
 			
@@ -78,7 +93,18 @@ public class RequestDaoImpl implements RequestDao{
 			PreparedStatement statement = connection.prepareStatement(sql);
 			ResultSet rs = statement.executeQuery();
 			while(rs.next()) {
-				requests.add(new Request(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getFloat(4), rs.getString(5), rs.getTimestamp(6), rs.getBlob(7), rs.getInt(8), rs.getInt(9), rs.getInt(10)));
+				
+				Blob blob = rs.getBlob(7);
+				File file = null;
+				if(blob != null && blob.length() > 0) {
+				    byte [] array = blob.getBytes( 1, ( int ) blob.length() );
+				    file = File.createTempFile("something-", ".binary", new File("."));
+				    FileOutputStream out = new FileOutputStream( file );
+				    out.write( array );
+				    out.close();
+				}
+			    
+				requests.add(new Request(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getFloat(4), rs.getString(5), rs.getTimestamp(6), file, rs.getInt(8), rs.getInt(9), rs.getInt(10)));
 			}
 			
 		} catch (IOException e) {
@@ -146,7 +172,18 @@ Connection connection;
 			statement.setInt(1, id);
 			ResultSet rs = statement.executeQuery();
 			while(rs.next()) {
-				return new Request(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getFloat(4), rs.getString(5), rs.getTimestamp(6), rs.getBlob(7), rs.getInt(8), rs.getInt(9), rs.getInt(10));
+				
+				Blob blob = rs.getBlob(7);
+				File file = null;
+				if(blob != null && blob.length() > 0) {
+				    byte [] array = blob.getBytes( 1, ( int ) blob.length() );
+				    file = File.createTempFile("something-", ".binary", new File("."));
+				    FileOutputStream out = new FileOutputStream( file );
+				    out.write( array );
+				    out.close();
+				}
+			    
+				return new Request(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getFloat(4), rs.getString(5), rs.getTimestamp(6), file, rs.getInt(8), rs.getInt(9), rs.getInt(10));
 			}
 			
 		} catch (IOException e) {

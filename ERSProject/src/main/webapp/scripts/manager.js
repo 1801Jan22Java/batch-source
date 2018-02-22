@@ -77,7 +77,7 @@ function populateRequests(xhr){
     	cell6.innerText = res.requests[i].status == 0 ? "Pending" : res.requests[i].status == 1 ? "Approved" : "Denied";
     	
     	cell8.innerHTML = "<div class=\"btn-group\">"+
-                                        "<button type=\"button\" class=\"btn btn-primary\" data-toggle=\"modal\" data-target=\"#myModal\">View</button>"+
+                                        "<button type=\"button\" class=\"btn btn-primary\" data-toggle=\"modal\" data-target=\"#myModal\"id=\"viewButton" + res.requests[i].id + "\">View</button>"+
                                         (res.requests[i].status != 0 ? "" :(
                                         "<button type=\"button\" class=\"btn btn-success\" id=\"approveButton" + res.requests[i].id + "\">Approve</button>"+
                                         "<button type=\"button\" class=\"btn btn-danger\" id=\"denyButton" + res.requests[i].id + "\">Deny</button>"))+
@@ -87,7 +87,8 @@ function populateRequests(xhr){
 	    	document.getElementById("denyButton"+res.requests[i].id).onclick = function(j) { return function() { onDenyClick(j); }; }(res.requests[i].id);
 	    	
     	}
-
+    	
+    	document.getElementById("viewButton"+res.requests[i].id).onclick = function(j) { return function() { onViewClick(j); }; }(res.requests[i].id);
     }
     
     function onApproveClick(id){
@@ -112,6 +113,11 @@ function populateRequests(xhr){
     	document.getElementById("denyButton"+id).parentNode.removeChild(document.getElementById("denyButton"+id));
     	
     	sendAjaxGet("http://localhost:8080/ERSProject/requestMod?id=" + id + "&type=2");
+    }
+    
+    function onViewClick(id){	
+    	document.getElementById("recieptModalImage").src = "/ERSProject/getImage?id="+id;
+    	document.getElementById("desc").src = "/ERSProject/requestDescription?id="+id;
     }
     
     for(var i = 0; i < res.employees.length; i++){

@@ -1,5 +1,6 @@
 package com.revature.beans;
 
+import java.io.File;
 import java.sql.Blob;
 import java.sql.Date;
 import java.sql.Timestamp;
@@ -12,12 +13,12 @@ public class Request {
 	private float amount;
 	private String description;
 	private Timestamp date;
-	private Blob reciept;
+	private File reciept;
 	private int walletID;
 	private int status;
 	private int managerID;
 	
-	public Request(int reqId, int empID, String title, float amount, String description, Timestamp date, Blob reciept, int walletID, int status, int manID) {
+	public Request(int reqId, int empID, String title, float amount, String description, Timestamp date, File reciept, int walletID, int status, int manID) {
 		super();
 		this.reqId = reqId;
 		this.empID = empID;
@@ -61,10 +62,10 @@ public class Request {
 	public void setDate(Timestamp date) {
 		this.date = date;
 	}
-	public Blob getReciept() {
+	public File getReciept() {
 		return reciept;
 	}
-	public void setReciept(Blob reciept) {
+	public void setReciept(File reciept) {
 		this.reciept = reciept;
 	}
 
