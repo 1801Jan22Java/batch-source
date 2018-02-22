@@ -12,6 +12,12 @@
 
 <body class="bodyClass">
 
+<script>
+$(document).ready(function(){
+    $('[data-toggle="popover"]').popover(); 
+});
+</script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.max.js"></script>
     <div class="centerContent">
         <div class="lightDiv centerDiv">
 
@@ -38,7 +44,9 @@
 
                 <div>
                     <a class="anchorSpace" href="./register.html"> Register        </a>
-                    <a class="anchorSpace" href="./forgotPassword.html"> Forgot Password?</a>
+                    
+                    <!-- <a href="#" data-toggle="popover" title="Popover Header" data-content="Planned feature">Forgot Password</a> -->
+                   	<!-- <a class="anchorSpace" href="./forgotPassword.html"> Forgot Password?</a>  -->
                 </div>
 
             </form>
