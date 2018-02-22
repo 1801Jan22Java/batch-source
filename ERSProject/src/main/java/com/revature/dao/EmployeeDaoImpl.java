@@ -18,6 +18,7 @@ public class EmployeeDaoImpl implements EmployeeDao{
 
 		Connection connection;
 		
+		//Attempt to log in the employee from the given username and password strings
 		try {
 			connection = ConnectionUtil.connectToDatabase(ConnectionUtil.PROPERTIES_FILE);
 			
@@ -46,6 +47,7 @@ public class EmployeeDaoImpl implements EmployeeDao{
 		return null;
 	}
 
+	//Create a new employee
 	@Override
 	public void register(String email, String password) {
 
@@ -69,6 +71,7 @@ public class EmployeeDaoImpl implements EmployeeDao{
 		
 	}
 
+	//Check to make sure email string is not already in the database
 	@Override
 	public boolean isEmailRegistered(String email) {
 
@@ -97,7 +100,8 @@ public class EmployeeDaoImpl implements EmployeeDao{
 
 		return isTaken;
 	}
-
+	
+	//Check to see if this employee is a manager
 	@Override
 	public boolean isEmployeeManager(String email) {
 		Connection connection;
@@ -131,6 +135,7 @@ public class EmployeeDaoImpl implements EmployeeDao{
 		return isManager;
 	}
 
+	//Get all the employees
 	@Override
 	public List<Employee> getEmployees() {
 		Connection connection;
@@ -156,6 +161,7 @@ public class EmployeeDaoImpl implements EmployeeDao{
 		return employees;
 	}
 
+	
 	@Override
 	public Employee getEmployee(String email) {
 		Connection connection;
@@ -206,6 +212,7 @@ public class EmployeeDaoImpl implements EmployeeDao{
 		return null;
 	}
 
+	//Change an employees email
 	@Override
 	public void changeEmail(String oldEmail, String newEmail) {
 		

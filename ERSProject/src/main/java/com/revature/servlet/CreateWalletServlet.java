@@ -31,14 +31,14 @@ public class CreateWalletServlet extends HttpServlet {
 		
 		if(session != null) {
 			String email = (String) session.getAttribute("username");
-			System.out.println("email: " + session.getAttribute("username"));//.getAttribute("email"));
+			System.out.println("email: " + session.getAttribute("username"));
 			if(email != null) {
 				
 				EmployeeDao dao = new EmployeeDaoImpl();
 				Employee emp = dao.getEmployee(email);
 				
 				if(emp != null) {
-					System.out.println("here");
+					System.out.println("Creating wallet in the database...");
 					String name = request.getParameter("name");
 					String address = request.getParameter("walletAddress");
 				

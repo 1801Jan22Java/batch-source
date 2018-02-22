@@ -58,8 +58,10 @@ public class GetRequestsServlet extends HttpServlet {
 						
 						String managerName = "";
 						
-						if(requests.get(i).getManagerID() > 0)
+						if(requests.get(i).getManagerID() > 0) {
 							managerName = dao.getEmployee(requests.get(i).getManagerID()).getEmail();
+						}
+							
 						
 						//TODO::Send all required data!
 						response.getWriter().write("{\"id\":\""+ requests.get(i).getReqId() +"\""

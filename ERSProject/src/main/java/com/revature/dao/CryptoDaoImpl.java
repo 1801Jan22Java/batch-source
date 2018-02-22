@@ -12,6 +12,7 @@ import com.revature.util.ConnectionUtil;
 
 public class CryptoDaoImpl implements CryptoDao{
 
+	//Get the crypto type from the wallet by id
 	@Override
 	public CryptoType getCryptoType(int id) {
 		CryptoType crypto = null;

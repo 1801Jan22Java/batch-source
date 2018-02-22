@@ -32,6 +32,7 @@ public class RequestDaoImpl implements RequestDao{
 			ResultSet rs = statement.executeQuery();
 			while(rs.next()) {
 				
+				//Blobify the uploaded file
 				Blob blob = rs.getBlob(7);
 				File file = null;
 				if(blob != null && blob.length() > 0) {
@@ -62,14 +63,21 @@ public class RequestDaoImpl implements RequestDao{
 			connection = ConnectionUtil.connectToDatabase(ConnectionUtil.PROPERTIES_FILE);
 			
 			String sql = "INSERT INTO ERS_REQUEST VALUES(REQUEST_ID_SEQUENCE.NEXTVAL,?,?,?,?,CURRENT_TIMESTAMP,?,?,0, -1)";
-			//int reqId, int empID, String title, String description, Date date, Blob reciept
+			
 			PreparedStatement statement = connection.prepareStatement(sql);
 			statement.setInt(1, request.getEmpID());
 			statement.setString(2, request.getTitle());
 			statement.setFloat(3, request.getAmount());
 			statement.setString(4, request.getDescription());
-			FileInputStream   fis = new FileInputStream(request.getReciept());
-			statement.setBinaryStream(5, fis, request.getReciept().length());
+			
+			System.out.println(request.getReciept().length());
+			if(request.getReciept().length() > 0) {
+				FileInputStream   fis = new FileInputStream(request.getReciept());
+				statement.setBinaryStream(5, fis, request.getReciept().length());
+			}
+			else
+				statement.setBinaryStream(5, null);
+			
 			statement.setInt(6, request.getWalletID());
 			statement.executeQuery();
 			

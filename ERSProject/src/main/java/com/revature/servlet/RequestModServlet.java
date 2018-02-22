@@ -47,7 +47,7 @@ public class RequestModServlet extends HttpServlet {
 					if(type == 1) {
 						
 						Request req = reqDao.GetRequest(id);
-						
+						//Make sure request can't be approved more than once
 						if(req != null && req.getStatus() == 0) {
 							
 							reqDao.ApproveRequest(id, empID);
@@ -56,7 +56,10 @@ public class RequestModServlet extends HttpServlet {
 								WalletDao walletDao = new WalletDaoImpl();
 								String walletAddress = walletDao.getWalletByID(req.getWalletID()).getWalletAddress();
 								
-								URL url = new URL("https://block.io/api/v2/withdraw/?api_key=ac86-0f48-3ba6-cd8d&amounts="+ req.getAmount()+"&to_addresses="
+								//Testnet doge apikey, from address and to address
+								URL url = new URL("https://block.io/api/v2/withdraw/?api_key=ac86-0f48-3ba6-cd8d&amounts="+ req.getAmount()+""
+										+ "&from_addresses=2NAgD6rNytBeqdQrLFL6SNvScxqpxoq2GRD"
+										+ "&to_addresses="
 										+walletAddress+"&pin=123456789");
 								//System.out.println(url);
 								String USER_AGENT = "Mozilla/5.0";
