@@ -17,7 +17,3 @@
 		<mapping class="com.revature.domain.Category"/>
 	</session-factory>
 </hibernate-configuration>
-
-<!-- dburl=jdbc:oracle:thin:@ahmed-rev-db-demo.ceduno256cgh.us-east-1.rds.amazonaws.com:1521:ORCL
-dbusername=AhmedAwwad
-dbpassword=23232RevaDB -->

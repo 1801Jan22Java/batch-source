@@ -7,7 +7,6 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Date;
 import java.util.List;
 
@@ -19,6 +18,7 @@ import javax.servlet.http.HttpSession;
 
 import com.revature.beans.*;
 import com.revature.dao.*;
+import com.revature.io.FileWriter;
 
 /**
  * Servlet implementation class SubmitRequestServlet
@@ -73,42 +73,10 @@ public class SubmitRequestServlet extends HttpServlet {
 		List<Reimb> allReimbs = rdi.getAllReqFromEmp(emp);
 		List<Reimb> pendingReimbs = rdi.getAllPendingReqFromEmp(emp);
 		List<Reimb> resolvedReimbs = rdi.getAllResolvedReqFromEmp(emp);
-		PrintWriter pw = new PrintWriter(this.getServletContext().getRealPath("/") + "allRequests.txt", "UTF-8");
-		String str = "{ \"allReimbs\" : [ ";
-		for (int i = 0; i < allReimbs.size(); i++) {
-			if (i == allReimbs.size() - 1) {
-				str = str + allReimbs.get(i).toString();
-			} else {
-				str = str + allReimbs.get(i).toString() + ", ";
-			}
-		}
-		str += "] }";
-		pw.println(str);
-		pw.close();
-		pw = new PrintWriter(this.getServletContext().getRealPath("/") + "allPendingRequests.txt", "UTF-8");
-		str = "{ \"allReimbs\" : [ ";
-		for (int i = 0; i < pendingReimbs.size(); i++) {
-			if (i == pendingReimbs.size() - 1) {
-				str = str + pendingReimbs.get(i).toString();
-			} else {
-				str = str + pendingReimbs.get(i).toString() + ", ";
-			}
-		}
-		str += "] }";
-		pw.println(str);
-		pw.close();
-		pw = new PrintWriter(this.getServletContext().getRealPath("/") + "allResolvedRequests.txt", "UTF-8");
-		str = "{ \"allReimbs\" : [ ";
-		for (int i = 0; i < resolvedReimbs.size(); i++) {
-			if (i == resolvedReimbs.size() - 1) {
-				str = str + resolvedReimbs.get(i).toString();
-			} else {
-				str = str + resolvedReimbs.get(i).toString() + ", ";
-			}
-		}
-		str += "] }";
-		pw.println(str);
-		pw.close();
+		String initString = this.getServletContext().getRealPath("/");
+		FileWriter.writeFiles(initString + "allRequests.txt", allReimbs);
+		FileWriter.writeFiles(initString + "allPendingRequests.txt", pendingReimbs);
+		FileWriter.writeFiles(initString + "allResolvedRequests.txt", resolvedReimbs);
 		
 		resp.sendRedirect("SuccessfulSubmission.html");
 	}

@@ -26,14 +26,21 @@ public class Driver {
 		Transaction tx = (Transaction) s.beginTransaction();
 		
 		Category c1 = new Category("coding");
+		Category c2 = new Category("jokes");
 		
-		s.save(c1);
+		int newCategory1 = (int) s.save(c1);
+		int newCategory2 = (int) s.save(c2);
 		
-		Flashcard f1 = new Flashcard("What is java?", "The coolest language", c1);
-		Flashcard f2 = new Flashcard("Where are the bears?", "Hibernating", c1);
+		// s.save(c1);
 		
-		fd.addFlashcard(f1);
-		fd.addFlashcard(f2);
+		Flashcard f1 = new Flashcard("What is java?", "The coolest language", new Category(newCategory1, "coding"));
+		Flashcard f2 = new Flashcard("Where are the bears?", "Hibernating", new Category(newCategory2, "coding"));
+		
+		s.save(f1);
+		s.save(f2);
+		
+		// fd.addFlashcard(f1);
+		// fd.addFlashcard(f2);
 		
 		try {
 			tx.commit();
