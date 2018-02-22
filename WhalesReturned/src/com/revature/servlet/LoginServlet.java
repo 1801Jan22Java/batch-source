@@ -31,11 +31,12 @@ public class LoginServlet extends HttpServlet{
 		String email = req.getParameter("email");
 		String password = req.getParameter("password");
 		System.out.println("Pass: " + password);
+		
 		if(password.equals("whales")) {
 			session.setAttribute("username", email);
 			pw.println("Welcome, " + email);
 			pw.println("<a href=home.html> Home <a>");
-			resp.sendRedirect("login");
+			resp.sendRedirect("mystery.html");
 		}
 		else {
 			pw.println("Nope, Go away");
