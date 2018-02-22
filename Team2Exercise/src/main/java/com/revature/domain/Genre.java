@@ -11,6 +11,16 @@ import javax.persistence.*;
 @Table(name = "GENRE")
 public class Genre  implements Serializable {
 
+	public Genre() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Genre(String name) {
+		super();
+		this.name = name;
+	}
+
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "genreSequence")
@@ -18,7 +28,7 @@ public class Genre  implements Serializable {
 	@Column(name = "GENRE_ID")
 	private int id;
 	
-	@Column(name = "GENRE_NAME")
+	@Column(name = "GENRE_NAME", unique = true)
 	private String name;
 	
 	@ManyToMany(mappedBy = "genres")
@@ -42,5 +52,10 @@ public class Genre  implements Serializable {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	@Override
+	public String toString() {
+		return "Genre [name=" + name + "]";
 	}
 }

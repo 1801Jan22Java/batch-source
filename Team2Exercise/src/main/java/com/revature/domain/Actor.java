@@ -13,9 +13,8 @@ public class Actor  implements Serializable {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Actor(int id, String name) {
+	public Actor(String name) {
 		super();
-		this.id = id;
 		this.name = name;
 	}
 	private static final long serialVersionUID = 1L;
@@ -25,7 +24,7 @@ public class Actor  implements Serializable {
 	@Column(name = "ACTOR_ID")
 	private int id;
 	
-	@Column(name = "ACTOR_NAME")
+	@Column(name = "ACTOR_NAME", unique = true)
 	private String name;
 	
 	@ManyToMany(mappedBy = "actors")
@@ -48,6 +47,6 @@ public class Actor  implements Serializable {
 	}
 	@Override
 	public String toString() {
-		return "Actor [id=" + id + ", name=" + name + "]";
+		return "Actor [name=" + name + "]";
 	}
 }

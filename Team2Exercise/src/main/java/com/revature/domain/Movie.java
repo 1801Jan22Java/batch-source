@@ -8,6 +8,23 @@ import javax.persistence.*;
 @Table(name = "MOVIE")
 public class Movie  implements Serializable {
 	
+	public Movie(String name, List<Genre> genres, List<Actor> actors) {
+		super();
+		this.name = name;
+		this.genres = genres;
+		this.actors = actors;
+	}
+
+	public Movie() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Movie(String name) {
+		super();
+		this.name = name;
+	}
+
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "movieSequence")
@@ -53,5 +70,26 @@ public class Movie  implements Serializable {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	@Override
+	public String toString() {
+		return "Movie [name=" + name + "]";
+	}
+
+	public List<Genre> getGenres() {
+		return genres;
+	}
+
+	public void setGenres(List<Genre> genres) {
+		this.genres = genres;
+	}
+
+	public List<Actor> getActors() {
+		return actors;
+	}
+
+	public void setActors(List<Actor> actors) {
+		this.actors = actors;
 	}
 }
