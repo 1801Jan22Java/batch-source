@@ -46,7 +46,7 @@ function getJson(xhr) {
 					var tr = document.createElement("tr");
 					tr.title = request.description;
 					var tdDate = document.createElement("td");
-					tdDate.innerHTML = months[request.creationDate.monthValue] + " " + request.creationDate.dayOfMonth + ", " + request.creationDate.year;
+					tdDate.innerHTML = "<span class='text-nowrap'>" + months[request.creationDate.monthValue] + " " + request.creationDate.dayOfMonth + ", " + request.creationDate.year + "</span>";
 					tr.appendChild(tdDate);
 					
 					var tdAuthor = document.createElement("td");
@@ -58,6 +58,7 @@ function getJson(xhr) {
 					tr.appendChild(tdType);
 					
 					var tdAmount = document.createElement("td");
+					tdAmount.classList.add("text-right");
 					tdAmount.innerHTML = "$" + request.amount.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 					tr.appendChild(tdAmount);
 					
@@ -93,7 +94,7 @@ function getJson(xhr) {
 					var tr = document.createElement("tr");
 					tr.title = request.description;
 					var tdDate = document.createElement("td");
-					tdDate.innerHTML = months[request.creationDate.monthValue] + " " + request.creationDate.dayOfMonth + ", " + request.creationDate.year;
+					tdDate.innerHTML = "<span class='text-nowrap'>" + months[request.creationDate.monthValue] + " " + request.creationDate.dayOfMonth + ", " + request.creationDate.year + "</span>";
 					tr.appendChild(tdDate);
 					
 					var tdAuthor = document.createElement("td");
@@ -105,6 +106,7 @@ function getJson(xhr) {
 					tr.appendChild(tdType);
 					
 					var tdAmount = document.createElement("td");
+					tdAmount.classList.add("text-right");
 					tdAmount.innerHTML = "$" + request.amount.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");;
 					tr.appendChild(tdAmount);
 
@@ -154,7 +156,7 @@ function getJson(xhr) {
 				var tr = document.createElement("tr");
 				tr.title = request.description;
 				var tdDate = document.createElement("td");
-				tdDate.innerHTML = months[request.creationDate.monthValue] + " " + request.creationDate.dayOfMonth + ", " + request.creationDate.year;
+				tdDate.innerHTML = "<span class='text-nowrap'>" + months[request.creationDate.monthValue] + " " + request.creationDate.dayOfMonth + ", " + request.creationDate.year + "</span>";
 				tr.appendChild(tdDate);
 				
 				var tdType = document.createElement("td");
@@ -162,6 +164,7 @@ function getJson(xhr) {
 				tr.appendChild(tdType);
 				
 				var tdAmount = document.createElement("td");
+				tdAmount.classList.add("text-right");
 				tdAmount.innerHTML = "$" + request.amount.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");;
 				tr.appendChild(tdAmount);
 				
@@ -194,7 +197,7 @@ function getJson(xhr) {
 				var tr = document.createElement("tr");
 				tr.title = request.description;
 				var tdDate = document.createElement("td");
-				tdDate.innerHTML = months[request.creationDate.monthValue] + " " + request.creationDate.dayOfMonth + ", " + request.creationDate.year;
+				tdDate.innerHTML = "<span class='text-nowrap'>" + months[request.creationDate.monthValue] + " " + request.creationDate.dayOfMonth + ", " + request.creationDate.year + "</span>";
 				tr.appendChild(tdDate);
 				
 				var tdType = document.createElement("td");
@@ -202,6 +205,7 @@ function getJson(xhr) {
 				tr.appendChild(tdType);
 				
 				var tdAmount = document.createElement("td");
+				tdAmount.classList.add("text-right");
 				tdAmount.innerHTML = "$" + request.amount.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");;
 				tr.appendChild(tdAmount);
 				

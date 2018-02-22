@@ -40,7 +40,7 @@ function getJson(xhr) {
 			total++;
 			var tr = document.createElement("tr");
 			var tdDate = document.createElement("td");
-			tdDate.innerHTML = months[employee.creationDate.monthValue] + " " + employee.creationDate.dayOfMonth + ", " + employee.creationDate.year;
+			tdDate.innerHTML = "<span class='text-nowrap'>" + months[employee.creationDate.monthValue] + " " + employee.creationDate.dayOfMonth + ", " + employee.creationDate.year + "</span>";
 			tr.appendChild(tdDate);
 			
 			var tdName = document.createElement("td");
