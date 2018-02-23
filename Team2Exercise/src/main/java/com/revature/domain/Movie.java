@@ -36,7 +36,7 @@ public class Movie  implements Serializable {
 	private String name;
 	
 	
-	@ManyToMany(cascade = { CascadeType.ALL })
+	@ManyToMany
     @JoinTable(
         name = "MOVIE_GENRE", 
         joinColumns = { @JoinColumn(name = "MOVIE_ID") }, 
@@ -44,7 +44,7 @@ public class Movie  implements Serializable {
     )
 	List <Genre> genres = new ArrayList<>();
 	
-	@ManyToMany(cascade = { CascadeType.ALL })
+	@ManyToMany
     @JoinTable(
         name = "MOVIE_ACTOR", 
         joinColumns = { @JoinColumn(name = "MOVIE_ID") }, 

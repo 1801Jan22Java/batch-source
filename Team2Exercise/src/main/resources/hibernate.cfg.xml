@@ -15,12 +15,15 @@
 		   
 		   <!--  Create mode will drop and recreate all conflicting tables -->
 		   <!--  Update mode will only add tables, but will error on conflict -->
-		   <property name="hibernate.hbm2ddl.auto">create</property>
+		   <property name="hibernate.hbm2ddl.auto">update</property>
 		   
 		   <!-- Tell hibernate where we created our domain mappings/annotations (Bean) -->
 		   <mapping class="com.revature.domain.Actor"/>
 		   <mapping class="com.revature.domain.Genre"/>
 		   <mapping class="com.revature.domain.Movie"/>
-	   
+		   <mapping class="com.revature.domain.Cave"/>
+			<mapping class="com.revature.domain.Animal"/>
+			<mapping class="com.revature.domain.Bat"/>
+			<mapping class="com.revature.domain.Bear"/>
 	   </session-factory>
    </hibernate-configuration>
