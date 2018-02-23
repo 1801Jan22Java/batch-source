@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+		"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+		<property name="hibernate.connection.username"> joshBrandl</property>
+        	<property name="hibernate.connection.password"> brandlRevature</property>
+        	<property name="hibernate.connection.url"> jdbc:oracle:thin:@brandl-demo.cj0y1mq2ce8s.us-east-1.rds.amazonaws.com:1521:ORCL</property>
+        	<property name="hibernate.connection.driver_class">oracle.jdbc.driver.OracleDriver</property>
+		<!-- this can be noisy in the console -->
+		<property name="hibernate.show_sql">true</property>
+		<!-- choose whether to create db or update existing db -->
+		<property name="hibernate.hbm2ddl.auto">update</property>
+		<!-- map domain object classes -->
+		<mapping class="com.revature.domain.Flashcard"/>
+		<mapping class="com.revature.domain.Category"/>
+		<mapping class="com.revature.domain.Cave"/>
+		<mapping class="com.revature.domain.Animal"/>
+		<mapping class="com.revature.domain.Bat"/>
+		<mapping class="com.revature.domain.Bear"/>
+	</session-factory>
+</hibernate-configuration>
