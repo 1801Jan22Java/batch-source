@@ -15,5 +15,9 @@
 		<!-- map domain object classes -->
 		<mapping class="com.revature.domain.Flashcard"/>
 		<mapping class="com.revature.domain.Category"/>
+		<mapping class="com.revature.domain.Cave"/>
+		<mapping class="com.revature.domain.Animal"/>
+		<mapping class="com.revature.domain.Bat"/>
+		<mapping class="com.revature.domain.Bear"/>
 	</session-factory>
 </hibernate-configuration>
