@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+   <hibernate-configuration>
+	   <session-factory>
+		   <property name="hibernate.connection.username">admin</property>
+		   <property name="hibernate.connection.password">cangetin</property>
+		   <property name="hibernate.connection.url">jdbc:oracle:thin:@milliron-hibernate.ck97ow9hq1o2.us-east-1.rds.amazonaws.com:1521:ORCL</property>
+		   
+		   <property name="hibernate.connection.driver_class">oracle.jdbc.driver.OracleDriver</property>
+		   
+		   <!-- console out all generated sql  -->
+		   <property name="hibernate.show_sql">true</property>
+		   
+		   <!--  Create mode will drop and recreate all conflicting tables -->
+		   <!--  Update mode will only add tables, but will error on conflict -->
+		   <property name="hibernate.hbm2ddl.auto">update</property>
+		   
+		   <!-- Tell hibernate where we created our domain mappings/annotations (Bean) -->
+		   <mapping class="com.revature.domain.Flashcard"/>
+		   <mapping class="com.revature.domain.Category"/>
+		   <mapping class="com.revature.domain.Animal"/>
+		   <mapping class="com.revature.domain.Bat"/>
+		   <mapping class="com.revature.domain.Bear"/>
+		   <mapping class="com.revature.domain.Cave"/>
+		   <mapping class="com.revature.domain.City"/>
+		   <mapping class="com.revature.domain.State"/>
+	   
+	   </session-factory>
+   </hibernate-configuration>
