@@ -1,5 +1,8 @@
 package com.revature.driver;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -40,8 +43,65 @@ public class Driver {
 //		StateDao sd = new StateDaoImpl();
 //		State myState = sd.getStateByName("Alabama");
 //		System.out.println(myState.toString());
-		cityInit();
+		//cityInit();
+		//routeInit();
+		allRoutes();
 
+	}
+	
+	static void routeInit() {
+		StateDao sd = new StateDaoImpl();
+		CityDao cd = new CityDaoImpl();
+		
+		City departureCity = null;
+		State departureState = null;
+		departureState = sd.getStateByName("Alabama");
+		departureCity = cd.getCityByName("Birmingham", departureState);
+		
+		
+		City arrivalCity = null;
+		State arrivalState = null;
+		arrivalState = sd.getStateByName("Virginia");
+		arrivalCity = cd.getCityByName("Richmond", arrivalState);
+		
+		double distance = cd.distanceBetween(departureCity, arrivalCity);
+		System.out.println("Distance between Birmingham and Richmond is " + distance);
+		
+	}
+	
+	static void allRoutes() {
+		CityDao cd = new CityDaoImpl();
+		BufferedWriter bw = null;
+		try {
+			bw = new BufferedWriter(new FileWriter("routes.csv", true));
+			ArrayList<City> cities = (ArrayList<City>) cd.getAllCities();
+			for (int i = 0; i < cities.size(); i++) {
+				System.out.println("checking " + cities.get(i).getName() + ", " + cities.get(i).getState().getName());
+				for (int j = i; j < cities.size(); j++) {
+					String line = cd.distanceBetween(cities.get(i), cities.get(j)) + "," + 
+								cities.get(i).getName() + "," + 
+								cities.get(i).getState().getName() + "," +
+								cities.get(j).getName() + "," + 
+								cities.get(j).getState().getName();
+					bw.write(line);
+					bw.newLine();
+					
+				}
+				bw.flush();
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			System.out.println("IOEXCEPTION");
+			e.printStackTrace();
+		} finally {
+			try {
+				bw.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				System.out.println("Problem closing Buffered Writer");
+				e.printStackTrace();
+			}
+		}
 	}
 	
 	static void stateInit() {
