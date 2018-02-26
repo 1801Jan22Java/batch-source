@@ -237,6 +237,10 @@ public class Driver {
 
 	}
 	
+	//
+	//Our functions
+	//
+	
 	private static void getGBears() {
 		Session session = HibernateUtil.getSession();
 		Criteria cr = session.createCriteria(Bear.class);
