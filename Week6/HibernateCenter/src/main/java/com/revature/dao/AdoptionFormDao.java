@@ -5,10 +5,10 @@ import java.util.List;
 import com.revature.domains.AdoptionForm;
 
 public interface AdoptionFormDao {
-	public List<AdoptionForm> getAdoptionForm();
-	public AdoptionForm getAdoptionFormById(int id);
-	public int addAdoptionForm(AdoptionForm form);
-	public void deleteAdoptionForm(AdoptionForm form);
-	public void merge(AdoptionForm form);
-	public void saveOrUpdate(AdoptionForm form);
+	public List<AdoptionForm> getAll();
+	public AdoptionForm getById(int id);
+	public int add(AdoptionForm a);
+	public void delete(AdoptionForm a);
+	public void merge(AdoptionForm a);
+	public void saveOrUpdate(AdoptionForm a);
 }
