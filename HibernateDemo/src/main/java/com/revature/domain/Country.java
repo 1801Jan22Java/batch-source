@@ -6,30 +6,30 @@ import java.util.List;
 import javax.persistence.*;
 
 @Entity 
-@Table(name="STATE")
-public class State implements Serializable {
+@Table(name="COUNTRY")
+public class Country implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
-	public State(String name) {
+
+	public Country(String name) {
 		super();
 		this.name = name;
 	}
 
-	public State() {
+	public Country() {
 		super();
 	}
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="stateSequence")
-	@SequenceGenerator(allocationSize=1,name="stateSequence",sequenceName="STATE_S1")
-	@Column(name="STATE_ID")
+	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="countrySequence")
+	@SequenceGenerator(allocationSize=1,name="countrySequence",sequenceName="COUNTRY_S1")
+	@Column(name="COUNTRY_ID")
 	private int id;
 	
-	@Column(name="STATE_NAME", unique = true)
+	@Column(name="COUNTRY_NAME", unique = true)
 	private String name;
 	
-	@OneToMany(mappedBy="state",fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="country",fetch=FetchType.EAGER)
 	private List<City> cities;
 
 	public int getId() {
@@ -54,6 +54,6 @@ public class State implements Serializable {
 
 	@Override
 	public String toString() {
-		return "State [id=" + id + ", name=" + name + ", cities=" + cities + "]";
+		return "State [id=" + id + ", name=" + name + ", countries=" + cities + "]";
 	}
 }

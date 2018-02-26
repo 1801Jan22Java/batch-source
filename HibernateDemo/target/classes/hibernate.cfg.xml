@@ -26,6 +26,7 @@
 		   <mapping class="com.revature.domain.Cave"/>
 		   <mapping class="com.revature.domain.City"/>
 		   <mapping class="com.revature.domain.State"/>
+		   <mapping class="com.revature.domain.Country"/>
 	   
 	   </session-factory>
    </hibernate-configuration>
