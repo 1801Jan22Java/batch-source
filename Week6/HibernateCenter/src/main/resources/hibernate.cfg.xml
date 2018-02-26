@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+		"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+		<property name="hibernate.connection.username">jameswhitten</property>
+		<property name="hibernate.connection.password">adopthibernate</property>
+		<property name="hibernate.connection.url">jdbc:oracle:thin:@adopthibernate.cmiqismyaow0.us-east-2.rds.amazonaws.com:1521:ORCL</property>
+		<property name="hibernate.connection.driver_class">oracle.jdbc.driver.OracleDriver</property>
+		<!-- this can be noisy in the console -->
+		<property name="hibernate.show_sql">true</property>
+		<!-- choose whether to create db or update existing db -->
+		<property name="hibernate.hbm2ddl.auto">create</property>
+		<!-- map domain object classes -->
+		<mapping class="com.revature.domains.AdoptionForm"/>
+		<mapping class="com.revature.domains.Animal"/>
+		<mapping class="com.revature.domains.AnimalFile"/>
+		<mapping class="com.revature.domains.Location"/>
+		<mapping class="com.revature.domains.LookupTable"/>
+		<mapping class="com.revature.domains.Mammal"/>
+		<mapping class="com.revature.domains.Meetup"/>
+		<mapping class="com.revature.domains.TankAnimal"/>
+		<mapping class="com.revature.domains.User"/>
+		<mapping class="com.revature.domains.UserFile"/>
+	</session-factory>
+</hibernate-configuration>
