@@ -1,0 +1,26 @@
+2018-01-26 15:51:09 TRACE root:11 - Trace Message!
+2018-01-26 15:51:09 DEBUG root:12 - Debug Message!
+2018-01-26 15:51:09 INFO  root:13 - Info Message!
+2018-01-26 15:51:09 WARN  root:14 - Warn Message!
+2018-01-26 15:51:09 ERROR root:15 - Error Message!
+2018-01-26 15:51:09 FATAL root:16 - Fatal Message!
+2018-01-26 15:56:19 TRACE root:11 - Trace Message!
+2018-01-26 15:56:19 DEBUG root:12 - Debug Message!
+2018-01-26 15:56:19 INFO  root:13 - Info Message!
+2018-01-26 15:56:19 WARN  root:14 - Warn Message!
+2018-01-26 15:56:19 ERROR root:15 - Error Message!
+2018-01-26 15:56:19 FATAL root:16 - Fatal Message!
+2018-01-26 15:56:19 FATAL root:21 - / by zero
+java.lang.ArithmeticException: / by zero
+	at com.revature.logging.App.divide(App.java:21)
+	at com.revature.logging.App.main(App.java:12)
+2018-01-26 16:40:45 TRACE root:11 - Trace Message!
+2018-01-26 16:40:45 DEBUG root:12 - Debug Message!
+2018-01-26 16:40:45 INFO  root:13 - Info Message!
+2018-01-26 16:40:45 WARN  root:14 - Warn Message!
+2018-01-26 16:40:45 ERROR root:15 - Error Message!
+2018-01-26 16:40:45 FATAL root:16 - Fatal Message!
+2018-01-26 16:40:45 FATAL root:21 - / by zero
+java.lang.ArithmeticException: / by zero
+	at com.revature.logging.App.divide(App.java:21)
+	at com.revature.logging.App.main(App.java:12)
