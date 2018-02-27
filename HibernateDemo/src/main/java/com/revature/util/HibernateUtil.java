@@ -12,6 +12,7 @@ public class HibernateUtil {
 	private static SessionFactory getSessionFactory(String filename){
 		if(HibernateUtil.sessionFactory == null){
 			Configuration c = new Configuration().configure(filename);
+			c.setProperty("hibernate.connection.username", System.getenv("DATASOURCE_USERNAME"));
 			ServiceRegistry sr = new StandardServiceRegistryBuilder().applySettings(c.getProperties()).build();
 			HibernateUtil.sessionFactory = c.buildSessionFactory(sr);
 		}

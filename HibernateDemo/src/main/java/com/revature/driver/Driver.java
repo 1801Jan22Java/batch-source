@@ -33,14 +33,14 @@ public class Driver {
 
 		// updateAndMerge();
 
-		// Category c1 = new Category (1, "coding");
-		// funWithNamedQueries(c1);
+		 Category c1 = new Category (1, "coding");
+		 funWithNamedQueries(c1);
 
 		// funWithCache();
 
 		// animalInit();
 
-		moreAnimals();
+		//moreAnimals();
 
 	}
 
