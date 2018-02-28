@@ -13,7 +13,7 @@ import com.revature.util.ConnectionUtil;
 
 public class EmployeeDaoImpl implements EmployeeDao {
 
-	public static final String filename = "C:\\Users\\Leonard\\GitRepos\\batch-source\\Project1_Reimbursment\\connection.properties";
+	public static final String filename = "C:\\Users\\Leonard\\GitRepos\\batch-source\\ProjectNo1\\connection.properties";
 
 	// I know it's a horrible practice, but
 	// a FileNotFoundException was giving me grief

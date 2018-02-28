@@ -14,7 +14,7 @@ import com.revature.util.ConnectionUtil;
 
 public class EventDaoImpl implements EventDao {
 
-	public static final String filename = "C:\\Users\\Leonard\\GitRepos\\batch-source\\Project1_Reimbursment\\connection.properties";
+	public static final String filename = "C:\\Users\\Leonard\\GitRepos\\batch-source\\ProjectNo1\\connection.properties";
 
 	public ArrayList<Event> getAllEvents() {
 		ArrayList<Event> requests = new ArrayList<Event>();

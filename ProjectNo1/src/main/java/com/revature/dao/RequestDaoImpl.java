@@ -16,7 +16,7 @@ import com.revature.util.InvalidActionException;
 
 public class RequestDaoImpl implements RequestDao {
 
-	public static final String filename = "C:\\Users\\Leonard\\GitRepos\\batch-source\\Project1_Reimbursment\\connection.properties";
+	public static final String filename = "C:\\Users\\Leonard\\GitRepos\\batch-source\\ProjectNo1\\connection.properties";
 	// I know it's a horrible practice, but a FileNotFoundException was giving me grief
 	// and copy/pasting the file to every folder in the project didn't solve a thing. So, I'm using an absolute path to get it working.
 	public void addRequest(Request req) {

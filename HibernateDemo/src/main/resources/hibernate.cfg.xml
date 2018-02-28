@@ -1,19 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-configuration PUBLIC
-        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
-        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd"> 
+		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+		"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
 	<session-factory>
 		<property name="hibernate.connection.username">admin</property>
 		<property name="hibernate.connection.password">tabasco4</property>
 		<property name="hibernate.connection.url">jdbc:oracle:thin:@blumbergfirstdemo.cnwuqznebe4h.us-east-1.rds.amazonaws.com:1521:ORCL</property>
 		<property name="hibernate.connection.driver_class">oracle.jdbc.driver.OracleDriver</property>
-		<!--  This can be super noisy in the console -->
+		<!-- this can be noisy in the console -->
 		<property name="hibernate.show_sql">true</property>
-		<!--  Choose whether to create database or update existing database -->
-		<property name="hibernate.hbm2ddl.auto">create</property>
-		<!--  Going to map our domain object classes -->
+		<!-- choose whether to create db or update existing db -->
+		<property name="hibernate.hbm2ddl.auto">Create</property>
+		<!-- map domain object classes -->
 		<mapping class="com.revature.domain.Flashcard"/>
 		<mapping class="com.revature.domain.Category"/>
+		<mapping class="com.revature.domain.Cave"/>
+		<mapping class="com.revature.domain.Animal"/>
+		<mapping class="com.revature.domain.Bat"/>
+		<mapping class="com.revature.domain.Bear"/>
 	</session-factory>
 </hibernate-configuration>
