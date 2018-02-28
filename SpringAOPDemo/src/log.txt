@@ -1,0 +1,23 @@
+2018-02-28 13:21:34 INFO  ClassPathXmlApplicationContext:578 - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@51521cc1: startup date [Wed Feb 28 13:21:34 EST 2018]; root of context hierarchy
+2018-02-28 13:21:34 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [beans.xml]
+2018-02-28 13:23:49 INFO  ClassPathXmlApplicationContext:578 - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@51521cc1: startup date [Wed Feb 28 13:23:49 EST 2018]; root of context hierarchy
+2018-02-28 13:23:49 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [beans.xml]
+2018-02-28 13:23:50 WARN  ClassPathXmlApplicationContext:546 - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'org.springframework.context.event.internalEventListenerProcessor': Initialization of bean failed; nested exception is java.lang.IllegalArgumentException: Pointcut is not well-formed: expecting ')' at character position 0
+execution(* wake(..)
+^
+
+2018-02-28 13:24:07 INFO  ClassPathXmlApplicationContext:578 - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@51521cc1: startup date [Wed Feb 28 13:24:07 EST 2018]; root of context hierarchy
+2018-02-28 13:24:07 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [beans.xml]
+2018-02-28 13:24:35 INFO  ClassPathXmlApplicationContext:578 - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@51521cc1: startup date [Wed Feb 28 13:24:35 EST 2018]; root of context hierarchy
+2018-02-28 13:24:35 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [beans.xml]
+2018-02-28 13:26:17 INFO  ClassPathXmlApplicationContext:578 - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@51521cc1: startup date [Wed Feb 28 13:26:17 EST 2018]; root of context hierarchy
+2018-02-28 13:26:17 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [beans.xml]
+2018-02-28 13:26:29 INFO  ClassPathXmlApplicationContext:578 - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@51521cc1: startup date [Wed Feb 28 13:26:29 EST 2018]; root of context hierarchy
+2018-02-28 13:26:29 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [beans.xml]
+2018-02-28 13:33:13 INFO  ClassPathXmlApplicationContext:578 - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@51521cc1: startup date [Wed Feb 28 13:33:13 EST 2018]; root of context hierarchy
+2018-02-28 13:33:13 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [beans.xml]
+2018-02-28 13:37:52 INFO  ClassPathXmlApplicationContext:578 - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@51521cc1: startup date [Wed Feb 28 13:37:52 EST 2018]; root of context hierarchy
+2018-02-28 13:37:52 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [beans.xml]
+2018-02-28 13:37:54 INFO  root:18 - void com.revature.service.PersonService.wakeUpAnimal()
+2018-02-28 13:37:54 INFO  root:18 - void com.revature.service.TigerService.animalChasesYou()
+2018-02-28 13:37:54 INFO  root:18 - void com.revature.service.AnimalService.animalCatchesYou()
