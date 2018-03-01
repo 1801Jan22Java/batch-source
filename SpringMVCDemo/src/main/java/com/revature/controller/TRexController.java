@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -55,4 +56,25 @@ public class TRexController {
 		return resp;
 
 	}
+	
+	//for rendering our simple T-Rex view via the View Resolver
+	@RequestMapping(value="view/{id}",method=RequestMethod.GET)
+	public String getTRexViewById(@PathVariable int id, Model m){
+		
+		for (TRex t : mockTrexService.getAllTRexes()){
+			if (id == t.getId()){
+				m.addAttribute("tRexId",t.getId());
+				m.addAttribute("tRexName",t.getName());
+				m.addAttribute("tRexFeatherColor",t.getFeatherColor());
+			}
+		} 
+		return "tRex";
+	}
+	
+	//for delivering our static HTML pages
+	@GetMapping(value="/staticTRex")
+	public String getStaticTRexPage(){
+		return "forward:/static/staticTRex.html";
+	}
+
 }

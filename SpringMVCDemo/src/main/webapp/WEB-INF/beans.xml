@@ -11,5 +11,18 @@
 
 	<!-- enable MVC annotations -->
 	<mvc:annotation-driven></mvc:annotation-driven>
+	
+	<!-- set up the View Resolver -->
+	<bean name="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix">
+			<value>/WEB-INF/pages/</value>
+		</property>
+		<property name="suffix">
+			<value>.jsp</value> <!-- JSPs are one of MANY server-side templating tools -->
+		</property>
+	</bean>
+	
+	<!-- enable static resource retrieval -->
+	<mvc:resources mapping="/static/**" location="/WEB-INF/static/"></mvc:resources>
 
 </beans>
