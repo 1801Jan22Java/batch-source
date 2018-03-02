@@ -17,9 +17,8 @@ import org.springframework.stereotype.Component;
 @Table(name="T_REX")
 public class TRex {
 
-	public TRex(int id, String name, String featherColor) {
+	public TRex(String name, String featherColor) {
 		super();
-		this.id = id;
 		this.name = name;
 		this.featherColor = featherColor;
 	}
