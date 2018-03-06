@@ -14,6 +14,7 @@ public interface Library {
 	
 	public List<Book> getAllBooks();
 	public String addBook(Book book) throws BradburyException;
+	public void notARealMethod();
 	
 
 }
