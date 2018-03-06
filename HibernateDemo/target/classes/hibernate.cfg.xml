@@ -6,16 +6,19 @@
         <hibernate-configuration>
         	<session-factory>
         		<property name="hibernate.connection.username">jaboyles</property>
-        		<property name="hibernate.connection.password">Spartan1</property>
+        		<property name="hibernate.connection.password">Skelet0r</property>
         		<property name="hibernate.connection.url">jdbc:oracle:thin:@boylesdemo.cewwysudyuaa.us-east-1.rds.amazonaws.com:1521:ORCL</property>
         		<property name="hibernate.connection.driver_class">oracle.jdbc.driver.OracleDriver</property>
         		<!-- This cab be noisy in the console -->
         		<property name="hibernate.show_sql">true</property>
         		<!-- choose whether to create db or update existing db -->
-        		<property name="hibernate.hbm2ddl.auto">update</property>
+        		<property name="hibernate.hbm2ddl.auto">create</property>
         		<!-- map domain object classes -->
         		<mapping class="com.revature.domain.Flashcard"/>
         		<mapping class="com.revature.domain.Category"/>
+        		<mapping class="com.revature.domain.User"/>
+        		<mapping class="com.revature.domain.Chatroom"/>
+        		<mapping class="com.revature.domain.Message"/>
         	</session-factory>
         	
         </hibernate-configuration>

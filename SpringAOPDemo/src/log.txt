@@ -1,0 +1,27 @@
+2018-02-28 13:22:25 INFO  ClassPathXmlApplicationContext:578 - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@51521cc1: startup date [Wed Feb 28 13:22:25 EST 2018]; root of context hierarchy
+2018-02-28 13:22:25 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [beans.xml]
+2018-02-28 13:24:48 INFO  ClassPathXmlApplicationContext:578 - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@51521cc1: startup date [Wed Feb 28 13:24:48 EST 2018]; root of context hierarchy
+2018-02-28 13:24:48 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [beans.xml]
+2018-02-28 13:32:42 INFO  ClassPathXmlApplicationContext:578 - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@51521cc1: startup date [Wed Feb 28 13:32:42 EST 2018]; root of context hierarchy
+2018-02-28 13:32:42 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [beans.xml]
+2018-02-28 13:33:28 INFO  ClassPathXmlApplicationContext:578 - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@51521cc1: startup date [Wed Feb 28 13:33:28 EST 2018]; root of context hierarchy
+2018-02-28 13:33:28 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [beans.xml]
+2018-02-28 13:37:27 INFO  ClassPathXmlApplicationContext:578 - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@51521cc1: startup date [Wed Feb 28 13:37:27 EST 2018]; root of context hierarchy
+2018-02-28 13:37:27 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [beans.xml]
+2018-02-28 13:37:27 INFO  root:17 - void com.revature.service.PersonService.wakeUpAnimal()
+2018-02-28 13:37:27 INFO  root:17 - void com.revature.service.TigerService.animalChasesYou()
+2018-02-28 13:44:12 INFO  ClassPathXmlApplicationContext:578 - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@51521cc1: startup date [Wed Feb 28 13:44:12 EST 2018]; root of context hierarchy
+2018-02-28 13:44:12 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [beans.xml]
+2018-02-28 13:44:41 INFO  ClassPathXmlApplicationContext:578 - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@51521cc1: startup date [Wed Feb 28 13:44:41 EST 2018]; root of context hierarchy
+2018-02-28 13:44:41 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [beans.xml]
+2018-02-28 13:50:20 INFO  ClassPathXmlApplicationContext:578 - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@51521cc1: startup date [Wed Feb 28 13:50:20 EST 2018]; root of context hierarchy
+2018-02-28 13:50:20 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [beans.xml]
+2018-02-28 13:50:36 INFO  ClassPathXmlApplicationContext:578 - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@51521cc1: startup date [Wed Feb 28 13:50:36 EST 2018]; root of context hierarchy
+2018-02-28 13:50:36 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [beans.xml]
+2018-02-28 13:50:37 ERROR root:23 - void com.revature.service.BearService.bearHibernates()
+2018-02-28 16:32:34 INFO  ClassPathXmlApplicationContext:578 - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@51521cc1: startup date [Wed Feb 28 16:32:34 EST 2018]; root of context hierarchy
+2018-02-28 16:32:34 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [beans.xml]
+2018-02-28 16:32:35 ERROR root:23 - void com.revature.service.BearService.bearHibernates()
+2018-03-05 15:41:37 INFO  ClassPathXmlApplicationContext:578 - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@51521cc1: startup date [Mon Mar 05 15:41:37 EST 2018]; root of context hierarchy
+2018-03-05 15:41:38 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [beans.xml]
+2018-03-05 15:41:38 ERROR root:23 - void com.revature.service.BearService.bearHibernates()

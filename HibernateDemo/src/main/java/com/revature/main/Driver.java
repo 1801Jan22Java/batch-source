@@ -1,12 +1,17 @@
 package com.revature.main;
 
+import java.time.LocalDateTime;
+
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import com.revature.dao.FlashcardDAO;
 import com.revature.dao.FlashcardDAOImpl;
 import com.revature.domain.Category;
+import com.revature.domain.Chatroom;
 import com.revature.domain.Flashcard;
+import com.revature.domain.Message;
+import com.revature.domain.User;
 import com.revature.util.HibernateUtil;
 
 public class Driver {
@@ -22,7 +27,33 @@ public class Driver {
 		// fd.getFlashcards();
 
 		// updateAndMerge();
+		
+		myInit();
 
+	}
+
+	private static void myInit() {
+		Session s = HibernateUtil.getSession();
+		Transaction tx = s.beginTransaction();
+		
+		User u = new User("Skeletor", "Skelet0r", "team.skeletor.rev@gmail.com", 0, true,
+				true);	
+		s.saveOrUpdate(u);
+		tx.commit();
+		
+		tx = s.beginTransaction();
+		Chatroom r = new Chatroom("First Chatroom");
+		s.saveOrUpdate(r);
+		tx.commit();
+		tx = s.beginTransaction();
+		Message msg = new Message(u, r, "I am Skeletor",
+			LocalDateTime.now(), null);
+		
+		s.saveOrUpdate(msg);
+		
+		tx.commit();
+		s.close();
+		
 	}
 
 	static void init() {
