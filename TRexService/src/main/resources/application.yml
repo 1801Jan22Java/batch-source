@@ -1,9 +1,18 @@
 server:
-  port: 8989
+  port: ${server.port}
   
 spring:
   application:
     name: trex-service
+  datasource:
+    platform: oracle
+    url: jdbc:oracle:thin:@jan22java-hibernate.cwt1ckcfzdar.us-west-2.rds.amazonaws.com:1521:ORCL
+    username: Admin
+    password: p4ssw0rd
+    driver-class-name: oracle.jdbc.OracleDriver
+  jpa:
+    database: ORACLE
+    show-sql: true
 
 eureka:
   instance:

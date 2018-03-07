@@ -16,7 +16,10 @@ zuul:
     test:
       path: /takeMeToBob/**
       url: http://bobrosslipsum.com/
-    trex-byaddress:
+    trex-by-address:
       path: /tba/**
-      url: http://localhost:8989
+      url: http://localhost:8988
+    trex-by-service-name:
+      path: /tbs/**
+      serviceId : trex-service
      
