@@ -1,0 +1,6 @@
+server:
+  port: 8987
+  
+eureka:
+  instance:
+    instanceId: ${spring.application.name}:dino1

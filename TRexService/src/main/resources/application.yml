@@ -1,6 +1,3 @@
-server:
-  port: ${server.port}
-  
 spring:
   application:
     name: trex-service
@@ -13,7 +10,11 @@ spring:
   jpa:
     database: ORACLE
     show-sql: true
-
+  profiles:
+    active: 
+      - "dino1"
+      - "dino2"
+      
 eureka:
   instance:
     leaseRenewalIntervalInSeconds: 1
