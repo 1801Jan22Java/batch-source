@@ -1,0 +1,23 @@
+server:
+  port: 9090
+  
+spring:
+  application:
+    name: zuul
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: https://eureka-b661b63f-4fcf-4b9d-9274-8b49018cb596.cfapps.io
+    
+zuul:
+  routes:
+    SkelopsProducer:
+      path: /SkelopsProducer/**
+      service-id: SkelopsProducer
+    
+    SkelopsDemo:
+      path: /SkelopsDemo/**
+      service-id: SkelopsDemo
+
+    
