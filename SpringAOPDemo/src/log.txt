@@ -1,0 +1,30 @@
+2018-02-28 13:21:19 INFO  ClassPathXmlApplicationContext:578 - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@51521cc1: startup date [Wed Feb 28 13:21:19 EST 2018]; root of context hierarchy
+2018-02-28 13:21:19 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [beans.xml]
+2018-02-28 13:25:23 INFO  ClassPathXmlApplicationContext:578 - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@51521cc1: startup date [Wed Feb 28 13:25:23 EST 2018]; root of context hierarchy
+2018-02-28 13:25:23 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [beans.xml]
+2018-02-28 13:33:11 INFO  ClassPathXmlApplicationContext:578 - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@51521cc1: startup date [Wed Feb 28 13:33:11 EST 2018]; root of context hierarchy
+2018-02-28 13:33:12 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [beans.xml]
+2018-02-28 13:37:47 INFO  ClassPathXmlApplicationContext:578 - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@51521cc1: startup date [Wed Feb 28 13:37:47 EST 2018]; root of context hierarchy
+2018-02-28 13:37:47 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [beans.xml]
+2018-02-28 13:37:48 INFO  root:18 - void com.revature.service.PersonService.wakeUpAnimal()
+2018-02-28 13:37:48 INFO  root:18 - void com.revature.service.TigerService.animalChasesYou()
+2018-02-28 13:37:48 INFO  root:18 - void com.revature.service.AnimalService.animalCatchesYou()
+2018-02-28 13:38:20 INFO  ClassPathXmlApplicationContext:578 - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@51521cc1: startup date [Wed Feb 28 13:38:20 EST 2018]; root of context hierarchy
+2018-02-28 13:38:20 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [beans.xml]
+2018-02-28 13:38:21 INFO  root:18 - void com.revature.service.PersonService.wakeUpAnimal()
+2018-02-28 13:38:21 INFO  root:18 - void com.revature.service.TigerService.animalChasesYou()
+2018-02-28 13:38:21 INFO  root:18 - void com.revature.service.AnimalService.animalCatchesYou()
+2018-02-28 13:39:01 INFO  ClassPathXmlApplicationContext:578 - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@51521cc1: startup date [Wed Feb 28 13:39:01 EST 2018]; root of context hierarchy
+2018-02-28 13:39:01 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [beans.xml]
+2018-02-28 13:39:02 INFO  root:18 - void com.revature.service.PersonService.wakeUpAnimal()
+2018-02-28 13:39:02 INFO  root:18 - void com.revature.service.TigerService.animalChasesYou()
+2018-02-28 13:39:02 INFO  root:18 - void com.revature.service.AnimalService.animalCatchesYou()
+2018-02-28 13:50:16 INFO  ClassPathXmlApplicationContext:578 - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@51521cc1: startup date [Wed Feb 28 13:50:16 EST 2018]; root of context hierarchy
+2018-02-28 13:50:16 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [beans.xml]
+2018-02-28 13:50:17 ERROR root:24 - void com.revature.service.BearService.bearHibernates()
+2018-02-28 13:50:26 INFO  ClassPathXmlApplicationContext:578 - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@51521cc1: startup date [Wed Feb 28 13:50:26 EST 2018]; root of context hierarchy
+2018-02-28 13:50:26 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [beans.xml]
+2018-02-28 13:50:27 ERROR root:24 - void com.revature.service.BearService.bearHibernates()
+2018-02-28 13:52:53 INFO  ClassPathXmlApplicationContext:578 - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@51521cc1: startup date [Wed Feb 28 13:52:52 EST 2018]; root of context hierarchy
+2018-02-28 13:52:53 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [beans.xml]
+2018-02-28 13:52:53 ERROR root:24 - Splargh

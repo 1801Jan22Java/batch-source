@@ -1,0 +1,11 @@
+applications:
+  - name: cf-loc
+    memory: 700M
+    instances: 1
+    random-route: true
+    buildpack: https://github.com/cloudfoundry/java-buildpack.git
+    path: target/LocationPackage-0.0.1-SNAPSHOT.jar
+    
+    services:
+    - service-registry
+    - config-server

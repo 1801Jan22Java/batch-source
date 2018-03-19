@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: Location-Package
+
+server: 
+  port: 8763

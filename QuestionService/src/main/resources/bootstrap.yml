@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: trainee
+  cloud:
+    config:
+      uri: http://localhost:8888
+  jpa:
+   database-platform: org.hibernate.dialect.Oracle10gDialect
+  h2:
+    console:
+      enabled: true
+  datasource:
+   platform: h2
+   url: jdbc:h2:mem:testdb;MODE=Oracle
+server:
+ port: 8899
+security:
+ basic:
+   enabled: false
